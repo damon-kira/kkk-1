@@ -2,15 +2,12 @@ package com.colombia.credit
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.content.ContextCompat
 import com.bigdata.lib.LocationHelp
 import com.colombia.credit.databinding.ActivitySplashBinding
 import com.colombia.credit.permission.PermissionHelper
-import com.colombia.credit.permission.appPermissions
 import com.common.lib.base.BaseActivity
 import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
-import com.util.lib.StatusBarUtil
 import com.util.lib.StatusBarUtil.setStatusBar
 import dagger.hilt.android.AndroidEntryPoint
 

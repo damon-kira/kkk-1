@@ -10,6 +10,7 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.dialog.FirstLoanHintDialog
+import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.expand.showNetErrorDialog
 import com.colombia.credit.expand.toast
 import com.common.lib.expand.setBlockingOnClickListener
@@ -66,7 +67,8 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipKycInfoActivity(view.context)
+//            Launch.skipKycInfoActivity(view.context)
+            ProcessBackDialog(getSupportContext()).setOnClickListener {  }.show()
         }
     }
 

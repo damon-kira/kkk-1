@@ -139,4 +139,5 @@
     <string name="first_btn">Seguir llenando</string>
     <string name="first_title">¡Felicidades!</string>
     <string name="first_top_hint">Límites recibido</string>
+    <string name="process_top_hint">Si te vas ahora, perderás mucho dinero,\n ¿estás seguro de que quieres irte?</string>
 </resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/shape_white_10dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/retention_aiv_image">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/marginLeftAndRight12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingMultiplier="1.3"
+            android:text="@string/process_top_hint"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/color_8f30d8"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="$ 50.000" />
+
+        <TextView
+            android:id="@+id/retention_tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_apply_bg"
+            android:paddingLeft="42dp"
+            android:paddingTop="10dp"
+            android:paddingRight="42dp"
+            android:paddingBottom="10dp"
+            android:text="@string/first_btn"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/retention_tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
+            android:padding="4dp"
+            android:text="No quiero dinero"
+            android:textColor="#FF999999"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/retention_aiv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/retention_tv_title"
+        app:srcCompat="@drawable/image_retention_pic" />
+</androidx.constraintlayout.widget.ConstraintLayout>
