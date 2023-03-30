@@ -46,11 +46,16 @@
     <string name="repay_period">Número de plazos</string>
     <string name="repay_date">Fecha de Pago</string>
     <string name="repay_btn">Pagar ahora</string>
+
     <string name="refused_hint">Reseña rechazada</string>
     <string name="refused_days">Periodo de préstamo</string>
     <string name="refused_amount">Monto del préstamo</string>
     <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después  del%s</string>
+
+    <!-- 复贷 -->
     <string name="repeat_apply">Obtener dinero ahora</string>
+    <string name="interest_text">Tipo interés diario</string>
+    <string name="period_text">Plazo</string>
     <string name="total_repay">Pago total</string>
     <string name="total_orders">Número de orden</string>
     <string name="total_order_hint">Pago pendiente</string>
@@ -124,4 +129,9 @@
     <string name="net_refresh">Refrescar</string>
     <string name="net_data">Datos móviles</string>
     <string name="net_wifi">WIFI</string>
+    <string name="retention_hint">Su cuenta ya ha iniciado sesión en otro dispositivo, inténtelo de nuevo</string>
+    <string name="confirm">Confirmar</string>
+    <string name="amount_text">Monto del préstamo</string>
+    <string name="order_text">Número de orden</string>
+    <string name="total_amount_text">Pago total</string>
 </resources>

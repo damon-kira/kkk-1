@@ -59,7 +59,7 @@
         <include layout="@layout/layout_line" />
 
         <TextView
-            android:id="@+id/net_tv_data"
+            android:id="@+id/net_tv_mobileNet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"

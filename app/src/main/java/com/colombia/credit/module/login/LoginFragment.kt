@@ -1,5 +1,6 @@
 package com.colombia.credit.module.login
 
+import android.accounts.NetworkErrorException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import com.colombia.credit.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
+import com.colombia.credit.expand.showNetErrorDialog
 import com.colombia.credit.expand.toast
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
@@ -21,11 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class LoginFragment : BaseLoginFragment() {
-
     private val mBinding by binding(FragmentLoginBinding::inflate)
-
     private val mViewModel by lazyViewModel<LoginViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +48,11 @@ class LoginFragment : BaseLoginFragment() {
             if (it.isSuccess()) {
                 mViewModel.startCountdown(mobile = getMobile())
             } else {
+                if (it.e is NetworkErrorException) {
+                    getBaseActivity()?.showNetErrorDialog {
+                        reqSmsCode()
+                    }
+                }
                 toast("获取验证码失败")
             }
         }
@@ -58,11 +62,15 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvPhoneError.show()
                 return@setBlockingOnClickListener
             }
-            mViewModel.reqSmsCode(getMobile())
+            reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
             Launch.skipKycInfoActivity(view.context)
         }
+    }
+
+    private fun reqSmsCode() {
+        mViewModel.reqSmsCode(getMobile())
     }
 
     private fun getMobile() = mBinding.loginEditPhone.getRealText()

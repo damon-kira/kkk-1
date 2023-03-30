@@ -4,15 +4,20 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
 import com.colombia.credit.expand.isXiaomi
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.util.lib.log.logger_e
 
 object Launch {
+
+    private const val TAG = "debug_Launch"
 
     fun skipMainActivity(context: Context) {
         launch(context, MainActivity::class.java)
@@ -32,6 +37,27 @@ object Launch {
 
     fun skipKycInfoActivity(context: Context) {
         launch(context, KycInfoActivity::class.java)
+    }
+
+    fun skipWifiPage(context: Context){
+        val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
+        context.startActivity(intent)
+    }
+
+    fun skipMobileNetPage(context: Context){
+        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        try {
+            val managerClass = Class.forName(manager.javaClass.name)
+            val field = managerClass.getDeclaredField("mService")
+            field.isAccessible = true
+            val managerObj = field.get(manager)
+            val managerObjClass = Class.forName(managerObj.javaClass.name)
+            val method = managerObjClass.getDeclaredMethod("setMobileDataEnabled", Boolean::class.java)
+            method.isAccessible = true
+            method.invoke(managerObj, true)
+        } catch (e: Exception) {
+            logger_e(TAG, "skipMobileNetPage: error = $e")
+        }
     }
 
     /**

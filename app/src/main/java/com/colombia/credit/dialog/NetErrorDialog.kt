@@ -12,18 +12,19 @@ class NetErrorDialog(context: Context) : DefaultDialog(context) {
 
     init {
         setContentView(mBinding.root)
+        setDisplaySize(0.88f, WRAP)
         mBinding.netAivClose.setBlockingOnClickListener {
             dismiss()
         }
     }
 
-    fun setonClickListener(refresh: () -> Unit, data: () -> Unit, wifi: () -> Unit) {
+    fun setonClickListener(refresh: () -> Unit, mobileNet: () -> Unit, wifi: () -> Unit) {
         mBinding.netTvRefresh.setBlockingOnClickListener {
             refresh.invoke()
             dismiss()
         }
-        mBinding.netTvData.setBlockingOnClickListener {
-            data.invoke()
+        mBinding.netTvMobileNet.setBlockingOnClickListener {
+            mobileNet.invoke()
             dismiss()
         }
         mBinding.netTvWifi.setBlockingOnClickListener {
