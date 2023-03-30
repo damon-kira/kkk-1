@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Finanzas extremas</string>
+    <string name="home_loan">Hogar</string>
+    <string name="home_account">Personal</string>
+    <string name="home_repay">Pagar</string>
+    <string name="phone_hint">Número de teléfono</string>
+    <string name="sms_hint">Ingrese 4 dígitos para la verificación</string>
+    <string name="sms_otp">Enviar OTP</string>
+
+    <string name="days">%s días</string>
+    <string name="seconds">%ss</string>
+
+    <string name="login_text">Continuar</string>
+    <string name="protocol_params"> Acuerdo de Privacidad</string>
+    <string name="login_protocol">Hacer clic en Continuar indica que ha leído y acepta el %s</string>
+    <string name="login_hint_title">Por qué nos elije ？</string>
+    <string name="login_hint1">Solicitar en línea un préstamo fácilmente</string>
+    <string name="login_hint2">Aprobación rápida y de alta eficiencia</string>
+    <string name="login_hint3">Límites elevado de crédito, sin aval</string>
+    <string name="login_sms_error">Código incorrecto. Intenta de nuevo</string>
+    <string name="login_phone_error">Por favor, introduzca el número de móvil correcto</string>
+    <string name="login_sms_get_error">获取验证码失败，请重试</string>
+
+    <string name="home_banner_text">Préstamo confiable</string>
+    <string name="loan_apply">Obtener monto del prestamo</string>
+    <string name="login_amount_hint">Obtener de inmediato</string>
+    <string name="login_amount">$ 5.000.000</string>
+    <string name="login_mobile_hint">Utilice el número de móvil asociado a su ID para registrarse/iniciar sesión</string>
+    <string name="home_loan_amount_hint">Cantidad prestable hasta</string>
+    <string name="loan_amount">$ 50.000</string>
+    <string name="loan_period">91～365</string>
+    <string name="loan_period_text">Ciclo</string>
+    <string name="loan_interest">0.05%</string>
+    <string name="loan_interest_text">Interés</string>
+    <string name="loan_apr">18.25%</string>
+    <string name="loan_apr_text">APR</string>
+    <string name="no_product">Actualmente no hay productos de préstamo</string>
+    <string name="no_wifi">Comprueba tu conexión a Internet</string>
+    <string name="review_hint">Nota: No transfiera dinero a ninguna cuenta personal</string>
+    <string name="hi_user">Hi,%s</string>
+    <string name="review_left">Aplicación exitosa</string>
+    <string name="review_right">Fondos acreditado</string>
+    <string name="review_mid">Auditoría aprobada</string>
+    <string name="review_bottom_hint">El préstamo se está procesando y se emitirá a la cuenta bancaria que completó después de que el procesamiento sea exitoso. Espere por favor</string>
+    <string name="repay_period">Número de plazos</string>
+    <string name="repay_date">Fecha de Pago</string>
+    <string name="repay_btn">Pagar ahora</string>
+    <string name="refused_hint">Reseña rechazada</string>
+    <string name="refused_days">Periodo de préstamo</string>
+    <string name="refused_amount">Monto del préstamo</string>
+    <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después  del%s</string>
+    <string name="repeat_apply">Obtener dinero ahora</string>
+    <string name="total_repay">Pago total</string>
+    <string name="total_orders">Número de orden</string>
+    <string name="total_order_hint">Pago pendiente</string>
+    <string name="orders">%s ordenes</string>
+    <string name="amount_unit">$ %s</string>
+    <string name="product_tag_risk">Monto alto</string>
+    <string name="product_tag_safety">100% Aprobado</string>
+
+    <!--  个人信息-->
+    <string name="personal_info">Informacion personal</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Por favor ingrese su correo electrónico</string>
+    <string name="education">Educación</string>
+    <string name="education_hint">Por favor elige</string>
+    <string name="address">Provincia y ciudad</string>
+    <string name="address_hint">Por favor elige</string>
+    <string name="address_detail">Por favor, introduzca la dirección de casa detallada</string>
+    <string name="marriage">Estado civil</string>
+    <string name="marriage_hint">Seleccione tu estado civil</string>
+    <string name="commit">Próximo paso</string>
+    <string name="process_safe">Cifrado SSL de 256 bits</string>
+    <string name="address_title">Seleccionar provincias y ciudades</string>
+    <string name="address_search_hint">请输入省市名称</string>
+
+    <!-- 工作信息 -->
+    <string name="work_title">Información Laboral</string>
+    <string name="work_type">Tipo de trabajo</string>
+    <string name="work_selector">Por favor elige</string>
+    <string name="work_salary">Frecuencia de pago de salarios</string><!-- 发薪日 -->
+    <string name="work_month_income">Ingreso Mensual</string>
+    <string name="work_life">Ingreso Mensual</string>
+    <string name="work_life_hint">¿Cuánto tiempo llevas en tu trabajo actual?</string>
+
+    <!-- 联系人 -->
+    <string name="contact_title">Información del contacto</string>
+    <string name="contact_hint">Contacto de emergencia</string>
+    <string name="retationship">Relación</string>
+    <string name="contact_number">Nombre</string>
+    <string name="contact2_relationship">Amigo/colega</string>
+    <string name="contact_dialog_title">Elección de relación</string>
+
+    <!-- 银行信息 -->
+    <string name="bank_title">Información del contacto</string>
+    <string name="bank_name_title">Seleccione su banco</string>
+    <string name="bank_no_title">El numero de cuenta bancaria</string>
+    <string name="bank_no_hint">Por favor ingrese su propia cuenta bancaria</string>
+    <string name="bank_card_type">Tipo de Cuenta Bancaria</string>
+    <string name="bank_card_ahorros">AHORROS</string>
+    <string name="bank_card_corriente">CORRIENTE</string>
+    <string name="bank_no_error">*Use la cuenta bancaria vinculada a su tarjeta de identificación y no use las tarjetas bancarias de otras personas para evitar la falla del préstamo</string>
+
+    <!-- 身份证信息 -->
+    <string name="kyc_front_text">Frente (retrato)</string>
+    <string name="kyc_back_text">Foto trasera</string>
+    <string name="kyc_nuip_hint">Por favor complete su número NUIP</string>
+    <string name="kyc_name_hint">Por favor, introduzca el nombre correcto</string>
+    <string name="kyc_surname_hint">Por favor, introduzca el apellido correcto</string>
+    <string name="kyc_gender_hint">Por favor seleccione sexo</string>
+    <string name="kyc_birthday_hint">Por favor seleccione su fecha de nacimiento</string>
+    <string name="kyc_birthday">Fecha de nacimiento</string>
+    <string name="kyc_gender">Genero</string>
+    <string name="kyc_surname">Apellidos</string>
+    <string name="kyc_name">Nombres</string>
+    <string name="kyc_nuip">Número NUIP</string>
+    <string name="kyc_warning">Consejo: asegúrese de que toda la información sea su  información verdadera, de lo contrario, afectará el préstamo</string>
+    <string name="kyc_top_hint">Fotografía cedula de ciudadania frente</string>
+    <string name="camera">Disparar con cámara</string>
+    <string name="album">Seleccionar del álbum</string>
+    <string name="net_error_title">Datos móviles</string>
+    <string name="net_error_hint">Comprueba si tienes conexión de datos o Wi-Fi e inténtalo de nuevo</string>
+    <string name="net_refresh">Refrescar</string>
+    <string name="net_data">Datos móviles</string>
+    <string name="net_wifi">WIFI</string>
+</resources>

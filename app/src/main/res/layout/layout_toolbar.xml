@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_aiv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="4dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/toolbar_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/toolbar_aiv_back"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="@string/app_name" />
+
+    <!-- 客服 -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_mine_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="4dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:srcCompat="@drawable/icon_customer" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_aiv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="16dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <!-- 红点 -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_aiv_point"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_alignTop="@id/toolbar_aiv_right"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+</merge>

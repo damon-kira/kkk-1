@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permission_hint">Dear customer,To acccess your eligibility and  facilitate faster disbursal of your loan, we  needpermissions to access your</string>
+    <string name="permission_hint_title">Divulgación de permisos</string>
+    <string name="permission_check_hint">协议未同意</string>
+    <string name="permission_protocol">Lea atentamente la declaración de autorización y haga clic en Continuar para indicar que está de acuerdo</string>
+
+    <!-- 定位 -->
+    <string name="permission_location">Ubicación</string>
+    <string name="permission_dlg_text_location">Recopijiale y supervise información sobre la ubicación de su dispositivo para proporcionar la facilidad de servicio de su solicitud de préstamo y también proporcione ofertas personalizadas.</string>
+
+    <!-- read phone state -->
+    <string name="permission_read_phone_state">Información de Dispositivo</string>
+    <string name="permission_dlg_text_readphone">La aplicacion necesita acceder a la intormacion de tu dispositivo y poder tomar las medidas antifraude necesarias</string>
+
+    <!-- 联系人 -->
+    <string name="permission_contact">Contactos</string>
+    <string name="permission_dlg_text_contacts">Permite que LibreCrédito obtenga permisos de contactos en para detectar automáticamente la información de referencias para la generación de perfiles en línea para generar ofertas de préstamos preaprobados. También ayuda a autocompletar datos durante el proceso de solicitud de préstamo. Sin embargo, no publicaremos ni divulgaremos su información de contacto sin su autorización. Cifrada subirlo a en nuestro servidor nuestro proveedor externo <![CDATA[<font color=\'#2767FD\'>https://client-collection.librecredito.com/</font>]]>, a fin de identificar y analizar su comportamiento y riesgo frente a préstamos múltiples para evaluar si se puede procesar el préstamo o no ayudando a prevenir fraude.</string>
+
+    <!-- 相机 -->
+    <string name="permission_camera">Cámara</string>
+    <string name="permission_dlg_text_camera">Necesitas autorizar el acceso a la cámara de tul dispositivo para poder completar el proceso</string>
+
+    <!-- 相册 -->
+    <string name="permission_album">Album</string>
+    <string name="permission_dlg_text_album">Necesitas autorizar el acceso a tus álbumes para poder cargar documentos KYC y fotos para completar el proceso</string>
+
+    <!-- 短信 -->
+    <string name="permission_sms">SMS</string>
+    <string name="permission_dlg_text_sms">Ermite que LibreCrédito obtenga permisos de SMS para Recopile y supervise su SMS, direcciones de remitentes y descripción de los mensajes para construir su perfil social y financiero, para la evaluación de crédito y proporcionarle ofertas de préstamos preaprobadas. Cifrada subirlo a en nuestro servidor nuestro proveedor externo <![CDATA[<font color=\'#2767FD\'>https://client-collection.librecredito.com/</font>]]>, a fin de identificar y analizar su comportamiento y riesgo frente a préstamos múltiples para evaluar si se puede procesar el préstamo o no ayudando a prevenir fraude.</string>
+
+    <!-- 日历 -->
+    <string name="permission_calendar">Calendario</string>
+    <string name="permission_dlg_text_calendar">Activa el recordatorio en el calendario, para así recordar fechas de pago.</string>
+
+    <!-- 存储 -->
+    <string name="permission_storage">Almacenamiento</string>
+    <string name="permission_dlg_text_storage">Le permite cargar documentos e imágenes para la solicitud de préstamo.</string>
+
+    <!-- APP list -->
+    <string name="app_list">Apps</string>
+    <string name="app_list_content">La aplicación necesita acceder a la información de tu dispositivo y poder tomar las medidas</string>
+
+    <string name="permission_connector_char" translatable="false">&#38;</string>
+    <string name="permission_dialog_message">Por favor, entra a Ajustes-APPS-Finanzas extremas-Permisos. Para autorizar el acceso a la %s y continúa con el proceso.</string>
+    <string name="deny_r1">Rechazar</string>
+    <string name="permission_ok">OK</string>
+    <string name="ok_r1">Aceptar</string>
+</resources>

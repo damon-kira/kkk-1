@@ -1,0 +1,86 @@
+package com.colombia.credit
+
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
+import com.colombia.credit.expand.isXiaomi
+import com.colombia.credit.module.process.contact.ContactInfoActivity
+import com.colombia.credit.module.process.kyc.KycInfoActivity
+import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
+import com.colombia.credit.module.process.work.WorkInfoActivity
+
+object Launch {
+
+    fun skipMainActivity(context: Context) {
+        launch(context, MainActivity::class.java)
+    }
+
+    fun skipPersonalInfoActivity(context: Context) {
+        launch(context, PersonalInfoActivity::class.java)
+    }
+
+    fun skipWorkInfoActivity(context: Context) {
+        launch(context, WorkInfoActivity::class.java)
+    }
+
+    fun skipContactInfoActivity(context: Context) {
+        launch(context, ContactInfoActivity::class.java)
+    }
+
+    fun skipKycInfoActivity(context: Context) {
+        launch(context, KycInfoActivity::class.java)
+    }
+
+    /**
+     * 跳转到本应用设置页面
+     */
+    fun Context.jumpToAppSettingPage() {
+        if (isXiaomi()) {
+            val miuiIntent = Intent("miui.intent.action.APP_PERM_EDITOR")
+            miuiIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            miuiIntent.putExtra("extra_pkgname", packageName)
+            //检测是否有能接受该Intent的Activity存在
+            val resolveInfos =
+                packageManager.queryIntentActivities(miuiIntent, PackageManager.MATCH_DEFAULT_ONLY)
+            if (resolveInfos.size > 0) {
+                startActivity(miuiIntent)
+                return
+            }
+        }
+        try {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            intent.data = Uri.fromParts(
+                "package",
+                packageName, null
+            )
+            startActivity(intent)
+        } catch (e: Exception) {
+            try {
+                val intent = Intent(Settings.ACTION_SETTINGS)
+                startActivity(intent)
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+
+}
+
+private fun <T> launch(context: Context, clazz: Class<T>, intent: Intent? = null) {
+    val intent0 = when (intent) {
+        null -> {
+            Intent().also {
+                it.setClass(context, clazz)
+            }
+        }
+        else -> intent
+    }
+    if (context !is Activity) {
+        intent0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+    context.startActivity(intent0)
+}

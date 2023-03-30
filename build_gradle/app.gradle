@@ -1,0 +1,20 @@
+rootProject.ext {
+
+    debug = [
+            h5Host       : "\"https://h5-test.librecredito.com\"",
+            apiHost      : "\"https://test.api.backend.librecredito.capella.world/\"",
+            bigDataHost  : "\"https://test.client-collection.backend.librecredito.capella.world/\"",
+
+            apiSecret    : "\"FA5BDMX98/DA\$DAF\"",
+    ]
+
+    release = [
+            h5Host       : "\"https://h5.librecredito.com\"",
+            apiHost      : "\"https://api.librecredito.com/\"",
+            bigDataHost  : "\"https://client-collection.librecredito.com/\"",
+
+            apiSecret    : "\"0CC3CA8FECA5B376\"",
+    ]
+
+    pkgName = "com.loan.librecredito.prestamos.efectivo.cash"
+}

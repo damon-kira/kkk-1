@@ -1,0 +1,49 @@
+
+apply plugin: 'maven-publish'
+//apply plugin: 'signing'
+
+//configurations {
+//    deployerJars
+//}
+
+//repositories {
+//    mavenCentral()
+//}
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: uri("${rootProject.rootDir}/repo"))
+//        }
+//    }
+//}
+
+publishing {
+    publications {
+        maven (MavenPublication) {
+            // 打包源码和Class
+//            from components.java // 发布Java组建
+
+            //定义源码task
+//            artifact sourceJar
+
+            // 定义包的坐标
+//            groupId 'com.test.test'
+//            artifactId 'test'
+//            version '1.0.0'
+        }
+    }
+
+// 定义目标仓库
+    repositories {
+        maven {
+            url uri("${rootProject.rootDir}/repo")
+        }
+    }
+}
+
+//signing {
+//    required { gradle.taskGraph.hasTask("uploadArchives")}
+//    sign configurations.archives
+//}
+

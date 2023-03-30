@@ -1,0 +1,25 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.okredito.devoptions">
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <application>
+        <activity
+            android:name="com.devoption.finance.DebugActivity"
+            android:label="Test mode"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.mexico.debug"
+            android:theme="@style/DebugAppTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="com.devoption.finance.DebugInitProvider"
+            android:authorities="${applicationId}.debugmode.provider"
+            android:enabled="true"
+            android:exported="false"
+            android:initOrder="100" />
+    </application>
+</manifest>

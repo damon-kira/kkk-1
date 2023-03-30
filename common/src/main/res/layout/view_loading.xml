@@ -1,0 +1,14 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="34dp"
+    android:background="@drawable/shape_loading_bg"
+    tools:ignore="ResourceName">
+
+    <com.common.lib.view.LoadingView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center" />
+</FrameLayout>

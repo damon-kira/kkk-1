@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="email_list">
+        <item>\@gmail.com</item>
+        <item>\@yahoo.com</item>
+        <item>\@rediffmail.com</item>
+        <item>\@@Email.com</item>
+        <item>\@outlook.com</item>
+        <item>\@zohomail.com</item>
+        <item>\@msn.com</item>
+        <item>\@hotmail.com</item>
+        <item>\@yahoo.com</item>
+        <item>\@yahoo.co.co</item>
+        <item>\@hotmail.com</item>
+        <item>\@aim.com</item>
+        <item>\@aol.com</item>
+        <item>\@mail.com</item>
+        <item>\@live.com</item>
+        <item>\@walla.com</item>
+        <item>\@inbox.com</item>
+    </string-array>
+
+    <string-array name="contact_relationship">
+        <item>Cónyuge</item>
+        <item>Padre</item>
+        <item>Madre</item>
+        <item>Hijo</item>
+        <item>Hermano</item>
+        <item>Hermana</item>
+    </string-array>
+</resources>

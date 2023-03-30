@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.colombia.credit'
+    compileSdk rootProject.ext.version.compileSdk
+    defaultConfig {
+        applicationId rootProject.ext.pkgName
+
+        minSdk rootProject.ext.version.minSdk
+        targetSdk rootProject.ext.version.targetSdk
+
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        manifestPlaceholders = [pkgName: "${rootProject.ext.pkgName}"]
+    }
+
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.android.kotlin_stdlib
+    implementation rootProject.ext.android.core_ktx
+    implementation rootProject.ext.android.appcompat
+    implementation rootProject.ext.view.constraintlayout
+    implementation rootProject.ext.view.material
+    implementation rootProject.ext.android.multidex
+    implementation rootProject.ext.view.swiperefreshlayout
+
+    implementation rootProject.ext.hilt.hilt_android
+    implementation project(path: ':sdks:cache')
+    kapt rootProject.ext.hilt.hilt_compiler_android
+
+    implementation project(path: ":common")
+    implementation project(path: ':sdks:bigdata')
+    implementation project(path: ':sdks:util')
+
+    implementation rootProject.ext.permission.rxpermission
+
+    //rxjava2.0
+    implementation rootProject.ext.rxjava.rxandroid
+    implementation rootProject.ext.rxjava.rxjava
+
+    implementation rootProject.ext.exifinterface.exifinterface
+}

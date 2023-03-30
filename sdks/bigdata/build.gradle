@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+android {
+    compileSdkVersion rootProject.ext.version.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation rootProject.ext.android.kotlin_stdlib
+    implementation rootProject.ext.android.core_ktx
+    implementation rootProject.ext.android.appcompat
+
+    implementation project(path: ":sdks:util")
+    implementation project(path: ":sdks:aes")
+    implementation project(path: ":sdks:cache")
+
+    implementation rootProject.ext.retrofit.gson
+    implementation rootProject.ext.retrofit.logging_interceptor
+    implementation rootProject.ext.retrofit.okhttp
+
+    //定位sdk
+    api (rootProject.ext.location.location) {
+        changing = true
+        transitive = true
+    }
+}
+
+apply from: '../../maven_push.gradle'
+group = 'com.bigdata.lib'
+version = '1.0.0'

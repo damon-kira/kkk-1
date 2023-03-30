@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion rootProject.ext.version.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    api rootProject.ext.android.kotlin_stdlib
+    api rootProject.ext.android.core_ktx
+    api rootProject.ext.android.appcompat
+    api rootProject.ext.view.constraintlayout
+    api rootProject.ext.android.coroutines_android
+
+    implementation rootProject.ext.view.recyclerview
+
+    // hilt
+    api rootProject.ext.hilt.hilt_android
+    kapt rootProject.ext.hilt.hilt_compiler_android
+
+    api rootProject.ext.android.lifecycle_runtime
+    api rootProject.ext.android.lifecycle_livedataKtx
+    api rootProject.ext.android.livedata_viewmodelKtx
+
+    // 适配
+    api rootProject.ext.autosize.autosize
+
+    implementation rootProject.ext.rxjava.rxandroid
+
+//    implementation rootProject.ext.other.util
+//    implementation rootProject.ext.other.userBehavior
+      implementation rootProject.ext.other.aes
+
+    api project(path: ':sdks:util')
+//    implementation project(path: ':sdks:userBehavior')
+
+    //retrofit2.0
+    api rootProject.ext.retrofit.retrofit
+    api rootProject.ext.retrofit.converter_gson
+    api rootProject.ext.retrofit.gson
+    api rootProject.ext.retrofit.logging_interceptor
+    api rootProject.ext.retrofit.okhttp
+
+    //glide
+    api rootProject.ext.glide.glide
+}

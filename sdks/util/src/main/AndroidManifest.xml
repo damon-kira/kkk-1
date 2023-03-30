@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.util.lib">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application>
+        <provider
+            android:name=".UtilInitProvider"
+            android:authorities="${applicationId}.UtilInitProvider"
+            android:exported="false"
+            android:enabled="true"/>
+    </application>
+</manifest>

@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.version.compileSdk
+    defaultConfig {
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.android.kotlin_stdlib
+    implementation rootProject.ext.android.core_ktx
+    implementation rootProject.ext.android.appcompat
+    implementation rootProject.ext.retrofit.gson
+}
+
+apply from: '../../maven_push.gradle'
+group = 'com.aes.lib'
+version = '1.0.0'

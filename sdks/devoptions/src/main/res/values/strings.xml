@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="debug_app_restart">app restart</string>
+    <string name="debug_token">app token</string>
+    <string name="debug_api">api</string>
+    <string name="debug_hint">*切换完环境后需要点击app restart*</string>
+    <string name="debug_crash">make crash</string>
+    <string name="debug_permission">Permission</string>
+    <string name="debug_setting">Setting</string>
+    <string name="debug_behavior">behavior is db</string>
+</resources>
