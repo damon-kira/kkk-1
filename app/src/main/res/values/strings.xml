@@ -134,4 +134,9 @@
     <string name="amount_text">Monto del préstamo</string>
     <string name="order_text">Número de orden</string>
     <string name="total_amount_text">Pago total</string>
+
+    <string name="first_hint_text">Usted ha cumplido los requisitos para ser  cliente de alta calidad. Rellene informaciones  para recibir premios con crédito efectivo.  Le recomendamos que complete datos  reales para solicitar préstamo más elevado</string>
+    <string name="first_btn">Seguir llenando</string>
+    <string name="first_title">¡Felicidades!</string>
+    <string name="first_top_hint">Límites recibido</string>
 </resources>
