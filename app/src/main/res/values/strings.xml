@@ -134,7 +134,6 @@
     <string name="amount_text">Monto del préstamo</string>
     <string name="order_text">Número de orden</string>
     <string name="total_amount_text">Pago total</string>
-
     <string name="first_hint_text">Usted ha cumplido los requisitos para ser  cliente de alta calidad. Rellene informaciones  para recibir premios con crédito efectivo.  Le recomendamos que complete datos  reales para solicitar préstamo más elevado</string>
     <string name="first_btn">Seguir llenando</string>
     <string name="first_title">¡Felicidades!</string>
@@ -149,4 +148,8 @@
     <string name="kyc_dialog_left">incompleto</string>
     <string name="kyc_dialog_mid">imagen borrosa</string>
     <string name="kyc_dialog_right">reflexivo</string>
+
+    <string name="dialog_permission_hint1">Acceso a permisos</string>
+    <string name="not_permission_text">Debes permitir el acceso de la Aplicación a \"Memoria/Mensajes/Contactos/Configuración\"     para su correcto fucionamiento y la evaluación     de tu préstamo. Ve a Configuración, en tu celular,     luego a Permisos, y selecciona [XXXX]</string>
+    <string name="permission_setting">Verificar</string>
 </resources>

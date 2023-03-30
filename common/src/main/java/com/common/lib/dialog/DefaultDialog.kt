@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.Gravity
 import android.view.WindowManager
+import androidx.annotation.StringRes
 import com.common.lib.R
 import com.common.lib.expand.getActivityFromContext
 import com.util.lib.log.logger_e
@@ -26,6 +27,10 @@ open class DefaultDialog : Dialog, IDialog {
     }
 
     private var mListener: OnDialogDismissListener? = null
+
+    protected fun getString(@StringRes strRes: Int,vararg params: String): String {
+        return context.resources.getString(strRes, params)
+    }
 
     protected fun setDisplaySize(widthPercent: Float, heightPercent: Float, isBottom:Boolean = false) {
         val window = window
