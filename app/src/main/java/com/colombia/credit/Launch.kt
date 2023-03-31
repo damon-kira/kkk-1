@@ -9,6 +9,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import com.colombia.credit.expand.isXiaomi
+import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
@@ -37,6 +38,10 @@ object Launch {
 
     fun skipKycInfoActivity(context: Context) {
         launch(context, KycInfoActivity::class.java)
+    }
+
+    fun skipBankCardListActivity(context: Context){
+        launch(context, BankCardListActivity::class.java)
     }
 
     fun skipWifiPage(context: Context){

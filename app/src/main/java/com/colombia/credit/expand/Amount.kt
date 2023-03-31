@@ -25,3 +25,18 @@ fun formatCommon(cash: String, splitDigits: Int = 3, symbol: String = ","): Stri
 
     return builder.toString().reversed()
 }
+
+/**
+ * 脱敏指定范围内的字符串
+ */
+fun maskString(str: String?, preCount: Int, postCount: Int): String {
+    if (str == null || str.isEmpty()) {
+        return ""
+    }
+    if (str.length <= preCount + postCount || preCount < 0) {
+        return str
+    }
+    val array = str.toCharArray()
+    array.fill('*', preCount, array.size - postCount)
+    return array.joinToString("")
+}

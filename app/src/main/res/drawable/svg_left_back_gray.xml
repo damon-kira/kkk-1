@@ -3,18 +3,6 @@
     android:height="24dp"
     android:viewportWidth="48"
     android:viewportHeight="48">
-    <path
-        android:fillColor="#FFFFFF"
-        android:fillType="evenOdd"
-        android:pathData="M-14,-24h720v96h-720z"
-        android:strokeWidth="1"
-        android:strokeColor="#00000000" />
-    <path
-        android:fillColor="#8F30D8"
-        android:fillType="evenOdd"
-        android:pathData="M-200.152,95a546,233 0,1 0,1092 0a546,233 0,1 0,-1092 0z"
-        android:strokeWidth="1"
-        android:strokeColor="#00000000" />
     <group>
         <clip-path android:pathData="M-200.152,95a546,233 0,1 0,1092 0a546,233 0,1 0,-1092 0z" />
         <path
@@ -22,7 +10,7 @@
             android:fillType="evenOdd"
             android:pathData="M32,9l-16,15.677l16,14.323"
             android:strokeWidth="3"
-            android:strokeColor="#FFFFFF"
+            android:strokeColor="#333333"
             android:strokeLineCap="round"
             android:strokeLineJoin="round" />
     </group>

@@ -58,7 +58,7 @@
     </declare-styleable>
 
     <!--SuperTextView-->
-    <declare-styleable name="SuperTextView">
+    <declare-styleable name="EasyTextView">
         <attr name="etv_corner" format="dimension" />
         <attr name="etv_left_top_corner" format="dimension" />
         <attr name="etv_right_top_corner" format="dimension" />

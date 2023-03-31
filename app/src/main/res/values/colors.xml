@@ -35,4 +35,12 @@
     <color name="color_f8e7ff">#F8E7FF</color>
     <color name="color_F9F2FC">#F9F2FC</color>
     <color name="color_ede1f7">#ede1f7</color>
+    <color name="color_dadada">#DADADA</color>
+    <color name="color_12000000">#12000000</color>
+
+    <color name="card_color1">#B258F7</color>
+    <color name="card_color2">#28DABB</color>
+    <color name="card_color3">#F96A97</color>
+    <color name="card_color4">#FA7C4A</color>
+    <color name="card_color5">#389DFF</color>
 </resources>

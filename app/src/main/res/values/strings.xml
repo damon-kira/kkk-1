@@ -152,4 +152,12 @@
     <string name="dialog_permission_hint1">Acceso a permisos</string>
     <string name="not_permission_text">Debes permitir el acceso de la Aplicación a \"Memoria/Mensajes/Contactos/Configuración\"     para su correcto fucionamiento y la evaluación     de tu préstamo. Ve a Configuración, en tu celular,     luego a Permisos, y selecciona [XXXX]</string>
     <string name="permission_setting">Verificar</string>
+
+    <!-- 银行账户列表 -->
+    <string name="bank_card_hint">Seleccione una cuenta bancaria para recibir fondos</string>
+    <string name="bank_card_btn_text">Confirmar préstamo $ 30.000</string>
+    <string name="bank_add_btn">Añadir cuenta bancaria</string>
+    <string name="dialog_bank_title">nombre del banco</string>
+    <string name="bank_name_search_hint">Introducir el nombre del banco a buscar</string>
+    <string name="bank_card_up_hint">Puede agregar hasta 5 cuentas bancarias. Si la cuenta bancaria agregada no se puede usar y necesita ser reemplazada,  comuníquese con el servicio al cliente</string>
 </resources>

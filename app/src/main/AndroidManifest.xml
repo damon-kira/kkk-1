@@ -59,6 +59,8 @@
         <activity android:name=".module.process.work.WorkInfoActivity" />
         <activity android:name=".module.process.contact.ContactInfoActivity" />
         <activity android:name=".module.process.kyc.KycInfoActivity" />
+        <activity android:name=".module.process.bank.BankInfoActivity" />
+        <activity android:name=".module.banklist.BankCardListActivity" />
         <!-- 适配 -->
         <meta-data
             android:name="design_width_in_dp"
