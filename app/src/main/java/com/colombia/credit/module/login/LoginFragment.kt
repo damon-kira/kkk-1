@@ -69,7 +69,7 @@ class LoginFragment : BaseLoginFragment() {
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
 //            Launch.skipBankCardListActivity(view.context)
-
+            BankSearchDialog(getSupportContext()).show()
         }
     }
 

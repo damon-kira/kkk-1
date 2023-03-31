@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.SearchInfo
 import com.util.lib.dip2px
+import com.util.lib.dp
 import me.jessyan.autosize.utils.AutoSizeUtils.dp2px
 import me.jessyan.autosize.utils.AutoSizeUtils.sp2px
 
@@ -27,14 +29,15 @@ class BankItemDecoration(
     private val mTitleHeight: Int//Title的高度
     private val mHotTitleHeigh: Int //热门高度
     private val mLinePaint = Paint()
-    private val mHotTag = "#"
-    private val mHotString = "Bancos frecuentes"
+    private var isHot = false
+    private val mHotString = "Bancos populares"
+
     init {
         mBgPaint.color =
-            ContextCompat.getColor(context, R.color.color_F5F5F5)
+            ContextCompat.getColor(context, R.color.color_F8F8F8)
 
-        mLinePaint.color = ContextCompat.getColor(context, R.color.color_12000000)
-        mLinePaint.strokeWidth = dp2px(context, 1f).toFloat()
+        mLinePaint.color = ContextCompat.getColor(context, R.color.color_F8F8F8)
+        mLinePaint.strokeWidth = 1.dp()
 
         mTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mTextPaint.color =
@@ -42,7 +45,6 @@ class BankItemDecoration(
         mTextPaint.textSize = sp2px(context, 12f).toFloat()
 
         mTitleHeight = dp2px(context, 28f)
-
         mHotTitleHeigh = dp2px(context, 40f)
 
     }
@@ -66,12 +68,12 @@ class BankItemDecoration(
             }
             return
         }
-        if (mDatalist[position].tag != mDatalist[position - 1].tag) {
+        if (mDatalist[position].getTag() != mDatalist[position - 1].getTag()) {
             //当前条目和上一个条目的第一个拼音不同时需要Title
             outRect.set(0, mTitleHeight, 0, 0)
             return
         }
-        outRect.set(0, 0, 0, 0)
+        outRect.set(0, 1f.dp(), 0, 0)
     }
 
 
@@ -86,7 +88,7 @@ class BankItemDecoration(
 
             if (position == 0) {
                 var bgHeight: Int
-                var textLeft : Float
+                var textLeft: Float
 
                 if (hasHotTitle) {
                     mBgPaint.color =
@@ -110,7 +112,7 @@ class BankItemDecoration(
                     mBgPaint
                 )
 
-                val text = mDatalist[position].tag.orEmpty()
+                val text = mDatalist[position].getTag()
 
                 if (text.isEmpty()) {
                     return
@@ -128,7 +130,7 @@ class BankItemDecoration(
                 )
             }
 
-            if (position > 0 && mDatalist[position].tag != mDatalist[position - 1].tag) {
+            if (position > 0 && mDatalist[position].getTag() != mDatalist[position - 1].getTag()) {
                 mBgPaint.color = ContextCompat.getColor(
                     context,
                     R.color.color_F5F5F5
@@ -142,7 +144,7 @@ class BankItemDecoration(
                     bottom = child.top.toFloat(),
                     paint = mBgPaint
                 )
-                val text = mDatalist[position].tag.orEmpty()
+                val text = mDatalist[position].getTag()
                 if (text.isEmpty()) {
                     return
                 }
@@ -158,6 +160,16 @@ class BankItemDecoration(
                     y = (child.top - (mTitleHeight / 2 - rect.height() / 2)).toFloat(),
                     paint = mTextPaint
                 )
+            } else {
+                //画背景
+                drawBg(
+                    canvas = c,
+                    left = 0f,
+                    top = (child.top - 1.dp()),
+                    right = parent.right.toFloat(),
+                    bottom = child.top.toFloat(),
+                    paint = mBgPaint
+                )
             }
         }
     }
@@ -169,11 +181,12 @@ class BankItemDecoration(
         if (position >= mDatalist.size || position < 0) {
             return
         }
+        return
 
         var bgBottom = 0f
         var textLeft = 0f
-        val isHot = mDatalist[position].tag == mHotTag
-        if (isHot){
+        isHot = mDatalist[position].isHot()
+        if (isHot) {
             mBgPaint.color = ContextCompat.getColor(
                 context,
                 R.color.white
@@ -182,7 +195,7 @@ class BankItemDecoration(
             mTextPaint.color =
                 ContextCompat.getColor(context, R.color.color_FF989898)
             textLeft = dp2px(context, 52f).toFloat()
-        }else{
+        } else {
             mBgPaint.color = ContextCompat.getColor(
                 context,
                 R.color.color_F5F5F5
@@ -190,17 +203,17 @@ class BankItemDecoration(
             bgBottom = mTitleHeight.toFloat()
             mTextPaint.color =
                 ContextCompat.getColor(context, R.color.colorPrimary)
-            textLeft = dp2px(context, 16f).toFloat()
+            textLeft = 16.dp()
         }
 
         //画背景
-        drawBg(c, 0f, 0f, parent.right.toFloat(), bgBottom, mBgPaint,isHot)
+        drawBg(c, 0f, 0f, parent.right.toFloat(), bgBottom, mBgPaint, isHot)
 
         //绘制常用银行icon
-        drawIcon(c,parent,isHot)
+        drawIcon(c, parent, isHot)
 
 
-        val text = mDatalist[position].tag.orEmpty()
+        val text = mDatalist[position].getTag()
         if (text.isEmpty()) {
             return
         }
@@ -218,7 +231,6 @@ class BankItemDecoration(
     }
 
 
-
     /**
      * 绘制热门icon
      */
@@ -227,7 +239,7 @@ class BankItemDecoration(
         parent: RecyclerView,
         hot: Boolean
     ) {
-        if (hot){
+        if (hot) {
             val drawable = AppCompatResources.getDrawable(
                 parent.context,
                 R.drawable.ic_hot_tag
@@ -250,7 +262,7 @@ class BankItemDecoration(
     /**
      * 绘制背景
      */
-    fun  drawBg(
+    fun drawBg(
         canvas: Canvas,
         left: Float,
         top: Float,
@@ -259,8 +271,8 @@ class BankItemDecoration(
         paint: Paint,
         drawHOt: Boolean = false
     ) {
-        if (drawHOt){
-            canvas.drawLine(0f,bottom,right,bottom,mLinePaint)
+        if (drawHOt) {
+            canvas.drawLine(0f, bottom, right, bottom, mLinePaint)
         }
         canvas.drawRect(
             left,
@@ -273,7 +285,7 @@ class BankItemDecoration(
 
     fun drawText(canvas: Canvas, text: String, x: Float, y: Float, paint: Paint) {
         var currentStr = text
-        if (currentStr == mHotTag){
+        if (isHot) {
             currentStr = mHotString
         }
         canvas.drawText(currentStr, x, y, paint)
