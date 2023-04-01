@@ -18,6 +18,7 @@ import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
 import com.util.lib.log.logger_e
@@ -56,6 +57,10 @@ object Launch {
 
     fun skipFaceFailedActivity(context: Context) {
         launch(context, FaceFailedActivity::class.java)
+    }
+
+    fun skipUploadActivity(context: Context) {
+        launch(context, UploadActivity::class.java)
     }
 
     fun skipWifiPage(context: Context) {

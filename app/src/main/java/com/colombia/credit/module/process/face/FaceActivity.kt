@@ -22,8 +22,10 @@ import com.util.lib.hide
 import com.util.lib.show
 import com.util.lib.sp
 import com.util.lib.span.SpannableImpl
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class FaceActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityFaceBinding>()

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_10dp"
+    android:orientation="vertical">
+
+    <com.colombia.credit.view.UploadView
+        android:id="@+id/upload_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/uploading"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingMultiplier="1.3"
+        android:text="@string/uploading_text"
+        android:textColor="@color/color_999999"
+        android:textSize="11sp" />
+</LinearLayout>

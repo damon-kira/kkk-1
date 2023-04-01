@@ -78,7 +78,7 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipFaceActivity(getSupportContext())
+            Launch.skipUploadActivity(getSupportContext())
         }
     }
 

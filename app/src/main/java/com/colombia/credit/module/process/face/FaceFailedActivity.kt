@@ -5,7 +5,9 @@ import com.colombia.credit.databinding.ActivityFaceFailedBinding
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FaceFailedActivity : BaseProcessActivity() {
 
     private val binding by binding<ActivityFaceFailedBinding>()
