@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/home_aiv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/image_home_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.colombia.credit.view.ToolbarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tl_back_text_color="@color/white"
+        app:tl_back_visibility="gone"
+        app:tl_right_icon="@drawable/icon_customer"
+        app:tl_right_icon_show="true"
+        app:tl_text_gravity="center" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_content"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_white_10dp"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@id/tv_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/confirm_amount_text"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aiv_jian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_jian"
+            app:layout_constraintBottom_toBottomOf="@id/tv_amount"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_amount"
+            app:layout_constraintTop_toTopOf="@id/tv_amount" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:text="$ 8.000"
+            android:textColor="@color/color_8f30d8"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/aiv_jian"
+            app:layout_constraintRight_toLeftOf="@id/aiv_plus"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount_text" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aiv_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_plus"
+            app:layout_constraintBottom_toBottomOf="@id/tv_amount"
+            app:layout_constraintLeft_toRightOf="@id/tv_amount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_amount" />
+
+        <!-- seekbar -->
+        <com.colombia.credit.view.textview.EasyTextView
+            android:id="@+id/etv_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:etv_corner_type="circle"
+            app:etv_solid="@color/color_f6e3ff"
+            app:layout_constraintBottom_toBottomOf="@id/etv_icon"
+            app:layout_constraintTop_toTopOf="@id/etv_icon" />
+
+        <com.colombia.credit.view.textview.EasyTextView
+            android:id="@+id/etv_icon"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="$"
+            android:textColor="@color/color_D16E2A"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:etv_corner_type="circle"
+            app:etv_shader_center_color="@color/color_FFE796"
+            app:etv_shader_enable="true"
+            app:etv_shader_end_color="@color/color_FE962C"
+            app:etv_shader_start_color="@color/color_FFE5AA"
+            app:layout_constraintLeft_toLeftOf="@id/etv_seekbar"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
+
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="$ 2.000"
+            android:textColor="@color/color_999999"
+            android:textSize="11sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etv_icon" />
+
+        <TextView
+            android:id="@+id/tv_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$30.000"
+            android:textColor="@color/color_999999"
+            android:textSize="11sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_min" />
+
+        <!-- 账期 -->
+        <TextView
+            android:id="@+id/tv_period_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/confirm_period"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_min" />
+
+        <LinearLayout
+            android:id="@+id/ll_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_period_title">
+
+            <com.colombia.credit.view.PeriodLayout
+                android:id="@+id/rl_period1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_period_bg"
+                android:paddingBottom="4dp"
+                app:pl_lock_visiblity="false"
+                app:pl_text="7" />
+
+            <com.colombia.credit.view.PeriodLayout
+                android:id="@+id/rl_period2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_period_normal_bg"
+                android:paddingBottom="4dp"
+                app:pl_lock_visiblity="true"
+                app:pl_text="14" />
+
+            <com.colombia.credit.view.PeriodLayout
+                android:id="@+id/rl_period3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_period_normal_bg"
+                android:paddingBottom="4dp"
+                app:pl_lock_visiblity="true"
+                app:pl_text="60" />
+
+            <com.colombia.credit.view.PeriodLayout
+                android:id="@+id/rl_period4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_period_normal_bg"
+                android:paddingBottom="4dp"
+                app:pl_lock_visiblity="true"
+                app:pl_text="90" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/line"
+            layout="@layout/layout_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_period" />
+
+        <!-- 到账金额 -->
+        <TextView
+            android:id="@+id/tv_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/loan_amount_text"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line" />
+
+        <TextView
+            android:id="@+id/tv_loan_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_8f30d8"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_loan"
+            tools:text="$34.700" />
+        <!-- 还款金额 -->
+        <TextView
+            android:id="@+id/tv_repay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/repay_amount"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_loan" />
+
+        <TextView
+            android:id="@+id/tv_repay_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_8f30d8"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_repay"
+            tools:text="$44.700" />
+        <!-- 期数，都是1 -->
+        <TextView
+            android:id="@+id/tv_stage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/loan_stage"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_repay" />
+
+        <TextView
+            android:id="@+id/tv_stage_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_stage" />
+        <!-- 放款银行账户 -->
+        <TextView
+            android:id="@+id/tv_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/loan_bank"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_stage" />
+
+        <TextView
+            android:id="@+id/tv_bank_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/svg_arrow_right"
+            android:text="1"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_bank" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableEnd="@drawable/svg_tanhao"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/color_999999"
+            android:text="@string/laon_detail_text"
+            android:textColor="@color/color_999999"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bank" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.colombia.credit.view.TextViewDrawable
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_time"
+        android:drawablePadding="4dp"
+        android:text="@string/auto_confirm_hint"
+        android:textColor="@color/color_333333"
+        android:textSize="10sp"
+        app:isAlignCenter="false"
+        app:layout_constraintTop_toBottomOf="@id/ll_content" />
+
+    <TextView
+        android:id="@+id/confirm_tv_apply"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_apply_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/confirm_btn"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_cancel" />
+
+    <com.colombia.credit.view.textview.EasyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="5dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="5dp"
+        android:text="@string/confirm_apply_hint"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:etv_corner_type="normal"
+        app:etv_left_top_corner="18dp"
+        app:etv_right_bottom_corner="18dp"
+        app:etv_right_top_corner="18dp"
+        app:etv_solid="@color/color_f5be41"
+        app:layout_constraintBottom_toBottomOf="@id/confirm_tv_apply"
+        app:layout_constraintRight_toRightOf="@id/confirm_tv_apply" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/confirm_cancel"
+        android:textColor="@color/color_666666"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

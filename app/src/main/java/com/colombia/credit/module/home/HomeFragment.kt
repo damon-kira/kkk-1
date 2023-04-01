@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentHomeBinding
 import com.colombia.credit.expand.inValidToken
+import com.colombia.credit.module.firstconfirm.FirstConfirmFragment
 import com.colombia.credit.module.login.LoginFragment
 import com.colombia.credit.module.review.ReviewFragment
 import com.common.lib.helper.FragmentHelper
@@ -29,21 +30,25 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     private val mLoginFragment by lazy {
-        getInstance(context!!, LoginFragment::class.java, null)
+        getInstance(getSupportContext(), LoginFragment::class.java, null)
     }
 
     private val mHomeLoanFragment by lazy {
-        getInstance(context!!, HomeLoanFragment::class.java, null)
+        getInstance(getSupportContext(), HomeLoanFragment::class.java, null)
     }
 
     private val mReviewFragment by lazy {
-        getInstance(context!!, ReviewFragment::class.java, null)
+        getInstance(getSupportContext(), ReviewFragment::class.java, null)
+    }
+
+    private val mFirstConfirmFragment by lazy {
+        getInstance(getSupportContext(), FirstConfirmFragment::class.java, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragment = if (inValidToken()) {
-            mLoginFragment
+            mFirstConfirmFragment
         } else {
             mReviewFragment
         }

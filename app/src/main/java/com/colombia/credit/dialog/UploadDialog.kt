@@ -13,7 +13,7 @@ class UploadDialog constructor(context: Context) : DefaultDialog(context) {
         setContentView(mBinding.root)
         setDisplaySize(0.88f, WRAP)
         setCancelable(false)
-        setCanceledOnTouchOutside(false)
+        setCanceledOnTouchOutside(true)
     }
 
     override fun onAttachedToWindow() {

@@ -10,6 +10,7 @@
 
     <string name="days">%s días</string>
     <string name="seconds">%ss</string>
+    <string name="day">días</string>
 
     <string name="login_text">Continuar</string>
     <string name="protocol_params"> Acuerdo de Privacidad</string>
@@ -28,8 +29,8 @@
     <string name="login_amount">$ 5.000.000</string>
     <string name="login_mobile_hint">Utilice el número de móvil asociado a su ID para registrarse/iniciar sesión</string>
     <string name="home_loan_amount_hint">Cantidad prestable hasta</string>
-    <string name="loan_amount">$ 50.000</string>
-    <string name="loan_period">91～365</string>
+    <string name="amount_50000">$ 50.000</string>
+    <string name="period_91_365">91～365</string>
     <string name="loan_period_text">Ciclo</string>
     <string name="loan_interest">0.05%</string>
     <string name="loan_interest_text">Interés</string>
@@ -170,4 +171,17 @@
 
     <string name="uploading">Revisión de datos de préstamo, tenga paciencia...</string>
     <string name="uploading_text">Su límite de crédito se evalúa utilizando nuestro  propio algoritmo patentado. La evaluación se basa en el  análisis de la información recopilada de usted. Espere  pacientemente los resultados</string>
+
+    <!--  确认借款页面 -->
+    <string name="auto_confirm_hint">Si no cancela la solicitud de pago después de que finalice la cuenta regresiva, automáticamente solicitará el préstamo por usted</string>
+    <string name="confirm_btn">Obtener dinero ahora</string>
+    <string name="confirm_cancel">No necesito dinero</string>
+    <string name="confirm_apply_hint">El 99% de los usuarios lo eligen</string>
+    <string name="confirm_amount_text">La cantidad que puede pedir prestada</string>
+    <string name="confirm_period">Periódo del Préstamo</string>
+    <string name="loan_amount_text">Importe real recibido</string>
+    <string name="repay_amount">Monto Pagado</string>
+    <string name="loan_bank">Cuenta bancaria receptora</string>
+    <string name="loan_stage">Número de plazos</string>
+    <string name="laon_detail_text">Plan de pago esperado</string>
 </resources>

@@ -45,4 +45,11 @@
     <color name="card_color5">#389DFF</color>
     <color name="color_F8F8F8">#F8F8F8</color>
     <color name="color_80FFFFFF">#80FFFFFF</color>
+    <color name="color_f5be41">#F5BE41</color>
+    <color name="color_f6e3ff">#f6e3ff</color>
+    <color name="color_FFE5AA">#FFE5AA</color>
+    <color name="color_FFE796">#FFE796</color>
+    <color name="color_FE962C">#FE962C</color>
+    <color name="color_D16E2A">#D16E2A</color>
+    <color name="color_666666">#666666</color>
 </resources>

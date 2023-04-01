@@ -168,4 +168,21 @@
         <attr name="iv_text" format="string|reference" />
         <attr name="iv_image" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="TextViewDrawable">
+        <attr name="drawableLeftWidth" format="reference|dimension" />
+        <attr name="drawableLeftHeight" format="reference|dimension" />
+        <attr name="drawableTopWidth" format="reference|dimension" />
+        <attr name="drawableTopHeight" format="reference|dimension" />
+        <attr name="drawableRightWidth" format="reference|dimension" />
+        <attr name="drawableRightHeight" format="reference|dimension" />
+        <attr name="drawableBottomWidth" format="reference|dimension" />
+        <attr name="drawableBottomHeight" format="reference|dimension" />
+        <attr name="isAlignCenter" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PeriodLayout">
+        <attr name="pl_lock_visiblity" format="boolean"/>
+        <attr name="pl_text" format="string|reference"/>
+    </declare-styleable>
 </resources>
