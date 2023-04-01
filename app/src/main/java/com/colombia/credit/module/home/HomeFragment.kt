@@ -48,7 +48,7 @@ class HomeFragment : BaseHomeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragment = if (inValidToken()) {
-            mFirstConfirmFragment
+            mLoginFragment
         } else {
             mReviewFragment
         }

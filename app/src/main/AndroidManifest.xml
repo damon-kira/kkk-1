@@ -84,7 +84,12 @@
             android:name=".camera.CaptureActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CaptureActivityTheme" />
-        <activity android:name=".module.upload.UploadActivity" />
+        <activity
+            android:name=".module.upload.UploadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.repeat.confirm.RepeatConfirmActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".module.webview.WebViewActivity"

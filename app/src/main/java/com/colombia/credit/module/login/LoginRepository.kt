@@ -1,10 +1,9 @@
 package com.colombia.credit.module.login
 
-import com.colombia.credit.net.ApiService
-import com.common.lib.base.BaseRepository
+import com.colombia.credit.app.BaseRepository
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(private val apiService: ApiService): BaseRepository() {
+class LoginRepository @Inject constructor(): BaseRepository() {
 
     fun login() {
     }

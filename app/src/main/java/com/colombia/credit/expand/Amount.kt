@@ -7,7 +7,7 @@ package com.colombia.credit.expand
  * @param symbol 间隔符
  * @param splitDigits 几位分隔
  */
-fun formatCommon(cash: String, splitDigits: Int = 3, symbol: String = ","): String {
+fun formatCommon(cash: String, splitDigits: Int = 3, symbol: String = "."): String {
     val reverdCash = cash.reversed()
     val charArray = reverdCash.toCharArray()
     val builder = StringBuilder()

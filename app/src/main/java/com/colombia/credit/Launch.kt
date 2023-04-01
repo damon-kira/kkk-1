@@ -18,6 +18,7 @@ import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
 import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
@@ -47,8 +48,11 @@ object Launch {
         launch(context, KycInfoActivity::class.java)
     }
 
-    fun skipBankCardListActivity(context: Context) {
-        launch(context, BankCardListActivity::class.java)
+    // 银行账户页面
+    fun skipBankCardListActivity(context: Context, amount: String) {
+        val intent = Intent(context, BankCardListActivity::class.java)
+        intent.putExtra(BankCardListActivity.EXTRA_AMOUNT, amount)
+        launch(context, BankCardListActivity::class.java, intent)
     }
 
     fun skipFaceActivity(context: Context) {
@@ -63,12 +67,16 @@ object Launch {
         launch(context, UploadActivity::class.java)
     }
 
+    fun skipRepeatConfirmActivity(context: Context) {
+        launch(context, RepeatConfirmActivity::class.java)
+    }
+
     fun skipWifiPage(context: Context) {
         val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
         context.startActivity(intent)
     }
 
-    fun skipWebViewActivity(context: Context, url: String){
+    fun skipWebViewActivity(context: Context, url: String) {
         val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra(WebViewActivity.EXTRA_URL, url)
         launch(context, WebViewActivity::class.java, intent)

@@ -1,17 +1,15 @@
 package com.colombia.credit.module.banklist
 
-import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.BankCardInfo
 import com.colombia.credit.databinding.ActivityBankCardListBinding
 import com.colombia.credit.expand.SimpleOnItemClickListener
+import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.expand.maskString
 import com.colombia.credit.expand.setOnItemClickListener
 import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
@@ -23,7 +21,12 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.hide
 import com.util.lib.show
 
+// 银行账户列表页面
 class BankCardListActivity : BaseActivity() {
+
+    companion object {
+        const val EXTRA_AMOUNT = "key_amount"
+    }
 
     private val mBinding by binding<ActivityBankCardListBinding>()
 
@@ -34,6 +37,10 @@ class BankCardListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+
+        var amount = intent.getStringExtra(EXTRA_AMOUNT).orEmpty()
+        amount = getString(R.string.amount_unit, formatCommon(amount))
+        mBinding.bankCardTvApply.text = getString(R.string.bank_card_btn_text, amount)
 
         mBinding.aivBack.setBlockingOnClickListener {
             finish()

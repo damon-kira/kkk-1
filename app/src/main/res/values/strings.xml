@@ -155,7 +155,7 @@
 
     <!-- 银行账户列表 -->
     <string name="bank_card_hint">Seleccione una cuenta bancaria para recibir fondos</string>
-    <string name="bank_card_btn_text">Confirmar préstamo $ 30.000</string>
+    <string name="bank_card_btn_text">Confirmar préstamo %s</string>
     <string name="bank_add_btn">Añadir cuenta bancaria</string>
     <string name="dialog_bank_title">nombre del banco</string>
     <string name="bank_name_search_hint">Introducir el nombre del banco a buscar</string>
@@ -184,4 +184,16 @@
     <string name="loan_bank">Cuenta bancaria receptora</string>
     <string name="loan_stage">Número de plazos</string>
     <string name="laon_detail_text">Plan de pago esperado</string>
+    <string name="repeat_confirm_hint">Si el dinero no se abandona después de las 30:26, se confirmará automáticamente</string>
+    <string name="repeat_confir_title">Cantidad total del préstamo</string>
+    <string name="repeat_confirm">Confirmación de préstamo</string>
+    <string name="total_amount">Cantidad total realmente recibida</string>
+    <string name="repeat_confirm_btn">Necesito dinero</string>
+    <string name="loan_success_data">%s Préstamo exitoso</string>
+    <string name="total_loan_amount">Cantidad total del préstamo</string>
+    <string name="total_interest_text">Cargo de interés total</string>
+    <string name="loan_list_hint">Productos préstamos</string>
+    <string name="product_name">YaPrésta</string>
+    <string name="product_interest">Interés: %s</string>
+    <string name="repeat_confirm_bottom_hint">*Cuantos más productos solicite, mayor será la tasa de éxito del préstamo</string>
 </resources>
