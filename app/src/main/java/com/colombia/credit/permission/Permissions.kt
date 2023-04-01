@@ -27,6 +27,7 @@ import com.util.lib.log.logger_i
  */
 
 val TAG = "debug_Permissions"
+
 //需要新权限只需在此数组添加即可
 val appPermissions = arrayOf(
     SmsPermission(),
@@ -91,7 +92,7 @@ fun Activity.checkAllPermission(
 
 fun Activity.showCheckCameraPermissionDialog(
     onAllGranted: (isAllGranted: Boolean) -> Unit = {},
-    showNoPermissionListener:() -> Unit
+    showNoPermissionListener: () -> Unit
 ) {
     checkCameraAndStoragePermission() { deniedList: ArrayList<AbsPermissionEntity>, isAllGranted: Boolean ->
         if (!isAllGranted) {
@@ -243,20 +244,14 @@ fun Activity.showNoPermissionDialog(
 
     val notPermissiontText = getNotPermissionText(deniedList, this, connectorChar)
     val message = this.getString(R.string.permission_dialog_message, notPermissiontText)
-    val no = this.getString(R.string.deny_r1)
-    val yes = this.getString(R.string.permission_ok)
-//    EventAgent.onEvent(ConstantDot.PERMISTION_GUIDE, ConstantDot.EVENT_PERMISTION_GUIDE_SHOW)
-    return showDialog(message, no, yes, leftListener = {
-//        EventAgent.onEvent(ConstantDot.PERMISTION_GUIDE, ConstantDot.EVENT_PERMISTION_GUIDE_CANCEL)
-        cancel()
-    }, rightListener = {
-        rightListener.invoke()
-//        EventAgent.onEvent(ConstantDot.PERMISTION_GUIDE, ConstantDot.EVENT_PERMISTION_GUIDE_SETTING)
-//        jumpToAppSettingPage()
-    }).also {
-        it?.setCancelable(false)
-        it?.setCanceledOnTouchOutside(false)
-    }
+
+    val dialog = PermissionForceDialog(this).setMessage(message)
+        .setOnCloseListener {
+            cancel.invoke()
+        }
+        .setOnClickListener { rightListener.invoke() }
+    dialog.show()
+    return dialog
 }
 
 fun Activity.showDialog(
@@ -292,15 +287,13 @@ fun getNotPermissionText(
         val permission = deniedList[index]
         linkSet.add(context.getString(permission.getHintIfNoPermission().first))
     }
-/*
-    if (isXiaomi()) {
+    /*if (isXiaomi()) {
         if (buffer.isEmpty()) {
             buffer.append(context.getString(R.string.xiaomi_notify_sms))
         } else {
             buffer.append(connectorChar).append(context.getString(R.string.xiaomi_notify_sms))
         }
     }*/
-
     return linkSet.joinToString(connectorChar ?: "")
 }
 

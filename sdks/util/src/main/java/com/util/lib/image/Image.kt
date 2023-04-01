@@ -13,9 +13,7 @@ import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.isDebug
 import java.io.*
 
-/**
- * Created by sunsg on 2018/2/10.
- */
+
 /**图片默认大小 */
 val IMAGE_DEFAULT_WIDTH = 720
 val IMAGE_DEFAULT_HEIGHT = 1080

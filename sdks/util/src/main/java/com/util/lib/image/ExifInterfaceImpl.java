@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * Created by sunsg on 15/10/17.
- */
 public class ExifInterfaceImpl extends ExifInterface {
 
     private HashMap<String, String> mAttributes;

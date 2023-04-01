@@ -8,12 +8,16 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import com.colombia.credit.camera.CaptureActivity
 import com.colombia.credit.expand.isXiaomi
 import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
+import com.colombia.credit.module.process.face.FaceActivity
+import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.common.lib.base.BaseActivity
 import com.util.lib.log.logger_e
 
 object Launch {
@@ -40,16 +44,39 @@ object Launch {
         launch(context, KycInfoActivity::class.java)
     }
 
-    fun skipBankCardListActivity(context: Context){
+    fun skipBankCardListActivity(context: Context) {
         launch(context, BankCardListActivity::class.java)
     }
 
-    fun skipWifiPage(context: Context){
+    fun skipFaceActivity(context: Context) {
+        launch(context, FaceActivity::class.java)
+    }
+
+    fun skipFaceFailedActivity(context: Context) {
+        launch(context, FaceFailedActivity::class.java)
+    }
+
+    fun skipCaptureActivityResult(
+        activity: BaseActivity,
+        capturePath: String,
+        isFront: Boolean,
+        requestCode: Int
+    ) {
+        val intent = Intent(activity, CaptureActivity::class.java)
+        intent.putExtra(CaptureActivity.KEY_CAPTURE_IMAGE_PATH, capturePath)
+        intent.putExtra(
+            CaptureActivity.KEY_PICTURE_TYPE,
+            if (isFront) CaptureActivity.TYPE_FRONT else CaptureActivity.TYPE_BACK
+        )
+        activity.launchForResult(intent, requestCode)
+    }
+
+    fun skipWifiPage(context: Context) {
         val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
         context.startActivity(intent)
     }
 
-    fun skipMobileNetPage(context: Context){
+    fun skipMobileNetPage(context: Context) {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         try {
             val managerClass = Class.forName(manager.javaClass.name)
@@ -57,7 +84,8 @@ object Launch {
             field.isAccessible = true
             val managerObj = field.get(manager)
             val managerObjClass = Class.forName(managerObj.javaClass.name)
-            val method = managerObjClass.getDeclaredMethod("setMobileDataEnabled", Boolean::class.java)
+            val method =
+                managerObjClass.getDeclaredMethod("setMobileDataEnabled", Boolean::class.java)
             method.isAccessible = true
             method.invoke(managerObj, true)
         } catch (e: Exception) {
@@ -114,4 +142,8 @@ private fun <T> launch(context: Context, clazz: Class<T>, intent: Intent? = null
         intent0.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
     context.startActivity(intent0)
+}
+
+fun Activity.launchForResult(intent: Intent, requestCode: Int) {
+    this.startActivityForResult(intent, requestCode)
 }

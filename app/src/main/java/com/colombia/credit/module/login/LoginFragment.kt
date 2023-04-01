@@ -1,24 +1,35 @@
 package com.colombia.credit.module.login
 
 import android.accounts.NetworkErrorException
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.colombia.credit.Launch
 import com.colombia.credit.Launch.jumpToAppSettingPage
 import com.colombia.credit.R
+import com.colombia.credit.camera.CaptureActivity
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.dialog.*
 import com.colombia.credit.expand.showNetErrorDialog
 import com.colombia.credit.expand.toast
 import com.colombia.credit.permission.PermissionDialog
 import com.colombia.credit.permission.PermissionForceDialog
+import com.colombia.credit.util.image.ImageObtainHelper
+import com.colombia.credit.util.image.callback.AdapterCallback
+import com.colombia.credit.util.image.data.CompressResult
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.expand.deleteFiles
+import com.util.lib.expand.getPicCacheFilePath
+import com.util.lib.expand.getTempPhotoSavePath
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 /**
  * Created by weishl on 2023/3/27
@@ -68,9 +79,33 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-//            Launch.skipBankCardListActivity(view.context)
-            BankSearchDialog(getSupportContext()).show()
+            openCamera(CaptureActivity.TYPE_FRONT)
         }
+    }
+
+    private fun openCamera(cameraType:Int) {
+        val targetPath = getPicCacheFilePath(getSupportContext(), "front.jpg")
+        val captureFile = File(getTempPhotoSavePath(getSupportContext(), "${SystemClock.uptimeMillis()}.jpg"))
+        ImageObtainHelper
+            .createAgent(this)
+            .idPicture()
+            .type(cameraType)
+            .fileToSave(captureFile)
+            .then()
+            .compress()
+            .fileToSave(File(targetPath))
+            .start(object : AdapterCallback<CompressResult>() {
+                override fun onSuccess(result: CompressResult) {
+                    val filePath = result.uri?.path ?: return
+                    val bitmap = BitmapFactory.decodeFile(filePath)
+                    mBinding.aivImage.setImageBitmap(bitmap)
+                    deleteFiles(captureFile)
+                }
+
+                override fun onFailed(e: Throwable) {
+
+                }
+            })
     }
 
     private fun reqSmsCode() {

@@ -44,4 +44,5 @@
     <color name="card_color4">#FA7C4A</color>
     <color name="card_color5">#389DFF</color>
     <color name="color_F8F8F8">#F8F8F8</color>
+    <color name="color_80FFFFFF">#80FFFFFF</color>
 </resources>

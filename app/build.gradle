@@ -61,6 +61,7 @@ dependencies {
     kapt rootProject.ext.hilt.hilt_compiler_android
 
     implementation project(path: ":common")
+    implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
 

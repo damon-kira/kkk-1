@@ -43,3 +43,4 @@ if (isModule.toBoolean()) {
     include ':sdks:cache'
     include ':sdks:aes'
 }
+include ':camera'

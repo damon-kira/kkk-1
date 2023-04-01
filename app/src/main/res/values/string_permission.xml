@@ -42,7 +42,8 @@
     <string name="app_list_content">La aplicación necesita acceder a la información de tu dispositivo y poder tomar las medidas</string>
 
     <string name="permission_connector_char" translatable="false">&#38;</string>
-    <string name="permission_dialog_message">Por favor, entra a Ajustes-APPS-Finanzas extremas-Permisos. Para autorizar el acceso a la %s y continúa con el proceso.</string>
+
+    <string name="permission_dialog_message">Debes permitir el acceso de la Aplicación a "%s" para su correcto fucionamiento y la evaluación de tu préstamo. Ve a Configuración, en tu celular,luego a Permisos, y selecciona [Finanzas extremas]</string>
     <string name="deny_r1">Rechazar</string>
     <string name="permission_ok">OK</string>
     <string name="ok_r1">Aceptar</string>

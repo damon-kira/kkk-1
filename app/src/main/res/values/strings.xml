@@ -150,7 +150,6 @@
     <string name="kyc_dialog_right">reflexivo</string>
 
     <string name="dialog_permission_hint1">Acceso a permisos</string>
-    <string name="not_permission_text">Debes permitir el acceso de la Aplicación a \"Memoria/Mensajes/Contactos/Configuración\"     para su correcto fucionamiento y la evaluación     de tu préstamo. Ve a Configuración, en tu celular,     luego a Permisos, y selecciona [XXXX]</string>
     <string name="permission_setting">Verificar</string>
 
     <!-- 银行账户列表 -->
@@ -160,4 +159,9 @@
     <string name="dialog_bank_title">nombre del banco</string>
     <string name="bank_name_search_hint">Introducir el nombre del banco a buscar</string>
     <string name="bank_card_up_hint">Puede agregar hasta 5 cuentas bancarias. Si la cuenta bancaria agregada no se puede usar y necesita ser reemplazada,  comuníquese con el servicio al cliente</string>
+    <string name="face_failed_hint">Reconocimiento facial fallido. Intenta de nuevo</string>
+    <string name="face_failed_btn">Intentar otra vez</string>
+    <string name="capture_id_tips">Después de que el reconocimiento de disparo frontal sea exitoso,  ingresará automáticamente al reconocimiento de disparo posterior</string>
+    <string name="capture_front_hint">Ejemplo de un plano frontal</string>
+    <string name="capture_back_hint">Ejemplo de disparo inverso</string>
 </resources>

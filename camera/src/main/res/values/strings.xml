@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">camera</string>
+
+    <!-- ################ 自定义相机 ######################## -->
+    <!--请对齐边框，保证图片清晰可辨-->
+    <string name="capture_id_tips">Coloca tu INE/IFE en el cuadro y asegura la foto sea clara sin reflejos por favor.</string>
+    <!-- 打开相机失败 -->
+    <string name="capture_open_camera_failure">	Falló abrir tu cámara</string>
+    <!-- ################ 自定义相机 ######################## -->
+</resources>

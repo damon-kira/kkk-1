@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="@string/not_permission_text"
+        android:text="@string/permission_dialog_message"
         android:textColor="@color/color_333333"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
