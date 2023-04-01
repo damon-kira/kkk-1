@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <com.colombia.credit.view.ToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/white"
+        app:tl_right_icon="@drawable/icon_customer"
+        app:tl_right_icon_show="true"
+        app:tl_text_gravity="center"
+        app:tl_title="@string/defer_title" />
+
+    <com.colombia.credit.view.textview.EasyTextView
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="6dp"
+        android:padding="10dp"
+        android:text="@string/defer_top_warning"
+        android:textColor="@color/color_666666"
+        android:textSize="11sp"
+        app:drawableStartCompat="@drawable/shape_error_hint"
+        app:etv_corner="4dp"
+        app:etv_corner_type="normal"
+        app:etv_solid="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_10dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/defer_amount_hint"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/color_333333"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount_text"
+            tools:text="$ 4.000" />
+
+        <com.colombia.credit.view.textview.EasyTextView
+            android:id="@+id/etv_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:padding="6dp"
+            android:text="@string/defer_hint_text"
+            android:textColor="@color/color_666666"
+            android:textSize="10sp"
+            app:etv_corner="4dp"
+            app:etv_corner_type="normal"
+            app:etv_solid="@color/color_F9F2FC"
+            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
+
+        <TextView
+            android:id="@+id/tv_detail_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/defer_detail_hint"
+            android:textColor="@color/color_333333"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etv_hint" />
+
+        <!-- 展期天数 -->
+        <TextView
+            android:id="@+id/tv_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/defer_days"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_hint" />
+
+        <TextView
+            android:id="@+id/tv_day_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_days"
+            tools:text="7 Dias" />
+        <!-- 展期还款时间 -->
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/defer_days"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_days"
+            app:layout_goneMarginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tv_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_date"
+            tools:text="09/12/2023" />
+        <!-- 展期还款金额 -->
+        <TextView
+            android:id="@+id/tv_repay_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/defer_days"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"
+            app:layout_goneMarginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tv_repay_amount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_repay_amount"
+            tools:text="$8.000" />
+
+        <!-- 支付当前费用 -->
+        <TextView
+            android:id="@+id/tv_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_apply_bg"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="@string/repay_amount_value"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_repay_amount" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/image_apply_success" />
+
+</LinearLayout>

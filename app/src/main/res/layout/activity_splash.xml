@@ -8,5 +8,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/image_login_bg" />
+        android:src="@drawable/image_splash_bg" />
 </FrameLayout>

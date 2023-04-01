@@ -92,6 +92,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".module.applysuccess.ApplySuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.defer.DeferActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.webview.WebViewActivity"
             android:screenOrientation="portrait" />
 

@@ -196,4 +196,17 @@
     <string name="product_name">YaPrésta</string>
     <string name="product_interest">Interés: %s</string>
     <string name="repeat_confirm_bottom_hint">*Cuantos más productos solicite, mayor será la tasa de éxito del préstamo</string>
+    <string name="apply_success_title">Aplicación exitosa</string>
+    <string name="apply_success_hint">Congratulations!</string>
+    <string name="apply_success_hint2">Hemos recibido su solicitud de préstamo y  estamos revisando su elegibilidad, espere</string>
+    <string name="defer_title">展期详情</string>
+    <string name="defer_top_warning">Nota: No transfiera dinero a ninguna cuenta personal</string>
+    <string name="defer_amount_hint">Tarifas totales de Prórroga</string>
+    <string name="defer_hint_text">La solicitud original se modificará automáticamente después de que la solicitud de prórroga se haya aprobado. Posteriormente, tienes que hacer el pago de acuerdo con la nueva orden</string>
+    <string name="defer_detail_hint">Detalles de la extensión</string>
+    <string name="defer_days">Período de la prórroga</string>
+    <string name="repay_amount_value">Pagar ahora $%s</string>
+    <string name="defer_confirm1">Consejos amables</string>
+    <string name="defer_confirm2">Una vez que la solicitud de extensión de pago  sea exitosa, el pedido original se liquidará  automáticamente. Solo debe pagar de  acuerdo con el tiempo de pago del nuevo  pedido, confirme si desea pagar  la tarifa por demora por el pago por demora</string>
+    <string name="defer_apply">Confirmar extensión</string>
 </resources>

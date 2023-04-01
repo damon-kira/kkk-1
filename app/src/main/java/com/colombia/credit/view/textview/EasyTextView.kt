@@ -28,7 +28,7 @@ class EasyTextView : AppCompatTextView {
     private var mSolidColor: Int = 0
     private var mStrokeWidth: Float = 0f
     private var mStrokeColor: Int = 0
-    private var mShapeBgType: ShapeBgType = ShapeBgType.CIRCLE
+    private var mShapeBgType: ShapeBgType = ShapeBgType.NORMAL
 
     private var mTextStrokeEnable: Boolean = false
     private var mTextStrokeWidth: Float = 0f
