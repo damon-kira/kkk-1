@@ -167,7 +167,7 @@ class CameraXHelper(val activity: AppCompatActivity) {
 
             val metadata = ImageCapture.Metadata().apply {
                 //使用前置摄像头时镜像
-                isReversedHorizontal = lensFacing == CameraSelector.LENS_FACING_FRONT
+//                isReversedHorizontal = lensFacing == CameraSelector.LENS_FACING_FRONT
             }
 
             val outputOptions = ImageCapture.OutputFileOptions.Builder(file)

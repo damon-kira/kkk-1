@@ -200,6 +200,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/login_tv_protocol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -209,10 +210,6 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/aiv_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
             <!-- 提示信息 -->
             <include layout="@layout/layout_home_hint" />
 

@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import android.webkit.WebView
 import com.colombia.credit.camera.CaptureActivity
 import com.colombia.credit.expand.isXiaomi
 import com.colombia.credit.module.banklist.BankCardListActivity
@@ -17,6 +18,7 @@ import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.colombia.credit.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
 import com.util.lib.log.logger_e
 
@@ -56,24 +58,15 @@ object Launch {
         launch(context, FaceFailedActivity::class.java)
     }
 
-    fun skipCaptureActivityResult(
-        activity: BaseActivity,
-        capturePath: String,
-        isFront: Boolean,
-        requestCode: Int
-    ) {
-        val intent = Intent(activity, CaptureActivity::class.java)
-        intent.putExtra(CaptureActivity.KEY_CAPTURE_IMAGE_PATH, capturePath)
-        intent.putExtra(
-            CaptureActivity.KEY_PICTURE_TYPE,
-            if (isFront) CaptureActivity.TYPE_FRONT else CaptureActivity.TYPE_BACK
-        )
-        activity.launchForResult(intent, requestCode)
-    }
-
     fun skipWifiPage(context: Context) {
         val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
         context.startActivity(intent)
+    }
+
+    fun skipWebViewActivity(context: Context, url: String){
+        val intent = Intent(context, WebViewActivity::class.java)
+        intent.putExtra(WebViewActivity.EXTRA_URL, url)
+        launch(context, WebViewActivity::class.java, intent)
     }
 
     fun skipMobileNetPage(context: Context) {

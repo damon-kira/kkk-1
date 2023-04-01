@@ -164,4 +164,5 @@
     <string name="capture_id_tips">Después de que el reconocimiento de disparo frontal sea exitoso,  ingresará automáticamente al reconocimiento de disparo posterior</string>
     <string name="capture_front_hint">Ejemplo de un plano frontal</string>
     <string name="capture_back_hint">Ejemplo de disparo inverso</string>
+    <string name="face_take_hint">Después de colocar la cara completamente en el marco del retrato.Haga clic en Capturar</string>
 </resources>

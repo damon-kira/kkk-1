@@ -71,8 +71,7 @@ object BitmapCrop {
                 val orientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
                 )
-                val rotation = getPhotoOrientation(orientation)
-                    .toFloat()
+                val rotation = getPhotoOrientation(orientation).toFloat()
                 val matrix = Matrix()
                 matrix.postRotate(rotation)
                 ops.inSampleSize = if (ops.outHeight < ops.outWidth) {
@@ -91,7 +90,6 @@ object BitmapCrop {
                 ops.inJustDecodeBounds = false
                 var bitmap = BitmapFactory.decodeFile(originFile.absolutePath, ops)
 
-
                 val bitmapWidth = bitmap.width.toFloat()
                 val bitmapHeight = bitmap.height.toFloat()
                 logger_i(TAG, "屏幕宽高：screenW:$screenW screenH:$screenH rotation: $rotation")
@@ -100,6 +98,7 @@ object BitmapCrop {
                 var top = rect.top
                 var bottom = rect.bottom - rect.top
 
+                logger_i(TAG, "bitmap width = $bitmapWidth  height=$bitmapHeight")
                 val scale = if (rotation / 90 % 2 == 0f) {
                     val widthScale = screenW / bitmapWidth
                     val heightScale = screenH / bitmapHeight
@@ -108,7 +107,6 @@ object BitmapCrop {
                     } else {
                         heightScale
                     }
-//                    Math.max(widthScale, heightScale)
                 } else {
                     val widthScale = screenW / bitmapHeight
                     val heightScale = screenH / bitmapWidth
@@ -117,9 +115,12 @@ object BitmapCrop {
                     } else {
                         heightScale
                     }
-//                    Math.max(widthScale, heightScale)
                 }
-//                matrix.postScale(scale, scale)
+                if (bitmapWidth < rect.right || bitmapHeight < rect.bottom) {
+                    matrix.postScale(scale, scale)
+                }
+                if (isFront)
+                    matrix.postScale(-1f, 1f)
 
                 bitmap =
                     Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
