@@ -33,17 +33,16 @@ object PermissionHelper {
      * 在产品首页
      * @param isIncludeCamera 是否包含相机权限
      * */
-    fun getExcludeCalendarPermission(isIncludeCamera: Boolean): ArrayList<AbsPermissionEntity> {
+    fun getExcludeCalendarPermission(): ArrayList<AbsPermissionEntity> {
         val list = arrayListOf<AbsPermissionEntity>()
         with(list) {
-            if (isIncludeCamera) {
-                add(CameraPermission())
-            }
-            add(ReadPhonePermission())
             add(SmsPermission())
-//            add(ContactPermission())
+            add(ContactPermission())
+            add(ReadPhonePermission())
+            add(CameraPermission())
             add(LocationPermission())
             add(StoragePermission())
+            add(AccountPermission())
         }
         return list
     }
@@ -94,8 +93,7 @@ object PermissionHelper {
         activity: Activity,
         result: (deniedList: List<AbsPermissionEntity>) -> Unit,
         skipSettingListener: () -> Unit = {},
-        requestLocationListener: () -> Unit = {},
-        agreementClick: () -> Unit
+        requestLocationListener: () -> Unit = {}
     ) {
         // 是否显示权限声明弹窗
         if (PermissionDialogManager.getInstance().isShowDialogTips()) {
@@ -109,7 +107,7 @@ object PermissionHelper {
                             return@showPermissionTipsDialog
                         }
                         checkPermissions(hintList, activity) { deniedList ->
-                            showPermissionDialog(activity, deniedList, {
+                            showPermissionDialog(activity, deniedList, false, {
                                 fixGroupPermission(activity)
                                 result.invoke(hintList.filter {
                                     !it.hasThisPermission(
@@ -118,11 +116,9 @@ object PermissionHelper {
                                 })
                             }, skipSettingListener, requestLocationListener)
                         }
-                    }, agreementClick = {
-                        agreementClick.invoke()
                     })
             }
-        }else {
+        } else {
             result.invoke(arrayListOf())
         }
     }
@@ -167,7 +163,7 @@ object PermissionHelper {
             fixGroupPermission(activity)
             if (!isAllGranted) {
                 showPermissionDialog(
-                    activity, deniedList, result, skipSettingListener = skipSettingListener
+                    activity, deniedList, true, result, skipSettingListener = skipSettingListener
                 )
             } else {
                 result.invoke(isAllGranted)
@@ -175,7 +171,7 @@ object PermissionHelper {
         }
     }
 
-    /** 申请所有未获取的权限 */
+    /** 申请未获取的权限 */
     fun reqPermission(
         activity: Activity,
         permissions: List<AbsPermissionEntity>,
@@ -191,7 +187,7 @@ object PermissionHelper {
             if (deniedList.isNotEmpty()) {
                 showPermissionDialog(
                     activity,
-                    deniedList,
+                    deniedList, true,
                     result,
                     requestLocationListener = requestLocationListener,
                     skipSettingListener = skipSettingListener
@@ -209,6 +205,7 @@ object PermissionHelper {
     private fun showPermissionDialog(
         activity: Activity,
         deniedList: ArrayList<AbsPermissionEntity>,
+        forceDialog: Boolean,
         result: (isAllGranted: Boolean) -> Unit = {},
         skipSettingListener: () -> Unit,
         requestLocationListener: () -> Unit = {}
@@ -245,7 +242,7 @@ object PermissionHelper {
                         requestLocationListener.invoke()
                     }
 //                    fixCalendarPermission()
-                    if (!isAll && isNotAsk) {
+                    if (!isAll && isNotAsk && forceDialog) {
                         mCheckPermissionDialog = activity.showNoPermissionDialog(deniedList.filter {
                             !it.hasThisPermission(activity)
                         }, cancel = {

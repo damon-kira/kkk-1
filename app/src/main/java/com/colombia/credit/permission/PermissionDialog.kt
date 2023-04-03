@@ -3,28 +3,31 @@ package com.colombia.credit.permission
 import android.content.Context
 import android.graphics.Color
 import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.colombia.credit.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.DlgPermissionLayoutBinding
-import com.colombia.credit.expand.toast
+import com.colombia.credit.manager.H5UrlManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.viewbinding.binding
 import com.util.lib.dp
 import com.util.lib.shape.ShapeImpl
 
 class PermissionDialog(context: Context): DefaultDialog(context) {
 
-    private lateinit var mContentView: LinearLayout
+    private val mBinding by binding<DlgPermissionLayoutBinding>()
 
     init {
         initViews()
     }
+    private lateinit var mContentView: LinearLayout
 
-    private lateinit var mBinding: DlgPermissionLayoutBinding
     private fun initViews() {
-        mBinding = DlgPermissionLayoutBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -34,37 +37,35 @@ class PermissionDialog(context: Context): DefaultDialog(context) {
         mBinding.llContainer.background = ShapeImpl(context).shapeSolid().color(Color.WHITE)
             .then().shapeCorners().radius(8.dp())
             .getShape()
+
+        initAgreement()
+
+        mBinding.aivProtocol.setBlockingOnClickListener {
+            mBinding.aivProtocol.isSelected = !mBinding.aivProtocol.isSelected
+            mBinding.okBtn.isEnabled = mBinding.aivProtocol.isSelected
+        }
     }
 
     fun setData(
         clickListener: () -> Unit = {},
-        deniedList: List<AbsPermissionEntity>,
-        agreementClick: () -> Unit
+        deniedList: List<AbsPermissionEntity>
     ) {
         showPermissionItem(mContentView, deniedList)
         mBinding.okBtn.setOnClickListener {
-            if (!mBinding.aivProtocol.isSelected) {
-                toast(R.string.permission_check_hint)
-                return@setOnClickListener
-            }
             clickListener()
         }
-
-        initAgreement(agreementClick)
     }
 
-    private fun initAgreement(agreementClick: () -> Unit) {
-//        val agreementParam = context.getString(R.string.permission_privacy_policy_link)
-//        val hint = context.getString(R.string.permission_dlg_text1, agreementParam)
-//        val span = SpannableStringBuilder(hint)
-//        span.append("\u200b")
-//        setAgreementClickableSpan(R.color.colorPrimary, context, span, agreementParam) {
-//            agreementClick.invoke()
-////            Launch.skipWebViewActivity(context, H5UrlManager.URL_PRIVACY_PROTOCOL)
-//        }
-//        tv_permission_hint.highlightColor = ContextCompat.getColor(context, R.color.transparent)
-//        tv_permission_hint.movementMethod = LinkMovementMethod.getInstance()
-//        tv_permission_hint.text = span
+    private fun initAgreement() {
+        val agreementParam = context.getString(R.string.permission_album)
+        val hint = context.getString(R.string.permission_protocol, agreementParam)
+        val span = SpannableStringBuilder(hint)
+        span.append("\u200b")
+        setAgreementClickableSpan(R.color.colorPrimary, context, span, agreementParam) {
+            Launch.skipWebViewActivity(context, H5UrlManager.URL_PRIVACY_PROTOCOL)
+        }
+        mBinding.tvProtocol.movementMethod = LinkMovementMethod.getInstance()
+        mBinding.tvProtocol.text = span
 
         mBinding.aivProtocol.setBlockingOnClickListener {
             mBinding.aivProtocol.isSelected = !mBinding.aivProtocol.isSelected

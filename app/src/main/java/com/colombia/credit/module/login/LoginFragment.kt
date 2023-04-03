@@ -46,7 +46,7 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginTvProtocol.text = span
         mBinding.loginTvProtocol.setBlockingOnClickListener {
             // 跳转协议页面
-            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_LOGIN_PROTOCOL)
+            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
         }
 
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
@@ -78,7 +78,7 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipRepeatConfirmActivity(getSupportContext())
+
         }
     }
 

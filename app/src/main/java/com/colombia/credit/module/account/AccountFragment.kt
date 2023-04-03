@@ -92,7 +92,7 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_FEEDBACK)
             }
             R.id.ail_protocol -> {
-                Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_LOGIN_PROTOCOL)
+                Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
             }
             R.id.ail_setting -> {
                 Launch.skipSettingActivity(getSupportContext())

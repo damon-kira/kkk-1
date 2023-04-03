@@ -31,6 +31,7 @@
                 style="@style/marginLeftAndRight16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/image_card_bg"
                 android:paddingLeft="12dp"
                 android:paddingTop="24dp"

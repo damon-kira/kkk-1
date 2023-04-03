@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="permission_hint">Dear customer,To acccess your eligibility and  facilitate faster disbursal of your loan, we  needpermissions to access your</string>
+    <string name="permission_hint">Declaración de adquisición de permisos Hola,A los efectos de su evaluación de riesgo de crédito y para facilitar el desembolso de préstamos más rápido, requerimos los siguientes permisos de datos de USTED:</string>
     <string name="permission_hint_title">Divulgación de permisos</string>
-    <string name="permission_check_hint">协议未同意</string>
-    <string name="permission_protocol">Lea atentamente la declaración de autorización y haga clic en Continuar para indicar que está de acuerdo</string>
+    <string name="protocol_param">privacidad y divulgación de permiso</string>
+    <string name="permission_protocol">Marque de acuerdo y haga clic en continuar para indicar que ha leído y aceptado nuestro acuerdo de %s</string>
+
+    <!-- 短信 -->
+    <string name="permission_sms">SMS financieros</string>
+    <string name="permission_dlg_text_sms">Recopilamos y monitoreamos solo sus SMS transaccionales financieros sobre transacciones bancarias, los nombres de las partes que realizan la transacción, una descripción de la transacción y el monto de la transacción con el fin de realizar una evaluación del riesgo crediticio. Esta evaluación del riesgo crediticio nos permite realizar un desembolso más rápido del préstamo. No se recopilan, leen ni almacenan datos personales de SMS. Recopilamos información de SMS solo después de obtener su consentimiento explícito adicional. La información de SMS se cargará en <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Eliminaremos la información del SMS una vez que hayamos determinado su perfil de riesgo.\nPara comprender mejor su identidad y asegurarse de que sus usuarios satisfagan sus necesidades de crédito. Por lo tanto, antes de enviar su solicitud, necesitamos su autorización para recopilar información de \"Contacto\" y \"SMS\", y subirlos a <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Nos comprometemos a utilizar un protocolo de transferencia de datos seguro para cifrar los datos y garantizar la seguridad de la información. Por favor, siéntase libre de usar. Si no está de acuerdo, no realizaremos esta operación y la aplicación no podrá brindarle un servicio normal y salir de la aplicación.</string>
+
+    <!-- 联系人 -->
+    <string name="permission_contact">Lista de contactos</string>
+    <string name="permission_dlg_text_contacts">Nuestra aplicación requiere este permiso para detectar referencias y completar automáticamente los datos durante el proceso de solicitud de préstamo para un viaje de usuario sin problemas. Además, la aplicación recopila y supervisa la información de sus contactos, incluidos el nombre, los números de teléfono, el tipo de cuenta, la última modificación del contacto, favoritos y otras opciones. que incluye relación, dirección estructural, si está disponible para enriquecer su perfil financiero y nos ayuda a determinar el.Recopilamos información de contactos solo después de obtener su consentimiento explícito adicional. La información de contactos se cargará en <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Eliminaremos la información de los contactos una vez que hayamos determinado su perfil de riesgo.</string>
+
+    <!-- read phone state -->
+    <string name="permission_read_phone_state">Teléfono</string>
+    <string name="permission_dlg_text_readphone">Nuestra aplicación recopila y monitorea información específica sobre su dispositivo, incluido su modelo de hardware, modelo de construcción, RAM, almacenamiento; identificadores únicos de dispositivos como IMEI, número de serie, SSAID; La información SIM incluye el operador de red, el estado de roaming, los códigos MNC y MCC, la información WIFI incluye la dirección MAC y la información de la red móvil para identificar de manera única los dispositivos y garantizar que ningún dispositivo no autorizado actúe en su nombre para evitar fraudes. Esto también nos ayuda a evaluar la solvencia crediticia para el enriquecimiento del perfil crediticio.</string>
+
+    <!-- APP list -->
+    <string name="app_list">Aplicaciones instaladas</string>
+    <string name="app_list_content">Recopilamos la información de metadatos de cada aplicación instalada que incluye el nombre de la aplicación, el nombre del paquete, la hora de instalación, la hora de actualización, el nombre de la versión y el código de la versión de cada aplicación instalada en su dispositivo para evaluar su solvencia crediticia y brindarle ofertas de préstamo personalizadas preaprobadas.</string>
 
     <!-- 定位 -->
     <string name="permission_location">Ubicación</string>
-    <string name="permission_dlg_text_location">Recopijiale y supervise información sobre la ubicación de su dispositivo para proporcionar la facilidad de servicio de su solicitud de préstamo y también proporcione ofertas personalizadas.</string>
+    <string name="permission_dlg_text_location">Recopilamos y monitoreamos la información sobre la ubicación de su dispositivo para proporcionar la capacidad de servicio de su solicitud de préstamo, para reducir el riesgo asociado con su solicitud de préstamo y para proporcionar ofertas de préstamo personalizadas preaprobadas. Esto también nos ayuda a verificar la dirección, tomar una mejor decisión sobre el riesgo crediticio y agilizar su proceso KYC.</string>
 
-    <!-- read phone state -->
-    <string name="permission_read_phone_state">Información de Dispositivo</string>
-    <string name="permission_dlg_text_readphone">La aplicacion necesita acceder a la intormacion de tu dispositivo y poder tomar las medidas antifraude necesarias</string>
-
-    <!-- 联系人 -->
-    <string name="permission_contact">Contactos</string>
-    <string name="permission_dlg_text_contacts">Permite que LibreCrédito obtenga permisos de contactos en para detectar automáticamente la información de referencias para la generación de perfiles en línea para generar ofertas de préstamos preaprobados. También ayuda a autocompletar datos durante el proceso de solicitud de préstamo. Sin embargo, no publicaremos ni divulgaremos su información de contacto sin su autorización. Cifrada subirlo a en nuestro servidor nuestro proveedor externo <![CDATA[<font color=\'#2767FD\'>https://client-collection.librecredito.com/</font>]]>, a fin de identificar y analizar su comportamiento y riesgo frente a préstamos múltiples para evaluar si se puede procesar el préstamo o no ayudando a prevenir fraude.</string>
+    <!-- account -->
+    <string name="permission_account">Cuentas de terceros</string>
+    <string name="permission_dlg_text_account">Recopilamos y supervisamos la lista de cuentas configuradas en el dispositivo para verificar la información, como su dirección de correo electrónico y los detalles básicos del perfil, que usted proporciona. Esto también nos ayuda a enriquecer la información de su perfil y brindarle ofertas de préstamos personalizadas preaprobadas.</string>
 
     <!-- 相机 -->
     <string name="permission_camera">Cámara</string>
-    <string name="permission_dlg_text_camera">Necesitas autorizar el acceso a la cámara de tul dispositivo para poder completar el proceso</string>
-
-    <!-- 相册 -->
-    <string name="permission_album">Album</string>
-    <string name="permission_dlg_text_album">Necesitas autorizar el acceso a tus álbumes para poder cargar documentos KYC y fotos para completar el proceso</string>
-
-    <!-- 短信 -->
-    <string name="permission_sms">SMS</string>
-    <string name="permission_dlg_text_sms">Ermite que LibreCrédito obtenga permisos de SMS para Recopile y supervise su SMS, direcciones de remitentes y descripción de los mensajes para construir su perfil social y financiero, para la evaluación de crédito y proporcionarle ofertas de préstamos preaprobadas. Cifrada subirlo a en nuestro servidor nuestro proveedor externo <![CDATA[<font color=\'#2767FD\'>https://client-collection.librecredito.com/</font>]]>, a fin de identificar y analizar su comportamiento y riesgo frente a préstamos múltiples para evaluar si se puede procesar el préstamo o no ayudando a prevenir fraude.</string>
-
-    <!-- 日历 -->
-    <string name="permission_calendar">Calendario</string>
-    <string name="permission_dlg_text_calendar">Activa el recordatorio en el calendario, para así recordar fechas de pago.</string>
+    <string name="permission_dlg_text_camera">Requerimos acceso a la cámara para que pueda escanear o capturar fácilmente los documentos KYC requeridos y ahorrar tiempo al permitirnos completar automáticamente los datos relevantes. Esto garantiza que se le brinde una experiencia perfecta mientras usa la aplicación.</string>
 
     <!-- 存储 -->
     <string name="permission_storage">Almacenamiento</string>
-    <string name="permission_dlg_text_storage">Le permite cargar documentos e imágenes para la solicitud de préstamo.</string>
+    <string name="permission_dlg_text_storage">Requerimos permiso de almacenamiento para que su KYC y otros documentos relevantes puedan descargarse y guardarse de manera segura en su teléfono. Luego, puede cargar fácilmente los documentos relacionados con KYC correctos para acelerar el proceso de llenado y desembolso de los detalles de la solicitud de préstamo. Esto garantiza que se le brinde una experiencia perfecta mientras usa la aplicación.</string>
 
-    <!-- APP list -->
-    <string name="app_list">Apps</string>
-    <string name="app_list_content">La aplicación necesita acceder a la información de tu dispositivo y poder tomar las medidas</string>
+    <!-- 相册 -->
+    <string name="permission_album">MEDIOS Y FOTOS Y ARCHIVOS</string>
+    <string name="permission_dlg_text_album">Requerimos el permiso de medios, fotos y archivos que permite que la aplicación le permita cargar fotos o documentos para completar el formulario de solicitud durante su viaje de solicitud de préstamo.</string>
 
+    <!-- 日历 -->
+    <string name="permission_calendar">INFORMACIÓN DEL CALENDARIO</string>
+    <string name="permission_dlg_text_calendar">Requerimos información del calendario para que pueda configurar una nota de fecha de vencimiento del préstamo en la aplicación después del préstamo, que le recordará que debe pagar su préstamo a tiempo.La información del calendario se subirá a <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Eliminaremos la información del calendario una vez que hayamos determinado su perfil de riesgo.</string>
+
+
+    <string name="permission_hint_text2">Tenga en cuenta que cierta información que se requiere obligatoriamente para realizar su evaluación de riesgo crediticio se comparte de forma segura con nuestro proveedor de servicios externo registrado. Para obtener más información sobre sus permisos, consulte la Política de privacidad.</string>
     <string name="permission_connector_char" translatable="false">&#38;</string>
 
     <string name="permission_dialog_message">Debes permitir el acceso de la Aplicación a "%s" para su correcto fucionamiento y la evaluación de tu préstamo. Ve a Configuración, en tu celular,luego a Permisos, y selecciona [Finanzas extremas]</string>
-    <string name="deny_r1">Rechazar</string>
-    <string name="permission_ok">OK</string>
-    <string name="ok_r1">Aceptar</string>
+    <string name="permission_acepter">Aceptar</string>
 </resources>

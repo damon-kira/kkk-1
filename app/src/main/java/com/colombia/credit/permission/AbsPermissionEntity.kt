@@ -136,7 +136,7 @@ class CameraPermission : AbsPermissionEntity() {
 class PhotoAlbumPermission: AbsPermissionEntity(){
 
     override fun permissionName(): String {
-        return ""
+        return Manifest.permission.READ_EXTERNAL_STORAGE
     }
 
     override fun hasPermissionUnder6(context: Context): Boolean {
@@ -243,19 +243,19 @@ class StoragePermission : AbsPermissionEntity() {
 }
 
 //账户权限
-//class AccountPermission : AbsPermissionEntity() {
-//    override fun permissionName(): String {
-//        return Manifest.permission.GET_ACCOUNTS
-//    }
-//
-//    override fun hasPermissionUnder6(context: Context): Boolean {
-//        return true
-//    }
-//
-//    override fun getHintIfNoPermission(): Pair<Int, Int> {
-//        return Pair(R.string.permission_account, R.string.permission_dlg_text_account)
-//    }
-//}
+class AccountPermission : AbsPermissionEntity() {
+    override fun permissionName(): String {
+        return Manifest.permission.GET_ACCOUNTS
+    }
+
+    override fun hasPermissionUnder6(context: Context): Boolean {
+        return true
+    }
+
+    override fun getHintIfNoPermission(): Pair<Int, Int> {
+        return Pair(R.string.permission_account, R.string.permission_dlg_text_account)
+    }
+}
 
 //app list权限
 class AppListPermission : AbsPermissionEntity() {

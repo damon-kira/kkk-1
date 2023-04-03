@@ -32,10 +32,12 @@ val TAG = "debug_Permissions"
 val appPermissions = arrayOf(
     SmsPermission(),
     ReceivePermission(),
-    ReadPhonePermission(),
     ContactPermission(),
+    ReadPhonePermission(),
     LocationPermission(),
+    AccountPermission(),
     CameraPermission(),
+    PhotoAlbumPermission(),
     CalendarReadPermission(),
     CalendarWritePermission()
 )
@@ -343,9 +345,7 @@ fun setAgreementClickableSpan(
 
         override fun updateDrawState(paint: TextPaint) {
             super.updateDrawState(paint)
-            paint?.apply {
-                paint.color = ContextCompat.getColor(context, colorRes)
-            }
+            paint.color = ContextCompat.getColor(context, colorRes)
         }
     }, index, index + clickableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 }

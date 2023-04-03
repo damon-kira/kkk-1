@@ -3,6 +3,7 @@ package com.colombia.credit
 import android.os.Bundle
 import android.os.Handler
 import com.bigdata.lib.LocationHelp
+import com.colombia.credit.Launch.jumpToAppSettingPage
 import com.colombia.credit.databinding.ActivitySplashBinding
 import com.colombia.credit.permission.PermissionHelper
 import com.common.lib.base.BaseActivity
@@ -38,11 +39,11 @@ class SplashActivity : BaseActivity() {
             Launch.skipMainActivity(this)
             finish()
         }, {
-
+            Launch.skipMainActivity(this)
+            finish()
+//            jumpToAppSettingPage()
         }, {
             LocationHelp.requestLocation()
-        }, {
-
         })
     }
 }

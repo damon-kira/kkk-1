@@ -10,7 +10,9 @@ import com.util.lib.log.logger_d
 class PermissionDialogManager {
 
     companion object {
-        fun getInstance(): PermissionDialogManager = PermissionDialogManager()
+        private val _instance = PermissionDialogManager()
+
+        fun getInstance()= _instance
 
         /** 是否显示过权限弹窗 */
         const val KEY_SHOW_PERMISSION_DIA_FLAG: String = "key_show_permission"
@@ -22,8 +24,7 @@ class PermissionDialogManager {
     fun showPermissionTipsDialog(
         deniedList: ArrayList<AbsPermissionEntity>,
         activity: Activity,
-        dismiss: () -> Unit,
-        agreementClick: () -> Unit
+        dismiss: () -> Unit
     ) {
         if (deniedList.isEmpty()) {
             dismiss.invoke()
@@ -33,9 +34,8 @@ class PermissionDialogManager {
         // 添加APPlist和相册声明
         val tempList = arrayListOf<AbsPermissionEntity>()
         tempList.addAll(deniedList)
-        if (tempList.size >= 1) {
-            tempList.add(1, PhotoAlbumPermission())
-            tempList.add(1, AppListPermission())
+        if (tempList.size >= 3) {
+            tempList.add(3, AppListPermission())
         }
 
         if (mPermissionTipsDialog?.isShowing == true) {
@@ -62,10 +62,7 @@ class PermissionDialogManager {
                 {
                     mPermissionTipsDialog?.dismiss()
                 },
-                tempList,
-                agreementClick = {
-                    agreementClick.invoke()
-                }
+                tempList
             )
         }
         mPermissionTipsDialog?.setOnDismissListener {
@@ -84,7 +81,7 @@ class PermissionDialogManager {
     fun isShowDialogTips(): Boolean {
         val boolean =
             SharedPrefGlobal.getBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, true)
-        logger_d("logout","是否已经显示过>>>$boolean")
+        logger_d("logout", "是否已经显示过>>>$boolean")
         return !boolean
 //        return true
     }
