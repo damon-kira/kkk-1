@@ -81,6 +81,12 @@
             android:name=".module.banklist.BankCardListActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".module.banklist.MeBankAccountListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.history.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".camera.CaptureActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CaptureActivityTheme" />
@@ -99,6 +105,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.webview.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.setting.SettingActivity"
             android:screenOrientation="portrait" />
 
         <!-- 适配 -->

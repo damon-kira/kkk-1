@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/marginLeftAndRight16"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:background="@drawable/shape_white_10dp"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/svg_home_logo" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/color_333333"
+            android:textSize="15sp" />
+
+        <com.colombia.credit.view.textview.EasyTextView
+            android:id="@+id/etv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/color_32C558"
+            android:textSize="12sp"
+            app:etv_corner="2dp"
+            tools:text="@string/history_status_repay" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="24dp" />
+
+    <!--  -->
+    <LinearLayout
+        android:id="@+id/ll_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 5.000"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/repay_amount"
+                android:textColor="#FF999999"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="$ 5.000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/history_repay_date"
+                android:textColor="#FF999999"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_repay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_apply_bg"
+            android:paddingLeft="8dp"
+            android:paddingTop="6dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="6dp"
+            android:text="@string/repay_btn"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 拒绝文案显示 -->
+    <TextView
+        android:id="@+id/tv_refused"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/history_refused_text"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/ll_failure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/history_failure"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/shape_apply_bg"
+            android:paddingLeft="14dp"
+            android:paddingTop="6dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="6dp"
+            android:text="@string/history_btn_failure"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="16dp" />
+</LinearLayout>

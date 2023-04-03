@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_white_top16"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        app:srcCompat="@drawable/image_home_empty" />
+
+    <TextView
+        android:id="@+id/tv_empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/history_not_orders"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/history_tv_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/shape_apply_bg"
+        android:paddingLeft="56dp"
+        android:paddingTop="12dp"
+        android:paddingRight="56dp"
+        android:paddingBottom="12dp"
+        android:text="@string/history_btn"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+</LinearLayout>

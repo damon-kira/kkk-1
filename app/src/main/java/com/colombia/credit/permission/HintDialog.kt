@@ -6,11 +6,12 @@ import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 
-class PermissionForceDialog constructor(context: Context):DefaultDialog(context) {
+class HintDialog constructor(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogPermissionBinding>()
 
     private var mCloseListener: (() -> Unit)? = null
+
     init {
         setContentView(mBinding.root)
         setDisplaySize(0.9f, WRAP)
@@ -22,17 +23,27 @@ class PermissionForceDialog constructor(context: Context):DefaultDialog(context)
         }
     }
 
-    fun setMessage(message: String): PermissionForceDialog {
+    fun setTitleText(title:String): HintDialog {
+        mBinding.tvTitle.text = title
+        return this
+    }
+
+    fun setMessage(message: String): HintDialog {
         mBinding.tvPermissionText.text = message
         return this
     }
 
-    fun setOnCloseListener(listener: () -> Unit):PermissionForceDialog{
+    fun setBtnText(btnText: String): HintDialog {
+        mBinding.tvSkip.text = btnText
+        return this
+    }
+
+    fun setOnCloseListener(listener: () -> Unit): HintDialog {
         mCloseListener = listener
         return this
     }
 
-    fun setOnClickListener(listener: () -> Unit): PermissionForceDialog {
+    fun setOnClickListener(listener: () -> Unit): HintDialog {
         mBinding.tvSkip.setBlockingOnClickListener {
             listener.invoke()
             dismiss()

@@ -182,8 +182,8 @@
     </declare-styleable>
 
     <declare-styleable name="PeriodLayout">
-        <attr name="pl_lock_visiblity" format="boolean"/>
-        <attr name="pl_text" format="string|reference"/>
+        <attr name="pl_lock_visiblity" format="boolean" />
+        <attr name="pl_text" format="string|reference" />
     </declare-styleable>
 
     <declare-styleable name="TextViewLine">
@@ -191,4 +191,8 @@
         <attr name="tvl_isShow" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="AccountItemLayout">
+        <attr name="ail_left_icon" format="reference" />
+        <attr name="ail_text" format="string|reference" />
+    </declare-styleable>
 </resources>

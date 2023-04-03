@@ -5,10 +5,9 @@ import android.os.Bundle
 import com.colombia.credit.databinding.ActivityMainBinding
 import com.colombia.credit.module.account.AccountFragment
 import com.colombia.credit.module.home.HomeFragment
-import com.colombia.credit.module.repay.RepayFragment
+import com.colombia.credit.module.repay.RepayTabFragment
 import com.common.lib.base.BaseFragment
 import com.common.lib.base.BaseFragmentActivity
-import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +20,7 @@ class MainActivity : BaseFragmentActivity() {
         BaseFragment.getInstance(this, HomeFragment::class.java)
     }
     private val mRepayFragment by lazy(LazyThreadSafetyMode.NONE) {
-        BaseFragment.getInstance(this, RepayFragment::class.java)
+        BaseFragment.getInstance(this, RepayTabFragment::class.java)
     }
     private val mAccountFragment by lazy(LazyThreadSafetyMode.NONE) {
         BaseFragment.getInstance(this, AccountFragment::class.java)

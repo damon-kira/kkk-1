@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <com.colombia.credit.view.ToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        app:tl_left_icon="@drawable/svg_left_back_gray"
+        app:tl_text_gravity="center"
+        app:tl_title="@string/setting_title" />
+
+
+    <TextView
+        android:id="@+id/tv_delete"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_10dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="22dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="22dp"
+        android:text="@string/delete_data"
+        android:textColor="#FF666666"
+        android:textSize="14sp"
+        app:drawableRightCompat="@drawable/svg_arrow_right" />
+
+
+    <TextView
+        android:id="@+id/tv_logout"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_10dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="22dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="22dp"
+        android:text="@string/logout"
+        android:textColor="#FF666666"
+        android:textSize="14sp"
+        app:drawableRightCompat="@drawable/svg_arrow_right" />
+
+</LinearLayout>

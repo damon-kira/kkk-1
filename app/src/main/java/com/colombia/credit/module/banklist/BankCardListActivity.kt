@@ -20,15 +20,19 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.hide
 import com.util.lib.show
+import dagger.hilt.android.AndroidEntryPoint
 
 // 银行账户列表页面
-class BankCardListActivity : BaseActivity() {
+@AndroidEntryPoint
+open class BankCardListActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_AMOUNT = "key_amount"
     }
 
-    private val mBinding by binding<ActivityBankCardListBinding>()
+    protected val mBinding by binding<ActivityBankCardListBinding>()
+
+    protected val mViewModel by lazyViewModel<BankCardViewModel>()
 
     private val mAdapter: BankCardAdapter by lazy {
         BankCardAdapter(arrayListOf())

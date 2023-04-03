@@ -10,6 +10,10 @@ fun inValidToken(): Boolean {
     return true
 }
 
+fun getMobile():String {
+    return ""
+}
+
 fun getUserName(): String {
     return ""
 }

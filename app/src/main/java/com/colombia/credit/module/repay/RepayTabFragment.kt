@@ -11,7 +11,7 @@ import com.common.lib.viewbinding.doOnDestroyView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RepayFragment : BaseFragment() {
+class RepayTabFragment : BaseFragment() {
 
     private val mBinding by binding(FragmentRepayBinding::inflate)
 
@@ -20,12 +20,10 @@ class RepayFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return mBinding.root
-    }
+    ): View = mBinding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        doOnDestroyView {  }
+
     }
 }

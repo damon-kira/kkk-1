@@ -9,9 +9,8 @@ import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * 首页还款页面
- */
+
+//复贷首页
 @AndroidEntryPoint
 class RepeatFragment : BaseHomeLoanFragment() {
 

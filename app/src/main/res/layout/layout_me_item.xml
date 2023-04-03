@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/aiv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        app:layout_constraintBottom_toTopOf="@id/view_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_me_about" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_333333"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@id/view_line"
+        app:layout_constraintLeft_toRightOf="@id/aiv_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Acerca de nosotros" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/aiv_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/view_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/svg_arrow_right" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/color_eeeeee"
+        app:layout_constraintLeft_toLeftOf="@id/tv_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aiv_icon" />
+
+</merge>

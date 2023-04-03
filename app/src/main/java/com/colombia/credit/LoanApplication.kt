@@ -3,6 +3,7 @@ package com.colombia.credit
 import android.app.Application
 import android.content.Context
 import com.cache.lib.CacheInit
+import com.colombia.credit.module.webview.WebViewPool
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -22,5 +23,6 @@ class LoanApplication: Application() {
         super.onCreate()
         mAppContext = this
         CacheInit.get().setContext(this)
+        WebViewPool.INSTANCE.init(this, false)
     }
 }

@@ -209,4 +209,52 @@
     <string name="defer_confirm1">Consejos amables</string>
     <string name="defer_confirm2">Una vez que la solicitud de extensión de pago  sea exitosa, el pedido original se liquidará  automáticamente. Solo debe pagar de  acuerdo con el tiempo de pago del nuevo  pedido, confirme si desea pagar  la tarifa por demora por el pago por demora</string>
     <string name="defer_apply">Confirmar extensión</string>
+    <string name="account_not_login">Registro/Acceso</string>
+
+    <!-- 个人中心 -->
+    <string name="me_history">Historial</string>
+    <string name="me_bank">Tarjeta bancaria</string>
+    <string name="me_about">Acerca de nosotros</string>
+    <string name="me_protocol">Acuerdo de privacidad</string>
+    <string name="me_feedback">Retroalimentación</string>
+    <string name="me_setting">Sistema</string>
+
+    <string name="me_repay_text1">El monto a paga</string>
+    <string name="me_repay_text2">Pago Vencido</string>
+    <string name="me_repayment">Repayment</string>
+
+    <string name="me_loan_amount_hint">Monto del préstamo</string>
+    <string name="me_loan">Toma dinero ahora</string>
+
+    <string name="me_refused_hint">Lo sentimos, actualmente no es elegible para un préstamoVuelva a intentarlo después del %s</string>
+    <string name="me_hi">Hi,%s</string>
+    <string name="me_custom">contact us</string>
+    <!-- 客服 -->
+    <string name="custom_whatsapp">WhatsApp</string>
+    <string name="custom_telephone">Teléfono</string>
+    <string name="custom_email">ahsjkadkakdl@gmail.com</string>
+    <string name="email_error_hint">未找到邮箱APP</string>
+
+    <string name="setting_title">Sistema</string>
+    <string name="delete_data">Borrar datos</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="delete_hint_title">Consejos amables</string>
+    <string name="delete_hint">Vaciaremos todos tus datos, ¿estás seguro?</string>
+    <string name="delete_btn">Confirmar extensión</string>
+
+    <!-- 历史订单 -->
+    <string name="history_title">Historial</string>
+    <string name="history_not_orders">Sin registro, consigue tu primer préstamo</string>
+    <string name="history_btn">Obtener dinero ahora</string>
+    <string name="history_status_repay">Pago en Proceso</string><!-- 还款 -->
+    <string name="history_status_settle">Fin de orden</string><!-- 结清 -->
+    <string name="history_status_">Préstamo Activo</string><!-- 审核中 -->
+    <string name="history_status_refused">Rechazar</string><!-- 拒绝 -->
+    <string name="history_status_failed">Fallar</string><!-- 失效 -->
+
+    <string name="history_btn_failure">Solicitar</string><!-- 订单失效 -->
+    <string name="history_repay_date">Día de Pago</string>
+    <string name="history_refused_text">Su pedido ha sido rechazado, intente nuevamente después del %s</string>
+    <string name="history_failure">Su pedido ha caducado, solicite un nuevo préstamo</string>
+    <string name="tab_repay_btn">Pago con un clic $ %s</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.colombia.credit
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,11 +8,10 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
-import android.util.Log
-import android.webkit.WebView
-import com.colombia.credit.camera.CaptureActivity
-import com.colombia.credit.expand.isXiaomi
+import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
+import com.colombia.credit.module.banklist.MeBankAccountListActivity
+import com.colombia.credit.module.history.HistoryActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.face.FaceActivity
 import com.colombia.credit.module.process.face.FaceFailedActivity
@@ -19,9 +19,9 @@ import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
+import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
-import com.common.lib.base.BaseActivity
 import com.util.lib.log.logger_e
 
 object Launch {
@@ -55,6 +55,14 @@ object Launch {
         launch(context, BankCardListActivity::class.java, intent)
     }
 
+    fun skipMeBankCardListActivity(context: Context) {
+        launch(context, MeBankAccountListActivity::class.java)
+    }
+
+    fun skipHistoryActivity(context: Context) {
+        launch(context, HistoryActivity::class.java)
+    }
+
     fun skipFaceActivity(context: Context) {
         launch(context, FaceActivity::class.java)
     }
@@ -80,6 +88,44 @@ object Launch {
         val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra(WebViewActivity.EXTRA_URL, url)
         launch(context, WebViewActivity::class.java, intent)
+    }
+
+    fun skipSettingActivity(context: Context) {
+        launch(context, SettingActivity::class.java)
+    }
+
+    @SuppressLint("IntentReset")
+    fun skipToEmail(context: Context) {
+        val uri = Uri.parse("mailto:${getEmail()}")
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "message/rfc822"
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getEmail()))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.data = uri
+        if (intent.resolveActivity(context.packageManager) != null) {
+            context.startActivity(intent)
+        } else {
+            toast(R.string.email_error_hint)
+        }
+    }
+
+    fun skipWhatsApp(context: Context) {
+        val whatsapp = "https://api.whatsapp.com/send?phone=57${getWhatsAppTel()}"
+        skipWebViewActivity(context, whatsapp)
+    }
+
+    fun skipCallPage(context: Context) {
+        val mobile = getServiceTel()
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$mobile")
+        try {
+            val mobile = ""
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$mobile")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
 
     fun skipMobileNetPage(context: Context) {
