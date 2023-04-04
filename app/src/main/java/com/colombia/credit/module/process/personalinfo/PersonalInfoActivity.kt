@@ -29,6 +29,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        setToolbarListener(mBinding.processToolbar)
         mBinding.bivEducation.setBlockingOnClickListener(this)
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)

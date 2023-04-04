@@ -14,6 +14,7 @@ class KycInfoActivity: BaseProcessActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        setToolbarListener(mBinding.processToolbar)
     }
 
     override fun checkCommitInfo(): Boolean {

@@ -16,6 +16,12 @@ object DictionaryUtil {
         return getMapData(R.array.marriage_key, R.array.marriage)
     }
 
+
+    // 获取工作类型
+    fun getJobTypeData(): MutableMap<String, String> {
+        return getMapData(R.array.jobType_key, R.array.jobType)
+    }
+
     // 获取入职时间
     fun getEntryTimeData(): MutableMap<String, String> {
         return getMapData(R.array.entryTime_key, R.array.entryTime)
@@ -31,6 +37,9 @@ object DictionaryUtil {
         return getMapData(R.array.education_key, R.array.education)
     }
 
+    // 获取支付频率
+    fun getPayCycle() = getMapData(R.array.salaryCycle_key, R.array.salaryCycle)
+
 
     // 根据id获取数据列表
     private fun getStringArrayData(arrarId: Int): Array<String> {
@@ -38,7 +47,10 @@ object DictionaryUtil {
     }
 
     // 把list数据转化成map数据
-    private fun produceMap(keyArray: Array<String>, value: Array<String>): MutableMap<String, String> {
+    private fun produceMap(
+        keyArray: Array<String>,
+        value: Array<String>
+    ): MutableMap<String, String> {
         val map = mutableMapOf<String, String>()
         for ((index, values) in value.withIndex()) {
             map[keyArray[index]] = values

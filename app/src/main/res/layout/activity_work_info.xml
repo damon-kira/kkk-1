@@ -17,8 +17,9 @@
         android:layout_height="?actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
-        app:tl_text_gravity="center"
         app:tl_left_icon="@drawable/svg_left_back"
+        app:tl_right_icon_show="true"
+        app:tl_text_gravity="center"
         app:tl_title="@string/work_title" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -49,14 +50,15 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape_white_10dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/process_pv">
 
         <LinearLayout
+            style="@style/marginLeftAndRight12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            style="@style/marginLeftAndRight12"
             android:paddingTop="12dp">
 
             <!--工作类型-->
@@ -66,8 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:hint="@string/work_selector"
+                app:if_can_edit="false"
                 app:left_icon="@drawable/svg_work_type"
-                app:rightIcon_visiblity="gone"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/work_type" />
 
             <!-- 发薪日 -->
@@ -79,8 +82,7 @@
                 app:hint="@string/work_selector"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_work_salary"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/work_salary" />
 
             <!-- 月收入 -->
@@ -92,29 +94,31 @@
                 app:hint="@string/work_selector"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_work_income"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/work_month_income" />
 
             <!-- 工作年限 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/biv_work_year"
+                android:id="@+id/biv_job_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:hint="@string/work_life_hint"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_work_time"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/work_life" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_commit"
                 style="@style/marginLeftAndRight12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:background="@drawable/shape_apply_bg"
                 android:gravity="center"
                 android:padding="11dp"

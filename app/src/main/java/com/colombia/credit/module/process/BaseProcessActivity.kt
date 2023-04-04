@@ -5,6 +5,7 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.DictionaryInfo
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.dialog.ProcessSelectorDialog
+import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.base.BaseActivity
@@ -22,11 +23,11 @@ abstract class BaseProcessActivity : BaseActivity() {
     fun showProcessSelectorDialog(
         title: String,
         data: MutableMap<String, String>,
-        selectorTag: String = "",
+        selectorTag: String? = null,
         listener: (DictionaryInfo) -> Unit
     ) {
         val dialog = mProcessSelectorDialog ?: ProcessSelectorDialog(this)
-        dialog.setDataAndTitle(title, data, selectorTag)
+        dialog.setDataAndTitle(title, data, selectorTag.orEmpty())
         dialog.setOnClickListener {
             listener.invoke(it)
         }
@@ -36,6 +37,15 @@ abstract class BaseProcessActivity : BaseActivity() {
     protected fun uploadInfo() {
         if (checkCommitInfo()) {
             val commitInfo = getCommitInfo()
+        }
+    }
+
+    protected fun setToolbarListener(toolbarLayout: ToolbarLayout){
+        toolbarLayout.setOnbackListener {
+            finish()
+        }
+        toolbarLayout.setCustomClickListener {
+
         }
     }
 

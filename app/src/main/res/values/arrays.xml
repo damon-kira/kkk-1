@@ -61,7 +61,7 @@
     </string-array>
 
     <!-- 工作类型 -->
-    <string-array name="workType">
+    <string-array name="jobType">
         <item>Jornada completa</item><!-- 全职 -->
         <item>Jornada parcial</item><!--兼职-->
         <item>Autónomo</item><!--自由职业-->
@@ -69,7 +69,7 @@
         <item>Desempleo</item><!--失业-->
         <item>Otro</item><!--其他-->
     </string-array>
-    <string-array name="workType_key">
+    <string-array name="jobType_key">
         <item>1</item><!-- 全职 -->
         <item>2</item><!--兼职-->
         <item>3</item><!--自由职业-->
