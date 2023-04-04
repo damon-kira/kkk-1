@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.jetbrains.annotations.NotNull
 
@@ -61,6 +62,10 @@ abstract class BaseRecyclerViewAdapter<T>(@NotNull private val items: ArrayList<
 
     open fun setOnItemClickListener(listener: OnItemClickListener<T>) {
         this.mListener = listener
+    }
+
+    protected fun getColor(context: Context, @ColorRes colorRes: Int): Int {
+        return ContextCompat.getColor(context, colorRes)
     }
 }
 

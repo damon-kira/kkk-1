@@ -220,8 +220,6 @@ class ApiManager @Inject constructor() {
 
     private val BASEURL = Constant.BASE_URL
 
-    private val BIG_DATA_URL = Constant.BIG_DATA_URL + "v2/basedata/collection"
-
     private val BASE_H5_URL = Constant.BASE_H5_URL
 
     private val IMAGE_IDENTITY_URL = "${BASEURL}api/v1/resource/img/download?"
@@ -239,10 +237,6 @@ class ApiManager @Inject constructor() {
 
     /** 默认15s */
     fun getApiDefaultService(): ApiService = createApiService()
-
-    fun getBigDataUrl(): String = BIG_DATA_URL
-
-    fun getBigDataBaseUrl(): String = Constant.BIG_DATA_URL
 
     fun getImageUrl(): String = IMAGE_IDENTITY_URL
 

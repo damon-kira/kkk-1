@@ -31,11 +31,35 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    signingConfigs {
+        debug {
+            storeFile file("keystore/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
 
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "String", "BASE_URL", "${rootProject.ext.release.apiHost}"
+            buildConfigField "String", "app_secret", "${rootProject.ext.release.apiSecret}"
+            buildConfigField "boolean", "APP_DEBUG", "false"
+            multiDexKeepFile file('multidex-config.txt')
+            minifyEnabled true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "${rootProject.ext.debug.apiHost}"
+            buildConfigField "String", "app_secret", "${rootProject.ext.debug.apiSecret}"
+            buildConfigField "boolean", "APP_DEBUG", "true"
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            debuggable true
+            versionNameSuffix ".alpha"
         }
     }
     compileOptions {

@@ -140,6 +140,7 @@ class BaseInfoView : AbsBaseInfoView {
     }
 
     override fun setTitle(@StringRes titleRes: Int) {
+        mBinding.bivTvTitle.show()
         mBinding.bivTvTitle.setText(titleRes)
     }
 
@@ -150,6 +151,10 @@ class BaseInfoView : AbsBaseInfoView {
 
     override fun setTitleVisible(visible: Int) {
         mBinding.bivTvTitle.visibility = BaseInfoVisibility.getViewVisible(visible)
+    }
+
+    override fun getTitle(): String {
+        return mBinding.bivTvTitle.text.toString()
     }
 
     override fun setInputMaxLength(maxLength: Int) {
@@ -244,7 +249,7 @@ class BaseInfoView : AbsBaseInfoView {
         val errorSpannable = SpannableStringBuilder(errorStr)
 //        if (hasIcon)
 //            errorSpannable.insert(0, errorImageSpan)
-        mBinding.bivTvError.visibility = View.VISIBLE
+        mBinding.bivTvError.show()
         mBinding.bivTvError.text = errorSpannable
         mBinding.bivEdittext.isSelected = true
     }
@@ -254,7 +259,7 @@ class BaseInfoView : AbsBaseInfoView {
     }
 
     override fun setDesc(desc: String) {
-        mBinding.bivTvDesc.visibility = View.VISIBLE
+        mBinding.bivTvDesc.show()
         mBinding.bivTvDesc.text = desc
     }
 

@@ -5,6 +5,7 @@ import com.project.util.AESNormalUtil
 import com.util.lib.GsonUtil
 import com.util.lib.log.logger_e
 import org.json.JSONException
+import java.lang.reflect.ParameterizedType
 
 /**
  * Created by weisl on 2019/8/12.
@@ -12,15 +13,24 @@ import org.json.JSONException
 open class BaseResponse<T>@JvmOverloads constructor(var code: Int, val data: String, val message: String?, val e: Throwable? = null) {
     var t: T? = null
 
-    fun parseT(clazz: Class<T>): T? {
+    fun parseT(/*clazz: Class<T>*/): T? {
         if (t == null) {
             try {
-                t = GsonUtil.fromJson(data, clazz) as? T
+                t = GsonUtil.fromJson(data, getType<T>()) as? T
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
         return t
+    }
+
+    private fun <T>getType(): Class<out Any?> {
+        val genericSuppress = this.javaClass.genericSuperclass as ParameterizedType
+        val type = genericSuppress.actualTypeArguments[0]
+        if (type is Class<*>) {
+            return Any::class.java
+        }
+        return type as Class<T>
     }
 
     fun getData(): T? = t

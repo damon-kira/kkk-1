@@ -11,6 +11,7 @@
     <string name="days">%s días</string>
     <string name="seconds">%ss</string>
     <string name="day">días</string>
+    <string name="selector_s">Elección %s</string>
 
     <string name="login_text">Continuar</string>
     <string name="protocol_params"> Acuerdo de Privacidad</string>
@@ -65,6 +66,8 @@
     <string name="product_tag_risk">Monto alto</string>
     <string name="product_tag_safety">100% Aprobado</string>
 
+    <!--  进件流程填写信息错误提示-->
+    <string name="error_process_hint">Ingrese el %s correcto</string>
     <!--  个人信息-->
     <string name="personal_info">Informacion personal</string>
     <string name="email">Email</string>
@@ -73,6 +76,7 @@
     <string name="education_hint">Por favor elige</string>
     <string name="address">Provincia y ciudad</string>
     <string name="address_hint">Por favor elige</string>
+    <string name="address_detail_title">dirección detallada</string>
     <string name="address_detail">Por favor, introduzca la dirección de casa detallada</string>
     <string name="marriage">Estado civil</string>
     <string name="marriage_hint">Seleccione tu estado civil</string>

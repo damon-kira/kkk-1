@@ -9,6 +9,7 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.colombia.credit.R
+import com.colombia.credit.bean.DictionaryInfo
 
 
 fun setAgreementClickableSpan(
@@ -32,4 +33,15 @@ fun setAgreementClickableSpan(
             }
         }
     }, index, index + clickableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+}
+
+fun mapToPopData(dataMap: Map<String, String>, selectorTag: String): ArrayList<DictionaryInfo> {
+    val list = mutableListOf<DictionaryInfo>()
+    var popData: DictionaryInfo
+    dataMap.forEach {
+        popData = DictionaryInfo(it.key, it.value)
+        popData.isSelected = it.key == selectorTag
+        list.add(popData)
+    }
+    return list as ArrayList<DictionaryInfo>
 }

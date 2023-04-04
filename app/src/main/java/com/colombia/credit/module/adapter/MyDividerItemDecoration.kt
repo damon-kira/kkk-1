@@ -2,10 +2,12 @@ package com.colombia.credit.module.adapter
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -13,14 +15,22 @@ import com.colombia.credit.R
 import com.util.lib.dp
 
 
-class DividerItemDecoration(private val context: Context, orientation: Int) :
+class MyDividerItemDecoration(private val context: Context, orientation: Int) :
     ItemDecoration() {
 
-    private var mDivider: Drawable? = null
     private var mOrientation: Int = VERTICAL_LIST
 
+    private val mPaint by lazy {
+        Paint().also {
+            it.isAntiAlias = true
+            it.color = ContextCompat.getColor(context, R.color.color_eeeeee)
+            it.strokeWidth = 1.dp()
+            it.style = Paint.Style.FILL
+
+        }
+    }
+
     init {
-        mDivider = AppCompatResources.getDrawable(context, R.drawable.shape_line)
         setOrientation(orientation)
     }
 
@@ -32,9 +42,9 @@ class DividerItemDecoration(private val context: Context, orientation: Int) :
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (mOrientation == HORIZONTAL_LIST) {
-            drawVerticalLine(c, parent, state)
-        } else {
             drawHorizontalLine(c, parent, state)
+        } else {
+            drawVerticalLine(c, parent, state)
         }
     }
 
@@ -49,9 +59,7 @@ class DividerItemDecoration(private val context: Context, orientation: Int) :
             //获得child的布局信息
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top: Int = child.bottom + params.bottomMargin
-            val bottom = top + mDivider!!.intrinsicHeight
-            mDivider?.setBounds(left, top, right, bottom)
-            mDivider?.draw(c)
+            c.drawLine(0f, top * 1f, right * 1f, top * 1f, mPaint)
         }
     }
 
@@ -66,9 +74,7 @@ class DividerItemDecoration(private val context: Context, orientation: Int) :
             //获得child的布局信息
             val params = child.layoutParams as RecyclerView.LayoutParams
             val left: Int = child.right + params.rightMargin
-            val right = left + mDivider!!.intrinsicWidth
-            mDivider?.setBounds(left, top, right, bottom)
-            mDivider?.draw(c)
+            c.drawLine(left * 1f, top * 1f, bottom * 1f, left * 1f, mPaint)
         }
     }
 
@@ -85,7 +91,7 @@ class DividerItemDecoration(private val context: Context, orientation: Int) :
             outRect.set(0, 0, 0, 1f.dp())
         } else {
             //画竖线，就是往右偏移一个分割线的宽度
-            outRect.set(0, 0, mDivider!!.intrinsicWidth, 0)
+            outRect.set(0, 0, 1f.dp(), 0)
         }
     }
 

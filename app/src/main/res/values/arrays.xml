@@ -20,19 +20,129 @@
         <item>\@inbox.com</item>
     </string-array>
 
-    <string-array name="contact_relationship">
-        <item>Cónyuge</item>
-        <item>Padre</item>
-        <item>Madre</item>
-        <item>Hijo</item>
-        <item>Hermano</item>
-        <item>Hermana</item>
-    </string-array>
-
     <string-array name="face_action">
         <item>Asentir arriba y abajo</item><!-- 点头 -->
         <item>sacudir la cabeza de izquierda a derecha</item><!-- 左右摇头 -->
         <item>parpadear</item><!-- 眨眼 -->
         <item>abrir la boca</item><!-- 张嘴 -->
     </string-array>
+
+    <!-- 教育程度 -->
+    <string-array name="education">
+        <item>Sin educación</item><!--没有教育-->
+        <item>Educación primaria</item><!--小学-->
+        <item>Educación Secundaria</item><!--中学-->
+        <item>Licenciado/Profesional Técnico</item><!--学士学位/技术-->
+        <item>Grado universitario/politécnica</item><!-- 大学、理工学院 -->
+        <item>Profesional/Máster/Doctorado</item><!--专业、硕士、博士-->
+    </string-array>
+    <string-array name="education_key">
+        <item>1</item><!--没有教育-->
+        <item>2</item><!--小学-->
+        <item>3</item><!--中学-->
+        <item>4</item><!--学士学位/技术-->
+        <item>5</item><!-- 大学、理工学院 -->
+        <item>6</item><!--专业、硕士、博士-->
+    </string-array>
+
+
+    <!-- 婚姻状态 -->
+    <string-array name="marriage">
+        <item>Soltero</item><!-- 单身 -->
+        <item>Casado</item><!-- 已婚 -->
+        <item>Divorciado</item><!--离婚-->
+        <item>Viudo</item><!--鳏夫-->
+    </string-array>
+    <string-array name="marriage_key">
+        <item>1</item><!-- 单身 -->
+        <item>2</item><!-- 已婚 -->
+        <item>3</item><!--离婚-->
+        <item>4</item><!--鳏夫-->
+    </string-array>
+
+    <!-- 工作类型 -->
+    <string-array name="workType">
+        <item>Jornada completa</item><!-- 全职 -->
+        <item>Jornada parcial</item><!--兼职-->
+        <item>Autónomo</item><!--自由职业-->
+        <item>Estudiante</item><!--学生-->
+        <item>Desempleo</item><!--失业-->
+        <item>Otro</item><!--其他-->
+    </string-array>
+    <string-array name="workType_key">
+        <item>1</item><!-- 全职 -->
+        <item>2</item><!--兼职-->
+        <item>3</item><!--自由职业-->
+        <item>4</item><!--学生-->
+        <item>5</item><!--失业-->
+        <item>6</item><!--其他-->
+    </string-array>
+
+    <!-- 薪资范围 -->
+    <string-array name="incomeSource">
+        <item>0-500,000</item>
+        <item>500,000-750,000</item>
+        <item>750,000-1,000,000</item>
+        <item>1,000,000-1,250,000</item>
+        <item>1,250,000-1,500,000</item>
+        <item>Sobre 1,500,000</item>
+    </string-array>
+    <string-array name="incomeSource_key">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- 入职时间 -->
+    <string-array name="entryTime">
+        <item>Menos de 3 meses</item><!-- 不到3个月-->
+        <item>3-6 meses</item>
+        <item>6-12 meses</item>
+        <item>12-24 meses</item>
+        <item>Más de 24 meses</item>
+    </string-array>
+    <string-array name="entryTime_key">
+        <item>1</item><!-- 不到3个月-->
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!-- 工资支付 -->
+    <string-array name="salaryCycle">
+        <item>Cada semana</item><!-- 周薪 -->
+        <item>Entre 1-2 semanas</item><!-- 双周 -->
+        <item>Cada dos semanas</item><!-- 半月 -->
+        <item>Cada mes</item><!--月薪-->
+    </string-array>
+    <string-array name="salaryCycle_key">
+        <item>1</item><!-- 周薪 -->
+        <item>2</item><!-- 双周 -->
+        <item>3</item><!-- 半月 -->
+        <item>4</item><!--月薪-->
+    </string-array>
+
+    <!-- 联系人关系 -->
+    <string-array name="relationShip">
+        <item>Cónyuge</item><!-- 配偶 -->
+        <item>Padre</item><!--父亲-->
+        <item>Madre</item><!--母亲-->
+        <item>Hijo</item><!--子女-->
+        <item>Hermano</item><!--兄弟-->
+        <item>Hermana</item><!--姐妹-->
+    </string-array>
+    <string-array name="relationShip_key">
+        <item>1</item><!-- 配偶 -->
+        <item>2</item><!--父亲-->
+        <item>3</item><!--母亲-->
+        <item>4</item><!--子女-->
+        <item>5</item><!--兄弟-->
+        <item>6</item><!--姐妹-->
+    </string-array>
+
+
 </resources>

@@ -10,7 +10,7 @@ rootProject.ext {
 
     release = [
             h5Host       : "\"https://h5.librecredito.com\"",
-            apiHost      : "\"https://api.librecredito.com/\"",
+            apiHost      : "\"https://anzafs.resmoaq.com\"",
             bigDataHost  : "\"https://client-collection.librecredito.com/\"",
 
             apiSecret    : "\"0CC3CA8FECA5B376\"",

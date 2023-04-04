@@ -72,7 +72,7 @@
 
             <!-- 发薪日 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/biv_education"
+                android:id="@+id/biv_payday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

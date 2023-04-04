@@ -6,9 +6,7 @@ package com.colombia.credit
  */
 object Constant {
 
-    val BASE_URL: String = "https://www.baidu.com"
-
-    val BIG_DATA_URL: String = ""
+    val BASE_URL: String = BuildConfig.BASE_URL
 
     val BASE_H5_URL: String = ""
 

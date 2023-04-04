@@ -35,3 +35,7 @@ class SafeLinearLayoutManager : LinearLayoutManager {
 
 fun Context.linearLayoutManager() =
     SafeLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+fun RecyclerView.linearLayoutManager() {
+    layoutManager = context.linearLayoutManager()
+}

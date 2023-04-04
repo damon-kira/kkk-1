@@ -11,10 +11,10 @@ import io.reactivex.Flowable
 object ApiServiceLiveDataProxy {
 
     @JvmStatic
-    fun <T> request(clazz: Class<T>, flowable: () -> Flowable<BaseResponse<T>>): LiveData<BaseResponse<T>> =
-        LiveDataCall(true, clazz, flowable)
+    fun <T>request(flowable: () -> Flowable<BaseResponse<T>>): LiveData<BaseResponse<T>> =
+        LiveDataCall(true, flowable)
 
     @JvmStatic
-    fun <T> requestIgnoreLogin(clazz: Class<T>, flowable: () -> Flowable<BaseResponse<T>>): LiveData<BaseResponse<T>> =
-        LiveDataCall(false, clazz, flowable)
+    fun <T> requestIgnoreLogin(flowable: () -> Flowable<BaseResponse<T>>): LiveData<BaseResponse<T>> =
+        LiveDataCall(false, flowable)
 }

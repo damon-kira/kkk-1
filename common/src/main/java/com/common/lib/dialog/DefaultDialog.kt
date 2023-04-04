@@ -28,11 +28,21 @@ open class DefaultDialog : Dialog, IDialog {
 
     private var mListener: OnDialogDismissListener? = null
 
-    protected fun getString(@StringRes strRes: Int,vararg params: String): String {
+    protected fun getString(@StringRes strRes: Int, vararg params: String): String {
         return context.resources.getString(strRes, params)
     }
 
-    protected fun setDisplaySize(widthPercent: Float, heightPercent: Float, isBottom:Boolean = false) {
+    protected fun setCancelable(onTouchOut: Boolean, cancel: Boolean) {
+        setCanceledOnTouchOutside(onTouchOut)
+        setCancelable(cancel)
+    }
+
+
+    protected fun setDisplaySize(
+        widthPercent: Float,
+        heightPercent: Float,
+        isBottom: Boolean = false
+    ) {
         val window = window
         val layoutParams = window!!.attributes
         val wm = window.windowManager
@@ -52,7 +62,7 @@ open class DefaultDialog : Dialog, IDialog {
             layoutParams.height = (d.height * heightPercent).toInt()
         }
 
-        if (isBottom){
+        if (isBottom) {
             window.setGravity(Gravity.BOTTOM)
         }
 
@@ -73,7 +83,7 @@ open class DefaultDialog : Dialog, IDialog {
 
     private fun isDestroyed(): Boolean {
         val ctx = getActivityFromContext(mCtx)
-        if ( ctx is Activity) {
+        if (ctx is Activity) {
             if (ctx.isFinishing || ctx.isDestroyed) {
                 return true
             }

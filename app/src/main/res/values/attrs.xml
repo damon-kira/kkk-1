@@ -25,8 +25,8 @@
     <declare-styleable name="BaseInfoView">
         <attr name="title" format="string" />
         <attr name="title_visiblity">
-            <enum name="gone" value="1" />
-            <enum name="visible" value="2" />
+            <enum name="gone" value="0" />
+            <enum name="visible" value="1" />
         </attr>
         <attr name="left_icon" format="reference" />
         <attr name="leftIcon_visiblity">

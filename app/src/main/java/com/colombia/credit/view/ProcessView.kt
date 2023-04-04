@@ -54,7 +54,7 @@ class ProcessView : View {
 
     private val mTextBgSpace = 6.dp()
     private val mTextPadding = 4.dp()
-    private val mTextSize = 14.sp()
+    private val mTextSize = 13.sp()
     private val mTextPaint by lazy {
         Paint().also {
             it.isAntiAlias = true

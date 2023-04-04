@@ -37,6 +37,8 @@ interface IBaseInfoView {
 
     fun setTitleVisible(@BaseInfoVisibility visible: Int)
 
+    fun getTitle(): String
+
     /**
      * 设置是否可以编辑
      * 不可编辑显示TextView（显示or选择）

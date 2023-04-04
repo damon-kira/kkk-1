@@ -17,8 +17,8 @@
         android:layout_height="?actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
-        app:tl_right_icon_show="true"
         app:tl_left_icon="@drawable/svg_left_back"
+        app:tl_right_icon_show="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/personal_info" />
 
@@ -26,8 +26,8 @@
         android:id="@+id/aiv_top_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="24dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/process_toolbar"
         app:srcCompat="@drawable/image_process_bg" />
@@ -54,11 +54,11 @@
         app:layout_constraintTop_toBottomOf="@id/process_pv">
 
         <LinearLayout
+            style="@style/marginLeftAndRight12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="12dp"
-            style="@style/marginLeftAndRight12">
+            android:paddingTop="12dp">
 
             <!--email-->
             <com.colombia.credit.view.baseinfo.EmailInfoView
@@ -81,8 +81,7 @@
                 app:hint="@string/education_hint"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_education"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/education" />
 
             <!-- 家庭住址 -->
@@ -94,8 +93,7 @@
                 app:hint="@string/address_hint"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_location"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/address" />
 
             <!-- 详细信息 -->
@@ -116,11 +114,11 @@
                 app:hint="@string/marriage_hint"
                 app:if_can_edit="false"
                 app:left_icon="@drawable/svg_marriage"
-                app:rightIcon_visiblity="gone"
-                app:right_icon="@drawable/svg_arrow_right"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/marriage" />
 
             <TextView
+                android:id="@+id/tv_commit"
                 style="@style/marginLeftAndRight12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,7 +141,6 @@
                 android:text="@string/process_safe"
                 android:textColor="@color/color_aaaaaa"
                 android:textSize="12sp" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

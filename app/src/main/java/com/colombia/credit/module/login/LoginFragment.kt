@@ -40,7 +40,8 @@ class LoginFragment : BaseLoginFragment() {
         super.onViewCreated(view, savedInstanceState)
         val param = getString(R.string.protocol_params)
         val protocol = getString(R.string.login_protocol, param)
-        val span = SpannableImpl().init(protocol).color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary), param)
+        val span = SpannableImpl().init(protocol)
+            .color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary), param)
             .getSpannable()
         mBinding.loginTvProtocol.movementMethod = LinkMovementMethod()
         mBinding.loginTvProtocol.text = span
@@ -66,7 +67,7 @@ class LoginFragment : BaseLoginFragment() {
                         reqSmsCode()
                     }
                 }
-                toast("获取验证码失败")
+                toast(it.message.orEmpty())
             }
         }
 
@@ -78,7 +79,7 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-
+            Launch.skipPersonalInfoActivity(getSupportContext())
         }
     }
 

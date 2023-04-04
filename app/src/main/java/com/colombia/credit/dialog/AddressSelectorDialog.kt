@@ -12,6 +12,8 @@ import com.colombia.credit.bean.AddressInfo
 import com.colombia.credit.databinding.DialogAddrSelectorBinding
 import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
 import com.colombia.credit.module.adapter.BaseViewHolder
+import com.colombia.credit.module.adapter.MyDividerItemDecoration
+import com.colombia.credit.module.adapter.linearLayoutManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -46,14 +48,19 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
                 it.address = "$index"
             })
         }
-
-        mBinding.searchRecyclerview.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        mBinding.searchRecyclerview.linearLayoutManager()
+        mBinding.searchRecyclerview.addItemDecoration(
+            MyDividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         mBinding.searchRecyclerview.adapter = mAdapter
     }
 
-    fun setAddressInfo(addressInfo: ArrayList<AddressInfo>) {
-
+    fun setAddressInfo(addressInfo: ArrayList<AddressInfo>): AddressSelectorDialog {
+        mAdapter.setItems(addressInfo)
+        return this
     }
 }
 

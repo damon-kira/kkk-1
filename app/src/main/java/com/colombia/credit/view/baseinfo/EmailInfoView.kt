@@ -157,6 +157,10 @@ class EmailInfoView : AbsBaseInfoView {
         mBinding.bivTvTitle.visibility = BaseInfoVisibility.getViewVisible(visible)
     }
 
+    override fun getTitle(): String {
+        return mBinding.bivTvTitle.text.toString()
+    }
+
     override fun setInputMaxLength(maxLength: Int) {
         this.maxLength = maxLength
         mBinding.bivEdittext.filters = arrayOf(InputFilter.LengthFilter(maxLength))

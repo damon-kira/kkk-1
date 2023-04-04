@@ -16,12 +16,18 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
 
     val mAuthSmsCodeLiveData = generatorLiveData<BaseResponse<String>>()
 
+    val loginLiveData = generatorLiveData<BaseResponse<String>>()
+
     fun reqSmsCode(mobile: String) {
-        mAuthSmsCodeLiveData.postValue(BaseResponse(0, "success", ""))
+        mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
+            mAuthSmsCodeLiveData.postValue(it)
+        }
     }
 
     fun reqLogin(mobile: String, smsCode: String) {
-
+        loginLiveData.addSourceLiveData(repository.login(mobile, smsCode)) {
+            loginLiveData.postValue(it)
+        }
     }
 
 

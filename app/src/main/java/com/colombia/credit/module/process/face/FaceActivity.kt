@@ -9,6 +9,9 @@ import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
+import com.colombia.credit.bean.resp.FaceInfo
+import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.resp.IdentityInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.module.login.createCountDownTimer
@@ -75,6 +78,14 @@ class FaceActivity : BaseProcessActivity() {
                 }
             }
         }
+    }
+
+    override fun checkCommitInfo(): Boolean {
+        return false
+    }
+
+    override fun getCommitInfo(): IBaseInfo {
+        return FaceInfo()
     }
 
     override fun onStart() {
