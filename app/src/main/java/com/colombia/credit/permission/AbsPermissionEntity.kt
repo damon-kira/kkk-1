@@ -84,6 +84,14 @@ class LocationPermission : AbsPermissionEntity() {
     override fun getHintIfNoPermission(): Pair<Int, Int> {
         return Pair(R.string.permission_location, R.string.permission_dlg_text_location)
     }
+
+    override fun hashCode(): Int {
+        return 10
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return true
+    }
 }
 
 //相机权限

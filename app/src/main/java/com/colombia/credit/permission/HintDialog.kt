@@ -5,6 +5,7 @@ import com.colombia.credit.databinding.DialogPermissionBinding
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import com.util.lib.ifShow
 
 class HintDialog constructor(context: Context) : DefaultDialog(context) {
 
@@ -23,7 +24,12 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
         }
     }
 
-    fun setTitleText(title:String): HintDialog {
+    fun showClose(ifShow: Boolean): HintDialog {
+        mBinding.aivClose.ifShow(ifShow)
+        return this
+    }
+
+    fun setTitleText(title: String): HintDialog {
         mBinding.tvTitle.text = title
         return this
     }

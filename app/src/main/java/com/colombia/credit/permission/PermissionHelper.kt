@@ -8,6 +8,7 @@ import android.hardware.Camera
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
+import com.bigdata.lib.LocationHelp
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.logger_e
@@ -92,8 +93,7 @@ object PermissionHelper {
     fun showDialogIfNeed(
         activity: Activity,
         result: (deniedList: List<AbsPermissionEntity>) -> Unit,
-        skipSettingListener: () -> Unit = {},
-        requestLocationListener: () -> Unit = {}
+        skipSettingListener: () -> Unit = {}
     ) {
         // 是否显示权限声明弹窗
         if (PermissionDialogManager.getInstance().isShowDialogTips()) {
@@ -102,7 +102,6 @@ object PermissionHelper {
                 hintList.addAll(appPermissions)
                 PermissionDialogManager.getInstance()
                     .showPermissionTipsDialog(hintList, activity, dismiss = {
-                        PermissionDialogManager.getInstance().setShowDialogTips(false)
                         if (activity.isFinishing || activity.isDestroyed) {
                             return@showPermissionTipsDialog
                         }
@@ -114,7 +113,7 @@ object PermissionHelper {
                                         activity
                                     )
                                 })
-                            }, skipSettingListener, requestLocationListener)
+                            }, skipSettingListener)
                         }
                     })
             }
@@ -175,8 +174,8 @@ object PermissionHelper {
     fun reqPermission(
         activity: Activity,
         permissions: List<AbsPermissionEntity>,
+        forceDialog: Boolean,
         result: (isAllGranted: Boolean) -> Unit = {},
-        requestLocationListener: () -> Unit,
         skipSettingListener: () -> Unit
     ) {
         checkPermissions(permissions, activity) { deniedList ->
@@ -187,9 +186,8 @@ object PermissionHelper {
             if (deniedList.isNotEmpty()) {
                 showPermissionDialog(
                     activity,
-                    deniedList, true,
+                    deniedList, forceDialog,
                     result,
-                    requestLocationListener = requestLocationListener,
                     skipSettingListener = skipSettingListener
                 )
             } else {
@@ -205,10 +203,9 @@ object PermissionHelper {
     private fun showPermissionDialog(
         activity: Activity,
         deniedList: ArrayList<AbsPermissionEntity>,
-        forceDialog: Boolean,
+        forceSettingDialog: Boolean,
         result: (isAllGranted: Boolean) -> Unit = {},
-        skipSettingListener: () -> Unit,
-        requestLocationListener: () -> Unit = {}
+        skipSettingListener: () -> Unit
     ) {
         if (isUIDestroyed(activity)) {
             result.invoke(false)
@@ -237,12 +234,13 @@ object PermissionHelper {
 //                    uploadAuthInfo(true)
                     //statisticPermission(deniedList, getNotGrantedAllPermissionList())
 
-                    if (LocationPermission().hasThisPermission(activity)) {
-//                        LocationHelp.requestLocation()
-                        requestLocationListener.invoke()
+                    if (deniedList.contains(LocationPermission())) {
+                        if (!LocationPermission().hasThisPermission(activity)) {
+                            LocationHelp.requestLocation()
+                        }
                     }
 //                    fixCalendarPermission()
-                    if (!isAll && isNotAsk && forceDialog) {
+                    if (!isAll && isNotAsk && forceSettingDialog || forceSettingDialog) {
                         mCheckPermissionDialog = activity.showNoPermissionDialog(deniedList.filter {
                             !it.hasThisPermission(activity)
                         }, cancel = {
@@ -266,7 +264,6 @@ object PermissionHelper {
     fun checkCameraPermission(
         activity: Activity,
         function: (hasPermission: Boolean) -> Unit,
-        requestLocationListener: () -> Unit,
         skipSettingListener: () -> Unit
     ) {
         val arrayListOf = arrayListOf(CameraPermission())
@@ -274,8 +271,8 @@ object PermissionHelper {
             reqPermission(
                 activity,
                 arrayListOf,
+                true,
                 function,
-                requestLocationListener,
                 skipSettingListener = skipSettingListener
             )
         } else {

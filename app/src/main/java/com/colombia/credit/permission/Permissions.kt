@@ -247,7 +247,9 @@ fun Activity.showNoPermissionDialog(
     val notPermissiontText = getNotPermissionText(deniedList, this, connectorChar)
     val message = this.getString(R.string.permission_dialog_message, notPermissiontText)
 
-    val dialog = HintDialog(this).setMessage(message)
+    val dialog = HintDialog(this)
+        .showClose(false)
+        .setMessage(message)
         .setOnCloseListener {
             cancel.invoke()
         }

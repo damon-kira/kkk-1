@@ -15,10 +15,11 @@
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:paddingEnd="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
         app:tl_left_icon="@drawable/svg_left_back"
-        app:tl_right_icon_show="true"
+        app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/work_title" />
 

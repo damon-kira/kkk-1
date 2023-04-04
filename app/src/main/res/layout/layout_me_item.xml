@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/view_line"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/svg_arrow_right" />
+        app:srcCompat="@drawable/svg_arrow_right_padding" />
 
     <View
         android:id="@+id/view_line"

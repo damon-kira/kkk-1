@@ -7,7 +7,10 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:paddingTop="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp">
 
     <TextView
         android:id="@+id/biv_tv_title"
@@ -57,12 +60,11 @@
         <!-- 右侧图标 -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/biv_aiv_icon_right"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:padding="6dp"
             android:visibility="gone"
-            app:srcCompat="@drawable/svg_arrow_right"
+            app:srcCompat="@drawable/svg_arrow_right_padding"
             tools:visibility="visible" />
     </LinearLayout>
 

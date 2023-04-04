@@ -12,10 +12,7 @@ class PermissionDialogManager {
     companion object {
         private val _instance = PermissionDialogManager()
 
-        fun getInstance()= _instance
-
-        /** 是否显示过权限弹窗 */
-        const val KEY_SHOW_PERMISSION_DIA_FLAG: String = "key_show_permission"
+        fun getInstance() = _instance
     }
 
     private var mPermissionTipsDialog: Dialog? = null
@@ -58,12 +55,7 @@ class PermissionDialogManager {
 //        val message = activity.getString(R.string.permission_dlg_text1, notPermissionText)
 
         mPermissionTipsDialog = PermissionDialog(activity).also {
-            it.setData(
-                {
-                    mPermissionTipsDialog?.dismiss()
-                },
-                tempList
-            )
+            it.setData({ mPermissionTipsDialog?.dismiss() }, tempList)
         }
         mPermissionTipsDialog?.setOnDismissListener {
             mPermissionTipsDialog?.setOnKeyListener(null)
@@ -80,17 +72,16 @@ class PermissionDialogManager {
     /** 是否显示 */
     fun isShowDialogTips(): Boolean {
         val boolean =
-            SharedPrefGlobal.getBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, true)
+            SharedPrefGlobal.getBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, false)
         logger_d("logout", "是否已经显示过>>>$boolean")
         return !boolean
-//        return true
     }
 
     /**
      * @param isShow 设置下一次是否显示
      */
     fun setShowDialogTips(isShow: Boolean) {
-        SharedPrefGlobal.setBoolean(KEY_SHOW_PERMISSION_DIA_FLAG, isShow)
+        SharedPrefGlobal.setBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, isShow)
     }
 
 

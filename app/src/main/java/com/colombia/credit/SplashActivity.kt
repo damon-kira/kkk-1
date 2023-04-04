@@ -42,8 +42,6 @@ class SplashActivity : BaseActivity() {
             Launch.skipMainActivity(this)
             finish()
 //            jumpToAppSettingPage()
-        }, {
-            LocationHelp.requestLocation()
         })
     }
 }

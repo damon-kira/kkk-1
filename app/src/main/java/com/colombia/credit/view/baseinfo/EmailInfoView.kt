@@ -267,6 +267,14 @@ class EmailInfoView : AbsBaseInfoView {
         mBinding.bivTvDesc.text = desc
     }
 
+    override fun setDescColor(color: Int) {
+        mBinding.bivTvDesc.setTextColor(color)
+    }
+
+    override fun setDesc(desc: Spannable) {
+        mBinding.bivTvDesc.show()
+        mBinding.bivTvDesc.text = desc
+    }
 
     override fun clearTextError() {
         if (!mIsError) return

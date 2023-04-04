@@ -104,6 +104,7 @@ abstract class AbsBaseInfoView : LinearLayout, IBaseInfoView {
                     }
                     R.styleable.BaseInfoView_desc_color -> {
                         mWaringColor = ta.getColor(attr, mWaringColor)
+                        setDescColor(mWaringColor)
                     }
                     R.styleable.BaseInfoView_desc_has_icon -> {
                         mWaringHasIcon = ta.getBoolean(attr, true)

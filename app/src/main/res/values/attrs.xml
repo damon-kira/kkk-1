@@ -16,6 +16,7 @@
         <attr name="tl_right_icon" format="reference" />
         <attr name="tl_right_icon_show" format="boolean" />
         <attr name="tl_right_point_bg" format="reference" />
+        <attr name="tl_show_custom_icon" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="ProcessView">

@@ -83,7 +83,8 @@
     <string name="commit">Próximo paso</string>
     <string name="process_safe">Cifrado SSL de 256 bits</string>
     <string name="address_title">Seleccionar provincias y ciudades</string>
-    <string name="address_search_hint">请输入省市名称</string>
+    <!--Por favor ingrese el nombre de la provincia y ciudad a buscar-->
+    <string name="address_search_hint">Por favor buscar</string>
 
     <!-- 工作信息 -->
     <string name="work_title">Información Laboral</string>
@@ -101,6 +102,10 @@
     <string name="contact_number">Nombre</string>
     <string name="contact2_relationship">Amigo/colega</string>
     <string name="contact_dialog_title">Elección de relación</string>
+    <string name="mobile_s">telefónico:%s</string>
+    <string name="error_contact_hint">Contacto</string>
+    <string name="error_mobile_same">El teléfono de contacto no puede ser el mismo</string><!-- 联系人手机号不能是一个 -->
+    <string name="error_mobile_same_login">El número de teléfono de contacto no puede ser su número de teléfono registrado</string><!-- 不能与登录的手机号是一个 -->
 
     <!-- 银行信息 -->
     <string name="bank_title">Información del contacto</string>

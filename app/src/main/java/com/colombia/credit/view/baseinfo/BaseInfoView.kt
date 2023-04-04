@@ -10,15 +10,20 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginLeft
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.core.widget.addTextChangedListener
 import com.colombia.credit.R
 import com.colombia.credit.databinding.LayoutInfoViewBinding
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.dip2px
+import com.util.lib.ifShow
 import com.util.lib.show
 import java.util.*
 import kotlin.collections.ArrayList
@@ -259,10 +264,25 @@ class BaseInfoView : AbsBaseInfoView {
     }
 
     override fun setDesc(desc: String) {
+        mBinding.bivTvDesc.ifShow(desc.isNotEmpty())
+        mBinding.bivTvDesc.text = desc
+    }
+
+
+    override fun setDescColor(color: Int) {
+        mBinding.bivTvDesc.setTextColor(color)
+    }
+
+    override fun setDesc(desc: Spannable) {
         mBinding.bivTvDesc.show()
         mBinding.bivTvDesc.text = desc
     }
 
+    fun getDesc() = mBinding.bivTvDesc.text?.toString()
+
+    fun setDescMarginLeft(margin: Int){
+        mBinding.bivTvDesc.updatePadding(margin)
+    }
 
     override fun clearTextError() {
         if (!mIsError) return
@@ -275,20 +295,4 @@ class BaseInfoView : AbsBaseInfoView {
 
     override fun setTextArray(array: ArrayList<String>) {
     }
-
-    /**
-     * 用户更新BaseInfoView的PaddingTop
-     * paddingLeft 16dp; paddingRight 16dp; paddingBottom 8dp, paddingTop 有title10dp, 没有0dp
-     * @param paddingTop Int 默认10dp，当需要作为附属控件时（没有Title），paddingTop应设置为0dp
-     */
-    private fun updatePaddingTop(
-        paddingTop: Int = dip2px(
-            context,
-            10f
-        )
-    ) {
-        val padding = dip2px(context, 16f)
-        setPadding(padding, paddingTop, padding, padding / 2)
-    }
-
 }

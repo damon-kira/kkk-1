@@ -2,11 +2,13 @@ package com.colombia.credit.view.baseinfo
 
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
+import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -81,6 +83,9 @@ interface IBaseInfoView {
      */
     fun setDesc(desc: String)
 
+    fun setDesc(spannable: Spannable)
+
+    fun setDescColor(@ColorInt color: Int)
 
     /**
      * 设置EditText错误的文案
