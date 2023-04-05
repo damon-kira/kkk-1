@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.RectF
 import android.util.Log
 import android.view.View
+import android.view.textclassifier.TextLanguage
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -68,7 +70,7 @@ class BankItemDecoration(
             }
             return
         }
-        if (mDatalist[position].getTag() != mDatalist[position - 1].getTag()) {
+        if (checkItem(position)) {
             //当前条目和上一个条目的第一个拼音不同时需要Title
             outRect.set(0, mTitleHeight, 0, 0)
             return
@@ -79,29 +81,26 @@ class BankItemDecoration(
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
+        val textLeft = 16.dp()
         for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
             val position = parent.layoutManager?.getPosition(child) ?: 0
             if (position >= mDatalist.size || position < 0) {
                 return
             }
-
+            isHot = mDatalist[position].isHot()
             if (position == 0) {
                 var bgHeight: Int
-                var textLeft: Float
-
                 if (hasHotTitle) {
                     mBgPaint.color =
                         ContextCompat.getColor(context, R.color.white)
                     bgHeight = mHotTitleHeigh
-                    textLeft = dp2px(context, 52f).toFloat()
                 } else {
                     mBgPaint.color = ContextCompat.getColor(
                         context,
                         R.color.color_F5F5F5
                     )
                     bgHeight = mTitleHeight
-                    textLeft = dp2px(context, 16f).toFloat()
                 }
                 drawBg(
                     c,
@@ -111,18 +110,16 @@ class BankItemDecoration(
                     child.top.toFloat(),
                     mBgPaint
                 )
-
                 val text = mDatalist[position].getTag()
-
                 if (text.isEmpty()) {
                     return
                 }
                 val rect = Rect()
                 mTextPaint.getTextBounds(text, 0, 1, rect)
-                mTextPaint.color =
-                    ContextCompat.getColor(context, R.color.color_FF989898)
+                mTextPaint.color = ContextCompat.getColor(context, R.color.color_FF989898)
                 //画文字
-                c.drawText(
+                drawText(
+                    c,
                     text,
                     textLeft,
                     (child.top - (bgHeight / 2 - rect.height() / 2)).toFloat(),
@@ -130,10 +127,10 @@ class BankItemDecoration(
                 )
             }
 
-            if (position > 0 && mDatalist[position].getTag() != mDatalist[position - 1].getTag()) {
+            if (checkItem(position) || position == 0) {
                 mBgPaint.color = ContextCompat.getColor(
                     context,
-                    R.color.color_F5F5F5
+                    R.color.color_F8F8F8
                 )
                 //画背景
                 drawBg(
@@ -174,88 +171,76 @@ class BankItemDecoration(
         }
     }
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        super.onDrawOver(c, parent, state)
-        //第一个可见条目的位置
-        val position = (parent.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        if (position >= mDatalist.size || position < 0) {
-            return
-        }
-        return
+    private fun checkItem(position: Int) =
+        position > 0 && mDatalist[position].getTag() != mDatalist[position - 1].getTag() && (mDatalist[position].isHot() != mDatalist[position - 1].isHot() || !mDatalist[position].isHot())
 
-        var bgBottom = 0f
-        var textLeft = 0f
-        isHot = mDatalist[position].isHot()
-        if (isHot) {
-            mBgPaint.color = ContextCompat.getColor(
-                context,
-                R.color.white
-            )
-            bgBottom = mHotTitleHeigh.toFloat()
-            mTextPaint.color =
-                ContextCompat.getColor(context, R.color.color_FF989898)
-            textLeft = dp2px(context, 52f).toFloat()
-        } else {
-            mBgPaint.color = ContextCompat.getColor(
-                context,
-                R.color.color_F5F5F5
-            )
-            bgBottom = mTitleHeight.toFloat()
-            mTextPaint.color =
-                ContextCompat.getColor(context, R.color.colorPrimary)
-            textLeft = 16.dp()
-        }
-
-        //画背景
-        drawBg(c, 0f, 0f, parent.right.toFloat(), bgBottom, mBgPaint, isHot)
-
-        //绘制常用银行icon
-        drawIcon(c, parent, isHot)
-
-
-        val text = mDatalist[position].getTag()
-        if (text.isEmpty()) {
-            return
-        }
-        val rect = Rect()
-        mTextPaint.getTextBounds(text, 0, 1, rect)
-
-        //画文字
-        drawText(
-            canvas = c,
-            text = text,
-            x = textLeft,
-            y = (bgBottom / 2 + rect.height() / 2),
-            paint = mTextPaint
-        )
-    }
-
+//    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+//        super.onDrawOver(c, parent, state)
+//        //第一个可见条目的位置
+//        val position = (parent.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+//        if (position >= mDatalist.size || position < 0) {
+//            return
+//        }
+//        var bgBottom = 0f
+//        var textLeft = 16.dp()
+//        isHot = mDatalist[position].isHot()
+//        if (isHot) {
+//            bgBottom = mHotTitleHeigh.toFloat()
+//            mTextPaint.color =
+//                ContextCompat.getColor(context, R.color.color_999999)
+//        } else {
+//            bgBottom = mTitleHeight.toFloat()
+//            mTextPaint.color =
+//                ContextCompat.getColor(context, R.color.colorPrimary)
+//            textLeft = 16.dp()
+//        }
+//        //画背景
+//        drawBg(c, 0f, 0f, parent.right.toFloat(), bgBottom, mBgPaint, isHot)
+//        //绘制常用银行icon
+//        drawIcon(c, parent.context, 24.dp())
+//
+//        val text = mDatalist[position].getTag()
+//        if (text.isEmpty()) {
+//            return
+//        }
+//        val rect = Rect()
+//        mTextPaint.getTextBounds(text, 0, 1, rect)
+//
+//        //画文字
+//        drawText(
+//            canvas = c,
+//            text = text,
+//            x = textLeft,
+//            y = (bgBottom / 2 + rect.height() / 2),
+//            paint = mTextPaint
+//        )
+//    }
 
     /**
      * 绘制热门icon
      */
     fun drawIcon(
         c: Canvas,
-        parent: RecyclerView,
-        hot: Boolean
+        context: Context,
+        y: Float
     ) {
-        if (hot) {
+        if (isHot) {
             val drawable = AppCompatResources.getDrawable(
-                parent.context,
+                context,
                 R.drawable.ic_hot_tag
             )?.toBitmap()
-
+            val left = mTextPaint.measureText(mHotString)
             drawable?.let {
                 c.drawBitmap(
                     it,
-                    dip2px(parent.context, 16f).toFloat(),
-                    dip2px(parent.context, 11f).toFloat(),
+                    left + 22.dp(),
+                    y,
                     null
                 )
             }
-//            if (drawable != null && !drawable.isRecycled){
-//                drawable.recycle()
-//            }
+            if (drawable != null && !drawable.isRecycled) {
+                drawable.recycle()
+            }
         }
     }
 
@@ -289,6 +274,10 @@ class BankItemDecoration(
             currentStr = mHotString
         }
         canvas.drawText(currentStr, x, y, paint)
+        val bounds = Rect()
+        paint.getTextBounds(text, 0, text.length, bounds)
+        drawIcon(canvas, context, y - bounds.height())
+
     }
 
 }

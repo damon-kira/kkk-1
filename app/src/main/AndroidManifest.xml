@@ -70,7 +70,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.process.bank.BankInfoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.process.face.FaceActivity"
             android:screenOrientation="portrait" />

@@ -4,19 +4,29 @@ import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.BankInfo
+import com.colombia.credit.bean.resp.BankInfoSearch
 import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.IdentityInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
+import com.colombia.credit.dialog.BankSearchDialog
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 
 class BankInfoActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityBankInfoBinding>()
+    private var mBankType = -1
+
+    private val mBankDialog: BankSearchDialog by lazy {
+        BankSearchDialog(this)
+    }
+
+    private val mBankList = arrayListOf<BankInfoSearch>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        setToolbarListener(mBinding.processToolbar)
         init()
     }
 
@@ -26,22 +36,39 @@ class BankInfoActivity : BaseProcessActivity() {
         mBinding.bankRadiogroup.setOnCheckedChangeListener { _, checkId ->
             when (checkId) {
                 R.id.bank_rb_ahorrs -> {
-
+                    mBankType = 0
                 }
                 R.id.bank_rb_corriente -> {
-
+                    mBankType = 1
                 }
             }
         }
         mBinding.bankRbAhorrs.isChecked = true
+
+        mBinding.bivName.setBlockingOnClickListener {
+            mBankDialog.setData(mBankList)
+                .setOnClickListener {
+                    mBinding.bivName.setViewText(it.getBankName().orEmpty())
+                }.show()
+        }
+        mBinding.tvCommit.setBlockingOnClickListener {
+            uploadInfo()
+        }
     }
 
-
     override fun checkCommitInfo(): Boolean {
-        return false
+        val bankNoCheck = (mBinding.bivBankno.getViewText().length >= 9).also { result ->
+            if (!result) {
+                mBinding.bivBankno.setError(R.string.error_bank_no)
+            }
+        }
+        return (mBankType > -1).and(checkAndSetErrorHint(mBinding.bivName)).and(bankNoCheck)
     }
 
     override fun getCommitInfo(): IBaseInfo {
+        val bankName = mBinding.bivName.getViewText()
+        val bankNo = mBinding.bivBankno.getViewText()
+        mBankType
         return BankInfo()
     }
 }

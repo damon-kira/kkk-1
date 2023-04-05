@@ -10,7 +10,7 @@
         android:id="@+id/aiv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="6dp"
         android:padding="4dp"
         app:layout_constraintRight_toRightOf="parent"

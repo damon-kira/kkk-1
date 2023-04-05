@@ -115,7 +115,8 @@
     <string name="bank_card_type">Tipo de Cuenta Bancaria</string>
     <string name="bank_card_ahorros">AHORROS</string>
     <string name="bank_card_corriente">CORRIENTE</string>
-    <string name="bank_no_error">*Use la cuenta bancaria vinculada a su tarjeta de identificación y no use las tarjetas bancarias de otras personas para evitar la falla del préstamo</string>
+    <string name="bank_no_desc">*Use la cuenta bancaria vinculada a su tarjeta de identificación y no use las tarjetas bancarias de otras personas para evitar la falla del préstamo</string>
+    <string name="error_bank_no">Información bancaria incorrecta, intenta de nuevo</string>
 
     <!-- 身份证信息 -->
     <string name="kyc_front_text">Frente (retrato)</string>

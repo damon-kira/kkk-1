@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.StringRes
 import com.colombia.credit.databinding.LayoutSearchViewBinding
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.ifShow
@@ -47,6 +48,10 @@ class SearchView : LinearLayout {
         binding.aivClear.setBlockingOnClickListener {
             binding.setSearch.setText("")
         }
+    }
+
+    fun setHintText(@StringRes strRes: Int) {
+        binding.setSearch.setHint(strRes)
     }
 
     fun getSearchText(): String = binding.setSearch.text.toString()

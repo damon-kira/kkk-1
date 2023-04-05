@@ -16,8 +16,10 @@
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:paddingEnd="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
+        app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/bank_title" />
 
@@ -49,25 +51,28 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape_white_10dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/process_pv">
 
         <LinearLayout
-            style="@style/marginLeftAndRight12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="12dp">
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"
+            android:paddingRight="12dp">
 
             <!--银行类型-->
             <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/biv_type"
+                android:id="@+id/biv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:hint="@string/work_selector"
+                app:if_can_edit="false"
                 app:left_icon="@drawable/svg_bank_name"
-                app:rightIcon_visiblity="gone"
+                app:rightIcon_visiblity="visible"
                 app:title="@string/bank_name_title" />
 
             <!-- 卡类型 -->
@@ -122,6 +127,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                app:desc_color="@color/color_FE4F4F"
+                app:desc_text="@string/bank_no_desc"
                 app:hint="@string/bank_no_hint"
                 app:inputType="number"
                 app:left_icon="@drawable/svg_bank_no"
@@ -135,13 +142,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:visibility="gone"
                 app:hint="@string/bank_no_hint"
                 app:inputType="number"
                 app:left_icon="@drawable/svg_bank_no"
-                android:visibility="gone"
                 app:rightIcon_visiblity="gone"
                 app:title="@string/bank_no_title" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/tv_commit"

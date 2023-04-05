@@ -79,7 +79,7 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipContactInfoActivity(getSupportContext())
+            Launch.skipBankInfoActivity(getSupportContext())
         }
     }
 

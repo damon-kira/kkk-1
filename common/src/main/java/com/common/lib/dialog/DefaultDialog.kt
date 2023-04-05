@@ -10,9 +10,7 @@ import com.common.lib.R
 import com.common.lib.expand.getActivityFromContext
 import com.util.lib.log.logger_e
 
-/**
- * Created by weisl on 2019/10/14.
- */
+
 open class DefaultDialog : Dialog, IDialog {
 
     protected val WRAP = 10f
@@ -47,19 +45,27 @@ open class DefaultDialog : Dialog, IDialog {
         val layoutParams = window!!.attributes
         val wm = window.windowManager
         val d = wm.defaultDisplay // 获取屏幕宽、高用
-        if (widthPercent == WRAP) {
-            layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
-        } else if (widthPercent == MATCH) {
-            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-        } else {
-            layoutParams.width = (d.width * widthPercent).toInt()
+        when (widthPercent) {
+            WRAP -> {
+                layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
+            }
+            MATCH -> {
+                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+            }
+            else -> {
+                layoutParams.width = (d.width * widthPercent).toInt()
+            }
         }
-        if (heightPercent == WRAP) {
-            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
-        } else if (heightPercent == MATCH) {
-            layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
-        } else {
-            layoutParams.height = (d.height * heightPercent).toInt()
+        when (heightPercent) {
+            WRAP -> {
+                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+            }
+            MATCH -> {
+                layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+            }
+            else -> {
+                layoutParams.height = (d.height * heightPercent).toInt()
+            }
         }
 
         if (isBottom) {

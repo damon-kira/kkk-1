@@ -12,6 +12,7 @@ import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
 import com.colombia.credit.module.history.HistoryActivity
+import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.face.FaceActivity
 import com.colombia.credit.module.process.face.FaceFailedActivity
@@ -42,6 +43,10 @@ object Launch {
 
     fun skipContactInfoActivity(context: Context) {
         launch(context, ContactInfoActivity::class.java)
+    }
+
+    fun skipBankInfoActivity(context: Context) {
+        launch(context, BankInfoActivity::class.java)
     }
 
     fun skipKycInfoActivity(context: Context) {
