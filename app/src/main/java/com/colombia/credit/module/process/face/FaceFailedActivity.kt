@@ -5,6 +5,7 @@ import com.colombia.credit.bean.resp.FaceInfo
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.databinding.ActivityFaceFailedBinding
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class FaceFailedActivity : BaseProcessActivity() {
 
     private val binding by binding<ActivityFaceFailedBinding>()
+
+    private val mViewModel by lazyViewModel<FaceViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,4 +35,7 @@ class FaceFailedActivity : BaseProcessActivity() {
     override fun getCommitInfo(): IBaseInfo {
         return FaceInfo()
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+
 }

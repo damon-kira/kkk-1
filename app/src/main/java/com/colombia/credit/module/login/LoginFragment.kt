@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.colombia.credit.Launch
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.expand.showNetErrorDialog
@@ -79,7 +79,7 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipBankInfoActivity(getSupportContext())
+            Launch.skipKycInfoActivity(getSupportContext())
         }
     }
 

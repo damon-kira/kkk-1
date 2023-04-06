@@ -8,6 +8,7 @@ import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.bean.resp.WorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
@@ -117,4 +118,6 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val jobYear = mBinding.bivJobYear.tag
         return WorkInfo()
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
 }

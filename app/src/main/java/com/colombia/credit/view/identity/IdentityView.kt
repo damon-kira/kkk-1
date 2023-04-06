@@ -2,7 +2,6 @@ package com.colombia.credit.view.identity
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -47,8 +46,7 @@ class IdentityView : ConstraintLayout {
         context.obtainStyledAttributes(attrs, R.styleable.IdentityView).let { ta ->
             val indexCount = ta.indexCount
             for (index in 0 until indexCount) {
-                val attr = ta.getIndex(index)
-                when (attr) {
+                when (val attr = ta.getIndex(index)) {
                     R.styleable.IdentityView_iv_text -> {
                         val text = ta.getString(attr)
                         setText(text)
@@ -92,4 +90,14 @@ class IdentityView : ConstraintLayout {
     }
 
     fun getImageView() = mBinding.identityAiv
+
+    fun toggleStatus(@IdentityPicStatus status: Int) {
+        when (status) {
+            IdentityPicStatus.STATUS_ERROR -> mBinding.aivStatus.setImageResource(R.drawable.svg_error_hint_24)
+            IdentityPicStatus.STATUS_SUCCESS -> mBinding.aivStatus.setImageResource(R.drawable.ic_kyc_success)
+            else -> {
+                mBinding.aivStatus.setImageResource(R.drawable.ic_kyc_camera)
+            }
+        }
+    }
 }

@@ -1,8 +1,6 @@
 package com.common.lib.base
 
-/**
- * Created by weisl on 2019/10/12.
- */
+
 open class BaseViewModel : CommonViewModel() {
 
 

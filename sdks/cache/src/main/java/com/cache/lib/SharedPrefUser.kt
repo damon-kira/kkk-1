@@ -23,15 +23,15 @@ object SharedPrefUser {
     }
 
     fun setString(key: String, value: String?) {
-        mCache.putString(key, value ?: "")
+        mCache.putString(key, value.orEmpty())
     }
 
     fun setSynchString(key: String, value: String?) {
-        mCache.putString(key, value ?: "")
+        mCache.putString(key, value.orEmpty())
     }
 
     fun getString(key: String, defVal: String?): String {
-        return mCache.getString(key, defVal) ?: ""
+        return mCache.getString(key, defVal).orEmpty()
     }
 
     fun setBoolean(key: String, value: Boolean) {

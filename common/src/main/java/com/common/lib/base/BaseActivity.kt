@@ -7,11 +7,7 @@ import com.common.lib.dialog.*
 import com.util.lib.log.logger_i
 import me.jessyan.autosize.AutoSizeCompat
 
-/**
- * Created by weisl on 2019/9/23.
- * laotie#liuliuliu
- * tuyaqifei*fjdkjfdk
- */
+
 open class BaseActivity : InjectorActivity(), ILoading, IDialogTask, Injectable {
 
     protected val TAG = "debug_${this.javaClass.simpleName}"

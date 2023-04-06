@@ -1,4 +1,4 @@
-package com.colombia.credit
+package com.colombia.credit.manager
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
+import com.colombia.credit.R
+import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity

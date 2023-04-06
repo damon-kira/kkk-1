@@ -14,9 +14,7 @@ import com.util.lib.checkCanRequest
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
 
-/**
- * Created by sunsg on 2018/1/29.
- */
+
 class LocationHelp {
     companion object {
         val TAG = "LocationHelp"

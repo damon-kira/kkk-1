@@ -9,6 +9,7 @@ import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 
@@ -16,6 +17,8 @@ class BankInfoActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityBankInfoBinding>()
     private var mBankType = -1
+
+    private val mViewModel by lazyViewModel<BankInfoViewModel>()
 
     private val mBankDialog: BankSearchDialog by lazy {
         BankSearchDialog(this)
@@ -71,4 +74,6 @@ class BankInfoActivity : BaseProcessActivity() {
         mBankType
         return BankInfo()
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
 }

@@ -1,10 +1,31 @@
 package com.colombia.credit.module.process.bank
 
-import com.common.lib.base.BaseViewModel
+import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.module.process.BaseProcessViewModel
+import com.common.lib.livedata.observerNonSticky
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+// 上传银行卡信息
 @HiltViewModel
 class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepository) :
-    BaseViewModel() {
+    BaseProcessViewModel() {
+
+    override fun uploadInfo(info: IBaseInfo) {
+        mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
+            mUploadLiveData.postValue(it)
+        }
+    }
+
+    override fun saveCacheInfo(info: IBaseInfo) {
+        repository.saveCacheInfo(info)
+    }
+
+    override fun removeCacheInfo() {
+        repository.removeCacheInfo()
+    }
+
+    override fun getCacheInfo(): IBaseInfo? {
+        return repository.getCacheInfo()
+    }
 }

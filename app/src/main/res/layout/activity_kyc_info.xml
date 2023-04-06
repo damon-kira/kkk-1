@@ -16,10 +16,11 @@
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:paddingRight="6dp"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
-        app:tl_right_icon_show="true"
         app:tl_left_icon="@drawable/svg_left_back"
+        app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/bank_title" />
 
@@ -51,6 +52,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape_white_10dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/process_pv">
 
@@ -74,100 +76,122 @@
 
             <!-- 身份证拍照 -->
             <com.colombia.credit.view.identity.IdentityLayout
+                android:id="@+id/il_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
 
-            <com.colombia.credit.view.textview.EasyTextView
+            <LinearLayout
+                android:id="@+id/ll_kyc_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:drawableStart="@drawable/svg_red_warning"
-                android:drawablePadding="6dp"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="14dp"
-                android:paddingBottom="4dp"
-                android:text="@string/kyc_warning"
-                android:textColor="@color/color_666666"
-                android:textSize="10sp"
-                app:etv_corner="4dp"
-                app:etv_corner_type="normal"
-                app:etv_solid="@color/color_F9F2FC" />
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-            <!--身份证号-->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/kyc_biv_nuip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:hint="@string/kyc_nuip_hint"
-                app:left_icon="@drawable/svg_bank_name"
-                app:rightIcon_visiblity="gone"
-                app:title="@string/kyc_nuip" />
+                <com.colombia.credit.view.textview.EasyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:drawableStart="@drawable/svg_red_warning"
+                    android:drawablePadding="6dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/kyc_warning"
+                    android:textColor="@color/color_666666"
+                    android:textSize="10sp"
+                    app:etv_corner="4dp"
+                    app:etv_corner_type="normal"
+                    app:etv_solid="@color/color_F9F2FC" />
 
-            <!-- 名字 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/kyc_biv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:hint="@string/kyc_name_hint"
-                app:inputType="number"
-                app:left_icon="@drawable/svg_bank_no"
-                app:rightIcon_visiblity="gone"
-                app:title="@string/kyc_name" />
+                <!--身份证号-->
+                <com.colombia.credit.view.baseinfo.BaseInfoView
+                    android:id="@+id/kyc_biv_nuip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:hint="@string/kyc_nuip_hint"
+                    app:if_can_edit="true"
+                    app:inputType="number"
+                    app:left_icon="@drawable/ic_nuip"
+                    app:rightIcon_visiblity="gone"
+                    app:title="@string/kyc_nuip" />
 
-            <!-- 父姓 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/kyc_biv_surname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:hint="@string/kyc_surname_hint"
-                app:inputType="number"
-                app:left_icon="@drawable/svg_bank_no"
-                app:rightIcon_visiblity="gone"
-                app:title="@string/kyc_surname" />
+                <!-- 名字 -->
+                <com.colombia.credit.view.baseinfo.BaseInfoView
+                    android:id="@+id/kyc_biv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:hint="@string/kyc_name_hint"
+                    app:left_icon="@drawable/ic_name"
+                    app:rightIcon_visiblity="gone"
+                    app:title="@string/kyc_name" />
 
-            <!-- 性别 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/kyc_biv_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:hint="@string/kyc_gender_hint"
-                app:if_can_edit="false"
-                app:inputType="number"
-                app:left_icon="@drawable/svg_bank_no"
-                app:rightIcon_visiblity="gone"
-                app:title="@string/kyc_gender" />
+                <!-- 父姓 -->
+                <com.colombia.credit.view.baseinfo.BaseInfoView
+                    android:id="@+id/kyc_biv_surname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:hint="@string/kyc_surname_hint"
+                    app:left_icon="@drawable/ic_father"
+                    app:rightIcon_visiblity="gone"
+                    app:title="@string/kyc_surname" />
 
-            <!-- 生日 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/kyc_biv_birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:hint="@string/kyc_birthday_hint"
-                app:inputType="number"
-                app:left_icon="@drawable/svg_bank_no"
-                app:rightIcon_visiblity="gone"
-                app:title="@string/kyc_birthday" />
+                <!-- 生日 -->
+                <com.colombia.credit.view.baseinfo.BaseInfoView
+                    android:id="@+id/kyc_biv_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:hint="@string/kyc_birthday_hint"
+                    app:if_can_edit="true"
+                    app:inputType="number"
+                    app:left_icon="@drawable/ic_birthday"
+                    app:max_length="8"
+                    app:rightIcon_visiblity="gone"
+                    app:title="@string/kyc_birthday" />
 
+                <!-- 性别 -->
+                <com.colombia.credit.view.baseinfo.BaseInfoView
+                    android:id="@+id/kyc_biv_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:hint="@string/kyc_gender_hint"
+                    app:if_can_edit="false"
+                    app:left_icon="@drawable/ic_gender"
+                    app:rightIcon_visiblity="visible"
+                    app:title="@string/kyc_gender" />
 
-            <TextView
-                android:id="@+id/tv_commit"
-                style="@style/marginLeftAndRight12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/shape_apply_bg"
-                android:gravity="center"
-                android:padding="11dp"
-                android:text="@string/commit"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:minHeight="26dp" />
+
+                <TextView
+                    android:id="@+id/tv_commit"
+                    style="@style/marginLeftAndRight12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/shape_apply_bg"
+                    android:gravity="center"
+                    android:padding="11dp"
+                    android:text="@string/commit"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,7 +204,6 @@
                 android:text="@string/process_safe"
                 android:textColor="@color/color_aaaaaa"
                 android:textSize="12sp" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

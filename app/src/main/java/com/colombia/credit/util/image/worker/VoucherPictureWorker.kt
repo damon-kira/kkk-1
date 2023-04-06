@@ -3,13 +3,12 @@ package com.colombia.credit.util.image.worker
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import com.colombia.credit.Launch.jumpToAppSettingPage
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.reqPermission
 import com.colombia.credit.permission.showNoPermissionDialog
 import com.colombia.credit.util.image.agent.AgentContainer
-import com.colombia.credit.util.image.FunctionManager
 import com.colombia.credit.util.image.callback.ResultCallback
 import com.colombia.credit.util.image.data.ResultData
 import com.colombia.credit.util.image.data.VoucherPictureParams

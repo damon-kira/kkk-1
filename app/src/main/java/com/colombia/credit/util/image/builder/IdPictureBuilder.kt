@@ -4,6 +4,7 @@ import com.camera.lib.CameraOneUtils.Companion.CAMERA_BACK
 import com.colombia.credit.util.image.ImagePathUtil
 import com.colombia.credit.util.image.FunctionManager
 import com.colombia.credit.util.image.annotations.CapturePhotoType
+import com.colombia.credit.util.image.annotations.PicType
 import com.colombia.credit.util.image.data.IdPictureParams
 import com.colombia.credit.util.image.data.ResultData
 import com.colombia.credit.util.image.worker.IdPictureWorker
@@ -15,6 +16,8 @@ class IdPictureBuilder(functionManager: FunctionManager) : BaseBuilder<ResultDat
     private var fileToSave: File? = null
 
     private var type = CAMERA_BACK
+
+    private var picType = PicType.PIC_FRONT
 
     private var checkPermission = true
 
@@ -29,16 +32,23 @@ class IdPictureBuilder(functionManager: FunctionManager) : BaseBuilder<ResultDat
         return this
     }
 
+    fun picType(@PicType picType: Int): IdPictureBuilder {
+        this.picType = picType
+        return this
+    }
+
     fun checkPermission(check: Boolean = true): IdPictureBuilder {
         this.checkPermission = check
         return this
     }
 
 
+
+
     override fun createWorker(): Worker<ResultData> {
         val path = fileToSave
                 ?: ImagePathUtil.createTempFile(functionManager.container.getActivity()!!)
-        val params = IdPictureParams(type, path.absolutePath, checkPermission)
+        val params = IdPictureParams(type, picType, path.absolutePath, checkPermission)
         return IdPictureWorker(functionManager.container, params)
     }
 }

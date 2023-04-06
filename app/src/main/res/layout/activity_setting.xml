@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -13,6 +12,7 @@
         android:background="@color/white"
         app:tl_left_icon="@drawable/svg_left_back_gray"
         app:tl_text_gravity="center"
+        app:tl_back_text_color="@color/color_333333"
         app:tl_title="@string/setting_title" />
 
 

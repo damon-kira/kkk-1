@@ -196,4 +196,11 @@
         <attr name="ail_left_icon" format="reference" />
         <attr name="ail_text" format="string|reference" />
     </declare-styleable>
+
+    <declare-styleable name="WheelView">
+        <attr name="wl_text_select_color" format="color" />
+        <attr name="wl_text_unselect_color" format="color" />
+        <attr name="wl_item_select_bg_color" format="color" />
+        <attr name="wl_view_bg_color" format="color" />
+    </declare-styleable>
 </resources>

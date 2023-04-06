@@ -8,7 +8,6 @@ import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
-import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.base.BaseActivity
 import com.util.lib.StatusBarUtil.setStatusBar
 
@@ -42,10 +41,11 @@ abstract class BaseProcessActivity : BaseActivity() {
     protected fun uploadInfo() {
         if (checkCommitInfo()) {
             val commitInfo = getCommitInfo()
+            getViewModel().uploadInfo(commitInfo)
         }
     }
 
-    protected fun setToolbarListener(toolbarLayout: ToolbarLayout){
+    protected fun setToolbarListener(toolbarLayout: ToolbarLayout) {
         toolbarLayout.setOnbackListener {
             finish()
         }
@@ -54,13 +54,21 @@ abstract class BaseProcessActivity : BaseActivity() {
         }
     }
 
-    protected fun checkAndSetErrorHint(baseInfoView: AbsBaseInfoView, errorHint: String? = null): Boolean {
+    protected fun checkAndSetErrorHint(
+        baseInfoView: AbsBaseInfoView,
+        errorHint: String? = null
+    ): Boolean {
         val text = baseInfoView.getViewText()
         var result = true
         if (text.isEmpty()) {
             result = false
             if (errorHint.isNullOrEmpty()) {
-                baseInfoView.setError(getString(R.string.error_process_hint, baseInfoView.getTitle()))
+                baseInfoView.setError(
+                    getString(
+                        R.string.error_process_hint,
+                        baseInfoView.getTitle()
+                    )
+                )
             } else {
                 baseInfoView.setError(getString(R.string.error_process_hint, errorHint))
             }
@@ -71,4 +79,6 @@ abstract class BaseProcessActivity : BaseActivity() {
     abstract fun checkCommitInfo(): Boolean
 
     abstract fun getCommitInfo(): IBaseInfo
+
+    abstract fun getViewModel(): IBaseProcessViewModel
 }

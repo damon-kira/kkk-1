@@ -9,6 +9,7 @@ import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.expand.checkEmailFormat
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -18,6 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mBinding by binding<ActivityPersonalInfoBinding>()
+
+    private val mViewModel by lazyViewModel<PersonalViewModel>()
 
     private val mEducation by lazy {
         DictionaryUtil.getEducationData()
@@ -75,9 +78,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val address = mBinding.bivAddress.getViewText()
         val addrDetail = mBinding.bivAddrDetail.getViewText()
         val marriage = mBinding.bivMarriage.tag
-        return PersonalInfo().also {
-
-        }
+        return PersonalInfo()
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -95,5 +96,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             .and(checkAndSetErrorHint(mBinding.bivAddrDetail, getString(R.string.address_detail_title)))
             .and(checkAndSetErrorHint(mBinding.bivMarriage))
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
 
 }

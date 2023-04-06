@@ -145,4 +145,13 @@
     </string-array>
 
 
+    <!--  性别-->
+    <string-array name="gender_value">
+        <item>Masculino</item><!-- 男 -->
+        <item>Mujer</item><!-- 女 -->
+    </string-array>
+    <string-array name="gender_key" >
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 </resources>

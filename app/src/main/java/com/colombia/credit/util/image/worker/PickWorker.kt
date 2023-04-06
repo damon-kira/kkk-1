@@ -4,7 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.provider.MediaStore
-import com.colombia.credit.Launch.jumpToAppSettingPage
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.StoragePermission
 import com.colombia.credit.permission.reqPermission

@@ -4,7 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import com.colombia.credit.Launch.jumpToAppSettingPage
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.camera.CaptureActivity
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
@@ -51,7 +51,7 @@ class IdPictureWorker(container: AgentContainer, params: IdPictureParams) :
         val capturePath = params.fileToSave
         val intent = Intent(activity, CaptureActivity::class.java).apply {
             putExtra(CaptureActivity.KEY_CAPTURE_IMAGE_PATH, capturePath)
-            putExtra(CaptureActivity.KEY_PICTURE_TYPE, params.type)
+            putExtra(CaptureActivity.KEY_PICTURE_TYPE, params.picType)
         }
         try {
             container.startActivityResult(

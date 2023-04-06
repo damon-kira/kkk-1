@@ -39,3 +39,13 @@ annotation class ImageType {
 @IntDef(CAMERA_BACK, CAMERA_FRONT)
 @Retention(AnnotationRetention.SOURCE)
 annotation class CapturePhotoType
+
+@IntDef(PicType.PIC_BACK, PicType.PIC_FRONT)
+@Target(AnnotationTarget.VALUE_PARAMETER)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class PicType {
+    companion object {
+        const val PIC_BACK = 1     // 反面
+        const val PIC_FRONT = 2    // 正面
+    }
+}

@@ -7,7 +7,7 @@ import android.hardware.Camera
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import com.colombia.credit.Launch.jumpToAppSettingPage
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.reqPermission

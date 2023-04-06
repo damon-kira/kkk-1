@@ -14,6 +14,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/aiv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_kyc_camera"
+        app:layout_constraintBottom_toBottomOf="@id/identity_aiv"
+        app:layout_constraintLeft_toLeftOf="@id/identity_aiv"
+        app:layout_constraintRight_toRightOf="@id/identity_aiv"
+        app:layout_constraintTop_toTopOf="@id/identity_aiv" />
+
     <TextView
         android:id="@+id/identity_tv"
         android:layout_width="wrap_content"

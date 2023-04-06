@@ -2,7 +2,7 @@ package com.colombia.credit.module.process.contact
 
 import android.os.Bundle
 import android.view.View
-import com.colombia.credit.Launch.jumpToAppSettingPage
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.R
 import com.colombia.credit.bean.PhoneAndName
 import com.colombia.credit.bean.resp.ContactInfo
@@ -11,6 +11,7 @@ import com.colombia.credit.databinding.ActivityContactInfoBinding
 import com.colombia.credit.expand.getMobile
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.util.DictionaryUtil
@@ -134,4 +135,6 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val name2 = mBinding.bivContact2.getViewText()
         return ContactInfo()
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
 }

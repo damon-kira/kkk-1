@@ -11,11 +11,11 @@ import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.FaceInfo
 import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.IdentityInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBar
@@ -32,7 +32,7 @@ import java.io.File
 class FaceActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityFaceBinding>()
-
+    private val mViewModel by lazyViewModel<FaceViewModel>()
     private val mActions by lazy {
         resources.getStringArray(R.array.face_action)
     }
@@ -69,7 +69,7 @@ class FaceActivity : BaseProcessActivity() {
 
                 if (success && f.exists()) {
                     val rect = Rect(0, 0, mBinding.aivFaceMask.right, mBinding.aivFaceMask.bottom)
-                    BitmapCrop.cropAndCompress(this, f, rect, true) {finalFile ->
+                    BitmapCrop.cropAndCompress(this, f, rect, true) { finalFile ->
                         if (finalFile != null) {
                             // 上传照片
 
@@ -87,6 +87,8 @@ class FaceActivity : BaseProcessActivity() {
     override fun getCommitInfo(): IBaseInfo {
         return FaceInfo()
     }
+
+    override fun getViewModel(): IBaseProcessViewModel = mViewModel
 
     override fun onStart() {
         super.onStart()

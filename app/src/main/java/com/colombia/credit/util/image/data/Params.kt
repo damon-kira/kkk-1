@@ -14,7 +14,7 @@ data class PickPictureParams(@PickRange val pickRange: Int, @ImageType val fileT
 data class TakePhotoParams(@CameraFace val cameraFace: Int, val fileToSave: File?, val checkPermission: Boolean)
 
 
-data class IdPictureParams(val type: Int, val fileToSave: String, val checkPermission: Boolean)
+data class IdPictureParams(val type: Int, val picType: Int, val fileToSave: String, val checkPermission: Boolean)
 
 
 

@@ -40,6 +40,8 @@ object DictionaryUtil {
     // 获取支付频率
     fun getPayCycle() = getMapData(R.array.salaryCycle_key, R.array.salaryCycle)
 
+    // 性別
+    fun getGender() = getMapData(R.array.gender_key, R.array.gender_value)
 
     // 根据id获取数据列表
     private fun getStringArrayData(arrarId: Int): Array<String> {

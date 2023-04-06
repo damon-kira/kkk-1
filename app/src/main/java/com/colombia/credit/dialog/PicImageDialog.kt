@@ -1,25 +1,26 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
-import android.view.View
 import com.colombia.credit.databinding.DialogKycSelectorBinding
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 
-class KycSelectorDialog constructor(context: Context) : DefaultDialog(context) {
+class PicImageDialog constructor(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogKycSelectorBinding>()
 
     init {
         setContentView(mBinding.root)
-
+        setDisplaySize(MATCH, WRAP, true)
+        setCancelable(true )
+        setCanceledOnTouchOutside(false)
         mBinding.aivClose.setBlockingOnClickListener {
             dismiss()
         }
     }
 
-    fun setOnClickListener(cameraListener: () -> Unit, albumListener: () -> Unit) {
+    fun setOnImageClick(cameraListener: () -> Unit, albumListener: () -> Unit): PicImageDialog {
         mBinding.tvCamera.setBlockingOnClickListener{
             cameraListener()
             dismiss()
@@ -28,5 +29,6 @@ class KycSelectorDialog constructor(context: Context) : DefaultDialog(context) {
             albumListener()
             dismiss()
         }
+        return this
     }
 }

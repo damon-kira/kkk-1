@@ -1,17 +1,15 @@
 package com.colombia.credit.module.defer
 
 import android.os.Bundle
-import com.colombia.credit.bean.resp.ExtensionInfo
-import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.databinding.ActivityDeferBinding
-import com.colombia.credit.module.process.BaseProcessActivity
+import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 // 展期
 @AndroidEntryPoint
-class DeferActivity : BaseProcessActivity() {
+class DeferActivity : BaseActivity() {
 
     private val mBinding by binding<ActivityDeferBinding>()
 
@@ -22,13 +20,5 @@ class DeferActivity : BaseProcessActivity() {
         mBinding.tvApply.setBlockingOnClickListener {
             // 调用支付
         }
-    }
-
-    override fun checkCommitInfo(): Boolean {
-        return false
-    }
-
-    override fun getCommitInfo(): IBaseInfo {
-        return ExtensionInfo()
     }
 }

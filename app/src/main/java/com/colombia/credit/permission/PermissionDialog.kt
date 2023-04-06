@@ -8,7 +8,7 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.colombia.credit.Launch
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.DlgPermissionLayoutBinding
 import com.colombia.credit.manager.H5UrlManager

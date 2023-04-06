@@ -1,9 +1,9 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
-import com.colombia.credit.Launch
 import com.colombia.credit.app.getAppContext
 import com.colombia.credit.databinding.DialogCutomBinding
+import com.colombia.credit.manager.Launch
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding

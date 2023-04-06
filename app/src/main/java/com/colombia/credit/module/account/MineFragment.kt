@@ -4,21 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.colombia.credit.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentAccountBinding
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.home.MainEvent
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AccountFragment : BaseFragment(), View.OnClickListener {
+class MineFragment : BaseFragment(), View.OnClickListener {
 
     private val mBinding by binding(FragmentAccountBinding::inflate)
 
@@ -89,18 +91,22 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_ABOUT)
             }
             R.id.ail_feedback -> {
+                if (!checkLogin()) return
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_FEEDBACK)
             }
             R.id.ail_protocol -> {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
             }
             R.id.ail_setting -> {
+                if (!checkLogin()) return
                 Launch.skipSettingActivity(getSupportContext())
             }
             R.id.fl_history -> {
+                if (!checkLogin()) return
                 Launch.skipHistoryActivity(getSupportContext())
             }
             R.id.fl_bank -> {
+                if (!checkLogin()) return
                 Launch.skipMeBankCardListActivity(getSupportContext())
             }
             R.id.etv_custom -> {
@@ -109,7 +115,16 @@ class AccountFragment : BaseFragment(), View.OnClickListener {
             R.id.etv_btn -> {
                 // 需要区分状态，还款状态--还款页面
                 // 没有在贷，跳转首页
+                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             }
         }
+    }
+
+    private fun checkLogin(): Boolean {
+        if (inValidToken()) {
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+            return false
+        }
+        return true
     }
 }

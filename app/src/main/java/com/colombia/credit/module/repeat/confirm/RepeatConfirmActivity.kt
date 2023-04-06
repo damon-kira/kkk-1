@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.colombia.credit.Launch
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatConfirmProductInfo
 import com.colombia.credit.databinding.ActivityRepeatConfirmBinding
