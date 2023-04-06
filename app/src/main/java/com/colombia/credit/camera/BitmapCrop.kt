@@ -25,7 +25,13 @@ object BitmapCrop {
 
     private const val TAG = "debug_BitmapCrop"
 
-    fun crop(activity: BaseActivity, originFile: File, rect: Rect, isFront: Boolean, result: (File?) -> Unit) {
+    fun crop(
+        activity: BaseActivity,
+        originFile: File,
+        rect: Rect,
+        isFront: Boolean,
+        result: (File?) -> Unit
+    ) {
         val dispose = crop(activity, originFile, rect, isFront).subscribe({
             logger_e(TAG, "success = ${it.length()}")
             result.invoke(it)
@@ -36,33 +42,44 @@ object BitmapCrop {
     }
 
 
-    fun cropAndCompress(activity: BaseActivity, originFile: File, rect: Rect, isFront: Boolean, result: (File?) -> Unit) {
-        val dispose = crop(activity, originFile, rect, isFront).doOnNext {
-            commonCompressPic(
-                it.absolutePath,
-                it.absolutePath,
-                360,
-                640
-            )
-        }.subscribe({
-            logger_e(TAG, "success = ${it.length()}")
-            result.invoke(it)
+    fun cropAndCompress(
+        activity: BaseActivity,
+        originFile: File,
+        rect: Rect,
+        isFront: Boolean,
+        result: (File?) -> Unit
+    ) {
+        val dispose =
+            crop(activity, originFile, rect, isFront).doOnNext {
+                commonCompressPic(
+                    it.absolutePath,
+                    it.absolutePath,
+                    360,
+                    640
+                )
+            }.subscribe({
+                logger_e(TAG, "success = ${it.length()}")
+                result.invoke(it)
 
-        }, {
-            logger_e(TAG, "error = $it")
-            result.invoke(null)
-        })
+            }, {
+                logger_e(TAG, "error = $it")
+                result.invoke(null)
+            })
     }
 
     /**
      * @param isFront true:前置  false:后置
      */
-    private fun crop(activity: BaseActivity, originFile: File, rect: Rect, isFront: Boolean): Flowable<File> {
-        return Flowable.fromPublisher<File> {
+    private fun crop(
+        activity: BaseActivity,
+        originFile: File,
+        rect: Rect,
+        isFront: Boolean
+    ): Flowable<File> {
+        return Flowable.fromPublisher {
             try {
-
-                val screenH = DisplayUtils.getRealScreenHeight(activity)
                 val screenW = DisplayUtils.getRealScreenWidth(activity)
+                val screenH = DisplayUtils.getRealScreenHeight(activity)
 
                 val ops = BitmapFactory.Options()
                 ops.inJustDecodeBounds = true
@@ -99,10 +116,14 @@ object BitmapCrop {
                 var bottom = rect.bottom - rect.top
 
                 logger_i(TAG, "bitmap width = $bitmapWidth  height=$bitmapHeight")
+
+                if (isFront)
+                    matrix.postScale(-1f, 1f)
+
                 val scale = if (rotation / 90 % 2 == 0f) {
                     val widthScale = screenW / bitmapWidth
                     val heightScale = screenH / bitmapHeight
-                    if (isScaleCanUsed(widthScale, originFile, rect, isFront)) {
+                    if (isScaleCanUsed(widthScale, bitmap, rect, isFront)) {
                         widthScale
                     } else {
                         heightScale
@@ -110,7 +131,7 @@ object BitmapCrop {
                 } else {
                     val widthScale = screenW / bitmapHeight
                     val heightScale = screenH / bitmapWidth
-                    if (isScaleCanUsed(widthScale, originFile, rect, isFront)) {
+                    if (isScaleCanUsed(widthScale, bitmap, rect, isFront)) {
                         widthScale
                     } else {
                         heightScale
@@ -119,8 +140,6 @@ object BitmapCrop {
                 if (bitmapWidth < rect.right || bitmapHeight < rect.bottom) {
                     matrix.postScale(scale, scale)
                 }
-                if (isFront)
-                    matrix.postScale(-1f, 1f)
 
                 bitmap =
                     Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
@@ -164,14 +183,22 @@ object BitmapCrop {
 
     private fun isScaleCanUsed(
         scale: Float,
-        originFile: File,
+        bitmap: Bitmap,
         scannerRect: Rect,
         isFront: Boolean
     ): Boolean {
-        var resultBitmap: Bitmap = BitmapFactory.decodeFile(originFile.absolutePath, null)
+        var resultBitmap: Bitmap = bitmap
         val matrix = Matrix()
         matrix.postScale(scale, scale)
-        resultBitmap = Bitmap.createBitmap(resultBitmap, 0, 0, resultBitmap.width, resultBitmap.height, matrix, true)
+        resultBitmap = Bitmap.createBitmap(
+            resultBitmap,
+            0,
+            0,
+            resultBitmap.width,
+            resultBitmap.height,
+            matrix,
+            true
+        )
         var left = 0
         var right = 0
         val top = scannerRect.top
@@ -190,12 +217,18 @@ object BitmapCrop {
             right = resultBitmap.width
         }
 
-        if (resultBitmap.height < bottom){
-            logger_d(TAG, "当前 scale:$scale 不符合  resultBitmap.height: ${resultBitmap.height} < bottom${bottom}")
+        if (resultBitmap.height < bottom) {
+            logger_d(
+                TAG,
+                "当前 scale:$scale 不符合  resultBitmap.height: ${resultBitmap.height} < bottom${bottom}"
+            )
             return false
         }
-        if (resultBitmap.width < right){
-            logger_d(TAG, "当前 scale:$scale 不符合  resultBitmap.height: ${resultBitmap.width} < right：${right}")
+        if (resultBitmap.width < right) {
+            logger_d(
+                TAG,
+                "当前 scale:$scale 不符合  resultBitmap.height: ${resultBitmap.width} < right：${right}"
+            )
             return false
         }
         return true

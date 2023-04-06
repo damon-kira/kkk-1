@@ -25,9 +25,9 @@ interface ApiService {
     @POST
     fun uploadKycImage(@Part img: MultipartBody): Flowable<BaseResponse<KycOcrInfo>>
 
-    @Multipart
-    @POST
-    fun uploadFaceImage(@Part img: MultipartBody): Flowable<BaseResponse<String>>
+
+    @POST("/upload/image")
+    fun uploadFaceImage(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
     @POST("")
     fun uploadPersonalInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>

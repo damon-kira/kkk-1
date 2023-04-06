@@ -32,5 +32,5 @@ class ExtensionInfo : IBaseInfo {
 }
 
 class FaceInfo : IBaseInfo {
-    val path: String? = null
+    var path: String? = null
 }

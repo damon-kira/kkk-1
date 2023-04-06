@@ -187,8 +187,8 @@ class ApiManager @Inject constructor() {
 
     //默认拦截器集合
     private val defaultInterceptor = ArrayList<Interceptor>().apply {
-        add(BaseDataAddInterceptor())//必传参数拦截器
-        add(EncryptDecryptInterceptor())//加解密拦截器
+//        add(BaseDataAddInterceptor())//必传参数拦截器
+//        add(EncryptDecryptInterceptor())//加解密拦截器
         add(mHeaderInterceptor)
         if (logInterceptor != null) {
             add(logInterceptor)

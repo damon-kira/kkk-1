@@ -52,7 +52,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         observeLivedata()
         mBinding.tvCommit.setBlockingOnClickListener(this)
         mBinding.kycBivGender.setBlockingOnClickListener(this)
-//        mBinding.kycBivBirthday.setBlockingOnClickListener(this)
+        mBinding.kycBivBirthday.setBlockingOnClickListener(this)
         mBinding.ilPic.setClickListener({
             mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_FRONT)
         }, {
@@ -133,9 +133,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                     mBinding.kycBivGender.tag = it.key
                 }
             }
-//            R.id.kyc_biv_birthday -> {
-//                DatePickerDialog(this).show()
-//            }
+            R.id.kyc_biv_birthday -> {
+                DatePickerDialog(this).show()
+            }
             R.id.tv_commit -> {
                 uploadInfo()
             }

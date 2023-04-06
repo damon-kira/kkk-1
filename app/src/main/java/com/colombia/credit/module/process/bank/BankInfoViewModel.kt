@@ -12,12 +12,16 @@ class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepo
     BaseProcessViewModel() {
 
     override fun uploadInfo(info: IBaseInfo) {
+        showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
+            hideLoading()
+            isUploadSuccess = it.isSuccess()
             mUploadLiveData.postValue(it)
         }
     }
 
     override fun saveCacheInfo(info: IBaseInfo) {
+        if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
 

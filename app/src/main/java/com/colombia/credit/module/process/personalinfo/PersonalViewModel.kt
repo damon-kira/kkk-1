@@ -11,12 +11,15 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
     BaseProcessViewModel() {
 
     override fun uploadInfo(info: IBaseInfo) {
+        showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
-
+            hideLoading()
+            isUploadSuccess = it.isSuccess()
         }
     }
 
     override fun saveCacheInfo(info: IBaseInfo) {
+        if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
 

@@ -11,12 +11,15 @@ class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepo
     BaseProcessViewModel() {
 
     override fun uploadInfo(info: IBaseInfo) {
+        showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
-
+            hideLoading()
+            isUploadSuccess = it.isSuccess()
         }
     }
 
     override fun saveCacheInfo(info: IBaseInfo) {
+        if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
 

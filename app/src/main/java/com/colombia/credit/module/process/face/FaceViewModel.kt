@@ -11,20 +11,19 @@ class FaceViewModel @Inject constructor(private val repository: FaceRepository) 
     BaseProcessViewModel() {
 
     override fun uploadInfo(info: IBaseInfo) {
+        showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
 
         }
     }
 
     override fun saveCacheInfo(info: IBaseInfo) {
-        repository.saveCacheInfo(info)
     }
 
     override fun getCacheInfo(): IBaseInfo? {
-        return repository.getCacheInfo()
+        return null
     }
 
     override fun removeCacheInfo() {
-        repository.removeCacheInfo()
     }
 }

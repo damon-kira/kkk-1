@@ -26,11 +26,13 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     override fun uploadInfo(info: IBaseInfo) {
         showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
+            isUploadSuccess = it.isSuccess()
             hideLoading()
         }
     }
 
     override fun saveCacheInfo(info: IBaseInfo) {
+        if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
 

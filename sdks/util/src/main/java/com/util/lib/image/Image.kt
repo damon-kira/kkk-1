@@ -12,6 +12,7 @@ import com.util.lib.StorageUriUtils
 import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.isDebug
 import java.io.*
+import kotlin.math.roundToInt
 
 
 /**图片默认大小 */
@@ -515,8 +516,8 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
     var inSampleSize = 1
 
     if (height > reqHeight || width > reqWidth) {
-        val heightRatio = Math.round(height.toFloat() / reqHeight.toFloat())
-        val widthRatio = Math.round(width.toFloat() / reqWidth.toFloat())
+        val heightRatio = (height.toFloat() / reqHeight.toFloat()).roundToInt()
+        val widthRatio = (width.toFloat() / reqWidth.toFloat()).roundToInt()
         inSampleSize = if (heightRatio < widthRatio) heightRatio else widthRatio
 
         if(isDebug()){

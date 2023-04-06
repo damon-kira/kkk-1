@@ -4,7 +4,7 @@ rootProject.ext {
             minSdk        : 21,
             targetSdk     : 32,
             kotlin        : "1.7.21",
-            retrofit      : "2.5.0",
+            retrofit      : "2.8.0",
             room_version  : "2.3.0",
             hilt_android  : '2.43.2',
             lifecycle     : "2.5.0",

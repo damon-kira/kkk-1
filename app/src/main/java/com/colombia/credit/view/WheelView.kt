@@ -11,7 +11,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -142,12 +141,6 @@ class WheelView : ScrollView {
         }
 
         itemLayoutParams = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, itemHeight)
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val mode = MeasureSpec.getMode(widthMeasureSpec)
-        logger_d(TAG, "onMeasure EXACTLY = ${mode == MeasureSpec.EXACTLY}   AT_MOST=${mode == MeasureSpec.AT_MOST} UNSPECIFIED=${mode == MeasureSpec.UNSPECIFIED}")
     }
 
     fun updateItemList(itemList: List<String>) {

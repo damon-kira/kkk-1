@@ -1,5 +1,6 @@
 package com.colombia.credit.module.process.face
 
+import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,17 +14,16 @@ import com.colombia.credit.bean.resp.FaceInfo
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBar
-import com.util.lib.TimerUtil
 import com.util.lib.expand.getPicCacheFilePath
-import com.util.lib.hide
-import com.util.lib.show
-import com.util.lib.sp
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -33,6 +33,7 @@ class FaceActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityFaceBinding>()
     private val mViewModel by lazyViewModel<FaceViewModel>()
+
     private val mActions by lazy {
         resources.getStringArray(R.array.face_action)
     }
@@ -57,25 +58,38 @@ class FaceActivity : BaseProcessActivity() {
 
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))
-            showLoading(false)
+            showLoading(true)
             manager.takePicture(file) { success, f ->
                 if (BuildConfig.DEBUG) {
                     Log.i(
                         TAG,
-                        "拍照结果是否成功:$success,file:$f length:${if (f.exists()) f.length() else 0}"
+                        "拍照结果是否成功:$success,file:$f length:${if (f.exists()) f.length() else 0}  thread name=${Thread.currentThread().name}"
                     )
                 }
-                hideLoading()
-
-                if (success && f.exists()) {
-                    val rect = Rect(0, 0, mBinding.aivFaceMask.right, mBinding.aivFaceMask.bottom)
-                    BitmapCrop.cropAndCompress(this, f, rect, true) { finalFile ->
-                        if (finalFile != null) {
-                            // 上传照片
-
+                MainHandler.post {
+                    hideLoading()
+                    if (success && f.exists()) {
+                        val rect = Rect(mBinding.aivFaceMask.left, mBinding.aivFaceMask.top, mBinding.aivFaceMask.right, mBinding.aivFaceMask.bottom)
+                        BitmapCrop.cropAndCompress(this, f, rect, manager.isFront()) { finalFile ->
+                            if (finalFile != null) {
+                                // 上传照片
+                                mViewModel.uploadInfo(FaceInfo().also {
+                                    it.path = finalFile.absolutePath
+                                })
+                            }
                         }
                     }
                 }
+            }
+        }
+
+        mViewModel.mUploadLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                Launch.skipUploadActivity(this)
+                finish()
+            } else {
+                Launch.skipFaceFailedActivity(this)
+                finish()
             }
         }
     }
