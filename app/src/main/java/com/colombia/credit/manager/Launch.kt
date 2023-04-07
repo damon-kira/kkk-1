@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
+import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
 import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
@@ -25,6 +26,8 @@ import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
 import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
+import com.util.lib.expand.isNotEmpty
+import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 
 object Launch {
@@ -99,6 +102,47 @@ object Launch {
 
     fun skipSettingActivity(context: Context) {
         launch(context, SettingActivity::class.java)
+    }
+
+    /**
+     * 跳转到应用商店，并退出app
+     * @param jumpAddress 跳转地址
+     */
+    fun skipAppStore(jumpAddress: String?, isUpdate: Boolean = false) {
+        val ctx = getAppContext()
+        val packageName = ctx.packageName
+        val appAddress = "https://play.google.com/store/apps/details?id=$packageName"
+        try {
+            var intent: Intent
+            if (isNotEmpty(jumpAddress)) {
+                intent = Intent(Intent.ACTION_VIEW, Uri.parse(jumpAddress))
+            } else {
+                intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+                intent.setPackage("com.android.vending")
+                if (intent.resolveActivity(ctx.packageManager) == null) {
+                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(appAddress))
+                }
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            ctx.startActivity(intent)
+        } catch (e: Exception) {
+            if (isDebug()) {
+                logger_e("debug_Launch", "skipAppStore Launch 290 error = $e")
+            }
+        }
+        if (isUpdate) {
+            skipMainAndExitApp(getAppContext())
+        }
+    }
+
+    /**
+     * 跳转首页然后退出app
+     */
+    fun skipMainAndExitApp(context: Context) {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("exit", 0)
+        launch(context, MainActivity::class.java, intent)
     }
 
     @SuppressLint("IntentReset")

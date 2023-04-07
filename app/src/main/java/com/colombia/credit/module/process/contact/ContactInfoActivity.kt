@@ -9,6 +9,7 @@ import com.colombia.credit.bean.resp.ContactInfo
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
 import com.colombia.credit.expand.getMobile
+import com.colombia.credit.expand.isSameNumber
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
@@ -109,10 +110,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
         val contact1 = mBinding.bivContact1.tag?.toString().orEmpty()
         val contact2 = mBinding.bivContact2.tag?.toString().orEmpty()
-        if (contact1.isEmpty() || contact2.isEmpty()) {
-            return
-        }
-        if (contact1 == contact2) {
+        if (isSameNumber(contact1, contact2)) {
             infoView.setViewText("")
             infoView.setDesc("")
             infoView.tag = ""

@@ -24,5 +24,6 @@ class LoanApplication: Application() {
         mAppContext = this
         CacheInit.get().setContext(this)
         WebViewPool.INSTANCE.init(this, false)
+
     }
 }

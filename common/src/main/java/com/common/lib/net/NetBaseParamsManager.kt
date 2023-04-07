@@ -271,23 +271,34 @@ class NetBaseParamsManager {
         fun addHeader(builder: Request.Builder) {
             val supplier = getExternalParamsSupplier()
             val context = supplier.getContext()
-            builder.addHeader("App-Language", getLanguage())
-            builder.addHeader("User-Agent", getUserAgent())
-            builder.addHeader("x-app-version", supplier.getAppVersionName())
-            builder.addHeader("x-app-version-code", supplier.getAppVersionCode().toString())
-            builder.addHeader("x-sys-version", Build.VERSION.RELEASE)
+            builder.addHeader("dfdfd", getUserAgent())// token
+            // app版本
+            builder.addHeader("dfdfd", supplier.getAppVersionCode().toString())// token
+            // 设备id
+            builder.addHeader("dfdjf", SysUtils.getImei(supplier.getContext()))
+            // 客户端类型
             builder.addHeader("x-platform", "android")
-            builder.addHeader("x-device", "${Build.BRAND}${Build.MODEL}")
-            builder.addHeader(
-                "x-client-pixel",
-                "${DisplayUtils.getRealScreenHeight(context)}x" +
-                        "${DisplayUtils.getRealScreenWidth(context)}"
-            )//分辨率
-            builder.addHeader("x-gaid", SysUtils.getDeviceId(context, supplier.getAdvertisingId()))//gaid 现在代表deveice id
-            builder.addHeader("x-channel", supplier.getChannelId())//渠道
-//            builder.addHeader("x-utm-source", AppFlyerManager.getAppsFlyerUtmSource())//AppsFlyer返回的渠道名称：例如facebook
-            builder.addHeader("x-appflyer-uid", supplier.getAppsFlyerUid())//appsflyer_uid
-            builder.addHeader("x-app-sign", getSignVersion())//秘钥更换标记
+            // google广告id
+            builder.addHeader("gaid", supplier.getAdvertisingId())
+            //
+            //builder.addHeader("App-Language", getLanguage())
+//            builder.addHeader("content-type", "application/json:charset=UTF-8")
+//            builder.addHeader("User-Agent", getUserAgent())
+//            builder.addHeader("x-app-version", supplier.getAppVersionName())
+//            builder.addHeader("x-app-version-code", supplier.getAppVersionCode().toString())
+//            builder.addHeader("x-sys-version", Build.VERSION.RELEASE)
+//            builder.addHeader("x-platform", "android")
+//            builder.addHeader("x-device", "${Build.BRAND}${Build.MODEL}")
+//            builder.addHeader(
+//                "x-client-pixel",
+//                "${DisplayUtils.getRealScreenHeight(context)}x" +
+//                        "${DisplayUtils.getRealScreenWidth(context)}"
+//            )//分辨率
+//            builder.addHeader("x-gaid", SysUtils.getDeviceId(context, supplier.getAdvertisingId()))//gaid 现在代表deveice id
+//            builder.addHeader("x-channel", supplier.getChannelId())//渠道
+////            builder.addHeader("x-utm-source", AppFlyerManager.getAppsFlyerUtmSource())//AppsFlyer返回的渠道名称：例如facebook
+//            builder.addHeader("x-appflyer-uid", supplier.getAppsFlyerUid())//appsflyer_uid
+//            builder.addHeader("x-app-sign", getSignVersion())//秘钥更换标记
         }
 
         /** 修改是需要同步 userBehavior/networkManager中的值*/

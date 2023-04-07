@@ -2,6 +2,7 @@ package com.colombia.credit.expand
 
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
+import com.util.lib.expand.isEmpty
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import java.lang.StringBuilder
@@ -100,38 +101,6 @@ fun checkEmailFormat(email: String?): Boolean{
     return false
 }
 
-/**
- * 校验邮政编码
- *
- * 长度为5位的纯数字，开头只能是0-9
- */
-fun checkPostalCode(code: String?):Boolean{
-    if (code.isNullOrEmpty()){
-        return false
-    }
-    val regex = "^\\d{5}\$"
-
-    if (!Pattern.matches(regex,code)){
-        return false
-    }
-    return true
-}
-
-/**
- * 校验rfc 纳税识别号编码  后三位不填写则不校验
- *
- * 共13位，前四位字母，5-10位为数字，后三位不做限制；eg:ABC800520XXX
- */
-fun checkRfcCode(code: String?):Boolean{
-    if (code.isNullOrEmpty()){
-        return true
-    }
-    val regex = "^[a-zA-Z]{4}[0-9]{6}[a-zA-Z0-9]{3}\$"
-    if (!Pattern.matches(regex,code)){
-        return false
-    }
-    return true
-}
 /**
  * 校验家庭手机号
  * 可以不填，填了的话长度必须是8-15

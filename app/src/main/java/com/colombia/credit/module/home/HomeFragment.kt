@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentHomeBinding
 import com.colombia.credit.expand.inValidToken
+import com.colombia.credit.expand.showAppUpgradeDialog
+import com.colombia.credit.module.appupdate.AppUpdateViewModel
 import com.colombia.credit.module.firstconfirm.FirstConfirmFragment
 import com.colombia.credit.module.login.LoginFragment
 import com.colombia.credit.module.review.ReviewFragment
 import com.common.lib.helper.FragmentHelper
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,12 +24,18 @@ class HomeFragment : BaseHomeFragment() {
 
     private var mCurrTag: String? = null
 
+    private val mViewModel by lazyViewModel<AppUpdateViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return mBinding.root
+    }
+
+    override fun onRefresh() {
+        mViewModel.getAppUpdate()
     }
 
     private val mLoginFragment by lazy {
@@ -58,5 +67,10 @@ class HomeFragment : BaseHomeFragment() {
             fragment,
             mCurrTag
         )
+
+        mViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
+            getBaseActivity()?.showAppUpgradeDialog(it)
+        }
+        mViewModel.getAppUpdate()
     }
 }

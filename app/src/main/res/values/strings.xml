@@ -271,4 +271,6 @@
     <string name="tab_repay_btn">Pago con un clic $ %s</string>
     <string name="permission_hint2">Información personal del usuario \nNuestra aplicación recopila datos de la cuenta del usuario, que incluyen la dirección de correo electrónico y la información del perfil público del usuario, como el nombre, el sexo, la foto, el ASID, según la red social o la plataforma de red que utilice, como Google o Facebook, para iniciar sesión en la aplicación. Esta información es necesaria como parte del proceso de registro para acceder a nuestro servicio y también se utiliza para completar automáticamente los campos relevantes en el curso de la interfaz de nuestra aplicación. Nuestra aplicación también recopila el número de teléfono móvil para verificar el estado activo de la SIM en el dispositivo, identificarlo de manera única y evitar fraudes y accesos no autorizados.</string>
     <string name="cancel">Cancelar</string>
+
+    <string name="update_btn">Actualizar ahora</string>
 </resources>

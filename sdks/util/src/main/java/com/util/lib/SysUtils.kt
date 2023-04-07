@@ -12,6 +12,7 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
+import androidx.core.content.PermissionChecker.PermissionResult
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -81,45 +82,58 @@ object SysUtils {
             } else gaid
         }
 //        if (IMEIDialogHelper.isGetIMEIAgree()) {
-            logger_i(TAG, "用户同意抓取imei")
-            try {
-                // IMEI
-                val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-                var imei = telephonyManager.deviceId
-                if (TextUtils.isEmpty(imei)) { //获取不到时，尝试使用新Api获取
-                    val imeiList: List<String> = getAllImei(context)
-                    if (imeiList.isNotEmpty()) {
-                        imei = imeiList[0]
-                        if (DEBUG) {
-                            Log.i(TAG, "获取主卡imei号失败，Android 8.0+ 获取卡一的imei号：$imei")
-                        }
-                    }
-                }
+        logger_i(TAG, "用户同意抓取imei")
+        try {
+            // IMEI
+            var imei = getImei(context)
 
-                if (UUidCheck.invalidCashDeviceId(context, imei)) {
-                    logger_i(TAG, "imei 无效")
-                    return generateCashUUID(context)
-                }
-                if (TextUtils.isEmpty(imei)) {
-                    logger_i(TAG, "imei 为空")
-                    return generateCashUUID(context)
-                }
-                logger_i(TAG, "imei = $imei")
-
-                // imei不能是0;IMEI必须大于10位
-                return if ("0" == imei || imei.length <= 10) {
-                    generateCashUUID(context)
-                } else imei
-
-            } catch (e: Exception) {
-                logger_e(TAG, "获取IMEI e = $e")
+            if (UUidCheck.invalidCashDeviceId(context, imei)) {
+                logger_i(TAG, "imei 无效")
+                return generateCashUUID(context)
             }
+            if (TextUtils.isEmpty(imei)) {
+                logger_i(TAG, "imei 为空")
+                return generateCashUUID(context)
+            }
+            logger_i(TAG, "imei = $imei")
 
-            return generateCashUUID(context)
+            // imei不能是0;IMEI必须大于10位
+            return if ("0" == imei || imei.length <= 10) {
+                generateCashUUID(context)
+            } else imei.orEmpty()
+
+        } catch (e: Exception) {
+            logger_e(TAG, "获取IMEI e = $e")
+        }
+
+        return generateCashUUID(context)
 //        } else {
 //            logger_i(TAG, "用户不同意抓取imei")
 //            return generateCashUUID(context)
 //        }
+    }
+
+
+    @SuppressLint("MissingPermission")
+    fun getImei(context: Context): String {
+        var imei: String? = ""
+        try {
+            val telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            imei = telephonyManager.deviceId
+            if (TextUtils.isEmpty(imei)) { //获取不到时，尝试使用新Api获取
+                val imeiList: List<String> = getAllImei(context)
+                if (imeiList.isNotEmpty()) {
+                    imei = imeiList[0]
+                    if (DEBUG) {
+                        Log.i(TAG, "获取主卡imei号失败，Android 8.0+ 获取卡一的imei号：$imei")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            logger_d(TAG, "exception = $e")
+        }
+        return imei.orEmpty()
     }
 
     /**
@@ -192,9 +206,10 @@ object SysUtils {
     /**
      * 获取系统语言
      */
-    fun getLanguage():String {
+    fun getLanguage(): String {
         val locale = Locale.getDefault()
-        return java.lang.StringBuilder().append(locale.language).append("-").append(locale.country).toString()
+        return java.lang.StringBuilder().append(locale.language).append("-").append(locale.country)
+            .toString()
     }
 
     /**

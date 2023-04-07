@@ -4,6 +4,7 @@ import android.content.Context
 import com.colombia.credit.Constant
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.app.AppEnv
+import com.colombia.credit.expand.getUserToken
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor
@@ -85,7 +86,7 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getToken(): String {
-                return ""
+                return getUserToken()
             }
 
             override fun isGoogleServiceAvailable(): Boolean {
@@ -222,8 +223,6 @@ class ApiManager @Inject constructor() {
 
     private val BASE_H5_URL = Constant.BASE_H5_URL
 
-    private val IMAGE_IDENTITY_URL = "${BASEURL}api/v1/resource/img/download?"
-
     fun createApiService(): ApiService = mApiService
 
     /** 检查是否有密码的接口设置4s超时 */
@@ -237,8 +236,6 @@ class ApiManager @Inject constructor() {
 
     /** 默认15s */
     fun getApiDefaultService(): ApiService = createApiService()
-
-    fun getImageUrl(): String = IMAGE_IDENTITY_URL
 
     fun getBaseH5Url(): String = BASE_H5_URL
 

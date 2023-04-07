@@ -2,7 +2,6 @@ package com.colombia.credit.module.webview
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,21 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
-import com.common.lib.base.BaseFragment
-import com.common.lib.expand.setBlockingOnClickListener
-import com.google.gson.JsonObject
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.databinding.FragmentWebviewBinding
-import com.colombia.credit.expand.isEmpty
-import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.view.BaseWebView
+import com.common.lib.base.BaseFragment
 import com.common.lib.viewbinding.binding
-import com.util.lib.GsonUtil
-import com.util.lib.NetWorkUtil
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.StatusBarUtil.setStatusBarColor
+import com.util.lib.expand.isEmpty
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 

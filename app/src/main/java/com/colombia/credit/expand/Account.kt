@@ -2,7 +2,7 @@ package com.colombia.credit.expand
 
 
 
-fun getToken(): String {
+fun getUserToken(): String {
     return ""
 }
 

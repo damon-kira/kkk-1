@@ -15,10 +15,7 @@ import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
 import kotlin.math.abs
 
-/**
- * Created by sunsg on 2018/1/31.
- * 短信 通话记录 联系人管理类
- */
+
 class MCLCManager {
     companion object {
         private const val TAG = "MCLCManager"
