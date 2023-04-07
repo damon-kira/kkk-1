@@ -7,19 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.checkMobile
 import com.colombia.credit.expand.showNetErrorDialog
-import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
@@ -44,6 +43,7 @@ class LoginFragment : BaseLoginFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModelLoading(mViewModel)
+        setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
         val param = getString(R.string.protocol_params)
         val protocol = getString(R.string.login_protocol, param)
@@ -53,7 +53,6 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginTvProtocol.movementMethod = LinkMovementMethod()
         mBinding.loginTvProtocol.text = span
         mBinding.loginTvProtocol.setBlockingOnClickListener {
-            // 跳转协议页面
             Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
         }
 
@@ -74,7 +73,7 @@ class LoginFragment : BaseLoginFragment() {
                         reqSmsCode()
                     }
                 }
-                toast(it.message.orEmpty())
+                it.ShowErrorMsg()
             }
         }
         mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
@@ -126,5 +125,17 @@ class LoginFragment : BaseLoginFragment() {
     }
 
     private fun getMobile() = mBinding.loginEditPhone.getRealText()
+
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if (visible) {
+            getBaseActivity()?.setStatusBarColor(
+                ContextCompat.getColor(
+                    getSupportContext(),
+                    R.color.colorPrimary
+                ), false
+            )
+        }
+    }
 
 }

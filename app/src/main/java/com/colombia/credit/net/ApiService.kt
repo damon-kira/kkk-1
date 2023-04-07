@@ -8,24 +8,24 @@ import com.common.lib.net.bean.BaseResponse
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 
 interface ApiService {
 
     // 获取App版本更新
     @POST("/ktje3N/ysE")
+    @Headers("kio8YGhwe6:sdFENAdj8as2DAS")
     fun getAppUpdate(): Flowable<BaseResponse<AppUpgradeInfo>>
 
     @POST("jasdi78wd/dfj7senYS")
+    @Headers("kio8YGhwe6:casdBAS8ASDcbas2LCJS")
     fun getSmsCode(@Body body: RequestBody): Flowable<BaseResponse<RspSmsCode>>
 
     // 登录
     @POST("/wFvw7/6bKwy3")
-    fun loginSms(@Body body: RequestBody): Flowable<BaseResponse<RspLoginInfo>>
+    @Headers("kio8YGhwe6:dsfEIFSadssda3KDAlos")
+    fun loginSms( @Body body: RequestBody): Flowable<BaseResponse<RspLoginInfo>>
 
     @Multipart
     @POST
@@ -48,4 +48,8 @@ interface ApiService {
 
     @POST("")
     fun uploadKycInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
+
+    @POST("tZyFyDwU/wD9X")
+    @Headers("kio8YGhwe6:pushMessageLogOut")
+    fun logout(@Body body: RequestBody): Flowable<BaseResponse<String>>
 }

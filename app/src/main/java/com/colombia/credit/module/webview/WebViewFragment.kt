@@ -1,5 +1,6 @@
 package com.colombia.credit.module.webview
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
@@ -19,6 +20,7 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.expand.isEmpty
+import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -97,9 +99,11 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
             finish()
         }
         webViewSetting(mWebView)
-        val url = arguments?.getString(EXTRA_URL).orEmpty()
+        var url = arguments?.getString(EXTRA_URL).orEmpty()
+        logger_d(TAG, "url =$url")
         mUrl = url
         mWebView?.loadUrl(url)
+        mWebView?.reload()
         setStatusBarColor(isTitleShow, url)
     }
 
@@ -176,7 +180,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 //                isDark = false
 //            )
 //        } else {
-            activity?.setStatusBar(isFullScreen = false, color = R.color.white)
+        activity?.setStatusBar(isFullScreen = false, color = R.color.white)
 //        }
     }
 
@@ -191,6 +195,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
     }
 
 
+    @SuppressLint("JavascriptInterface")
     private fun webViewSetting(webView: WebView?) {
         webView ?: return
 //        settings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -256,16 +261,16 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 
     inner class MyWebViewClient : WebViewClient() {
 //        private val protocolWebViewLoader = ProtocolWebViewLoader()
-//
+
 //        override fun shouldInterceptRequest(
 //            view: WebView?,
 //            request: WebResourceRequest?
 //        ): WebResourceResponse? {
-//            return protocolWebViewLoader.shouldInterceptRequest(request?.url)
+//            return super.shouldInterceptRequest(view, request)
 //        }
-//
+
 //        override fun shouldInterceptRequest(view: WebView?, url: String?): WebResourceResponse? {
-//            return protocolWebViewLoader.shouldInterceptRequest(url?.let { Uri.parse(it) })
+//            return  super.shouldInterceptRequest(view, url)
 //        }
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -288,6 +293,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
             error: WebResourceError?
         ) {
             super.onReceivedError(view, request, error)
+            logger_e(TAG, "onReceivedError = $error")
             isLoadComplete = true
             hideLoading()
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -307,6 +313,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
             errorResponse: WebResourceResponse?
         ) {
             super.onReceivedHttpError(view, request, errorResponse)
+            logger_e(TAG, "onReceivedHttpError = ${errorResponse.toString()}")
             isLoadComplete = true
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
                 val statusCode = errorResponse?.statusCode

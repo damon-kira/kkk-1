@@ -21,9 +21,6 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
         binding.aivClose.setBlockingOnClickListener {
             dismiss()
         }
-    }
-
-    fun setCustomClickListener(): CustomDialog {
         binding.etvWhatsapp.setBlockingOnClickListener {
             Launch.skipWhatsApp(getAppContext())
             dismiss()
@@ -36,6 +33,5 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
             Launch.skipCallPage(getAppContext())
             dismiss()
         }
-        return this
     }
 }

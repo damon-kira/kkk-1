@@ -4,10 +4,13 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivitySettingBinding
 import com.colombia.credit.dialog.LogoutDialog
+import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.toast
+import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +42,12 @@ class SettingActivity : BaseActivity() {
         }
 
         mViewModel.mLogoutLivedata.observerNonSticky(this) {
-
+            if (it.isSuccess()) {
+                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+                finish()
+            } else {
+                it.ShowErrorMsg()
+            }
         }
     }
 }

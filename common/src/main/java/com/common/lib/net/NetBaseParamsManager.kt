@@ -271,16 +271,15 @@ class NetBaseParamsManager {
         fun addHeader(builder: Request.Builder) {
             val supplier = getExternalParamsSupplier()
             val context = supplier.getContext()
-            builder.addHeader("kio8YGhwe6", "casdBAS8ASDcbas2LCJS")
-            builder.addHeader("dfdfd", getUserAgent())// token
+            builder.addHeader("chdknc6-1dwaiu", getUserAgent())// token
             // app版本
-            builder.addHeader("dfdfd", supplier.getAppVersionCode().toString())// token
+            builder.addHeader("iodaswdsa", supplier.getAppVersionCode().toString())// app 版本
             // 设备id
-            builder.addHeader("dfdjf", SysUtils.getImei(supplier.getContext()))
+            builder.addHeader("podawsdaw", SysUtils.getImei(supplier.getContext()))
             // 客户端类型
-            builder.addHeader("x-platform", "android")
+            builder.addHeader("vifjsansdaw", "android")
             // google广告id
-            builder.addHeader("gaid", supplier.getAdvertisingId())
+            builder.addHeader("buasdnjeasq", supplier.getAdvertisingId())
             //
             //builder.addHeader("App-Language", getLanguage())
 //            builder.addHeader("content-type", "application/json:charset=UTF-8")

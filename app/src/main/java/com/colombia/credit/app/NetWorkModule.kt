@@ -1,5 +1,6 @@
 package com.colombia.credit.app
 
+import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.net.ApiManager
 import com.colombia.credit.net.ApiService
 import dagger.Module
@@ -21,21 +22,21 @@ class NetWorkModule {
     fun provideApiService(): ApiService {
         return ApiManager.getInstance().createApiService()
     }
-//
-//    @UploadApiService
-//    @Singleton
-//    @Provides
-//    fun provideApiUploadService(): ApiService {
-//        return ApiManager.getInstance().createApiUploadService()
-//    }
-//
+
+    @UploadApiService
+    @Singleton
+    @Provides
+    fun provideApiUploadService(): ApiService {
+        return ApiManager.getInstance().createApiUploadService()
+    }
+
 //    @CheckApiService
 //    @Singleton
 //    @Provides
 //    fun provideCheckApiService(): ApiService {
 //        return ApiManager.getInstance().createCheckApiService()
 //    }
-//
+
 //    @DownloadApiService
 //    @Singleton
 //    @Provides

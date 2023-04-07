@@ -26,7 +26,7 @@ class HomeLoanFragment : BaseHomeLoanFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.homeToolbar.showCustomIcon(true)
+        setCustomListener(mBinding.homeToolbar)
     }
 
     /**

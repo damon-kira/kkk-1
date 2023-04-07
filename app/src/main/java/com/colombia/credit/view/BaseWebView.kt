@@ -46,6 +46,7 @@ class BaseWebView : WebView {
         initSetting()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initSetting() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setWebContentsDebuggingEnabled(AppEnv.DEBUG)
@@ -53,17 +54,17 @@ class BaseWebView : WebView {
         isHorizontalScrollBarEnabled = false
         isVerticalScrollBarEnabled = false//滑动条隐藏
         settings.javaScriptEnabled = true//启用javascript支持
-        settings.setSupportZoom(false)
-        settings.builtInZoomControls = false//缩放按钮
-        settings.useWideViewPort = true//支持可任意比例缩放
-        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
-        settings.textZoom = 100
-        settings.cacheMode = WebSettings.LOAD_DEFAULT
-        settings.setAppCacheEnabled(true)
-        val cachePath = context.filesDir.absolutePath + "/webview"
-        settings.setAppCachePath(cachePath)
-        settings.setAppCacheMaxSize(50 * 1024 * 1024)//50MB
-        settings.loadWithOverviewMode = true
+//        settings.setSupportZoom(false)
+//        settings.builtInZoomControls = false//缩放按钮
+//        settings.useWideViewPort = true//支持可任意比例缩放
+//        settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+//        settings.textZoom = 100
+//        settings.cacheMode = WebSettings.LOAD_NO_CACHE
+//        settings.setAppCacheEnabled(false)
+//        val cachePath = context.filesDir.absolutePath + "/webview"
+//        settings.setAppCachePath(cachePath)
+//        settings.setAppCacheMaxSize(50 * 1024 * 1024)//50MB
+//        settings.loadWithOverviewMode = true
         settings.domStorageEnabled = true//设置webview支持dom storage API
         settings.allowFileAccess = true//在webView内部是否允许访问文件
         settings.javaScriptCanOpenWindowsAutomatically = true//设置脚本是否允许自动打开弹窗

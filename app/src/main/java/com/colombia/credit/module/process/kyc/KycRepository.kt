@@ -2,8 +2,10 @@ package com.colombia.credit.module.process.kyc
 
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.bean.resp.KycInfo
+import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
+import com.colombia.credit.net.ApiService
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.util.lib.GsonUtil
 import okhttp3.MultipartBody
@@ -12,12 +14,12 @@ import javax.inject.Inject
 
 
 // 上传身份证信息
-class KycRepository @Inject constructor() : BaseProcessRepository<KycInfo>() {
+class KycRepository @Inject constructor(@UploadApiService private val uploadApiService: ApiService) : BaseProcessRepository<KycInfo>() {
 
     fun uploadImage(path: String, type: Int) =
         ApiServiceLiveDataProxy.request {
             val part = MultipartBody.Builder().addPart(createFileRequestBody(File(path))).build()
-            apiService.uploadKycImage(part)
+            uploadApiService.uploadKycImage(part)
         }
 
     override fun uploadInfo(info: IBaseInfo) = ApiServiceLiveDataProxy.request {

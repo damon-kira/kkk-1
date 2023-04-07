@@ -2,14 +2,16 @@ package com.colombia.credit.module.process.face
 
 import com.colombia.credit.bean.resp.FaceInfo
 import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
+import com.colombia.credit.net.ApiService
 import com.common.lib.net.ApiServiceLiveDataProxy
 import okhttp3.MultipartBody
 import java.io.File
 import javax.inject.Inject
 
-class FaceRepository @Inject constructor() : BaseProcessRepository<FaceInfo>() {
+class FaceRepository @Inject constructor(@UploadApiService private val uploadApiService: ApiService) : BaseProcessRepository<FaceInfo>() {
 
     override fun getCacheClass(): Class<FaceInfo> = FaceInfo::class.java
 
@@ -20,6 +22,6 @@ class FaceRepository @Inject constructor() : BaseProcessRepository<FaceInfo>() {
         val file = File(path)
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
         builder.addFormDataPart("image", file.name, createFileRequestBody(file))
-        apiService.uploadFaceImage(builder.build())
+        uploadApiService.uploadFaceImage(builder.build())
     }
 }

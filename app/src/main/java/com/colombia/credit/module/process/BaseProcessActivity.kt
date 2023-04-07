@@ -21,7 +21,7 @@ abstract class BaseProcessActivity : BaseActivity() {
     private var mProcessSelectorDialog: ProcessSelectorDialog? = null
 
     private val mCustomDialog by lazy {
-        CustomDialog(this).setCustomClickListener()
+        CustomDialog(this)
     }
 
     fun showProcessSelectorDialog(

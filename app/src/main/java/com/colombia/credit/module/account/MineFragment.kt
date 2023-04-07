@@ -25,9 +25,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     private val mBinding by binding(FragmentAccountBinding::inflate)
 
     private val mCustomDialog by lazy {
-        CustomDialog(getSupportContext()).also {
-            it.setCustomClickListener()
-        }
+        CustomDialog(getSupportContext())
     }
 
     override fun onCreateView(

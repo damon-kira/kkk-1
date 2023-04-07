@@ -12,7 +12,8 @@ class SettingViewModel @Inject constructor(private val repository: SettingReposi
     val mLogoutLivedata = generatorLiveData<BaseResponse<String>>()
 
     fun logout() {
-        repository.logout()
+        mLogoutLivedata.addSourceLiveData(repository.logout()) {
+            mLogoutLivedata.postValue(it)
+        }
     }
-
 }
