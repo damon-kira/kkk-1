@@ -2,6 +2,8 @@ package com.colombia.credit.net
 
 import com.colombia.credit.bean.resp.AppUpgradeInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
+import com.colombia.credit.bean.resp.RspLoginInfo
+import com.colombia.credit.bean.resp.RspSmsCode
 import com.common.lib.net.bean.BaseResponse
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
@@ -18,11 +20,12 @@ interface ApiService {
     @POST("/ktje3N/ysE")
     fun getAppUpdate(): Flowable<BaseResponse<AppUpgradeInfo>>
 
-    @POST("api/v1/auth/login/sms")
-    fun getSmsCode(@Body body: RequestBody): Flowable<BaseResponse<String>>
+    @POST("jasdi78wd/dfj7senYS")
+    fun getSmsCode(@Body body: RequestBody): Flowable<BaseResponse<RspSmsCode>>
 
-    @POST("api/v1/auth/login/sms")
-    fun login(@Body body: RequestBody): Flowable<BaseResponse<String>>
+    // 登录
+    @POST("/wFvw7/6bKwy3")
+    fun loginSms(@Body body: RequestBody): Flowable<BaseResponse<RspLoginInfo>>
 
     @Multipart
     @POST

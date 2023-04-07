@@ -1,11 +1,8 @@
 package com.colombia.credit.expand
 
-import com.colombia.credit.LoanApplication.Companion.getAppContext
-import com.colombia.credit.R
 import com.util.lib.expand.isEmpty
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
-import java.lang.StringBuilder
 import java.util.regex.Pattern
 
 
@@ -13,8 +10,9 @@ import java.util.regex.Pattern
  * 修改手机号校验格式，以1开头的11位数字，或者是非1开头的10位数字
  */
 const val mobileRegex = "^[1]\\d{10}$|^[234567890]\\d{9}$"
+const val mobileRegex2 = "^\\d{10}"
 fun checkMobile(mobile: String?): Boolean {
-    if (!Pattern.matches(mobileRegex, mobile)) {
+    if (!Pattern.matches(mobileRegex2, mobile)) {
         return false
     }
     return true

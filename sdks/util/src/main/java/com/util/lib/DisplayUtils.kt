@@ -14,17 +14,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 
-/**
- * Created by weisl on 2018/6/4.
- *
- */
 object DisplayUtils {
-
-    @JvmStatic
-    fun getCurrentDate(): String {
-        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        return format.format(Date(System.currentTimeMillis()))
-    }
 
     @JvmStatic
     fun getCurrentSdk(): Int {

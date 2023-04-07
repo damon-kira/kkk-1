@@ -2,6 +2,10 @@ package com.colombia.credit.manager
 
 object SharedPrefKeyManager {
 
+    const val KEY_USER_INFO   = "user_info"
+    const val KEY_USER_MOBILE  = "user_mobile"
+    const val KEY_USER_TOKEN   = "user_token"
+    const val KEY_USER_ID   = "user_id"
     const val KEY_SHOW_PERMISSION_DIA_FLAG = "show_permission_dialog_flag"
 
     /** 退出登录清除*/

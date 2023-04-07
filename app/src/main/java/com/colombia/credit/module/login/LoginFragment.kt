@@ -7,15 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.colombia.credit.manager.Launch
+import androidx.core.widget.addTextChangedListener
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
+import com.colombia.credit.expand.ShowErrorMsg
+import com.colombia.credit.expand.checkMobile
 import com.colombia.credit.expand.showNetErrorDialog
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.manager.InputHelper
+import com.colombia.credit.manager.Launch
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.hide
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +43,8 @@ class LoginFragment : BaseLoginFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setViewModelLoading(mViewModel)
+        mBinding.loginEditPhone.requestFocus()
         val param = getString(R.string.protocol_params)
         val protocol = getString(R.string.login_protocol, param)
         val span = SpannableImpl().init(protocol)
@@ -70,6 +77,13 @@ class LoginFragment : BaseLoginFragment() {
                 toast(it.message.orEmpty())
             }
         }
+        mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                Launch.skipMainActivity(getSupportContext())
+            } else {
+                it.ShowErrorMsg()
+            }
+        }
 
         mBinding.loginTvOtp.setBlockingOnClickListener {
             if (getMobile().length < 10) {
@@ -79,8 +93,32 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            Launch.skipFaceActivity(getSupportContext())
+            val mobile = getMobile()
+            val code = mBinding.loginEditCode.getRealText()
+            if (!checkMobile(mobile)) {
+                mBinding.loginTvPhoneError.show()
+                return@setBlockingOnClickListener
+            }
+            if (code.length != 4) {
+                mBinding.loginTvCodeError.show()
+                return@setBlockingOnClickListener
+            }
+            mViewModel.reqLogin(mobile, code)
         }
+
+
+        mBinding.loginEditPhone.addTextChangedListener(object : InputHelper.TextWatchAdapter() {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                super.onTextChanged(s, start, before, count)
+                mBinding.loginTvPhoneError.hide()
+            }
+        })
+        mBinding.loginEditCode.addTextChangedListener(object : InputHelper.TextWatchAdapter() {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                super.onTextChanged(s, start, before, count)
+                mBinding.loginTvCodeError.hide()
+            }
+        })
     }
 
     private fun reqSmsCode() {

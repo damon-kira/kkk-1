@@ -271,6 +271,7 @@ class NetBaseParamsManager {
         fun addHeader(builder: Request.Builder) {
             val supplier = getExternalParamsSupplier()
             val context = supplier.getContext()
+            builder.addHeader("kio8YGhwe6", "casdBAS8ASDcbas2LCJS")
             builder.addHeader("dfdfd", getUserAgent())// token
             // app版本
             builder.addHeader("dfdfd", supplier.getAppVersionCode().toString())// token

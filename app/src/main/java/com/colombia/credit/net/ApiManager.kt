@@ -5,6 +5,7 @@ import com.colombia.credit.Constant
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.expand.getUserToken
+import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor
@@ -74,7 +75,7 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getAdvertisingId(): String {
-                return ""
+                return GPInfoUtils.getAdid()
             }
 
             override fun getChannelId(): String {
@@ -98,7 +99,7 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getFcmToken(): String {
-                return ""
+                return GPInfoUtils.getFcmToken()
             }
 
             override fun getLocationInfo(): Location {

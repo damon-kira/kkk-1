@@ -140,9 +140,9 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
     fun getSupportContext(): Context = requireActivity()
 
     protected fun setViewModelLoading(viewModel: BaseViewModel) {
-        viewModel.loading.observe(this, Observer {
+        viewModel.loading.observe(viewLifecycleOwner) {
             if (it) showLoading() else hideLoading()
-        })
+        }
     }
 
 
