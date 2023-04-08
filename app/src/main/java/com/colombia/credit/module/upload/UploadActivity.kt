@@ -5,7 +5,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.databinding.ActivityUploadBinding
 import com.colombia.credit.module.process.BaseProcessActivity
-import com.colombia.credit.module.process.IBaseProcessViewModel
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,5 +29,9 @@ class UploadActivity : BaseProcessActivity() {
         return ReqKycInfo()
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+
+    }
 }

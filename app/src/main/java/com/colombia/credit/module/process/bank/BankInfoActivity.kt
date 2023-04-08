@@ -3,13 +3,15 @@ package com.colombia.credit.module.process.bank
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqBankInfo
 import com.colombia.credit.bean.resp.BankInfoSearch
-import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
+import com.colombia.credit.expand.TYPE_IDENTITY
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.module.process.BaseProcessActivity
-import com.colombia.credit.module.process.IBaseProcessViewModel
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 
@@ -75,5 +77,9 @@ class BankInfoActivity : BaseProcessActivity() {
         return ReqBankInfo()
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+        jumpProcess(this, TYPE_IDENTITY)
+    }
 }

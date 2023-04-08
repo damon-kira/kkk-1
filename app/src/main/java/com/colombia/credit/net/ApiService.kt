@@ -36,19 +36,24 @@ interface ApiService {
     @POST("/upload/image")
     fun uploadFaceImage(@Body body: MultipartBody): Flowable<BaseResponse<String>>
 
-    @POST("")
+    @POST("WY8x6gV/GWE9")
+    @Headers("kio8YGhwe6:jdianASDWEsnd3AS")
     fun uploadPersonalInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
-    @POST("")
+    @POST("ZWk/LoIc7p")
+    @Headers("kio8YGhwe6:nNFASnfjkadsUHSAdVsa")
     fun uploadWorkInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
-    @POST("")
+    @POST("fxqYSZI11H/aDGVjE")
+    @Headers("kio8YGhwe6:Dsdjiio9SAoia")
     fun uploadContactInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
-    @POST("")
+    @POST("nThpJKyVhe/xCwc5dop")
+    @Headers("kio8YGhwe6:ANSD90NJAISnjcOSsa")
     fun uploadBankInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
-    @POST("")
+    @POST("5Vw4Bz/sx4Yn6V")
+    @Headers("kio8YGhwe6:wenjSAasiXsSa")
     fun uploadKycInfo(@Body body: RequestBody): Flowable<BaseResponse<String>>
 
     @POST("tZyFyDwU/wD9X")

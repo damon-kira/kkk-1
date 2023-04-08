@@ -5,6 +5,7 @@ import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityFaceFailedBinding
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -28,6 +29,9 @@ class FaceFailedActivity : BaseProcessActivity() {
         }
     }
 
+    override fun uploadSuccess() {
+    }
+
     override fun checkCommitInfo(): Boolean {
         return false
     }
@@ -36,6 +40,6 @@ class FaceFailedActivity : BaseProcessActivity() {
         return ReqFaceInfo()
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
 
 }

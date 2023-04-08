@@ -136,12 +136,12 @@
         <item>Hermana</item><!--姐妹-->
     </string-array>
     <string-array name="relationShip_key">
-        <item>1</item><!-- 配偶 -->
-        <item>2</item><!--父亲-->
-        <item>3</item><!--母亲-->
-        <item>4</item><!--子女-->
-        <item>5</item><!--兄弟-->
-        <item>6</item><!--姐妹-->
+        <item>0</item><!-- 配偶 -->
+        <item>1</item><!--父亲-->
+        <item>2</item><!--母亲-->
+        <item>3</item><!--子女-->
+        <item>4</item><!--兄弟-->
+        <item>5</item><!--姐妹-->
     </string-array>
 
 

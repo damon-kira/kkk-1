@@ -6,11 +6,16 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqWorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
+import com.colombia.credit.expand.TYPE_CONTACT
+import com.colombia.credit.expand.jumpProcess
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,6 +49,14 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivPayday.setBlockingOnClickListener(this)
         mBinding.bivJobYear.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
+
+        mViewModel.mUploadLiveData.observerNonSticky(this) {
+            if (it.isSuccess()){
+                Launch.skipContactInfoActivity(this)
+            } else {
+
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -111,12 +124,17 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getCommitInfo(): IReqBaseInfo {
-        val jobType = mBinding.bivType.tag
-        val payday = mBinding.bivPayday.tag
-        val incomeSource = mBinding.bivIncome.tag
-        val jobYear = mBinding.bivJobYear.tag
-        return ReqWorkInfo()
+        return ReqWorkInfo().also {
+            it.jQIai = mBinding.bivType.tag.toString()
+            it.flb5WwOaaaaa = mBinding.bivPayday.tag.toString()
+            it.flb5WwOaa = mBinding.bivIncome.tag.toString()
+            it.Cv10jD = mBinding.bivJobYear.tag.toString()
+        }
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+        jumpProcess(this, TYPE_CONTACT)
+    }
 }

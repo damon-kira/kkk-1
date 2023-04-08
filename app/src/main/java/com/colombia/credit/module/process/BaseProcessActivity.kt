@@ -7,11 +7,15 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
+import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.isShowBackDialog
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.expand.saveShowBackDialog
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.common.lib.base.BaseActivity
+import com.common.lib.livedata.observerNonSticky
+import com.common.lib.net.bean.BaseResponse
 import com.util.lib.StatusBarUtil.setStatusBar
 
 abstract class BaseProcessActivity : BaseActivity() {
@@ -19,6 +23,15 @@ abstract class BaseProcessActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(false, R.color.colorPrimary, false)
+        val viewModel = getViewModel()
+        setViewModelLoading(viewModel)
+        viewModel.mUploadLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+
+            } else {
+                uploadException(it)
+            }
+        }
     }
 
     private val mBackDialog by lazy {
@@ -94,9 +107,15 @@ abstract class BaseProcessActivity : BaseActivity() {
         return result
     }
 
+    abstract fun uploadSuccess()
+
+    fun uploadException(response: BaseResponse<*>){
+        response.ShowErrorMsg()
+    }
+
     abstract fun checkCommitInfo(): Boolean
 
     abstract fun getCommitInfo(): IReqBaseInfo
 
-    abstract fun getViewModel(): IBaseProcessViewModel
+    abstract fun getViewModel(): BaseProcessViewModel
 }

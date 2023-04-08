@@ -8,9 +8,12 @@ import com.colombia.credit.bean.req.ReqPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.expand.ShowErrorMsg
+import com.colombia.credit.expand.TYPE_WORK
 import com.colombia.credit.expand.checkEmailFormat
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.common.lib.expand.setBlockingOnClickListener
@@ -40,9 +43,6 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
-
-        setViewModelLoading(mViewModel)
-
         mViewModel.mUploadLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 Launch.skipWorkInfoActivity(this)
@@ -125,6 +125,9 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             .and(checkAndSetErrorHint(mBinding.bivMarriage))
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
 
+    override fun uploadSuccess() {
+        jumpProcess(this, TYPE_WORK)
+    }
 }

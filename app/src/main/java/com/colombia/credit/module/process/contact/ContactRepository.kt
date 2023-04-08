@@ -11,8 +11,6 @@ import javax.inject.Inject
 // 上传联系人
 class ContactRepository @Inject constructor() : BaseProcessRepository<ReqContactInfo>() {
 
-    private val CACHE_KEY = SharedPrefKeyManager.KEY_CONTACT_INFO_INPUT
-
     override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
         val body = createRequestBody(GsonUtil.toJson(info).orEmpty())
         apiService.uploadContactInfo(body)

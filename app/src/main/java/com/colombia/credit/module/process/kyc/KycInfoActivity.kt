@@ -9,9 +9,12 @@ import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.DatePickerDialog
+import com.colombia.credit.expand.TYPE_FACE
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
@@ -173,5 +176,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         return ReqKycInfo()
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+        jumpProcess(this, TYPE_FACE)
+    }
 }

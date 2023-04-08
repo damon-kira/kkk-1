@@ -8,10 +8,13 @@ import com.colombia.credit.bean.PhoneAndName
 import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
+import com.colombia.credit.expand.TYPE_BANK
 import com.colombia.credit.expand.getMobile
 import com.colombia.credit.expand.isSameNumber
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
 import com.colombia.credit.permission.PermissionHelper
@@ -125,14 +128,19 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getCommitInfo(): IReqBaseInfo {
-        val relationShip = mBinding.bivRelationship.tag
-        val contact1 = mBinding.bivContact1.tag
-        val name1 = mBinding.bivContact1.getViewText()
+        return ReqContactInfo().also {
+            it.HCy5Y = mBinding.bivRelationship.tag.toString()
+            it.RHqi = mBinding.bivContact1.tag.toString()
+            it.hcPt = mBinding.bivContact1.getViewText()
 
-        val contact2 = mBinding.bivContact2.tag
-        val name2 = mBinding.bivContact2.getViewText()
-        return ReqContactInfo()
+            it.SP2d7 = mBinding.bivContact2.tag.toString()
+            it.IKIcWwu6 = mBinding.bivContact2.getViewText()
+        }
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+        jumpProcess(this, TYPE_BANK)
+    }
 }

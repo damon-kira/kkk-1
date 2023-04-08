@@ -16,6 +16,7 @@ import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
+import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
@@ -106,7 +107,11 @@ class FaceActivity : BaseProcessActivity() {
         return ReqFaceInfo()
     }
 
-    override fun getViewModel(): IBaseProcessViewModel = mViewModel
+    override fun getViewModel(): BaseProcessViewModel = mViewModel
+
+    override fun uploadSuccess() {
+        Launch.skipUploadActivity(this)
+    }
 
     override fun onStart() {
         super.onStart()
