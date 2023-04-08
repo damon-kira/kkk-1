@@ -18,7 +18,7 @@ import com.common.lib.viewbinding.binding
 class BankInfoActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityBankInfoBinding>()
-    private var mBankType = -1
+    private var mBankType = 0
 
     private val mViewModel by lazyViewModel<BankInfoViewModel>()
 
@@ -54,6 +54,7 @@ class BankInfoActivity : BaseProcessActivity() {
             mBankDialog.setData(mBankList)
                 .setOnClickListener {
                     mBinding.bivName.setViewText(it.getBankName().orEmpty())
+                    mBinding.bivName.tag = it.BCode
                 }.show()
         }
         mBinding.tvCommit.setBlockingOnClickListener {
@@ -71,10 +72,12 @@ class BankInfoActivity : BaseProcessActivity() {
     }
 
     override fun getCommitInfo(): IReqBaseInfo {
-        val bankName = mBinding.bivName.getViewText()
-        val bankNo = mBinding.bivBankno.getViewText()
-        mBankType
-        return ReqBankInfo()
+        return ReqBankInfo().also {
+            it.dmQHAqbC = mBinding.bivName.getViewText()// 银行名称
+            it.Wf3pgbaTm = mBinding.bivBankno.getViewText()// 银行编码
+            it.OZwuBMo = mBankType.toString()// 银行类型
+            it.COZthiVwS = mBinding.bivName.tag?.toString().orEmpty() // 银行编码
+        }
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel

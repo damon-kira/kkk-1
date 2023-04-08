@@ -24,12 +24,12 @@ class ReqWorkInfo : IReqBaseInfo {
 }
 
 class ReqContactInfo : IReqBaseInfo {
-//    var vo9dza3yA: String? = null // 联系人id
+    //    var vo9dza3yA: String? = null // 联系人id
     var hcPt: String? = null // 第一联系人姓名
     var RHqi: String? = null // 第一联系人电话
     var HCy5Y: String? = null //第一联系人关系
 
-//    var nJBqrhrxl: String? = null // 第二联系人id
+    //    var nJBqrhrxl: String? = null // 第二联系人id
     var IKIcWwu6: String? = null // 第二联系人姓名
     var SP2d7: String? = null // 第二联系人电话
     var fOgLF6IBO: String = "4" // 第二联系人关系
@@ -38,7 +38,12 @@ class ReqContactInfo : IReqBaseInfo {
 }
 
 class ReqBankInfo : IReqBaseInfo {
-
+    var dmQHAqbC: String? = null // 银行名称
+    var OZwuBMo: String? = null // 银行类型
+    var COZthiVwS: String? = null // 银行编码
+    var Wf3pgbaTm: String? = null // 银行卡号
+    var X11Jmqd = 0 // 停留时长
+    var d0eSqwK = "02" // 页面来源
 }
 
 class ReqKycInfo : IReqBaseInfo {
