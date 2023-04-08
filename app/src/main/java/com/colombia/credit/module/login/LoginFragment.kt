@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
+import com.colombia.credit.dialog.RepayDetailDialog
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.checkMobile
 import com.colombia.credit.expand.showNetErrorDialog
@@ -92,17 +93,18 @@ class LoginFragment : BaseLoginFragment() {
             reqSmsCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-            val mobile = getMobile()
-            val code = mBinding.loginEditCode.getRealText()
-            if (!checkMobile(mobile)) {
-                mBinding.loginTvPhoneError.show()
-                return@setBlockingOnClickListener
-            }
-            if (code.length != 4) {
-                mBinding.loginTvCodeError.show()
-                return@setBlockingOnClickListener
-            }
-            mViewModel.reqLogin(mobile, code)
+//            val mobile = getMobile()
+//            val code = mBinding.loginEditCode.getRealText()
+//            if (!checkMobile(mobile)) {
+//                mBinding.loginTvPhoneError.show()
+//                return@setBlockingOnClickListener
+//            }
+//            if (code.length != 4) {
+//                mBinding.loginTvCodeError.show()
+//                return@setBlockingOnClickListener
+//            }
+//            mViewModel.reqLogin(mobile, code)
+            Launch.skipRepayDetailActivity(getSupportContext())
         }
 
 

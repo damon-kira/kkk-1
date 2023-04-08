@@ -14,6 +14,8 @@ import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
+import com.colombia.credit.module.defer.DeferActivity
+import com.colombia.credit.module.defer.DeferActivity_GeneratedInjector
 import com.colombia.credit.module.history.HistoryActivity
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
@@ -22,6 +24,7 @@ import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.colombia.credit.module.repaydetail.RepayDetailActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
 import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
@@ -87,6 +90,14 @@ object Launch {
 
     fun skipRepeatConfirmActivity(context: Context) {
         launch(context, RepeatConfirmActivity::class.java)
+    }
+
+    fun skipDeferActivity(context: Context) {
+        launch(context, DeferActivity::class.java)
+    }
+
+    fun skipRepayDetailActivity(context: Context) {
+        launch(context, RepayDetailActivity::class.java)
     }
 
     fun skipWifiPage(context: Context) {

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import com.colombia.credit.R
 import com.colombia.credit.databinding.LayoutToolbarBinding
 import com.common.lib.expand.setBlockingOnClickListener
@@ -88,6 +89,12 @@ class ToolbarLayout : RelativeLayout {
                         val showCustom = ta.getBoolean(attr, false)
                         showCustomIcon(showCustom)
                     }
+                    R.styleable.ToolbarLayout_tl_custom_icon -> {
+                        val customRes = ta.getResourceId(attr, 0)
+                        if (customRes != 0) {
+                            setCustomImage(customRes)
+                        }
+                    }
                 }
             }
             ta.recycle()
@@ -157,7 +164,7 @@ class ToolbarLayout : RelativeLayout {
     }
 
     fun setPointBackground(drawable: Drawable?) {
-        mBinding.toolbarAivPoint?.background = drawable
+        mBinding.toolbarAivPoint.background = drawable
     }
 
     fun setCustomImage(@DrawableRes customImage: Int) {

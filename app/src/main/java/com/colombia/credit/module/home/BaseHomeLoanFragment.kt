@@ -9,6 +9,7 @@ import androidx.core.widget.NestedScrollView
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentBaseLoanBinding
 import com.common.lib.viewbinding.binding
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp
 
 abstract class BaseHomeLoanFragment: BaseHomeFragment() {
@@ -60,7 +61,14 @@ abstract class BaseHomeLoanFragment: BaseHomeFragment() {
         }
     }
 
-    open fun needScrollView(): Boolean = true
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if (visible) {
+            getBaseActivity()?.setStatusBarColor(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary), false)
+        }
+    }
+
+    open fun needScrollView(): Boolean = false
 
     abstract fun contentView(): View
 

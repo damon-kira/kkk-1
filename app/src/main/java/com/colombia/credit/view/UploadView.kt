@@ -51,6 +51,8 @@ class UploadView : View {
     private var mCurrProcess = 1
     private val MAX_PROCESS = 100
 
+    private val rect = Rect()
+
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -81,6 +83,7 @@ class UploadView : View {
         defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
+
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
         val centerX = width / 2f
@@ -92,7 +95,6 @@ class UploadView : View {
         mPaint.color = PROCESS_COLOR
         canvas.drawArc(mRectSize, -90f, mCurrProcess * 360 / MAX_PROCESS * 1f, false, mPaint)
         // 绘制文本
-        val rect = Rect()
         mText = "$mCurrProcess%"
         mTextPaint.getTextBounds(mText, 0, mText.length, rect)
         canvas.drawText(mText, centerX, centerY + rect.height() / 2, mTextPaint)

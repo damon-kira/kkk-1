@@ -8,6 +8,7 @@
     <string name="sms_hint">Ingrese 4 dígitos para la verificación</string>
     <string name="sms_otp">Enviar OTP</string>
 
+    <string name="normal_text">--</string>
     <string name="days">%s días</string>
     <string name="seconds">%ss</string>
     <string name="day">días</string>
@@ -48,11 +49,12 @@
     <string name="repay_period">Número de plazos</string>
     <string name="repay_date">Fecha de Pago</string>
     <string name="repay_btn">Pagar ahora</string>
+    <string name="overdue_tag">%s días \nde retraso</string>
 
     <string name="refused_hint">Reseña rechazada</string>
     <string name="refused_days">Periodo de préstamo</string>
     <string name="refused_amount">Monto del préstamo</string>
-    <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después  del%s</string>
+    <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después del %s</string>
 
     <!-- 复贷 -->
     <string name="repeat_apply">Obtener dinero ahora</string>
@@ -211,7 +213,7 @@
     <string name="apply_success_title">Aplicación exitosa</string>
     <string name="apply_success_hint">Congratulations!</string>
     <string name="apply_success_hint2">Hemos recibido su solicitud de préstamo y  estamos revisando su elegibilidad, espere</string>
-    <string name="defer_title">展期详情</string>
+    <string name="defer_title">Detalles de prórroga</string>
     <string name="defer_top_warning">Nota: No transfiera dinero a ninguna cuenta personal</string>
     <string name="defer_amount_hint">Tarifas totales de Prórroga</string>
     <string name="defer_hint_text">La solicitud original se modificará automáticamente después de que la solicitud de prórroga se haya aprobado. Posteriormente, tienes que hacer el pago de acuerdo con la nueva orden</string>
@@ -273,4 +275,13 @@
     <string name="cancel">Cancelar</string>
 
     <string name="update_btn">Actualizar ahora</string>
+    <!-- 还款详情 -->
+    <string name="repay_detail_title">Detalles de reembolso</string>
+    <string name="repay_detail_hint">monto de reembolso</string>
+    <string name="detail_repay_date">fecha de vencimiento</string>
+    <string name="repay_status">Pago en Proceso</string>
+    <string name="repay_extension">Dese la vuelta</string>
+    <string name="detail_title">Detalles de la cantidad de reembolso</string>
+    <string name="dialog_loan_amount_text">Monto Recibido</string>
+    <string name="overdue_text">Comisión por Pago Tardío</string><!-- 展期还款 -->
 </resources>

@@ -2,8 +2,10 @@ package com.colombia.credit.expand
 
 import android.app.Activity
 import android.app.Dialog
+import androidx.appcompat.app.AppCompatActivity
 import com.colombia.credit.bean.resp.AppUpgradeInfo
 import com.colombia.credit.dialog.AppUpgradeDialog
+import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.NetErrorDialog
 import com.colombia.credit.manager.Launch
 import com.common.lib.BuildConfig
@@ -18,6 +20,10 @@ fun Activity.showNetErrorDialog(refresh: () -> Unit) {
     }, wifi = {
         Launch.skipWifiPage(this)
     })
+}
+
+fun AppCompatActivity.showCustomDialog(){
+    CustomDialog(this).show()
 }
 
 private var appUpgradeDialog: AppUpgradeDialog? = null

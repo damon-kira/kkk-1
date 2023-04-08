@@ -16,7 +16,8 @@
         <attr name="tl_right_icon" format="reference" />
         <attr name="tl_right_icon_show" format="boolean" />
         <attr name="tl_right_point_bg" format="reference" />
-        <attr name="tl_show_custom_icon" format="boolean"/>
+        <attr name="tl_show_custom_icon" format="boolean" />
+        <attr name="tl_custom_icon" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="ProcessView">
@@ -202,5 +203,19 @@
         <attr name="wl_text_unselect_color" format="color" />
         <attr name="wl_item_select_bg_color" format="color" />
         <attr name="wl_view_bg_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ItemInfoLayout">
+        <attr name="iil_left_text" format="string|reference" />
+        <attr name="iil_left_text_color" format="color" />
+        <attr name="iil_left_text_size" format="dimension" />
+        <attr name="iil_left_text_bold" format="boolean"/>
+
+        <attr name="iil_right_text" format="string|reference" />
+        <attr name="iil_right_text_color" format="color" />
+        <attr name="iil_right_text_size" format="dimension" />
+        <attr name="iil_right_text_bold" format="boolean"/>
+
+        <attr name="iil_line_show" format="boolean" />
     </declare-styleable>
 </resources>

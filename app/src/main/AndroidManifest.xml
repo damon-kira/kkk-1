@@ -102,6 +102,9 @@
         <activity
             android:name=".module.repeat.confirm.RepeatConfirmActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.repaydetail.RepayDetailActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".module.applysuccess.ApplySuccessActivity"

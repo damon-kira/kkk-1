@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
 import com.colombia.credit.expand.formatCommon
-import com.common.lib.livedata.observerNonSticky
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
-import com.util.lib.formatPhone
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,7 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
     }
 
     override fun onPullToRefresh() {
-        (parentFragment as IHomeFragment).refresh()
+        LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
     }
 
     override fun onRefresh() {
@@ -33,13 +32,11 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setCustomListener(mBinding.homeToolbar)
+        setCustomListener(mBinding.toolbar)
 
-        mViewModel.rspInfoLiveData.observe(viewLifecycleOwner) {
+        mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.toString())
         }
-//        val amount = (parentFragment as? IHomeFragment)?.getData()?.yqGhrjOF2?.toString().orEmpty()
-//        mBinding.tvMaxAmount.text = formatCommon(amount)
     }
 
     /**

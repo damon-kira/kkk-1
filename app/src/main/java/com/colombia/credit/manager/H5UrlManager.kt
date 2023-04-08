@@ -10,4 +10,6 @@ object H5UrlManager {
     val URL_FEEDBACK = "$base_url/feedback"
     val URL_ABOUT = "$base_url/about"
 
+    val URL_PAY = "$base_url/pay"
+
 }

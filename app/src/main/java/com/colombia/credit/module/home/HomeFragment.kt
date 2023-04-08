@@ -11,7 +11,6 @@ import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.inValidToken
 import com.colombia.credit.expand.showAppUpgradeDialog
 import com.colombia.credit.module.appupdate.AppUpdateViewModel
-import com.colombia.credit.module.firstconfirm.FirstConfirmFragment
 import com.colombia.credit.module.homerepay.FirstRepayFragment
 import com.colombia.credit.module.login.LoginFragment
 import com.colombia.credit.module.refused.RefusedFragment
@@ -19,6 +18,7 @@ import com.colombia.credit.module.repeat.RepeatFragment
 import com.colombia.credit.module.review.ReviewFragment
 import com.common.lib.base.BaseFragment
 import com.common.lib.helper.FragmentHelper
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +30,7 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
 
     private var mCurrTag: String? = null
 
-    private val mViewModel by lazyViewModel<AppUpdateViewModel>()
+    private val mAppUpdateViewModel by lazyViewModel<AppUpdateViewModel>()
 
     private val mHomeViewModel by lazyViewModel<HomeLoanViewModel>()
 
@@ -51,12 +51,8 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
     }
 
     override fun onRefresh() {
-        mViewModel.getAppUpdate()
+        mAppUpdateViewModel.getAppUpdate()
         mHomeViewModel.getHomeInfo()
-    }
-
-    override fun refresh() {
-        onRefresh()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,12 +69,21 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
             mCurrTag
         )
 
-        mViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
+        LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
+            when (it.event) {
+                HomeEvent.EVENT_REFRESH -> {
+                    onRefresh()
+                }
+            }
+        }
+
+        mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
             getBaseActivity()?.showAppUpgradeDialog(it)
         }
-        mViewModel.getAppUpdate()
+        mAppUpdateViewModel.getAppUpdate()
 
         mHomeViewModel.mHomeLiveData.observerNonSticky(viewLifecycleOwner) {
+            stopRefresh()
             if (it.isSuccess()) {
                 it.getData()?.let { data ->
                     val fragment = getCurrFragment(data)
@@ -139,4 +144,17 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
     }
 
     override fun getData(): RspProductInfo? = mHomeViewModel.mRspProductInfo
+
+    override fun getHomeViewModel() = mHomeViewModel
+
+    private fun stopRefresh() {
+        val fragment = FragmentHelper.getCurrFragment(
+            childFragmentManager,
+            R.id.fl_home_content,
+            mCurrTag
+        )
+        if (fragment is BaseHomeLoanFragment) {
+            fragment.stopRefresh()
+        }
+    }
 }

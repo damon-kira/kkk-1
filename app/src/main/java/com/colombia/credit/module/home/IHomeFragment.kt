@@ -6,5 +6,5 @@ interface IHomeFragment {
 
     fun getData(): RspProductInfo?
 
-    fun refresh()
+    fun getHomeViewModel(): HomeLoanViewModel
 }

@@ -1,8 +1,10 @@
 package com.colombia.credit.module.firstconfirm
 
+import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
 import com.colombia.credit.module.home.BaseHomeLoanFragment
+import com.colombia.credit.module.home.IHomeFragment
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,5 +22,14 @@ class FirstConfirmFragment : BaseHomeLoanFragment() {
 
     override fun onPullToRefresh() {
         stopRefresh()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(
+            viewLifecycleOwner
+        ) {
+
+        }
     }
 }
