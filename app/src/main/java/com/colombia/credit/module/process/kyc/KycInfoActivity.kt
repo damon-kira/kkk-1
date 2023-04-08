@@ -4,11 +4,12 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.KycInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.DatePickerDialog
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
@@ -142,6 +143,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        Launch.skipMainActivity(this)
+        super.onBackPressed()
+    }
+
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
         mBinding.llKycInfo.show()
@@ -158,13 +164,13 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         return result
     }
 
-    override fun getCommitInfo(): IBaseInfo {
+    override fun getCommitInfo(): IReqBaseInfo {
         val nuip = mBinding.kycBivNuip.getViewText()
         val name = mBinding.kycBivName.getViewText()
         val surname = mBinding.kycBivSurname.getViewText()
         val gender = mBinding.kycBivGender.tag
         val birthday = mBinding.kycBivBirthday.getViewText()
-        return KycInfo()
+        return ReqKycInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

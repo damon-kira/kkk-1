@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
 import com.colombia.credit.expand.formatCommon
+import com.colombia.credit.expand.mFirstPageLoanAmount
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.hide
@@ -35,7 +36,8 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         setCustomListener(mBinding.toolbar)
 
         mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.toString())
+            mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.orEmpty())
+            mFirstPageLoanAmount = it.yqGhrjOF2.orEmpty()
         }
     }
 

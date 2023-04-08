@@ -1,6 +1,6 @@
 package com.colombia.credit.module.process.work
 
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepository) :
     BaseProcessViewModel() {
 
-    override fun uploadInfo(info: IBaseInfo) {
+    override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
@@ -18,12 +18,12 @@ class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepo
         }
     }
 
-    override fun saveCacheInfo(info: IBaseInfo) {
+    override fun saveCacheInfo(info: IReqBaseInfo) {
         if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
 
-    override fun getCacheInfo(): IBaseInfo? {
+    override fun getCacheInfo(): IReqBaseInfo? {
         return repository.getCacheInfo()
     }
 

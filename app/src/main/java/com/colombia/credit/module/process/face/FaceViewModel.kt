@@ -1,6 +1,6 @@
 package com.colombia.credit.module.process.face
 
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -10,17 +10,17 @@ import javax.inject.Inject
 class FaceViewModel @Inject constructor(private val repository: FaceRepository) :
     BaseProcessViewModel() {
 
-    override fun uploadInfo(info: IBaseInfo) {
+    override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
 
         }
     }
 
-    override fun saveCacheInfo(info: IBaseInfo) {
+    override fun saveCacheInfo(info: IReqBaseInfo) {
     }
 
-    override fun getCacheInfo(): IBaseInfo? {
+    override fun getCacheInfo(): IReqBaseInfo? {
         return null
     }
 

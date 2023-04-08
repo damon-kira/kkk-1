@@ -3,10 +3,12 @@ package com.colombia.credit.module.process
 import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.DictionaryInfo
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
+import com.colombia.credit.expand.isShowBackDialog
+import com.colombia.credit.expand.saveShowBackDialog
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.common.lib.base.BaseActivity
@@ -18,8 +20,6 @@ abstract class BaseProcessActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setStatusBar(false, R.color.colorPrimary, false)
     }
-
-    protected var isShowBackDialog = true
 
     private val mBackDialog by lazy {
         ProcessBackDialog(this).setOnClickListener {
@@ -64,7 +64,8 @@ abstract class BaseProcessActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (isShowBackDialog) {
+        if (isShowBackDialog()) {
+            saveShowBackDialog(false)
             mBackDialog.show()
         } else {
             super.onBackPressed()
@@ -95,7 +96,7 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     abstract fun checkCommitInfo(): Boolean
 
-    abstract fun getCommitInfo(): IBaseInfo
+    abstract fun getCommitInfo(): IReqBaseInfo
 
     abstract fun getViewModel(): IBaseProcessViewModel
 }

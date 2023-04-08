@@ -3,9 +3,8 @@ package com.colombia.credit.module.process.work
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.bean.DictionaryInfo
-import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.WorkInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqWorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
@@ -111,12 +110,12 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
             .and(checkAndSetErrorHint(mBinding.bivJobYear))
     }
 
-    override fun getCommitInfo(): IBaseInfo {
+    override fun getCommitInfo(): IReqBaseInfo {
         val jobType = mBinding.bivType.tag
         val payday = mBinding.bivPayday.tag
         val incomeSource = mBinding.bivIncome.tag
         val jobYear = mBinding.bivJobYear.tag
-        return WorkInfo()
+        return ReqWorkInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

@@ -1,6 +1,6 @@
 package com.colombia.credit.module.upload
 
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -9,15 +9,15 @@ import javax.inject.Inject
 class UploadViewModel @Inject constructor(private val repository: UploadRepository) :
     BaseProcessViewModel() {
 
-    override fun uploadInfo(info: IBaseInfo) {
+    override fun uploadInfo(info: IReqBaseInfo) {
         repository.uploadInfo()
     }
 
-    override fun saveCacheInfo(info: IBaseInfo) {
+    override fun saveCacheInfo(info: IReqBaseInfo) {
 
     }
 
-    override fun getCacheInfo(): IBaseInfo? = null
+    override fun getCacheInfo(): IReqBaseInfo? = null
 
     override fun removeCacheInfo() {
     }

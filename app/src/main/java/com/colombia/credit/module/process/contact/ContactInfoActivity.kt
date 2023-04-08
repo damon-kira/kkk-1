@@ -5,8 +5,8 @@ import android.view.View
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.R
 import com.colombia.credit.bean.PhoneAndName
-import com.colombia.credit.bean.resp.ContactInfo
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.ReqContactInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
 import com.colombia.credit.expand.getMobile
 import com.colombia.credit.expand.isSameNumber
@@ -124,14 +124,14 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
             .and(checkAndSetErrorHint(mBinding.bivContact2, getString(R.string.error_contact_hint)))
     }
 
-    override fun getCommitInfo(): IBaseInfo {
+    override fun getCommitInfo(): IReqBaseInfo {
         val relationShip = mBinding.bivRelationship.tag
         val contact1 = mBinding.bivContact1.tag
         val name1 = mBinding.bivContact1.getViewText()
 
         val contact2 = mBinding.bivContact2.tag
         val name2 = mBinding.bivContact2.getViewText()
-        return ContactInfo()
+        return ReqContactInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

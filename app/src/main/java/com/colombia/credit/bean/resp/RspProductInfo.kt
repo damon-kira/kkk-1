@@ -1,7 +1,7 @@
 package com.colombia.credit.bean.resp
 
 class RspProductInfo {
-    val yqGhrjOF2: Int = 0// 最高可借金额，实际还款金额，借款金额
+    val yqGhrjOF2: String? = null // 最高可借金额，实际还款金额，借款金额
     val HyulExS1ei: String? = null //客户名字
 //    "cusTell":"", //客户号码
     val WTvE5G: Int = 0// 借款天数

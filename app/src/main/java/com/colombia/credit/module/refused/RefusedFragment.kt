@@ -35,18 +35,18 @@ class RefusedFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (parentFragment as? IHomeFragment)?.getData()?.let {
-            setText(it.WTvE5G, it.yqGhrjOF2, it.K1v0Pz.orEmpty())
+            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
         }
 
         mViewModel.mRspInfoLiveData.observerNonSticky(this) {
-            setText(it.WTvE5G, it.yqGhrjOF2, it.K1v0Pz.orEmpty())
+            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
         }
     }
 
-    private fun setText(days: Int, amount: Int, date: String) {
+    private fun setText(days: Int, amount: String, date: String) {
         mBinding.layoutInfo.apply {
             tvDays.text = getString(R.string.days, days.toString())
-            tvAmount.text = getString(R.string.amount_unit, formatCommon(amount.toString()))
+            tvAmount.text = getString(R.string.amount_unit, formatCommon(amount))
             tvDesc.text = getString(R.string.refused_time, date)
         }
     }

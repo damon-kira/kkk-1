@@ -27,6 +27,8 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
         AddressSearchAdapter(mItems)
     }
 
+    private var mListener: ((String) -> Unit)? = null
+
     init {
         setContentView(mBinding.root)
         setDisplaySize(MATCH, 0.65f, true)
@@ -60,6 +62,12 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
 
     fun setAddressInfo(addressInfo: ArrayList<AddressInfo>): AddressSelectorDialog {
         mAdapter.setItems(addressInfo)
+        return this
+    }
+
+    // 省市使用英文逗号’,‘分割
+    fun setSelectorListener(listener: (String) -> Unit): AddressSelectorDialog {
+        this.mListener = listener
         return this
     }
 }

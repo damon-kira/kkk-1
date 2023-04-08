@@ -3,13 +3,13 @@ package com.colombia.credit.module.process
 import androidx.lifecycle.LiveData
 import com.cache.lib.SharedPrefUser
 import com.colombia.credit.app.BaseRepository
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
 
-abstract class BaseProcessRepository<T : IBaseInfo> : BaseRepository(), IBaseProcessRepository {
+abstract class BaseProcessRepository<T : IReqBaseInfo> : BaseRepository(), IBaseProcessRepository {
 
-    override fun saveCacheInfo(info: IBaseInfo) {
+    override fun saveCacheInfo(info: IReqBaseInfo) {
         SharedPrefUser.setString(getCacheKey(), GsonUtil.toJson(info))
     }
 
@@ -17,9 +17,9 @@ abstract class BaseProcessRepository<T : IBaseInfo> : BaseRepository(), IBasePro
         SharedPrefUser.removeKey(getCacheKey())
     }
 
-    override fun getCacheInfo(): IBaseInfo? {
+    override fun getCacheInfo(): IReqBaseInfo? {
         val cache = SharedPrefUser.getString(getCacheKey(), null)
-        return GsonUtil.fromJson(cache, getCacheClass()) as IBaseInfo
+        return GsonUtil.fromJson(cache, getCacheClass()) as IReqBaseInfo
     }
 
     abstract fun getCacheClass(): Class<T>
@@ -29,11 +29,11 @@ abstract class BaseProcessRepository<T : IBaseInfo> : BaseRepository(), IBasePro
 
 interface IBaseProcessRepository {
 
-    fun uploadInfo(info: IBaseInfo): LiveData<BaseResponse<String>>
+    fun uploadInfo(info: IReqBaseInfo): LiveData<BaseResponse<String>>
 
-    fun saveCacheInfo(info: IBaseInfo)
+    fun saveCacheInfo(info: IReqBaseInfo)
 
-    fun getCacheInfo(): IBaseInfo?
+    fun getCacheInfo(): IReqBaseInfo?
 
     fun removeCacheInfo()
 }

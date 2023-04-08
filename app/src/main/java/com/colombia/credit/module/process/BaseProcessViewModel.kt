@@ -1,6 +1,6 @@
 package com.colombia.credit.module.process
 
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 
@@ -13,11 +13,11 @@ abstract class BaseProcessViewModel : BaseViewModel(), IBaseProcessViewModel {
 
 interface IBaseProcessViewModel {
 
-    fun uploadInfo(info: IBaseInfo)
+    fun uploadInfo(info: IReqBaseInfo)
 
-    fun saveCacheInfo(info: IBaseInfo)
+    fun saveCacheInfo(info: IReqBaseInfo)
 
-    fun getCacheInfo(): IBaseInfo?
+    fun getCacheInfo(): IReqBaseInfo?
 
     fun removeCacheInfo()
 }

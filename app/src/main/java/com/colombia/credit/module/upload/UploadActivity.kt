@@ -1,8 +1,8 @@
 package com.colombia.credit.module.upload
 
 import android.os.Bundle
-import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.KycInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.databinding.ActivityUploadBinding
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
@@ -25,8 +25,8 @@ class UploadActivity : BaseProcessActivity() {
         return false
     }
 
-    override fun getCommitInfo(): IBaseInfo {
-        return KycInfo()
+    override fun getCommitInfo(): IReqBaseInfo {
+        return ReqKycInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

@@ -40,7 +40,7 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
             viewLifecycleOwner
         ) {
             mBinding.repayTvAmount.apply {
-                text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.toString()))
+                text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.orEmpty()))
                 isSelected = it.v3ItXF > 0 // 是否逾期
             }
 

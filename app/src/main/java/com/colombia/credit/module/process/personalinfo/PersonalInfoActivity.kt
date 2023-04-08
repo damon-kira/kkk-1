@@ -3,15 +3,18 @@ package com.colombia.credit.module.process.personalinfo
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.IBaseInfo
-import com.colombia.credit.bean.resp.PersonalInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
+import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.checkEmailFormat
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +40,17 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
+
+        setViewModelLoading(mViewModel)
+
+        mViewModel.mUploadLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                Launch.skipWorkInfoActivity(this)
+            } else {
+                it.ShowErrorMsg()
+            }
+        }
+
     }
 
     override fun onClick(v: View?) {
@@ -54,7 +68,9 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
             R.id.biv_address -> {
                 AddressSelectorDialog(this)
-                    .setAddressInfo(arrayListOf()).show()
+                    .setSelectorListener { address ->
+                        mBinding.bivAddress.setViewText(address)
+                    }.setAddressInfo(arrayListOf()).show()
             }
             R.id.biv_marriage -> {
                 showProcessSelectorDialog(
@@ -72,13 +88,19 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-    override fun getCommitInfo(): IBaseInfo {
-        val email = mBinding.bivEmail.getViewText()
-        val education = mBinding.bivEducation.tag
+    override fun getCommitInfo(): IReqBaseInfo {
         val address = mBinding.bivAddress.getViewText()
-        val addrDetail = mBinding.bivAddrDetail.getViewText()
-        val marriage = mBinding.bivMarriage.tag
-        return PersonalInfo()
+        val addressArray = address.split(",")
+        return ReqPersonalInfo().also {
+            it.m8pFeRm = mBinding.bivEmail.getViewText() // email
+            it.VLQuj = mBinding.bivMarriage.tag.toString() // 婚姻
+            it.ECH0 = mBinding.bivEducation.tag.toString() // 教育
+            if (addressArray.size > 1) {
+                it.nsiCfM = addressArray[0] // 省份
+                it.JBHSQZXmN = addressArray[1]// 市区
+            }
+            it.bwJaS = mBinding.bivAddrDetail.getViewText() // 详细地址
+        }
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -93,7 +115,13 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
         return checkEmail.and(checkAndSetErrorHint(mBinding.bivEducation))
             .and(checkAndSetErrorHint(mBinding.bivAddress))
-            .and(checkAndSetErrorHint(mBinding.bivAddrDetail, getString(R.string.address_detail_title)))
+            .and(mBinding.bivAddress.getViewText().contains(","))
+            .and(
+                checkAndSetErrorHint(
+                    mBinding.bivAddrDetail,
+                    getString(R.string.address_detail_title)
+                )
+            )
             .and(checkAndSetErrorHint(mBinding.bivMarriage))
     }
 

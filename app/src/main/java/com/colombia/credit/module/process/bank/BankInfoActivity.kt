@@ -3,9 +3,9 @@ package com.colombia.credit.module.process.bank
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.BankInfo
+import com.colombia.credit.bean.req.ReqBankInfo
 import com.colombia.credit.bean.resp.BankInfoSearch
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
 import com.colombia.credit.module.process.BaseProcessActivity
@@ -68,11 +68,11 @@ class BankInfoActivity : BaseProcessActivity() {
         return (mBankType > -1).and(checkAndSetErrorHint(mBinding.bivName)).and(bankNoCheck)
     }
 
-    override fun getCommitInfo(): IBaseInfo {
+    override fun getCommitInfo(): IReqBaseInfo {
         val bankName = mBinding.bivName.getViewText()
         val bankNo = mBinding.bivBankno.getViewText()
         mBankType
-        return BankInfo()
+        return ReqBankInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

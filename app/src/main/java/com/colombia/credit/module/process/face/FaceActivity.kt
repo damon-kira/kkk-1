@@ -1,6 +1,5 @@
 package com.colombia.credit.module.process.face
 
-import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,8 +9,8 @@ import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.FaceInfo
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.ReqFaceInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.manager.Launch
@@ -73,7 +72,7 @@ class FaceActivity : BaseProcessActivity() {
                         BitmapCrop.cropAndCompress(this, f, rect, manager.isFront()) { finalFile ->
                             if (finalFile != null) {
                                 // 上传照片
-                                mViewModel.uploadInfo(FaceInfo().also {
+                                mViewModel.uploadInfo(ReqFaceInfo().also {
                                     it.path = finalFile.absolutePath
                                 })
                             }
@@ -94,12 +93,17 @@ class FaceActivity : BaseProcessActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        Launch.skipMainActivity(this)
+        super.onBackPressed()
+    }
+
     override fun checkCommitInfo(): Boolean {
         return false
     }
 
-    override fun getCommitInfo(): IBaseInfo {
-        return FaceInfo()
+    override fun getCommitInfo(): IReqBaseInfo {
+        return ReqFaceInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

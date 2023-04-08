@@ -1,8 +1,8 @@
 package com.colombia.credit.module.process.face
 
 import android.os.Bundle
-import com.colombia.credit.bean.resp.FaceInfo
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.ReqFaceInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.databinding.ActivityFaceFailedBinding
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.IBaseProcessViewModel
@@ -32,8 +32,8 @@ class FaceFailedActivity : BaseProcessActivity() {
         return false
     }
 
-    override fun getCommitInfo(): IBaseInfo {
-        return FaceInfo()
+    override fun getCommitInfo(): IReqBaseInfo {
+        return ReqFaceInfo()
     }
 
     override fun getViewModel(): IBaseProcessViewModel = mViewModel

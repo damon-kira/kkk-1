@@ -1,9 +1,8 @@
 package com.colombia.credit.module.process.kyc
 
-import com.colombia.credit.bean.resp.IBaseInfo
+import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.common.lib.net.ApiServiceLiveDataProxy
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +22,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
         }
     }
 
-    override fun uploadInfo(info: IBaseInfo) {
+    override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             isUploadSuccess = it.isSuccess()
@@ -31,7 +30,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
         }
     }
 
-    override fun saveCacheInfo(info: IBaseInfo) {
+    override fun saveCacheInfo(info: IReqBaseInfo) {
         if (isUploadSuccess) return
         repository.saveCacheInfo(info)
     }
@@ -40,5 +39,5 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
         repository.removeCacheInfo()
     }
 
-    override fun getCacheInfo(): IBaseInfo? = repository.getCacheInfo()
+    override fun getCacheInfo(): IReqBaseInfo? = repository.getCacheInfo()
 }

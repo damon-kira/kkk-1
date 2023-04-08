@@ -33,7 +33,7 @@ class ReviewFragment : BaseHomeLoanFragment() {
             viewLifecycleOwner
         ) {
             mBinding.reviewTvAmount.text =
-                formatCommon(getString(R.string.amount_unit, it.yqGhrjOF2.toString()))
+                formatCommon(getString(R.string.amount_unit, it.yqGhrjOF2.orEmpty()))
         }
     }
 }
