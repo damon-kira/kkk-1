@@ -1,9 +1,6 @@
 package com.colombia.credit.net
 
-import com.colombia.credit.bean.resp.AppUpgradeInfo
-import com.colombia.credit.bean.resp.KycOcrInfo
-import com.colombia.credit.bean.resp.RspLoginInfo
-import com.colombia.credit.bean.resp.RspSmsCode
+import com.colombia.credit.bean.resp.*
 import com.common.lib.net.bean.BaseResponse
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
@@ -26,6 +23,11 @@ interface ApiService {
     @POST("/wFvw7/6bKwy3")
     @Headers("kio8YGhwe6:dsfEIFSadssda3KDAlos")
     fun loginSms( @Body body: RequestBody): Flowable<BaseResponse<RspLoginInfo>>
+
+    // 获取首页信息
+    @POST("/YmJbnXu2/40Jfc")
+    @Headers("kio8YGhwe6:oajsdAsadza")
+    fun getHomeInfo(): Flowable<BaseResponse<RspProductInfo>>
 
     @Multipart
     @POST

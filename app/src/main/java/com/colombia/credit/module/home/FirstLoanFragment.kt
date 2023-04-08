@@ -3,14 +3,17 @@ package com.colombia.credit.module.home
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
+import com.colombia.credit.expand.formatCommon
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.formatPhone
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeLoanFragment : BaseHomeLoanFragment() {
+class FirstLoanFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentHomeLoanBinding::inflate)
 
@@ -21,12 +24,22 @@ class HomeLoanFragment : BaseHomeLoanFragment() {
     }
 
     override fun onPullToRefresh() {
-        stopRefresh()
+        (parentFragment as IHomeFragment).refresh()
+    }
+
+    override fun onRefresh() {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.homeToolbar)
+
+        mViewModel.rspInfoLiveData.observe(viewLifecycleOwner) {
+            mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.toString())
+        }
+//        val amount = (parentFragment as? IHomeFragment)?.getData()?.yqGhrjOF2?.toString().orEmpty()
+//        mBinding.tvMaxAmount.text = formatCommon(amount)
     }
 
     /**

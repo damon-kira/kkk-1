@@ -15,7 +15,7 @@ abstract class BaseFragmentActivity : BaseActivity(), IFragmentSwitch {
     }
 
     override fun replaceFragment(fragment: BaseFragment) {
-        mCurrTag = FragmentHelper.repleaceFragment(supportFragmentManager, getFragmentViewId(), fragment, mCurrTag)
+        mCurrTag = FragmentHelper.replaceFragment(supportFragmentManager, getFragmentViewId(), fragment, mCurrTag)
     }
 
     override fun showToFragment(fragment: BaseFragment) {

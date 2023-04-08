@@ -6,7 +6,7 @@ class RspProductInfo {
 //    "cusTell":"", //客户号码
     val WTvE5G: Int = 0// 借款天数
     val ZXEUWfOy: String? = null//订单id
-    val EqyO: Int = 0// 客户类型 1 :新客户 0 老客户 2 被拉黑客户
+    val EqyO: String = "1"// 客户类型 1 :新客户 0 老客户 2 被拉黑客户
     val Wg5u: String? = null //客户类型 A :正常用户 G:谷歌审查用户
 
     // 状态 00：新用户确定额度,01：订单审核中,02：待还款,03:逾期,04:拒单，05：认证未通过，新用户起始页，06:被拒到期 07:复借客户没有待还订单、未确定订单  08：复借客户有待还订单，没有待确定订单  09：复借客户没有待还订单，有待确定订单 10：复借客户既有待还订单也有待确定订单
@@ -20,7 +20,7 @@ class RspProductInfo {
     val yMiEwn3: String? = null // 银行卡号
     val swOwF0KJ: Long = 0// 弹框秒数
     val GqGV3L: Int = 1// 倒计时开关 1 开 0 关
-    val fyEV: ArrayList<FirstProductInfo>? = null // 新客户确定额度首页
+    val fyEV: ArrayList<FirstConfirmInfo>? = null // 新客户确定额度首页
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
     val gQ1J: ArrayList<RepeatRepayInfo>? = null // 老客户待还
     val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
@@ -37,7 +37,7 @@ class RspProductInfo {
 //"applyId":23,// 产品id
 //"applyCode":"RTS"// 产品code
 // 首贷产品信息
-class FirstProductInfo {
+class FirstConfirmInfo {
     val u5kCNqk: Int = 0//到手金额
     val RIoDBuyjO: Int = 0//贷款金额,
     val y5MbVG: Int = 0//期数

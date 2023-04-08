@@ -1,6 +1,5 @@
 package com.common.lib.helper
 
-import android.hardware.usb.UsbRequest
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -58,7 +57,7 @@ object FragmentHelper {
         return tag
     }
 
-    fun repleaceFragment(
+    fun replaceFragment(
         fragmentManger: FragmentManager, @IdRes viewId: Int,
         fragment: BaseFragment, currTag: String? = null, isRefresh: Boolean = true
     ): String {

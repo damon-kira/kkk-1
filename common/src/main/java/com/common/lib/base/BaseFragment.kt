@@ -6,7 +6,6 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.Observer
 import com.common.lib.BuildConfig
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.hideLoadingDialog
@@ -89,10 +88,6 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
     }
 
     fun isDestroyView() = isDestroyView
-
-    fun <T : BaseViewModel> getActivityViewModel(): IActivityModel<T>? {
-        return activity as? IActivityModel<T>
-    }
 
     private fun checkVisibility(visible: Boolean) {
         val parentFragment = parentFragment

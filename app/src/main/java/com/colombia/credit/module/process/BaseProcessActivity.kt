@@ -5,6 +5,7 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.DictionaryInfo
 import com.colombia.credit.bean.resp.IBaseInfo
 import com.colombia.credit.dialog.CustomDialog
+import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
@@ -16,6 +17,14 @@ abstract class BaseProcessActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(false, R.color.colorPrimary, false)
+    }
+
+    protected var isShowBackDialog = true
+
+    private val mBackDialog by lazy {
+        ProcessBackDialog(this).setOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     private var mProcessSelectorDialog: ProcessSelectorDialog? = null
@@ -51,6 +60,14 @@ abstract class BaseProcessActivity : BaseActivity() {
         }
         toolbarLayout.setCustomClickListener {
             mCustomDialog.show()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (isShowBackDialog) {
+            mBackDialog.show()
+        } else {
+            super.onBackPressed()
         }
     }
 

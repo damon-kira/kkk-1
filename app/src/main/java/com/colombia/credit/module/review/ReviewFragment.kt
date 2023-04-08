@@ -7,6 +7,7 @@ import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
+// 待审核
 @AndroidEntryPoint
 class ReviewFragment : BaseHomeLoanFragment() {
 

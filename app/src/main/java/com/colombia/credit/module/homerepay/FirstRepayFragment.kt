@@ -7,7 +7,7 @@ import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeRepayFragment: BaseHomeLoanFragment() {
+class FirstRepayFragment: BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentHomeRepayBinding::inflate)
 
