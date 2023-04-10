@@ -6,6 +6,7 @@ import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
 import com.colombia.credit.net.ApiService
+import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.util.lib.GsonUtil
 import okhttp3.MultipartBody
@@ -14,12 +15,16 @@ import javax.inject.Inject
 
 
 // 上传身份证信息
-class KycRepository @Inject constructor(@UploadApiService private val uploadApiService: ApiService) : BaseProcessRepository<ReqKycInfo>() {
+class KycRepository @Inject constructor(@UploadApiService private val uploadApiService: ApiService) :
+    BaseProcessRepository<ReqKycInfo>() {
 
-    fun uploadImage(path: String, type: Int) =
+    fun uploadImage(path: String,@PicType type: Int) =
         ApiServiceLiveDataProxy.request {
-            val part = MultipartBody.Builder().addPart(createFileRequestBody(File(path))).build()
-            uploadApiService.uploadKycImage(part)
+            val file = File(path)
+            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            builder.addFormDataPart("gdkvsSDfvOrfds", file.name, createFileRequestBody(file))
+            builder.addFormDataPart("asfvVdsainKsfv", if (type == PicType.PIC_FRONT) "FRONT" else "BACK")
+            uploadApiService.uploadKycImage(builder.build())
         }
 
     override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {

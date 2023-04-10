@@ -47,11 +47,13 @@ class ReqBankInfo : IReqBaseInfo {
 }
 
 class ReqKycInfo : IReqBaseInfo {
-    var name: String? = null
-    var resuname: String? = null
-    var nuip: String? = null
-    var birthday: String? = null
-    var gender: String? = null
+    var Z4SFQo60E5: String? = null // 性别
+    var tjuIw: String? = null // nuip
+    var lozpjICr: String? = null // 姓名
+    var lup8: String? = null // 生日
+
+    var Z8zd6b0gEi = 0L // 停留时长
+    var swpvWP = "02" // 页面来源
 }
 
 class ReqExtensionInfo : IReqBaseInfo {

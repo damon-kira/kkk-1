@@ -154,6 +154,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
         mBinding.llKycInfo.show()
+        mBinding.kycBivNuip.setViewText(kycInfo.YP7Bq8O9u.orEmpty())
+        mBinding.kycBivName.setViewText(kycInfo.SNLXyP4m.orEmpty())
+        mBinding.kycBivSurname.setViewText(kycInfo.SNLXyP4m2.orEmpty())
+        mBinding.kycBivBirthday.setViewText(kycInfo.cBXI4H.orEmpty())
+        mBinding.kycBivGender.setViewText(kycInfo.xQOTfUO.orEmpty()) // 性别 需要跟服务端对下
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -162,18 +167,22 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             .and(checkAndSetErrorHint(mBinding.kycBivName))
             .and(checkAndSetErrorHint(mBinding.kycBivGender))
             .and(checkAndSetErrorHint(mBinding.kycBivBirthday))
-        //生日格式
-
         return result
     }
 
     override fun getCommitInfo(): IReqBaseInfo {
-        val nuip = mBinding.kycBivNuip.getViewText()
-        val name = mBinding.kycBivName.getViewText()
-        val surname = mBinding.kycBivSurname.getViewText()
-        val gender = mBinding.kycBivGender.tag
-        val birthday = mBinding.kycBivBirthday.getViewText()
-        return ReqKycInfo()
+//        var Z4SFQo60E5: String? = null // 性别
+//        var tjuIw: String? = null // nuip
+//        var lozpjICr: String? = null // 姓名
+//        var lup8: String? = null // 生日
+        return ReqKycInfo().also {
+            it.tjuIw = mBinding.kycBivNuip.getViewText()
+            val name = mBinding.kycBivName.getViewText()
+            val surname = mBinding.kycBivSurname.getViewText()
+            it.lozpjICr = "$surname|$name"
+            it.Z4SFQo60E5 = mBinding.kycBivGender.tag.toString()
+            it.lup8 = mBinding.kycBivBirthday.getViewText()
+        }
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel

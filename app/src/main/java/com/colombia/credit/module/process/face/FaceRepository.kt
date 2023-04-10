@@ -17,11 +17,16 @@ class FaceRepository @Inject constructor(@UploadApiService private val uploadApi
 
     override fun getCacheKey(): String = SharedPrefKeyManager.KEY_FACE_INFO
 
+    //{{app_url}}/userInfo/submitUserCheckFaceV2?headingCodeId=4fdas41&durationStay=2311&eventOrigin=06
     override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
         val path = (info as ReqFaceInfo).path.orEmpty()
         val file = File(path)
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
         builder.addFormDataPart("image", file.name, createFileRequestBody(file))
-        uploadApiService.uploadFaceImage(builder.build())
+        val map = mutableMapOf<String, String>()
+        map["ClaF050"] = ""
+        map["RmNG"] = "0"
+        map["O4MnAK"] = "02"
+        uploadApiService.uploadFaceImage(builder.build(), map)
     }
 }
