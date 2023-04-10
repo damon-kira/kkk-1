@@ -11,7 +11,6 @@ import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
@@ -125,10 +124,10 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getCommitInfo(): IReqBaseInfo {
         return ReqWorkInfo().also {
-            it.jQIai = mBinding.bivType.tag.toString()
-            it.flb5WwOaaaaa = mBinding.bivPayday.tag.toString()
-            it.flb5WwOaa = mBinding.bivIncome.tag.toString()
-            it.Cv10jD = mBinding.bivJobYear.tag.toString()
+            it.AD8Jznx = mBinding.bivType.tag.toString()
+            it.u0pn = mBinding.bivPayday.tag.toString()
+            it.xgJ5 = mBinding.bivIncome.tag.toString()
+            it.x6yR = mBinding.bivJobYear.tag.toString()
         }
     }
 

@@ -22,11 +22,11 @@ class FaceRepository @Inject constructor(@UploadApiService private val uploadApi
         val path = (info as ReqFaceInfo).path.orEmpty()
         val file = File(path)
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-        builder.addFormDataPart("image", file.name, createFileRequestBody(file))
+        builder.addFormDataPart("dSgQ8Tt", file.name, createFileRequestBody(file))
         val map = mutableMapOf<String, String>()
-        map["ClaF050"] = ""
-        map["RmNG"] = "0"
-        map["O4MnAK"] = "02"
+        map["TOCkGDeL"] = ""
+        map["DGCb"] = "0"
+        map["pVGq3"] = "02"
         uploadApiService.uploadFaceImage(builder.build(), map)
     }
 }

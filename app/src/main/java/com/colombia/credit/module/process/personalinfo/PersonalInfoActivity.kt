@@ -14,7 +14,6 @@ import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
@@ -92,14 +91,14 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val address = mBinding.bivAddress.getViewText()
         val addressArray = address.split(",")
         return ReqPersonalInfo().also {
-            it.m8pFeRm = mBinding.bivEmail.getViewText() // email
-            it.VLQuj = mBinding.bivMarriage.tag.toString() // 婚姻
-            it.ECH0 = mBinding.bivEducation.tag.toString() // 教育
+            it.unH4I2vHXG = mBinding.bivEmail.getViewText() // email
+            it.m7pyaSk = mBinding.bivMarriage.tag.toString() // 婚姻
+            it.zgGtVHl9N2 = mBinding.bivEducation.tag.toString() // 教育
             if (addressArray.size > 1) {
-                it.nsiCfM = addressArray[0] // 省份
-                it.JBHSQZXmN = addressArray[1]// 市区
+                it.QlCvCLnNx = addressArray[0] // 省份
+                it.woTVOe = addressArray[1]// 市区
             }
-            it.bwJaS = mBinding.bivAddrDetail.getViewText() // 详细地址
+            it.lh3bJ = mBinding.bivAddrDetail.getViewText() // 详细地址
         }
     }
 

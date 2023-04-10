@@ -9,4 +9,8 @@ class HomeLoanRepository @Inject constructor(): BaseRepository() {
     fun getHomeInfo() = ApiServiceLiveDataProxy.request {
         apiService.getHomeInfo()
     }
+
+    fun getCertProcess() = ApiServiceLiveDataProxy.request {
+        apiService.getCertProcess()
+    }
 }

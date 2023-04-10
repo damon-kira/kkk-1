@@ -73,10 +73,10 @@ class BankInfoActivity : BaseProcessActivity() {
 
     override fun getCommitInfo(): IReqBaseInfo {
         return ReqBankInfo().also {
-            it.dmQHAqbC = mBinding.bivName.getViewText()// 银行名称
-            it.Wf3pgbaTm = mBinding.bivBankno.getViewText()// 银行编码
-            it.OZwuBMo = mBankType.toString()// 银行类型
-            it.COZthiVwS = mBinding.bivName.tag?.toString().orEmpty() // 银行编码
+            it.thXggvo = mBinding.bivName.getViewText()// 银行名称
+            it.Bkmaj97 = mBinding.bivBankno.getViewText()// 银行编码
+            it.SElc4 = mBankType.toString()// 银行类型
+            it.GiQ40BKKr = mBinding.bivName.tag?.toString().orEmpty() // 银行编码
         }
     }
 

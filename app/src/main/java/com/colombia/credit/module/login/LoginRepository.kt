@@ -14,14 +14,14 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
 
     fun loginSms(mobile: String, code: String, uuid: String) = ApiServiceLiveDataProxy.request {
         val jobj = JsonObject()
-        jobj.addProperty("ykFmcq", mobile) // 手机号
-        jobj.addProperty("AUMKWbddJp", code) // 验证码
-        jobj.addProperty("swEXCj9g", "phone")
+        jobj.addProperty("ska3nXMv1K", "phone")
+        jobj.addProperty("LuOZz", "0")
+        jobj.addProperty("tSp3", mobile) // 手机号
+        jobj.addProperty("lmjyS2Vw", code) // 验证码
         jobj.addProperty("rVcbGK", uuid) // 来自验证码接口返回的uuid 【多个uuid就用,隔开】
-        jobj.addProperty("YLFuyy", "0")
-        jobj.addProperty("KP6X4M", "") // 邀请码
-        jobj.addProperty("UvnKsvKDu",  WifiInfoUtil.getWifiName(context)) // WiFi
-        jobj.addProperty("yzkPN4Z", GPInfoUtils.getAdid()) // gaid
+        jobj.addProperty("nYc91KC", "") // 邀请码
+        jobj.addProperty("bhUyamS",  WifiInfoUtil.getWifiName(context)) // WiFi
+        jobj.addProperty("Sbbh", GPInfoUtils.getAdid()) // gaid
         apiService.loginSms(createRequestBody(jobj.toString()))
     }
 

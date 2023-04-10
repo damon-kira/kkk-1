@@ -15,7 +15,6 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.StoragePermission
@@ -154,11 +153,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
         mBinding.llKycInfo.show()
-        mBinding.kycBivNuip.setViewText(kycInfo.YP7Bq8O9u.orEmpty())
-        mBinding.kycBivName.setViewText(kycInfo.SNLXyP4m.orEmpty())
-        mBinding.kycBivSurname.setViewText(kycInfo.SNLXyP4m2.orEmpty())
-        mBinding.kycBivBirthday.setViewText(kycInfo.cBXI4H.orEmpty())
-        mBinding.kycBivGender.setViewText(kycInfo.xQOTfUO.orEmpty()) // 性别 需要跟服务端对下
+        mBinding.kycBivNuip.setViewText(kycInfo.ZtlNh40ZEi.orEmpty())
+        mBinding.kycBivName.setViewText(kycInfo.uVnCle.orEmpty())
+        mBinding.kycBivSurname.setViewText(kycInfo.QbcSs.orEmpty())
+        mBinding.kycBivBirthday.setViewText(kycInfo.oEuR1yS3f.orEmpty())
+        mBinding.kycBivGender.setViewText(kycInfo.PGXgxbtr.orEmpty()) // 性别 需要跟服务端对下
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -171,17 +170,13 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getCommitInfo(): IReqBaseInfo {
-//        var Z4SFQo60E5: String? = null // 性别
-//        var tjuIw: String? = null // nuip
-//        var lozpjICr: String? = null // 姓名
-//        var lup8: String? = null // 生日
         return ReqKycInfo().also {
-            it.tjuIw = mBinding.kycBivNuip.getViewText()
+            it.ALKxGTZ4FQ = mBinding.kycBivNuip.getViewText()
             val name = mBinding.kycBivName.getViewText()
             val surname = mBinding.kycBivSurname.getViewText()
-            it.lozpjICr = "$surname|$name"
-            it.Z4SFQo60E5 = mBinding.kycBivGender.tag.toString()
-            it.lup8 = mBinding.kycBivBirthday.getViewText()
+            it.y6hQBtv = "$surname|$name"
+            it.W8mqV = mBinding.kycBivGender.tag.toString()
+            it.GJmhwzsK5 = mBinding.kycBivBirthday.getViewText()
         }
     }
 

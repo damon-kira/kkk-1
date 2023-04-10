@@ -3,12 +3,14 @@ package com.colombia.credit.module.home
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
+import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.formatCommon
+import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.expand.mFirstPageLoanAmount
+import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.hide
-import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,31 +30,29 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
     }
 
     override fun onRefresh() {
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
+        setViewModelLoading(mViewModel)
 
         mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.orEmpty())
             mFirstPageLoanAmount = it.yqGhrjOF2.orEmpty()
         }
-    }
 
-    /**
-     * @param noProduct true:无产品信息
-     */
-    private fun changePage(noProduct: Boolean) {
-        if (noProduct) {
-            mBinding.noProduct.root.show()
-            mBinding.loanClProduct.hide()
-            mBinding.inclueHint.root.hide()
-        } else {
-            mBinding.noProduct.root.hide()
-            mBinding.loanClProduct.show()
-            mBinding.inclueHint.root.show()
+        mViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                it.getData()?.let {
+                    val type = it.getProcessType()
+                    jumpProcess(getSupportContext(), type)
+                }
+            } else it.ShowErrorMsg()
+        }
+
+        mBinding.loanTvApply.setBlockingOnClickListener {
+            mViewModel.getCertProcess()
         }
     }
 }

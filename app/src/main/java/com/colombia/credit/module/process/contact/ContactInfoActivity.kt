@@ -15,7 +15,6 @@ import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.util.DictionaryUtil
@@ -129,12 +128,12 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getCommitInfo(): IReqBaseInfo {
         return ReqContactInfo().also {
-            it.HCy5Y = mBinding.bivRelationship.tag.toString()
-            it.RHqi = mBinding.bivContact1.tag.toString()
-            it.hcPt = mBinding.bivContact1.getViewText()
+            it.gQdRCJKOEJ = mBinding.bivRelationship.tag.toString()
+            it.ifunMf6ZLx = mBinding.bivContact1.tag.toString()
+            it.zAqGvHgHls = mBinding.bivContact1.getViewText()
 
-            it.SP2d7 = mBinding.bivContact2.tag.toString()
-            it.IKIcWwu6 = mBinding.bivContact2.getViewText()
+            it.fHdl = mBinding.bivContact2.tag.toString()
+            it.VWHN = mBinding.bivContact2.getViewText()
         }
     }
 

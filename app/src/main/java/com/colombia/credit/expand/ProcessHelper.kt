@@ -11,8 +11,7 @@ val TYPE_CONTACT = 3
 val TYPE_BANK = 4
 val TYPE_IDENTITY = 5
 val TYPE_FACE = 6
-
-var mFirstPageLoanAmount = ""
+val TYPE_SUCCESS = 100
 
 fun jumpProcess(context: Context, type: Int) {
     saveShowBackDialog(true)
@@ -35,8 +34,13 @@ fun jumpProcess(context: Context, type: Int) {
         TYPE_FACE -> {
             Launch.skipFaceActivity(context)
         }
+        TYPE_SUCCESS -> {
+            Launch.skipUploadActivity(context)
+        }
     }
 }
+
+var mFirstPageLoanAmount = ""
 
 fun isShowBackDialog() = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_SHOW_BACK_DIALOG, true)
 

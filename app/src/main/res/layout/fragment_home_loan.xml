@@ -41,11 +41,6 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <include
-                android:id="@+id/no_product"
-                layout="@layout/layout_no_product"
-                android:visibility="gone" />
-
             <!-- 借款信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/loan_cl_product"

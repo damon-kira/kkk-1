@@ -22,6 +22,8 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
 
     val mRspInfoLiveData = generatorLiveData<RspProductInfo>()
 
+    val mCertProcessLiveData = generatorLiveData<BaseResponse<RspCertProcessInfo>>()
+
     var mRspProductInfo: RspProductInfo? = null
 
     init {
@@ -49,6 +51,14 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         if (inValidToken()) return
         mHomeLiveData.addSourceLiveData(repository.getHomeInfo()) { response ->
             _homeLiveData.postValue(response)
+        }
+    }
+
+    fun getCertProcess() {
+        showloading()
+        mCertProcessLiveData.addSourceLiveData(repository.getCertProcess()) {
+            hideLoading()
+            mCertProcessLiveData.postValue(it)
         }
     }
 }

@@ -4,62 +4,64 @@ package com.colombia.credit.bean.req
 interface IReqBaseInfo
 
 class ReqPersonalInfo : IReqBaseInfo {
-    var m8pFeRm: String? = null // email
-    var VLQuj: String? = null // 婚姻
-    var ECH0: String? = null // 教育
-    var nsiCfM: String? = null // 省份
-    var JBHSQZXmN: String? = null // 市区
-    var bwJaS: String? = null // 详细地址
-    var UiSC9wqnS: Long = 0 // 停留时长
-    var M6dlmwC: String = "02" // 页面来源
+    var unH4I2vHXG: String? = null // email
+    var m7pyaSk: String? = null // 婚姻
+    var zgGtVHl9N2: String? = null // 教育
+    var QlCvCLnNx: String? = null // 省份
+    var woTVOe: String? = null // 市区
+    var lh3bJ: String? = null // 详细地址
+    var qoTp6AOTAZ: Long = 0 // 停留时长
+    var XVQOOWFrF: String = "02" // 页面来源
 }
 
 class ReqWorkInfo : IReqBaseInfo {
-    var Cv10jD: String? = null // 工作时间
-    var flb5WwOaa: String? = null // 月收入
-    var flb5WwOaaaaa: String? = null // 工资支付频率
-    var jQIai: String? = null // 工作类型
-    val DxVqsIv = 0L // 停留时长
-    val XAhO = "02" // 页面来源
+    var x6yR: String? = null // 工作时间
+    var xgJ5: String? = null // 月收入
+    var u0pn: String? = null // 工资支付频率
+    var AD8Jznx: String? = null // 工作类型
+    val HeWTdLp3 = 0L // 停留时长
+    val GdGN6viJS = "02" // 页面来源
 }
 
 class ReqContactInfo : IReqBaseInfo {
     //    var vo9dza3yA: String? = null // 联系人id
-    var hcPt: String? = null // 第一联系人姓名
-    var RHqi: String? = null // 第一联系人电话
-    var HCy5Y: String? = null //第一联系人关系
+    var zAqGvHgHls: String? = null // 第一联系人姓名
+    var ifunMf6ZLx: String? = null // 第一联系人电话
+    var gQdRCJKOEJ: String? = null //第一联系人关系
 
     //    var nJBqrhrxl: String? = null // 第二联系人id
-    var IKIcWwu6: String? = null // 第二联系人姓名
-    var SP2d7: String? = null // 第二联系人电话
-    var fOgLF6IBO: String = "4" // 第二联系人关系
-    var JifOASaJn = 0L // 停留时长
-    var SMJ2sSiDM9 = "02" // 页面来源
+    var VWHN: String? = null // 第二联系人姓名
+    var fHdl: String? = null // 第二联系人电话
+    var PqQz: String = "4" // 第二联系人关系
+    var yB5L8A8mo = 0L // 停留时长
+    var HkdIn = "02" // 页面来源
 }
 
 class ReqBankInfo : IReqBaseInfo {
-    var dmQHAqbC: String? = null // 银行名称
-    var OZwuBMo: String? = null // 银行类型
-    var COZthiVwS: String? = null // 银行编码
-    var Wf3pgbaTm: String? = null // 银行卡号
-    var X11Jmqd = 0 // 停留时长
-    var d0eSqwK = "02" // 页面来源
+    var thXggvo: String? = null // 银行名称
+    var SElc4: String? = null // 银行类型
+    var GiQ40BKKr: String? = null // 银行编码
+    var Bkmaj97: String? = null // 银行卡号
+    var kQWn = 0 // 停留时长
+    var cOzMNSKThS = "02" // 页面来源
 }
 
 class ReqKycInfo : IReqBaseInfo {
-    var Z4SFQo60E5: String? = null // 性别
-    var tjuIw: String? = null // nuip
-    var lozpjICr: String? = null // 姓名
-    var lup8: String? = null // 生日
+    var W8mqV: String? = null // 性别
+    var ALKxGTZ4FQ: String? = null // nuip
+    var y6hQBtv: String? = null // 姓名
+    var GJmhwzsK5: String? = null // 生日
 
-    var Z8zd6b0gEi = 0L // 停留时长
-    var swpvWP = "02" // 页面来源
+    var Yqm8Lv = 0L // 停留时长
+    var oOxsFrckdv = "02" // 页面来源
 }
 
+// 展期
 class ReqExtensionInfo : IReqBaseInfo {
 
 }
 
+// 活体
 class ReqFaceInfo : IReqBaseInfo {
     var path: String? = null
 }
