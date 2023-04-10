@@ -10,9 +10,7 @@ import androidx.core.content.ContextCompat
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.dialog.RepayDetailDialog
-import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.checkMobile
-import com.colombia.credit.expand.showNetErrorDialog
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
@@ -104,7 +102,7 @@ class LoginFragment : BaseLoginFragment() {
 //                return@setBlockingOnClickListener
 //            }
 //            mViewModel.reqLogin(mobile, code)
-            Launch.skipRepayDetailActivity(getSupportContext())
+            jumpProcess(getSupportContext(), TYPE_CONTACT)
         }
 
 

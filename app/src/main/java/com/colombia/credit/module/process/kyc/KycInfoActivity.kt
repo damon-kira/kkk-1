@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
@@ -80,6 +81,20 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                     {
                         logger_e(TAG, "exception = $it")
                     })
+            }
+        }
+
+        mViewModel.getCacheInfo()?.let { info ->
+            info as ReqKycInfo
+            mBinding.kycBivNuip.setViewText(info.ALKxGTZ4FQ.orEmpty())
+            val names = info.y6hQBtv?.split("|").orEmpty()
+            if (names.size > 1) {
+                mBinding.kycBivName.setViewText(names[1])
+                mBinding.kycBivSurname.setViewText(names[0])
+            }
+            mBinding.kycBivBirthday.setViewText(info.GJmhwzsK5.orEmpty())
+            if (mGender.containsKey(info.W8mqV)) {
+                setBaseInfo(mBinding.kycBivGender, mGender[info.W8mqV], info.W8mqV)
             }
         }
     }
@@ -175,7 +190,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             val name = mBinding.kycBivName.getViewText()
             val surname = mBinding.kycBivSurname.getViewText()
             it.y6hQBtv = "$surname|$name"
-            it.W8mqV = mBinding.kycBivGender.tag.toString()
+            it.W8mqV = mBinding.kycBivGender.tag?.toString()
             it.GJmhwzsK5 = mBinding.kycBivBirthday.getViewText()
         }
     }

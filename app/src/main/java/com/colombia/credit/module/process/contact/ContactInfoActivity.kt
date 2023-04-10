@@ -48,7 +48,32 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivRelationship.setBlockingOnClickListener(this)
         mBinding.bivContact1.setBlockingOnClickListener(this)
         mBinding.bivContact2.setBlockingOnClickListener(this)
+
+        mViewModel.getCacheInfo()?.let {info ->
+            info as ReqContactInfo
+            if (mRelationship.containsKey(info.gQdRCJKOEJ)) {
+                setBaseInfo(
+                    mBinding.bivRelationship,
+                    mRelationship[info.gQdRCJKOEJ],
+                    info.gQdRCJKOEJ
+                )
+            }
+            mBinding.bivContact1.setViewText(info.zAqGvHgHls.orEmpty())
+            if(!info.ifunMf6ZLx.isNullOrEmpty()) {
+                mBinding.bivContact1.setDesc(getString(R.string.mobile_s, info.ifunMf6ZLx))
+                mBinding.bivContact1.tag = info.ifunMf6ZLx
+            }
+
+            mBinding.bivContact2.setViewText(info.VWHN.orEmpty())
+            if (!info.fHdl.isNullOrEmpty()) {
+                mBinding.bivContact2.setDesc(getString(R.string.mobile_s, info.fHdl))
+                mBinding.bivContact2.tag = info.fHdl
+            }
+
+        }
     }
+
+
 
     private fun reqPermission() {
         PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), true, {}, {
@@ -101,6 +126,14 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private fun setContactInfo(infoView: BaseInfoView, data: PhoneAndName) {
         val loginMobile = getMobile()
+        if (data.phone.startsWith("57") && data.phone.length > 10) {
+            val mobile = data.phone
+            data.phone = mobile.substring(2, mobile.length)
+        } else if (data.phone.startsWith("+57") && data.phone.length > 10) {
+            val mobile = data.phone
+            data.phone = mobile.substring(2, mobile.length)
+        }
+
         // 是否与登录手机号是一个
         if (loginMobile == data.phone) {
             infoView.setError(R.string.error_mobile_same_login)
@@ -128,11 +161,11 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getCommitInfo(): IReqBaseInfo {
         return ReqContactInfo().also {
-            it.gQdRCJKOEJ = mBinding.bivRelationship.tag.toString()
-            it.ifunMf6ZLx = mBinding.bivContact1.tag.toString()
+            it.gQdRCJKOEJ = mBinding.bivRelationship.tag?.toString()
+            it.ifunMf6ZLx = mBinding.bivContact1.tag?.toString()
             it.zAqGvHgHls = mBinding.bivContact1.getViewText()
 
-            it.fHdl = mBinding.bivContact2.tag.toString()
+            it.fHdl = mBinding.bivContact2.tag?.toString()
             it.VWHN = mBinding.bivContact2.getViewText()
         }
     }

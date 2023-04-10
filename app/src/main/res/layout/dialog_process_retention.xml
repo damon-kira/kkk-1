@@ -28,10 +28,12 @@
 
         <TextView
             android:id="@+id/tv_amount"
-            android:layout_width="wrap_content"
+            style="@style/marginLeftAndRight12"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
             android:textColor="@color/color_8f30d8"
             android:textSize="30sp"
             android:textStyle="bold"

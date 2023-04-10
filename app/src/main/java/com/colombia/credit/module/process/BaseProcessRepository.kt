@@ -19,7 +19,8 @@ abstract class BaseProcessRepository<T : IReqBaseInfo> : BaseRepository(), IBase
 
     override fun getCacheInfo(): IReqBaseInfo? {
         val cache = SharedPrefUser.getString(getCacheKey(), null)
-        return GsonUtil.fromJson(cache, getCacheClass()) as IReqBaseInfo
+        if (cache.isEmpty()) return null
+        return GsonUtil.fromJson(cache, getCacheClass()) as? IReqBaseInfo
     }
 
     abstract fun getCacheClass(): Class<T>

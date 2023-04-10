@@ -13,6 +13,7 @@ import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.expand.saveShowBackDialog
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
+import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
@@ -36,7 +37,7 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     private val mBackDialog by lazy {
         ProcessBackDialog(this).setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
     }
 
@@ -58,6 +59,11 @@ abstract class BaseProcessActivity : BaseActivity() {
             listener.invoke(it)
         }
         dialog.show()
+    }
+
+    protected fun setBaseInfo(baseInfoView: BaseInfoView, text: String?, tag: String?) {
+        baseInfoView.setViewText(text.orEmpty())
+        baseInfoView.tag = tag
     }
 
     protected fun uploadInfo() {
@@ -85,6 +91,11 @@ abstract class BaseProcessActivity : BaseActivity() {
         }
     }
 
+    override fun onDestroy() {
+        getViewModel().saveCacheInfo(getCommitInfo())
+        super.onDestroy()
+    }
+
     protected fun checkAndSetErrorHint(
         baseInfoView: AbsBaseInfoView,
         errorHint: String? = null
@@ -109,7 +120,7 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     abstract fun uploadSuccess()
 
-    fun uploadException(response: BaseResponse<*>){
+    fun uploadException(response: BaseResponse<*>) {
         response.ShowErrorMsg()
     }
 

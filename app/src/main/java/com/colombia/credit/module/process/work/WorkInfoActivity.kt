@@ -9,6 +9,7 @@ import com.colombia.credit.databinding.ActivityWorkInfoBinding
 import com.colombia.credit.expand.TYPE_CONTACT
 import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
@@ -16,6 +17,7 @@ import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,10 +52,30 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
         mViewModel.mUploadLiveData.observerNonSticky(this) {
-            if (it.isSuccess()){
+            if (it.isSuccess()) {
                 Launch.skipContactInfoActivity(this)
             } else {
 
+            }
+        }
+
+        mViewModel.getCacheInfo()?.let { info ->
+            info as ReqWorkInfo
+            val jobTime = info.x6yR
+            if (mJobYear.containsKey(jobTime)) {
+                setBaseInfo(mBinding.bivJobYear, mJobYear[jobTime], jobTime)
+            }
+            val income = info.xgJ5
+            if (mJobIncomeSource.containsKey(income)) {
+                setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
+            }
+            val payday = info.u0pn
+            if (mPayCycle.containsKey(payday)) {
+                setBaseInfo(mBinding.bivPayday, mPayCycle[payday], payday)
+            }
+            val jobType = info.AD8Jznx
+            if (mJobType.containsKey(jobType)) {
+                setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
         }
     }
@@ -124,10 +146,10 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getCommitInfo(): IReqBaseInfo {
         return ReqWorkInfo().also {
-            it.AD8Jznx = mBinding.bivType.tag.toString()
-            it.u0pn = mBinding.bivPayday.tag.toString()
-            it.xgJ5 = mBinding.bivIncome.tag.toString()
-            it.x6yR = mBinding.bivJobYear.tag.toString()
+            it.AD8Jznx = mBinding.bivType.tag?.toString()
+            it.u0pn = mBinding.bivPayday.tag?.toString()
+            it.xgJ5 = mBinding.bivIncome.tag?.toString()
+            it.x6yR = mBinding.bivJobYear.tag?.toString()
         }
     }
 

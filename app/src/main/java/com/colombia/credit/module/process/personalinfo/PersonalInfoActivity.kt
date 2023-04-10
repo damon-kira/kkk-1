@@ -49,7 +49,22 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 it.ShowErrorMsg()
             }
         }
-
+        mViewModel.getCacheInfo()?.also { info ->
+            info as ReqPersonalInfo
+            mBinding.bivEmail.setViewText(info.unH4I2vHXG.orEmpty())
+            if (!info.QlCvCLnNx.isNullOrEmpty() && !info.woTVOe.isNullOrEmpty()) {
+                mBinding.bivAddress.setViewText(info.QlCvCLnNx.orEmpty() + "," + info.woTVOe)
+            }
+            mBinding.bivAddrDetail.setViewText(info.lh3bJ.orEmpty())
+            val education = info.zgGtVHl9N2
+            if (mEducation.containsKey(education)) {
+                setBaseInfo(mBinding.bivEducation, mEducation[info.zgGtVHl9N2], info.zgGtVHl9N2)
+            }
+            val marriage = info.m7pyaSk
+            if (mMarriage.containsKey(marriage)) {
+                setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+            }
+        }
     }
 
     override fun onClick(v: View?) {

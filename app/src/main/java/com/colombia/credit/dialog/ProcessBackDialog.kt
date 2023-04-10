@@ -1,6 +1,7 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
+import com.colombia.credit.R
 import com.colombia.credit.databinding.DialogProcessRetentionBinding
 import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.expand.mFirstPageLoanAmount
@@ -14,18 +15,19 @@ class ProcessBackDialog constructor(context: Context): DefaultDialog(context) {
 
     init {
         setContentView(mBinding.root)
+        setDisplaySize(0.86f,WRAP)
         setCancelable(false)
         setCanceledOnTouchOutside(false)
         mBinding.retentionTvCancel.setBlockingOnClickListener {
             dismiss()
         }
-        mBinding.tvAmount.text = formatCommon(mFirstPageLoanAmount.toString())
+        mBinding.tvAmount.text = getString(R.string.amount_unit, formatCommon(mFirstPageLoanAmount))
     }
 
     fun setOnClickListener(clickListener: () -> Unit): ProcessBackDialog {
         mBinding.retentionTvBack.setBlockingOnClickListener {
-            clickListener.invoke()
             dismiss()
+            clickListener.invoke()
         }
         return this
     }

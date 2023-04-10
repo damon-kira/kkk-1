@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqBankInfo
+import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.resp.BankInfoSearch
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
@@ -59,6 +60,22 @@ class BankInfoActivity : BaseProcessActivity() {
         }
         mBinding.tvCommit.setBlockingOnClickListener {
             uploadInfo()
+        }
+
+        mViewModel.getCacheInfo()?.let {info ->
+            info as ReqBankInfo
+//            var thXggvo: String? = null // 银行名称
+//            var SElc4: String? = null // 银行类型
+//            var GiQ40BKKr: String? = null // 银行编码
+//            var Bkmaj97: String? = null // 银行卡号
+            mBinding.bivName.setViewText(info.thXggvo.orEmpty())
+            mBinding.bivName.tag = info.GiQ40BKKr
+            mBinding.bivBankno.setViewText(info.Bkmaj97.orEmpty())
+            if (info.SElc4 == "0") {
+                mBinding.bankRbAhorrs.isChecked = true
+            } else if (info.SElc4 == "1") {
+                mBinding.bankRbCorriente.isChecked = true
+            }
         }
     }
 
