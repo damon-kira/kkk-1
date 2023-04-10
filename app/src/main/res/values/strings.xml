@@ -193,6 +193,7 @@
     <string name="confirm_apply_hint">El 99% de los usuarios lo eligen</string>
     <string name="confirm_amount_text">La cantidad que puede pedir prestada</string>
     <string name="confirm_period">Periódo del Préstamo</string>
+    <string name="toast_level_hint">Por el momento no puedes cambiar tu puntuaje crediticio,éste se incrementa cada vez que pagas a tiempo.</string>
     <string name="loan_amount_text">Importe real recibido</string>
     <string name="repay_amount">Monto Pagado</string>
     <string name="loan_bank">Cuenta bancaria receptora</string>

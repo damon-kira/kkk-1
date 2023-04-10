@@ -38,10 +38,10 @@ class RspProductInfo {
 //"applyCode":"RTS"// 产品code
 // 首贷产品信息
 class FirstConfirmInfo {
-    val u5kCNqk: Int = 0//到手金额
-    val RIoDBuyjO: Int = 0//贷款金额,
-    val y5MbVG: Int = 0//期数
-    val b6O2Joc: Int = 0// 应还金额
+    val u5kCNqk: String? = null//到手金额
+    val RIoDBuyjO: String? = null//贷款金额,
+    val y5MbVG: String? = null//期数
+    val b6O2Joc: String? = null// 应还金额
     val ihm3G2: String? = null//利息
     val WTvE5G: String? = null//贷款周期  "7,14,90,108"
     val vzXq3u:String? = null // 还款时间"2023-05-01"

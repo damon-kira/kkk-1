@@ -36,9 +36,7 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
             // 跳转还款详情页面
             Launch.skipRepayDetailActivity(getSupportContext())
         }
-        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(
-            viewLifecycleOwner
-        ) {
+        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(viewLifecycleOwner) {
             mBinding.repayTvAmount.apply {
                 text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.orEmpty()))
                 isSelected = it.v3ItXF > 0 // 是否逾期

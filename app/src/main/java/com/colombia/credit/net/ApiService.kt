@@ -70,6 +70,10 @@ interface ApiService {
     @Headers("kio8YGhwe6:Bw8rKf7HtN")
     fun getCertProcess():Flowable<BaseResponse<RspCertProcessInfo>>
 
+    @Headers("kio8YGhwe6:eGkB4uwv0U")
+    @POST("/jUOhsd7UY/ksjdYR6Jn")
+    fun firstCacul(): Flowable<BaseResponse<String>>
+
     @POST("tZyFyDwU/wD9X")
     @Headers("kio8YGhwe6:UzB5rkIgVd")
     fun logout(@Body body: RequestBody): Flowable<BaseResponse<String>>
