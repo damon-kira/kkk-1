@@ -1,5 +1,6 @@
 package com.colombia.credit.module.account
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -124,5 +126,12 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             return false
         }
         return true
+    }
+
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if (visible) {
+            getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
+        }
     }
 }

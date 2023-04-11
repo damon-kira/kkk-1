@@ -5,7 +5,7 @@
     android:id="@+id/fl_home_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,9 +24,11 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="13dp"
+            android:gravity="center_vertical"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/aiv_head"
             app:layout_constraintTop_toTopOf="@id/aiv_head">
 
@@ -138,66 +140,73 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_white_10dp"
-        android:orientation="horizontal">
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="20dp"
+        app:cardPreventCornerOverlap="false">
 
-        <FrameLayout
-            android:id="@+id/fl_history"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="32dp"
-            android:paddingTop="14dp"
-            android:paddingRight="32dp"
-            android:paddingBottom="14dp">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:id="@+id/fl_history"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:text="@string/me_history"
-                android:textColor="@color/color_333333"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:drawableLeftCompat="@drawable/ic_me_history" />
-        </FrameLayout>
+                android:layout_weight="1"
+                android:paddingLeft="32dp"
+                android:paddingTop="14dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="14dp">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center_vertical"
-            android:background="@color/color_eeeeee" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="@string/me_history"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_me_history" />
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/fl_bank"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="32dp"
-            android:paddingTop="14dp"
-            android:paddingRight="32dp"
-            android:paddingBottom="14dp">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_eeeeee" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:id="@+id/fl_bank"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/me_bank"
-                android:textColor="@color/color_333333"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:drawableLeftCompat="@drawable/ic_me_bank" />
-        </FrameLayout>
-    </LinearLayout>
+                android:layout_weight="1"
+                android:paddingLeft="32dp"
+                android:paddingTop="14dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="14dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/me_bank"
+                    android:textColor="@color/color_333333"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_me_bank" />
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
     <!-- 关于 -->
     <com.colombia.credit.view.AccountItemLayout
         android:id="@+id/ail_about"
@@ -224,7 +233,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
-        app:ail_left_icon="@drawable/ic_me_setup"
+        app:ail_left_icon="@drawable/ic_me_feedback"
         app:ail_text="@string/me_feedback" />
     <!-- 设置 -->
     <com.colombia.credit.view.AccountItemLayout
@@ -233,7 +242,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
-        app:ail_left_icon="@drawable/ic_me_about"
+        app:ail_left_icon="@drawable/ic_me_setup"
         app:ail_text="@string/me_setting" />
 
     <com.colombia.credit.view.textview.EasyTextView

@@ -13,6 +13,7 @@ import com.colombia.credit.R
 import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
+import com.colombia.credit.module.banklist.BankInfoAddActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
 import com.colombia.credit.module.defer.DeferActivity
 import com.colombia.credit.module.defer.DeferActivity_GeneratedInjector
@@ -55,6 +56,11 @@ object Launch {
 
     fun skipBankInfoActivity(context: Context) {
         launch(context, BankInfoActivity::class.java)
+    }
+
+    // 其它流程添加银行卡信息页面
+    fun skipBankInfoAddActivity(context: Context) {
+        launch(context, BankInfoAddActivity::class.java)
     }
 
     fun skipKycInfoActivity(context: Context) {

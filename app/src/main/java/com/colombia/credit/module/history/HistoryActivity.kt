@@ -28,7 +28,8 @@ class HistoryActivity : BaseActivity() {
 
 
     private fun setRecyclerView() {
-        mBinding.recyclerview.layoutManager = linearLayoutManager()
+        mBinding.recyclerview.linearLayoutManager()
         mBinding.recyclerview.adapter = mAdapter
+
     }
 }

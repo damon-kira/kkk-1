@@ -284,5 +284,6 @@
     <string name="repay_extension">Dese la vuelta</string>
     <string name="detail_title">Detalles de la cantidad de reembolso</string>
     <string name="dialog_loan_amount_text">Monto Recibido</string>
-    <string name="overdue_text">Comisión por Pago Tardío</string><!-- 展期还款 -->
+    <string name="overdue_text">Comisión por Pago Tardío</string>
+    <string name="bank_add_title">Préstamo exitoso</string><!-- 展期还款 -->
 </resources>

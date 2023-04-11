@@ -74,6 +74,16 @@ interface ApiService {
     @POST("/jUOhsd7UY/ksjdYR6Jn")
     fun firstCacul(): Flowable<BaseResponse<String>>
 
+    // 获取银行名称列表
+    @POST("y6zwn6HiW/BRRsOpkNaM")
+    @Headers("kio8YGhwe6:Sd7gJm0TfN")
+    fun getBankNameList(): Flowable<BaseResponse<RspBankNameInfo>>
+
+    // 获取银行账户
+    @POST("Ih8Ke/IzDMW1s8")
+    @Headers("kio8YGhwe6:Xp6nHk4YsB")
+    fun getBankAccountList(): Flowable<BaseResponse<RspBankAccount>>
+
     @POST("tZyFyDwU/wD9X")
     @Headers("kio8YGhwe6:UzB5rkIgVd")
     fun logout(@Body body: RequestBody): Flowable<BaseResponse<String>>

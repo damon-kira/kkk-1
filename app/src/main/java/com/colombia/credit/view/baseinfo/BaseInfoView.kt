@@ -278,6 +278,10 @@ class BaseInfoView : AbsBaseInfoView {
         mBinding.bivTvDesc.text = desc
     }
 
+    fun showDesc(isShow: Boolean) {
+        mBinding.bivTvDesc.ifShow(isShow)
+    }
+
     fun getDesc() = mBinding.bivTvDesc.text?.toString()
 
     fun setDescMarginLeft(margin: Int){

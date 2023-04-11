@@ -33,6 +33,8 @@
     <!-- 闪光灯 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
     <application
         android:name=".LoanApplication"
         android:allowBackup="true"
@@ -88,6 +90,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.banklist.MeBankAccountListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".module.banklist.BankInfoAddActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.history.HistoryActivity"

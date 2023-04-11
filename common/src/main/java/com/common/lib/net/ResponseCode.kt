@@ -8,7 +8,7 @@ object ResponseCode {
     const val FORCED_UPDATE_CODE = 800800 //强制升级
 
     const val FAILED_CHECK = -10
-    const val SUCCESS = 0
+    const val SUCCESS = 200
     const val LOADING = -10
     const val FAILED = -1
 

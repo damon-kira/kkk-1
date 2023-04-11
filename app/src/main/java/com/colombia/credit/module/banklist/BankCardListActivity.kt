@@ -1,22 +1,23 @@
 package com.colombia.credit.module.banklist
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.BankCardInfo
+import com.colombia.credit.bean.resp.RspBankAccount
 import com.colombia.credit.databinding.ActivityBankCardListBinding
-import com.colombia.credit.expand.SimpleOnItemClickListener
-import com.colombia.credit.expand.formatCommon
-import com.colombia.credit.expand.maskString
-import com.colombia.credit.expand.setOnItemClickListener
+import com.colombia.credit.dialog.BankSearchDialog
+import com.colombia.credit.expand.*
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
 import com.colombia.credit.module.adapter.BaseViewHolder
 import com.colombia.credit.module.adapter.SafeLinearLayoutManager
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.hide
 import com.util.lib.show
@@ -41,7 +42,6 @@ open class BankCardListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
-
         var amount = intent.getStringExtra(EXTRA_AMOUNT).orEmpty()
         amount = getString(R.string.amount_unit, formatCommon(amount))
         mBinding.bankCardTvApply.text = getString(R.string.bank_card_btn_text, amount)
@@ -49,30 +49,35 @@ open class BankCardListActivity : BaseActivity() {
         mBinding.aivBack.setBlockingOnClickListener {
             finish()
         }
-        val list = arrayListOf<BankCardInfo>()
-        for (index in 0..3) {
-            val info = BankCardInfo().also {
-                it.bankName = "bank$index"
-                it.bankNo = "38403849384$index"
-            }
-            list.add(info)
-        }
-
-        change(list.size == 5)
-
         mBinding.bankRecyclerview.layoutManager =
             SafeLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding.bankRecyclerview.adapter = mAdapter
         mBinding.bankRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                mAdapter.setSelectorPosition(position)
+                mAdapter.getItemData<RspBankAccount.BankAccountInfo>(position)?.changeSelector()
+                mAdapter.notifyItemChanged(position)
             }
         })
-        mAdapter.setItems(list)
 
         mBinding.cardTvSave.setBlockingOnClickListener {
             // 调用接口， 保存信息后返回
         }
+
+        mBinding.bankEtvAdd.setBlockingOnClickListener {
+            Launch.skipBankInfoAddActivity(this)
+        }
+
+        mViewModel.mBankAccountLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                it.getData()?.oaeFxoW?.apply {
+                    change(size == 5)
+                    mAdapter.setItems(this)
+                }
+            } else it.ShowErrorMsg()
+        }
+
+        mViewModel.getBankAccountList()
+
     }
 
     override fun onDestroy() {
@@ -91,15 +96,16 @@ open class BankCardListActivity : BaseActivity() {
         }
     }
 
-    class BankCardAdapter(items: ArrayList<BankCardInfo>) :
-        BaseRecyclerViewAdapter<BankCardInfo>(items, R.layout.layout_bank_card_item) {
+    class BankCardAdapter(items: ArrayList<RspBankAccount.BankAccountInfo>) :
+        BaseRecyclerViewAdapter<RspBankAccount.BankAccountInfo>(items, R.layout.layout_bank_card_item) {
 
-        private var mSelector: Int = -1
-
-        override fun convert(holder: BaseViewHolder, item: BankCardInfo, position: Int) {
-            holder.setText(R.id.tv_name, item.bankName)
-            holder.setText(R.id.tv_bank_no, maskString(item.bankNo, 4, 4))
-            holder.getView<AppCompatImageView>(R.id.aiv_selector).isSelected = mSelector == position
+        override fun convert(holder: BaseViewHolder, item: RspBankAccount.BankAccountInfo, position: Int) {
+            holder.getView<TextView>(R.id.tv_name).let {tv ->
+                tv.text = item.RPZ7
+                tv.tag = item.oH3Jv
+            }
+            holder.setText(R.id.tv_bank_no, maskString(item.JJ41sQr, 4, 4))
+            holder.getView<AppCompatImageView>(R.id.aiv_selector).isSelected = item.isSelector()
             when (position) {
                 0 -> {
                     holder.getView<ConstraintLayout>(R.id.cl_layout)
@@ -132,11 +138,6 @@ open class BankCardListActivity : BaseActivity() {
                         .setImageResource(R.drawable.svg_bank_icon5)
                 }
             }
-        }
-
-        fun setSelectorPosition(position: Int) {
-            mSelector = position
-            notifyItemChanged(position)
         }
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.ContextThemeWrapper
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.BankInfoSearch
+import com.colombia.credit.bean.resp.RspBankNameInfo
 import com.colombia.credit.databinding.DialogBankSelectorBinding
 import com.colombia.credit.expand.SimpleOnItemClickListener
 import com.colombia.credit.expand.setOnItemClickListener
@@ -23,7 +23,7 @@ class BankSearchDialog(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogBankSelectorBinding>()
 
-    private val mItems: ArrayList<BankInfoSearch> = arrayListOf()
+    private val mItems: ArrayList<RspBankNameInfo.BankNameInfo> = arrayListOf()
     private val mAdapter: BankAdapter by lazy {
         BankAdapter(arrayListOf())
     }
@@ -31,7 +31,6 @@ class BankSearchDialog(context: Context) : DefaultDialog(context) {
     init {
         setContentView(mBinding.root)
         setDisplaySize(MATCH, MATCH, true)
-        addTestData()
         mBinding.dialogBankSearchview.setHintText(R.string.bank_name_search_hint)
         mBinding.dialogBankRecyclerview.linearLayoutManager()
         mBinding.dialogBankRecyclerview.adapter = mAdapter
@@ -68,68 +67,24 @@ class BankSearchDialog(context: Context) : DefaultDialog(context) {
         }
     }
 
-    private var mListener: ((BankInfoSearch) -> Unit)? = null
+    private var mListener: ((RspBankNameInfo.BankNameInfo) -> Unit)? = null
 
-    fun setData(bankInfo: ArrayList<BankInfoSearch>): BankSearchDialog {
-//        mItems.clear()
-//        mItems.addAll(bankInfo)
-//        mAdapter.notifyDataSetChanged()
+    fun setData(bankInfo: ArrayList<RspBankNameInfo.BankNameInfo>): BankSearchDialog {
+        mItems.clear()
+        mItems.addAll(bankInfo)
+        mAdapter.notifyDataSetChanged()
         return this
     }
 
-    fun setOnClickListener(listener: (BankInfoSearch) -> Unit): BankSearchDialog {
+    fun setOnSelectListener(listener: (RspBankNameInfo.BankNameInfo) -> Unit): BankSearchDialog {
         this.mListener = listener
         return this
     }
 
-    class BankAdapter(items: ArrayList<BankInfoSearch>) :
-        SearchAdapter<BankInfoSearch>(items, R.layout.layout_bank_name_item) {
-        override fun convert(holder: BaseViewHolder, item: BankInfoSearch, position: Int) {
-            holder.setText(R.id.tv_text, item.BName)
+    class BankAdapter(items: ArrayList<RspBankNameInfo.BankNameInfo>) :
+        SearchAdapter<RspBankNameInfo.BankNameInfo>(items, R.layout.layout_bank_name_item) {
+        override fun convert(holder: BaseViewHolder, item: RspBankNameInfo.BankNameInfo, position: Int) {
+            holder.setText(R.id.tv_text, item.KoGUgumBVm)
         }
-    }
-
-    private fun addTestData() {
-        mItems.add(BankInfoSearch().also {
-            it.BName = "bYYdddHFJHFJdfdfd"
-            it.isCommonlyUsed = 1
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "CYYHFJHFJdfd"
-            it.isCommonlyUsed = 1
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "BANK BRI"
-            it.isCommonlyUsed = 1
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "BANK  BNI"
-            it.isCommonlyUsed = 1
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "AYYHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "AYYHFJHFdddJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "bYYHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "bYYdddHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "CYYHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "DYYHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "EYYHFJHFJ"
-        })
-        mItems.add(BankInfoSearch().also {
-            it.BName = "GYYHFJHFJ"
-        })
-        mAdapter.setItems(mItems)
     }
 }
