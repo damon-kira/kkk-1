@@ -10,18 +10,18 @@ import java.lang.reflect.ParameterizedType
 /**
  * Created by weisl on 2019/8/12.
  */
-open class BaseResponse<T> @JvmOverloads constructor(
+class BaseResponse<T> @JvmOverloads constructor(
     var code: Int,
-    val data: String?,
+    var data: String?,
     val message: String?,
     val e: Throwable? = null
 ) {
     var t: T? = null
 
-    fun parseT(/*clazz: Class<T>*/): T? {
+    fun parseT(clazz: Class<T>): T? {
         if (t == null) {
             try {
-                t = GsonUtil.fromJson(data!!, getType<T>()) as? T
+                t = GsonUtil.fromJson(data!!, clazz) as? T
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -30,12 +30,14 @@ open class BaseResponse<T> @JvmOverloads constructor(
     }
 
     private fun <T> getType(): Class<out Any?> {
-        val genericSuppress = this.javaClass.genericSuperclass as ParameterizedType
-        val type = genericSuppress.actualTypeArguments[0]
-        if (type is Class<*>) {
-            return Any::class.java
+        val genericType = this.javaClass.genericSuperclass
+        if (genericType is ParameterizedType) {
+            val type = genericType.actualTypeArguments[0]
+            if (type is Class<*>) {
+                return Any::class.java
+            }
         }
-        return type as Class<T>
+        return Any::class.java
     }
 
     fun getData(): T? = t

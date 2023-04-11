@@ -546,6 +546,11 @@ class EasyTextView : AppCompatTextView {
         } else mOriginTextColor
     }
 
+    override fun setTextColor(color: Int) {
+        super.setTextColor(color)
+        mOriginTextColor = color
+    }
+
 
     /** 背景圆角 */
     fun setStrokeCorner(radius: Float): EasyTextView {

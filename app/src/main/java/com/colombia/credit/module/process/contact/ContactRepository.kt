@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.contact
 
 import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
 import com.common.lib.net.ApiServiceLiveDataProxy
@@ -11,7 +12,7 @@ import javax.inject.Inject
 // 上传联系人
 class ContactRepository @Inject constructor() : BaseProcessRepository<ReqContactInfo>() {
 
-    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
+    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val body = createRequestBody(GsonUtil.toJson(info).orEmpty())
         apiService.uploadContactInfo(body)
     }

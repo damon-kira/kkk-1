@@ -10,13 +10,13 @@ import androidx.viewbinding.ViewBinding
 
 inline fun <reified VB : ViewBinding> ComponentActivity.binding() =
     lazy {
-        inflateBinding<VB>(layoutInflater).also {
-            setContentView(it.root)
+        inflateBinding<VB>(layoutInflater).apply {
+            setContentView(root)
         }
     }
 
 inline fun <reified VB : ViewBinding> Dialog.binding() = lazy {
-    inflateBinding<VB>(layoutInflater).also { setContentView(it.root) }
+    inflateBinding<VB>(layoutInflater).apply { setContentView(root) }
 }
 
 inline fun <reified VB : ViewBinding> inflateBinding(layoutInflater: LayoutInflater): VB {
@@ -26,14 +26,14 @@ inline fun <reified VB : ViewBinding> inflateBinding(layoutInflater: LayoutInfla
 
 inline fun <reified VB : ViewBinding> ComponentActivity.binding(crossinline inflate: (LayoutInflater) -> VB) =
     lazy(LazyThreadSafetyMode.NONE) {
-        inflate(layoutInflater).also {
-            setContentView(it.root)
+        inflate(layoutInflater).apply {
+            setContentView(root)
         }
     }
 
 inline fun <reified VB : ViewBinding> Dialog.binding(crossinline inflate: (LayoutInflater) -> VB) =
     lazy(LazyThreadSafetyMode.NONE) {
-        inflate(layoutInflater).also {
-            setContentView(it.root)
+        inflate(layoutInflater).apply {
+            setContentView(root)
         }
     }

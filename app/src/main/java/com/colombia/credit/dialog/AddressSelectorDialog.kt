@@ -1,11 +1,8 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
-import android.provider.Telephony.Mms.Addr
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.colombia.credit.R
 import com.colombia.credit.bean.AddressInfo
@@ -17,7 +14,6 @@ import com.colombia.credit.module.adapter.linearLayoutManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
-import com.util.lib.getContext
 
 class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
 

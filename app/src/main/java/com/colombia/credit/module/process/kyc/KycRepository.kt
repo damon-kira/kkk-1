@@ -2,6 +2,8 @@ package com.colombia.credit.module.process.kyc
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
+import com.colombia.credit.bean.resp.KycOcrInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
@@ -19,7 +21,7 @@ class KycRepository @Inject constructor(@UploadApiService private val uploadApiS
     BaseProcessRepository<ReqKycInfo>() {
 
     fun uploadImage(path: String,@PicType type: Int) =
-        ApiServiceLiveDataProxy.request {
+        ApiServiceLiveDataProxy.request(KycOcrInfo::class.java) {
             val file = File(path)
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             builder.addFormDataPart("gdkvsSDfvOrfds", file.name, createFileRequestBody(file))
@@ -27,7 +29,7 @@ class KycRepository @Inject constructor(@UploadApiService private val uploadApiS
             uploadApiService.uploadKycImage(builder.build())
         }
 
-    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
+    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val body = createRequestBody(GsonUtil.toJson(info).orEmpty())
         apiService.uploadKycInfo(body)
     }

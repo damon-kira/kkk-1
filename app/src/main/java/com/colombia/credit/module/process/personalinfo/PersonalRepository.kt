@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.personalinfo
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqPersonalInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
 import com.common.lib.net.ApiServiceLiveDataProxy
@@ -11,7 +12,7 @@ import javax.inject.Inject
 // 上传基本信息
 class PersonalRepository @Inject constructor() : BaseProcessRepository<ReqPersonalInfo>() {
 
-    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
+    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val body = createRequestBody(GsonUtil.toJson(info).orEmpty())
         apiService.uploadPersonalInfo(body)
     }

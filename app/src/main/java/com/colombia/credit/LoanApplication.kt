@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.cache.lib.CacheInit
 import com.colombia.credit.module.webview.WebViewPool
+import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -24,6 +25,8 @@ class LoanApplication: Application() {
         mAppContext = this
         CacheInit.get().setContext(this)
         WebViewPool.INSTANCE.init(this, false)
-
+        AesConstant.AES_SECRET = Constant.API_SECRET
+        AesConstant.apiKey = Constant.API_KEY
+        AesConstant.apiIv = Constant.API_IV
     }
 }

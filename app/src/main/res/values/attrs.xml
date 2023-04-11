@@ -11,6 +11,7 @@
             <enum name="visible" value="1" />
             <enum name="gone" value="2" />
         </attr>
+        <attr name="tl_textsize" format="dimension"/>
         <attr name="tl_back_text_color" format="color" />
         <attr name="tl_left_icon" format="reference" />
         <attr name="tl_right_icon" format="reference" />

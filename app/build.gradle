@@ -88,6 +88,7 @@ dependencies {
     implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
+    implementation rootProject.ext.other.aes
 
     implementation rootProject.ext.permission.rxpermission
 

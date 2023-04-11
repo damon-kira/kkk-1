@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.cache.lib.SharedPrefUser
 import com.colombia.credit.app.BaseRepository
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
 
@@ -30,7 +31,7 @@ abstract class BaseProcessRepository<T : IReqBaseInfo> : BaseRepository(), IBase
 
 interface IBaseProcessRepository {
 
-    fun uploadInfo(info: IReqBaseInfo): LiveData<BaseResponse<String>>
+    fun uploadInfo(info: IReqBaseInfo): LiveData<BaseResponse<RspResult>>
 
     fun saveCacheInfo(info: IReqBaseInfo)
 

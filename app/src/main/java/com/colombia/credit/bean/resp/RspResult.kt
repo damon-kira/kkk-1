@@ -1,4 +1,4 @@
 package com.colombia.credit.bean.resp
 
-class HistoryOrderInfo {
+class RspResult {
 }

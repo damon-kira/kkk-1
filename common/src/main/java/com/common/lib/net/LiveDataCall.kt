@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import javax.net.ssl.SSLHandshakeException
 import kotlin.reflect.KClass
 
@@ -20,6 +21,7 @@ import kotlin.reflect.KClass
  * Created by weisl on 2019/8/12.
  */
 class LiveDataCall<T>(
+    private val clazz: Class<T>,
     private val skipLogin: Boolean,
     private val flowable: () -> Flowable<BaseResponse<T>>
 ) : LiveData<BaseResponse<T>>() {
@@ -33,7 +35,7 @@ class LiveDataCall<T>(
                 flowable()
             }.doOnNext {
                 if (it.isSuccess() && !it.data.isNullOrEmpty()) {
-                    it.parseT()
+                    it.parseT(clazz)
                 } else if (!it.isAppForcedUpdate() || it.data.isNullOrEmpty()) {
                     throw HttpResponseException(it.code, it.message)
                 }
@@ -53,6 +55,7 @@ class LiveDataCall<T>(
                     ?.onFailed(getErrorReponse(throwable), skipLogin)
             })
     }
+
 
     override fun onInactive() {
         super.onInactive()

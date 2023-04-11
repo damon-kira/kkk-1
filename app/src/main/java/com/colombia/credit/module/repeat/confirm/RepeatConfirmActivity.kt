@@ -14,8 +14,10 @@ import com.colombia.credit.databinding.LayoutRepeatItemProductBinding
 import com.colombia.credit.expand.SimpleOnItemClickListener
 import com.colombia.credit.expand.setOnItemClickListener
 import com.colombia.credit.module.adapter.SafeLinearLayoutManager
+import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +29,10 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private val mAdapter by lazy {
         ConfirmProductAdapter(arrayListOf())
     }
+
+    private val mConfirmLoanViewModel by lazyViewModel<FirstConfirmViewModel>()
+
+    private val mInfoViewModel by lazyViewModel<RepeatConfirmViewModel>()
 
     private var mTotalAmount = ""
 
@@ -41,6 +47,10 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mBinding.tvConfirm.setBlockingOnClickListener(this)
         mBinding.tvCancel.setBlockingOnClickListener(this)
         mBinding.tvBankNo.setBlockingOnClickListener(this)
+
+        mInfoViewModel.mConfirmInfoLiveData.observerNonSticky(this) {
+
+        }
     }
 
     override fun onClick(v: View?) {

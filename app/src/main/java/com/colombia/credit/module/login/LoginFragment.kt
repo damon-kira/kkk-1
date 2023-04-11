@@ -30,7 +30,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment : BaseLoginFragment() {
     private val mBinding by binding(FragmentLoginBinding::inflate)
+
     private val mViewModel by lazyViewModel<LoginViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

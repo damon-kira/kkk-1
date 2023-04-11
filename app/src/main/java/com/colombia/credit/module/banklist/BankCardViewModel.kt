@@ -50,6 +50,8 @@ class BankCardViewModel @Inject constructor(private val repository: BankCardRepo
         if (event == Lifecycle.Event.ON_CREATE) {
             mBankNameLiveData.observerNonSticky(source) {}
             getBankName()
+        } else if (event == Lifecycle.Event.ON_DESTROY) {
+            source.lifecycle.removeObserver(this)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.colombia.credit.module.banklist
 
+import android.graphics.Color
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
@@ -14,6 +15,8 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.StatusBarUtil.setStatusBar
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +45,6 @@ class BankInfoAddActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setViewModelLoading(mViewModel)
         setViewModelLoading(mBankViewModel)
         lifecycle.addObserver(mBankViewModel)
@@ -82,6 +84,11 @@ class BankInfoAddActivity : BaseActivity() {
                 finish()
             } else it.ShowErrorMsg()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setStatusBarColor(Color.WHITE, true)
     }
 
     private fun checkCommitInfo(): Boolean {

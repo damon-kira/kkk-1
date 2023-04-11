@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.face
 
 import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.colombia.credit.di.UploadApiService
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessRepository
@@ -18,7 +19,7 @@ class FaceRepository @Inject constructor(@UploadApiService private val uploadApi
     override fun getCacheKey(): String = SharedPrefKeyManager.KEY_FACE_INFO
 
     //{{app_url}}/userInfo/submitUserCheckFaceV2?headingCodeId=4fdas41&durationStay=2311&eventOrigin=06
-    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request {
+    override fun uploadInfo(info: IReqBaseInfo) = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val path = (info as ReqFaceInfo).path.orEmpty()
         val file = File(path)
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)

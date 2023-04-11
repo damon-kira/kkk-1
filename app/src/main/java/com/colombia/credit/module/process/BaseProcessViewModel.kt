@@ -1,6 +1,7 @@
 package com.colombia.credit.module.process
 
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 
@@ -8,7 +9,7 @@ abstract class BaseProcessViewModel : BaseViewModel(), IBaseProcessViewModel {
 
     protected var isUploadSuccess = false // 是否上传成功，上传成功不保存进件填写信息
 
-    val mUploadLiveData = generatorLiveData<BaseResponse<String>>()
+    val mUploadLiveData = generatorLiveData<BaseResponse<RspResult>>()
 }
 
 interface IBaseProcessViewModel {

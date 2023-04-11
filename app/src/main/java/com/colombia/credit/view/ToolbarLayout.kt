@@ -3,16 +3,19 @@ package com.colombia.credit.view
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
+import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import com.colombia.credit.R
 import com.colombia.credit.databinding.LayoutToolbarBinding
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.ifShow
+import com.util.lib.sp
 
 /**
  * Created by weisl on 2019/10/22.
@@ -95,6 +98,10 @@ class ToolbarLayout : RelativeLayout {
                             setCustomImage(customRes)
                         }
                     }
+                    R.styleable.ToolbarLayout_tl_textsize -> {
+                        val textsize = ta.getDimension(attr, 14f.sp())
+                        setTextSize(textsize)
+                    }
                 }
             }
             ta.recycle()
@@ -124,6 +131,10 @@ class ToolbarLayout : RelativeLayout {
     }
 
     fun getTitleText(): String? = mBinding.toolbarTvTitle.text.toString()
+
+    fun setTextSize(@Px textsize: Float){
+        mBinding.toolbarTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textsize)
+    }
 
     fun setOnbackListener(onClick: () -> Unit) {
         mBinding.toolbarAivBack.setBlockingOnClickListener {

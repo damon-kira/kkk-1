@@ -36,8 +36,12 @@
             android:id="@+id/etv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:textColor="@color/color_32C558"
+            android:gravity="center"
+            android:minWidth="92dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="2dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="2dp"
             android:textSize="12sp"
             app:etv_corner="2dp"
             tools:text="@string/history_status_repay" />
@@ -47,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="24dp" />
 
-    <!--  -->
+    <!-- 正常订单 -->
     <LinearLayout
         android:id="@+id/ll_normal"
         android:layout_width="match_parent"
@@ -97,6 +101,7 @@
                 tools:text="$ 5.000" />
 
             <TextView
+                android:id="@+id/history_tv_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -119,17 +124,7 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <!-- 拒绝文案显示 -->
-    <TextView
-        android:id="@+id/tv_refused"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/history_refused_text"
-        android:textColor="@color/color_333333"
-        android:textSize="14sp"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
+    <!-- 拒绝or失败订单 -->
     <LinearLayout
         android:id="@+id/ll_failure"
         android:layout_width="match_parent"
@@ -140,6 +135,7 @@
         tools:visibility="visible">
 
         <TextView
+            android:id="@+id/tv_text_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -148,7 +144,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_loan"
+            android:id="@+id/history_tv_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
