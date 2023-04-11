@@ -10,13 +10,18 @@ import java.lang.reflect.ParameterizedType
 /**
  * Created by weisl on 2019/8/12.
  */
-open class BaseResponse<T>@JvmOverloads constructor(var code: Int, val data: String, val message: String?, val e: Throwable? = null) {
+open class BaseResponse<T> @JvmOverloads constructor(
+    var code: Int,
+    val data: String?,
+    val message: String?,
+    val e: Throwable? = null
+) {
     var t: T? = null
 
     fun parseT(/*clazz: Class<T>*/): T? {
         if (t == null) {
             try {
-                t = GsonUtil.fromJson(data, getType<T>()) as? T
+                t = GsonUtil.fromJson(data!!, getType<T>()) as? T
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -24,7 +29,7 @@ open class BaseResponse<T>@JvmOverloads constructor(var code: Int, val data: Str
         return t
     }
 
-    private fun <T>getType(): Class<out Any?> {
+    private fun <T> getType(): Class<out Any?> {
         val genericSuppress = this.javaClass.genericSuperclass as ParameterizedType
         val type = genericSuppress.actualTypeArguments[0]
         if (type is Class<*>) {
@@ -58,9 +63,9 @@ open class BaseResponse<T>@JvmOverloads constructor(var code: Int, val data: Str
      * @return 返回提示信息
      */
     fun <T> parsingData(clazz: Class<T>): T? {
-        val decryptStr = AESNormalUtil.mexicoDecrypt(data)
         var bean: T? = null
         try {
+            val decryptStr = AESNormalUtil.mexicoDecrypt(data!!)
             if (!decryptStr.isNullOrEmpty()) {
                 bean = GsonUtil.fromJson(decryptStr.orEmpty(), clazz) as? T
             }

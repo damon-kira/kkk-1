@@ -32,9 +32,9 @@ class LiveDataCall<T>(
             .flatMap {
                 flowable()
             }.doOnNext {
-                if (it.isSuccess()) {
+                if (it.isSuccess() && !it.data.isNullOrEmpty()) {
                     it.parseT()
-                } else if (!it.isAppForcedUpdate() || it.data.isEmpty()) {
+                } else if (!it.isAppForcedUpdate() || it.data.isNullOrEmpty()) {
                     throw HttpResponseException(it.code, it.message)
                 }
             }

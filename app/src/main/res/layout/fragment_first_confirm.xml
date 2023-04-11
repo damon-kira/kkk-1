@@ -63,6 +63,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_amount"
             app:layout_constraintTop_toTopOf="@id/tv_amount" />
 
+        <!-- 借款金额 -->
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
@@ -221,6 +222,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line" />
 
+        <!-- 放款金额 -->
         <TextView
             android:id="@+id/tv_loan_value"
             android:layout_width="wrap_content"

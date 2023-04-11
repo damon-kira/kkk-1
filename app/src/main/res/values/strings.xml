@@ -194,6 +194,9 @@
     <string name="confirm_amount_text">La cantidad que puede pedir prestada</string>
     <string name="confirm_period">Periódo del Préstamo</string>
     <string name="toast_level_hint">Por el momento no puedes cambiar tu puntuaje crediticio,éste se incrementa cada vez que pagas a tiempo.</string>
+    <string name="toast_max_amount">Pague a tiempo para obtener una cantidad mayor</string><!-- 当前已是最高金额 -->
+    <string name="toast_mix_amount">Este es el monto mínimo.</string><!-- 当前是最低金额 -->
+
     <string name="loan_amount_text">Importe real recibido</string>
     <string name="repay_amount">Monto Pagado</string>
     <string name="loan_bank">Cuenta bancaria receptora</string>
@@ -285,5 +288,5 @@
     <string name="detail_title">Detalles de la cantidad de reembolso</string>
     <string name="dialog_loan_amount_text">Monto Recibido</string>
     <string name="overdue_text">Comisión por Pago Tardío</string>
-    <string name="bank_add_title">Préstamo exitoso</string><!-- 展期还款 -->
+    <string name="bank_add_title">Préstamo exitoso</string>
 </resources>

@@ -30,6 +30,9 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
     private var mTotalAmount = ""
 
+    private var mProductId = ""
+    private var mBankNo = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
@@ -53,7 +56,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 // 底部list展开或收起
             }
             R.id.tv_bank_no -> {
-                Launch.skipBankCardListActivity(this, mTotalAmount)
+                Launch.skipBankCardListActivity(this, mTotalAmount, mProductId)
             }
         }
     }

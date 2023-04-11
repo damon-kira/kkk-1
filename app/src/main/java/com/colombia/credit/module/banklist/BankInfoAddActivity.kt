@@ -78,6 +78,7 @@ class BankInfoAddActivity : BaseActivity() {
 
         mViewModel.mUploadLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
+                setResult(RESULT_OK)
                 finish()
             } else it.ShowErrorMsg()
         }

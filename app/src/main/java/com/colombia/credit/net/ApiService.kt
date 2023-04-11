@@ -84,6 +84,10 @@ interface ApiService {
     @Headers("kio8YGhwe6:Xp6nHk4YsB")
     fun getBankAccountList(): Flowable<BaseResponse<RspBankAccount>>
 
+    @POST("aKzLLSv/F2Y")
+    @Headers("kio8YGhwe6:Zg2tPm4KlN")
+    fun confirmLoan(@Body body: RequestBody): Flowable<BaseResponse<String>>
+
     @POST("tZyFyDwU/wD9X")
     @Headers("kio8YGhwe6:UzB5rkIgVd")
     fun logout(@Body body: RequestBody): Flowable<BaseResponse<String>>

@@ -8,15 +8,16 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.provider.Settings
+import androidx.fragment.app.Fragment
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
 import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
 import com.colombia.credit.module.banklist.BankCardListActivity
 import com.colombia.credit.module.banklist.BankInfoAddActivity
+import com.colombia.credit.module.banklist.ConfirmBankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
 import com.colombia.credit.module.defer.DeferActivity
-import com.colombia.credit.module.defer.DeferActivity_GeneratedInjector
 import com.colombia.credit.module.history.HistoryActivity
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
@@ -30,6 +31,8 @@ import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
 import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
+import com.common.lib.base.BaseActivity
+import com.common.lib.base.BaseFragment
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
@@ -63,15 +66,29 @@ object Launch {
         launch(context, BankInfoAddActivity::class.java)
     }
 
+    fun skipBankInfoAddActivityResult(activity: BaseActivity, requestCode: Int) {
+        val intent = Intent(activity, BankInfoAddActivity::class.java)
+        activity.launchForResult(intent, requestCode)
+    }
+
     fun skipKycInfoActivity(context: Context) {
         launch(context, KycInfoActivity::class.java)
     }
 
     // 银行账户页面
-    fun skipBankCardListActivity(context: Context, amount: String) {
-        val intent = Intent(context, BankCardListActivity::class.java)
-        intent.putExtra(BankCardListActivity.EXTRA_AMOUNT, amount)
-        launch(context, BankCardListActivity::class.java, intent)
+    fun BaseActivity.skipBankCardListActivity(amount: String, productId: String) {
+        val intent = Intent(this, ConfirmBankCardListActivity::class.java)
+        intent.putExtra(ConfirmBankCardListActivity.EXTRA_LOAN_AMOUNT, amount)
+        intent.putExtra(ConfirmBankCardListActivity.EXTRA_PRODUCT_ID, productId)
+        launchForResult(intent, 10)
+    }
+
+    // 银行账户页面
+    fun skipBankCardListActivity(context: Context, amount: String, productId: String) {
+        val intent = Intent(context, ConfirmBankCardListActivity::class.java)
+        intent.putExtra(ConfirmBankCardListActivity.EXTRA_LOAN_AMOUNT, amount)
+        intent.putExtra(ConfirmBankCardListActivity.EXTRA_PRODUCT_ID, productId)
+        launch(context, ConfirmBankCardListActivity::class.java, intent)
     }
 
     fun skipMeBankCardListActivity(context: Context) {
@@ -265,5 +282,9 @@ private fun <T> launch(context: Context, clazz: Class<T>, intent: Intent? = null
 }
 
 fun Activity.launchForResult(intent: Intent, requestCode: Int) {
+    this.startActivityForResult(intent, requestCode)
+}
+
+fun Fragment.launchForResult(intent: Intent, requestCode: Int) {
     this.startActivityForResult(intent, requestCode)
 }
