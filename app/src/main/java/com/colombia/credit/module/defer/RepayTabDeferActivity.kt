@@ -1,6 +1,7 @@
 package com.colombia.credit.module.defer
 
 import android.os.Bundle
+import com.colombia.credit.bean.resp.RspRepayOrders
 import com.colombia.credit.databinding.ActivityDeferBinding
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -9,20 +10,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 // 展期
 @AndroidEntryPoint
-open class DeferActivity : BaseActivity() {
-
-    companion object {
-        const val EXTRA_INFO = "info"
-    }
-
-    protected val mBinding by binding<ActivityDeferBinding>()
+open class RepayTabDeferActivity : DeferActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
-
-        mBinding.tvApply.setBlockingOnClickListener {
-            // 调用支付
-        }
+//        val orderDetail = intent.getParcelableExtra<RspRepayOrders.RepayOrderDetail>(EXTRA_INFO)
+//        orderDetail?.let {
+//            mBinding.tvAmount
+//        }
     }
 }

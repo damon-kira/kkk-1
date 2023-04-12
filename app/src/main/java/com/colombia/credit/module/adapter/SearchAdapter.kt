@@ -6,7 +6,7 @@ import androidx.annotation.LayoutRes
 import com.colombia.credit.bean.SearchInfo
 import org.jetbrains.annotations.NotNull
 
-abstract class SearchAdapter<T>(@NotNull private val items: ArrayList<T>, @LayoutRes private var layoutRes: Int) :
+abstract class SearchAdapter<T>(@NotNull private val items: ArrayList<T>, layoutRes: Int) :
     BaseRecyclerViewAdapter<T>(items, layoutRes),
     Filterable {
 

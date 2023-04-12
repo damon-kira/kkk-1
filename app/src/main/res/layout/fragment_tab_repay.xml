@@ -33,8 +33,9 @@
         android:id="@+id/recyclerview"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aiv_banner" />
 
     <TextView
@@ -63,7 +64,7 @@
         android:paddingTop="4dp"
         android:paddingRight="12dp"
         android:paddingBottom="4dp"
-        android:text="Puede pagar varios pedidos al mismo tiempo"
+        android:text="@string/tab_repay_btn_hint"
         android:textColor="@color/white"
         android:textSize="11sp"
         app:etv_corner_type="normal"
@@ -84,5 +85,14 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/aiv_banner" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tv_repay,etv_repay_hint,recyclerview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,20 +9,17 @@ import android.widget.TextView
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.colombia.credit.databinding.LayoutItemHistoryBinding
-import com.common.lib.viewbinding.newBindingViewHolder
 import org.jetbrains.annotations.NotNull
 
 /**
  * Created by weisl on 2018/9/12.
  */
-abstract class BaseRecyclerViewAdapter<T>(@NotNull private val items: ArrayList<T>, @LayoutRes private var layoutRes: Int) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRecyclerViewAdapter<T>(@NotNull private val items: ArrayList<T>, @LayoutRes protected var layoutRes: Int) : RecyclerView.Adapter<BaseViewHolder>() {
 
     protected var mListener: OnItemClickListener<T>? = null
     protected var currentItems = items
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        newBindingViewHolder<LayoutItemHistoryBinding>(parent)
         return BaseViewHolder(LayoutInflater.from(parent.context).inflate(layoutRes, parent, false))
     }
 

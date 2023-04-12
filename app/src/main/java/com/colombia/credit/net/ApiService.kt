@@ -6,7 +6,6 @@ import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
-import java.util.concurrent.Flow
 
 
 interface ApiService {
@@ -101,4 +100,9 @@ interface ApiService {
     @POST("S56sI1etMP/bkz")
     @Headers("kio8YGhwe6:32rbrKpP3I")
     fun getHistoryInfo(): Flowable<BaseResponse<RspHistoryInfo>>
+
+    //获取还款订单
+    @POST("Fzr/DnfbJqlp")
+    @Headers("kio8YGhwe6:Iv7mKp0TcE")
+    fun getRepayOrders(): Flowable<BaseResponse<RspRepayOrders>>
 }

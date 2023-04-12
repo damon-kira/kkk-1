@@ -8,12 +8,11 @@ object ResponseCode {
     const val FORCED_UPDATE_CODE = 800800 //强制升级
 
     const val FAILED_CHECK = -10
-    const val SUCCESS = 200
     const val LOADING = -10
     const val FAILED = -1
 
     const val TAG = "okhttp"
-    const val SUCCESS_CODE = 0//接口请求成功码
+    const val SUCCESS_CODE = 200//接口请求成功码
     const val OTHER_ERROR_CODE = -111//其他未定义错误
     const val SSL_ERROR_CODE = 120 // CA证书失效
     const val REQUEST_ERROR_CODE = -2//请求失败

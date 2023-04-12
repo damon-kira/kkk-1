@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
     android:background="@drawable/shape_white_10dp"
     android:orientation="vertical"
     android:paddingLeft="12dp"
@@ -17,11 +18,13 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aiv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/svg_home_logo" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -30,25 +33,31 @@
             android:textColor="@color/color_333333"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/etv_status"
+        <com.colombia.credit.view.TextViewDrawable
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingTop="2dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="2dp"
-            android:textColor="@color/selector_repay_status_textcolor"
-            android:textSize="12sp"
             android:background="@drawable/selector_repay_status"
-            tools:text="@string/history_status_repay" />
+            android:minWidth="96dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="2dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="2dp"
+            android:text="@string/history_status_repay"
+            android:textColor="@color/selector_repay_status_textcolor"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            app:srcCompat="@drawable/svg_arrow_right_solid" />
     </LinearLayout>
 
     <Space
         android:layout_width="0dp"
         android:layout_height="24dp" />
 
-    <!--  -->
+    <!-- 订单信息 -->
     <LinearLayout
         android:id="@+id/ll_normal"
         android:layout_width="match_parent"
@@ -57,16 +66,16 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/aiv_checkbox"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
-            android:button="@null"
             app:srcCompat="@drawable/selector_checkbox_icon" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -74,10 +83,10 @@
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$ 5.000"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="$ 5.000" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,9 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_333333"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="$ 5.000" />
+                tools:text="02/03/2023" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,11 +121,13 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
+        <!-- 展期按钮 -->
         <TextView
-            android:id="@+id/tv_repay"
+            android:id="@+id/tv_extension"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
             android:drawablePadding="2dp"
             android:gravity="center_vertical"
             android:padding="4dp"

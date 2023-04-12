@@ -42,7 +42,7 @@ class BaseResponse<T> @JvmOverloads constructor(
 
     fun getData(): T? = t
 
-    fun isSuccess() = code == ResponseCode.SUCCESS
+    fun isSuccess() = code == ResponseCode.SUCCESS_CODE
 
     /** 没有活动信息 */
     fun isActivitiesFailed() = code == ResponseCode.ERROR_ACTIVITIES_FAILED
