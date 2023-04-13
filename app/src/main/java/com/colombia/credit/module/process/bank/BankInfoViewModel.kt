@@ -4,6 +4,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlin.math.min
 
 // 上传银行卡信息
 @HiltViewModel
@@ -19,8 +20,19 @@ class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepo
         }
     }
 
+    override fun getInfo() {
+        mInfoLiveData.addSourceLiveData(repository.getInfo()) {
+            if (it.isSuccess()) {
+                mInfoLiveData.postValue(it.getData())
+            }
+        }
+    }
+
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess) return
+        if (isUploadSuccess){
+            removeCacheInfo()
+            return
+        }
         repository.saveCacheInfo(info)
     }
 

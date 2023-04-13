@@ -45,25 +45,50 @@ interface ApiService {
     @Headers("kio8YGhwe6:Qb5rDc2PnE")
     fun uploadPersonalInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
+    // 获取个人信息
+    @POST("yiuS/qLJ4i0Ay")
+    @Headers("kio8YGhwe6:Wu9mLq3KjP")
+    fun getPersonalInfo(): Flowable<BaseResponse<RspPersonalInfo>>
+
     // 上传工作信息
     @POST("zJWiAtubkn/PX9")
     @Headers("kio8YGhwe6:Nf8xLg7JkY")
     fun uploadWorkInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
+
+    // 获取工作信息
+    @POST("wmWk3mXiL/VSWq5s")
+    @Headers("kio8YGhwe6:Eh4vRp5NcB")
+    fun getWorkInfo(): Flowable<BaseResponse<RspWorkInfo>>
 
     // 上传联系人信息
     @POST("fxqYSZI11H/aDGVjE")
     @Headers("kio8YGhwe6:Uw2vMl5ZtP")
     fun uploadContactInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
+    // 获取联系人信息
+    @POST("B4GHMias/N9qiifls")
+    @Headers("kio8YGhwe6:Gk1nFj8TzS")
+    fun getContactInfo(): Flowable<BaseResponse<RspContactInfo>>
+
     // 上传银行信息
     @POST("nThpJKyVhe/xCwc5dop")
     @Headers("kio8YGhwe6:Vc9rKf1GhT")
     fun uploadBankInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
+    // 获取银行信息 待修改接口
+    @POST("nThpJKyVhe/xCwc5dop")
+    @Headers("kio8YGhwe6:Vc9rKf1GhT")
+    fun getBankInfo(): Flowable<BaseResponse<RspBankInfo>>
+
     // 上传身份证信息
     @POST("5Vw4Bz/sx4Yn6V")
     @Headers("kio8YGhwe6:Zt1xQb2VuL")
     fun uploadKycInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
+
+    // 获取身份证信息
+    @POST("NgX06XLb9a/jzPHk")
+    @Headers("kio8YGhwe6:Ys3xMl6DpB")
+    fun getKycInfo(): Flowable<BaseResponse<RspKycInfo>>
 
     // 获取认证进度
     @POST("mPmB1n2Nh/fxC")

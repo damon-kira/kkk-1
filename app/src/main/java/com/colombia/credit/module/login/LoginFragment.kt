@@ -104,6 +104,7 @@ class LoginFragment : BaseLoginFragment() {
 //                return@setBlockingOnClickListener
 //            }
 //            mViewModel.reqLogin(mobile, code)
+            mFirstPageLoanAmount = "5000"
             jumpProcess(getSupportContext(), TYPE_CONTACT)
         }
 

@@ -5,6 +5,7 @@ import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqWorkInfo
+import com.colombia.credit.bean.resp.RspWorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
 import com.colombia.credit.expand.TYPE_CONTACT
 import com.colombia.credit.expand.jumpProcess
@@ -51,6 +52,10 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivJobYear.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
+        initObserver()
+    }
+
+    private fun initObserver() {
         mViewModel.mUploadLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 Launch.skipContactInfoActivity(this)
@@ -78,6 +83,27 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
         }
+
+        mViewModel.mInfoLiveData.observerNonSticky(this) { info ->
+            if (info !is RspWorkInfo) return@observerNonSticky
+            val jobTime = info.iBwnjiNbTX
+            if (mJobYear.containsKey(jobTime)) {
+                setBaseInfo(mBinding.bivJobYear, mJobYear[jobTime], jobTime)
+            }
+            val income = info.P2i72V
+            if (mJobIncomeSource.containsKey(income)) {
+                setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
+            }
+            val payday = info.RbNJgGj
+            if (mPayCycle.containsKey(payday)) {
+                setBaseInfo(mBinding.bivPayday, mPayCycle[payday], payday)
+            }
+            val jobType = info.V33vxNjkQf
+            if (mJobType.containsKey(jobType)) {
+                setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
+            }
+        }
+        mViewModel.getInfo()
     }
 
     override fun onClick(v: View?) {

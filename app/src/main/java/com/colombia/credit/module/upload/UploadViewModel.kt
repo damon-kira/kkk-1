@@ -13,6 +13,8 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         repository.uploadInfo()
     }
 
+    override fun getInfo() {}
+
     override fun saveCacheInfo(info: IReqBaseInfo) {
 
     }

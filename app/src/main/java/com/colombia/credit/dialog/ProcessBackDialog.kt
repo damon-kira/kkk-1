@@ -4,6 +4,7 @@ import android.content.Context
 import com.colombia.credit.R
 import com.colombia.credit.databinding.DialogProcessRetentionBinding
 import com.colombia.credit.expand.formatCommon
+import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.mFirstPageLoanAmount
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
@@ -21,7 +22,11 @@ class ProcessBackDialog constructor(context: Context): DefaultDialog(context) {
         mBinding.retentionTvCancel.setBlockingOnClickListener {
             dismiss()
         }
-        mBinding.tvAmount.text = getString(R.string.amount_unit, formatCommon(mFirstPageLoanAmount))
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        mBinding.tvAmount.text = getUnitString(mFirstPageLoanAmount)
     }
 
     fun setOnClickListener(clickListener: () -> Unit): ProcessBackDialog {

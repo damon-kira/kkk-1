@@ -12,13 +12,21 @@ import javax.inject.Inject
 @HiltViewModel
 class KycViewModel @Inject constructor(private val repository: KycRepository) :
     BaseProcessViewModel() {
-
-    val imageLivedata = generatorLiveData<BaseResponse<KycOcrInfo>>()
+    private val _imageLiveData = generatorLiveData<BaseResponse<KycOcrInfo>>()
+    val imageLivedata = _imageLiveData
     fun uploadImage(path: String, type: Int) {
         val json = GsonUtil.toJson(KycOcrInfo())
-        imageLivedata.postValue(BaseResponse(0, json.orEmpty(), ""))
-        imageLivedata.addSourceLiveData(repository.uploadImage(path, type)) {
-            imageLivedata.postValue(it)
+        _imageLiveData.postValue(BaseResponse(0, json.orEmpty(), ""))
+        _imageLiveData.addSourceLiveData(repository.uploadImage(path, type)) {
+            _imageLiveData.postValue(it)
+        }
+    }
+
+    override fun getInfo() {
+        mInfoLiveData.addSourceLiveData(repository.getInfo()) {
+            if (it.isSuccess()) {
+                mInfoLiveData.postValue(it.getData())
+            }
         }
     }
 
@@ -31,7 +39,10 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     }
 
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess) return
+        if (isUploadSuccess){
+            removeCacheInfo()
+            return
+        }
         repository.saveCacheInfo(info)
     }
 

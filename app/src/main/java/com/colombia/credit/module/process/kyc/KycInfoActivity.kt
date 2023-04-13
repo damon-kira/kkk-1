@@ -8,6 +8,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
+import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.DatePickerDialog
 import com.colombia.credit.expand.TYPE_FACE
@@ -99,6 +100,23 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    private fun loadImage(url: String?, type: Int) {
+        if (url.isNullOrEmpty()) return
+        GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
+            if (bitmap != null) {
+                if (type == PicType.PIC_FRONT) {
+                    mBinding.ilPic.setLeftImage(bitmap)
+                    mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_SUCCESS)
+                    mBinding.ilPic.setLeftEnable(false)
+                } else {
+                    mBinding.ilPic.setRightImage(bitmap)
+                    mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_SUCCESS)
+                    mBinding.ilPic.setRightEnable(false)
+                }
+            }
+        }, {})
+    }
+
     override fun onRestart() {
         super.onRestart()
         if (isJumpSetting) {
@@ -115,9 +133,24 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
             it.getData()?.let { info ->
                 setDetailInfo(info)
+                mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
             }
-            setDetailInfo(KycOcrInfo())
         }
+
+        mViewModel.mInfoLiveData.observerNonSticky(this) { info ->
+            if (info !is RspKycInfo) return@observerNonSticky
+            mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
+            mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
+            mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
+            mBinding.kycBivBirthday.setViewText(info.YiWtoa1.orEmpty())
+            if (mGender.containsKey(info.DrD60)) {
+                setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
+            }
+            loadImage(info.fefFSZ, PicType.PIC_FRONT)
+
+            loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
+        }
+        mViewModel.getInfo()
     }
 
     private fun reqPermission() {

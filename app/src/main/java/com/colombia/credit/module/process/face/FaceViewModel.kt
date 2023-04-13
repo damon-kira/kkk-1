@@ -17,6 +17,9 @@ class FaceViewModel @Inject constructor(private val repository: FaceRepository) 
         }
     }
 
+    override fun getInfo() {
+    }
+
     override fun saveCacheInfo(info: IReqBaseInfo) {
     }
 

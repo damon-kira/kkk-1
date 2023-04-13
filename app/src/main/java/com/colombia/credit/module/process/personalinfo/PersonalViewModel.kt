@@ -27,8 +27,19 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
         }
     }
 
+    override fun getInfo() {
+        mInfoLiveData.addSourceLiveData(repository.getInfo()) {
+            if (it.isSuccess()) {
+                mInfoLiveData.postValue(it.getData())
+            }
+        }
+    }
+
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess) return
+        if (isUploadSuccess){
+            removeCacheInfo()
+            return
+        }
         repository.saveCacheInfo(info)
     }
 

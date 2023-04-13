@@ -5,6 +5,7 @@ import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqPersonalInfo
+import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.expand.ShowErrorMsg
@@ -80,10 +81,25 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             if (mAddrDialog.isShowing || list.isNullOrEmpty()) return@observerNonSticky
             mAddrDialog.setAddressInfo(list).show()
         }
-    }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
+            if (info !is RspPersonalInfo) return@observerNonSticky
+
+            mBinding.bivEmail.setViewText(info.OloW.orEmpty())
+            if (!info.tKgYzqB7yP.isNullOrEmpty() && !info.ZzBVPho.isNullOrEmpty()) {
+                mBinding.bivAddress.setViewText(info.tKgYzqB7yP.orEmpty() + "," + info.ZzBVPho)
+            }
+            mBinding.bivAddrDetail.setViewText(info.fomX9KPzpi.orEmpty())
+            val education = info.rtA8s2HSB
+            if (mEducation.containsKey(education)) {
+                setBaseInfo(mBinding.bivEducation, mEducation[info.rtA8s2HSB], info.rtA8s2HSB)
+            }
+            val marriage = info.wXlWnOHPzK
+            if (mMarriage.containsKey(marriage)) {
+                setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+            }
+        }
+        mViewModel.getInfo()
     }
 
     override fun onClick(v: View?) {

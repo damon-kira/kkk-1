@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqBankInfo
+import com.colombia.credit.bean.resp.RspBankInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
 import com.colombia.credit.expand.TYPE_IDENTITY
@@ -13,6 +14,7 @@ import com.colombia.credit.module.banklist.BankCardViewModel
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 
 class BankInfoActivity : BaseProcessActivity() {
@@ -67,6 +69,19 @@ class BankInfoActivity : BaseProcessActivity() {
 
         mViewModel.getCacheInfo()?.let {info ->
             info as ReqBankInfo
+            mBinding.layoutBank.bivName.setViewText(info.thXggvo.orEmpty())
+            mBinding.layoutBank.bivName.tag = info.GiQ40BKKr
+            mBinding.layoutBank.bivBankno.setViewText(info.Bkmaj97.orEmpty())
+            if (info.SElc4 == "0") {
+                mBinding.layoutBank.bankRbAhorrs.isChecked = true
+            } else if (info.SElc4 == "1") {
+                mBinding.layoutBank.bankRbCorriente.isChecked = true
+            }
+        }
+
+        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
+            if (info !is RspBankInfo) return@observerNonSticky
+
             mBinding.layoutBank.bivName.setViewText(info.thXggvo.orEmpty())
             mBinding.layoutBank.bivName.tag = info.GiQ40BKKr
             mBinding.layoutBank.bivBankno.setViewText(info.Bkmaj97.orEmpty())

@@ -7,6 +7,7 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.PhoneAndName
 import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.RspContactInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
 import com.colombia.credit.expand.TYPE_BANK
 import com.colombia.credit.expand.getMobile
@@ -20,6 +21,7 @@ import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.dp
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,8 +71,31 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 mBinding.bivContact2.setDesc(getString(R.string.mobile_s, info.fHdl))
                 mBinding.bivContact2.tag = info.fHdl
             }
-
         }
+
+        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
+            if (info !is RspContactInfo) return@observerNonSticky
+
+            if (mRelationship.containsKey(info.yYVUx)) {
+                setBaseInfo(
+                    mBinding.bivRelationship,
+                    mRelationship[info.yYVUx],
+                    info.yYVUx
+                )
+            }
+            mBinding.bivContact1.setViewText(info.MGwL.orEmpty())
+            if(!info.fTvY4N5.isNullOrEmpty()) {
+                mBinding.bivContact1.setDesc(getString(R.string.mobile_s, info.fTvY4N5))
+                mBinding.bivContact1.tag = info.fTvY4N5
+            }
+
+            mBinding.bivContact2.setViewText(info.dZgCz3.orEmpty())
+            if (!info.fWvRFuMb.isNullOrEmpty()) {
+                mBinding.bivContact2.setDesc(getString(R.string.mobile_s, info.fWvRFuMb))
+                mBinding.bivContact2.tag = info.fWvRFuMb
+            }
+        }
+        mViewModel.getInfo()
     }
 
 

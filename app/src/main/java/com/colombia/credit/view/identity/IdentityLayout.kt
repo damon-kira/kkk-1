@@ -68,6 +68,14 @@ class IdentityLayout : LinearLayout {
         mBinding.ivRight.isEnabled = rightEnable
     }
 
+    fun setLeftEnable(leftEnable: Boolean) {
+        mBinding.ivLeft.isEnabled  = leftEnable
+    }
+
+    fun setRightEnable(leftEnable: Boolean) {
+        mBinding.ivRight.isEnabled  = leftEnable
+    }
+
     fun setClickListener(leftListener: (View) -> Unit, rightListener: (View) -> Unit) {
         mBinding.ivLeft.setBlockingOnClickListener(leftListener)
         mBinding.ivRight.setBlockingOnClickListener(rightListener)

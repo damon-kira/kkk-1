@@ -4,6 +4,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlin.math.min
 
 // 上传工作信息
 @HiltViewModel
@@ -18,8 +19,19 @@ class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepo
         }
     }
 
+    override fun getInfo() {
+        mInfoLiveData.addSourceLiveData(repository.getInfo()) {
+            if (it.isSuccess()) {
+                mInfoLiveData.postValue(it.getData())
+            }
+        }
+    }
+
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess) return
+        if (isUploadSuccess){
+            removeCacheInfo()
+            return
+        }
         repository.saveCacheInfo(info)
     }
 

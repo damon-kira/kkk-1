@@ -6,6 +6,5 @@ import javax.inject.Inject
 class UploadRepository @Inject constructor(): BaseRepository() {
 
     fun uploadInfo() {
-
     }
 }
