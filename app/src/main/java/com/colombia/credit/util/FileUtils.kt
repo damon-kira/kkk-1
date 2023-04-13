@@ -20,17 +20,16 @@ object FileUtils {
         Flowable.fromPublisher<String> {
             try {
                 val inputStream = context.assets.open(fileName)
-                val br = BufferedReader(InputStreamReader(inputStream))
-                var result = StringBuilder()
-                var line = br.readLine()
-                while (line != null) {
-                    result.append(line)
-                    line = br.readLine()
+                val result = StringBuilder()
+                BufferedReader(InputStreamReader(inputStream)).use { br ->
+                    var line = br.readLine()
+                    while (line != null) {
+                        result.append(line)
+                        line = br.readLine()
+                    }
+                    it.onNext(result.toString())
+                    it.onComplete()
                 }
-                it.onNext(result.toString())
-                it.onComplete()
-                inputStream.close()
-                br.close()
             } catch (e: Exception) {
                 it.onError(e)
             }

@@ -104,7 +104,7 @@ class LoginFragment : BaseLoginFragment() {
 //                return@setBlockingOnClickListener
 //            }
 //            mViewModel.reqLogin(mobile, code)
-            Launch.skipBankInfoAddActivity(getSupportContext())
+            Launch.skipPersonalInfoActivity(getSupportContext())
         }
 
 

@@ -1,0 +1,6902 @@
+[
+	{
+		"fluia": "1010100",
+		"cingorium": "Distrito Capital",
+		"sonList": [
+			{
+				"caldably": "1010101",
+				"cingorium": "Distrito Capital",
+				"fluia": "1010100",
+				"trophful": "Bogotá"
+			}
+		]
+	},
+	{
+		"fluia": "1020100",
+		"cingorium": "Casanare",
+		"sonList": [
+			{
+				"caldably": "1020101",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Yopal"
+			},
+			{
+				"caldably": "1020102",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Támara"
+			},
+			{
+				"caldably": "1020103",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Pore"
+			},
+			{
+				"caldably": "1020104",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Monterrey"
+			},
+			{
+				"caldably": "1020105",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Villanueva"
+			},
+			{
+				"caldably": "1020106",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Tauramena"
+			},
+			{
+				"caldably": "1020107",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Chámeza"
+			},
+			{
+				"caldably": "1020108",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Recetor"
+			},
+			{
+				"caldably": "1020109",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Nunchía"
+			},
+			{
+				"caldably": "1020110",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Sácama"
+			},
+			{
+				"caldably": "1020111",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Aguazul"
+			},
+			{
+				"caldably": "1020112",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "La Salina"
+			},
+			{
+				"caldably": "1020113",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Orocué"
+			},
+			{
+				"caldably": "1020114",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "San Luis de Palenque"
+			},
+			{
+				"caldably": "1020115",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Hato Corozal"
+			},
+			{
+				"caldably": "1020116",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Trinidad"
+			},
+			{
+				"caldably": "1020117",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Maní"
+			},
+			{
+				"caldably": "1020118",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Paz de Ariporo"
+			},
+			{
+				"caldably": "1020119",
+				"cingorium": "Casanare",
+				"fluia": "1020100",
+				"trophful": "Sabanalarga"
+			}
+		]
+	},
+	{
+		"fluia": "1030100",
+		"cingorium": "Meta",
+		"sonList": [
+			{
+				"caldably": "1030101",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "San Martín"
+			},
+			{
+				"caldably": "1030102",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Fuente de oro"
+			},
+			{
+				"caldably": "1030103",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "San Juanito"
+			},
+			{
+				"caldably": "1030104",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "La Uribe"
+			},
+			{
+				"caldably": "1030105",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Restrepo"
+			},
+			{
+				"caldably": "1030106",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "San Juan de Arama"
+			},
+			{
+				"caldably": "1030107",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "San Carlos de Guaroa"
+			},
+			{
+				"caldably": "1030108",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Puerto Gaitán"
+			},
+			{
+				"caldably": "1030109",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Puerto López"
+			},
+			{
+				"caldably": "1030110",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Acacías"
+			},
+			{
+				"caldably": "1030111",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Puerto Concordia"
+			},
+			{
+				"caldably": "1030112",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Puerto Rico"
+			},
+			{
+				"caldably": "1030113",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Mapiripán"
+			},
+			{
+				"caldably": "1030114",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Cubarral"
+			},
+			{
+				"caldably": "1030115",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Granada"
+			},
+			{
+				"caldably": "1030116",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Cumaral"
+			},
+			{
+				"caldably": "1030117",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Lejanías"
+			},
+			{
+				"caldably": "1030118",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "El Dorado"
+			},
+			{
+				"caldably": "1030119",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Castilla la Nueva"
+			},
+			{
+				"caldably": "1030120",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "El Castillo"
+			},
+			{
+				"caldably": "1030121",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "El Calvario"
+			},
+			{
+				"caldably": "1030122",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Mesetas"
+			},
+			{
+				"caldably": "1030123",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Guamal"
+			},
+			{
+				"caldably": "1030124",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Cabuyaro"
+			},
+			{
+				"caldably": "1030125",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Villavicencio"
+			},
+			{
+				"caldably": "1030126",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "La Macarena"
+			},
+			{
+				"caldably": "1030127",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Puerto Lleras"
+			},
+			{
+				"caldably": "1030128",
+				"cingorium": "Meta",
+				"fluia": "1030100",
+				"trophful": "Barranca de Upía"
+			}
+		]
+	},
+	{
+		"fluia": "1040100",
+		"cingorium": "Guainía",
+		"sonList": [
+			{
+				"caldably": "1040101",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Pana Pana"
+			},
+			{
+				"caldably": "1040102",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "La Guadalupe"
+			},
+			{
+				"caldably": "1040103",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Barranco Minas"
+			},
+			{
+				"caldably": "1040104",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "San Felipe"
+			},
+			{
+				"caldably": "1040105",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Puerto Colombia"
+			},
+			{
+				"caldably": "1040106",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Cacahual"
+			},
+			{
+				"caldably": "1040107",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Mapiripana"
+			},
+			{
+				"caldably": "1040108",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Morichal Nuevo"
+			},
+			{
+				"caldably": "1040109",
+				"cingorium": "Guainía",
+				"fluia": "1040100",
+				"trophful": "Inírida"
+			}
+		]
+	},
+	{
+		"fluia": "1050100",
+		"cingorium": "Caquetá",
+		"sonList": [
+			{
+				"caldably": "1050101",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Milán"
+			},
+			{
+				"caldably": "1050102",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "San José del Fragua"
+			},
+			{
+				"caldably": "1050103",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Solano"
+			},
+			{
+				"caldably": "1050104",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Morelia"
+			},
+			{
+				"caldably": "1050105",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Solita"
+			},
+			{
+				"caldably": "1050106",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "La Montañita"
+			},
+			{
+				"caldably": "1050107",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "San Vicente del Caguán"
+			},
+			{
+				"caldably": "1050108",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "El Paujil"
+			},
+			{
+				"caldably": "1050109",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Valparaíso"
+			},
+			{
+				"caldably": "1050110",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Cartagena del Chairá"
+			},
+			{
+				"caldably": "1050111",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Belén de Andaquies"
+			},
+			{
+				"caldably": "1050112",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Curillo"
+			},
+			{
+				"caldably": "1050113",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Puerto Rico"
+			},
+			{
+				"caldably": "1050114",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Albania"
+			},
+			{
+				"caldably": "1050115",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "Florencia"
+			},
+			{
+				"caldably": "1050116",
+				"cingorium": "Caquetá",
+				"fluia": "1050100",
+				"trophful": "El Doncello"
+			}
+		]
+	},
+	{
+		"fluia": "1060100",
+		"cingorium": "Atlántico",
+		"sonList": [
+			{
+				"caldably": "1060101",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Tubará"
+			},
+			{
+				"caldably": "1060102",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Usiacurí"
+			},
+			{
+				"caldably": "1060103",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Juan de Acosta"
+			},
+			{
+				"caldably": "1060104",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Barranquilla"
+			},
+			{
+				"caldably": "1060105",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Luruaco"
+			},
+			{
+				"caldably": "1060106",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Ponedera"
+			},
+			{
+				"caldably": "1060107",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Piojó"
+			},
+			{
+				"caldably": "1060108",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Manatí"
+			},
+			{
+				"caldably": "1060109",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Sabanagrande"
+			},
+			{
+				"caldably": "1060110",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Repelón"
+			},
+			{
+				"caldably": "1060111",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Sabanalarga"
+			},
+			{
+				"caldably": "1060112",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Galapa"
+			},
+			{
+				"caldably": "1060113",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Malambo"
+			},
+			{
+				"caldably": "1060114",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Campo de La Cruz"
+			},
+			{
+				"caldably": "1060115",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Puerto Colombia"
+			},
+			{
+				"caldably": "1060116",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Soledad"
+			},
+			{
+				"caldably": "1060117",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Polonuevo"
+			},
+			{
+				"caldably": "1060118",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Suán"
+			},
+			{
+				"caldably": "1060119",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Palmar de Varela"
+			},
+			{
+				"caldably": "1060120",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Santo Tomás"
+			},
+			{
+				"caldably": "1060121",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Candelaria"
+			},
+			{
+				"caldably": "1060122",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Baranoa"
+			},
+			{
+				"caldably": "1060123",
+				"cingorium": "Atlántico",
+				"fluia": "1060100",
+				"trophful": "Santa Lucía"
+			}
+		]
+	},
+	{
+		"fluia": "1070100",
+		"cingorium": "Quindío",
+		"sonList": [
+			{
+				"caldably": "1070101",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Armenia"
+			},
+			{
+				"caldably": "1070102",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Buenavista"
+			},
+			{
+				"caldably": "1070103",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Génova"
+			},
+			{
+				"caldably": "1070104",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "La Tebaida"
+			},
+			{
+				"caldably": "1070105",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Quimbaya"
+			},
+			{
+				"caldably": "1070106",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Montenegro"
+			},
+			{
+				"caldably": "1070107",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Salento"
+			},
+			{
+				"caldably": "1070108",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Filandia"
+			},
+			{
+				"caldably": "1070109",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Circasia"
+			},
+			{
+				"caldably": "1070110",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Pijao"
+			},
+			{
+				"caldably": "1070111",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Calarcá"
+			},
+			{
+				"caldably": "1070112",
+				"cingorium": "Quindío",
+				"fluia": "1070100",
+				"trophful": "Córdoba"
+			}
+		]
+	},
+	{
+		"fluia": "1080100",
+		"cingorium": "Tolima",
+		"sonList": [
+			{
+				"caldably": "1080101",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Ataco"
+			},
+			{
+				"caldably": "1080102",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Rioblanco"
+			},
+			{
+				"caldably": "1080103",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Piedras"
+			},
+			{
+				"caldably": "1080104",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Alvarado"
+			},
+			{
+				"caldably": "1080105",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Espinal"
+			},
+			{
+				"caldably": "1080106",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Villahermosa"
+			},
+			{
+				"caldably": "1080107",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Valle de San Juan"
+			},
+			{
+				"caldably": "1080108",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Honda"
+			},
+			{
+				"caldably": "1080109",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Chaparral"
+			},
+			{
+				"caldably": "1080110",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Saldaña"
+			},
+			{
+				"caldably": "1080111",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Dolores"
+			},
+			{
+				"caldably": "1080112",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Icononzo"
+			},
+			{
+				"caldably": "1080113",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "San Antonio"
+			},
+			{
+				"caldably": "1080114",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "San Luis"
+			},
+			{
+				"caldably": "1080115",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Villarrica"
+			},
+			{
+				"caldably": "1080116",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Palocabildo"
+			},
+			{
+				"caldably": "1080117",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Cajamarca"
+			},
+			{
+				"caldably": "1080118",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Armero"
+			},
+			{
+				"caldably": "1080119",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Purificación"
+			},
+			{
+				"caldably": "1080120",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Rovira"
+			},
+			{
+				"caldably": "1080121",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Natagaima"
+			},
+			{
+				"caldably": "1080122",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Carmen de Apicalá"
+			},
+			{
+				"caldably": "1080123",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Alpujarra"
+			},
+			{
+				"caldably": "1080124",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Lérida"
+			},
+			{
+				"caldably": "1080125",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Planadas"
+			},
+			{
+				"caldably": "1080126",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Coello"
+			},
+			{
+				"caldably": "1080127",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Santa Isabel"
+			},
+			{
+				"caldably": "1080128",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Casabianca"
+			},
+			{
+				"caldably": "1080129",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Ortega"
+			},
+			{
+				"caldably": "1080130",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Anzoátegui"
+			},
+			{
+				"caldably": "1080131",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Ibagué"
+			},
+			{
+				"caldably": "1080132",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Falan"
+			},
+			{
+				"caldably": "1080133",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Roncesvalles"
+			},
+			{
+				"caldably": "1080134",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Melgar"
+			},
+			{
+				"caldably": "1080135",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Ambalema"
+			},
+			{
+				"caldably": "1080136",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Guamo"
+			},
+			{
+				"caldably": "1080137",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Coyaima"
+			},
+			{
+				"caldably": "1080138",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Cunday"
+			},
+			{
+				"caldably": "1080139",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Herveo"
+			},
+			{
+				"caldably": "1080140",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Fresno"
+			},
+			{
+				"caldably": "1080141",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Mariquita"
+			},
+			{
+				"caldably": "1080142",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Prado"
+			},
+			{
+				"caldably": "1080143",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Flandes"
+			},
+			{
+				"caldably": "1080144",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Venadillo"
+			},
+			{
+				"caldably": "1080145",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Líbano"
+			},
+			{
+				"caldably": "1080146",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Suárez"
+			},
+			{
+				"caldably": "1080147",
+				"cingorium": "Tolima",
+				"fluia": "1080100",
+				"trophful": "Murillo"
+			}
+		]
+	},
+	{
+		"fluia": "1090100",
+		"cingorium": "Cauca",
+		"sonList": [
+			{
+				"caldably": "1090101",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Mercaderes"
+			},
+			{
+				"caldably": "1090102",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Almaguer"
+			},
+			{
+				"caldably": "1090103",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Florencia"
+			},
+			{
+				"caldably": "1090104",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Timbío"
+			},
+			{
+				"caldably": "1090105",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Silvia"
+			},
+			{
+				"caldably": "1090106",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Morales"
+			},
+			{
+				"caldably": "1090107",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Patía"
+			},
+			{
+				"caldably": "1090108",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Rosas"
+			},
+			{
+				"caldably": "1090109",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Sucre"
+			},
+			{
+				"caldably": "1090110",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Argelia"
+			},
+			{
+				"caldably": "1090111",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Timbiquí"
+			},
+			{
+				"caldably": "1090112",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Padilla"
+			},
+			{
+				"caldably": "1090113",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "San Sebastián"
+			},
+			{
+				"caldably": "1090114",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Bolívar"
+			},
+			{
+				"caldably": "1090115",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Caldono"
+			},
+			{
+				"caldably": "1090116",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Piamonte"
+			},
+			{
+				"caldably": "1090117",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Puracé"
+			},
+			{
+				"caldably": "1090118",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Santander de Quilichao"
+			},
+			{
+				"caldably": "1090119",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Popayán"
+			},
+			{
+				"caldably": "1090120",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Miranda"
+			},
+			{
+				"caldably": "1090121",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "La Vega"
+			},
+			{
+				"caldably": "1090122",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Piendamó"
+			},
+			{
+				"caldably": "1090123",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Guapi"
+			},
+			{
+				"caldably": "1090124",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Inzá"
+			},
+			{
+				"caldably": "1090125",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Balboa"
+			},
+			{
+				"caldably": "1090126",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Jambaló"
+			},
+			{
+				"caldably": "1090127",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "López de Micay"
+			},
+			{
+				"caldably": "1090128",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Toribio"
+			},
+			{
+				"caldably": "1090129",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Corinto"
+			},
+			{
+				"caldably": "1090130",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Buenos Aires"
+			},
+			{
+				"caldably": "1090131",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Caloto"
+			},
+			{
+				"caldably": "1090132",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Cajibio"
+			},
+			{
+				"caldably": "1090133",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Villa Rica"
+			},
+			{
+				"caldably": "1090134",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Totoró"
+			},
+			{
+				"caldably": "1090135",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Sotara"
+			},
+			{
+				"caldably": "1090136",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "El Tambo"
+			},
+			{
+				"caldably": "1090137",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Santa Rosa"
+			},
+			{
+				"caldably": "1090138",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "La Sierra"
+			},
+			{
+				"caldably": "1090139",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Puerto Tejada"
+			},
+			{
+				"caldably": "1090140",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Páez"
+			},
+			{
+				"caldably": "1090141",
+				"cingorium": "Cauca",
+				"fluia": "1090100",
+				"trophful": "Suárez"
+			}
+		]
+	},
+	{
+		"fluia": "1100100",
+		"cingorium": "Córdoba",
+		"sonList": [
+			{
+				"caldably": "1100101",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Pueblo Nuevo"
+			},
+			{
+				"caldably": "1100102",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Puerto Libertador"
+			},
+			{
+				"caldably": "1100103",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "San Bernardo del Viento"
+			},
+			{
+				"caldably": "1100104",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Purísima"
+			},
+			{
+				"caldably": "1100105",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "San Andrés de Sotavento"
+			},
+			{
+				"caldably": "1100106",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Cereté"
+			},
+			{
+				"caldably": "1100107",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "San Antero"
+			},
+			{
+				"caldably": "1100108",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Valencia"
+			},
+			{
+				"caldably": "1100109",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Puerto Escondido"
+			},
+			{
+				"caldably": "1100110",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Canalete"
+			},
+			{
+				"caldably": "1100111",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Moñitos"
+			},
+			{
+				"caldably": "1100112",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Planeta Rica"
+			},
+			{
+				"caldably": "1100113",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Momil"
+			},
+			{
+				"caldably": "1100114",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "San Carlos"
+			},
+			{
+				"caldably": "1100115",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Montelíbano"
+			},
+			{
+				"caldably": "1100116",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Chimá"
+			},
+			{
+				"caldably": "1100117",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Chinú"
+			},
+			{
+				"caldably": "1100118",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Buenavista"
+			},
+			{
+				"caldably": "1100119",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Montería"
+			},
+			{
+				"caldably": "1100120",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Ayapel"
+			},
+			{
+				"caldably": "1100121",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Santa Cruz de Lorica"
+			},
+			{
+				"caldably": "1100122",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Los Córdobas"
+			},
+			{
+				"caldably": "1100123",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Tierralta"
+			},
+			{
+				"caldably": "1100124",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "San Pelayo"
+			},
+			{
+				"caldably": "1100125",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Sahagún"
+			},
+			{
+				"caldably": "1100126",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "La Apartada"
+			},
+			{
+				"caldably": "1100127",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Ciénaga de Oro"
+			},
+			{
+				"caldably": "1100128",
+				"cingorium": "Córdoba",
+				"fluia": "1100100",
+				"trophful": "Cotorra"
+			}
+		]
+	},
+	{
+		"fluia": "1110100",
+		"cingorium": "Nariño",
+		"sonList": [
+			{
+				"caldably": "1110101",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "El Rosario"
+			},
+			{
+				"caldably": "1110102",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Barbacoas"
+			},
+			{
+				"caldably": "1110103",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Pupiales"
+			},
+			{
+				"caldably": "1110104",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "San Lorenzo"
+			},
+			{
+				"caldably": "1110105",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Ricaurte"
+			},
+			{
+				"caldably": "1110106",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "El Tablón"
+			},
+			{
+				"caldably": "1110107",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Guaitarilla"
+			},
+			{
+				"caldably": "1110108",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Colón"
+			},
+			{
+				"caldably": "1110109",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Potosí"
+			},
+			{
+				"caldably": "1110110",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Magüí Payán"
+			},
+			{
+				"caldably": "1110111",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Los Andes"
+			},
+			{
+				"caldably": "1110112",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "San Bernardo"
+			},
+			{
+				"caldably": "1110113",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Olaya Herrera"
+			},
+			{
+				"caldably": "1110114",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Nariño"
+			},
+			{
+				"caldably": "1110115",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Taminango"
+			},
+			{
+				"caldably": "1110116",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "El Charco"
+			},
+			{
+				"caldably": "1110117",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Puerres"
+			},
+			{
+				"caldably": "1110118",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Funes"
+			},
+			{
+				"caldably": "1110119",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Cumbal"
+			},
+			{
+				"caldably": "1110120",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Francisco Pizarro"
+			},
+			{
+				"caldably": "1110121",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Samaniego"
+			},
+			{
+				"caldably": "1110122",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "La Cruz"
+			},
+			{
+				"caldably": "1110123",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Aldana"
+			},
+			{
+				"caldably": "1110124",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "San Pablo"
+			},
+			{
+				"caldably": "1110125",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Gualmatán"
+			},
+			{
+				"caldably": "1110126",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Mosquera"
+			},
+			{
+				"caldably": "1110127",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "San Juan de Pasto"
+			},
+			{
+				"caldably": "1110128",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "San Pedro de Cartago"
+			},
+			{
+				"caldably": "1110129",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Chachagüí"
+			},
+			{
+				"caldably": "1110130",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Guachucal"
+			},
+			{
+				"caldably": "1110131",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Cumbitara"
+			},
+			{
+				"caldably": "1110132",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Sandoná"
+			},
+			{
+				"caldably": "1110133",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Sapuyes"
+			},
+			{
+				"caldably": "1110134",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Córdoba"
+			},
+			{
+				"caldably": "1110135",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Mallama"
+			},
+			{
+				"caldably": "1110136",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Imués"
+			},
+			{
+				"caldably": "1110137",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Cuaspud"
+			},
+			{
+				"caldably": "1110138",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Roberto Payán"
+			},
+			{
+				"caldably": "1110139",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Linares"
+			},
+			{
+				"caldably": "1110140",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Ospina"
+			},
+			{
+				"caldably": "1110141",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Leiva"
+			},
+			{
+				"caldably": "1110142",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "El Tambo"
+			},
+			{
+				"caldably": "1110143",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Santacruz"
+			},
+			{
+				"caldably": "1110144",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Consaca"
+			},
+			{
+				"caldably": "1110145",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Buesaco"
+			},
+			{
+				"caldably": "1110146",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "La Florida"
+			},
+			{
+				"caldably": "1110147",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Santa Bárbara"
+			},
+			{
+				"caldably": "1110148",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Ancuya"
+			},
+			{
+				"caldably": "1110149",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Albán"
+			},
+			{
+				"caldably": "1110150",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Arboleda"
+			},
+			{
+				"caldably": "1110151",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Iles"
+			},
+			{
+				"caldably": "1110152",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Contadero"
+			},
+			{
+				"caldably": "1110153",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Tumaco"
+			},
+			{
+				"caldably": "1110154",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Yacuanquer"
+			},
+			{
+				"caldably": "1110155",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Belén"
+			},
+			{
+				"caldably": "1110156",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "La Llanada"
+			},
+			{
+				"caldably": "1110157",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Policarpa"
+			},
+			{
+				"caldably": "1110158",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "El Peñol"
+			},
+			{
+				"caldably": "1110159",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Túquerres"
+			},
+			{
+				"caldably": "1110160",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "La Unión"
+			},
+			{
+				"caldably": "1110161",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Ipiales"
+			},
+			{
+				"caldably": "1110162",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Tangua"
+			},
+			{
+				"caldably": "1110163",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "Providencia"
+			},
+			{
+				"caldably": "1110164",
+				"cingorium": "Nariño",
+				"fluia": "1110100",
+				"trophful": "La Tola"
+			}
+		]
+	},
+	{
+		"fluia": "1120100",
+		"cingorium": "San Andrés y Providencia",
+		"sonList": [
+			{
+				"caldably": "1120101",
+				"cingorium": "San Andrés y Providencia",
+				"fluia": "1120100",
+				"trophful": "Providencia"
+			},
+			{
+				"caldably": "1120102",
+				"cingorium": "San Andrés y Providencia",
+				"fluia": "1120100",
+				"trophful": "San Andrés"
+			}
+		]
+	},
+	{
+		"fluia": "1130100",
+		"cingorium": "Valle del Cauca",
+		"sonList": [
+			{
+				"caldably": "1130101",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Bugalagrande"
+			},
+			{
+				"caldably": "1130102",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Florida"
+			},
+			{
+				"caldably": "1130103",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Bolívar"
+			},
+			{
+				"caldably": "1130104",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Guadalajara de Buga"
+			},
+			{
+				"caldably": "1130105",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "La Cumbre"
+			},
+			{
+				"caldably": "1130106",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Tuluá"
+			},
+			{
+				"caldably": "1130107",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Pradera"
+			},
+			{
+				"caldably": "1130108",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "El Águila"
+			},
+			{
+				"caldably": "1130109",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "El Dovio"
+			},
+			{
+				"caldably": "1130110",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Trujillo"
+			},
+			{
+				"caldably": "1130111",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Argelia"
+			},
+			{
+				"caldably": "1130112",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Vijes"
+			},
+			{
+				"caldably": "1130113",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Guacarí"
+			},
+			{
+				"caldably": "1130114",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Ansermanuevo"
+			},
+			{
+				"caldably": "1130115",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "San Pedro"
+			},
+			{
+				"caldably": "1130116",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Calima"
+			},
+			{
+				"caldably": "1130117",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Palmira"
+			},
+			{
+				"caldably": "1130118",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Caicedonia"
+			},
+			{
+				"caldably": "1130119",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "La Victoria"
+			},
+			{
+				"caldably": "1130120",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Buenaventura"
+			},
+			{
+				"caldably": "1130121",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Restrepo"
+			},
+			{
+				"caldably": "1130122",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Yumbo"
+			},
+			{
+				"caldably": "1130123",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Dagua"
+			},
+			{
+				"caldably": "1130124",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "La Unión"
+			},
+			{
+				"caldably": "1130125",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Ulloa"
+			},
+			{
+				"caldably": "1130126",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Alcalá"
+			},
+			{
+				"caldably": "1130127",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Sevilla"
+			},
+			{
+				"caldably": "1130128",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Zarzal"
+			},
+			{
+				"caldably": "1130129",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Roldanillo"
+			},
+			{
+				"caldably": "1130130",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Andalucía"
+			},
+			{
+				"caldably": "1130131",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Candelaria"
+			},
+			{
+				"caldably": "1130132",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Versalles"
+			},
+			{
+				"caldably": "1130133",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Cartago"
+			},
+			{
+				"caldably": "1130134",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Yotoco"
+			},
+			{
+				"caldably": "1130135",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "El Cairo"
+			},
+			{
+				"caldably": "1130136",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Obando"
+			},
+			{
+				"caldably": "1130137",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Ginebra"
+			},
+			{
+				"caldably": "1130138",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Jamundí"
+			},
+			{
+				"caldably": "1130139",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Toro"
+			},
+			{
+				"caldably": "1130140",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "El Cerrito"
+			},
+			{
+				"caldably": "1130141",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Riofrío"
+			},
+			{
+				"caldably": "1130142",
+				"cingorium": "Valle del Cauca",
+				"fluia": "1130100",
+				"trophful": "Cali"
+			}
+		]
+	},
+	{
+		"fluia": "1140100",
+		"cingorium": "Antioquia",
+		"sonList": [
+			{
+				"caldably": "1140101",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Vigía del Fuerte"
+			},
+			{
+				"caldably": "1140102",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "La Estrella"
+			},
+			{
+				"caldably": "1140103",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Abejorral"
+			},
+			{
+				"caldably": "1140104",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Támesis"
+			},
+			{
+				"caldably": "1140105",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Cisneros"
+			},
+			{
+				"caldably": "1140106",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Juan de Urabá"
+			},
+			{
+				"caldably": "1140107",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Copacabana"
+			},
+			{
+				"caldably": "1140108",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Girardota"
+			},
+			{
+				"caldably": "1140109",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Salgar"
+			},
+			{
+				"caldably": "1140110",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Ituango"
+			},
+			{
+				"caldably": "1140111",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Fredonia"
+			},
+			{
+				"caldably": "1140112",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Granada"
+			},
+			{
+				"caldably": "1140113",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Giraldo"
+			},
+			{
+				"caldably": "1140114",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Amalfi"
+			},
+			{
+				"caldably": "1140115",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Don Matías"
+			},
+			{
+				"caldably": "1140116",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Roque"
+			},
+			{
+				"caldably": "1140117",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Gómez Plata"
+			},
+			{
+				"caldably": "1140118",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "El Carmen de Viboral"
+			},
+			{
+				"caldably": "1140119",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Arboletes"
+			},
+			{
+				"caldably": "1140120",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Anza"
+			},
+			{
+				"caldably": "1140121",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Santa Fe de Antioquia"
+			},
+			{
+				"caldably": "1140122",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Abriaquí"
+			},
+			{
+				"caldably": "1140123",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Guadalupe"
+			},
+			{
+				"caldably": "1140124",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "La Unión"
+			},
+			{
+				"caldably": "1140125",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Nariño"
+			},
+			{
+				"caldably": "1140126",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Anorí"
+			},
+			{
+				"caldably": "1140127",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Caldas"
+			},
+			{
+				"caldably": "1140128",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Angostura"
+			},
+			{
+				"caldably": "1140129",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Yolombó"
+			},
+			{
+				"caldably": "1140130",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Carepa"
+			},
+			{
+				"caldably": "1140131",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Santo Domingo"
+			},
+			{
+				"caldably": "1140132",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Vegachí"
+			},
+			{
+				"caldably": "1140133",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Cocorná"
+			},
+			{
+				"caldably": "1140134",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Valdivia"
+			},
+			{
+				"caldably": "1140135",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Yondó"
+			},
+			{
+				"caldably": "1140136",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Pedro de los Milagros"
+			},
+			{
+				"caldably": "1140137",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Caramanta"
+			},
+			{
+				"caldably": "1140138",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Carlos"
+			},
+			{
+				"caldably": "1140139",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Olaya"
+			},
+			{
+				"caldably": "1140140",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "El Santuario"
+			},
+			{
+				"caldably": "1140141",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Montebello"
+			},
+			{
+				"caldably": "1140142",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Guarne"
+			},
+			{
+				"caldably": "1140143",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Buriticá"
+			},
+			{
+				"caldably": "1140144",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Sopetrán"
+			},
+			{
+				"caldably": "1140145",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San José de la Montaña"
+			},
+			{
+				"caldably": "1140146",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Caucasia"
+			},
+			{
+				"caldably": "1140147",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Liborina"
+			},
+			{
+				"caldably": "1140148",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Jerónimo"
+			},
+			{
+				"caldably": "1140149",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Argelia"
+			},
+			{
+				"caldably": "1140150",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Heliconia"
+			},
+			{
+				"caldably": "1140151",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Envigado"
+			},
+			{
+				"caldably": "1140152",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "La Pintada"
+			},
+			{
+				"caldably": "1140153",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Santa Rosa de Osos"
+			},
+			{
+				"caldably": "1140154",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Yarumal"
+			},
+			{
+				"caldably": "1140155",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Belmira"
+			},
+			{
+				"caldably": "1140156",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Venecia"
+			},
+			{
+				"caldably": "1140157",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Toledo"
+			},
+			{
+				"caldably": "1140158",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Necoclí"
+			},
+			{
+				"caldably": "1140159",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Yalí"
+			},
+			{
+				"caldably": "1140160",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Retiro"
+			},
+			{
+				"caldably": "1140161",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Pedro de Urabá"
+			},
+			{
+				"caldably": "1140162",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Campamento"
+			},
+			{
+				"caldably": "1140163",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Frontino"
+			},
+			{
+				"caldably": "1140164",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Betulia"
+			},
+			{
+				"caldably": "1140165",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Titiribí"
+			},
+			{
+				"caldably": "1140166",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Turbo"
+			},
+			{
+				"caldably": "1140167",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Cañasgordas"
+			},
+			{
+				"caldably": "1140168",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Itagüí"
+			},
+			{
+				"caldably": "1140169",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Uramita"
+			},
+			{
+				"caldably": "1140170",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Briceño"
+			},
+			{
+				"caldably": "1140171",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Amagá"
+			},
+			{
+				"caldably": "1140172",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Marinilla"
+			},
+			{
+				"caldably": "1140173",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "El Bagre"
+			},
+			{
+				"caldably": "1140174",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Pueblorrico"
+			},
+			{
+				"caldably": "1140175",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Concordia"
+			},
+			{
+				"caldably": "1140176",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Barbosa"
+			},
+			{
+				"caldably": "1140177",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Puerto Triunfo"
+			},
+			{
+				"caldably": "1140178",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Dabeiba"
+			},
+			{
+				"caldably": "1140179",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Jericó"
+			},
+			{
+				"caldably": "1140180",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Segovia"
+			},
+			{
+				"caldably": "1140181",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Apartadó"
+			},
+			{
+				"caldably": "1140182",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Andes"
+			},
+			{
+				"caldably": "1140183",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Cáceres"
+			},
+			{
+				"caldably": "1140184",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Jardín"
+			},
+			{
+				"caldably": "1140185",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Betania"
+			},
+			{
+				"caldably": "1140186",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Carolina"
+			},
+			{
+				"caldably": "1140187",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Nechí"
+			},
+			{
+				"caldably": "1140188",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Urrao"
+			},
+			{
+				"caldably": "1140189",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Sabanalarga"
+			},
+			{
+				"caldably": "1140190",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Rionegro"
+			},
+			{
+				"caldably": "1140191",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Ebéjico"
+			},
+			{
+				"caldably": "1140192",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Ciudad Bolívar"
+			},
+			{
+				"caldably": "1140193",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "La Ceja"
+			},
+			{
+				"caldably": "1140194",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Peñol"
+			},
+			{
+				"caldably": "1140195",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Chigorodó"
+			},
+			{
+				"caldably": "1140196",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Bello"
+			},
+			{
+				"caldably": "1140197",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Sabaneta"
+			},
+			{
+				"caldably": "1140198",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Puerto Nare"
+			},
+			{
+				"caldably": "1140199",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Peque"
+			},
+			{
+				"caldably": "1140200",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Vicente"
+			},
+			{
+				"caldably": "1140201",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Tarso"
+			},
+			{
+				"caldably": "1140202",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Hispania"
+			},
+			{
+				"caldably": "1140203",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Concepción"
+			},
+			{
+				"caldably": "1140204",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Santa Bárbara"
+			},
+			{
+				"caldably": "1140205",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Armenia"
+			},
+			{
+				"caldably": "1140206",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Puerto Berrío"
+			},
+			{
+				"caldably": "1140207",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Andrés de Cuerquia"
+			},
+			{
+				"caldably": "1140208",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Mutatá"
+			},
+			{
+				"caldably": "1140209",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Zaragoza"
+			},
+			{
+				"caldably": "1140210",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Murindó"
+			},
+			{
+				"caldably": "1140211",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Caracolí"
+			},
+			{
+				"caldably": "1140212",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Tarazá"
+			},
+			{
+				"caldably": "1140213",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Medellín"
+			},
+			{
+				"caldably": "1140214",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Entrerríos"
+			},
+			{
+				"caldably": "1140215",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Francisco"
+			},
+			{
+				"caldably": "1140216",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Alejandría"
+			},
+			{
+				"caldably": "1140217",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Valparaíso"
+			},
+			{
+				"caldably": "1140218",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Luis"
+			},
+			{
+				"caldably": "1140219",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Remedios"
+			},
+			{
+				"caldably": "1140220",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Sonsón"
+			},
+			{
+				"caldably": "1140221",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "San Rafael"
+			},
+			{
+				"caldably": "1140222",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Maceo"
+			},
+			{
+				"caldably": "1140223",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Angelópolis"
+			},
+			{
+				"caldably": "1140224",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Caicedo"
+			},
+			{
+				"caldably": "1140225",
+				"cingorium": "Antioquia",
+				"fluia": "1140100",
+				"trophful": "Guatapé"
+			}
+		]
+	},
+	{
+		"fluia": "1150100",
+		"cingorium": "Chocó",
+		"sonList": [
+			{
+				"caldably": "1150101",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Nuquí"
+			},
+			{
+				"caldably": "1150102",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Río Iró"
+			},
+			{
+				"caldably": "1150103",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "El Carmen de Atrato"
+			},
+			{
+				"caldably": "1150104",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "El Cantón de San Pablo"
+			},
+			{
+				"caldably": "1150105",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Riosucio"
+			},
+			{
+				"caldably": "1150106",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Quibdó"
+			},
+			{
+				"caldably": "1150107",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Bajo Baudó"
+			},
+			{
+				"caldably": "1150108",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Tadó"
+			},
+			{
+				"caldably": "1150109",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Cértegui"
+			},
+			{
+				"caldably": "1150110",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Bahía Solano"
+			},
+			{
+				"caldably": "1150111",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Litoral del San Juan"
+			},
+			{
+				"caldably": "1150112",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Atrato"
+			},
+			{
+				"caldably": "1150113",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Nóvita"
+			},
+			{
+				"caldably": "1150114",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "San José del Palmar"
+			},
+			{
+				"caldably": "1150115",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Medio Atrato"
+			},
+			{
+				"caldably": "1150116",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Alto Baudó"
+			},
+			{
+				"caldably": "1150117",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Medio San Juan"
+			},
+			{
+				"caldably": "1150118",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Acandí"
+			},
+			{
+				"caldably": "1150119",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Sipí"
+			},
+			{
+				"caldably": "1150120",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Lloró"
+			},
+			{
+				"caldably": "1150121",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Medio Baudó"
+			},
+			{
+				"caldably": "1150122",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Bagadó"
+			},
+			{
+				"caldably": "1150123",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Belén de Bajirá"
+			},
+			{
+				"caldably": "1150124",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Río Quito"
+			},
+			{
+				"caldably": "1150125",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Unión Panamericana"
+			},
+			{
+				"caldably": "1150126",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Juradó"
+			},
+			{
+				"caldably": "1150127",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "El Carmen del Darién"
+			},
+			{
+				"caldably": "1150128",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Condoto"
+			},
+			{
+				"caldably": "1150129",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Bojayá"
+			},
+			{
+				"caldably": "1150130",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Unguía"
+			},
+			{
+				"caldably": "1150131",
+				"cingorium": "Chocó",
+				"fluia": "1150100",
+				"trophful": "Istmina"
+			}
+		]
+	},
+	{
+		"fluia": "1160100",
+		"cingorium": "Sucre",
+		"sonList": [
+			{
+				"caldably": "1160101",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Juan Betulia"
+			},
+			{
+				"caldably": "1160102",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Chalán"
+			},
+			{
+				"caldably": "1160103",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Galeras"
+			},
+			{
+				"caldably": "1160104",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Buenavista"
+			},
+			{
+				"caldably": "1160105",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Guaranda"
+			},
+			{
+				"caldably": "1160106",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Sampués"
+			},
+			{
+				"caldably": "1160107",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Sucre"
+			},
+			{
+				"caldably": "1160108",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Coveñas"
+			},
+			{
+				"caldably": "1160109",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Majagual"
+			},
+			{
+				"caldably": "1160110",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Ovejas"
+			},
+			{
+				"caldably": "1160111",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Corozal"
+			},
+			{
+				"caldably": "1160112",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Pedro"
+			},
+			{
+				"caldably": "1160113",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "La Unión"
+			},
+			{
+				"caldably": "1160114",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Benito Abad"
+			},
+			{
+				"caldably": "1160115",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Palmito"
+			},
+			{
+				"caldably": "1160116",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Sincelejo"
+			},
+			{
+				"caldably": "1160117",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Morroa"
+			},
+			{
+				"caldably": "1160118",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Tolú"
+			},
+			{
+				"caldably": "1160119",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Colosó"
+			},
+			{
+				"caldably": "1160120",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Marcos"
+			},
+			{
+				"caldably": "1160121",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Caimito"
+			},
+			{
+				"caldably": "1160122",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Los Palmitos"
+			},
+			{
+				"caldably": "1160123",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Luis de Sincé"
+			},
+			{
+				"caldably": "1160124",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "Toluviejo"
+			},
+			{
+				"caldably": "1160125",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "San Onofre"
+			},
+			{
+				"caldably": "1160126",
+				"cingorium": "Sucre",
+				"fluia": "1160100",
+				"trophful": "El Roble"
+			}
+		]
+	},
+	{
+		"fluia": "1170100",
+		"cingorium": "Bolívar",
+		"sonList": [
+			{
+				"caldably": "1170101",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Jacinto del Cauca"
+			},
+			{
+				"caldably": "1170102",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Santa Catalina"
+			},
+			{
+				"caldably": "1170103",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Hatillo de Loba"
+			},
+			{
+				"caldably": "1170104",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Pinillos"
+			},
+			{
+				"caldably": "1170105",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Santa Cruz de Mompox"
+			},
+			{
+				"caldably": "1170106",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Tiquisio"
+			},
+			{
+				"caldably": "1170107",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Talaigua Nuevo"
+			},
+			{
+				"caldably": "1170108",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Soplaviento"
+			},
+			{
+				"caldably": "1170109",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Mahates"
+			},
+			{
+				"caldably": "1170110",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Santa Rosa del Sur"
+			},
+			{
+				"caldably": "1170111",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Magangué"
+			},
+			{
+				"caldably": "1170112",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "El Guamo"
+			},
+			{
+				"caldably": "1170113",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Clemencia"
+			},
+			{
+				"caldably": "1170114",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Simití"
+			},
+			{
+				"caldably": "1170115",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Arenal del Sur"
+			},
+			{
+				"caldably": "1170116",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Cicuco"
+			},
+			{
+				"caldably": "1170117",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Martín de Loba"
+			},
+			{
+				"caldably": "1170118",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Morales"
+			},
+			{
+				"caldably": "1170119",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "María La Baja"
+			},
+			{
+				"caldably": "1170120",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Cristóbal"
+			},
+			{
+				"caldably": "1170121",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Montecristo"
+			},
+			{
+				"caldably": "1170122",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Arjona"
+			},
+			{
+				"caldably": "1170123",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Carmen de Bolivar"
+			},
+			{
+				"caldably": "1170124",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "El Peñón"
+			},
+			{
+				"caldably": "1170125",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Juan Nepomuceno"
+			},
+			{
+				"caldably": "1170126",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Regidor"
+			},
+			{
+				"caldably": "1170127",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Arroyohondo"
+			},
+			{
+				"caldably": "1170128",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Barranco de Loba"
+			},
+			{
+				"caldably": "1170129",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Fernando"
+			},
+			{
+				"caldably": "1170130",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Cantagallo"
+			},
+			{
+				"caldably": "1170131",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Turbaco"
+			},
+			{
+				"caldably": "1170132",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Jacinto"
+			},
+			{
+				"caldably": "1170133",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Río Viejo"
+			},
+			{
+				"caldably": "1170134",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Córdoba"
+			},
+			{
+				"caldably": "1170135",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Achí"
+			},
+			{
+				"caldably": "1170136",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Cartagena"
+			},
+			{
+				"caldably": "1170137",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Zambrano"
+			},
+			{
+				"caldably": "1170138",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Pablo"
+			},
+			{
+				"caldably": "1170139",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Margarita"
+			},
+			{
+				"caldably": "1170140",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Santa Rosa"
+			},
+			{
+				"caldably": "1170141",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Altos del Rosario"
+			},
+			{
+				"caldably": "1170142",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Villanueva"
+			},
+			{
+				"caldably": "1170143",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "San Estanislao"
+			},
+			{
+				"caldably": "1170144",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Calamar"
+			},
+			{
+				"caldably": "1170145",
+				"cingorium": "Bolívar",
+				"fluia": "1170100",
+				"trophful": "Turbaná"
+			}
+		]
+	},
+	{
+		"fluia": "1180100",
+		"cingorium": "La Guajira",
+		"sonList": [
+			{
+				"caldably": "1180101",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "El Molino"
+			},
+			{
+				"caldably": "1180102",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Uribia"
+			},
+			{
+				"caldably": "1180103",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "La Jagua del Pilar"
+			},
+			{
+				"caldably": "1180104",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Dibulla"
+			},
+			{
+				"caldably": "1180105",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Manaure"
+			},
+			{
+				"caldably": "1180106",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Barrancas"
+			},
+			{
+				"caldably": "1180107",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Distracción"
+			},
+			{
+				"caldably": "1180108",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "San Juan del Cesar"
+			},
+			{
+				"caldably": "1180109",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Maicao"
+			},
+			{
+				"caldably": "1180110",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Hatonuevo"
+			},
+			{
+				"caldably": "1180111",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Urumita"
+			},
+			{
+				"caldably": "1180112",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Villanueva"
+			},
+			{
+				"caldably": "1180113",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Fonseca"
+			},
+			{
+				"caldably": "1180114",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Albania"
+			},
+			{
+				"caldably": "1180115",
+				"cingorium": "La Guajira",
+				"fluia": "1180100",
+				"trophful": "Riohacha"
+			}
+		]
+	},
+	{
+		"fluia": "1190100",
+		"cingorium": "Vaupés",
+		"sonList": [
+			{
+				"caldably": "1190101",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "La Primavera"
+			},
+			{
+				"caldably": "1190102",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Mitú"
+			},
+			{
+				"caldably": "1190103",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Taraira"
+			},
+			{
+				"caldably": "1190104",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Puerto Carreño"
+			},
+			{
+				"caldably": "1190105",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Pacoa"
+			},
+			{
+				"caldably": "1190106",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Carurú"
+			},
+			{
+				"caldably": "1190107",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Cumaribo"
+			},
+			{
+				"caldably": "1190108",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Santa Rosalía"
+			},
+			{
+				"caldably": "1190109",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Yavaraté"
+			},
+			{
+				"caldably": "1190110",
+				"cingorium": "Vaupés",
+				"fluia": "1190100",
+				"trophful": "Papunahua"
+			}
+		]
+	},
+	{
+		"fluia": "1200100",
+		"cingorium": "Cundinamarca",
+		"sonList": [
+			{
+				"caldably": "1200101",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Yacopí"
+			},
+			{
+				"caldably": "1200102",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Fusagasugá"
+			},
+			{
+				"caldably": "1200103",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Granada"
+			},
+			{
+				"caldably": "1200104",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Gachancipá"
+			},
+			{
+				"caldably": "1200105",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Supatá"
+			},
+			{
+				"caldably": "1200106",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Puerto Salgar"
+			},
+			{
+				"caldably": "1200107",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Pandi"
+			},
+			{
+				"caldably": "1200108",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Jerusalén"
+			},
+			{
+				"caldably": "1200109",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Quipile"
+			},
+			{
+				"caldably": "1200110",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Chipaque"
+			},
+			{
+				"caldably": "1200111",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cota"
+			},
+			{
+				"caldably": "1200112",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Funza"
+			},
+			{
+				"caldably": "1200113",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tenjo"
+			},
+			{
+				"caldably": "1200114",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guachetá"
+			},
+			{
+				"caldably": "1200115",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Medina"
+			},
+			{
+				"caldably": "1200116",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Gachetá"
+			},
+			{
+				"caldably": "1200117",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Gachalá"
+			},
+			{
+				"caldably": "1200118",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Beltrán"
+			},
+			{
+				"caldably": "1200119",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Soacha"
+			},
+			{
+				"caldably": "1200120",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Zipaquirá"
+			},
+			{
+				"caldably": "1200121",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Arbeláez"
+			},
+			{
+				"caldably": "1200122",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Lenguazaque"
+			},
+			{
+				"caldably": "1200123",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Pacho"
+			},
+			{
+				"caldably": "1200124",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Gutiérrez"
+			},
+			{
+				"caldably": "1200125",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Nilo"
+			},
+			{
+				"caldably": "1200126",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Choachí"
+			},
+			{
+				"caldably": "1200127",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guatavita"
+			},
+			{
+				"caldably": "1200128",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tausa"
+			},
+			{
+				"caldably": "1200129",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Nimaima"
+			},
+			{
+				"caldably": "1200130",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Bojacá"
+			},
+			{
+				"caldably": "1200131",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Ubalá"
+			},
+			{
+				"caldably": "1200132",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cáqueza"
+			},
+			{
+				"caldably": "1200133",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Albán"
+			},
+			{
+				"caldably": "1200134",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Agua de Dios"
+			},
+			{
+				"caldably": "1200135",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Ubaque"
+			},
+			{
+				"caldably": "1200136",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Pasca"
+			},
+			{
+				"caldably": "1200137",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "La Peña"
+			},
+			{
+				"caldably": "1200138",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Carmen de Carupa"
+			},
+			{
+				"caldably": "1200139",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Nemocón"
+			},
+			{
+				"caldably": "1200140",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Chaguaní"
+			},
+			{
+				"caldably": "1200141",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Vianí"
+			},
+			{
+				"caldably": "1200142",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tocancipá"
+			},
+			{
+				"caldably": "1200143",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Suesca"
+			},
+			{
+				"caldably": "1200144",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Villagómez"
+			},
+			{
+				"caldably": "1200145",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Quebradanegra"
+			},
+			{
+				"caldably": "1200146",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "La Calera"
+			},
+			{
+				"caldably": "1200147",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Topaipí"
+			},
+			{
+				"caldably": "1200148",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Sibaté"
+			},
+			{
+				"caldably": "1200149",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tabio"
+			},
+			{
+				"caldably": "1200150",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Une"
+			},
+			{
+				"caldably": "1200151",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tibiritá"
+			},
+			{
+				"caldably": "1200152",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cachipay"
+			},
+			{
+				"caldably": "1200153",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Manta"
+			},
+			{
+				"caldably": "1200154",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "San Bernardo"
+			},
+			{
+				"caldably": "1200155",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Fúquene"
+			},
+			{
+				"caldably": "1200156",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "La Vega"
+			},
+			{
+				"caldably": "1200157",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Junín"
+			},
+			{
+				"caldably": "1200158",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Chocontá"
+			},
+			{
+				"caldably": "1200159",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Silvania"
+			},
+			{
+				"caldably": "1200160",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cogua"
+			},
+			{
+				"caldably": "1200161",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Caparrapí"
+			},
+			{
+				"caldably": "1200162",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guasca"
+			},
+			{
+				"caldably": "1200163",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Subachoque"
+			},
+			{
+				"caldably": "1200164",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cucunubá"
+			},
+			{
+				"caldably": "1200165",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Chía"
+			},
+			{
+				"caldably": "1200166",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Susa"
+			},
+			{
+				"caldably": "1200167",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Quetame"
+			},
+			{
+				"caldably": "1200168",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "El Colegio"
+			},
+			{
+				"caldably": "1200169",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guayabal de Síquima"
+			},
+			{
+				"caldably": "1200170",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tena"
+			},
+			{
+				"caldably": "1200171",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Gama"
+			},
+			{
+				"caldably": "1200172",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tibacuy"
+			},
+			{
+				"caldably": "1200173",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cabrera"
+			},
+			{
+				"caldably": "1200174",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Anapoima"
+			},
+			{
+				"caldably": "1200175",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Ubaté"
+			},
+			{
+				"caldably": "1200176",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Fómeque"
+			},
+			{
+				"caldably": "1200177",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Facatativá"
+			},
+			{
+				"caldably": "1200178",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guaduas"
+			},
+			{
+				"caldably": "1200179",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Sesquilé"
+			},
+			{
+				"caldably": "1200180",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Útica"
+			},
+			{
+				"caldably": "1200181",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Apulo"
+			},
+			{
+				"caldably": "1200182",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Ricaurte"
+			},
+			{
+				"caldably": "1200183",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "El Rosal"
+			},
+			{
+				"caldably": "1200184",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "San Juan de Rioseco"
+			},
+			{
+				"caldably": "1200185",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Nariño"
+			},
+			{
+				"caldably": "1200186",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Paratebueno"
+			},
+			{
+				"caldably": "1200187",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "San Antonio del Tequendama"
+			},
+			{
+				"caldably": "1200188",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Zipacón"
+			},
+			{
+				"caldably": "1200189",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Villapinzón"
+			},
+			{
+				"caldably": "1200190",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Girardot"
+			},
+			{
+				"caldably": "1200191",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "El Peñón"
+			},
+			{
+				"caldably": "1200192",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "San Cayetano"
+			},
+			{
+				"caldably": "1200193",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "La Mesa"
+			},
+			{
+				"caldably": "1200194",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Paime"
+			},
+			{
+				"caldably": "1200195",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Sutatausa"
+			},
+			{
+				"caldably": "1200196",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Fosca"
+			},
+			{
+				"caldably": "1200197",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Anolaima"
+			},
+			{
+				"caldably": "1200198",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Cajicá"
+			},
+			{
+				"caldably": "1200199",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "La Palma"
+			},
+			{
+				"caldably": "1200200",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Viotá"
+			},
+			{
+				"caldably": "1200201",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Vergara"
+			},
+			{
+				"caldably": "1200202",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "San Francisco"
+			},
+			{
+				"caldably": "1200203",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Bituima"
+			},
+			{
+				"caldably": "1200204",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Villeta"
+			},
+			{
+				"caldably": "1200205",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Venecia"
+			},
+			{
+				"caldably": "1200206",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Sasaima"
+			},
+			{
+				"caldably": "1200207",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guayabetal"
+			},
+			{
+				"caldably": "1200208",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Nocaima"
+			},
+			{
+				"caldably": "1200209",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Tocaima"
+			},
+			{
+				"caldably": "1200210",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Sopó"
+			},
+			{
+				"caldably": "1200211",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Simijaca"
+			},
+			{
+				"caldably": "1200212",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Mosquera"
+			},
+			{
+				"caldably": "1200213",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Pulí"
+			},
+			{
+				"caldably": "1200214",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Machetá"
+			},
+			{
+				"caldably": "1200215",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Guataquí"
+			},
+			{
+				"caldably": "1200216",
+				"cingorium": "Cundinamarca",
+				"fluia": "1200100",
+				"trophful": "Madrid"
+			}
+		]
+	},
+	{
+		"fluia": "1210100",
+		"cingorium": "Boyacá",
+		"sonList": [
+			{
+				"caldably": "1210101",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Cómbita"
+			},
+			{
+				"caldably": "1210102",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Pesca"
+			},
+			{
+				"caldably": "1210103",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chíquiza"
+			},
+			{
+				"caldably": "1210104",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Coper"
+			},
+			{
+				"caldably": "1210105",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Guayatá"
+			},
+			{
+				"caldably": "1210106",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sutamarchán"
+			},
+			{
+				"caldably": "1210107",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Togüí"
+			},
+			{
+				"caldably": "1210108",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San Luis de Gaceno"
+			},
+			{
+				"caldably": "1210109",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Floresta"
+			},
+			{
+				"caldably": "1210110",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "La Victoria"
+			},
+			{
+				"caldably": "1210111",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Susacón"
+			},
+			{
+				"caldably": "1210112",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Turmequé"
+			},
+			{
+				"caldably": "1210113",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sativanorte"
+			},
+			{
+				"caldably": "1210114",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Santa Sofía"
+			},
+			{
+				"caldably": "1210115",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Rondón"
+			},
+			{
+				"caldably": "1210116",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Guacamayas"
+			},
+			{
+				"caldably": "1210117",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Jenesano"
+			},
+			{
+				"caldably": "1210118",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Berbeo"
+			},
+			{
+				"caldably": "1210119",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tununguá"
+			},
+			{
+				"caldably": "1210120",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tópaga"
+			},
+			{
+				"caldably": "1210121",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sativasur"
+			},
+			{
+				"caldably": "1210122",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Viracachá"
+			},
+			{
+				"caldably": "1210123",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tipacoque"
+			},
+			{
+				"caldably": "1210124",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Maripí"
+			},
+			{
+				"caldably": "1210125",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Nobsa"
+			},
+			{
+				"caldably": "1210126",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Quípama"
+			},
+			{
+				"caldably": "1210127",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Villa de Leyva"
+			},
+			{
+				"caldably": "1210128",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tuta"
+			},
+			{
+				"caldably": "1210129",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Garagoa"
+			},
+			{
+				"caldably": "1210130",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sogamoso"
+			},
+			{
+				"caldably": "1210131",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Socha"
+			},
+			{
+				"caldably": "1210132",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chita"
+			},
+			{
+				"caldably": "1210133",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Pauna"
+			},
+			{
+				"caldably": "1210134",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Covarachía"
+			},
+			{
+				"caldably": "1210135",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Macanal"
+			},
+			{
+				"caldably": "1210136",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San Miguel de Sema"
+			},
+			{
+				"caldably": "1210137",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "El Cocuy"
+			},
+			{
+				"caldably": "1210138",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Motavita"
+			},
+			{
+				"caldably": "1210139",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Cucaita"
+			},
+			{
+				"caldably": "1210140",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chiquinquirá"
+			},
+			{
+				"caldably": "1210141",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Cerinza"
+			},
+			{
+				"caldably": "1210142",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Somondoco"
+			},
+			{
+				"caldably": "1210143",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Samacá"
+			},
+			{
+				"caldably": "1210144",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Nuevo Colón"
+			},
+			{
+				"caldably": "1210145",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Labranzagrande"
+			},
+			{
+				"caldably": "1210146",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tenza"
+			},
+			{
+				"caldably": "1210147",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tibaná"
+			},
+			{
+				"caldably": "1210148",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Toca"
+			},
+			{
+				"caldably": "1210149",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Belén"
+			},
+			{
+				"caldably": "1210150",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Campohermoso"
+			},
+			{
+				"caldably": "1210151",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Aquitania"
+			},
+			{
+				"caldably": "1210152",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Caldas"
+			},
+			{
+				"caldably": "1210153",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Duitama"
+			},
+			{
+				"caldably": "1210154",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sáchica"
+			},
+			{
+				"caldably": "1210155",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Otanche"
+			},
+			{
+				"caldably": "1210156",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Mongua"
+			},
+			{
+				"caldably": "1210157",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Ciénega"
+			},
+			{
+				"caldably": "1210158",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chitaraque"
+			},
+			{
+				"caldably": "1210159",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chinavita"
+			},
+			{
+				"caldably": "1210160",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Oicatá"
+			},
+			{
+				"caldably": "1210161",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Monguí"
+			},
+			{
+				"caldably": "1210162",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tinjacá"
+			},
+			{
+				"caldably": "1210163",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tibasosa"
+			},
+			{
+				"caldably": "1210164",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sutatenza"
+			},
+			{
+				"caldably": "1210165",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Úmbita"
+			},
+			{
+				"caldably": "1210166",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tasco"
+			},
+			{
+				"caldably": "1210167",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San Pablo de Borbur"
+			},
+			{
+				"caldably": "1210168",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Briceño"
+			},
+			{
+				"caldably": "1210169",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sora"
+			},
+			{
+				"caldably": "1210170",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Soracá"
+			},
+			{
+				"caldably": "1210171",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Ráquira"
+			},
+			{
+				"caldably": "1210172",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Buenavista"
+			},
+			{
+				"caldably": "1210173",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Gachantivá"
+			},
+			{
+				"caldably": "1210174",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Firavitoba"
+			},
+			{
+				"caldably": "1210175",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "La Capilla"
+			},
+			{
+				"caldably": "1210176",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Santa María"
+			},
+			{
+				"caldably": "1210177",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Corrales"
+			},
+			{
+				"caldably": "1210178",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Zetaquira"
+			},
+			{
+				"caldably": "1210179",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Cubará"
+			},
+			{
+				"caldably": "1210180",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Paya"
+			},
+			{
+				"caldably": "1210181",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Paz de Río"
+			},
+			{
+				"caldably": "1210182",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Saboyá"
+			},
+			{
+				"caldably": "1210183",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Boyacá"
+			},
+			{
+				"caldably": "1210184",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Santana"
+			},
+			{
+				"caldably": "1210185",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Sotaquirá"
+			},
+			{
+				"caldably": "1210186",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Panqueba"
+			},
+			{
+				"caldably": "1210187",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Santa Rosa de Viterbo"
+			},
+			{
+				"caldably": "1210188",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tutazá"
+			},
+			{
+				"caldably": "1210189",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Miraflores"
+			},
+			{
+				"caldably": "1210190",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San Eduardo"
+			},
+			{
+				"caldably": "1210191",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "El Espino"
+			},
+			{
+				"caldably": "1210192",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "La Uvita"
+			},
+			{
+				"caldably": "1210193",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Busbanzá"
+			},
+			{
+				"caldably": "1210194",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Ramiriquí"
+			},
+			{
+				"caldably": "1210195",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Güicán"
+			},
+			{
+				"caldably": "1210196",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Paipa"
+			},
+			{
+				"caldably": "1210197",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Betéitiva"
+			},
+			{
+				"caldably": "1210198",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Iza"
+			},
+			{
+				"caldably": "1210199",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Siachoque"
+			},
+			{
+				"caldably": "1210200",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tunja"
+			},
+			{
+				"caldably": "1210201",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Pachavita"
+			},
+			{
+				"caldably": "1210202",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chivor"
+			},
+			{
+				"caldably": "1210203",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Cuítiva"
+			},
+			{
+				"caldably": "1210204",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Boavita"
+			},
+			{
+				"caldably": "1210205",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Soatá"
+			},
+			{
+				"caldably": "1210206",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Ventaquemada"
+			},
+			{
+				"caldably": "1210207",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Almeida"
+			},
+			{
+				"caldably": "1210208",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chivatá"
+			},
+			{
+				"caldably": "1210209",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Tota"
+			},
+			{
+				"caldably": "1210210",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Gámeza"
+			},
+			{
+				"caldably": "1210211",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Moniquirá"
+			},
+			{
+				"caldably": "1210212",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San Mateo"
+			},
+			{
+				"caldably": "1210213",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Socotá"
+			},
+			{
+				"caldably": "1210214",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Chiscas"
+			},
+			{
+				"caldably": "1210215",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Arcabuco"
+			},
+			{
+				"caldably": "1210216",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "San José de Pare"
+			},
+			{
+				"caldably": "1210217",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Muzo"
+			},
+			{
+				"caldably": "1210218",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Pajarito"
+			},
+			{
+				"caldably": "1210219",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Pisba"
+			},
+			{
+				"caldably": "1210220",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Páez"
+			},
+			{
+				"caldably": "1210221",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Puerto Boyacá"
+			},
+			{
+				"caldably": "1210222",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Jericó"
+			},
+			{
+				"caldably": "1210223",
+				"cingorium": "Boyacá",
+				"fluia": "1210100",
+				"trophful": "Guateque"
+			}
+		]
+	},
+	{
+		"fluia": "1220100",
+		"cingorium": "Magdalena",
+		"sonList": [
+			{
+				"caldably": "1220101",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Pijiño del Carmen"
+			},
+			{
+				"caldably": "1220102",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Ciénaga"
+			},
+			{
+				"caldably": "1220103",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Sitionuevo"
+			},
+			{
+				"caldably": "1220104",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Nueva Granada"
+			},
+			{
+				"caldably": "1220105",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Santa Marta"
+			},
+			{
+				"caldably": "1220106",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "El Piñón"
+			},
+			{
+				"caldably": "1220107",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Salamina"
+			},
+			{
+				"caldably": "1220108",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "El Retén"
+			},
+			{
+				"caldably": "1220109",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Guamal"
+			},
+			{
+				"caldably": "1220110",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Zapayán"
+			},
+			{
+				"caldably": "1220111",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Ariguaní"
+			},
+			{
+				"caldably": "1220112",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "El Banco"
+			},
+			{
+				"caldably": "1220113",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Concordia"
+			},
+			{
+				"caldably": "1220114",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Pivijay"
+			},
+			{
+				"caldably": "1220115",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "San Sebastián de Buenavista"
+			},
+			{
+				"caldably": "1220116",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Aracataca"
+			},
+			{
+				"caldably": "1220117",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Fundación"
+			},
+			{
+				"caldably": "1220118",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Chibolo"
+			},
+			{
+				"caldably": "1220119",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Pedraza"
+			},
+			{
+				"caldably": "1220120",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Sabanas de San Ángel"
+			},
+			{
+				"caldably": "1220121",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Santa Ana"
+			},
+			{
+				"caldably": "1220122",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Santa Bárbara de Pinto"
+			},
+			{
+				"caldably": "1220123",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Remolino"
+			},
+			{
+				"caldably": "1220124",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Zona Bananera"
+			},
+			{
+				"caldably": "1220125",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Tenerife"
+			},
+			{
+				"caldably": "1220126",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Cerro San Antonio"
+			},
+			{
+				"caldably": "1220127",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "San Zenón"
+			},
+			{
+				"caldably": "1220128",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Algarrobo"
+			},
+			{
+				"caldably": "1220129",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Plato"
+			},
+			{
+				"caldably": "1220130",
+				"cingorium": "Magdalena",
+				"fluia": "1220100",
+				"trophful": "Puebloviejo"
+			}
+		]
+	},
+	{
+		"fluia": "1230100",
+		"cingorium": "Guaviare",
+		"sonList": [
+			{
+				"caldably": "1230101",
+				"cingorium": "Guaviare",
+				"fluia": "1230100",
+				"trophful": "San José del Guaviare"
+			},
+			{
+				"caldably": "1230102",
+				"cingorium": "Guaviare",
+				"fluia": "1230100",
+				"trophful": "El Retorno"
+			},
+			{
+				"caldably": "1230103",
+				"cingorium": "Guaviare",
+				"fluia": "1230100",
+				"trophful": "Calamar"
+			},
+			{
+				"caldably": "1230104",
+				"cingorium": "Guaviare",
+				"fluia": "1230100",
+				"trophful": "Miraflores"
+			}
+		]
+	},
+	{
+		"fluia": "1240100",
+		"cingorium": "Amazonas",
+		"sonList": [
+			{
+				"caldably": "1240101",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Puerto Nariño"
+			},
+			{
+				"caldably": "1240102",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "La Pedrera"
+			},
+			{
+				"caldably": "1240103",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "El Encanto"
+			},
+			{
+				"caldably": "1240104",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Mirití"
+			},
+			{
+				"caldably": "1240105",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Tarapacá"
+			},
+			{
+				"caldably": "1240106",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Puerto Santander"
+			},
+			{
+				"caldably": "1240107",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Leticia"
+			},
+			{
+				"caldably": "1240108",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "La Victoria"
+			},
+			{
+				"caldably": "1240109",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "La Chorrera"
+			},
+			{
+				"caldably": "1240110",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Puerto Arica"
+			},
+			{
+				"caldably": "1240111",
+				"cingorium": "Amazonas",
+				"fluia": "1240100",
+				"trophful": "Puerto Alegría"
+			}
+		]
+	},
+	{
+		"fluia": "1250100",
+		"cingorium": "Caldas",
+		"sonList": [
+			{
+				"caldably": "1250101",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Chinchiná"
+			},
+			{
+				"caldably": "1250102",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Pensilvania"
+			},
+			{
+				"caldably": "1250103",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Viterbo"
+			},
+			{
+				"caldably": "1250104",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Anserma"
+			},
+			{
+				"caldably": "1250105",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Samaná"
+			},
+			{
+				"caldably": "1250106",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Marulanda"
+			},
+			{
+				"caldably": "1250107",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Manzanares"
+			},
+			{
+				"caldably": "1250108",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Riosucio"
+			},
+			{
+				"caldably": "1250109",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Belalcázar"
+			},
+			{
+				"caldably": "1250110",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Norcasia"
+			},
+			{
+				"caldably": "1250111",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "San José"
+			},
+			{
+				"caldably": "1250112",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Salamina"
+			},
+			{
+				"caldably": "1250113",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Marmato"
+			},
+			{
+				"caldably": "1250114",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Villamaría"
+			},
+			{
+				"caldably": "1250115",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Aguadas"
+			},
+			{
+				"caldably": "1250116",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Palestina"
+			},
+			{
+				"caldably": "1250117",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Supía"
+			},
+			{
+				"caldably": "1250118",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "La Merced"
+			},
+			{
+				"caldably": "1250119",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Pácora"
+			},
+			{
+				"caldably": "1250120",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Aranzazu"
+			},
+			{
+				"caldably": "1250121",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Victoria"
+			},
+			{
+				"caldably": "1250122",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Filadelfia"
+			},
+			{
+				"caldably": "1250123",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Neira"
+			},
+			{
+				"caldably": "1250124",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "La Dorada"
+			},
+			{
+				"caldably": "1250125",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Marquetalia"
+			},
+			{
+				"caldably": "1250126",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Risaralda"
+			},
+			{
+				"caldably": "1250127",
+				"cingorium": "Caldas",
+				"fluia": "1250100",
+				"trophful": "Manizales"
+			}
+		]
+	},
+	{
+		"fluia": "1260100",
+		"cingorium": "Risaralda",
+		"sonList": [
+			{
+				"caldably": "1260101",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Santa Rosa de Cabal"
+			},
+			{
+				"caldably": "1260102",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Quinchía"
+			},
+			{
+				"caldably": "1260103",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Marsella"
+			},
+			{
+				"caldably": "1260104",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Pereira"
+			},
+			{
+				"caldably": "1260105",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "La Celia"
+			},
+			{
+				"caldably": "1260106",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Belén de Umbría"
+			},
+			{
+				"caldably": "1260107",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Mistrató"
+			},
+			{
+				"caldably": "1260108",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Guática"
+			},
+			{
+				"caldably": "1260109",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Apía"
+			},
+			{
+				"caldably": "1260110",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Dosquebradas"
+			},
+			{
+				"caldably": "1260111",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "La Virginia"
+			},
+			{
+				"caldably": "1260112",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Santuario"
+			},
+			{
+				"caldably": "1260113",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Pueblo Rico"
+			},
+			{
+				"caldably": "1260114",
+				"cingorium": "Risaralda",
+				"fluia": "1260100",
+				"trophful": "Balboa"
+			}
+		]
+	},
+	{
+		"fluia": "1270100",
+		"cingorium": "Norte de Santander",
+		"sonList": [
+			{
+				"caldably": "1270101",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Villa Caro"
+			},
+			{
+				"caldably": "1270102",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Chinácota"
+			},
+			{
+				"caldably": "1270103",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Convención"
+			},
+			{
+				"caldably": "1270104",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Salazar de las Palmas"
+			},
+			{
+				"caldably": "1270105",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Teorama"
+			},
+			{
+				"caldably": "1270106",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "El Carmen"
+			},
+			{
+				"caldably": "1270107",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Toledo"
+			},
+			{
+				"caldably": "1270108",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Tibú"
+			},
+			{
+				"caldably": "1270109",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Cácota"
+			},
+			{
+				"caldably": "1270110",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Pamplonita"
+			},
+			{
+				"caldably": "1270111",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Cucutilla"
+			},
+			{
+				"caldably": "1270112",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Cáchira"
+			},
+			{
+				"caldably": "1270113",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Ragonvalia"
+			},
+			{
+				"caldably": "1270114",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Lourdes"
+			},
+			{
+				"caldably": "1270115",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "La Esperanza"
+			},
+			{
+				"caldably": "1270116",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "El Tarra"
+			},
+			{
+				"caldably": "1270117",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Mutiscua"
+			},
+			{
+				"caldably": "1270118",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Hacarí"
+			},
+			{
+				"caldably": "1270119",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Silos"
+			},
+			{
+				"caldably": "1270120",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "San Cayetano"
+			},
+			{
+				"caldably": "1270121",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Chitagá"
+			},
+			{
+				"caldably": "1270122",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Puerto Santander"
+			},
+			{
+				"caldably": "1270123",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Sardinata"
+			},
+			{
+				"caldably": "1270124",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "El Zulia"
+			},
+			{
+				"caldably": "1270125",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Bucarasica"
+			},
+			{
+				"caldably": "1270126",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Arboledas"
+			},
+			{
+				"caldably": "1270127",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Duranía"
+			},
+			{
+				"caldably": "1270128",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Ocaña"
+			},
+			{
+				"caldably": "1270129",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Abrego"
+			},
+			{
+				"caldably": "1270130",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Santiago"
+			},
+			{
+				"caldably": "1270131",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Villa del Rosario"
+			},
+			{
+				"caldably": "1270132",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Pamplona"
+			},
+			{
+				"caldably": "1270133",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Los Patios"
+			},
+			{
+				"caldably": "1270134",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Cúcuta"
+			},
+			{
+				"caldably": "1270135",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Herrán"
+			},
+			{
+				"caldably": "1270136",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Labateca"
+			},
+			{
+				"caldably": "1270137",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "San Calixto"
+			},
+			{
+				"caldably": "1270138",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Bochalema"
+			},
+			{
+				"caldably": "1270139",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "Gramalote"
+			},
+			{
+				"caldably": "1270140",
+				"cingorium": "Norte de Santander",
+				"fluia": "1270100",
+				"trophful": "La Playa de Belén"
+			}
+		]
+	},
+	{
+		"fluia": "1280100",
+		"cingorium": "Arauca",
+		"sonList": [
+			{
+				"caldably": "1280101",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Cravo Norte"
+			},
+			{
+				"caldably": "1280102",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Arauquita"
+			},
+			{
+				"caldably": "1280103",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Fortul"
+			},
+			{
+				"caldably": "1280104",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Arauca"
+			},
+			{
+				"caldably": "1280105",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Saravena"
+			},
+			{
+				"caldably": "1280106",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Tame"
+			},
+			{
+				"caldably": "1280107",
+				"cingorium": "Arauca",
+				"fluia": "1280100",
+				"trophful": "Puerto Rondón"
+			}
+		]
+	},
+	{
+		"fluia": "1290100",
+		"cingorium": "Huila",
+		"sonList": [
+			{
+				"caldably": "1290101",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Acevedo"
+			},
+			{
+				"caldably": "1290102",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Algeciras"
+			},
+			{
+				"caldably": "1290103",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Nátaga"
+			},
+			{
+				"caldably": "1290104",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Colombia"
+			},
+			{
+				"caldably": "1290105",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Agrado"
+			},
+			{
+				"caldably": "1290106",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Gigante"
+			},
+			{
+				"caldably": "1290107",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Teruel"
+			},
+			{
+				"caldably": "1290108",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Palestina"
+			},
+			{
+				"caldably": "1290109",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "San Agustín"
+			},
+			{
+				"caldably": "1290110",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Aipe"
+			},
+			{
+				"caldably": "1290111",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Saladoblanco"
+			},
+			{
+				"caldably": "1290112",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Pitalito"
+			},
+			{
+				"caldably": "1290113",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "La Plata"
+			},
+			{
+				"caldably": "1290114",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Campoalegre"
+			},
+			{
+				"caldably": "1290115",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Timaná"
+			},
+			{
+				"caldably": "1290116",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Villavieja"
+			},
+			{
+				"caldably": "1290117",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Oporapa"
+			},
+			{
+				"caldably": "1290118",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Yaguará"
+			},
+			{
+				"caldably": "1290119",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Baraya"
+			},
+			{
+				"caldably": "1290120",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Guadalupe"
+			},
+			{
+				"caldably": "1290121",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Tarqui"
+			},
+			{
+				"caldably": "1290122",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Hobo"
+			},
+			{
+				"caldably": "1290123",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Paicol"
+			},
+			{
+				"caldably": "1290124",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Tello"
+			},
+			{
+				"caldably": "1290125",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Garzón"
+			},
+			{
+				"caldably": "1290126",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "El Pital"
+			},
+			{
+				"caldably": "1290127",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "La Argentina"
+			},
+			{
+				"caldably": "1290128",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Rivera"
+			},
+			{
+				"caldably": "1290129",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Suaza"
+			},
+			{
+				"caldably": "1290130",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Iquira"
+			},
+			{
+				"caldably": "1290131",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Palermo"
+			},
+			{
+				"caldably": "1290132",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Altamira"
+			},
+			{
+				"caldably": "1290133",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Elías"
+			},
+			{
+				"caldably": "1290134",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Isnos"
+			},
+			{
+				"caldably": "1290135",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Santa María"
+			},
+			{
+				"caldably": "1290136",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Neiva"
+			},
+			{
+				"caldably": "1290137",
+				"cingorium": "Huila",
+				"fluia": "1290100",
+				"trophful": "Tesalia"
+			}
+		]
+	},
+	{
+		"fluia": "1300100",
+		"cingorium": "Santander",
+		"sonList": [
+			{
+				"caldably": "1300101",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Miguel"
+			},
+			{
+				"caldably": "1300102",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "El Guacamayo"
+			},
+			{
+				"caldably": "1300103",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Villanueva"
+			},
+			{
+				"caldably": "1300104",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Sucre"
+			},
+			{
+				"caldably": "1300105",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Guadalupe"
+			},
+			{
+				"caldably": "1300106",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Bolívar"
+			},
+			{
+				"caldably": "1300107",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Puente Nacional"
+			},
+			{
+				"caldably": "1300108",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Florián"
+			},
+			{
+				"caldably": "1300109",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Confines"
+			},
+			{
+				"caldably": "1300110",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Floridablanca"
+			},
+			{
+				"caldably": "1300111",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Puerto Parra"
+			},
+			{
+				"caldably": "1300112",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Lebrija"
+			},
+			{
+				"caldably": "1300113",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "El Playón"
+			},
+			{
+				"caldably": "1300114",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Santa Helena del Opón"
+			},
+			{
+				"caldably": "1300115",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Guapotá"
+			},
+			{
+				"caldably": "1300116",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Aratoca"
+			},
+			{
+				"caldably": "1300117",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Gámbita"
+			},
+			{
+				"caldably": "1300118",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Sabana de Torres"
+			},
+			{
+				"caldably": "1300119",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Socorro"
+			},
+			{
+				"caldably": "1300120",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Betulia"
+			},
+			{
+				"caldably": "1300121",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Chima"
+			},
+			{
+				"caldably": "1300122",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Albania"
+			},
+			{
+				"caldably": "1300123",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Benito"
+			},
+			{
+				"caldably": "1300124",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Zapatoca"
+			},
+			{
+				"caldably": "1300125",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Valle de San José"
+			},
+			{
+				"caldably": "1300126",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Palmar"
+			},
+			{
+				"caldably": "1300127",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Molagavita"
+			},
+			{
+				"caldably": "1300128",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Vélez"
+			},
+			{
+				"caldably": "1300129",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San José de Miranda"
+			},
+			{
+				"caldably": "1300130",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Simacota"
+			},
+			{
+				"caldably": "1300131",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Pinchote"
+			},
+			{
+				"caldably": "1300132",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Piedecuesta"
+			},
+			{
+				"caldably": "1300133",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Los Santos"
+			},
+			{
+				"caldably": "1300134",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Suaita"
+			},
+			{
+				"caldably": "1300135",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Onzaga"
+			},
+			{
+				"caldably": "1300136",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Macaravita"
+			},
+			{
+				"caldably": "1300137",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Chipatá"
+			},
+			{
+				"caldably": "1300138",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Contratación"
+			},
+			{
+				"caldably": "1300139",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Barichara"
+			},
+			{
+				"caldably": "1300140",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Vicente de Chucurí"
+			},
+			{
+				"caldably": "1300141",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Palmas del Socorro"
+			},
+			{
+				"caldably": "1300142",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Cepitá"
+			},
+			{
+				"caldably": "1300143",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Carcasí"
+			},
+			{
+				"caldably": "1300144",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Guavatá"
+			},
+			{
+				"caldably": "1300145",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Gil"
+			},
+			{
+				"caldably": "1300146",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Suratá"
+			},
+			{
+				"caldably": "1300147",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Guaca"
+			},
+			{
+				"caldably": "1300148",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Landázuri"
+			},
+			{
+				"caldably": "1300149",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Tona"
+			},
+			{
+				"caldably": "1300150",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "El Peñón"
+			},
+			{
+				"caldably": "1300151",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Puerto Wilches"
+			},
+			{
+				"caldably": "1300152",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Juan de Girón"
+			},
+			{
+				"caldably": "1300153",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Coromoro"
+			},
+			{
+				"caldably": "1300154",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Barbosa"
+			},
+			{
+				"caldably": "1300155",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Curití"
+			},
+			{
+				"caldably": "1300156",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Cabrera"
+			},
+			{
+				"caldably": "1300157",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Joaquín"
+			},
+			{
+				"caldably": "1300158",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Hato"
+			},
+			{
+				"caldably": "1300159",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Vetas"
+			},
+			{
+				"caldably": "1300160",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "El Carmen de Chucurí"
+			},
+			{
+				"caldably": "1300161",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "San Andrés"
+			},
+			{
+				"caldably": "1300162",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Charta"
+			},
+			{
+				"caldably": "1300163",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Charalá"
+			},
+			{
+				"caldably": "1300164",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Cimitarra"
+			},
+			{
+				"caldably": "1300165",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Galán"
+			},
+			{
+				"caldably": "1300166",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Capitanejo"
+			},
+			{
+				"caldably": "1300167",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Jesús María"
+			},
+			{
+				"caldably": "1300168",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "La Paz"
+			},
+			{
+				"caldably": "1300169",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Cerrito"
+			},
+			{
+				"caldably": "1300170",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Güepsa"
+			},
+			{
+				"caldably": "1300171",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "La Belleza"
+			},
+			{
+				"caldably": "1300172",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Jordán"
+			},
+			{
+				"caldably": "1300173",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Páramo"
+			},
+			{
+				"caldably": "1300174",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Encino"
+			},
+			{
+				"caldably": "1300175",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Ocamonte"
+			},
+			{
+				"caldably": "1300176",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Málaga"
+			},
+			{
+				"caldably": "1300177",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Bucaramanga"
+			},
+			{
+				"caldably": "1300178",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Oiba"
+			},
+			{
+				"caldably": "1300179",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Mogotes"
+			},
+			{
+				"caldably": "1300180",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Enciso"
+			},
+			{
+				"caldably": "1300181",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Concepción"
+			},
+			{
+				"caldably": "1300182",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Barrancabermeja"
+			},
+			{
+				"caldably": "1300183",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Aguada"
+			},
+			{
+				"caldably": "1300184",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Rionegro"
+			},
+			{
+				"caldably": "1300185",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Matanza"
+			},
+			{
+				"caldably": "1300186",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "Santa Bárbara"
+			},
+			{
+				"caldably": "1300187",
+				"cingorium": "Santander",
+				"fluia": "1300100",
+				"trophful": "California"
+			}
+		]
+	},
+	{
+		"fluia": "1310100",
+		"cingorium": "Cesar",
+		"sonList": [
+			{
+				"caldably": "1310101",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Valledupar"
+			},
+			{
+				"caldably": "1310102",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "González"
+			},
+			{
+				"caldably": "1310103",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Pueblo Bello"
+			},
+			{
+				"caldably": "1310104",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Becerril"
+			},
+			{
+				"caldably": "1310105",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "San Martín"
+			},
+			{
+				"caldably": "1310106",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Chimichagua"
+			},
+			{
+				"caldably": "1310107",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Tamalameque"
+			},
+			{
+				"caldably": "1310108",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Gamarra"
+			},
+			{
+				"caldably": "1310109",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "El Paso"
+			},
+			{
+				"caldably": "1310110",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Manaure"
+			},
+			{
+				"caldably": "1310111",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Pailitas"
+			},
+			{
+				"caldably": "1310112",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "La Jagua de Ibirico"
+			},
+			{
+				"caldably": "1310113",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Bosconia"
+			},
+			{
+				"caldably": "1310114",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "La Paz"
+			},
+			{
+				"caldably": "1310115",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Chiriguaná"
+			},
+			{
+				"caldably": "1310116",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Astrea"
+			},
+			{
+				"caldably": "1310117",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "San Diego"
+			},
+			{
+				"caldably": "1310118",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Aguachica"
+			},
+			{
+				"caldably": "1310119",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Agustín Codazzi"
+			},
+			{
+				"caldably": "1310120",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "La Gloria"
+			},
+			{
+				"caldably": "1310121",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "San Alberto"
+			},
+			{
+				"caldably": "1310122",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Curumaní"
+			},
+			{
+				"caldably": "1310123",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Río de Oro"
+			},
+			{
+				"caldably": "1310124",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "Pelaya"
+			},
+			{
+				"caldably": "1310125",
+				"cingorium": "Cesar",
+				"fluia": "1310100",
+				"trophful": "El Copey"
+			}
+		]
+	},
+	{
+		"fluia": "1320100",
+		"cingorium": "Putumayo",
+		"sonList": [
+			{
+				"caldably": "1320101",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "San Miguel"
+			},
+			{
+				"caldably": "1320102",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Sibundoy"
+			},
+			{
+				"caldably": "1320103",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Puerto Guzmán"
+			},
+			{
+				"caldably": "1320104",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Puerto Asís"
+			},
+			{
+				"caldably": "1320105",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Villagarzón"
+			},
+			{
+				"caldably": "1320106",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Mocoa"
+			},
+			{
+				"caldably": "1320107",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Colón"
+			},
+			{
+				"caldably": "1320108",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Puerto Caicedo"
+			},
+			{
+				"caldably": "1320109",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Puerto Leguízamo"
+			},
+			{
+				"caldably": "1320110",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Santiago"
+			},
+			{
+				"caldably": "1320111",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "San Francisco"
+			},
+			{
+				"caldably": "1320112",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Valle del Guamuez"
+			},
+			{
+				"caldably": "1320113",
+				"cingorium": "Putumayo",
+				"fluia": "1320100",
+				"trophful": "Orito"
+			}
+		]
+	}
+]

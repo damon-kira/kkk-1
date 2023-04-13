@@ -27,11 +27,21 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mViewModel by lazyViewModel<PersonalViewModel>()
 
-    private val mEducation by lazy {
+    private val mEducation by lazy(LazyThreadSafetyMode.NONE) {
         DictionaryUtil.getEducationData()
     }
-    private val mMarriage by lazy {
+    private val mMarriage by lazy(LazyThreadSafetyMode.NONE) {
         DictionaryUtil.getMaritalData()
+    }
+
+    private val mAddrDialog by lazy(LazyThreadSafetyMode.NONE) {
+        AddressSelectorDialog(this).also {
+            it.setSelectorListener { address ->
+                address?.let {
+                    mBinding.bivAddress.setViewText("address.cingorium,${address.trophful}")
+                }
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +75,11 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
             }
         }
+
+        mViewModel.mAddrLiveData.observerNonSticky(this) { list ->
+            if (mAddrDialog.isShowing || list.isNullOrEmpty()) return@observerNonSticky
+            mAddrDialog.setAddressInfo(list).show()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -81,10 +96,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 }
             }
             R.id.biv_address -> {
-                AddressSelectorDialog(this)
-                    .setSelectorListener { address ->
-                        mBinding.bivAddress.setViewText(address)
-                    }.setAddressInfo(arrayListOf()).show()
+                mViewModel.getAddrInfo()
             }
             R.id.biv_marriage -> {
                 showProcessSelectorDialog(

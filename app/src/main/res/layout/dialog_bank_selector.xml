@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#99000000">
+    android:background="@color/dialog_bg">
 
     <Space
         android:layout_width="0dp"

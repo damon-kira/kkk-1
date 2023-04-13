@@ -54,6 +54,14 @@ class SearchView : LinearLayout {
         binding.setSearch.setHint(strRes)
     }
 
+    fun setSearchText(text: String?) {
+        binding.setSearch.setText(text)
+    }
+
+    fun clearSearchText(){
+        setSearchText("")
+    }
+
     fun getSearchText(): String = binding.setSearch.text.toString()
 
     var listener: OnSearchViewListener? = null

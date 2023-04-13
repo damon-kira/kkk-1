@@ -1,7 +1,11 @@
 package com.colombia.credit.module.process.personalinfo
 
+import android.util.Log
+import com.colombia.credit.bean.AddressInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.google.gson.reflect.TypeToken
+import com.util.lib.GsonUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -9,6 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class PersonalViewModel @Inject constructor(private val repository: PersonalRepository) :
     BaseProcessViewModel() {
+
+    val mAddrLiveData = generatorLiveData<ArrayList<AddressInfo>?>()
+
+    private var mCache: ArrayList<AddressInfo>? = null
 
     override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
@@ -30,5 +38,18 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
 
     override fun removeCacheInfo() {
         repository.removeCacheInfo()
+    }
+
+    fun getAddrInfo() {
+        if (mCache != null) {
+            mAddrLiveData.postValue(mCache!!)
+            return
+        }
+        mAddrLiveData.addSourceLiveData(repository.getAddrInfo()) {
+            Log.d(TAG, "getAddrInfo: it =$it")
+            val info = GsonUtil.fromJson(it, object : TypeToken<ArrayList<AddressInfo>>() {})
+            mAddrLiveData.postValue(info)
+            mCache = info
+        }
     }
 }

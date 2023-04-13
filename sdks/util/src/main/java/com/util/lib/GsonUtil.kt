@@ -188,6 +188,26 @@ class GsonUtil {
 
         /**
          *
+         * 描述：将json转化为对象.
+         * @param json
+         * @param clazz
+         * @return
+         */
+        inline fun <reified T> fromJsonNew(json: String): T? {
+            try {
+                val gsonb = GsonBuilder()
+                val gson = gsonb.create()
+                return gson.fromJson(json, T::class.java)
+            } catch (e: Exception) {
+                logger_e(TAG,"$e")
+                e.printStackTrace()
+            }
+
+            return null
+        }
+
+        /**
+         *
          * 描述：将对象转化为JsonArray
          * @param
          * @return

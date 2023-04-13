@@ -1,51 +1,81 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.AddressInfo
 import com.colombia.credit.databinding.DialogAddrSelectorBinding
-import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
-import com.colombia.credit.module.adapter.BaseViewHolder
-import com.colombia.credit.module.adapter.MyDividerItemDecoration
-import com.colombia.credit.module.adapter.linearLayoutManager
+import com.colombia.credit.expand.SimpleOnItemClickListener
+import com.colombia.credit.expand.setOnItemClickListener
+import com.colombia.credit.module.adapter.*
+import com.colombia.credit.view.SearchView
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import com.util.lib.ifShow
 
 class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogAddrSelectorBinding>()
-    private val mItems = arrayListOf<AddressInfo>()
-    private val mAdapter by lazy {
-        AddressSearchAdapter(mItems)
+    private val mParentItems = arrayListOf<AddressInfo>()
+    private var mCurrParent: String? = null
+
+    private val mItemsCity = arrayListOf<AddressInfo.City>()
+    private var mCurrCity: String? = null
+
+    private val TYPE_PARENT = 1
+    private val TYPE_CITY = 2
+    private var currType = TYPE_PARENT
+
+    private val mParentAdapter by lazy {
+        AddressSearchAdapter(arrayListOf())
+    }
+    private val mCityAdapter by lazy {
+        CitySearchAdapter(arrayListOf())
     }
 
-    private var mListener: ((String) -> Unit)? = null
+    private var mListener: ((AddressInfo.City?) -> Unit)? = null
 
     init {
         setContentView(mBinding.root)
-        setDisplaySize(MATCH, 0.65f, true)
-        mBinding.aivClear.setBlockingOnClickListener {
-            mBinding.addrEdittext.setText("")
-        }
+        setDisplaySize(MATCH, MATCH, true)
+
+        mBinding.searchview.setOnSearchListener(object : SearchView.OnSearchViewListener {
+            override fun onSearchTextChanged(searchText: String) {
+                if (searchText.isNullOrEmpty()) {
+                    if (currType == TYPE_CITY) {
+                        mCityAdapter.setItems(mItemsCity)
+                    } else {
+                        mParentAdapter.setItems(mParentItems)
+                    }
+                } else {
+                    if (currType == TYPE_CITY) {
+                        mCityAdapter.filter.filter(searchText)
+                    } else {
+                        mParentAdapter.filter.filter(searchText)
+                    }
+                }
+            }
+        })
+
         mBinding.aivClose.setBlockingOnClickListener {
             dismiss()
         }
-        mBinding.aivSearch.setBlockingOnClickListener {
-            val realText = mBinding.addrEdittext.getRealText()
-            if (realText.isEmpty()) {
-                return@setBlockingOnClickListener
-            }
-        }
 
-        for (index in 0 until 60) {
-            mItems.add(AddressInfo().also {
-                it.address = "$index"
-            })
+        val backListener = View.OnClickListener {
+            setCurrType(TYPE_PARENT)
+            mBinding.searchview.clearSearchText()
+            val list = arrayListOf<AddressInfo>()
+            list.addAll(mParentItems)
+            setAddressInfo(list)
         }
+        mBinding.aivBack.setBlockingOnClickListener(backListener)
+        mBinding.tvFirst.setBlockingOnClickListener(backListener)
+
         mBinding.searchRecyclerview.linearLayoutManager()
         mBinding.searchRecyclerview.addItemDecoration(
             MyDividerItemDecoration(
@@ -53,37 +83,80 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
                 LinearLayoutManager.VERTICAL
             )
         )
-        mBinding.searchRecyclerview.adapter = mAdapter
+        mBinding.searchRecyclerview.adapter = mParentAdapter
+
+        mBinding.searchRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
+            override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+                if (currType == TYPE_PARENT) {
+                    setCurrType(TYPE_CITY)
+                    mBinding.searchview.clearSearchText()
+                    mParentAdapter.getItemData<AddressInfo>(position)?.let { item ->
+                        setCityInfo(item.sonList!!)
+                        mCurrParent = item.cingorium
+                        mBinding.tvFirst.text = item.cingorium
+                    }
+                } else {
+                    val item = mCityAdapter.getItemData<AddressInfo.City>(position)
+                    item?.isCheck = item?.isCheck != true
+                    mCurrCity = item?.trophful
+                    mListener?.invoke(item)
+                    dismiss()
+                }
+            }
+        })
+    }
+
+    private fun setCurrType(type: Int) {
+        currType = type
+        val isShow = type == TYPE_CITY
+        mBinding.ivProcess.ifShow(isShow)
+        mBinding.tvFirst.ifShow(isShow)
     }
 
     fun setAddressInfo(addressInfo: ArrayList<AddressInfo>): AddressSelectorDialog {
-        mAdapter.setItems(addressInfo)
+        setCurrType(TYPE_PARENT)
+        mBinding.searchRecyclerview.adapter = mParentAdapter
+        mParentAdapter.curr = mCurrParent.orEmpty()
+        mParentItems.clear()
+        mParentItems.addAll(addressInfo)
+        mParentAdapter.setItems(addressInfo)
+        return this
+    }
+
+    fun setCityInfo(citys: ArrayList<AddressInfo.City>): AddressSelectorDialog {
+        setCurrType(TYPE_CITY)
+        mBinding.searchRecyclerview.adapter = mCityAdapter
+        mCityAdapter.curr = mCurrCity.orEmpty()
+        mItemsCity.clear()
+        mItemsCity.addAll(citys)
+        mCityAdapter.setItems(citys)
         return this
     }
 
     // 省市使用英文逗号’,‘分割
-    fun setSelectorListener(listener: (String) -> Unit): AddressSelectorDialog {
+    fun setSelectorListener(listener: (AddressInfo.City?) -> Unit): AddressSelectorDialog {
         this.mListener = listener
         return this
     }
 }
 
-class AddressSearchAdapter(items: ArrayList<AddressInfo>, private val curr: String = "") :
-    BaseRecyclerViewAdapter<AddressInfo>(items, R.layout.layout_addr_search_item) {
+class AddressSearchAdapter(items: ArrayList<AddressInfo>, var curr: String = "") :
+    SearchAdapter<AddressInfo>(items, R.layout.layout_addr_search_item) {
+
     override fun convert(holder: BaseViewHolder, item: AddressInfo, position: Int) {
         holder.getView<TextView>(R.id.tv_text).let {
-            it.text = item.address
-            val isSelector = item.address == curr
+            it.text = item.cingorium
+            val isSelector = item.cingorium == curr
             it.isSelected = isSelector
             if (isSelector) {
-                it.setCompoundDrawables(
+                it.setCompoundDrawablesWithIntrinsicBounds(
                     null,
                     null,
                     AppCompatResources.getDrawable(holder.getContext(), R.drawable.svg_coupler),
                     null
                 )
             } else {
-                it.setCompoundDrawables(
+                it.setCompoundDrawablesWithIntrinsicBounds(
                     null,
                     null,
                     null,
@@ -92,5 +165,31 @@ class AddressSearchAdapter(items: ArrayList<AddressInfo>, private val curr: Stri
             }
         }
     }
+}
 
+class CitySearchAdapter(items: ArrayList<AddressInfo.City>, var curr: String = "") :
+    SearchAdapter<AddressInfo.City>(items, R.layout.layout_addr_search_item) {
+
+    override fun convert(holder: BaseViewHolder, item: AddressInfo.City, position: Int) {
+        holder.getView<TextView>(R.id.tv_text).let {
+            it.text = item.trophful
+            val isSelector = item.trophful == curr
+            it.isSelected = isSelector
+            if (isSelector) {
+                it.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    AppCompatResources.getDrawable(holder.getContext(), R.drawable.svg_coupler),
+                    null
+                )
+            } else {
+                it.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    null,
+                    null
+                )
+            }
+        }
+    }
 }
