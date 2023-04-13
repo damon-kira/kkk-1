@@ -82,6 +82,10 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     override fun onClick(v: View?) {
         v ?: return
         when (v.id) {

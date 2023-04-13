@@ -104,7 +104,7 @@ class LoginFragment : BaseLoginFragment() {
 //                return@setBlockingOnClickListener
 //            }
 //            mViewModel.reqLogin(mobile, code)
-            Launch.skipPersonalInfoActivity(getSupportContext())
+            jumpProcess(getSupportContext(), TYPE_CONTACT)
         }
 
 

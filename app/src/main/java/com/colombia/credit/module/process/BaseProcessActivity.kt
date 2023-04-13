@@ -11,6 +11,12 @@ import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.isShowBackDialog
 import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.expand.saveShowBackDialog
+import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.process.bank.BankInfoActivity
+import com.colombia.credit.module.process.contact.ContactInfoActivity
+import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
+import com.colombia.credit.module.process.work.WorkInfoActivity
+import com.colombia.credit.module.process.work.WorkInfoActivity_GeneratedInjector
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.colombia.credit.view.baseinfo.BaseInfoView
@@ -37,7 +43,7 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     private val mBackDialog by lazy {
         ProcessBackDialog(this).setOnClickListener {
-            finish()
+            _backPressed()
         }
     }
 
@@ -87,8 +93,29 @@ abstract class BaseProcessActivity : BaseActivity() {
             saveShowBackDialog(false)
             mBackDialog.show()
         } else {
-            super.onBackPressed()
+            _backPressed()
         }
+    }
+
+    private fun _backPressed() {
+        when (this) {
+            is PersonalInfoActivity -> {
+                Launch.skipMainActivity(this)
+            }
+            is WorkInfoActivity -> {
+                Launch.skipPersonalInfoActivity(this)
+            }
+            is ContactInfoActivity -> {
+                Launch.skipWorkInfoActivity(this)
+            }
+            is BankInfoActivity -> {
+                Launch.skipContactInfoActivity(this)
+            }
+            else -> {
+                Launch.skipMainActivity(this)
+            }
+        }
+        finish()
     }
 
     override fun onDestroy() {
