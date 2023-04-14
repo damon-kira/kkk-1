@@ -5,21 +5,23 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.bigdata.lib.StorageHelper
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
-import com.colombia.credit.dialog.RepayDetailDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.util.loginTime
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBarColor
-import com.util.lib.hide
-import com.util.lib.show
+import com.util.lib.log.logger_d
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,7 +56,20 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginTvProtocol.movementMethod = LinkMovementMethod()
         mBinding.loginTvProtocol.text = span
         mBinding.loginTvProtocol.setBlockingOnClickListener {
-            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
+            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
+        }
+
+        mBinding.loginEditPhone.onFocusChangeListener = object: OnFocusChangeListener {
+            var startTime = System.currentTimeMillis()
+            override fun onFocusChange(v: View?, hasFocus: Boolean) {
+                if(!hasFocus) {
+                    if (getMobile().isNotEmpty()) {
+                        loginTime = System.currentTimeMillis() - startTime
+                    }
+                } else {
+                    startTime = System.currentTimeMillis()
+                }
+            }
         }
 
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
@@ -105,7 +120,9 @@ class LoginFragment : BaseLoginFragment() {
 //            }
 //            mViewModel.reqLogin(mobile, code)
             mFirstPageLoanAmount = "5000"
-            jumpProcess(getSupportContext(), TYPE_CONTACT)
+            jumpProcess(getSupportContext(), TYPE_PERSONAL)
+//            val size = StorageHelper.getDownFileNum()
+//            logger_d(TAG, "size  = $size")
         }
 
 

@@ -1,11 +1,18 @@
 package com.bigdata.lib
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.util.FloatProperty
+import com.bigdata.lib.bean.AppInfo
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.util.lib.*
+import com.util.lib.PackageUtil
+import com.util.lib.SysUtils
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
+import com.util.lib.time2Str
+import com.util.lib.utcTimeToStr
 import java.util.*
 
 /**
@@ -34,7 +41,10 @@ object DevicesAppHelper {
                         "appname",
                         packageManager.getApplicationLabel(it.applicationInfo).toString()
                     )//app名
-                    jsonObject.addProperty("installtime", time2Str(it.firstInstallTime, locale = Locale.getDefault()))//本地安装时间
+                    jsonObject.addProperty(
+                        "installtime",
+                        time2Str(it.firstInstallTime, locale = Locale.getDefault())
+                    )//本地安装时间
                     jsonObject.addProperty(
                         "installtime_utc",
                         utcTimeToStr(it.firstInstallTime)
@@ -64,6 +74,48 @@ object DevicesAppHelper {
             logger_e(TAG, " applist e = $e")
         }
         return jsonArray
+    }
+
+    fun getAppListInfo(context: Context): List<AppInfo> {
+        val list = arrayListOf<AppInfo>()
+        try {
+            val config = BigDataManager.get().getNetDataListener() ?: return list
+            val appInfors = PackageUtil.getInstallApp(config.getContext())
+            val packageManager = config.getContext().packageManager
+            val imei = SysUtils.getImei(context)
+            var info: AppInfo
+            appInfors.forEach {
+                info = AppInfo()
+                info.pkgname = it.packageName
+                info.appname =
+                    packageManager.getApplicationLabel(it.applicationInfo).toString() //app名
+                info.installtime =
+                    time2Str(it.firstInstallTime, locale = Locale.getDefault()) //本地安装时间
+                info.installtime_utc = utcTimeToStr(it.firstInstallTime) //utc 安装时间
+                info.timestamps = it.firstInstallTime.toString()// 第一次按照时间
+                info.last_timestamps = it.lastUpdateTime.toString() // 最后更新时间
+                info.type = if (PackageUtil.isPreInstall(it)) 0 else 1
+                info.appInfoVersion = it.versionName
+                info.devicesId = imei
+                list.add(info)
+            }
+            if (isDebug()) {
+                logger_i(TAG, " applist = $list")
+            }
+        } catch (e: Exception) {
+            logger_e(TAG, " applist e = $e")
+        }
+        return list
+    }
+
+    fun getFakeApp(ctx: Context){
+        val pm = ctx.packageManager
+        val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+
+        packages.forEach {appInfo ->
+            val packageInfo = pm.getPackageInfo(appInfo.packageName, PackageManager.GET_PERMISSIONS)
+            val requestedPermissions = packageInfo.requestedPermissions
+        }
     }
 
 }

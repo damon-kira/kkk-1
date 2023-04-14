@@ -2,7 +2,6 @@ package com.colombia.credit.module.adapter
 
 import android.widget.Filter
 import android.widget.Filterable
-import androidx.annotation.LayoutRes
 import com.colombia.credit.bean.SearchInfo
 import org.jetbrains.annotations.NotNull
 

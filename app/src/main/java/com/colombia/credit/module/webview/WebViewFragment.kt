@@ -14,6 +14,9 @@ import android.widget.LinearLayout
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.databinding.FragmentWebviewBinding
+import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.util.readPrivacyCount
+import com.colombia.credit.util.readPrivacyTime
 import com.colombia.credit.view.BaseWebView
 import com.common.lib.base.BaseFragment
 import com.common.lib.viewbinding.binding
@@ -48,6 +51,8 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 
     private var mUrl = ""
     private var isTitleShow = true
+
+    private var mEnterTime: Long = 0
 
     private val mBinding by binding(FragmentWebviewBinding::inflate)
 
@@ -105,6 +110,11 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         mWebView?.loadUrl(url)
         mWebView?.reload()
         setStatusBarColor(isTitleShow, url)
+
+        if (url == H5UrlManager.URL_PRIVACY) {
+            readPrivacyCount++
+            mEnterTime = System.currentTimeMillis()
+        }
     }
 
 
@@ -209,7 +219,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
                 title?.let {
                     if (it.startsWith("http") || isEmpty(it)) return
                 }
-//                tl_toolbar?.setText(title.orEmpty())
+                mBinding.toolbar.setText(title.orEmpty())
             }
 
 //            override fun onShowFileChooser(
@@ -342,6 +352,9 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        if (mUrl == H5UrlManager.URL_PRIVACY) {
+            readPrivacyTime = System.currentTimeMillis() - mEnterTime
+        }
         mWebView?.let {
             WebViewPool.INSTANCE.recycle(it)
             mWebView = null

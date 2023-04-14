@@ -2,6 +2,7 @@ package com.util.lib
 
 import android.os.Handler
 import android.os.Looper
+import android.os.Message
 
 class MainHandler {
     companion object {
@@ -14,6 +15,7 @@ class MainHandler {
         }
 
         fun post(runnable: () -> Unit) {
+            Message.obtain()
             HanderHolder.handler.post(runnable)
         }
 

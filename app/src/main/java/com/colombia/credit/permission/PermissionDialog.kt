@@ -62,7 +62,7 @@ class PermissionDialog(context: Context): DefaultDialog(context) {
         val span = SpannableStringBuilder(hint)
         span.append("\u200b")
         setAgreementClickableSpan(R.color.colorPrimary, context, span, agreementParam) {
-            Launch.skipWebViewActivity(context, H5UrlManager.URL_PRIVACY_PROTOCOL)
+            Launch.skipWebViewActivity(context, H5UrlManager.URL_PRIVACY)
         }
         mBinding.tvProtocol.movementMethod = LinkMovementMethod.getInstance()
         mBinding.tvProtocol.text = span

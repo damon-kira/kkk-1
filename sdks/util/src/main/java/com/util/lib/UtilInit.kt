@@ -31,7 +31,7 @@ class UtilInit {
     fun getContext() = mContext
 }
 
-fun getContext() : Context {
-    val ctx = UtilInit.get().getContext() ?: throw IllegalStateException("please call first UtilInit.get().setContext()")
-    return ctx
-}
+//fun getContext() : Context {
+//    val ctx = UtilInit.get().getContext() ?: throw IllegalStateException("please call first UtilInit.get().setContext()")
+//    return ctx
+//}

@@ -23,7 +23,7 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         jobj.addProperty("rVcbGK", uuid) // 来自验证码接口返回的uuid 【多个uuid就用,隔开】
         jobj.addProperty("nYc91KC", "") // 邀请码
         jobj.addProperty("bhUyamS",  WifiInfoUtil.getWifiName(context)) // WiFi
-        jobj.addProperty("Sbbh", GPInfoUtils.getAdid()) // gaid
+        jobj.addProperty("Sbbh", GPInfoUtils.getGdid()) // gaid
         apiService.loginSms(createRequestBody(jobj.toString()))
     }
 

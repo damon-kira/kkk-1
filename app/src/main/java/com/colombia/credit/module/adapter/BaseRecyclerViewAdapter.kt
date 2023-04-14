@@ -1,6 +1,7 @@
 package com.colombia.credit.module.adapter
 
 import android.content.Context
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,16 @@ import android.widget.TextView
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.util.lib.ifShow
 import org.jetbrains.annotations.NotNull
 
 /**
  * Created by weisl on 2018/9/12.
  */
-abstract class BaseRecyclerViewAdapter<T>(@NotNull private val items: ArrayList<T>, @LayoutRes protected var layoutRes: Int) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseRecyclerViewAdapter<T>(
+    @NotNull private val items: ArrayList<T>,
+    @LayoutRes protected var layoutRes: Int
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
     protected var mListener: OnItemClickListener<T>? = null
     protected var currentItems = items
@@ -71,36 +76,51 @@ abstract class BaseRecyclerViewAdapter<T>(@NotNull private val items: ArrayList<
 
 open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    private val sparseArray = SparseArray<View>()
 
     fun getContext(): Context {
         return itemView.context
     }
 
+    private fun <V: View> findViewById(@IdRes id: Int): V {
+        var view = sparseArray.get(id)
+        if (view == null) {
+            view = itemView.findViewById<V>(id)
+            sparseArray.put(id, view)
+        }
+        return view as V
+    }
+
     fun setText(@IdRes viewId: Int, text: String?) {
-        itemView.findViewById<TextView>(viewId).text = text
+        findViewById<TextView>(viewId).text = text
     }
 
     fun setText(@IdRes viewId: Int, @StringRes strRes: Int) {
-        itemView.findViewById<TextView>(viewId).setText(strRes)
+        findViewById<TextView>(viewId).setText(strRes)
     }
 
     fun setImageResource(@IdRes viewId: Int, @DrawableRes drawableRes: Int) {
-        itemView.findViewById<ImageView>(viewId).setImageResource(drawableRes)
+        findViewById<ImageView>(viewId).setImageResource(drawableRes)
     }
 
     fun <T : View> getView(@IdRes viewId: Int): T {
-        return itemView.findViewById(viewId)
+        return findViewById(viewId)
     }
 
     fun setTextColor(@IdRes viewId: Int, @ColorRes colorRes: Int) {
-        itemView.findViewById<TextView>(viewId).setTextColor(getContext().resources.getColor(colorRes))
+        findViewById<TextView>(viewId)
+            .setTextColor(getContext().resources.getColor(colorRes))
     }
 
     /**
      * @param isVisiable true: 显示 false GONE
      */
     fun setVisibility(@IdRes viewId: Int, isVisiable: Boolean) {
-        itemView.findViewById<View>(viewId).visibility = if (isVisiable) View.VISIBLE else View.GONE
+        findViewById<View>(viewId).ifShow(isVisiable)
+    }
+
+    fun clear() {
+        sparseArray.clear()
     }
 
 }

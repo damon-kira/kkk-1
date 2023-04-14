@@ -2,12 +2,12 @@ package com.colombia.credit.util.image.builder
 
 import android.graphics.Bitmap
 import android.net.Uri
+import com.colombia.credit.app.getAppContext
 import com.colombia.credit.util.image.FunctionManager
-import com.colombia.credit.util.image.data.CompressResult
 import com.colombia.credit.util.image.data.CompressParams
+import com.colombia.credit.util.image.data.CompressResult
 import com.colombia.credit.util.image.worker.CompressWorker
 import com.colombia.credit.util.image.worker.Worker
-import com.util.lib.getContext
 import com.util.lib.image.commonCompressPic
 import java.io.File
 
@@ -96,7 +96,7 @@ class CompressImageBuilder(functionManager: FunctionManager) :
                 targetHeight: Int
             ): Boolean {
                 return commonCompressPic(
-                    getContext(),
+                    getAppContext(),
                     source,
                     outputFile.absolutePath,
                     targetWidth,

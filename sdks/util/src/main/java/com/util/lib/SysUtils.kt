@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
+import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
@@ -37,7 +38,7 @@ object SysUtils {
             return arrayListOf()
         }
         val imeiList = arrayListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(
                     context,
                     Manifest.permission.READ_PHONE_STATE
@@ -224,5 +225,44 @@ object SysUtils {
             result = context.resources.getDimensionPixelOffset(resId)
         }
         return result
+    }
+
+    @SuppressLint("HardwareIds")
+    fun getAId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    }
+
+    fun isDevelop(context: Context) : Int{
+        return if (Settings.Secure.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0) > 0) {
+            1
+        } else 0
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getSimSerial(context: Context):String{
+        if (PermissionChecker.checkSelfPermission(
+                context,
+                Manifest.permission.READ_PHONE_STATE
+            ) == PermissionChecker.PERMISSION_DENIED && PermissionChecker.checkSelfPermission(
+                context,
+                Manifest.permission.READ_PHONE_NUMBERS
+            ) == PermissionChecker.PERMISSION_DENIED
+        ) {
+            return ""
+        }
+        try {
+            val phoneMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val phoneNumber = phoneMgr.simSerialNumber.orEmpty()
+            if (BuildConfig.DEBUG) {
+                logger_d(TAG, "phone number = $phoneNumber")
+            }
+            return phoneNumber
+        } catch (e: Exception) {
+            if (DEBUG) {
+                Log.e(TAG, e.toString())
+            }
+        }
+
+        return ""
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.AddressInfo
+import com.colombia.credit.bean.SearchInfo
 import com.colombia.credit.databinding.DialogAddrSelectorBinding
 import com.colombia.credit.expand.SimpleOnItemClickListener
 import com.colombia.credit.expand.setOnItemClickListener
@@ -67,11 +68,15 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
         }
 
         val backListener = View.OnClickListener {
-            setCurrType(TYPE_PARENT)
-            mBinding.searchview.clearSearchText()
-            val list = arrayListOf<AddressInfo>()
-            list.addAll(mParentItems)
-            setAddressInfo(list)
+            if (currType == TYPE_CITY) {
+                setCurrType(TYPE_PARENT)
+                mBinding.searchview.clearSearchText()
+                val list = arrayListOf<AddressInfo>()
+                list.addAll(mParentItems)
+                setAddressInfo(list)
+            } else {
+                dismiss()
+            }
         }
         mBinding.aivBack.setBlockingOnClickListener(backListener)
         mBinding.tvFirst.setBlockingOnClickListener(backListener)
@@ -140,56 +145,37 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
     }
 }
 
-class AddressSearchAdapter(items: ArrayList<AddressInfo>, var curr: String = "") :
-    SearchAdapter<AddressInfo>(items, R.layout.layout_addr_search_item) {
+open class AbsAddresAdater<T : SearchInfo>(items: ArrayList<T>, var curr: String = "") :
+    SearchAdapter<T>(items, R.layout.layout_addr_search_item) {
 
-    override fun convert(holder: BaseViewHolder, item: AddressInfo, position: Int) {
+    override fun convert(holder: BaseViewHolder, item: T, position: Int) {
+        if (item is AddressInfo) {
+            setText(holder, item.cingorium.orEmpty())
+        } else if (item is AddressInfo.City) {
+            setText(holder, item.trophful.orEmpty())
+        }
+    }
+
+    private fun setText(
+        holder: BaseViewHolder,
+        text: String
+    ) {
         holder.getView<TextView>(R.id.tv_text).let {
-            it.text = item.cingorium
-            val isSelector = item.cingorium == curr
+            it.text = text
+            val isSelector = text == curr
             it.isSelected = isSelector
-            if (isSelector) {
-                it.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    AppCompatResources.getDrawable(holder.getContext(), R.drawable.svg_coupler),
-                    null
-                )
-            } else {
-                it.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    null,
-                    null
-                )
-            }
+            val rightDrawable = if (isSelector) AppCompatResources.getDrawable(
+                holder.getContext(),
+                R.drawable.svg_coupler
+            ) else null
+            it.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrawable, null)
         }
     }
 }
 
-class CitySearchAdapter(items: ArrayList<AddressInfo.City>, var curr: String = "") :
-    SearchAdapter<AddressInfo.City>(items, R.layout.layout_addr_search_item) {
+class AddressSearchAdapter(items: ArrayList<AddressInfo>, curr: String = "") :
+    AbsAddresAdater<AddressInfo>(items, curr) {}
 
-    override fun convert(holder: BaseViewHolder, item: AddressInfo.City, position: Int) {
-        holder.getView<TextView>(R.id.tv_text).let {
-            it.text = item.trophful
-            val isSelector = item.trophful == curr
-            it.isSelected = isSelector
-            if (isSelector) {
-                it.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    AppCompatResources.getDrawable(holder.getContext(), R.drawable.svg_coupler),
-                    null
-                )
-            } else {
-                it.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    null,
-                    null
-                )
-            }
-        }
-    }
+class CitySearchAdapter(items: ArrayList<AddressInfo.City>, curr: String = "") :
+    AbsAddresAdater<AddressInfo.City>(items, curr) {
 }

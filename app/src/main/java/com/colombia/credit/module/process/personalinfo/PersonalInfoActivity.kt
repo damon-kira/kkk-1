@@ -39,7 +39,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         AddressSelectorDialog(this).also {
             it.setSelectorListener { address ->
                 address?.let {
-                    mBinding.bivAddress.setViewText("address.cingorium,${address.trophful}")
+                    mBinding.bivAddress.setViewText("${address.cingorium},${address.trophful}")
                 }
             }
         }

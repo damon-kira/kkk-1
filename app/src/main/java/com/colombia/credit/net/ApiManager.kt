@@ -75,7 +75,7 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getAdvertisingId(): String {
-                return GPInfoUtils.getAdid()
+                return GPInfoUtils.getGdid()
             }
 
             override fun getChannelId(): String {

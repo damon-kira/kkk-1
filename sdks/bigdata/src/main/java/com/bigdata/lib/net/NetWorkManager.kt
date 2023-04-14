@@ -51,7 +51,6 @@ internal object NetWorkManager {
             override fun onResponse(call: Call, response: Response) {
 
                 if (response.isSuccessful) {
-
                     response.body()?.string()?.let { body ->
                         logger_i(TAG, "postCashInfo success ======= $body")
                     }
@@ -66,19 +65,12 @@ internal object NetWorkManager {
                     } else {
                         logger_i(TAG, "not settime")
                     }
-
                 }else{
-
                     MCLCManager.doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_FAILED)
                     logger_i(TAG,"isAllpermission = $isAllPermission postCashInfo error ======= ${response.code()}")
-
                 }
             }
-
         })
-
-
-
     }
 
 

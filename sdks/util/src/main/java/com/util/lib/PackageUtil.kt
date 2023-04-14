@@ -14,6 +14,8 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import com.cache.lib.SharedPrefGlobal
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.util.lib.log.isDebug
 import java.util.*
 
@@ -40,6 +42,31 @@ object PackageUtil {
 
     fun isAppLaunchable(context: Context, pkgName: String): Boolean {
         return null != context.packageManager.getLaunchIntentForPackage(pkgName)
+    }
+
+    fun getGpsMockApp(context: Context): JsonArray {
+        val apps = getInstallApp(context)
+        val array = JsonArray()
+        var jobj: JsonObject
+        apps.forEach { packageInfo ->
+            val permissionInfos = context.packageManager.getPackageInfo(
+                packageInfo.packageName,
+                PackageManager.GET_PERMISSIONS
+            )
+            permissionInfos.requestedPermissions?.forEach { permissionName ->
+                if (permissionName == "android.permission.ACCESS_MOCK_LOCATION" && packageInfo.packageName != context.packageName) {
+                    jobj = JsonObject()
+                    jobj.addProperty("firstInstallTime", packageInfo.firstInstallTime)
+                    jobj.addProperty("appName", packageInfo.applicationInfo?.name)
+                    jobj.addProperty("packageName", packageInfo.packageName)
+                    jobj.addProperty("lastUpdateTime", packageInfo.lastUpdateTime)
+                    array.add(jobj)
+                    return@forEach
+                }
+                Log.d(TAG, "getGpsMockApp: permission = ${permissionName}")
+            }
+        }
+        return array
     }
 
     fun getAppPackageInfo(context: Context, pkgName: String): PackageInfo? {

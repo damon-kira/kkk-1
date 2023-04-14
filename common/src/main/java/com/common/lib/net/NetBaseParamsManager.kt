@@ -183,7 +183,7 @@ class NetBaseParamsManager {
             jsonObject.addProperty("longitude", locationInfo.longitude.orEmpty())//经度
             jsonObject.addProperty("latitude", locationInfo.latitude.orEmpty())//纬度
             jsonObject.addProperty("time_zone", TimeZone.getDefault().id)//时区
-            jsonObject.addProperty("network", NetWorkUtil.getNetworkState(supplier.getContext()))
+            jsonObject.addProperty("network", NetWorkUtils.getNetworkState(supplier.getContext()))
             jsonObject.addProperty(
                 "is_simulator", if (isSimulator()) {
                     "1"
@@ -194,7 +194,7 @@ class NetBaseParamsManager {
             jsonObject.addProperty("city", "")
             // 优先google服务  0:google 1:华为
 //            jsonObject.addProperty("channel_fm", PushManagerFactory.getChannel())
-            jsonObject.addProperty("is_use_vpn", if (NetWorkUtil.isVPN(supplier.getContext())) "1" else "0")
+            jsonObject.addProperty("is_use_vpn", if (NetWorkUtils.isVPN(supplier.getContext())) "1" else "0")
         }
 
 

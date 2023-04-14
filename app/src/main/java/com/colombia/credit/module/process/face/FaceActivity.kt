@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import com.bigdata.lib.WifiHelper
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
@@ -18,6 +19,7 @@ import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.process.IBaseProcessViewModel
+import com.colombia.credit.util.faceWifi
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
@@ -55,6 +57,8 @@ class FaceActivity : BaseProcessActivity() {
             BaseCameraManager.FACING_FRONT,
             BaseCameraManager.SCREEN_PORTRAIT
         )
+
+        faceWifi = WifiHelper.getSSid(this)
 
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))

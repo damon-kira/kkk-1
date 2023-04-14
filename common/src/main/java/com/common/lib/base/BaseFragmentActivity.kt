@@ -19,7 +19,7 @@ abstract class BaseFragmentActivity : BaseActivity(), IFragmentSwitch {
     }
 
     override fun showToFragment(fragment: BaseFragment) {
-        mCurrTag = FragmentHelper.showToFragment(supportFragmentManager, getFragmentViewId(), fragment)
+        mCurrTag = FragmentHelper.popToFragment(supportFragmentManager, getFragmentViewId(), fragment)
     }
 
     override fun reloadRootFragment(fragment: BaseFragment) {

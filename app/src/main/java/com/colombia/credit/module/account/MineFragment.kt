@@ -95,7 +95,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_FEEDBACK)
             }
             R.id.ail_protocol -> {
-                Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY_PROTOCOL)
+                Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
             }
             R.id.ail_setting -> {
                 if (!checkLogin()) return

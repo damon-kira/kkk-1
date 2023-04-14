@@ -79,9 +79,9 @@ object FragmentHelper {
     }
 
     /**
-     * 如果toFragment在FragmentManager中则清除toFragment以上的fragment,否则直接添加进FragmentManager中
+     * 如果toFragment在FragmentManager中则清除toFragment以上的fragment
      */
-    fun showToFragment(fm: FragmentManager, @IdRes viewId: Int, toFragment: BaseFragment): String {
+    fun popToFragment(fm: FragmentManager, @IdRes viewId: Int, toFragment: BaseFragment): String {
         val bt = fm.beginTransaction()
         val toTag = getTag(toFragment)
         val findFragment = findFragment(fm, toTag)

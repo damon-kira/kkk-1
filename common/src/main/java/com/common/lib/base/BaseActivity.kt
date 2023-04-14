@@ -1,6 +1,8 @@
 package com.common.lib.base
 
 import android.content.res.Resources
+import android.os.Bundle
+import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.common.lib.BuildConfig
 import com.common.lib.dialog.*
@@ -56,6 +58,11 @@ open class BaseActivity : InjectorActivity(), ILoading, IDialogTask, Injectable 
 
     override fun hideLoading() {
         hideLoadingDialog(mLoadingDialog)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE) //禁止截屏
     }
 
     override fun onStop() {

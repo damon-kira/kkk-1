@@ -4,7 +4,7 @@ object GPInfoUtils {
 
     // 获取广告id
     @JvmStatic
-    fun getAdid(): String {
+    fun getGdid(): String {
         return ""
     }
 

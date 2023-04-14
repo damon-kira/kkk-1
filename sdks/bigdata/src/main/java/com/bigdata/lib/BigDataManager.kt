@@ -3,11 +3,7 @@ package com.bigdata.lib
 import com.bigdata.lib.net.NetConfigDataInterface
 
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/2/28 4:26 下午
- */
+
 class BigDataManager private constructor(){
     companion object {
 

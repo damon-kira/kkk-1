@@ -44,9 +44,8 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
 
         mViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                it.getData()?.let {
-                    val type = it.getProcessType()
-                    jumpProcess(getSupportContext(), type)
+                it.getData()?.let {info ->
+                    jumpProcess(getSupportContext(), info.getProcessType())
                 }
             } else it.ShowErrorMsg()
         }

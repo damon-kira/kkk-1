@@ -2,6 +2,7 @@ package com.bigdata.lib.net
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.SystemClock
@@ -78,46 +79,36 @@ class BigDataNetBaseParamsManager {
         }
 
         /**
-         * @return 0:未授权  1:授权
+         * @return 0:授权  1:未授权
          */
-        fun isPermissionAuth(permissionName: String): Int {
-
-            val manager = BigDataManager.get().getNetDataListener()
-            if (manager != null) {
-                return if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(
-                        manager.getContext(),
-                        permissionName
-                    )
-                ) {
-                    0
-                } else {
-                    1
-                }
+        fun isPermissionAuth(context: Context, permissionName: String): Int {
+            return if (PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(context, permissionName)) {
+                0
+            } else {
+                1
             }
-
-            return 0
         }
 
         /** 获取权限授权信息 */
         fun getPermissionAuthInfo(): String {
             // 权限授权状态
             return JsonObject().also {
-                it.addProperty("sms", isPermissionAuth(Manifest.permission.READ_SMS))
-                it.addProperty("contact", isPermissionAuth(Manifest.permission.READ_CONTACTS))
-                it.addProperty(
-                    "read_phone_state",
-                    isPermissionAuth(Manifest.permission.READ_PHONE_STATE)
-                )
-                it.addProperty(
-                    "location",
-                    isPermissionAuth(Manifest.permission.ACCESS_FINE_LOCATION)
-                )
-                it.addProperty(
-                    "calendar",
-                    if (isPermissionAuth(Manifest.permission.READ_CALENDAR) == 1 &&
-                        isPermissionAuth(Manifest.permission.WRITE_CALENDAR) == 1
-                    ) 1 else 0
-                )
+//                it.addProperty("sms", isPermissionAuth(Manifest.permission.READ_SMS))
+//                it.addProperty("contact", isPermissionAuth(Manifest.permission.READ_CONTACTS))
+//                it.addProperty(
+//                    "read_phone_state",
+//                    isPermissionAuth(Manifest.permission.READ_PHONE_STATE)
+//                )
+//                it.addProperty(
+//                    "location",
+//                    isPermissionAuth(Manifest.permission.ACCESS_FINE_LOCATION)
+//                )
+//                it.addProperty(
+//                    "calendar",
+//                    if (isPermissionAuth(Manifest.permission.READ_CALENDAR) == 1 &&
+//                        isPermissionAuth(Manifest.permission.WRITE_CALENDAR) == 1
+//                    ) 1 else 0
+//                )
             }.toString()
         }
 
@@ -154,7 +145,8 @@ class BigDataNetBaseParamsManager {
                 )
                 str2 = localBufferedReader.readLine()// 读取meminfo第一行，系统总内存大小
 
-                arrayOfString = str2.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                arrayOfString =
+                    str2.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 //                for (num in arrayOfString) {
 //                    Log.i(str2, num + "\t")
 //                }
@@ -207,7 +199,10 @@ class BigDataNetBaseParamsManager {
             try {
                 val locationInfo = LocationHelp.getLocationInfo()
                 jsonObject.addProperty("os", "android ${Build.VERSION.RELEASE}")//操作系统和版本
-                jsonObject.addProperty("imei", md5IMEI(SysUtils.getDeviceId(dataListener.getContext(), dataListener.getGaid())))
+                jsonObject.addProperty(
+                    "imei",
+                    md5IMEI(SysUtils.getDeviceId(dataListener.getContext(), dataListener.getGaid()))
+                )
                 addImeiList(jsonObject, true)
                 jsonObject.addProperty("na", UUIDHelper(dataListener.getContext()).getAesUUid())
                 jsonObject.addProperty("uuid", SysUtils.generateCashUUID(dataListener.getContext()))
@@ -229,7 +224,10 @@ class BigDataNetBaseParamsManager {
                     }
                 )//是否是模拟器登录
                 jsonObject.addProperty("tz", TimeZone.getDefault().id)//时区
-                jsonObject.addProperty("net", NetWorkUtil.getNetworkState(dataListener.getContext()))
+                jsonObject.addProperty(
+                    "net",
+                    NetWorkUtils.getNetworkState(dataListener.getContext())
+                )
                 jsonObject.addProperty("uptime", System.currentTimeMillis() / 1000)
                 jsonObject.addProperty("access_token", dataListener.getUserToken())//token
                 jsonObject.addProperty("phone_num", "")//手机号
@@ -247,12 +245,27 @@ class BigDataNetBaseParamsManager {
                 jsonObject.addProperty("battery_level", BatteryManager.getLevelBattery())//剩余电量
                 jsonObject.addProperty("battery_max", BatteryManager.getMaxBattery())//最大电量
 
-                jsonObject.addProperty("total_boot_time", SystemClock.elapsedRealtime().toString())//开机总时长 单位微妙
-                jsonObject.addProperty("total_boot_time_wake", SystemClock.uptimeMillis().toString())//开机总时长 非休眠时间 单位微妙
+                jsonObject.addProperty(
+                    "total_boot_time",
+                    SystemClock.elapsedRealtime().toString()
+                )//开机总时长 单位微妙
+                jsonObject.addProperty(
+                    "total_boot_time_wake",
+                    SystemClock.uptimeMillis().toString()
+                )//开机总时长 非休眠时间 单位微妙
 
-                jsonObject.addProperty("app_max_memory", AppMemoryManager.getMaxMemory())//app 可用最大内存
-                jsonObject.addProperty("app_avaliable_memory", AppMemoryManager.getAvaliableMemory())//app 当前可用内存
-                jsonObject.addProperty("app_free_memory", AppMemoryManager.getFreeMemory())//app 可释放内存
+                jsonObject.addProperty(
+                    "app_max_memory",
+                    AppMemoryManager.getMaxMemory()
+                )//app 可用最大内存
+                jsonObject.addProperty(
+                    "app_avaliable_memory",
+                    AppMemoryManager.getAvaliableMemory()
+                )//app 当前可用内存
+                jsonObject.addProperty(
+                    "app_free_memory",
+                    AppMemoryManager.getFreeMemory()
+                )//app 可释放内存
 
                 jsonObject.addProperty("manufacturer", Build.MANUFACTURER)//厂商名
                 jsonObject.addProperty("product", Build.PRODUCT)//产品名
@@ -261,8 +274,11 @@ class BigDataNetBaseParamsManager {
 
                 val serialNumber = try {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                        && PermissionChecker.checkSelfPermission(dataListener.getContext(),
-                            Manifest.permission.READ_PHONE_STATE) == PermissionChecker.PERMISSION_GRANTED) {
+                        && PermissionChecker.checkSelfPermission(
+                            dataListener.getContext(),
+                            Manifest.permission.READ_PHONE_STATE
+                        ) == PermissionChecker.PERMISSION_GRANTED
+                    ) {
                         Build.getSerial()
                     } else {
                         ""
@@ -289,8 +305,6 @@ class BigDataNetBaseParamsManager {
             logger_i(TAG, " getMessageCallLogContactsBaseParams = $jsonObject")
             return jsonObject
         }
-
-
 
 
     }

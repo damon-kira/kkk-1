@@ -3,6 +3,7 @@ package com.colombia.credit.module.process.kyc
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.util.ocrExif
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
