@@ -72,7 +72,7 @@ class BankSearchDialog(context: Context) : DefaultDialog(context) {
     fun setData(bankInfo: ArrayList<RspBankNameInfo.BankNameInfo>): BankSearchDialog {
         mItems.clear()
         mItems.addAll(bankInfo)
-        mAdapter.notifyDataSetChanged()
+        mAdapter.setItems(mItems)
         return this
     }
 

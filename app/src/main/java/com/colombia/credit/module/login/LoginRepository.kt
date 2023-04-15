@@ -18,9 +18,9 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         val jobj = JsonObject()
         jobj.addProperty("ska3nXMv1K", "phone")
         jobj.addProperty("LuOZz", "0")
-        jobj.addProperty("tSp3", mobile) // 手机号
+        jobj.addProperty("tSp3", "57|$mobile") // 手机号
         jobj.addProperty("lmjyS2Vw", code) // 验证码
-        jobj.addProperty("rVcbGK", uuid) // 来自验证码接口返回的uuid 【多个uuid就用,隔开】
+        jobj.addProperty("gGvE", uuid) // 来自验证码接口返回的uuid 【多个uuid就用,隔开】
         jobj.addProperty("nYc91KC", "") // 邀请码
         jobj.addProperty("bhUyamS",  WifiInfoUtil.getWifiName(context)) // WiFi
         jobj.addProperty("Sbbh", GPInfoUtils.getGdid()) // gaid
@@ -31,7 +31,7 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         val jobj = JsonObject()
         jobj.addProperty("ZF2FqPB8gZ", "phone") //类型（手机短信=phone,手机语音=phonesounds）
         jobj.addProperty("sbSsC", "1") // 验证码类型 （1=注册 3=忘记密码）
-        jobj.addProperty("Y4WsSnBl", mobile)
+        jobj.addProperty("Y4WsSnBl", "57|$mobile")
         apiService.getSmsCode(RequestBody.create(MEDIA_TYPE, jobj.toString()))
     }
 }

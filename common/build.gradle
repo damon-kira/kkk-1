@@ -48,6 +48,9 @@ dependencies {
     api rootProject.ext.hilt.hilt_android
     kapt rootProject.ext.hilt.hilt_compiler_android
 
+    //rxjava2.0
+    implementation rootProject.ext.rxjava.rxandroid
+
     api rootProject.ext.android.lifecycle_runtime
     api rootProject.ext.android.lifecycle_livedataKtx
     api rootProject.ext.android.livedata_viewmodelKtx
@@ -55,7 +58,7 @@ dependencies {
     // 适配
     api rootProject.ext.autosize.autosize
 
-    implementation rootProject.ext.rxjava.rxandroid
+//    implementation rootProject.ext.rxjava.rxandroid
 
 //    implementation rootProject.ext.other.util
 //    implementation rootProject.ext.other.userBehavior
@@ -67,6 +70,7 @@ dependencies {
     //retrofit2.0
     api rootProject.ext.retrofit.retrofit
     api rootProject.ext.retrofit.converter_gson
+    api rootProject.ext.retrofit.adapter_rxjava2
     api rootProject.ext.retrofit.gson
     api rootProject.ext.retrofit.logging_interceptor
     api rootProject.ext.retrofit.okhttp

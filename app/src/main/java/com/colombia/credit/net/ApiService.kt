@@ -15,6 +15,10 @@ interface ApiService {
     @Headers("kio8YGhwe6:Rf4hTm8JkN")
     fun getAppUpdate(): Flowable<BaseResponse<AppUpgradeInfo>>
 
+    @POST("XRmN4gV/3YiUwQ")
+    @Headers("kio8YGhwe6:bW41VrzLl3")
+    fun getCustom(): Flowable<BaseResponse<RspCustom>>
+
     // 获取验证码
     @POST("jasdi78wd/dfj7senYS")
     @Headers("kio8YGhwe6:Dc7vJh2TrP")
@@ -31,12 +35,13 @@ interface ApiService {
     fun getHomeInfo(): Flowable<BaseResponse<RspProductInfo>>
 
     //上传身份证照片
+    @Multipart
     @POST("/fiR/3PA2Q")
     @Headers("kio8YGhwe6:Vf9hLq0GjT")
-    fun uploadKycImage(@Part img: MultipartBody): Flowable<BaseResponse<KycOcrInfo>>
+    fun uploadKycImage(@Part img: MultipartBody.Part, @Query("asfvVdsainKsfv") type: String): Flowable<BaseResponse<KycOcrInfo>>
 
     // 上传活体照片
-    @POST("QVPWLl/whWhm")
+    @POST("/QVPWLl/whWhm")
     @Headers("kio8YGhwe6:Qc5nJm2ZuL")
     fun uploadFaceImage(@Body body: MultipartBody,@QueryMap map: MutableMap<String, String>): Flowable<BaseResponse<RspResult>>
 
@@ -76,8 +81,8 @@ interface ApiService {
     fun uploadBankInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
     // 获取银行信息 待修改接口
-    @POST("nThpJKyVhe/xCwc5dop")
-    @Headers("kio8YGhwe6:Vc9rKf1GhT")
+    @POST("msdkU7H6Gswe/Lowen8gsdYWE")
+    @Headers("kio8YGhwe6:skwueYEU7SDGWE")
     fun getBankInfo(): Flowable<BaseResponse<RspBankInfo>>
 
     // 上传身份证信息

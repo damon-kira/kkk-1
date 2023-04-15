@@ -25,8 +25,8 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
-<!--    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"-->
-<!--        tools:ignore="ProtectedPermissions" />-->
+    <!--    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"-->
+    <!--        tools:ignore="ProtectedPermissions" />-->
 
     <!--读取短信-->
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -94,7 +94,8 @@
         <activity
             android:name=".module.banklist.MeBankAccountListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.banklist.BankInfoAddActivity"
+        <activity
+            android:name=".module.banklist.BankInfoAddActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.history.HistoryActivity"
@@ -125,6 +126,9 @@
         <activity
             android:name=".module.setting.SettingActivity"
             android:screenOrientation="portrait" />
+
+        <service android:name=".module.service.XjbgdfdfService"
+            android:exported="false"/>
 
         <!-- 适配 -->
         <meta-data

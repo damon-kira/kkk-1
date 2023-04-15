@@ -2,17 +2,13 @@ package com.colombia.credit.module.login
 
 import android.content.Context
 import com.bigdata.lib.WifiHelper
-import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.bean.resp.RspSmsCode
 import com.colombia.credit.expand.saveUserInfo
-import com.colombia.credit.expand.setUserToken
 import com.colombia.credit.util.registIP
 import com.colombia.credit.util.registWifi
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.util.lib.MainHandler
-import com.util.lib.NetWorkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -41,7 +37,7 @@ class LoginViewModel @Inject constructor(
         mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
             hideLoading()
             if (it.isSuccess()) {
-                mCodeUUid = it.getData()?.data
+                mCodeUUid = it.getData()?.FSo4NScBct
             }
             mAuthSmsCodeLiveData.postValue(it)
         }

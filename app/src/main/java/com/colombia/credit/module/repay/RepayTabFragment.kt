@@ -62,7 +62,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mViewModel.ordersLivedata.observerNonSticky(viewLifecycleOwner) {
             stopRefresh()
             if (it.isSuccess()) {
-                it.parseT(RspRepayOrders::class.java)
+//                it.parseT(RspRepayOrders::class.java)
                 val list = it.getData()?.list
                 changePage(!list.isNullOrEmpty())
                 if (list?.isNotEmpty() == true) {

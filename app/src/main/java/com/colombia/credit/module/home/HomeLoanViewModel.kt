@@ -49,7 +49,9 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
 
     fun getHomeInfo() {
         if (inValidToken()) return
+        showloading()
         mHomeLiveData.addSourceLiveData(repository.getHomeInfo()) { response ->
+            hideLoading()
             _homeLiveData.postValue(response)
         }
     }

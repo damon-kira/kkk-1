@@ -8,10 +8,7 @@ import com.colombia.credit.bean.req.ReqPersonalInfo
 import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
-import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.TYPE_WORK
-import com.colombia.credit.expand.checkEmailFormat
-import com.colombia.credit.expand.jumpProcess
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -47,20 +44,13 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setToolbarListener(mBinding.processToolbar)
         mBinding.bivEducation.setBlockingOnClickListener(this)
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
-        mViewModel.mUploadLiveData.observerNonSticky(this) {
-            if (it.isSuccess()) {
-                Launch.skipWorkInfoActivity(this)
-            } else {
-                it.ShowErrorMsg()
-            }
-        }
-        mViewModel.getCacheInfo()?.also { info ->
+
+        val cache = mViewModel.getCacheInfo()?.also { info ->
             info as ReqPersonalInfo
             mBinding.bivEmail.setViewText(info.unH4I2vHXG.orEmpty())
             if (!info.QlCvCLnNx.isNullOrEmpty() && !info.woTVOe.isNullOrEmpty()) {
@@ -76,31 +66,38 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
             }
         }
+        if (cache == null) {
+            mViewModel.getInfo()
+        }
+    }
 
+
+    override fun initObserver() {
         mViewModel.mAddrLiveData.observerNonSticky(this) { list ->
             if (mAddrDialog.isShowing || list.isNullOrEmpty()) return@observerNonSticky
             mAddrDialog.setAddressInfo(list).show()
         }
 
-        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
-            if (info !is RspPersonalInfo) return@observerNonSticky
-
-            mBinding.bivEmail.setViewText(info.OloW.orEmpty())
-            if (!info.tKgYzqB7yP.isNullOrEmpty() && !info.ZzBVPho.isNullOrEmpty()) {
-                mBinding.bivAddress.setViewText(info.tKgYzqB7yP.orEmpty() + "," + info.ZzBVPho)
-            }
-            mBinding.bivAddrDetail.setViewText(info.fomX9KPzpi.orEmpty())
-            val education = info.rtA8s2HSB
-            if (mEducation.containsKey(education)) {
-                setBaseInfo(mBinding.bivEducation, mEducation[info.rtA8s2HSB], info.rtA8s2HSB)
-            }
-            val marriage = info.wXlWnOHPzK
-            if (mMarriage.containsKey(marriage)) {
-                setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+        mViewModel.mInfoLiveData.observerNonSticky(this) {rspInfo ->
+            if (rspInfo !is RspPersonalInfo) return@observerNonSticky
+            rspInfo.MFL57Df?.let { info ->
+                mBinding.bivEmail.setViewText(info.OloW.orEmpty())
+                if (!info.tKgYzqB7yP.isNullOrEmpty() && !info.ZzBVPho.isNullOrEmpty()) {
+                    mBinding.bivAddress.setViewText(info.tKgYzqB7yP.orEmpty() + "," + info.ZzBVPho)
+                }
+                mBinding.bivAddrDetail.setViewText(info.fomX9KPzpi.orEmpty())
+                val education = info.rtA8s2HSB
+                if (mEducation.containsKey(education)) {
+                    setBaseInfo(mBinding.bivEducation, mEducation[info.rtA8s2HSB], info.rtA8s2HSB)
+                }
+                val marriage = info.wXlWnOHPzK
+                if (mMarriage.containsKey(marriage)) {
+                    setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+                }
             }
         }
-        mViewModel.getInfo()
     }
+
 
     override fun onClick(v: View?) {
         v ?: return
@@ -172,8 +169,5 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-
-    override fun uploadSuccess() {
-        jumpProcess(this, TYPE_WORK)
-    }
+    override fun getNextType(): Int = TYPE_WORK
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.DictionaryInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.resp.IRspBaseInfo
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
@@ -34,11 +35,12 @@ abstract class BaseProcessActivity : BaseActivity() {
         setViewModelLoading(viewModel)
         viewModel.mUploadLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
-
+                uploadSuccess()
             } else {
                 uploadException(it)
             }
         }
+        initObserver()
     }
 
     private val mBackDialog by lazy {
@@ -145,11 +147,17 @@ abstract class BaseProcessActivity : BaseActivity() {
         return result
     }
 
-    abstract fun uploadSuccess()
-
-    fun uploadException(response: BaseResponse<*>) {
-        response.ShowErrorMsg()
+    open fun uploadSuccess() {
+        jumpProcess(this, getNextType())
     }
+
+    open fun uploadException(response: BaseResponse<*>) {
+        response.ShowErrorMsg(::uploadInfo)
+    }
+
+    abstract fun getNextType(): Int
+
+    abstract fun initObserver()
 
     abstract fun checkCommitInfo(): Boolean
 

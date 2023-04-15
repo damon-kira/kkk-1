@@ -22,21 +22,22 @@ fun Activity.showNetErrorDialog(refresh: () -> Unit) {
     })
 }
 
-fun AppCompatActivity.showCustomDialog(){
+fun AppCompatActivity.showCustomDialog() {
     CustomDialog(this).show()
 }
 
 private var appUpgradeDialog: AppUpgradeDialog? = null
-fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo) {
+fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo, clickListener: (type: Int) -> Unit) {
     var updateDialog = appUpgradeDialog
     if (updateDialog?.isShowing == true) {
         return
     }
     appUpgradeDialog = AppUpgradeDialog(this).setAppUpdateInfo(info)
     updateDialog = appUpgradeDialog
-    val mode = if (info.CHDnt3v == 2) DialogHandleMode.REMOVE_OTHERS else DialogHandleMode.ALL_PRIORITY_FIRST
+    updateDialog?.mListener = clickListener
+    val mode =
+        if (info.CHDnt3v == 2) DialogHandleMode.REMOVE_OTHERS else DialogHandleMode.ALL_PRIORITY_FIRST
     addDialog(updateDialog!!, mode = mode)
-    showDialoga(appUpgradeDialog)
 }
 
 

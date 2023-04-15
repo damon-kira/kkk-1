@@ -21,8 +21,8 @@
         android:layout_marginRight="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
-        app:tl_show_custom_icon="true"
         app:tl_left_icon="@drawable/svg_home_logo"
+        app:tl_show_custom_icon="true"
         app:tl_title="@string/app_name" />
 
     <androidx.core.widget.NestedScrollView
@@ -112,6 +112,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="4dp"
                         android:background="@null"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:hint="@string/phone_hint"
                         android:inputType="number"
                         android:lines="1"

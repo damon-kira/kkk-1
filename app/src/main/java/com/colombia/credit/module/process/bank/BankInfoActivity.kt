@@ -16,7 +16,9 @@ import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BankInfoActivity : BaseProcessActivity() {
 
     private val mBinding by binding<ActivityBankInfoBinding>()
@@ -37,7 +39,6 @@ class BankInfoActivity : BaseProcessActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setToolbarListener(mBinding.processToolbar)
         init()
         lifecycle.addObserver(mBankViewModel)
@@ -66,8 +67,7 @@ class BankInfoActivity : BaseProcessActivity() {
         mBinding.layoutBank.tvCommit.setBlockingOnClickListener {
             uploadInfo()
         }
-
-        mViewModel.getCacheInfo()?.let {info ->
+        val cache = mViewModel.getCacheInfo()?.let {info ->
             info as ReqBankInfo
             mBinding.layoutBank.bivName.setViewText(info.thXggvo.orEmpty())
             mBinding.layoutBank.bivName.tag = info.GiQ40BKKr
@@ -78,17 +78,23 @@ class BankInfoActivity : BaseProcessActivity() {
                 mBinding.layoutBank.bankRbCorriente.isChecked = true
             }
         }
+        if (cache == null) {
+            mViewModel.getInfo()
+        }
+    }
 
-        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
-            if (info !is RspBankInfo) return@observerNonSticky
-
-            mBinding.layoutBank.bivName.setViewText(info.thXggvo.orEmpty())
-            mBinding.layoutBank.bivName.tag = info.GiQ40BKKr
-            mBinding.layoutBank.bivBankno.setViewText(info.Bkmaj97.orEmpty())
-            if (info.SElc4 == "0") {
-                mBinding.layoutBank.bankRbAhorrs.isChecked = true
-            } else if (info.SElc4 == "1") {
-                mBinding.layoutBank.bankRbCorriente.isChecked = true
+    override fun initObserver() {
+        mViewModel.mInfoLiveData.observerNonSticky(this) {rspInfo ->
+            if (rspInfo !is RspBankInfo) return@observerNonSticky
+            rspInfo.hQYeCtjtJh?.let {info ->
+                mBinding.layoutBank.bivName.setViewText(info.N61kI40HaH.orEmpty())
+                mBinding.layoutBank.bivName.tag = info.TA2B58tdUU
+                mBinding.layoutBank.bivBankno.setViewText(info.owuNUS9vAj.orEmpty())
+                if (info.`87hVygkzSb` == "0") {
+                    mBinding.layoutBank.bankRbAhorrs.isChecked = true
+                } else if (info.`87hVygkzSb` == "1") {
+                    mBinding.layoutBank.bankRbCorriente.isChecked = true
+                }
             }
         }
     }
@@ -112,8 +118,5 @@ class BankInfoActivity : BaseProcessActivity() {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-
-    override fun uploadSuccess() {
-        jumpProcess(this, TYPE_IDENTITY)
-    }
+    override fun getNextType(): Int = TYPE_IDENTITY
 }

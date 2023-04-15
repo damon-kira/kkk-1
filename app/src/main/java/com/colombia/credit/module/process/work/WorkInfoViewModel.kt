@@ -16,12 +16,14 @@ class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepo
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
+            mUploadLiveData.postValue(it)
         }
     }
 
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
+                it.getData()?.dbxhWe4XWA ?: return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }

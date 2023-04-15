@@ -1,10 +1,12 @@
 package com.colombia.credit.net
 
 import android.content.Context
+import com.bigdata.lib.LocationHelp
 import com.colombia.credit.Constant
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.expand.getUserToken
+import com.colombia.credit.expand.saveUserToken
 import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
@@ -103,10 +105,10 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getLocationInfo(): Location {
-//                val locationInfo = LocationHelp.getLocationInfo()
+                val locationInfo = LocationHelp.getLocationInfo()
                 val location = Location()
-//                location.longitude = locationInfo?.first.orEmpty()
-//                location.latitude = locationInfo?.second.orEmpty()
+                location.longitude = locationInfo?.first.orEmpty()
+                location.latitude = locationInfo?.second.orEmpty()
                 return location
             }
 
@@ -174,7 +176,8 @@ class ApiManager @Inject constructor() {
         val builder = original.newBuilder()
         NetBaseParamsManager.addHeader(builder)
         builder.method(original.method(), original.body())
-        chain.proceed(builder.build())
+        val response = chain.proceed(builder.build())
+        response
     }
 
     private val logInterceptor =
@@ -199,8 +202,8 @@ class ApiManager @Inject constructor() {
 
     //无需加密拦截器
     private val notEncryptInterceptor = ArrayList<Interceptor>().apply {
-        add(BaseDataAddInterceptor())
-        add(DecryptInterceptor())//解密拦截器
+//        add(BaseDataAddInterceptor())
+//        add(DecryptInterceptor())//解密拦截器
         add(mHeaderInterceptor)
         if (logInterceptor != null) {
             add(logInterceptor)

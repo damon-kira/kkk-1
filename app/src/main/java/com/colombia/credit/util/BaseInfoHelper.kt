@@ -35,8 +35,8 @@ class BaseInfoHelper {
         info.systemVersion = Build.VERSION.SDK_INT.toString()
         info.screenRateLong = DisplayUtils.getRealScreenHeight(context)
         info.screenRateWidth = DisplayUtils.getRealScreenWidth(context)
-        info.ocrPhotoExif = ocrExif
-        info.faceCheckExif = faceExif
+        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
+        info.faceCheckExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
         val imeis = SysUtils.getAllImei(context)
         if (imeis.isNotEmpty()) {
             info.imei = imeis[0]
@@ -128,13 +128,6 @@ var faceWifi: String
 var loanWifi: String
     set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_LOAN_WIFI, value)
     get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_LOAN_WIFI, "")
-
-var ocrExif: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_OCR_EXIF, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_OCR_EXIF, "")
-var faceExif: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_FACE_EXIF, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_FACE_EXIF, "")
 
 var loanPageStayTime: Long
     set(value) = SharedPrefUser.setLong(SharedPrefKeyManager.KEY_PAGE_STAY_TIME, value)

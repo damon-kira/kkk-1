@@ -1,15 +1,11 @@
 package com.colombia.credit
 
 import android.os.Bundle
-import android.os.Handler
 import com.colombia.credit.databinding.ActivitySplashBinding
-import com.colombia.credit.expand.showAppUpgradeDialog
 import com.colombia.credit.manager.Launch
-import com.colombia.credit.module.appupdate.AppUpdateViewModel
-import com.colombia.credit.module.upload.UploadViewModel
+import com.colombia.credit.module.service.SerManager
 import com.colombia.credit.permission.PermissionHelper
 import com.common.lib.base.BaseActivity
-import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBar
@@ -19,18 +15,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashActivity : BaseActivity() {
 
-    private val mBinding by binding<ActivitySplashBinding>()
 
-    private val mViewModel by lazyViewModel<AppUpdateViewModel>()
+    private val mBinding by binding<ActivitySplashBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         setStatusBar(true, R.color.white, true)
-        mViewModel.updateLiveData.observerNonSticky(this) {
-            showAppUpgradeDialog(it)
-        }
-        mViewModel.getAppUpdate()
+
+        SerManager.getCustom()
 
         MainHandler.postDelay({
             reqPermission()
@@ -44,11 +37,14 @@ class SplashActivity : BaseActivity() {
 
     private fun reqPermission() {
         PermissionHelper.showDialogIfNeed(this, {
-            Launch.skipMainActivity(this)
-            finish()
+            next()
         }, {
-            Launch.skipMainActivity(this)
-            finish()
+            next()
         })
+    }
+
+    private fun next() {
+        Launch.skipMainActivity(this)
+        finish()
     }
 }

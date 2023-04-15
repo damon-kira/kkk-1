@@ -270,16 +270,16 @@ class NetBaseParamsManager {
         //添加header信息
         fun addHeader(builder: Request.Builder) {
             val supplier = getExternalParamsSupplier()
-            val context = supplier.getContext()
             builder.addHeader("chdknc6-1dwaiu", getUserAgent())// token
             // app版本
-            builder.addHeader("iodaswdsa", supplier.getAppVersionCode().toString())// app 版本
+            builder.addHeader("vMRdV0dUmj", supplier.getAppVersionCode().toString())// app 版本
             // 设备id
-            builder.addHeader("podawsdaw", SysUtils.getImei(supplier.getContext()))
+            builder.addHeader("NbBH4GIwmz", SysUtils.getImei(supplier.getContext()))
             // 客户端类型
-            builder.addHeader("vifjsansdaw", "android")
+            builder.addHeader("dnpiIILLEI", "android")
             // google广告id
-            builder.addHeader("buasdnjeasq", supplier.getAdvertisingId())
+            builder.addHeader("pg77Foy4PL", supplier.getAdvertisingId())
+            builder.addHeader("wCxyJuAwkK", supplier.getToken())
             //
             //builder.addHeader("App-Language", getLanguage())
 //            builder.addHeader("content-type", "application/json:charset=UTF-8")
@@ -300,10 +300,6 @@ class NetBaseParamsManager {
 //            builder.addHeader("x-appflyer-uid", supplier.getAppsFlyerUid())//appsflyer_uid
 //            builder.addHeader("x-app-sign", getSignVersion())//秘钥更换标记
         }
-
-        /** 修改是需要同步 userBehavior/networkManager中的值*/
-        fun getSignVersion(): String = "1"
-
 
         private fun addImeiList(jobj: JsonObject, isMd5: Boolean) {
             val supplier = getExternalParamsSupplier()

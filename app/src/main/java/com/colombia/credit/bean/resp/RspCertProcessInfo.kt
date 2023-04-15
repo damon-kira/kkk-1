@@ -16,7 +16,8 @@ class RspCertProcessInfo {
     val BzXT: Int = 0//人脸认证
     val peFgT: Int = 0//添加银行卡认证
 
-    fun isCertInfo(process: Int) = process == 1
+    // return 返回true 未认证
+    fun isCertInfo(process: Int) = process == 0
 
     fun getProcessType(): Int {
         return if (isCertInfo(hj15t)) {

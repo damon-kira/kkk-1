@@ -10,7 +10,7 @@ object SharedPrefKeyManager {
     const val KEY_USER_ID = "user_id"
     const val KEY_SHOW_PERMISSION_DIA_FLAG = "show_permission_dialog_flag"
 
-    /** 退出登录清除*/
+    // 退出登录清除
     const val KEY_WORK_INFO_INPUT = "work_info_input"
     const val KEY_CONTACT_INFO_INPUT = "contact_info_input"
     const val KEY_BASE_INFO_INPUT = "base_info_input"
@@ -30,4 +30,8 @@ object SharedPrefKeyManager {
     const val KEY_PAGE_STAY_TIME = "page_stay_time"
     const val KEY_BG_RECOVER_COUNT = "bg_recover_count"
     const val KEY_LOGIN_TIME = "login_time"
+
+    const val KEY_IMAGE_FRONT = "image_front"
+    const val KEY_IMAGE_BACK = "image_back"
+    const val KEY_IMAGE_FACE = "image_face"
 }

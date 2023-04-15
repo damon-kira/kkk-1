@@ -164,9 +164,9 @@ object Launch {
                 logger_e("debug_Launch", "skipAppStore Launch 290 error = $e")
             }
         }
-        if (isUpdate) {
-            skipMainAndExitApp(getAppContext())
-        }
+//        if (isUpdate) {
+//            skipMainAndExitApp(getAppContext())
+//        }
     }
 
     /**
@@ -195,16 +195,17 @@ object Launch {
     }
 
     fun skipWhatsApp(context: Context) {
-        val whatsapp = "https://api.whatsapp.com/send?phone=57${getWhatsAppTel()}"
-        skipWebViewActivity(context, whatsapp)
+        val whatsapp = getWhatsAppTel()
+        if (whatsapp.isNullOrEmpty()) {
+            return
+        }
+        val url = "https://api.whatsapp.com/send?phone=57$whatsapp"
+        skipWebViewActivity(context, url)
     }
 
     fun skipCallPage(context: Context) {
         val mobile = getServiceTel()
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:$mobile")
         try {
-            val mobile = ""
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$mobile")
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

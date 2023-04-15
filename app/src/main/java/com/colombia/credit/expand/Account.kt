@@ -8,15 +8,15 @@ import com.util.lib.GsonUtil
 
 fun saveUserInfo(info: RspLoginInfo) {
     SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_INFO, GsonUtil.toJson(info))
-    setUserToken(info.token.orEmpty())
     setUserId(info.jsa2Dfw3.orEmpty())
+    saveUserToken(info.token.orEmpty())
 }
 
 fun getUserToken(): String {
     return SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_TOKEN, null)
 }
 
-fun setUserToken(token: String) {
+fun saveUserToken(token: String) {
     SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_TOKEN, token)
 }
 

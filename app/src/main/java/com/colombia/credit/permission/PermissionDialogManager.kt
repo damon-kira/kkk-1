@@ -1,10 +1,9 @@
 package com.colombia.credit.permission
 
-import android.app.Activity
-import android.app.Dialog
 import com.cache.lib.SharedPrefGlobal
-import com.colombia.credit.R
 import com.colombia.credit.manager.SharedPrefKeyManager
+import com.common.lib.base.BaseActivity
+import com.common.lib.dialog.DefaultDialog
 import com.util.lib.log.logger_d
 
 class PermissionDialogManager {
@@ -15,12 +14,11 @@ class PermissionDialogManager {
         fun getInstance() = _instance
     }
 
-    private var mPermissionTipsDialog: Dialog? = null
-    private var mCheckPermissionDialog: Dialog? = null
+    private var mPermissionTipsDialog: DefaultDialog? = null
 
     fun showPermissionTipsDialog(
         deniedList: ArrayList<AbsPermissionEntity>,
-        activity: Activity,
+        activity: BaseActivity,
         dismiss: () -> Unit
     ) {
         if (deniedList.isEmpty()) {
@@ -63,7 +61,9 @@ class PermissionDialogManager {
             dismiss.invoke()
         }
         if (!activity.isFinishing) {
-            mPermissionTipsDialog?.show()
+            mPermissionTipsDialog?.let {
+                activity.addDialog(it)
+            }
             setShowDialogTips(true)
         }
     }
@@ -84,13 +84,9 @@ class PermissionDialogManager {
         SharedPrefGlobal.setBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, isShow)
     }
 
-
     fun onDestroy() {
         mPermissionTipsDialog?.setOnDismissListener(null)
         mPermissionTipsDialog?.dismiss()
         mPermissionTipsDialog = null
-
-        mCheckPermissionDialog?.dismiss()
-        mCheckPermissionDialog = null
     }
 }

@@ -67,7 +67,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         savedInstanceState: Bundle?
     ): View? {
         try {
-            return inflater.inflate(R.layout.fragment_webview, container, false)
+            return mBinding.root
         } catch (e: Exception) {
             finish()
         }

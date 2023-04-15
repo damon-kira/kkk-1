@@ -4,8 +4,11 @@ import android.os.Bundle
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.databinding.ActivityUploadBinding
+import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +21,7 @@ class UploadActivity : BaseProcessActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
+
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -32,6 +35,11 @@ class UploadActivity : BaseProcessActivity() {
     override fun getViewModel(): BaseProcessViewModel = mViewModel
 
     override fun uploadSuccess() {
-
+        LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+        Launch.skipMainActivity(this)
     }
+
+    override fun initObserver() {}
+
+    override fun getNextType(): Int = 0
 }

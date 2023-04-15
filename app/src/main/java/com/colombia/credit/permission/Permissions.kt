@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.colombia.credit.R
+import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogManager
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.util.lib.MainHandler
@@ -234,7 +235,7 @@ fun Activity.showNoPermissionDialog(
     deniedList: List<AbsPermissionEntity>,
     cancel: () -> Unit = {},
     rightListener: () -> Unit = {}
-): Dialog? {
+): DefaultDialog? {
 
     if (deniedList.isEmpty()) {
         return null

@@ -14,6 +14,7 @@ import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
+import com.colombia.credit.expand.TYPE_SUCCESS
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
@@ -22,6 +23,7 @@ import com.colombia.credit.module.process.IBaseProcessViewModel
 import com.colombia.credit.util.faceWifi
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
+import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBar
@@ -47,7 +49,6 @@ class FaceActivity : BaseProcessActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setStatusBar(true, R.color.transparent, false)
         setCountDownText(4)
         val manager = CameraFactory.invoke(
@@ -57,9 +58,7 @@ class FaceActivity : BaseProcessActivity() {
             BaseCameraManager.FACING_FRONT,
             BaseCameraManager.SCREEN_PORTRAIT
         )
-
         faceWifi = WifiHelper.getSSid(this)
-
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))
             showLoading(true)
@@ -87,21 +86,14 @@ class FaceActivity : BaseProcessActivity() {
             }
         }
 
-        mViewModel.mUploadLiveData.observerNonSticky(this) {
-            if (it.isSuccess()) {
-                Launch.skipUploadActivity(this)
-                finish()
-            } else {
-                Launch.skipFaceFailedActivity(this)
-                finish()
-            }
-        }
     }
 
-    override fun onBackPressed() {
-        Launch.skipMainActivity(this)
-        super.onBackPressed()
+    override fun initObserver() {}
+
+    override fun uploadException(response: BaseResponse<*>) {
+        Launch.skipFaceFailedActivity(this)
     }
+
 
     override fun checkCommitInfo(): Boolean {
         return false
@@ -113,9 +105,7 @@ class FaceActivity : BaseProcessActivity() {
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
 
-    override fun uploadSuccess() {
-        Launch.skipUploadActivity(this)
-    }
+    override fun getNextType(): Int = TYPE_SUCCESS
 
     override fun onStart() {
         super.onStart()

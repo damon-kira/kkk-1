@@ -23,6 +23,7 @@ class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepo
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
+                it.getData()?.hQYeCtjtJh ?: return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }

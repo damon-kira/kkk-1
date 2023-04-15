@@ -23,4 +23,8 @@ abstract class InjectorFragment : Fragment() {
     inline fun <reified T : ViewModel> lazyViewModel(): Lazy<T> {
         return lazy { ViewModelProvider(this)[T::class.java] }
     }
+
+    inline fun <reified T : ViewModel> lazyActivityViewModel(): Lazy<T> {
+        return lazy { ViewModelProvider(requireActivity())[T::class.java] }
+    }
 }

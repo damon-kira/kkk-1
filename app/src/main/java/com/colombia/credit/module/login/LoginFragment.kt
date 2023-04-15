@@ -8,20 +8,24 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.bigdata.lib.StorageHelper
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
-import com.colombia.credit.expand.*
+import com.colombia.credit.expand.ShowErrorMsg
+import com.colombia.credit.expand.checkMobile
+import com.colombia.credit.expand.showNetErrorDialog
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.util.loginTime
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.expand.showSoftInput
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBarColor
-import com.util.lib.log.logger_d
+import com.util.lib.hide
+import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,10 +63,10 @@ class LoginFragment : BaseLoginFragment() {
             Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
         }
 
-        mBinding.loginEditPhone.onFocusChangeListener = object: OnFocusChangeListener {
+        mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     if (getMobile().isNotEmpty()) {
                         loginTime = System.currentTimeMillis() - startTime
                     }
@@ -89,14 +93,14 @@ class LoginFragment : BaseLoginFragment() {
                         reqSmsCode()
                     }
                 }
-                it.ShowErrorMsg()
+                it.ShowErrorMsg(::reqCode)
             }
         }
         mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                Launch.skipMainActivity(getSupportContext())
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))
             } else {
-                it.ShowErrorMsg()
+                it.ShowErrorMsg(::login)
             }
         }
 
@@ -105,24 +109,10 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvPhoneError.show()
                 return@setBlockingOnClickListener
             }
-            reqSmsCode()
+            reqCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
-//            val mobile = getMobile()
-//            val code = mBinding.loginEditCode.getRealText()
-//            if (!checkMobile(mobile)) {
-//                mBinding.loginTvPhoneError.show()
-//                return@setBlockingOnClickListener
-//            }
-//            if (code.length != 4) {
-//                mBinding.loginTvCodeError.show()
-//                return@setBlockingOnClickListener
-//            }
-//            mViewModel.reqLogin(mobile, code)
-            mFirstPageLoanAmount = "5000"
-            jumpProcess(getSupportContext(), TYPE_PERSONAL)
-//            val size = StorageHelper.getDownFileNum()
-//            logger_d(TAG, "size  = $size")
+            login()
         }
 
 
@@ -138,6 +128,26 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvCodeError.hide()
             }
         })
+    }
+
+    private fun reqCode() {
+        mBinding.loginEditCode.requestFocus()
+        showSoftInput(mBinding.loginEditCode)
+        reqSmsCode()
+    }
+
+    private fun login() {
+        val mobile = getMobile()
+        val code = mBinding.loginEditCode.getRealText()
+        if (!checkMobile(mobile)) {
+            mBinding.loginTvPhoneError.show()
+            return
+        }
+        if (code.length != 4) {
+            mBinding.loginTvCodeError.show()
+            return
+        }
+        mViewModel.reqLogin(mobile, code)
     }
 
     private fun reqSmsCode() {

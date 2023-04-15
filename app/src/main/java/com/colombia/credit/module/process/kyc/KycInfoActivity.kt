@@ -21,6 +21,7 @@ import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.StoragePermission
 import com.colombia.credit.util.DictionaryUtil
+import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.colombia.credit.view.identity.IdentityPicStatus
 import com.common.lib.expand.setBlockingOnClickListener
@@ -52,9 +53,8 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setToolbarListener(mBinding.processToolbar)
-        observeLivedata()
+        setViewModelLoading(mViewModel)
         mBinding.tvCommit.setBlockingOnClickListener(this)
         mBinding.kycBivGender.setBlockingOnClickListener(this)
         mBinding.kycBivBirthday.setBlockingOnClickListener(this)
@@ -85,7 +85,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
         }
 
-        mViewModel.getCacheInfo()?.let { info ->
+        val cache = mViewModel.getCacheInfo()?.also { info ->
             info as ReqKycInfo
             mBinding.kycBivNuip.setViewText(info.ALKxGTZ4FQ.orEmpty())
             val names = info.y6hQBtv?.split("|").orEmpty()
@@ -97,6 +97,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             if (mGender.containsKey(info.W8mqV)) {
                 setBaseInfo(mBinding.kycBivGender, mGender[info.W8mqV], info.W8mqV)
             }
+        }
+        if (cache == null) {
+            mViewModel.getInfo()
         }
     }
 
@@ -125,32 +128,31 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-    private fun observeLivedata() {
+    override fun initObserver() {
         mViewModel.imageLivedata.observerNonSticky(this) {
             if (!it.isSuccess()) {
-                mBinding
                 return@observerNonSticky
             }
             it.getData()?.let { info ->
                 setDetailInfo(info)
-                mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
+//                mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
             }
         }
 
-        mViewModel.mInfoLiveData.observerNonSticky(this) { info ->
-            if (info !is RspKycInfo) return@observerNonSticky
-            mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
-            mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
-            mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
-            mBinding.kycBivBirthday.setViewText(info.YiWtoa1.orEmpty())
-            if (mGender.containsKey(info.DrD60)) {
-                setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
+        mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
+            if (rspInfo !is RspKycInfo) return@observerNonSticky
+            rspInfo.jmWujylO6j?.let { info ->
+                mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
+                mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
+                mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
+                mBinding.kycBivBirthday.setViewText(info.YiWtoa1.orEmpty())
+                if (mGender.containsKey(info.DrD60)) {
+                    setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
+                }
+                loadImage(info.fefFSZ, PicType.PIC_FRONT)
+                loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
             }
-            loadImage(info.fefFSZ, PicType.PIC_FRONT)
-
-            loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
         }
-        mViewModel.getInfo()
     }
 
     private fun reqPermission() {
@@ -193,10 +195,10 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-    override fun onBackPressed() {
-        Launch.skipMainActivity(this)
-        super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        Launch.skipMainActivity(this)
+//        super.onBackPressed()
+//    }
 
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
@@ -229,8 +231,5 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-
-    override fun uploadSuccess() {
-        jumpProcess(this, TYPE_FACE)
-    }
+    override fun getNextType(): Int = TYPE_FACE
 }

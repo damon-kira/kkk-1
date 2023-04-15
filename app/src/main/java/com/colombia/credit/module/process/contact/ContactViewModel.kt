@@ -31,6 +31,7 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
+                it.getData()?.Rwfbhdu1 ?: return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }

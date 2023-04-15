@@ -8,6 +8,7 @@ import com.colombia.credit.bean.req.ReqWorkInfo
 import com.colombia.credit.bean.resp.RspWorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
 import com.colombia.credit.expand.TYPE_CONTACT
+import com.colombia.credit.expand.TYPE_IDENTITY
 import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
@@ -44,7 +45,6 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setToolbarListener(mBinding.processToolbar)
         mBinding.bivType.setBlockingOnClickListener(this)
         mBinding.bivIncome.setBlockingOnClickListener(this)
@@ -52,19 +52,7 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivJobYear.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
-        initObserver()
-    }
-
-    private fun initObserver() {
-        mViewModel.mUploadLiveData.observerNonSticky(this) {
-            if (it.isSuccess()) {
-                Launch.skipContactInfoActivity(this)
-            } else {
-
-            }
-        }
-
-        mViewModel.getCacheInfo()?.let { info ->
+        val cache = mViewModel.getCacheInfo()?.also { info ->
             info as ReqWorkInfo
             val jobTime = info.x6yR
             if (mJobYear.containsKey(jobTime)) {
@@ -83,27 +71,33 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
         }
+        if (cache == null) {
+            mViewModel.getInfo()
+        }
+    }
 
-        mViewModel.mInfoLiveData.observerNonSticky(this) { info ->
-            if (info !is RspWorkInfo) return@observerNonSticky
-            val jobTime = info.iBwnjiNbTX
-            if (mJobYear.containsKey(jobTime)) {
-                setBaseInfo(mBinding.bivJobYear, mJobYear[jobTime], jobTime)
-            }
-            val income = info.P2i72V
-            if (mJobIncomeSource.containsKey(income)) {
-                setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
-            }
-            val payday = info.RbNJgGj
-            if (mPayCycle.containsKey(payday)) {
-                setBaseInfo(mBinding.bivPayday, mPayCycle[payday], payday)
-            }
-            val jobType = info.V33vxNjkQf
-            if (mJobType.containsKey(jobType)) {
-                setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
+    override fun initObserver() {
+        mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
+            if (rspInfo !is RspWorkInfo) return@observerNonSticky
+            rspInfo.dbxhWe4XWA?.let {info ->
+                val jobTime = info.iBwnjiNbTX
+                if (mJobYear.containsKey(jobTime)) {
+                    setBaseInfo(mBinding.bivJobYear, mJobYear[jobTime], jobTime)
+                }
+                val income = info.P2i72V
+                if (mJobIncomeSource.containsKey(income)) {
+                    setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
+                }
+                val payday = info.RbNJgGj
+                if (mPayCycle.containsKey(payday)) {
+                    setBaseInfo(mBinding.bivPayday, mPayCycle[payday], payday)
+                }
+                val jobType = info.V33vxNjkQf
+                if (mJobType.containsKey(jobType)) {
+                    setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
+                }
             }
         }
-        mViewModel.getInfo()
     }
 
     override fun onClick(v: View?) {
@@ -180,8 +174,5 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-
-    override fun uploadSuccess() {
-        jumpProcess(this, TYPE_CONTACT)
-    }
+    override fun getNextType(): Int =TYPE_CONTACT
 }

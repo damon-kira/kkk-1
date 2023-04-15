@@ -3,6 +3,7 @@ package com.colombia.credit.module.home
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
+import com.colombia.credit.bean.resp.RspProductInfo
 import com.colombia.credit.databinding.ActivityMainBinding
 import com.colombia.credit.expand.showAppUpgradeDialog
 import com.colombia.credit.module.account.MineFragment
@@ -22,12 +23,16 @@ class MainActivity : BaseFragmentActivity() {
 
     private val mBinding: ActivityMainBinding by binding()
 
+    private val mHomeViewModel by lazyViewModel<HomeLoanViewModel>()
+
     private val mHomeFragment by lazy(LazyThreadSafetyMode.NONE) {
         BaseFragment.getInstance(this, HomeFragment::class.java)
     }
+
     private val mRepayFragment by lazy(LazyThreadSafetyMode.NONE) {
         BaseFragment.getInstance(this, RepayTabFragment::class.java)
     }
+
     private val mMineFragment by lazy(LazyThreadSafetyMode.NONE) {
         BaseFragment.getInstance(this, MineFragment::class.java)
     }

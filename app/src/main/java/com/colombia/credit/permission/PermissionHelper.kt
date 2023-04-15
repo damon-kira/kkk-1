@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.bigdata.lib.LocationHelp
+import com.common.lib.base.BaseActivity
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.logger_e
@@ -91,7 +92,7 @@ object PermissionHelper {
      * @param isNeedShowDialog 是否需要弹权限声明弹窗 true:非复贷会弹  false:不弹
      * */
     fun showDialogIfNeed(
-        activity: Activity,
+        activity: BaseActivity,
         result: (deniedList: List<AbsPermissionEntity>) -> Unit,
         skipSettingListener: () -> Unit = {}
     ) {
@@ -151,7 +152,7 @@ object PermissionHelper {
 
     /** 申请所有未获取的权限 */
     fun reqAllPermission(
-        activity: Activity,
+        activity: BaseActivity,
         result: (isAllGranted: Boolean) -> Unit = {},
         skipSettingListener: () -> Unit
     ) {
@@ -172,7 +173,7 @@ object PermissionHelper {
 
     /** 申请未获取的权限 */
     fun reqPermission(
-        activity: Activity,
+        activity: BaseActivity,
         permissions: List<AbsPermissionEntity>,
         forceDialog: Boolean,
         result: (isAllGranted: Boolean) -> Unit = {},
@@ -196,12 +197,12 @@ object PermissionHelper {
         }
     }
 
-    private fun isUIDestroyed(activity: Activity): Boolean =
+    private fun isUIDestroyed(activity: BaseActivity): Boolean =
         activity.isFinishing || activity.isDestroyed
 
 
     private fun showPermissionDialog(
-        activity: Activity,
+        activity: BaseActivity,
         deniedList: ArrayList<AbsPermissionEntity>,
         forceSettingDialog: Boolean,
         result: (isAllGranted: Boolean) -> Unit = {},
@@ -262,7 +263,7 @@ object PermissionHelper {
     }
 
     fun checkCameraPermission(
-        activity: Activity,
+        activity: BaseActivity,
         function: (hasPermission: Boolean) -> Unit,
         skipSettingListener: () -> Unit
     ) {

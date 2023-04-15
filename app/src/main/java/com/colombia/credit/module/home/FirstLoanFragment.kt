@@ -3,10 +3,7 @@ package com.colombia.credit.module.home
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
-import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.formatCommon
-import com.colombia.credit.expand.jumpProcess
-import com.colombia.credit.expand.mFirstPageLoanAmount
+import com.colombia.credit.expand.*
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -18,8 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class FirstLoanFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentHomeLoanBinding::inflate)
-
-    private val mViewModel by lazyViewModel<HomeLoanViewModel>()
 
     override fun contentView(): View {
         return mBinding.root
@@ -35,14 +30,14 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
-        setViewModelLoading(mViewModel)
-
-        mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            mBinding.tvMaxAmount.text = formatCommon(it.yqGhrjOF2.orEmpty())
+        val viewModel = (parentFragment as IHomeFragment).getHomeViewModel()
+        setViewModelLoading(viewModel)
+        viewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
+            mBinding.tvMaxAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
             mFirstPageLoanAmount = it.yqGhrjOF2.orEmpty()
         }
 
-        mViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
+        viewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
                 it.getData()?.let {info ->
                     jumpProcess(getSupportContext(), info.getProcessType())
@@ -51,7 +46,7 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
-            mViewModel.getCertProcess()
+            viewModel.getCertProcess()
         }
     }
 }

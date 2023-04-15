@@ -11,6 +11,7 @@ import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.IHomeFragment
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
+import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +21,9 @@ class RefusedFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentRefusedBinding::inflate)
 
-    private val mViewModel by lazyViewModel<HomeLoanViewModel>()
+    private val mViewModel by lazy {
+        (parentFragment as IHomeFragment).getHomeViewModel()
+    }
 
     override fun contentView(): View = mBinding.root
 
@@ -34,11 +37,11 @@ class RefusedFragment : BaseHomeLoanFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (parentFragment as? IHomeFragment)?.getData()?.let {
-            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
-        }
+//        (parentFragment as? IHomeFragment)?.getData()?.let {
+//            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
+//        }
 
-        mViewModel.mRspInfoLiveData.observerNonSticky(this) {
+        mViewModel.mRspInfoLiveData.observe(this) {
             setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
         }
     }

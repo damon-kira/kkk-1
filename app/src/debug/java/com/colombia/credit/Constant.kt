@@ -2,7 +2,7 @@ package com.colombia.credit
 
 object Constant {
 
-    const val BASE_URL = "https://www.baidu.com"
+    const val BASE_URL = "http://192.168.5.222:8083"
 
     const val BASE_H5_URL = ""
 

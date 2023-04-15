@@ -1,6 +1,7 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
+import android.util.Log
 import com.colombia.credit.bean.resp.AppUpgradeInfo
 import com.colombia.credit.databinding.DialogAppUpgradeBinding
 import com.colombia.credit.manager.Launch
@@ -8,6 +9,7 @@ import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.ifShow
+import me.jessyan.autosize.DisplayMetricsInfo
 
 class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
 
@@ -15,13 +17,24 @@ class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
 
     private var mJumpAddress: String? = null
 
+    var mListener: ((Int) -> Unit)? = null
+
+    companion object {
+        const val TYPE_CLOSE = 1
+        const val TYPE_APP_STORE = 2
+    }
+
     init {
         setContentView(mBinding.root)
         setDisplaySize(0.88f, WRAP)
         mBinding.tvUpdate.setBlockingOnClickListener {
             Launch.skipAppStore(mJumpAddress, true)
+            mListener?.invoke(TYPE_APP_STORE)
         }
-        mBinding.aivClose.setBlockingOnClickListener { dismiss() }
+        mBinding.aivClose.setBlockingOnClickListener {
+            dismiss()
+            mListener?.invoke(TYPE_CLOSE)
+        }
     }
 
 //    var bt35AvNbu: Int = 0 //是否需要更新 1是 0否

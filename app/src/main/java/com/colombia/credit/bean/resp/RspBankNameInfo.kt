@@ -6,9 +6,17 @@ import kotlin.collections.ArrayList
 
 class RspBankNameInfo {
 
-    val list: ArrayList<BankNameInfo>? = null
+    val nefV2g8cf0: ArrayList<BankNameInfo>? = null
 
-    class BankNameInfo: SearchInfo() {
+//    override fun equals(other: Any?): Boolean {
+//        if (this === other) return true
+//        if (javaClass != other?.javaClass) return false
+//
+//        other as RspBankNameInfo
+//        return nefV2g8cf0 === other.nefV2g8cf0
+//    }
+
+    class BankNameInfo : SearchInfo() {
         val Vu3XbBF: String? = null // 银行编码
         val KoGUgumBVm: String? = null  // 银行名称
         val xevtra: String? = null  // 是否常用
@@ -17,7 +25,8 @@ class RspBankNameInfo {
             KoGUgumBVm?.let { nameStr ->
                 constraint?.let { it ->
                     result =
-                        nameStr.toLowerCase(Locale.US).startsWith(it.toString().toLowerCase(Locale.US))
+                        nameStr.toLowerCase(Locale.US)
+                            .startsWith(it.toString().toLowerCase(Locale.US))
                 }
             }
             return result
@@ -30,5 +39,24 @@ class RspBankNameInfo {
         }
 
         override fun isHot(): Boolean = xevtra == "1"
+
+//        override fun hashCode(): Int {
+//            var result = Vu3XbBF?.hashCode() ?: 0
+//             result += KoGUgumBVm?.hashCode() ?: 0
+//             result += xevtra?.hashCode() ?: 0
+//            return result
+//        }
+
+//        override fun equals(other: Any?): Boolean {
+//            if (other === this) return true
+//            if (javaClass != other?.javaClass) return false
+//
+//            other as BankNameInfo
+//
+//            if (Vu3XbBF != other.Vu3XbBF) return false
+//            if (KoGUgumBVm != other.KoGUgumBVm) return false
+//            if (xevtra != other.xevtra) return false
+//            return true
+//        }
     }
 }

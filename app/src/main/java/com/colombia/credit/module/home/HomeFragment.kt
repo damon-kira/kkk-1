@@ -32,7 +32,7 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
 
     private val mAppUpdateViewModel by lazyViewModel<AppUpdateViewModel>()
 
-    private val mHomeViewModel by lazyViewModel<HomeLoanViewModel>()
+    private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
     private val mLoginFragment by lazy {
         getInstance(getSupportContext(), LoginFragment::class.java, null)
@@ -57,28 +57,26 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragment = if (inValidToken()) {
-            mLoginFragment
-        } else {
-            mNoProductFragment
-        }
-        FragmentHelper.replaceFragment(
-            childFragmentManager,
-            R.id.fl_home_content,
-            fragment,
-            mCurrTag
-        )
+        replaceChildFragment(getFragment())
 
         LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
             when (it.event) {
                 HomeEvent.EVENT_REFRESH -> {
                     onRefresh()
                 }
+                HomeEvent.EVENT_LOGIN -> {
+                    onRefresh()
+                    replaceChildFragment(getFragment())
+                }
+                HomeEvent.EVENT_LOGOUT-> {
+                    replaceChildFragment(getFragment())
+                }
             }
         }
 
         mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
-            getBaseActivity()?.showAppUpgradeDialog(it)
+            getBaseActivity()?.showAppUpgradeDialog(it){
+            }
         }
         mAppUpdateViewModel.getAppUpdate()
 
@@ -98,6 +96,15 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
         onRefresh()
     }
 
+    private fun getFragment(): BaseHomeFragment {
+        val fragment = if (inValidToken()) {
+            mLoginFragment
+        } else {
+            mNoProductFragment
+        }
+        return fragment
+    }
+
     private fun replaceChildFragment(fragment: BaseFragment) {
         FragmentHelper.replaceFragment(childFragmentManager, R.id.fl_home_content, fragment)
     }
@@ -105,13 +112,12 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
     private fun getCurrFragment(rspInfo: RspProductInfo): BaseFragment? {
         val userStatus: String = rspInfo.EqyO
         val orderStatus: String = rspInfo.xXkO
-        val firstProducts = rspInfo.fyEV
         return when (userStatus) {
             UserStatus.STATUS_FIRST -> {
                 when (orderStatus) {
                     OrderStatus.STATUS_FIRST_PRODUCT,
                     OrderStatus.STATUS_REFUSED_EXPIRE -> {
-                        if (firstProducts.isNullOrEmpty()) {
+                        if (rspInfo.yqGhrjOF2 == "0") {
                             mNoProductFragment
                         } else {
                             getInstance(getSupportContext(), FirstLoanFragment::class.java, null)

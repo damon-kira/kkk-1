@@ -54,7 +54,7 @@ class KycPicHelper {
             .fileToSave(File(targetPath))
             .start(object : AdapterCallback<CompressResult>() {
                 override fun onSuccess(result: CompressResult) {
-                    deleteFiles(captureFile)
+//                    deleteFiles(captureFile)
                     val filePath = result.uri?.path ?: return
                     mResultListener?.invoke(filePath, picType)
                 }

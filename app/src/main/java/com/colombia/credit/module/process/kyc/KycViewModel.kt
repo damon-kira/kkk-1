@@ -2,10 +2,12 @@ package com.colombia.credit.module.process.kyc
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
+import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.util.ocrExif
+import com.colombia.credit.util.ImageInfoUtil
+import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
-import com.util.lib.GsonUtil
+import com.util.lib.ThreadPoolUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,9 +18,10 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     private val _imageLiveData = generatorLiveData<BaseResponse<KycOcrInfo>>()
     val imageLivedata = _imageLiveData
     fun uploadImage(path: String, type: Int) {
-        val json = GsonUtil.toJson(KycOcrInfo())
-        _imageLiveData.postValue(BaseResponse(0, json.orEmpty(), ""))
         _imageLiveData.addSourceLiveData(repository.uploadImage(path, type)) {
+            val imageInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
+            val key = if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
+            ImageInfoUtil.saveInfo(key, imageInfo)
             _imageLiveData.postValue(it)
         }
     }
@@ -26,6 +29,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
+                it.getData()?.jmWujylO6j ?: return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }
@@ -40,7 +44,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     }
 
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess){
+        if (isUploadSuccess) {
             removeCacheInfo()
             return
         }

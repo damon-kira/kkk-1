@@ -15,9 +15,9 @@ import java.lang.StringBuilder
 @Keep
 class KycTempInfo {
     val pathFront: String
-        get() = generatorPath("front.png")
+        get() = generatorPath("front")
     val pathBack: String
-        get() = generatorPath("back.png")
+        get() = generatorPath("back")
 
     var resFrontDrawable: Int = R.drawable.image_front_hint
     var resBackDrawable: Int = R.drawable.image_back_hint

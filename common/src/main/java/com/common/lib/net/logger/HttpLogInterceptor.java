@@ -355,7 +355,6 @@ public final class HttpLogInterceptor implements Interceptor {
                     requestLogs.add("--> END request " + request.method() + " " + request.url());
                 }
             }
-
         } catch (Exception e) {
             requestLogs.add("--> END request failed -> " + request.url() + "\n" + e);
         }

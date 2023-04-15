@@ -9,10 +9,7 @@ import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.resp.RspContactInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
-import com.colombia.credit.expand.TYPE_BANK
-import com.colombia.credit.expand.getMobile
-import com.colombia.credit.expand.isSameNumber
-import com.colombia.credit.expand.jumpProcess
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -41,7 +38,6 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setToolbarListener(mBinding.processToolbar)
         reqPermission()
         mBinding.bivContact1.setDescMarginLeft(35f.dp())
@@ -51,7 +47,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivContact1.setBlockingOnClickListener(this)
         mBinding.bivContact2.setBlockingOnClickListener(this)
 
-        mViewModel.getCacheInfo()?.let {info ->
+        val cache = mViewModel.getCacheInfo()?.also { info ->
             info as ReqContactInfo
             if (mRelationship.containsKey(info.gQdRCJKOEJ)) {
                 setBaseInfo(
@@ -61,7 +57,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 )
             }
             mBinding.bivContact1.setViewText(info.zAqGvHgHls.orEmpty())
-            if(!info.ifunMf6ZLx.isNullOrEmpty()) {
+            if (!info.ifunMf6ZLx.isNullOrEmpty()) {
                 mBinding.bivContact1.setDesc(getString(R.string.mobile_s, info.ifunMf6ZLx))
                 mBinding.bivContact1.tag = info.ifunMf6ZLx
             }
@@ -72,32 +68,36 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 mBinding.bivContact2.tag = info.fHdl
             }
         }
-
-        mViewModel.mInfoLiveData.observerNonSticky(this) {info ->
-            if (info !is RspContactInfo) return@observerNonSticky
-
-            if (mRelationship.containsKey(info.yYVUx)) {
-                setBaseInfo(
-                    mBinding.bivRelationship,
-                    mRelationship[info.yYVUx],
-                    info.yYVUx
-                )
-            }
-            mBinding.bivContact1.setViewText(info.MGwL.orEmpty())
-            if(!info.fTvY4N5.isNullOrEmpty()) {
-                mBinding.bivContact1.setDesc(getString(R.string.mobile_s, info.fTvY4N5))
-                mBinding.bivContact1.tag = info.fTvY4N5
-            }
-
-            mBinding.bivContact2.setViewText(info.dZgCz3.orEmpty())
-            if (!info.fWvRFuMb.isNullOrEmpty()) {
-                mBinding.bivContact2.setDesc(getString(R.string.mobile_s, info.fWvRFuMb))
-                mBinding.bivContact2.tag = info.fWvRFuMb
-            }
+        if (cache == null) {
+            mViewModel.getInfo()
         }
-        mViewModel.getInfo()
     }
 
+    override fun initObserver() {
+        mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
+            if (rspInfo !is RspContactInfo) return@observerNonSticky
+            rspInfo.Rwfbhdu1?.let { info ->
+                if (mRelationship.containsKey(info.yYVUx)) {
+                    setBaseInfo(
+                        mBinding.bivRelationship,
+                        mRelationship[info.yYVUx],
+                        info.yYVUx
+                    )
+                }
+                mBinding.bivContact1.setViewText(info.MGwL.orEmpty())
+                if (!info.fTvY4N5.isNullOrEmpty()) {
+                    mBinding.bivContact1.setDesc(getString(R.string.mobile_s, info.fTvY4N5))
+                    mBinding.bivContact1.tag = info.fTvY4N5
+                }
+
+                mBinding.bivContact2.setViewText(info.dZgCz3.orEmpty())
+                if (!info.fWvRFuMb.isNullOrEmpty()) {
+                    mBinding.bivContact2.setDesc(getString(R.string.mobile_s, info.fWvRFuMb))
+                    mBinding.bivContact2.tag = info.fWvRFuMb
+                }
+            }
+        }
+    }
 
 
     private fun reqPermission() {
@@ -196,8 +196,5 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-
-    override fun uploadSuccess() {
-        jumpProcess(this, TYPE_BANK)
-    }
+    override fun getNextType(): Int = TYPE_BANK
 }

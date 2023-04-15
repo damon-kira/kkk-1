@@ -13,6 +13,7 @@ class JsInterface(webHost: IWebHost) : LifecycleEventObserver {
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         if (event == Lifecycle.Event.ON_DESTROY) {
+            source.lifecycle.removeObserver(this)
             fragment = null
         }
     }

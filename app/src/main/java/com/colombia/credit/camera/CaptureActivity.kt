@@ -7,18 +7,21 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.exifinterface.media.ExifInterface
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityCaptureBinding
+import com.colombia.credit.util.ImageInfoUtil
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class CaptureActivity : BaseActivity() {
@@ -96,11 +99,13 @@ class CaptureActivity : BaseActivity() {
                         it.right = scannerRect.right.toInt()
                         it.bottom = scannerRect.bottom.toInt()
                     }
+                    val exifInfo = ImageInfoUtil.getImageExifInfo(f.absolutePath)
                     BitmapCrop.crop(this, f, rect, manager.isFront()) { finalFile ->
                         if (finalFile != null) {
                             if (BuildConfig.DEBUG) {
                                 logger_e(TAG, "success = ${finalFile.length()}")
                             }
+                            ImageInfoUtil.saveExifInfo(finalFile.absolutePath, exifInfo)
                             val result = intent
                             result.data = Uri.fromFile(finalFile)
                             setResult(Activity.RESULT_OK, result)

@@ -11,15 +11,12 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.common.lib.base.BaseActivity
-import com.common.lib.net.NetBaseParamsManager
-import com.util.lib.MainHandler
 import com.bumptech.glide.request.target.Target
+import com.common.lib.base.BaseActivity
+import com.util.lib.MainHandler
 import com.util.lib.dp
 
 /**
@@ -69,7 +66,7 @@ object GlideUtils {
                     corner = corner
                 )
             )
-            .load(getUrl(url))
+            .load(url)
             .into(imageView)
     }
 
@@ -152,7 +149,7 @@ object GlideUtils {
         resultError: (error: Exception?) -> Unit
     ) {
         requestManger.asBitmap()
-            .load(getUrl(url))
+            .load(url)
             .apply(createRequestOptions(width, height, radius = radius))
             .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
@@ -181,14 +178,5 @@ object GlideUtils {
 
                 }
             }).submit()
-    }
-
-    private fun getUrl(url: String): Any{
-        return if (url.startsWith("https")) {
-            GlideUrl(url, LazyHeaders
-                .Builder()
-                .addHeader("x-app-sign", NetBaseParamsManager.getSignVersion())
-                .build())
-        } else url
     }
 }

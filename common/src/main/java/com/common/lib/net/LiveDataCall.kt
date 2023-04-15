@@ -1,20 +1,14 @@
 package com.common.lib.net
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.log.logger_e
-import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.FlowableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.reflect.ParameterizedType
-import java.lang.reflect.Type
 import javax.net.ssl.SSLHandshakeException
-import kotlin.reflect.KClass
 
 
 /**
@@ -33,13 +27,13 @@ class LiveDataCall<T>(
         mDispose = Flowable.just(0)
             .flatMap {
                 flowable()
-            }.doOnNext {
+            }/*.doOnNext {
                 if (it.isSuccess() && !it.data.isNullOrEmpty()) {
                     it.parseT(clazz)
                 } else if (!it.isAppForcedUpdate() || it.data.isNullOrEmpty()) {
-                    throw HttpResponseException(it.code, it.message)
+                    throw HttpResponseException(it.code, it.msg)
                 }
-            }
+            }*/
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -71,7 +65,7 @@ class LiveDataCall<T>(
         } else if (throwable is SSLHandshakeException) {
             code = ResponseCode.SSL_ERROR_CODE
         }
-        return BaseResponse(code, "", msg)
+        return BaseResponse(code, null, msg, throwable)
     }
 
     private fun getErrorCode(throwable: Throwable): Int {
