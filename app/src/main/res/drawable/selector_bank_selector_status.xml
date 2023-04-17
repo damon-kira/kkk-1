@@ -14,6 +14,14 @@
         <shape android:shape="oval">
             <solid android:color="@color/transparent" />
             <stroke android:width="2dp" android:color="@color/white" />
+            <size android:width="16dp" android:height="16dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/transparent" />
+            <stroke android:width="2dp" android:color="@color/white" />
+            <size android:width="16dp" android:height="16dp"/>
         </shape>
     </item>
 </selector>

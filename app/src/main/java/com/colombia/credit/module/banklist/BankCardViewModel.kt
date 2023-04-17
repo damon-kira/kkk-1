@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.colombia.credit.bean.resp.RspBankAccount
 import com.colombia.credit.bean.resp.RspBankNameInfo
+import com.colombia.credit.bean.resp.RspResult
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
@@ -18,6 +19,8 @@ class BankCardViewModel @Inject constructor(private val repository: BankCardRepo
     val mBankNameLiveData = generatorLiveData<ArrayList<RspBankNameInfo.BankNameInfo>>()
 
     val mBankAccountLiveData = generatorLiveData<BaseResponse<RspBankAccount>>()
+
+    val mUpdateLiveData = generatorLiveData<BaseResponse<RspResult>>()
 
     private var _rspBankNameList: ArrayList<RspBankNameInfo.BankNameInfo>? = null
         set(value) {
@@ -52,6 +55,14 @@ class BankCardViewModel @Inject constructor(private val repository: BankCardRepo
                     _rspBankNameList = this
                 }
             }
+        }
+    }
+
+    fun updateBank(bankNo: String, productId: String?) {
+        showloading()
+        mUpdateLiveData.addSourceLiveData(repository.updateBank(bankNo, productId)) {
+            hideLoading()
+            mUpdateLiveData.postValue(it)
         }
     }
 

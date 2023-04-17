@@ -13,6 +13,8 @@
     <string name="seconds">%ss</string>
     <string name="day">días</string>
     <string name="selector_s">Elección %s</string>
+    <string name="error_hint_blank">&#160;&#160;&#160;</string>
+
 
     <string name="login_text">Continuar</string>
     <string name="protocol_params"> Acuerdo de Privacidad</string>
@@ -196,6 +198,7 @@
     <string name="toast_level_hint">Por el momento no puedes cambiar tu puntuaje crediticio,éste se incrementa cada vez que pagas a tiempo.</string>
     <string name="toast_max_amount">Pague a tiempo para obtener una cantidad mayor</string><!-- 当前已是最高金额 -->
     <string name="toast_mix_amount">Este es el monto mínimo.</string><!-- 当前是最低金额 -->
+    <string name="confirm_title">Confirmar Solicitud</string>
 
     <string name="tab_repay_overdue">Pago Vencido</string>
     <string name="tab_repay_normal">@string/history_status_review</string>

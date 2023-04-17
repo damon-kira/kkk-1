@@ -52,9 +52,13 @@ fun getMobile(): String {
 }
 
 fun saveMobile(mobile: String) {
-    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_MOBILE, mobile)
+    var temp = mobile
+    if (mobile.startsWith("57") && mobile.length == 12) {
+        temp = mobile.substring(2)
+    }
+    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_MOBILE, temp)
 }
 
-fun getUserName(): String {
-    return ""
-}
+var mUserName: String
+    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_NAME, "")
+    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_NAME, value)

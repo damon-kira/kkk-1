@@ -95,21 +95,23 @@ class BankInfoAddActivity : BaseActivity() {
         val bankNo = mBinding.layoutBank.bivBankno.getViewText()
         val bankNoCheck = (bankNo.length >= 9).also { result ->
             if (!result) {
-                mBinding.layoutBank.bivBankno.setError(R.string.error_bank_no)
+                mBinding.layoutBank.bivBankno.setError(R.string.error_bank_no, true)
             }
         }
 
         val bankNoConfirm = mBinding.layoutBank.bivBanknoTow.getViewText()
         val bankNoTwoCheck = if (bankNoConfirm.isEmpty()) {
-            checkAndSetErrorHint(mBinding.layoutBank.bivBanknoTow, mBinding.layoutBank.bivBanknoTow.getTitle())
+            checkAndSetErrorHint(
+                mBinding.layoutBank.bivBanknoTow,
+                mBinding.layoutBank.bivBanknoTow.getTitle()
+            )
             false
-        } else if(bankNo != bankNoConfirm) {
-            mBinding.layoutBank.bivBanknoTow.setError(R.string.error_bank_no)
+        } else if (bankNo != bankNoConfirm) {
+            mBinding.layoutBank.bivBanknoTow.setError(R.string.error_bank_no, true)
             false
         } else true
-        bankNoCheck.and(bankNoTwoCheck)
         return (mBankType > -1).and(checkAndSetErrorHint(mBinding.layoutBank.bivName))
-            .and(bankNoCheck)
+            .and(bankNoCheck).and(bankNoTwoCheck)
     }
 
     private fun getCommitInfo(): IReqBaseInfo {
@@ -135,10 +137,10 @@ class BankInfoAddActivity : BaseActivity() {
                     getString(
                         R.string.error_process_hint,
                         baseInfoView.getTitle()
-                    )
+                    ), true
                 )
             } else {
-                baseInfoView.setError(getString(R.string.error_process_hint, errorHint))
+                baseInfoView.setError(getString(R.string.error_process_hint, errorHint), true)
             }
         }
         return result

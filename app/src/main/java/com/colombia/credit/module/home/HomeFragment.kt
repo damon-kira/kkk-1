@@ -11,6 +11,7 @@ import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.inValidToken
 import com.colombia.credit.expand.showAppUpgradeDialog
 import com.colombia.credit.module.appupdate.AppUpdateViewModel
+import com.colombia.credit.module.firstconfirm.FirstConfirmFragment
 import com.colombia.credit.module.homerepay.FirstRepayFragment
 import com.colombia.credit.module.login.LoginFragment
 import com.colombia.credit.module.refused.RefusedFragment
@@ -130,11 +131,17 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
                         getInstance(getSupportContext(), ReviewFragment::class.java, null)
                     }
                     OrderStatus.STATUS_FIRST_CONFIRM -> {
-                        getInstance(getSupportContext(), FirstRepayFragment::class.java, null)
+                        getInstance(getSupportContext(), FirstConfirmFragment::class.java, null)
                     }
                     OrderStatus.STATUS_REPAY,
                     OrderStatus.STATUS_OVERDUE -> {
                         getInstance(getSupportContext(), FirstRepayFragment::class.java, null)
+                    }
+                    OrderStatus.STATUS_REPEAT1,
+                    OrderStatus.STATUS_REPEAT1,
+                    OrderStatus.STATUS_REPEAT1,
+                    OrderStatus.STATUS_REPEAT1 -> {
+                        getInstance(getSupportContext(), RepeatFragment::class.java, null)
                     }
                     else -> {
                         getInstance(getSupportContext(), NoProductFragment::class.java, null)
@@ -150,8 +157,6 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
     }
 
     override fun getData(): RspProductInfo? = mHomeViewModel.mRspProductInfo
-
-    override fun getHomeViewModel() = mHomeViewModel
 
     private fun stopRefresh() {
         val fragment = FragmentHelper.getCurrFragment(

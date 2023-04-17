@@ -5,12 +5,11 @@ import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentHomeRepayBinding
 import com.colombia.credit.expand.formatCommon
-import com.colombia.credit.expand.getUserName
-import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.expand.mUserName
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
-import com.colombia.credit.module.home.IHomeFragment
+import com.colombia.credit.module.home.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
@@ -22,6 +21,8 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentHomeRepayBinding::inflate)
 
+    private val mHomeLoanViewModel by lazyActivityViewModel<HomeLoanViewModel>()
+
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
@@ -31,12 +32,12 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.repayToolbar)
-        mBinding.tvUser.text = getString(R.string.hi_user, getUserName())
+        mBinding.tvUser.text = getString(R.string.hi_user, mUserName)
         mBinding.repayTvRepay.setBlockingOnClickListener {
             // 跳转还款详情页面
             Launch.skipRepayDetailActivity(getSupportContext())
         }
-        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(viewLifecycleOwner) {
+        mHomeLoanViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.repayTvAmount.apply {
                 text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.orEmpty()))
                 isSelected = it.v3ItXF > 0 // 是否逾期

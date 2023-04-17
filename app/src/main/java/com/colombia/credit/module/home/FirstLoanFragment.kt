@@ -17,6 +17,8 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentHomeLoanBinding::inflate)
 
+    private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
+
     override fun contentView(): View {
         return mBinding.root
     }
@@ -31,14 +33,13 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
-        val viewModel = (parentFragment as IHomeFragment).getHomeViewModel()
-        setViewModelLoading(viewModel)
-        viewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
+        setViewModelLoading(mHomeViewModel)
+        mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.tvMaxAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
             mFirstPageLoanAmount = it.yqGhrjOF2.orEmpty()
         }
 
-        viewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
+        mHomeViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
                 it.getData()?.let {info ->
                     jumpProcess(getSupportContext(), info.getProcessType())
@@ -47,7 +48,7 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
-            viewModel.getCertProcess()
+            mHomeViewModel.getCertProcess()
         }
     }
 }

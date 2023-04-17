@@ -2,7 +2,6 @@ package com.colombia.credit.module.account
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,9 @@ import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
-import com.colombia.credit.module.home.*
+import com.colombia.credit.module.home.HomeLoanViewModel
+import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.module.home.OrderStatus
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
@@ -44,8 +45,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         val isLogin = !inValidToken()
         mBinding.aivHead.isSelected = isLogin
         changeUserName()
-        // 是否是拒绝状态
-        changeOrderInfo("")
 
         mBinding.etvCustom.setBlockingOnClickListener(this)
         mBinding.ailAbout.setBlockingOnClickListener(this)
@@ -57,40 +56,39 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         mBinding.etvBtn.setBlockingOnClickListener(this)
 
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            if (it.xXkO == OrderStatus.STATUS_REPAY) {
-
-            } else if (it.xXkO == OrderStatus.STATUS_REJECT) {
-                mBinding.clRepay.hide()
-                mBinding.tvRefused.show()
-                mBinding.tvRefused.text = getString(R.string.me_refused_hint, it.K1v0Pz)
-            } else {
-
-            }
-        }
-    }
-
-    private fun changeOrderInfo(states: String) {
-        if (inValidToken()) {
-            mBinding.clRepay.hide()
-            mBinding.tvRefused.hide()
-            return
-        }
-        if (states == OrderStatus.STATUS_REJECT) {
-            mBinding.clRepay.hide()
-            mBinding.tvRefused.show()
-        } else {
-            mBinding.clRepay.show()
-            mBinding.tvRefused.hide()
-            // 是否有在贷订单
-            var amount = ""
-            mBinding.tvRepayAmount.text = getString(R.string.amount_unit, formatCommon(amount))
-            if (isLoanOrder()) {
-                mBinding.tvText2.show()
-                mBinding.etvBtn.setText(R.string.me_repayment)
-                mBinding.tvText.setText(R.string.me_repay_text1)
-            } else {
-                mBinding.tvText2.hide()
-                mBinding.tvText.setText(R.string.me_loan_amount_hint)
+            when (it.xXkO) {
+                OrderStatus.STATUS_FIRST_PRODUCT -> {
+                    mBinding.clRepay.show()
+                    mBinding.tvRefused.hide()
+                    mBinding.tvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
+                    mBinding.etvBtn.setText(R.string.me_loan)
+                    mBinding.etvBtn.isSelected = true
+                    mBinding.tvText.setText(R.string.me_loan_amount_hint)
+                    mBinding.tvText2.hide()
+                }
+                OrderStatus.STATUS_REPAY, OrderStatus.STATUS_OVERDUE -> {
+                    mBinding.clRepay.show()
+                    mBinding.tvRefused.hide()
+                    mBinding.tvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
+                    mBinding.etvBtn.setText(R.string.me_repayment)
+                    if (it.xXkO == OrderStatus.STATUS_OVERDUE) {
+                        mBinding.etvBtn.setSolidColorRes(R.color.color_fe4f4f)
+                    } else {
+                        mBinding.etvBtn.setSolidColorRes(R.color.color_32C558)
+                    }
+                    mBinding.etvBtn.isSelected = false
+                    mBinding.tvText.setText(R.string.me_repay_text1)
+                    mBinding.tvText2.show()
+                }
+                OrderStatus.STATUS_REJECT -> {
+                    mBinding.clRepay.hide()
+                    mBinding.tvRefused.show()
+                    mBinding.tvRefused.text = getString(R.string.me_refused_hint, it.K1v0Pz)
+                }
+                else -> {
+                    mBinding.clRepay.hide()
+                    mBinding.tvRefused.hide()
+                }
             }
         }
     }
@@ -98,7 +96,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     private fun changeUserName() {
         if (!inValidToken()) {
             mBinding.tvMobile.show()
-            mBinding.tvName.text = getString(R.string.me_hi, getUserName())
+            mBinding.tvName.text = getString(R.string.me_hi, mUserName)
             mBinding.tvMobile.text = maskString(getMobile(), 3, 4)
         } else {
             mBinding.tvMobile.hide()
@@ -154,9 +152,17 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         return true
     }
 
+    private fun changeStatus(){
+        if (inValidToken()) {
+            mBinding.clRepay.hide()
+            mBinding.tvRefused.hide()
+        }
+    }
+
     override fun onFragmentVisibilityChanged(visible: Boolean) {
         super.onFragmentVisibilityChanged(visible)
         if (visible) {
+            changeStatus()
             changeUserName()
             getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
         }

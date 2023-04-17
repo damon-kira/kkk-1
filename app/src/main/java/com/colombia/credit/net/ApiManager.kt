@@ -10,7 +10,6 @@ import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.expand.saveUserToken
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeEvent
-import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.net.*
@@ -51,7 +50,8 @@ class ApiManager @Inject constructor() {
                     result.code == ResponseCode.INVALIDTOKEN -> {
                         saveUserToken("")
                         if (gotoLogin) {
-                            val context = AppInjector.getTopActivity() ?: com.colombia.credit.app.getAppContext()
+                            val context = AppInjector.getTopActivity()
+                                ?: com.colombia.credit.app.getAppContext()
                             Launch.skipMainActivity(context)
                             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
                         }
@@ -183,8 +183,7 @@ class ApiManager @Inject constructor() {
         val builder = original.newBuilder()
         NetBaseParamsManager.addHeader(builder)
         builder.method(original.method(), original.body())
-        val response = chain.proceed(builder.build())
-        response
+        chain.proceed(builder.build())
     }
 
     private val logInterceptor =

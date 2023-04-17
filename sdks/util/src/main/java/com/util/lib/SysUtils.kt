@@ -118,6 +118,14 @@ object SysUtils {
     @SuppressLint("MissingPermission")
     fun getImei(context: Context): String {
         var imei: String? = ""
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return imei.orEmpty()
+        }
+//
         try {
             val telephonyManager =
                 context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager

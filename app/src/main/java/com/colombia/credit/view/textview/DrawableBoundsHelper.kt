@@ -14,6 +14,7 @@ object DrawableBoundsHelper {
         drawableWidth: Int,
         drawableHeight: Int
     ): IntArray {
+        val textWidth = view.paint.measureText(view.text.toString())
         val originRect = drawable.bounds
         val originBounds =
             intArrayOf(originRect.left, originRect.top, originRect.right, originRect.bottom)
@@ -26,7 +27,8 @@ object DrawableBoundsHelper {
         }
 
         if (tag == 0 || tag == 2) {
-            val left = 0
+            val left =
+                ((view.measuredWidth - textWidth) / 2 - view.compoundDrawablePadding - finalWidth).toInt()
             val right = finalWidth
             when (mode.code) {
                 EasyTextView.DrawableMode.TOP.code -> {
@@ -42,7 +44,7 @@ object DrawableBoundsHelper {
                 else -> {
                     if (finalWidth > originRect.width() && finalHeight > originRect.height()) {
                         val halfHeight = (finalHeight - originRect.height()) / 2
-                        val left = originRect.left
+//                        val left = originRect.left
                         val top = originRect.top - halfHeight
                         fillBounds(bounds, left, top, left + finalWidth, top + finalHeight)
                     } else {
@@ -70,9 +72,9 @@ object DrawableBoundsHelper {
                 fillBounds(bounds, left, top, right, bottom)
             } else if (mode.code == EasyTextView.DrawableMode.RIGHT.code) {
                 val right = if (view.compoundDrawables[3] != null) {
-                    view.width / 2 - view.paddingRight- view.compoundDrawablePadding - view.compoundDrawables[3].bounds.width()
+                    view.width / 2 - view.paddingRight - view.compoundDrawablePadding - view.compoundDrawables[3].bounds.width()
                 } else {
-                    view.width / 2 - view.paddingRight- view.compoundDrawablePadding
+                    view.width / 2 - view.paddingRight - view.compoundDrawablePadding
                 }
                 val left = right - finalWidth
                 fillBounds(bounds, left, top, right, bottom)

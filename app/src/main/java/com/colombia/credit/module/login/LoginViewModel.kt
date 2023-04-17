@@ -8,6 +8,7 @@ import com.bigdata.lib.WifiHelper
 import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.bean.resp.RspSmsCode
 import com.colombia.credit.expand.mCustom
+import com.colombia.credit.expand.saveMobile
 import com.colombia.credit.expand.saveUserInfo
 import com.colombia.credit.util.registIP
 import com.colombia.credit.util.registWifi
@@ -53,6 +54,7 @@ class LoginViewModel @Inject constructor(
             if (it.isSuccess()) {
                 registWifi = WifiHelper.getSSid(context)
                 registIP = WifiHelper.getIp(context)
+                saveMobile(mobile)
                 it.getData()?.let { data ->
                     saveUserInfo(data)
                 }

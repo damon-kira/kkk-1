@@ -5,10 +5,10 @@ import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentReviewBinding
 import com.colombia.credit.expand.formatCommon
-import com.colombia.credit.expand.getUserName
+import com.colombia.credit.expand.mUserName
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
-import com.colombia.credit.module.home.IHomeFragment
+import com.colombia.credit.module.home.HomeLoanViewModel
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +19,8 @@ class ReviewFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentReviewBinding::inflate)
 
+    private val mHomeLoanViewModel by lazyActivityViewModel<HomeLoanViewModel>()
+
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
@@ -28,10 +30,8 @@ class ReviewFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.reviewToolbar)
-        mBinding.tvUser.text = getString(R.string.hi_user, getUserName())
-        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(
-            viewLifecycleOwner
-        ) {
+        mBinding.tvUser.text = getString(R.string.hi_user, mUserName)
+        mHomeLoanViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.reviewTvAmount.text =
                 formatCommon(getString(R.string.amount_unit, it.yqGhrjOF2.orEmpty()))
         }

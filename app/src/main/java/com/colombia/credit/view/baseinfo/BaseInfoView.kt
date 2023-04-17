@@ -21,6 +21,7 @@ import androidx.core.view.updatePadding
 import androidx.core.widget.addTextChangedListener
 import com.colombia.credit.R
 import com.colombia.credit.databinding.LayoutInfoViewBinding
+import com.colombia.credit.expand.errorImageSpan
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.dip2px
 import com.util.lib.ifShow
@@ -252,8 +253,8 @@ class BaseInfoView : AbsBaseInfoView {
     override fun setError(errorStr: String, hasIcon: Boolean) {
         mIsError = true
         val errorSpannable = SpannableStringBuilder(errorStr)
-//        if (hasIcon)
-//            errorSpannable.insert(0, errorImageSpan)
+        if (hasIcon)
+            errorSpannable.insert(0, errorImageSpan)
         mBinding.bivTvError.show()
         mBinding.bivTvError.text = errorSpannable
         mBinding.bivEdittext.isSelected = true

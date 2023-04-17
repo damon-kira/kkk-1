@@ -157,7 +157,7 @@
             android:textColor="@color/color_333333"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_repay_amount"
+            app:layout_constraintTop_toTopOf="@id/tv_amount"
             tools:text="$8.000" />
 
         <!-- 支付当前费用 -->
@@ -173,7 +173,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_repay_amount" />
+            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Space

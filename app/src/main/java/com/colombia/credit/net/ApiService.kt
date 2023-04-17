@@ -119,6 +119,11 @@ interface ApiService {
     @Headers("kio8YGhwe6:Zg2tPm4KlN")
     fun confirmLoan(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
+    // 更改放款银行
+    @POST("N6qNa/fH98vRUuB")
+    @Headers("kio8YGhwe6:Pf9hKl3GmT")
+    fun updateLoanBank(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
+
     @POST("tZyFyDwU/wD9X")
     @Headers("kio8YGhwe6:UzB5rkIgVd")
     fun logout(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>

@@ -60,6 +60,7 @@ class ReviewProcessView : View {
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
 
+        mPaint.color = mInnerColor
         canvas.drawLine(mCircleRadius, halfHeight, halfWidth, halfHeight, mPaint)
         mPaint.color = mOutCircleColor
         canvas.drawCircle(mCircleRadius, halfHeight, mCircleRadius, mPaint)

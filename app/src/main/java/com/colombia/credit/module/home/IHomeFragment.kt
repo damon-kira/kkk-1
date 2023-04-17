@@ -5,6 +5,4 @@ import com.colombia.credit.bean.resp.RspProductInfo
 interface IHomeFragment {
 
     fun getData(): RspProductInfo?
-
-    fun getHomeViewModel(): HomeLoanViewModel
 }

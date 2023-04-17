@@ -2,6 +2,8 @@ package com.colombia.credit.module.home
 
 import com.colombia.credit.bean.resp.*
 import com.colombia.credit.expand.inValidToken
+import com.colombia.credit.expand.mUserName
+import com.colombia.credit.expand.saveMobile
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.bean.BaseResponse
@@ -30,7 +32,9 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         _homeLiveData.observerNonStickyForever {response ->
             if (response.isSuccess()) {
                 response.getData()?.let { info ->
-                    info.fyEV?.let { list ->
+                    mUserName = info.HyulExS1ei.orEmpty()
+                    saveMobile(info.cusTell.orEmpty())
+                    info.fyEV?.let {
                         firstConfirmLiveData.postValue(info.fyEV)
                     }
                     repeatProductLiveData.postValue(info.jBRR)

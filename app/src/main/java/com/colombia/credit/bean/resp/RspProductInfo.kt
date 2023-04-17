@@ -3,7 +3,7 @@ package com.colombia.credit.bean.resp
 class RspProductInfo {
     val yqGhrjOF2: String? = null // 最高可借金额，实际还款金额，借款金额
     val HyulExS1ei: String? = null //客户名字
-//    "cusTell":"", //客户号码
+    val cusTell: String? = null //客户号码
     val WTvE5G: Int = 0// 借款天数
     val ZXEUWfOy: String? = null//订单id
     val EqyO: String = "1"// 客户类型 1 :新客户 0 老客户 2 被拉黑客户

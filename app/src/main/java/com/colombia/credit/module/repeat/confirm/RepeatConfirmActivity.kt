@@ -66,7 +66,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 // 底部list展开或收起
             }
             R.id.tv_bank_no -> {
-                Launch.skipBankCardListActivity(this, mTotalAmount, mProductId)
+                Launch.skipBankCardListActivity(this, mTotalAmount, mProductId, mBankNo)
             }
         }
     }

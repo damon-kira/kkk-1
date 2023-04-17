@@ -21,9 +21,8 @@ class RefusedFragment : BaseHomeLoanFragment() {
 
     private val mBinding by binding(FragmentRefusedBinding::inflate)
 
-    private val mViewModel by lazy {
-        (parentFragment as IHomeFragment).getHomeViewModel()
-    }
+
+    private val mViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
     override fun contentView(): View = mBinding.root
 
@@ -37,11 +36,8 @@ class RefusedFragment : BaseHomeLoanFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        (parentFragment as? IHomeFragment)?.getData()?.let {
-//            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
-//        }
-
-        mViewModel.mRspInfoLiveData.observe(this) {
+        setCustomListener(mBinding.toolbar)
+        mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
         }
     }

@@ -1,10 +1,12 @@
 package com.colombia.credit.module.banklist
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
@@ -22,7 +24,9 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.dp
 import com.util.lib.hide
+import com.util.lib.shape.ShapeImpl
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +38,8 @@ open class BankCardListActivity : BaseActivity() {
 
     protected val mViewModel by lazyViewModel<BankCardViewModel>()
 
+    protected var mCurrBankNo: String? = null
+
     protected val mAdapter: BankCardAdapter by lazy {
         BankCardAdapter(arrayListOf())
     }
@@ -41,6 +47,15 @@ open class BankCardListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+
+        setViewModelLoading(mViewModel)
+
+        val shape = ShapeImpl(this)
+            .shapeCorners().radius(20.dp()).then()
+            .shapeSolid().color(Color.TRANSPARENT).then()
+            .shapeStroke().setStroke(1f.dp(), ContextCompat.getColor(this, R.color.color_dadada))
+            .getShape()
+        mBinding.bankFlAdd.background = shape
 
         mBinding.aivBack.setBlockingOnClickListener {
             finish()
@@ -50,28 +65,47 @@ open class BankCardListActivity : BaseActivity() {
         mBinding.bankRecyclerview.adapter = mAdapter
         mBinding.bankRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                mAdapter.getItemData<RspBankAccount.BankAccountInfo>(position)?.changeSelector()
+                val item = mAdapter.getItemData<RspBankAccount.BankAccountInfo>(position)
+                item?.changeSelector()
                 mAdapter.setSelectorPosition(position)
+                mCurrBankNo = item?.JJ41sQr
             }
         })
 
-        mBinding.cardTvSave.setBlockingOnClickListener {
-            // 调用接口， 保存信息后返回
+        mBinding.bankFlAdd.setBlockingOnClickListener {
+            Launch.skipBankInfoAddActivityResult(this, 10)
         }
 
-        mBinding.bankEtvAdd.setBlockingOnClickListener {
-            Launch.skipBankInfoAddActivityResult(this, 10)
+        mBinding.cardTvSave.setBlockingOnClickListener {
+            // 调用接口， 保存信息后返回
+            updateBank()
+        }
+
+        mViewModel.mUpdateLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                updataSuccess()
+            } else {
+                it.ShowErrorMsg(::updateBank)
+            }
         }
 
         mViewModel.mBankAccountLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
-                it.getData()?.oaeFxoW?.apply {
-                    change(size == 5)
-                    mAdapter.setItems(this)
+                it.getData()?.oaeFxoW?.let { list ->
+                    change(list.size == 5)
+                    mAdapter.setItems(list)
                 }
             } else it.ShowErrorMsg()
         }
         mViewModel.getBankAccountList()
+    }
+
+    open fun updateBank() {
+        mViewModel.updateBank(mAdapter.getSelectData()?.JJ41sQr.orEmpty(), "")
+    }
+
+    open fun updataSuccess() {
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -92,10 +126,10 @@ open class BankCardListActivity : BaseActivity() {
     private fun change(isCardUp: Boolean) {
         if (isCardUp) {
             mBinding.tvCardUp.show()
-            mBinding.bankEtvAdd.hide()
+            mBinding.bankFlAdd.hide()
         } else {
             mBinding.tvCardUp.hide()
-            mBinding.bankEtvAdd.show()
+            mBinding.bankFlAdd.show()
         }
     }
 
@@ -116,7 +150,7 @@ open class BankCardListActivity : BaseActivity() {
                 tv.text = item.RPZ7
                 tv.tag = item.oH3Jv
             }
-            holder.setText(R.id.tv_bank_no, maskString(item.JJ41sQr, 4, 4))
+            holder.setText(R.id.tv_bank_no, maskString(item.JJ41sQr, 3, 3))
             holder.getView<AppCompatImageView>(R.id.aiv_selector).isSelected = item.isSelector()
             if (item.isSelector()) {
                 mSelectPosition = position
@@ -156,6 +190,11 @@ open class BankCardListActivity : BaseActivity() {
         }
 
         fun setSelectorPosition(position: Int) {
+            val preSelector = mSelectPosition
+            if (preSelector > -1) {
+                getItemData<RspBankAccount.BankAccountInfo>(preSelector)?.changeSelector()
+                notifyItemChanged(preSelector)
+            }
             mSelectPosition = position
             notifyItemChanged(position)
         }

@@ -23,24 +23,26 @@
             app:srcCompat="@drawable/selector_me_head" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="13dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/aiv_head"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/aiv_head">
 
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="@string/account_not_login"
                 android:textColor="@color/color_333333"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Hi,User name" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_mobile"
@@ -92,13 +94,13 @@
             android:text="@string/me_repay_text1"
             android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_repay_amount"
+            app:layout_constraintBottom_toTopOf="@id/tv_amount"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/tv_repay_amount"
+            android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -121,7 +123,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_repay_amount" />
+            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
         <com.colombia.credit.view.textview.EasyTextView
             android:id="@+id/etv_btn"

@@ -1,6 +1,7 @@
 package com.colombia.credit.module.process.kyc
 
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -44,6 +45,9 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
+            if (isUploadSuccess) {
+                com.colombia.credit.expand.mUserName = (info as ReqKycInfo).y6hQBtv.orEmpty()
+            }
             mUploadLiveData.postValue(it)
         }
     }

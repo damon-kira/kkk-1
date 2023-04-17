@@ -1,8 +1,10 @@
 package com.colombia.credit.module.firstconfirm
 
 import android.os.Bundle
+import android.telephony.TelephonyCallback.DataActivityListener
 import android.view.View
 import com.colombia.credit.R
+import com.colombia.credit.bean.resp.RspProductInfo
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
@@ -11,6 +13,7 @@ import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.IHomeFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
@@ -27,15 +30,20 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     private val mBinding by binding(FragmentFirstConfirmBinding::inflate)
 
     private val mViewModel by lazyViewModel<FirstConfirmViewModel>()
+    private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
     override fun contentView(): View = mBinding.root
 
     private var mLoanBankNo: String? = null
+        set(value) {
+            mBinding.tvBankNo.text = maskString(value.orEmpty(), 2, 2)
+            field = value
+        }
     private var mProductId: String? = null
     private var mLoanAmount: String? = null// 借款金额
 
     override fun onPullToRefresh() {
-        stopRefresh()
+        mHomeViewModel.getHomeInfo()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,29 +56,43 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         mBinding.rlPeriod4.setBlockingOnClickListener(this)
         mBinding.tvBankNo.setBlockingOnClickListener(this)
         mBinding.confirmTvApply.setBlockingOnClickListener(this)
-        mBinding.tvMin.setBlockingOnClickListener(this)
-        mBinding.tvMax.setBlockingOnClickListener(this)
+        mBinding.aivJian.setBlockingOnClickListener(this)
+        mBinding.aivPlus.setBlockingOnClickListener(this)
     }
 
     private fun initObserver() {
-        (parentFragment as? IHomeFragment)?.getHomeViewModel()?.mRspInfoLiveData?.observe(
-            viewLifecycleOwner
-        ) { info ->
+        mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) { info ->
             mBinding.tvMax.text = getUnitString(info.yqGhrjOF2.orEmpty())
-            mBinding.tvBankNo.text = maskString(info.yMiEwn3, 2, 2)
+            mLoanBankNo = info.yMiEwn3
             val list = info.fyEV
             if (list?.isNotEmpty() == true) {
                 val firstConfirmInfo = list[0]
                 // 显示账期
                 firstConfirmInfo.WTvE5G?.split(",")?.let { dateList ->
                     var isLock = false
-                    for (s in dateList.take(4)) {
-                        mBinding.rlPeriod1.setPeriod(s)
-                        mBinding.rlPeriod1.showLock(isLock)
+                    for (index in 0 until dateList.take(4).size) {
+                        val s = dateList.get(index)
+                        val view = when (index) {
+                            0 -> {
+                                mBinding.rlPeriod1
+                            }
+                            1 -> {
+                                mBinding.rlPeriod2
+                            }
+                            2 -> {
+                                mBinding.rlPeriod3
+                            }
+                            else -> {
+                                mBinding.rlPeriod4
+                            }
+                        }
+                        view.showLock(isLock)
+                        view.setPeriod(s)
                         isLock = true
                     }
                 }
 
+                mProductId = firstConfirmInfo.ZXEUWfOy
                 mLoanAmount = firstConfirmInfo.RIoDBuyjO
                 val amount = getUnitString(firstConfirmInfo.RIoDBuyjO.orEmpty())
                 mBinding.tvAmount.text = amount
@@ -84,7 +106,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
         mViewModel.confirmLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+                mHomeViewModel.getHomeInfo()
             } else it.ShowErrorMsg(::confirmLoan)
         }
 
@@ -96,7 +118,6 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
             }
         }
     }
-
 
     override fun onClick(v: View?) {
         v ?: return
@@ -110,16 +131,17 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 Launch.skipBankCardListActivity(
                     getSupportContext(),
                     mLoanAmount.orEmpty(),
-                    mProductId.orEmpty()
+                    mProductId.orEmpty(),
+                    mLoanBankNo.orEmpty()
                 )
             }
             R.id.confirm_tv_apply -> {
                 confirmLoan()
             }
-            R.id.tv_min -> {
+            R.id.aiv_jian -> {
                 toast(R.string.toast_mix_amount)
             }
-            R.id.tv_max -> {
+            R.id.aiv_plus -> {
                 toast(R.string.toast_max_amount)
             }
         }

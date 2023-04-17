@@ -65,8 +65,8 @@
         <activity
             android:name=".module.home.MainActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateAlwaysVisible"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" />
 
         <activity
             android:name=".module.process.personalinfo.PersonalInfoActivity"
@@ -96,8 +96,12 @@
             android:name=".module.banklist.MeBankAccountListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.banklist.BankInfoAddActivity"
+            android:name=".module.banklist.ConfirmBankCardListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.banklist.BankInfoAddActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".module.history.HistoryActivity"
             android:screenOrientation="portrait" />
@@ -128,8 +132,9 @@
             android:name=".module.setting.SettingActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".module.service.XjbgdfdfService"
-            android:exported="false"/>
+        <service
+            android:name=".module.service.XjbgdfdfService"
+            android:exported="false" />
 
         <!-- 适配 -->
         <meta-data

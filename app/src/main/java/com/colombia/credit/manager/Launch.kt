@@ -84,10 +84,11 @@ object Launch {
     }
 
     // 银行账户页面
-    fun skipBankCardListActivity(context: Context, amount: String, productId: String) {
+    fun skipBankCardListActivity(context: Context, amount: String, productId: String, bankNo: String) {
         val intent = Intent(context, ConfirmBankCardListActivity::class.java)
         intent.putExtra(ConfirmBankCardListActivity.EXTRA_LOAN_AMOUNT, amount)
         intent.putExtra(ConfirmBankCardListActivity.EXTRA_PRODUCT_ID, productId)
+        intent.putExtra(ConfirmBankCardListActivity.EXTRA_BANK_NO, bankNo)
         launch(context, ConfirmBankCardListActivity::class.java, intent)
     }
 
