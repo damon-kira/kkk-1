@@ -18,10 +18,14 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     private val _imageLiveData = generatorLiveData<BaseResponse<KycOcrInfo>>()
     val imageLivedata = _imageLiveData
     fun uploadImage(path: String, type: Int) {
+        showloading()
         _imageLiveData.addSourceLiveData(repository.uploadImage(path, type)) {
-            val imageInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
-            val key = if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
-            ImageInfoUtil.saveInfo(key, imageInfo)
+            hideLoading()
+            if (it.isSuccess()) {
+                val imageInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
+                val key = if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
+                ImageInfoUtil.saveInfo(key, imageInfo)
+            }
             _imageLiveData.postValue(it)
         }
     }
@@ -38,8 +42,9 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
-            isUploadSuccess = it.isSuccess()
             hideLoading()
+            isUploadSuccess = it.isSuccess()
+            mUploadLiveData.postValue(it)
         }
     }
 

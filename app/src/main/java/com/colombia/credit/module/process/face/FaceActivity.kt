@@ -10,6 +10,7 @@ import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
+import com.colombia.credit.app.AppEnv
 import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.camera.BitmapCrop
@@ -47,10 +48,13 @@ class FaceActivity : BaseProcessActivity() {
 
     private var mCountDownTimer: CountDownTimer? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState:  Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(true, R.color.transparent, false)
         setCountDownText(4)
+
+        mBinding.faceAivSwitch.ifShow(AppEnv.DEBUG)
+
         val manager = CameraFactory.invoke(
             CameraType.CameraX,
             this,
@@ -58,6 +62,11 @@ class FaceActivity : BaseProcessActivity() {
             BaseCameraManager.FACING_FRONT,
             BaseCameraManager.SCREEN_PORTRAIT
         )
+
+        mBinding.faceAivSwitch.setBlockingOnClickListener {
+            manager.switchCamera()
+        }
+
         faceWifi = WifiHelper.getSSid(this)
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))

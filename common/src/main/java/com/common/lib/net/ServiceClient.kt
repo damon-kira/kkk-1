@@ -11,11 +11,7 @@ import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/2 2:15 下午
- */
+
 class ServiceClient private constructor() {
 
     companion object {

@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
-import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.DatePickerDialog
 import com.colombia.credit.expand.TYPE_FACE
-import com.colombia.credit.expand.jumpProcess
-import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -21,7 +18,6 @@ import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.StoragePermission
 import com.colombia.credit.util.DictionaryUtil
-import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.colombia.credit.view.identity.IdentityPicStatus
 import com.common.lib.expand.setBlockingOnClickListener
@@ -85,7 +81,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
         }
 
-        val cache = mViewModel.getCacheInfo()?.also { info ->
+        mViewModel.getCacheInfo()?.also { info ->
             info as ReqKycInfo
             mBinding.kycBivNuip.setViewText(info.ALKxGTZ4FQ.orEmpty())
             val names = info.y6hQBtv?.split("|").orEmpty()
@@ -98,9 +94,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.kycBivGender, mGender[info.W8mqV], info.W8mqV)
             }
         }
-        if (cache == null) {
-            mViewModel.getInfo()
-        }
+        mViewModel.getInfo()
     }
 
     private fun loadImage(url: String?, type: Int) {
@@ -130,18 +124,19 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun initObserver() {
         mViewModel.imageLivedata.observerNonSticky(this) {
-            if (!it.isSuccess()) {
+            if (!it.isSuccess() || !mBinding.ilPic.isAllSuccess()) {
                 return@observerNonSticky
             }
             it.getData()?.let { info ->
                 setDetailInfo(info)
-//                mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
+                mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
             }
         }
 
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspKycInfo) return@observerNonSticky
             rspInfo.jmWujylO6j?.let { info ->
+                mBinding.llKycInfo.show()
                 mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
                 mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
                 mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
@@ -203,11 +198,19 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
         mBinding.llKycInfo.show()
-        mBinding.kycBivNuip.setViewText(kycInfo.ZtlNh40ZEi.orEmpty())
-        mBinding.kycBivName.setViewText(kycInfo.uVnCle.orEmpty())
-        mBinding.kycBivSurname.setViewText(kycInfo.QbcSs.orEmpty())
-        mBinding.kycBivBirthday.setViewText(kycInfo.oEuR1yS3f.orEmpty())
-        mBinding.kycBivGender.setViewText(kycInfo.PGXgxbtr.orEmpty()) // 性别 需要跟服务端对下
+        kycInfo.G5JGlRQZWl?.let {
+            mBinding.kycBivNuip.setViewText(it.BUJQ2NTER.orEmpty())
+            mBinding.kycBivName.setViewText(it.NNdlFOp.orEmpty())
+            mBinding.kycBivSurname.setViewText(it.LlK8Tt.orEmpty())
+        }
+        kycInfo.tAUA?.let {
+            mBinding.kycBivBirthday.setViewText(it.OXOcXj.orEmpty())
+            val gender = it.COXa.orEmpty()
+            if(mGender.containsKey(gender)) {
+                setBaseInfo(mBinding.kycBivGender, mGender[gender], gender)
+
+            }
+        }
     }
 
     override fun checkCommitInfo(): Boolean {

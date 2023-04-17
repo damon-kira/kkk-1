@@ -3,6 +3,7 @@ package com.util.lib.image
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder.ImageInfo
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
@@ -279,7 +280,6 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         width = IMAGE_DEFAULT_WIDTH
         height = IMAGE_DEFAULT_HEIGHT
     }
-
     var fos: FileOutputStream? = null
     var isNeedRepeatCompress = false
     if(isDebug()) {
@@ -288,7 +288,6 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
     var rotation = 0f
     var targetFileExceedsLimit = false
     try {
-
         val fd: FileDescriptor = context.contentResolver.openFileDescriptor(source, "r")?.fileDescriptor!!
         val exif = androidx.exifinterface.media.ExifInterface(fd)
         val orientation = exif.getAttributeInt(androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION, androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL)

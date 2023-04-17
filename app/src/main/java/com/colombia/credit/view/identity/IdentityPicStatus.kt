@@ -6,7 +6,7 @@ import com.colombia.credit.view.identity.IdentityPicStatus.Companion.STATUS_NORM
 import com.colombia.credit.view.identity.IdentityPicStatus.Companion.STATUS_SUCCESS
 
 @Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.VALUE_PARAMETER)
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD)
 @IntDef(STATUS_NORMAL, STATUS_ERROR, STATUS_SUCCESS)
 annotation class IdentityPicStatus {
     companion object {

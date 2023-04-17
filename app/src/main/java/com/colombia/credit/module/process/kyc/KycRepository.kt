@@ -27,9 +27,9 @@ class KycRepository @Inject constructor(@UploadApiService private val uploadApiS
         ApiServiceLiveDataProxy.request(KycOcrInfo::class.java) {
             val file = File(path)
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-            builder.addFormDataPart("gdkvsSDfvOrfds", file.name, createFileRequestBody(file))
+            builder.addFormDataPart("YGqDffupPG", file.name, createFileRequestBody(file))
             val type = if (type == PicType.PIC_FRONT) "FRONT" else "BACK"
-            builder.addFormDataPart("asfvVdsainKsfv", type)
+            builder.addFormDataPart("P6KkaG04zb", type)
             uploadApiService.uploadKycImage(builder.build().part(0), type)
         }
 

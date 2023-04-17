@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
+import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.ImagePathUtil
 import com.colombia.credit.util.image.agent.AgentContainer
 import com.colombia.credit.util.image.builder.ImageCompressor
@@ -44,7 +45,8 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
         val dis = Observable.just(params)
             .map {
                 val compressor = it.customCompressor ?: this@CompressWorker
-                compressor.compress(
+                val imageInfo = ImageInfoUtil.getImageExifInfo(source.encodedPath)
+                val compressResult = compressor.compress(
                     source,
                     outputFile,
                     it.bitmapConfig,
@@ -53,7 +55,8 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
                     it.targetWidth,
                     it.targetHeight
                 )
-
+                ImageInfoUtil.saveExifInfo(outputFile.absolutePath, imageInfo)
+                compressResult
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -42,6 +42,9 @@ class IdentityView : ConstraintLayout {
         LayoutInflater.from(context), this
     )
 
+    @IdentityPicStatus
+    private var mCurrStatus: Int = IdentityPicStatus.STATUS_NORMAL
+
     private fun init(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.IdentityView).let { ta ->
             val indexCount = ta.indexCount
@@ -92,6 +95,7 @@ class IdentityView : ConstraintLayout {
     fun getImageView() = mBinding.identityAiv
 
     fun toggleStatus(@IdentityPicStatus status: Int) {
+        mCurrStatus = status
         when (status) {
             IdentityPicStatus.STATUS_ERROR -> mBinding.aivStatus.setImageResource(R.drawable.svg_error_hint_24)
             IdentityPicStatus.STATUS_SUCCESS -> mBinding.aivStatus.setImageResource(R.drawable.ic_kyc_success)
@@ -100,4 +104,6 @@ class IdentityView : ConstraintLayout {
             }
         }
     }
+
+    fun getStatus() = mCurrStatus
 }

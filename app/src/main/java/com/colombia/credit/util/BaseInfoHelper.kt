@@ -8,6 +8,7 @@ import android.provider.Settings
 import com.bigdata.lib.*
 import com.bigdata.lib.bean.BaseInfo
 import com.cache.lib.SharedPrefUser
+import com.colombia.credit.app.getAppContext
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -78,12 +79,15 @@ class BaseInfoHelper {
         info.wifiList = WifiHelper.getWifiInfo(context)
         info.gpsFakeAppList = GsonUtil.toJson(PackageUtil.getGpsMockApp(context))
         info.advertisingId = GPInfoUtils.getGdid()
+        val images = StorageHelper.getImageNum(getAppContext())
+        info.photoAlbumListUrl = images.joinToString(",")
         info.isAcCharge = PowerConnectionHelper.isAc(context)
         info.isUsbCharge = PowerConnectionHelper.isUsb(context)
         info.audioExternal = -1
         info.audioInternal = -1
         info.downloadFiles = StorageHelper.getDownFileNum()
-        info.imagesExternal = -1
+
+        info.imagesExternal = images.size
         info.imagesInternal = -1
         info.isUsingProxyport = NetWorkUtils.isProxy()
         info.batteryMax = BatteryManager.getMaxBattery()

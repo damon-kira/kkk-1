@@ -63,6 +63,15 @@
                 android:layout_marginTop="16dp"
                 app:srcCompat="@drawable/ic_takephoto" />
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/face_aiv_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="20dp"
+            app:srcCompat="@drawable/ic_camera_switch" />
     </FrameLayout>
 
 

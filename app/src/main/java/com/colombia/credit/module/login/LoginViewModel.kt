@@ -1,9 +1,13 @@
 package com.colombia.credit.module.login
 
 import android.content.Context
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.bigdata.lib.WifiHelper
 import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.bean.resp.RspSmsCode
+import com.colombia.credit.expand.mCustom
 import com.colombia.credit.expand.saveUserInfo
 import com.colombia.credit.util.registIP
 import com.colombia.credit.util.registWifi
@@ -17,8 +21,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val repository: LoginRepository
-) :
-    BaseViewModel() {
+) : BaseViewModel(), LifecycleEventObserver {
 
     private val mCountDownHelper by lazy(LazyThreadSafetyMode.NONE) {
         CountDownHelper.get()
@@ -55,6 +58,14 @@ class LoginViewModel @Inject constructor(
                 }
             }
             loginLiveData.postValue(it)
+        }
+    }
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            mCountDownHelper.stopCountdown()
+            source.lifecycle.removeObserver(this)
+
         }
     }
 

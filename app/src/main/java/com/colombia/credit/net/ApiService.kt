@@ -38,20 +38,21 @@ interface ApiService {
     @Multipart
     @POST("/fiR/3PA2Q")
     @Headers("kio8YGhwe6:Vf9hLq0GjT")
-    fun uploadKycImage(@Part img: MultipartBody.Part, @Query("asfvVdsainKsfv") type: String): Flowable<BaseResponse<KycOcrInfo>>
+    fun uploadKycImage(@Part img: MultipartBody.Part, @Query("P6KkaG04zb") type: String): Flowable<BaseResponse<KycOcrInfo>>
 
     // 上传活体照片
+    @Multipart
     @POST("/QVPWLl/whWhm")
     @Headers("kio8YGhwe6:Qc5nJm2ZuL")
-    fun uploadFaceImage(@Body body: MultipartBody,@QueryMap map: MutableMap<String, String>): Flowable<BaseResponse<RspResult>>
+    fun uploadFaceImage(@Part body: MultipartBody.Part, @QueryMap map: MutableMap<String, String>): Flowable<BaseResponse<RspResult>>
 
     // 上传个人信息
-    @POST("WY8x6gV/GWE9")
+    @POST("/WY8x6gV/GWE9")
     @Headers("kio8YGhwe6:Qb5rDc2PnE")
     fun uploadPersonalInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
     // 获取个人信息
-    @POST("yiuS/qLJ4i0Ay")
+    @POST("/yiuS/qLJ4i0Ay")
     @Headers("kio8YGhwe6:Wu9mLq3KjP")
     fun getPersonalInfo(): Flowable<BaseResponse<RspPersonalInfo>>
 

@@ -36,6 +36,6 @@ class FaceRepository @Inject constructor(@UploadApiService private val uploadApi
             map["TOCkGDeL"] = ""
             map["DGCb"] = "0"
             map["pVGq3"] = "02"
-            uploadApiService.uploadFaceImage(builder.build(), map)
+            uploadApiService.uploadFaceImage(builder.build().part(0), map)
         }
 }

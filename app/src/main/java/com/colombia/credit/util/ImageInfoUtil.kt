@@ -36,7 +36,9 @@ object ImageInfoUtil {
         val longitude = exifInfo[ExifInterface.TAG_GPS_LONGITUDE]
         val latitude = exifInfo[ExifInterface.TAG_GPS_LATITUDE]
         val jobj = JsonObject()
-        jobj.addProperty("extractGps", "$longitude,$latitude")
+        if (!(longitude.isNullOrEmpty() && latitude.isNullOrEmpty())) {
+            jobj.addProperty("extractGps", "$longitude,$latitude")
+        } else jobj.addProperty("extractGps", "")
         jobj.addProperty("extractTakeTime", dateTime)
         jobj.addProperty("extractPohotoSize", "${File(path).length() / 1000}kb")
         jobj.addProperty("extractPohotoPixel", "${width}x${height}")

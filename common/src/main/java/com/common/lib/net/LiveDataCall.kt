@@ -3,6 +3,7 @@ package com.common.lib.net
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
+import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,21 +28,16 @@ class LiveDataCall<T>(
         mDispose = Flowable.just(0)
             .flatMap {
                 flowable()
-            }/*.doOnNext {
-                if (it.isSuccess() && !it.data.isNullOrEmpty()) {
-                    it.parseT(clazz)
-                } else if (!it.isAppForcedUpdate() || it.data.isNullOrEmpty()) {
+            }.doOnNext {
+                if (!it.isSuccess()) {
                     throw HttpResponseException(it.code, it.msg)
                 }
-            }*/
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it.isAppForcedUpdate()) {
-                    ServiceClient.getInstance().getGlobalFailedListener()?.onFailed(it, skipLogin)
-                } else {
-                    postValue(it)
-                }
+                logger_d("debug_LiveDataCall", "onActive success = $it")
+                postValue(it)
             }, { throwable ->
                 logger_e("debug_LiveDataCall", "onActive error ===  $throwable")
                 postValue(getErrorReponse(throwable))

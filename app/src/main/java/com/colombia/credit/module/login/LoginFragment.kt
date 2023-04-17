@@ -50,8 +50,10 @@ class LoginFragment : BaseLoginFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModelLoading(mViewModel)
+        lifecycle.addObserver(mViewModel)
         setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
+        showSoftInput(mBinding.loginEditPhone)
         val param = getString(R.string.protocol_params)
         val protocol = getString(R.string.login_protocol, param)
         val span = SpannableImpl().init(protocol)

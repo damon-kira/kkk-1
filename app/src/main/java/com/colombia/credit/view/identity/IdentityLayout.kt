@@ -63,6 +63,10 @@ class IdentityLayout : LinearLayout {
         mBinding.ivRight.toggleStatus(status)
     }
 
+    fun isAllSuccess():Boolean {
+        return mBinding.ivLeft.getStatus() == IdentityPicStatus.STATUS_SUCCESS && mBinding.ivRight.getStatus() == IdentityPicStatus.STATUS_SUCCESS
+    }
+
     fun setEnable(leftEnable: Boolean, rightEnable: Boolean) {
         mBinding.ivLeft.isEnabled  = leftEnable
         mBinding.ivRight.isEnabled = rightEnable

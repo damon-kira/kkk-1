@@ -34,9 +34,9 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
-    private val mLoginFragment by lazy {
-        getInstance(getSupportContext(), LoginFragment::class.java, null)
-    }
+    private val mLoginFragment
+        get() = getInstance(getSupportContext(), LoginFragment::class.java, null)
+
     private val mNoProductFragment by lazy {
         getInstance(getSupportContext(), NoProductFragment::class.java, null)
     }
@@ -68,14 +68,14 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
                     onRefresh()
                     replaceChildFragment(getFragment())
                 }
-                HomeEvent.EVENT_LOGOUT-> {
+                HomeEvent.EVENT_LOGOUT -> {
                     replaceChildFragment(getFragment())
                 }
             }
         }
 
         mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
-            getBaseActivity()?.showAppUpgradeDialog(it){
+            getBaseActivity()?.showAppUpgradeDialog(it) {
             }
         }
         mAppUpdateViewModel.getAppUpdate()

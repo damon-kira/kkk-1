@@ -5,9 +5,14 @@ import com.bigdata.lib.LocationHelp
 import com.colombia.credit.Constant
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.app.AppEnv
+import com.colombia.credit.app.AppInjector
 import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.expand.saveUserToken
+import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.util.GPInfoUtils
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor
@@ -43,12 +48,14 @@ class ApiManager @Inject constructor() {
 //                        val appUpgradeBean = result.parsingData(AppUpgradeBean::class.java)
 //                        ApplicationDelegate.updateLiveData.postValue(appUpgradeBean)
 //                    }
-//                    result.code == ResponseCode.INVALIDTOKEN -> {
-//                        setToken("")
-//                        if (gotoLogin) {
-//                            LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
-//                        }
-//                    }
+                    result.code == ResponseCode.INVALIDTOKEN -> {
+                        saveUserToken("")
+                        if (gotoLogin) {
+                            val context = AppInjector.getTopActivity() ?: com.colombia.credit.app.getAppContext()
+                            Launch.skipMainActivity(context)
+                            LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
+                        }
+                    }
 //                    result.code == ResponseCode.SERVICE_ERROR_CODE -> {
 //                        Launch.skipWebViewActivity(
 //                            getAppContext(),

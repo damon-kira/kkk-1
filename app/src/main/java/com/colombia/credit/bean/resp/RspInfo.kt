@@ -74,7 +74,9 @@ class RspKycInfo : IRspBaseInfo {
         var JSusdh7YE: String? = null //名
 
         var fefFSZ: String? = null // 反面url
+            get() = field?.replace(" ", "")
         var YZ7Mlc8yf: String? = null // 正面url
+            get() = field?.replace(" ", "")
     }
 }
 

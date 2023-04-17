@@ -45,18 +45,6 @@ class BaseResponse<T> @JvmOverloads constructor(
 
     fun isSuccess() = code == ResponseCode.SUCCESS_CODE
 
-    /** 没有活动信息 */
-    fun isActivitiesFailed() = code == ResponseCode.ERROR_ACTIVITIES_FAILED
-
-    /** 没有banner信息 */
-    fun isBannerFailed() = code == ResponseCode.ERROR_BANNER_FAILED
-
-    fun isAppForcedUpdate(): Boolean {
-        return code == ResponseCode.FORCED_UPDATE_CODE
-    }
-
-    fun isCouponInvalid() = code == ResponseCode.ERROR_COUPON_INVALID
-
     fun getErrorCode(): Int = code
 
 
