@@ -18,13 +18,19 @@ android {
         multiDexEnabled true
 
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
 
         manifestPlaceholders = [pkgName: "${rootProject.ext.pkgName}"]
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "${variant.name}_v${variant.versionName}_${time()}.apk"
+            }
+        }
     }
 
 
@@ -69,6 +75,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+def time(){
+    return new Date().format("yyyyMMddhhmm")
 }
 
 dependencies {
