@@ -28,7 +28,7 @@ android {
 
         android.applicationVariants.all { variant ->
             variant.outputs.all {
-                outputFileName = "${variant.name}_v${variant.versionName}_${time()}.apk"
+                outputFileName = "FinanzasExtremas_v${variant.versionName}_${time()}.apk"
             }
         }
     }
@@ -68,6 +68,10 @@ android {
             versionNameSuffix ".alpha"
         }
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -99,6 +103,16 @@ dependencies {
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
     implementation rootProject.ext.other.aes
+    implementation rootProject.ext.other.devoptions
+
+    //firebase core
+//    implementation platform(rootProject.ext.firebase.bom)
+//    implementation rootProject.ext.firebase.messaging
+//    implementation rootProject.ext.firebase.analytics
+//    api rootProject.ext.firebase.crashlytics
+//    implementation rootProject.ext.firebase.firebase_perf
+//    implementation rootProject.ext.google.play_services_gcm
+
 
     implementation rootProject.ext.permission.rxpermission
 

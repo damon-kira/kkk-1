@@ -58,10 +58,10 @@ rootProject.ext {
             autosize: "me.jessyan:autosize:1.2.1"
     ]
 
-    appsflyer = [
-            af_android_sdk   : "com.appsflyer:af-android-sdk:6.5.0",
-            installreferrer  : "com.android.installreferrer:installreferrer:2.2",
-    ]
+//    appsflyer = [
+//            af_android_sdk   : "com.appsflyer:af-android-sdk:6.5.0",
+//            installreferrer  : "com.android.installreferrer:installreferrer:2.2",
+//    ]
 
     google = [
             play_services_gcm       : "com.google.android.gms:play-services-gcm:17.0.0",
@@ -76,9 +76,9 @@ rootProject.ext {
             bom          : "com.google.firebase:firebase-bom:29.2.0"
     ]
 
-    facebook = [
-            fb: "com.facebook.android:facebook-login:14.0.0"
-    ]
+//    facebook = [
+//            fb: "com.facebook.android:facebook-login:14.0.0"
+//    ]
 
     glide = [
             glide: "com.github.bumptech.glide:glide:4.9.0"
@@ -115,7 +115,7 @@ rootProject.ext {
     allDesList.addAll(retrofit.values())
     allDesList.addAll(glide.values())
     allDesList.addAll(firebase.values())
-    allDesList.addAll(appsflyer.values())
+//    allDesList.addAll(appsflyer.values())
     allDesList.addAll(room.values())
     allDesList.addAll(other.values())
 
