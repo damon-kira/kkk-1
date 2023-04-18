@@ -273,4 +273,23 @@ object SysUtils {
 
         return ""
     }
+
+    /**
+     * 是否是模拟器
+     * 现在默认是false
+     */
+    fun isSimulator(context: Context): Boolean {
+        var isEmulator = false
+        try {
+            isEmulator = EmulatorCheckUtil.checkIsRunningInEmulator(
+                context,
+                null
+            )
+            logger_e(TAG, "是否是模拟器$isEmulator")
+        } catch (e: Exception) {
+            logger_e(TAG, "$e")
+        }
+        return isEmulator
+    }
+
 }

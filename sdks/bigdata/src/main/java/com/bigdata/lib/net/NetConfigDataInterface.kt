@@ -1,10 +1,9 @@
 package com.bigdata.lib.net
 
 import android.content.Context
+import com.google.gson.JsonObject
 
-/**
- * Created by zhujun
- */
+
 interface NetConfigDataInterface {
 
     //Context
@@ -13,23 +12,16 @@ interface NetConfigDataInterface {
     //gaid
     fun getGaid(): String
 
-    //UIVERSION
-    fun getUIVERSION(): Int
-
     fun isDebug(): Boolean
 
     //是否处于前台
     fun isAppFront(): Boolean
 
-    fun getAppAbtest():String
-
     //TOKEN
-    fun getUserToken():String
+    fun getAppToken():String
 
     //mBigBaseUrl
     fun getBigUrl():String
 
-    //cid
-    fun getCid():String
-
+    fun addBaseParams(jobj: JsonObject)
 }

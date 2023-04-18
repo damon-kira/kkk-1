@@ -1,14 +1,11 @@
 package com.bigdata.lib
 
-import android.Manifest
 import android.app.ActivityManager
 import android.app.ActivityManager.MemoryInfo
 import android.content.Context
 import android.os.Environment
 import android.os.StatFs
-import androidx.core.app.ActivityCompat
-import androidx.core.content.PermissionChecker
-import com.bigdata.lib.net.BigDataNetBaseParamsManager
+import com.bigdata.lib.net.BaseParamsManager
 
 
 /**
@@ -44,7 +41,7 @@ object AppMemoryManager {
      * 小数点后两位
      */
     private fun format(value: Long): String {
-        return BigDataNetBaseParamsManager.getFormatSize(value.toDouble())
+        return BaseParamsManager.getFormatSize(value.toDouble())
     }
 
     fun getDeviceTotalMemory(context: Context): String {

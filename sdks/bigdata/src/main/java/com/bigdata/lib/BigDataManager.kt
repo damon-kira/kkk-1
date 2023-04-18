@@ -3,8 +3,7 @@ package com.bigdata.lib
 import com.bigdata.lib.net.NetConfigDataInterface
 
 
-
-class BigDataManager private constructor(){
+class BigDataManager private constructor() {
     companion object {
 
         fun get(): BigDataManager {
@@ -18,12 +17,14 @@ class BigDataManager private constructor(){
 
     private var dataListener: NetConfigDataInterface? = null
 
-    fun getNetDataListener(): NetConfigDataInterface?{
+    fun getNetDataListener(): NetConfigDataInterface? {
         return dataListener
     }
 
-    fun setNetDataListener(listener: NetConfigDataInterface){
+    fun setNetDataListener(listener: NetConfigDataInterface) {
         dataListener = listener
     }
+
+    var uploadListener: ((result: Boolean) -> Unit)? = null
 
 }

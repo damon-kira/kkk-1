@@ -14,6 +14,7 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.module.home.OrderStatus
+import com.colombia.credit.module.service.SerManager
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
@@ -109,7 +110,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         v ?: return
         when (v.id) {
             R.id.etv_custom -> {
-                mCustomDialog.show()
+//                mCustomDialog.show()
+                SerManager.uploadData()
             }
             R.id.ail_about -> {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_ABOUT)

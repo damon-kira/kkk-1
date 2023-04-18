@@ -15,6 +15,10 @@
     <string name="selector_s">Elección %s</string>
     <string name="error_hint_blank">&#160;&#160;&#160;</string>
 
+    <string name="logout_no">No</string>
+    <string name="logout_yes">Sí</string>
+
+    <string name="webview_ssl_hint">Validación de certificado SSL fallido</string>
 
     <string name="login_text">Continuar</string>
     <string name="protocol_params"> Acuerdo de Privacidad</string>
@@ -297,4 +301,7 @@
     <string name="dialog_loan_amount_text">Monto Recibido</string>
     <string name="overdue_text">Comisión por Pago Tardío</string>
     <string name="bank_add_title">Préstamo exitoso</string>
+    <string name="bank_card_save">Guardar</string>
+    <string name="logout_hint">Seguro que deseas Cerrar Sesión？</string>
+    <string name="clear_data_success">Datos borrados con éxito</string>
 </resources>

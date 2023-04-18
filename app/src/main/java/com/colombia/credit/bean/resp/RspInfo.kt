@@ -64,6 +64,10 @@ class RspBankInfo : IRspBaseInfo {
 class RspKycInfo : IRspBaseInfo {
 
     val jmWujylO6j: KycInfo? = null
+    get() {
+        if (field?.isUpload() == true) return field
+        else return null
+    }
 
     class KycInfo {
         var DrD60: String? = null // 性别
@@ -77,6 +81,10 @@ class RspKycInfo : IRspBaseInfo {
             get() = field?.replace(" ", "")
         var YZ7Mlc8yf: String? = null // 正面url
             get() = field?.replace(" ", "")
+
+        fun isUpload(): Boolean {
+            return !(fefFSZ.isNullOrEmpty() || YZ7Mlc8yf.isNullOrEmpty() || DrD60 == "-1" || Wa7f.isNullOrEmpty() || FStwV6Fge7.isNullOrEmpty() || YiWtoa1.isNullOrEmpty())
+        }
     }
 }
 

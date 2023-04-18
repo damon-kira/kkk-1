@@ -1,13 +1,9 @@
 package com.bigdata.lib.net
 
 import com.bigdata.lib.BigDataManager
-import com.bigdata.lib.BigDataSpKeyManager
-import com.bigdata.lib.EventKeyManager
-import com.bigdata.lib.MCLCManager
-import com.cache.lib.SharedPrefUser
+import com.util.lib.AppUtil
+import com.util.lib.SysUtils
 import com.util.lib.log.isDebug
-import com.util.lib.log.logger_d
-import com.util.lib.log.logger_i
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
@@ -24,15 +20,16 @@ internal object NetWorkManager {
 
     @JvmStatic
     @Synchronized
-    fun uploadlogMessage(bigDataInfo: String, isAllPermission: Boolean) {
-        val listener = BigDataManager.get().getNetDataListener() ?: return
-        val remoteUrl = listener.getBigUrl()
-        if (remoteUrl.isEmpty()) return
+    fun synUploadlogMessage(bigDataInfo: String, remoteUrl: String): Response {
+        val call = createRequest(bigDataInfo, remoteUrl)
+        return call.execute()
+    }
+
+    private fun createRequest(bigDataInfo: String, remoteUrl: String): Call {
         val body = RequestBody.create(
             MediaType.parse("application/json; charset=utf-8"),
             bigDataInfo
         )
-
         val okHttpClient = OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
@@ -42,43 +39,38 @@ internal object NetWorkManager {
 
         val request = Request.Builder().url(remoteUrl)
             .post(body).build()
-        val call = okHttpClient.newCall(request)
-        call.enqueue(object : Callback {
+        return okHttpClient.newCall(request)
+    }
+
+    fun asynUplaodMsg(bigDataInfo: String, remoteUrl: String, listener: ((result: Boolean) -> Unit)? = null) {
+        createRequest(bigDataInfo, remoteUrl).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                logger_d(TAG, "postCashInfo fai ======= ${e.message}")
+                listener?.invoke(false)
             }
 
             override fun onResponse(call: Call, response: Response) {
-
-                if (response.isSuccessful) {
-                    response.body()?.string()?.let { body ->
-                        logger_i(TAG, "postCashInfo success ======= $body")
-                    }
-                    MCLCManager.doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_OK)
-                    logger_i(TAG, " isAllpermission = $isAllPermission")
-                    if (isAllPermission) {
-                        logger_i(TAG, "setTime")
-                        SharedPrefUser.setLong(
-                            BigDataSpKeyManager.CASH_KEY_POST_MCLC,
-                            System.currentTimeMillis()
-                        )
-                    } else {
-                        logger_i(TAG, "not settime")
-                    }
-                }else{
-                    MCLCManager.doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_FAILED)
-                    logger_i(TAG,"isAllpermission = $isAllPermission postCashInfo error ======= ${response.code()}")
-                }
+                listener?.invoke(true)
             }
         })
     }
 
 
-
     private val mHeaderInterceptor = Interceptor { chain ->
         val original = chain.request()
         val builder = original.newBuilder()
-        builder.addHeader("x-app-sign", "1")
+        BigDataManager.get().getNetDataListener()?.also {listener ->
+            // app版本
+            val ctx = listener.getContext()
+            builder.addHeader("vMRdV0dUmj",AppUtil.getVersionCode(ctx, ctx.packageName).toString())// app 版本
+            // 设备id
+            builder.addHeader("NbBH4GIwmz", SysUtils.getImei(ctx))
+            // 客户端类型
+            builder.addHeader("dnpiIILLEI", "android")
+            // google广告id
+            builder.addHeader("pg77Foy4PL", listener.getGaid())
+            builder.addHeader("wCxyJuAwkK", listener.getAppToken())// token
+            builder.addHeader("kio8YGhwe6", "Xs8jKf5LmN")// 固定值
+        }
         builder.method(original.method(), original.body())
         chain.proceed(builder.build())
     }

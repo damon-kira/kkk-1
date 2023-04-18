@@ -5,7 +5,9 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivitySettingBinding
 import com.colombia.credit.dialog.LogoutDialog
 import com.colombia.credit.expand.ShowErrorMsg
+import com.colombia.credit.expand.saveUserToken
 import com.colombia.credit.expand.toast
+import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.permission.HintDialog
 import com.common.lib.base.BaseActivity
@@ -13,6 +15,7 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.MainHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,8 +35,13 @@ class SettingActivity : BaseActivity() {
 
         mBinding.tvDelete.setBlockingOnClickListener {
             dialog.setOnClickListener {
-                toast("清除数据成功")
+                showLoading(true)
+                MainHandler.postDelay({
+                    hideLoading()
+                    toast(R.string.clear_data_success)
+                }, 2000)
             }
+            dialog.show()
         }
         mBinding.tvLogout.setBlockingOnClickListener {
             LogoutDialog(this).setLogoutListener {
@@ -43,11 +51,18 @@ class SettingActivity : BaseActivity() {
 
         mViewModel.mLogoutLivedata.observerNonSticky(this) {
             if (it.isSuccess()) {
+                saveUserToken("")
                 LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
                 finish()
             } else {
                 it.ShowErrorMsg()
             }
         }
+    }
+
+    override fun onDestroy() {
+        MainHandler.removeAll()
+        super.onDestroy()
     }
 }

@@ -1,23 +1,21 @@
-package com.colombia.credit.util
+package com.bigdata.lib
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageInfo
 import android.os.Build
 import android.os.SystemClock
 import android.provider.Settings
 import com.bigdata.lib.*
 import com.bigdata.lib.bean.BaseInfo
 import com.cache.lib.SharedPrefUser
-import com.colombia.credit.app.getAppContext
-import com.colombia.credit.manager.SharedPrefKeyManager
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.*
-import java.util.TimeZone
+import java.util.*
 
 class BaseInfoHelper {
 
-    fun getBaseInfo(context: Context) {
+    @SuppressLint("MissingPermission")
+    fun getBaseInfo(context: Context): JsonObject {
         val info = BaseInfo()
         info.isSwitchPages = isSwitchPage
         info.readPrivacyAgreementTime = readPrivacyTime
@@ -36,8 +34,8 @@ class BaseInfoHelper {
         info.systemVersion = Build.VERSION.SDK_INT.toString()
         info.screenRateLong = DisplayUtils.getRealScreenHeight(context)
         info.screenRateWidth = DisplayUtils.getRealScreenWidth(context)
-        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
-        info.faceCheckExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
+//        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
+//        info.faceCheckExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
         val imeis = SysUtils.getAllImei(context)
         if (imeis.isNotEmpty()) {
             info.imei = imeis[0]
@@ -47,7 +45,9 @@ class BaseInfoHelper {
                 ""
             }
         }
-        info.gaid = GPInfoUtils.getGdid()
+        val gaid = BigDataManager.get().getNetDataListener()?.getGaid().orEmpty()
+        info.gaid = gaid
+        info.advertisingId = gaid
         info.imsi = NetWorkUtils.getIMSI(context)
         val androidId = try {
             Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
@@ -73,13 +73,12 @@ class BaseInfoHelper {
         info.mcc = NetWorkUtils.getMcc(context)
         info.mac = NetWorkUtils.getMac()
         info.developerStatus = SysUtils.isDevelop(context)
-        info.addresSimulationApp = 0
+        info.addresSimulationApp = if (SysUtils.isSimulator(context)) 0 else 1
         info.operators = NetWorkUtils.getOperator(context)
         info.loanPageStayTime = loanPageStayTime
         info.wifiList = WifiHelper.getWifiInfo(context)
         info.gpsFakeAppList = GsonUtil.toJson(PackageUtil.getGpsMockApp(context))
-        info.advertisingId = GPInfoUtils.getGdid()
-        val images = StorageHelper.getImageNum(getAppContext())
+        val images = StorageHelper.getImageNum(context)
         info.photoAlbumListUrl = images.joinToString(",")
         info.isAcCharge = PowerConnectionHelper.isAc(context)
         info.isUsbCharge = PowerConnectionHelper.isUsb(context)
@@ -99,47 +98,51 @@ class BaseInfoHelper {
         info.ramUsedSize = AppMemoryManager.getDeviceAvailableMemory(context)
         info.sdkVersion = Build.VERSION.SDK_INT.toString()
         info.iccId = SysUtils.getSimSerial(context)
+        val jobj = GsonUtil.toJsonObject(info)?.apply {
+            BigDataManager.get().getNetDataListener()?.addBaseParams(this)
+        }
+        return jobj ?: JsonObject()
     }
 }
 
 var isSwitchPage: Int
-    set(value) = SharedPrefUser.setInt(SharedPrefKeyManager.KEY_CERT_SWITCH_PAGE, value)
-    get() = SharedPrefUser.getInt(SharedPrefKeyManager.KEY_CERT_SWITCH_PAGE, 0)
+    set(value) = SharedPrefUser.setInt(SpKeyManager.KEY_CERT_SWITCH_PAGE, value)
+    get() = SharedPrefUser.getInt(SpKeyManager.KEY_CERT_SWITCH_PAGE, 0)
 
 var readPrivacyTime: Long
-    set(value) = SharedPrefUser.setLong(SharedPrefKeyManager.KEY_READ_PRIVACY_TIME, value)
-    get() = SharedPrefUser.getLong(SharedPrefKeyManager.KEY_READ_PRIVACY_TIME, 0)
+    set(value) = SharedPrefUser.setLong(SpKeyManager.KEY_READ_PRIVACY_TIME, value)
+    get() = SharedPrefUser.getLong(SpKeyManager.KEY_READ_PRIVACY_TIME, 0)
 
 var readPrivacyCount: Int
     set(value) {
         if (value < readPrivacyTime) return
-        SharedPrefUser.setInt(SharedPrefKeyManager.KEY_READ_PRIVACY_COUNT, value)
+        SharedPrefUser.setInt(SpKeyManager.KEY_READ_PRIVACY_COUNT, value)
     }
-    get() = SharedPrefUser.getInt(SharedPrefKeyManager.KEY_READ_PRIVACY_COUNT, 0)
+    get() = SharedPrefUser.getInt(SpKeyManager.KEY_READ_PRIVACY_COUNT, 0)
 
 var registWifi: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_REGIS_WIFI, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_REGIS_WIFI, "")
+    set(value) = SharedPrefUser.setString(SpKeyManager.KEY_REGIS_WIFI, value)
+    get() = SharedPrefUser.getString(SpKeyManager.KEY_REGIS_WIFI, "")
 
 var registIP: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_REGIS_IP, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_REGIS_IP, "")
+    set(value) = SharedPrefUser.setString(SpKeyManager.KEY_REGIS_IP, value)
+    get() = SharedPrefUser.getString(SpKeyManager.KEY_REGIS_IP, "")
 
 var faceWifi: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_FACE_WIFI, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_FACE_WIFI, "")
+    set(value) = SharedPrefUser.setString(SpKeyManager.KEY_FACE_WIFI, value)
+    get() = SharedPrefUser.getString(SpKeyManager.KEY_FACE_WIFI, "")
 
 var loanWifi: String
-    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_LOAN_WIFI, value)
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_LOAN_WIFI, "")
+    set(value) = SharedPrefUser.setString(SpKeyManager.KEY_LOAN_WIFI, value)
+    get() = SharedPrefUser.getString(SpKeyManager.KEY_LOAN_WIFI, "")
 
 var loanPageStayTime: Long
-    set(value) = SharedPrefUser.setLong(SharedPrefKeyManager.KEY_PAGE_STAY_TIME, value)
-    get() = SharedPrefUser.getLong(SharedPrefKeyManager.KEY_PAGE_STAY_TIME, 0)
+    set(value) = SharedPrefUser.setLong(SpKeyManager.KEY_PAGE_STAY_TIME, value)
+    get() = SharedPrefUser.getLong(SpKeyManager.KEY_PAGE_STAY_TIME, 0)
 
 var bgRecoverCount: Int
-    set(value) = SharedPrefUser.setInt(SharedPrefKeyManager.KEY_BG_RECOVER_COUNT, value)
-    get() = SharedPrefUser.getInt(SharedPrefKeyManager.KEY_BG_RECOVER_COUNT, 0)
+    set(value) = SharedPrefUser.setInt(SpKeyManager.KEY_BG_RECOVER_COUNT, value)
+    get() = SharedPrefUser.getInt(SpKeyManager.KEY_BG_RECOVER_COUNT, 0)
 var loginTime: Long
-    set(value) = SharedPrefUser.setLong(SharedPrefKeyManager.KEY_LOGIN_TIME, value)
-    get() = SharedPrefUser.getLong(SharedPrefKeyManager.KEY_LOGIN_TIME, 0)
+    set(value) = SharedPrefUser.setLong(SpKeyManager.KEY_LOGIN_TIME, value)
+    get() = SharedPrefUser.getLong(SpKeyManager.KEY_LOGIN_TIME, 0)

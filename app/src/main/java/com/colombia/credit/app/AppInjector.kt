@@ -3,6 +3,8 @@ package com.colombia.credit.app
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.cache.lib.SharedPrefUser
+import com.colombia.credit.manager.SharedPrefKeyManager
 import com.common.lib.base.BaseActivity
 import java.lang.ref.WeakReference
 
@@ -11,6 +13,8 @@ import java.lang.ref.WeakReference
  */
 object AppInjector {
     private var mCurrActivity: WeakReference<Activity>? = null
+
+
 
     fun init(app: Application) {
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
@@ -21,9 +25,9 @@ object AppInjector {
             override fun onActivityStarted(activity: Activity) {
                 mCurrActivity = WeakReference(activity)
                 activityCounts ++
-//                if (activityCounts == 1){
-//                    SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, true)
-//                }
+                if (activityCounts == 1){
+                    SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, true)
+                }
             }
 
             override fun onActivityResumed(activity: Activity) {}
@@ -32,9 +36,9 @@ object AppInjector {
 
             override fun onActivityStopped(activity: Activity) {
                 activityCounts --
-//                if (activityCounts == 0){
-//                    SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
-//                }
+                if (activityCounts == 0){
+                    SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
+                }
             }
 
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}

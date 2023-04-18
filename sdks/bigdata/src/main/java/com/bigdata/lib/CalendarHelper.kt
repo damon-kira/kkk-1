@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.CalendarContract
-import com.bigdata.lib.net.BigDataNetBaseParamsManager
+import com.bigdata.lib.net.BaseParamsManager
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.log.logger_e
@@ -25,7 +25,7 @@ object CalendarHelper {
      */
     fun getCalendarEvent(context: Context): JsonArray {
         val jsonArray = JsonArray()
-        if (BigDataNetBaseParamsManager.isPermissionAuth(context, Manifest.permission.READ_CALENDAR) == 0){
+        if (BaseParamsManager.isPermissionAuth(context, Manifest.permission.READ_CALENDAR) == 0){
             logger_i(TAG, " 日历 = 没有权限")
             return jsonArray
         }

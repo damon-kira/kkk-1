@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:padding="6dp"
-            android:text="Guardar"
+            android:text="@string/bank_card_save"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 

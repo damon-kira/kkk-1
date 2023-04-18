@@ -3,6 +3,7 @@ package com.colombia.credit.module.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import com.bigdata.lib.MCLCManager
 import com.colombia.credit.module.custom.CustomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,8 +23,9 @@ class XjbgdfdfService : Service() {
 
         if (flag == SerManager.FLAG_CUSTOM) {
             mCustomViewModel.getCustomInfo()
+        }else if (flag == SerManager.FLAG_DATA){
+            MCLCManager.postMCLCinfoReal(null)
         }
-
         return super.onStartCommand(intent, flags, startId)
     }
 }

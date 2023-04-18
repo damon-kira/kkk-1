@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.bigdata.lib.loginTime
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
 import com.colombia.credit.expand.ShowErrorMsg
@@ -17,7 +18,6 @@ import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeEvent
-import com.colombia.credit.util.loginTime
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.expand.showSoftInput
 import com.common.lib.livedata.LiveDataBus

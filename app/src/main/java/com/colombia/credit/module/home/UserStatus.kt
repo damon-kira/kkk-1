@@ -25,8 +25,8 @@ object OrderStatus {
     const val STATUS_REJECT        = "04" // 拒绝
     const val STATUS_FIRST_PRODUCT = "05" // 首贷首页
     const val STATUS_REFUSED_EXPIRE= "06" // 被拒到期
-    const val STATUS_REPEAT1       = "07" // 被拒到期
-    const val STATUS_REPEAT2       = "08" // 被拒到期
-    const val STATUS_REPEAT3       = "09" // 被拒到期
-    const val STATUS_REPEAT4       = "10" // 被拒到期
+    const val STATUS_REPEAT1       = "07" //复借客户没有待还订单、未确定订单
+    const val STATUS_REPEAT2       = "08" // 复借客户有待还订单，没有待确定订单
+    const val STATUS_REPEAT3       = "09" // 复借客户没有待还订单，有待确定订单
+    const val STATUS_REPEAT4       = "10" // 复借客户既有待还订单也有待确定订单
 }

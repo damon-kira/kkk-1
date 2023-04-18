@@ -53,9 +53,8 @@ class GsonUtil {
         fun toJsonObject(src: Any): JsonObject? {
             var jsonObject: JsonObject? = null
             try {
-                val gsonb = GsonBuilder()
-                val gson = gsonb.create()
-                jsonObject = JsonParser().parse(gson.toJson(src)).asJsonObject
+                val gson = GsonBuilder().create()
+                jsonObject = JsonParser.parseString(gson.toJson(src)).asJsonObject
             } catch (e: Exception) {
                 e.printStackTrace()
             }

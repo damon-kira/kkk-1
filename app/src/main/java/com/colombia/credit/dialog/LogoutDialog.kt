@@ -13,6 +13,7 @@ class LogoutDialog constructor(context: Context) : DefaultDialog(context) {
     init {
         setContentView(binding.root)
         setCancelable(true)
+        setDisplaySize(0.88f, WRAP)
         setCanceledOnTouchOutside(false)
         binding.tvCancel.setBlockingOnClickListener { dismiss() }
     }

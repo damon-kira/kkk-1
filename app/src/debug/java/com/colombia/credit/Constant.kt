@@ -8,6 +8,8 @@ object Constant {
 
     const val API_SECRET = "83D763DA4B8B0734"
 
+    const val BIG_DATA_URL = "${BASE_URL}/XRmN4gV/N9Ed7VEoU"
+
     //375AED183CD667D4C2D0E3271DAC6782
     val API_KEY = byteArrayOf(0xA2.toByte() ,0x48.toByte() ,0xCA.toByte() ,0xDC.toByte() ,0x9E.toByte() ,0x96.toByte() ,0x2B.toByte() ,0x0C.toByte() ,0x4D.toByte() ,0x0D.toByte() ,0xA4.toByte() ,0xF4.toByte() ,0x83.toByte() ,0x0D.toByte() ,0x30.toByte() ,0xB1.toByte() ,0x95.toByte() ,0x12.toByte() ,0x27.toByte() ,0xC4.toByte() ,0xA2.toByte() ,0x40.toByte() ,0x4C.toByte() ,0xD8.toByte() ,0x8F.toByte() ,0xDD.toByte() ,0x47.toByte() ,0xD3.toByte() ,0x9E.toByte() ,0xA1.toByte() ,0x57.toByte() ,0x33.toByte())
 

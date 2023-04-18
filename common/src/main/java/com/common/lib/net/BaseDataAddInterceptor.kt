@@ -143,12 +143,12 @@ class BaseDataAddInterceptor : Interceptor {
      * @param isNeedBase 添加额外参数 在ApiService 设置请求头 @Headers("isNeedBase:false") 为不传base信息
      */
     private fun appendParams(source: JsonObject, isNeedBase: Boolean = true): JsonObject {
-        //添加必填签名信息
-        NetBaseParamsManager.getMustCashMustParams(source)
-        //添加base签名信息
-        if (isNeedBase) {
-            NetBaseParamsManager.getCashNormalBaseParams(source)
-        }
+//        //添加必填签名信息
+//        NetBaseParamsManager.getMustCashMustParams(source)
+//        //添加base签名信息
+//        if (isNeedBase) {
+//            NetBaseParamsManager.getCashNormalBaseParams(source)
+//        }
         //2.添加签名json
         source.addProperty("signature", SignatureManager.mexicoSign(source))
         return source

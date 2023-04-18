@@ -1,8 +1,11 @@
 package com.colombia.credit.module.webview
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,15 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.widget.LinearLayout
+import com.bigdata.lib.readPrivacyCount
+import com.bigdata.lib.readPrivacyTime
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.databinding.FragmentWebviewBinding
 import com.colombia.credit.manager.H5UrlManager
-import com.colombia.credit.util.readPrivacyCount
-import com.colombia.credit.util.readPrivacyTime
 import com.colombia.credit.view.BaseWebView
 import com.common.lib.base.BaseFragment
 import com.common.lib.viewbinding.binding
+import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.expand.isEmpty
@@ -339,6 +343,35 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
                 isLoadError = true
             }
             refreshNetView()
+        }
+
+        override fun onReceivedSslError(
+            view: WebView?,
+            handler: SslErrorHandler?,
+            error: SslError?
+        ) {
+            super.onReceivedSslError(view, handler, error)
+
+            getBaseActivity()?.let {activy ->
+                val builder = AlertDialog.Builder(activy)
+                    .setMessage(getString(R.string.webview_ssl_hint))
+                    .setPositiveButton(
+                        getString(R.string.confirm)
+                    ) { _, _ -> handler?.proceed() }
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                        handler?.cancel()
+                    }.setOnKeyListener { dialog, keyCode, event ->
+                        return@setOnKeyListener if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                            handler?.cancel()
+                            dialog.dismiss()
+                            true
+                        } else false
+                    }
+                try {
+                    builder.create().show()
+                } catch (e: Exception) {
+                }
+            }
         }
     }
 

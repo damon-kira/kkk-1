@@ -2,13 +2,13 @@ package com.bigdata.lib
 
 import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.database.Cursor
+import android.media.session.PlaybackState.CustomAction
 import android.net.Uri
 import android.provider.Telephony
 import com.bigdata.lib.bean.SmsInfo
-import com.bigdata.lib.net.BigDataNetBaseParamsManager
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
+import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
@@ -28,12 +28,18 @@ object SmsHelper {
     @JvmStatic
     fun getMessage(context: Context): ArrayList<SmsInfo> {
         val list = arrayListOf<SmsInfo>()
+        val ctx = BigDataManager.get().getNetDataListener()?.getContext()
+        if (BaseParamsManager.isPermissionAuth(
+                ctx!!, Manifest.permission.READ_SMS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return list
+        }
 
-        var cursor: Cursor? = null
         try {
             val resolver = context.contentResolver
             val uri = Uri.parse("content://sms/")
-            cursor = resolver.query(
+            val cursor = resolver.query(
                 uri,
                 arrayOf(
                     Telephony.Sms.ADDRESS,
@@ -47,7 +53,7 @@ object SmsHelper {
                 arrayOf(MCLCManager.getLast_6_Month_time().toString()),
                 "date DESC limit $MAX_ITEM"
             )
-            if (cursor != null) {
+            cursor?.use {
                 var info: SmsInfo
                 while (cursor.moveToNext()) {
                     info = SmsInfo()
@@ -64,10 +70,9 @@ object SmsHelper {
                     logger_i(TAG, " getmessage = $list")
                 }
             }
+
         } catch (e: Exception) {
             logger_e(TAG, " getmessage e = $e")
-        } finally {
-            close(cursor)
         }
         return list
     }

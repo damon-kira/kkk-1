@@ -3,9 +3,9 @@ package com.bigdata.lib
 import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.util.Log
-import com.bigdata.lib.BigDataSpKeyManager.Companion.CASH_KEY_LOCATION_INFO
-import com.bigdata.lib.BigDataSpKeyManager.Companion.CASH_KEY_REQUEST_CICY_TIMER
-import com.bigdata.lib.BigDataSpKeyManager.Companion.CASH_KEY_REQUEST_LOCATION_TIMER
+import com.bigdata.lib.SpKeyManager.CASH_KEY_LOCATION_INFO
+import com.bigdata.lib.SpKeyManager.CASH_KEY_REQUEST_CICY_TIMER
+import com.bigdata.lib.SpKeyManager.CASH_KEY_REQUEST_LOCATION_TIMER
 import com.cache.lib.SharedPrefGlobal
 import com.location.lib.LocationInfo
 import com.location.lib.OLocationManager

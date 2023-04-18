@@ -22,12 +22,8 @@ import java.io.FileReader
 import java.math.BigDecimal
 import java.util.*
 
-/**
- *@author zhujun
- *@description: 大数据网络请求公共参数管理类
- *@date : 2022/3/1 9:45 上午
- */
-class BigDataNetBaseParamsManager {
+
+class BaseParamsManager {
 
     companion object {
 
@@ -229,13 +225,11 @@ class BigDataNetBaseParamsManager {
                     NetWorkUtils.getNetworkState(dataListener.getContext())
                 )
                 jsonObject.addProperty("uptime", System.currentTimeMillis() / 1000)
-                jsonObject.addProperty("access_token", dataListener.getUserToken())//token
+                jsonObject.addProperty("access_token", dataListener.getAppToken())//token
                 jsonObject.addProperty("phone_num", "")//手机号
 
                 jsonObject.addProperty("gaid", dataListener.getGaid())//gaid
-                jsonObject.addProperty("ui_version", dataListener.getUIVERSION())//uiveision
                 jsonObject.addProperty("version_code", getAppVersionCode())//versioncode
-                jsonObject.addProperty("cid", dataListener.getCid())//versioncode
                 jsonObject.addProperty("event_id", EventKeyManager.EVENT_ACTIVATION)//事件id
                 val screenWH = DisplayUtils.getScreenWH(dataListener.getContext())
                 jsonObject.addProperty("width", screenWH[0])

@@ -11,6 +11,5 @@ class MeBankAccountListActivity : BankCardListActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding.bankCardTvApply.hide()
-        mBinding.cardTvSave.hide()
     }
 }

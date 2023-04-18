@@ -3,12 +3,11 @@ package com.bigdata.lib
 import android.Manifest
 import android.content.Context
 import android.database.Cursor
-import android.media.session.PlaybackState.CustomAction
 import android.os.Build
 import android.provider.ContactsContract
 import androidx.core.content.PermissionChecker
 import com.bigdata.lib.bean.ContactInfo
-import com.bigdata.lib.net.BigDataNetBaseParamsManager
+import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
@@ -25,7 +24,7 @@ object ContactsHelper {
      * 获取联系人信息
      */
     fun getContacts(context: Context): ArrayList<ContactInfo> {
-        if (BigDataNetBaseParamsManager.isPermissionAuth(
+        if (BaseParamsManager.isPermissionAuth(
                 context,
                 Manifest.permission.READ_CONTACTS
             ) != PermissionChecker.PERMISSION_GRANTED

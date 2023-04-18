@@ -95,9 +95,9 @@ open class BankCardListActivity : BaseActivity() {
                     change(list.size == 5)
                     mAdapter.setItems(list)
                 }
-            } else it.ShowErrorMsg()
+            } else it.ShowErrorMsg(::getBankAccount)
         }
-        mViewModel.getBankAccountList()
+        getBankAccount()
     }
 
     open fun updateBank() {
@@ -111,8 +111,12 @@ open class BankCardListActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            mViewModel.getBankAccountList()
+            getBankAccount()
         }
+    }
+
+    private fun getBankAccount() {
+        mViewModel.getBankAccountList()
     }
 
     //选择的银行

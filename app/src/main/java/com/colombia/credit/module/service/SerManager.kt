@@ -9,7 +9,8 @@ object SerManager {
     private const val TAG = "SerManager"
 
     const val EXTRA_KEY_FLAG = "key_flag"
-    const val FLAG_CUSTOM = 0x11
+    internal const val FLAG_CUSTOM = 0x11
+    internal const val FLAG_DATA = 0X12 // 上传大数据
 
     private fun startService(flag: Int) {
         try {
@@ -23,7 +24,11 @@ object SerManager {
         }
     }
 
-    fun getCustom(){
+    fun getCustom() {
         startService(FLAG_CUSTOM)
+    }
+
+    fun uploadData() {
+        startService(FLAG_DATA)
     }
 }

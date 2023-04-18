@@ -5,13 +5,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.bigdata.lib.WifiHelper
+import com.bigdata.lib.registIP
+import com.bigdata.lib.registWifi
 import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.bean.resp.RspSmsCode
-import com.colombia.credit.expand.mCustom
 import com.colombia.credit.expand.saveMobile
 import com.colombia.credit.expand.saveUserInfo
-import com.colombia.credit.util.registIP
-import com.colombia.credit.util.registWifi
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

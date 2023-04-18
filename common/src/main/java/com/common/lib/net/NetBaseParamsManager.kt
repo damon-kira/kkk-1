@@ -54,16 +54,10 @@ class NetBaseParamsManager {
          */
         fun buildDataParmas(jsonObject: JsonObject?, isNeedBase: Boolean): String {
             try {
-                //添加必填签名信息
-                getMustCashMustParams(jsonObject!!)
-                //添加base签名信息
-                if (isNeedBase) {
-                    getCashNormalBaseParams(jsonObject)
-                }
+
                 //2.添加签名json
-                jsonObject.addProperty("signature", SignatureManager.mexicoSign(jsonObject))
-                val returnData = AESNormalUtil.mexicoEncrypt(jsonObject.toString(), false).orEmpty()
-                return returnData
+                jsonObject?.addProperty("signature", SignatureManager.mexicoSign(jsonObject))
+                return AESNormalUtil.mexicoEncrypt(jsonObject.toString(), false).orEmpty()
             } catch (e: Exception) {
                 if (isDebug()) {
                     logger_e(
@@ -73,20 +67,6 @@ class NetBaseParamsManager {
                 }
                 return ""
             }
-        }
-
-        fun getBaseMustParams(): String  {
-            return JsonObject().also {jobj ->
-                getMustCashMustParams(jobj)
-                getCashNormalBaseParams(jobj)
-            }.toString()
-        }
-
-        /**
-         * md5 imei
-         */
-        fun md5IMEI(imei: String): String {
-            return MD5Utils.getMD5(imei).orEmpty()
         }
 
         fun getTotalMemory(): String {
@@ -185,7 +165,7 @@ class NetBaseParamsManager {
             jsonObject.addProperty("time_zone", TimeZone.getDefault().id)//时区
             jsonObject.addProperty("network", NetWorkUtils.getNetworkState(supplier.getContext()))
             jsonObject.addProperty(
-                "is_simulator", if (isSimulator()) {
+                "is_simulator", if (SysUtils.isSimulator(supplier.getContext())) {
                     "1"
                 } else {
                     "0"
@@ -212,7 +192,7 @@ class NetBaseParamsManager {
             jsonObject.addProperty("ui_version", supplier.getUiVersion())
             jsonObject.addProperty("cid", supplier.getChannelId())
             jsonObject.addProperty("is_google_service", if (supplier.isGoogleServiceAvailable()) "1" else "0")
-            jsonObject.addProperty("system_language", getLanguage())
+            jsonObject.addProperty("system_language", SysUtils.getLanguage())
             jsonObject.addProperty("platform", "android")
             addThirdSdkIdParams(jsonObject)
         }
@@ -240,37 +220,9 @@ class NetBaseParamsManager {
             }"
         }
 
-        /**
-         * 是否是模拟器
-         * 现在默认是false
-         */
-        fun isSimulator(): Boolean {
-            val supplier = getExternalParamsSupplier()
-            var isEmulator = false
-            try {
-                isEmulator = EmulatorCheckUtil.checkIsRunningInEmulator(
-                    supplier.getContext(),
-                    null
-                )
-                logger_e(TAG, "是否是模拟器$isEmulator")
-            } catch (e: Exception) {
-                logger_e(TAG, "$e")
-            }
-            return isEmulator
-        }
-
-        /**
-         * 获取系统语言
-         */
-        private fun getLanguage():String {
-            val locale = Locale.getDefault()
-            return java.lang.StringBuilder().append(locale.language).append("-").append(locale.country).toString()
-        }
-
         //添加header信息
         fun addHeader(builder: Request.Builder) {
             val supplier = getExternalParamsSupplier()
-            builder.addHeader("chdknc6-1dwaiu", getUserAgent())// token
             // app版本
             builder.addHeader("vMRdV0dUmj", supplier.getAppVersionCode().toString())// app 版本
             // 设备id
@@ -280,25 +232,6 @@ class NetBaseParamsManager {
             // google广告id
             builder.addHeader("pg77Foy4PL", supplier.getAdvertisingId())
             builder.addHeader("wCxyJuAwkK", supplier.getToken())
-            //
-            //builder.addHeader("App-Language", getLanguage())
-//            builder.addHeader("content-type", "application/json:charset=UTF-8")
-//            builder.addHeader("User-Agent", getUserAgent())
-//            builder.addHeader("x-app-version", supplier.getAppVersionName())
-//            builder.addHeader("x-app-version-code", supplier.getAppVersionCode().toString())
-//            builder.addHeader("x-sys-version", Build.VERSION.RELEASE)
-//            builder.addHeader("x-platform", "android")
-//            builder.addHeader("x-device", "${Build.BRAND}${Build.MODEL}")
-//            builder.addHeader(
-//                "x-client-pixel",
-//                "${DisplayUtils.getRealScreenHeight(context)}x" +
-//                        "${DisplayUtils.getRealScreenWidth(context)}"
-//            )//分辨率
-//            builder.addHeader("x-gaid", SysUtils.getDeviceId(context, supplier.getAdvertisingId()))//gaid 现在代表deveice id
-//            builder.addHeader("x-channel", supplier.getChannelId())//渠道
-////            builder.addHeader("x-utm-source", AppFlyerManager.getAppsFlyerUtmSource())//AppsFlyer返回的渠道名称：例如facebook
-//            builder.addHeader("x-appflyer-uid", supplier.getAppsFlyerUid())//appsflyer_uid
-//            builder.addHeader("x-app-sign", getSignVersion())//秘钥更换标记
         }
 
         private fun addImeiList(jobj: JsonObject, isMd5: Boolean) {
@@ -307,7 +240,7 @@ class NetBaseParamsManager {
             val allImei = SysUtils.getAllImei(context)
             if (allImei.isNotEmpty()) {
                 allImei.forEachIndexed { index, str ->
-                    jobj.addProperty("imei${index + 1}", if (isMd5) md5IMEI(str) else str)
+                    jobj.addProperty("imei${index + 1}", if (isMd5) MD5Utils.getMD5(str) else str)
                 }
             }
         }

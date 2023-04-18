@@ -19,6 +19,14 @@ object AESNormalUtil {
     }
 
     /**
+     * app数据抓取加密（短信，通话记录，通讯录）
+     */
+    @JvmStatic
+    fun mexicoEncrypt(src: ByteArray, needUrlEncoder: Boolean = true): String? {
+        return AESUtil.mexicoEncrypt(src, AesConstant.bigKey, AesConstant.bigIv, needUrlEncoder)
+    }
+
+    /**
      * cash loan 通用解密
      */
     @JvmStatic

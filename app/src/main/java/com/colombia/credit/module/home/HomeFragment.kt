@@ -138,9 +138,9 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
                         getInstance(getSupportContext(), FirstRepayFragment::class.java, null)
                     }
                     OrderStatus.STATUS_REPEAT1,
-                    OrderStatus.STATUS_REPEAT1,
-                    OrderStatus.STATUS_REPEAT1,
-                    OrderStatus.STATUS_REPEAT1 -> {
+                    OrderStatus.STATUS_REPEAT2,
+                    OrderStatus.STATUS_REPEAT3,
+                    OrderStatus.STATUS_REPEAT4 -> {
                         getInstance(getSupportContext(), RepeatFragment::class.java, null)
                     }
                     else -> {

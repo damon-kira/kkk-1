@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import com.bigdata.lib.WifiHelper
+import com.bigdata.lib.faceWifi
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
-import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.expand.TYPE_SUCCESS
@@ -20,10 +21,7 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.module.process.IBaseProcessViewModel
-import com.colombia.credit.util.faceWifi
 import com.common.lib.expand.setBlockingOnClickListener
-import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import com.util.lib.*
