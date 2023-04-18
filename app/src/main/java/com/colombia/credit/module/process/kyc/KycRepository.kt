@@ -28,9 +28,9 @@ class KycRepository @Inject constructor(@UploadApiService private val uploadApiS
             val file = File(path)
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             builder.addFormDataPart("YGqDffupPG", file.name, createFileRequestBody(file))
-            val type = if (type == PicType.PIC_FRONT) "FRONT" else "BACK"
-            builder.addFormDataPart("P6KkaG04zb", type)
-            uploadApiService.uploadKycImage(builder.build().part(0), type)
+            val tempType = if (type == PicType.PIC_FRONT) "FRONT" else "BACK"
+            builder.addFormDataPart("P6KkaG04zb", tempType)
+            uploadApiService.uploadKycImage(builder.build().part(0), tempType)
         }
 
     override fun getInfo(): LiveData<BaseResponse<RspKycInfo>> =

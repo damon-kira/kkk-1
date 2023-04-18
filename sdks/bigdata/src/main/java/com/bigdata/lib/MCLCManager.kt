@@ -143,34 +143,12 @@ class MCLCManager {
                 if (checkPostMCLCSuccessTimer()) {
                     isUploadComplete = false
                     val jsonCashInfo = getCashInfo()
-                    var isAllPermission = false
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        //6.0以及以上走这个
-                        //todo 添加权限
-                        isAllPermission = /*isAllPermission()*/true
-                        logger_i(TAG, " os >= 6.0 isAllPermission = $isAllPermission")
-                    } else {
-                        val smsSize = try {
-                            jsonCashInfo.getAsJsonArray("sms")?.size() ?: 0
-                        } catch (e: Exception) {
-                            0
-                        }
-                        /*val callSize = jsonCashInfo.getAsJsonArray("call").size()*/
-                        /*val contactSize = jsonCashInfo.getAsJsonArray("contact").size()*/
-                        isAllPermission = smsSize > 0 /*&& callSize > 0 && contactSize > 0*/
-
-                        logger_i(
-                            TAG,
-                            " os < 6.0 smsSize = $smsSize isAllPermission = $isAllPermission"
-                        )
-                    }
                     val beforePostInfo = jsonCashInfo.toString()
                     logger_i(TAG, "cash info post encryt before = $beforePostInfo")
-//                    val zipInfo = GzipUtils.zip(beforePostInfo)
+                    val zipInfo = GzipUtils.zip(beforePostInfo)
 //                    ${zipInfo.size / 1024f}
                     logger_i(
                         TAG,
-
                         "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
                     )
 //                    val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
@@ -181,10 +159,10 @@ class MCLCManager {
                         val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
                             ?: return@executor
                         val response = NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
-                        var result  = false
+                        var result = false
                         isUploadComplete = true
                         if (response.isSuccessful) {
-                            response.body()?.string()?.let {body ->
+                            response.body()?.string()?.let { body ->
                                 val jobj = JSONObject(body)
                                 val code = jobj.optInt("code")
                                 Log.d(TAG, "uploadData: code= $code")

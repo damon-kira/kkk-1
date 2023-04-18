@@ -47,7 +47,11 @@ class MainActivity : BaseFragmentActivity() {
         initRadioButton()
 
         mMainEventObserve = LiveDataBus.getLiveData(MainEvent::class.java).observerNonStickyForever {
-            mBinding.rbHomeLoan.isChecked = true
+            if (it.event == MainEvent.EVENT_SHOW_HOME) {
+                mBinding.rbHomeLoan.isChecked = true
+            } else if (it.event == MainEvent.EVENT_SHOW_REPAY) {
+                mBinding.rbHomeRepay.isChecked = true
+            }
         }
     }
 

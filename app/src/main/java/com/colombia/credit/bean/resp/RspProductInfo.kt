@@ -22,7 +22,7 @@ class RspProductInfo {
     val GqGV3L: Int = 1// 倒计时开关 1 开 0 关
     val fyEV: ArrayList<FirstConfirmInfo>? = null // 新客户确定额度首页
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
-    val gQ1J: ArrayList<RepeatRepayInfo>? = null // 老客户待还
+    val gQ1J: RepeatRepayInfo? = null // 老客户待还
     val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
 }
@@ -80,10 +80,12 @@ class RepeatProductInfo {
 //"applyIds":[11111, 222]// 申请id
 // 复贷还款信息
 class RepeatRepayInfo {
-    val AMGH9kXswv: Int = 0 //未还订单数
-    val RPBJ47rhC: Int = 0 //未还金额
-    val RYtVvxJH: Int = 0 //待还借金额
+    val AMGH9kXswv: String? = null //未还订单数
+    val RPBJ47rhC: String? = null //未还金额
+    val RYtVvxJH: String? = null //待还借金额
     val QLPGXTNU: ArrayList<String>? = null // 申请id [11111, 222]
+
+    fun isEmpty() = AMGH9kXswv == "0" || AMGH9kXswv.isNullOrEmpty()
 }
 
 //"maxApplyAt":20000,//范围金额最大值

@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
         app:tl_left_icon="@drawable/svg_home_logo"
-        app:tl_right_icon_show="true"
+        app:tl_show_custom_icon="true"
         app:tl_title="@string/app_name" />
 
     <!-- 用户名 -->

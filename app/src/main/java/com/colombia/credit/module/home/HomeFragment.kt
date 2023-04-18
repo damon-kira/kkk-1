@@ -14,6 +14,7 @@ import com.colombia.credit.module.appupdate.AppUpdateViewModel
 import com.colombia.credit.module.firstconfirm.FirstConfirmFragment
 import com.colombia.credit.module.homerepay.FirstRepayFragment
 import com.colombia.credit.module.login.LoginFragment
+import com.colombia.credit.module.refused.BlackFragment
 import com.colombia.credit.module.refused.RefusedFragment
 import com.colombia.credit.module.repeat.RepeatFragment
 import com.colombia.credit.module.review.ReviewFragment
@@ -148,9 +149,11 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
                     }
                 }
             }
-            UserStatus.STATUS_REPEAT,
-            UserStatus.STATUS_BLACK -> {
+            UserStatus.STATUS_REPEAT -> {
                 getInstance(getSupportContext(), RepeatFragment::class.java, null)
+            }
+            UserStatus.STATUS_BLACK -> {
+                getInstance(getSupportContext(), BlackFragment::class.java, null)
             }
             else -> null
         }

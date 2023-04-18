@@ -304,4 +304,8 @@
     <string name="bank_card_save">Guardar</string>
     <string name="logout_hint">Seguro que deseas Cerrar Sesión？</string>
     <string name="clear_data_success">Datos borrados con éxito</string>
+
+    <!-- 拉黑 -->
+    <string name="black_text1">Producto de préstamo Cantidad</string>
+    <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
 </resources>

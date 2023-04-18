@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:paddingRight="6dp"
         app:tl_back_text_color="@color/color_333333"
-        app:tl_custom_icon="@drawable/ic_me_customer"
+        app:tl_custom_icon="@drawable/ic_custom_gray"
         app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/repay_detail_title" />
