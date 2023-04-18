@@ -228,7 +228,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             val name = mBinding.kycBivName.getViewText()
             val surname = mBinding.kycBivSurname.getViewText()
             it.y6hQBtv = "$surname|$name"
-            it.W8mqV = mBinding.kycBivGender.tag?.toString()
+            it.W8mqV = mBinding.kycBivGender.tag?.toString().orEmpty()
             it.GJmhwzsK5 = mBinding.kycBivBirthday.getViewText()
         }
     }

@@ -136,8 +136,8 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val addressArray = address.split(",")
         return ReqPersonalInfo().also {
             it.unH4I2vHXG = mBinding.bivEmail.getViewText() // email
-            it.m7pyaSk = mBinding.bivMarriage.tag.toString() // 婚姻
-            it.zgGtVHl9N2 = mBinding.bivEducation.tag.toString() // 教育
+            it.m7pyaSk = mBinding.bivMarriage.tag?.toString().orEmpty() // 婚姻
+            it.zgGtVHl9N2 = mBinding.bivEducation.tag?.toString().orEmpty() // 教育
             if (addressArray.size > 1) {
                 it.QlCvCLnNx = addressArray[0] // 省份
                 it.woTVOe = addressArray[1]// 市区
