@@ -83,7 +83,7 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     protected fun setToolbarListener(toolbarLayout: ToolbarLayout) {
         toolbarLayout.setOnbackListener {
-            finish()
+            onBackPressed()
         }
         toolbarLayout.setCustomClickListener {
             mCustomDialog.show()
