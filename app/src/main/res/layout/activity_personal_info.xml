@@ -70,6 +70,7 @@
                 app:hint="@string/email_hint"
                 app:left_icon="@drawable/svg_email"
                 app:rightIcon_visiblity="gone"
+                app:max_length="50"
                 app:stringArray="@array/email_list"
                 app:title="@string/email" />
 
@@ -105,6 +106,7 @@
                 android:layout_marginTop="12dp"
                 app:hint="@string/address_detail"
                 app:rightIcon_visiblity="gone"
+                app:max_length="100"
                 app:title_visiblity="gone" />
             <!-- 婚姻 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView

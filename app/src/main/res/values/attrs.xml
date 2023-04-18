@@ -53,6 +53,7 @@
             <enum name="email" value="1" />
             <enum name="password" value="2" />
         </attr>
+        <attr name="digits" format="string"/>
         <attr name="stringArray" format="reference" />
         <attr name="max_lines" format="integer" />
         <attr name="desc_text" format="string" />

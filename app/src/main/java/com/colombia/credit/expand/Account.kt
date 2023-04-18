@@ -1,9 +1,14 @@
 package com.colombia.credit.expand
 
+import android.content.Context
 import com.cache.lib.SharedPrefUser
+import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.util.lib.GsonUtil
+import com.util.lib.ThreadPoolUtil
+import com.util.lib.expand.deleteDir
+import com.util.lib.expand.getCameraCache
 
 
 fun saveUserInfo(info: RspLoginInfo) {
@@ -45,6 +50,22 @@ fun isFirstRegister(): Boolean {
     val json = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_INFO, null)
     return ((GsonUtil.fromJson(json, RspLoginInfo::class.java) as? RspLoginInfo)?.roiM2eg8uM
         ?: 0) == 1
+}
+
+fun setLogout(){
+    saveUserToken("")
+    SharedPrefUser.clear()
+    deleteCameraCache(getAppContext())
+}
+
+
+/**
+ * 删除应用内拍照图片
+ */
+fun deleteCameraCache(context: Context) {
+    ThreadPoolUtil.executor("删除证件信息图片缓存") {
+        deleteDir(getCameraCache(context))
+    }
 }
 
 fun getMobile(): String {

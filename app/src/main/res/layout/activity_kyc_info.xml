@@ -114,8 +114,9 @@
                     android:layout_marginTop="20dp"
                     app:hint="@string/kyc_nuip_hint"
                     app:if_can_edit="true"
-                    app:inputType="number"
                     app:left_icon="@drawable/ic_nuip"
+                    app:max_length="15"
+                    app:digits="123456789."
                     app:rightIcon_visiblity="gone"
                     app:title="@string/kyc_nuip" />
 
@@ -127,6 +128,7 @@
                     android:layout_marginTop="24dp"
                     app:hint="@string/kyc_name_hint"
                     app:left_icon="@drawable/ic_name"
+                    app:max_length="30"
                     app:rightIcon_visiblity="gone"
                     app:title="@string/kyc_name" />
 
@@ -138,6 +140,7 @@
                     android:layout_marginTop="24dp"
                     app:hint="@string/kyc_surname_hint"
                     app:left_icon="@drawable/ic_father"
+                    app:max_length="20"
                     app:rightIcon_visiblity="gone"
                     app:title="@string/kyc_surname" />
 

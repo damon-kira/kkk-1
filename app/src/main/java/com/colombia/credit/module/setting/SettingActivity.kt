@@ -6,6 +6,7 @@ import com.colombia.credit.databinding.ActivitySettingBinding
 import com.colombia.credit.dialog.LogoutDialog
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.saveUserToken
+import com.colombia.credit.expand.setLogout
 import com.colombia.credit.expand.toast
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.MainEvent
@@ -51,7 +52,7 @@ class SettingActivity : BaseActivity() {
 
         mViewModel.mLogoutLivedata.observerNonSticky(this) {
             if (it.isSuccess()) {
-                saveUserToken("")
+                setLogout()
                 LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
                 finish()

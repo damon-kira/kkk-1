@@ -3,6 +3,7 @@ package com.colombia.credit.view.baseinfo
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.*
+import android.text.method.DigitsKeyListener
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.util.Log
@@ -86,6 +87,10 @@ class BaseInfoView : AbsBaseInfoView {
             else ->
                 InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS or InputType.TYPE_CLASS_TEXT
         }
+    }
+
+    override fun setDigits(digits: String) {
+        mBinding.bivEdittext.keyListener = DigitsKeyListener.getInstance(digits)
     }
 
     /** 设置editText可以多行显示 */

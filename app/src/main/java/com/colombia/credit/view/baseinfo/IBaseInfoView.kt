@@ -105,6 +105,8 @@ interface IBaseInfoView {
 
     fun setInputType(@BaseInfoInputType inputType: Int)
 
+    fun setDigits(digits: String)
+
     fun setMaxLine(maxLine: Int)
 
     fun setRightIconVisiblity(@BaseInfoVisibility visible: Int)

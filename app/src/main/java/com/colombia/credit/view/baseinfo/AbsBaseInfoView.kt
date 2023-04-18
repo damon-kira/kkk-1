@@ -123,6 +123,11 @@ abstract class AbsBaseInfoView : LinearLayout, IBaseInfoView {
                         }
                         setTextArray(arr)
                     }
+                    R.styleable.BaseInfoView_digits -> {
+                        ta.getString(attr)?.let {digits ->
+                            setDigits(digits)
+                        }
+                    }
                 }
             }
             ta.recycle()
