@@ -42,6 +42,7 @@ class BankInfoActivity : BaseProcessActivity() {
         setToolbarListener(mBinding.processToolbar)
         init()
         lifecycle.addObserver(mBankViewModel)
+        setViewModelLoading(mBankViewModel)
     }
 
     private fun init() {

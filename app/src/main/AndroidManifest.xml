@@ -126,6 +126,10 @@
             android:name=".module.defer.DeferActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".module.defer.RepayTabDeferActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".module.webview.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity

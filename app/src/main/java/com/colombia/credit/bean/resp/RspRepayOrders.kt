@@ -3,6 +3,7 @@ package com.colombia.credit.bean.resp
 import android.os.Parcel
 import android.os.Parcelable
 import com.colombia.credit.expand.transform
+import java.math.BigDecimal
 
 class RspRepayOrders {
 
@@ -14,7 +15,8 @@ class RspRepayOrders {
         var W5KW6: String? = null      //计划id
         var RA9GEePdNs: String? = null //产品log
         var C2O8E6jjzd: String? = null //产品名字
-        var Eff0nA: Int = 0            //待还金额
+        var Eff0nA: String? = null            //待还金额
+            get() = field?.transform()
         var zbRV6Lg8jO: String? = null //还款日期
         var gzBTFx: String? = null     //是否逾期
         var QiZorG: String? = null     //1代表勾选中
@@ -36,7 +38,7 @@ class RspRepayOrders {
             W5KW6 = parcel.readString()
             RA9GEePdNs = parcel.readString()
             C2O8E6jjzd = parcel.readString()
-            Eff0nA = parcel.readInt()
+            Eff0nA = parcel.readString()
             zbRV6Lg8jO = parcel.readString()
             gzBTFx = parcel.readString()
             QiZorG = parcel.readString()
@@ -63,7 +65,7 @@ class RspRepayOrders {
             parcel.writeString(W5KW6)
             parcel.writeString(RA9GEePdNs)
             parcel.writeString(C2O8E6jjzd)
-            parcel.writeInt(Eff0nA)
+            parcel.writeString(Eff0nA)
             parcel.writeString(zbRV6Lg8jO)
             parcel.writeString(gzBTFx)
             parcel.writeString(QiZorG)

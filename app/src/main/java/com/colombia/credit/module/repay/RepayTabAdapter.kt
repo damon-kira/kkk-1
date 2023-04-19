@@ -68,7 +68,8 @@ class RepayTabAdapter(
             holder.getContext(),
             item.RA9GEePdNs.orEmpty(),
             aivIcon,
-            4f
+            4f,
+            R.drawable.svg_home_logo
         )
         holder.setText(R.id.tv_name, item.C2O8E6jjzd)
         holder.getView<TextView>(R.id.tv_status).apply {
@@ -81,7 +82,7 @@ class RepayTabAdapter(
         }
         holder.getView<AppCompatImageView>(R.id.aiv_checkbox).isSelected = item.isCheck()
 
-        holder.setText(R.id.tv_amount, getUnitString(item.Eff0nA.toString()))
+        holder.setText(R.id.tv_amount, getUnitString(item.Eff0nA.orEmpty()))
         holder.setText(R.id.tv_date, item.zbRV6Lg8jO.orEmpty())
 
         val selectItem = getSelectorItems()
@@ -98,7 +99,7 @@ class RepayTabAdapter(
     fun getTotalAmount(): Int {
         var total = 0
         getSelectorItems().forEach {
-            total += it.Eff0nA
+            total += it.Eff0nA?.toIntOrNull() ?: 0
         }
         return total
     }

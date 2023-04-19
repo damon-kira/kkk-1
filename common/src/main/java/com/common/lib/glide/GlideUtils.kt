@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -55,7 +56,7 @@ object GlideUtils {
             .into(imageView)
     }
 
-    fun loadCornerImageFromUrl(context: Context, url: String, imageView: ImageView, corner: Float) {
+    fun loadCornerImageFromUrl(context: Context, url: String, imageView: ImageView, corner: Float,@DrawableRes normalDrawableRes: Int) {
         Glide.with(context)
             .asBitmap()
             .apply(
@@ -63,7 +64,9 @@ object GlideUtils {
                     imageView.width,
                     imageView.height,
                     false,
-                    corner = corner
+                    corner = corner,
+                    placeholder = normalDrawableRes,
+                    errorDrawable = normalDrawableRes
                 )
             )
             .load(url)
@@ -125,9 +128,11 @@ object GlideUtils {
         height: Int,
         skipMemory: Boolean = true,
         strategy: DiskCacheStrategy = DiskCacheStrategy.NONE,
-        corner: Float
+        corner: Float,
+        placeholder: Int = 0,
+        errorDrawable: Int = 0
     ): RequestOptions {
-        val requestOptions = RequestOptions()
+        var requestOptions = RequestOptions()
         if (corner > 0) {
             requestOptions.transform(
                 RoundedCorners(
@@ -135,8 +140,14 @@ object GlideUtils {
                 )
             )
         }
-        requestOptions.skipMemoryCache(skipMemory).diskCacheStrategy(strategy)
+        requestOptions = requestOptions.skipMemoryCache(skipMemory).diskCacheStrategy(strategy)
             .override(width, height)
+        if (placeholder != 0) {
+            requestOptions.placeholder(placeholder)
+        }
+        if (errorDrawable != 0) {
+            requestOptions.error(errorDrawable)
+        }
         return requestOptions
     }
 

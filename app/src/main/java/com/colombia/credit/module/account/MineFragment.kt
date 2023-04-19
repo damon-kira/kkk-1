@@ -31,9 +31,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
-    private val mCustomDialog by lazy {
-        CustomDialog(getSupportContext())
-    }
+    private var mStatus: Int = 0 // 大于0，跳转还款页面
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +57,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             when (it.xXkO) {
                 OrderStatus.STATUS_FIRST_PRODUCT -> {
+                    mStatus = 0
                     mBinding.clRepay.show()
                     mBinding.tvRefused.hide()
                     mBinding.tvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
@@ -68,6 +67,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                     mBinding.tvText2.hide()
                 }
                 OrderStatus.STATUS_REPAY, OrderStatus.STATUS_OVERDUE -> {
+                    mStatus = 1
                     mBinding.clRepay.show()
                     mBinding.tvRefused.hide()
                     mBinding.tvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
@@ -141,7 +141,11 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             R.id.etv_btn -> {
                 // 需要区分状态，还款状态--还款页面
                 // 没有在贷，跳转首页
-                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+                if (mStatus > 0) {
+                    LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
+                } else {
+                    LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+                }
             }
         }
     }
@@ -154,7 +158,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         return true
     }
 
-    private fun changeStatus(){
+    private fun changeStatus() {
         if (inValidToken()) {
             mBinding.clRepay.hide()
             mBinding.tvRefused.hide()

@@ -7,6 +7,7 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentTabRepayBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.home.BaseHomeLoanFragment
@@ -15,10 +16,10 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.GsonUtil
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp
 import com.util.lib.ifShow
-import com.util.lib.log.logger_d
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,7 +53,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.tvRepay.text = getString(R.string.tab_repay_btn, "0")
 
         mAdapter.mExtensionListener = {
-            Launch.skipDeferActivity(getSupportContext(), "")
+            Launch.skipRepayDeferActivity(getSupportContext(), GsonUtil.toJson(it).orEmpty())
         }
         mAdapter.mSelectListener = {
             val amount = getUnitString(mAdapter.getTotalAmount().toString())
@@ -77,8 +78,12 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         onPullToRefresh()
 
         mBinding.tvRepay.setBlockingOnClickListener {
-            if (mAdapter.getSelectorItems().isNotEmpty()) {
+            val list = mAdapter.getSelectorItems()
+            if (list.isNotEmpty()) {
                 // 调起支付
+                list.map { it.W5KW6 }
+                mAdapter.getTotalAmount()
+                toast("调起支付，暂未处理")
             }
         }
 
@@ -103,7 +108,6 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     }
 
     private fun changeListPadding(offset: Int) {
-        mBinding.recyclerview.clipToPadding = false
         val padding = mBinding.flHomeContent.height - offset + 20f.dp()
         mBinding.recyclerview.setPadding(
             mBinding.recyclerview.paddingLeft,

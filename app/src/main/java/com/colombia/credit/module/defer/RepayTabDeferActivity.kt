@@ -1,5 +1,9 @@
 package com.colombia.credit.module.defer
 
+import com.colombia.credit.R
+import com.colombia.credit.bean.resp.RspRepayOrders
+import com.colombia.credit.expand.getUnitString
+import com.util.lib.GsonUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 // 展期
@@ -8,7 +12,15 @@ open class RepayTabDeferActivity : DeferActivity() {
 
     override fun getInfo() {
         intent.getStringExtra(EXTRA_INFO)?.let {
-
+            val detail = GsonUtil.fromJsonNew<RspRepayOrders.RepayOrderDetail>(it)
+            jine = detail?.rCC18KSG.orEmpty()
+            val amount = getUnitString(jine)
+            mBinding.tvAmount.text = amount
+            mBinding.tvDayValue.text = getString(R.string.days, detail?.GHMXDjtsUn ?: "--")
+            mBinding.tvDateValue.text = detail?.prr9Ie61
+            mBinding.tvRepayAmountValue.text = getUnitString(detail?.X32HrYq4u ?: "--")
+            mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
+            orderId = detail?.W5KW6.orEmpty()
         }
     }
 }
