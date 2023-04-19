@@ -10,16 +10,26 @@ import com.colombia.credit.dialog.NetErrorDialog
 import com.colombia.credit.manager.Launch
 import com.common.lib.BuildConfig
 import com.common.lib.base.BaseActivity
+import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogHandleMode
 
 
-fun Activity.showNetErrorDialog(refresh: () -> Unit) {
-    val dialog = NetErrorDialog(this)
+private var mNetErrorDialog: NetErrorDialog? = null
+fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
+    var dialog = mNetErrorDialog
+    if (dialog == null) {
+        dialog = NetErrorDialog(this)
+    }
+    if (dialog.isShowing) {
+        dialog.dismiss()
+    }
     dialog.setonClickListener(refresh, mobileNet = {
         Launch.skipMobileNetPage(this)
     }, wifi = {
         Launch.skipWifiPage(this)
     })
+    addDialog(dialog)
+    return dialog
 }
 
 fun AppCompatActivity.showCustomDialog() {

@@ -136,11 +136,7 @@ class ProcessView : View {
         canvas.save()
         val bgWidth = mTextBg?.intrinsicWidth ?: 0
         val bgHeight = mTextBg?.intrinsicHeight ?: 0
-        val moveX =
-            max(
-                ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth),
-                0f
-            )
+        val moveX = ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth).coerceAtLeast(0f)
         canvas.translate(moveX, 0f)
         mTextBg?.setBounds(0, 0, bgWidth, bgHeight)
         mTextBg?.draw(canvas)
