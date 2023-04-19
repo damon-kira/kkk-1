@@ -5,8 +5,10 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspRepayDetail
 import com.colombia.credit.databinding.ActivityDeferBinding
+import com.colombia.credit.dialog.ExtensionConfirmDialog
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.showCustomDialog
+import com.colombia.credit.expand.toast
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -38,6 +40,10 @@ open class DeferActivity : BaseActivity() {
 
         mBinding.tvApply.setBlockingOnClickListener {
             // 调用支付
+            ExtensionConfirmDialog(this).setOnClickListener {
+                toast("调H5支付，暂未处理")
+//                Launch.skipWebViewActivity(this, H5UrlManager.getPayUrl("",""))
+            }.show()
         }
     }
 

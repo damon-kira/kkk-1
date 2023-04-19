@@ -27,6 +27,7 @@
 
     <TextView
         android:id="@+id/tv_title"
+        style="@style/marginLeftAndRight12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -41,13 +42,15 @@
     <TextView
         android:id="@+id/tv_permission_text"
         style="@style/marginLeftAndRight16"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="@string/permission_dialog_message"
         android:textColor="@color/color_333333"
         android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <TextView

@@ -6,6 +6,7 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityRepayDetailBinding
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.showCustomDialog
+import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
 import com.common.lib.base.BaseActivity
@@ -41,7 +42,8 @@ class RepayDetailActivity : BaseActivity() {
         }
 
         mBinding.tvApply.setBlockingOnClickListener {
-            Launch.skipWebViewActivity(this, H5UrlManager.URL_PAY)
+            toast("调H5支付，暂未处理")
+//            Launch.skipWebViewActivity(this, H5UrlManager.URL_PAY)
         }
 
         mBinding.tvExtension.setBlockingOnClickListener {

@@ -1,7 +1,7 @@
 package com.colombia.credit.permission
 
 import android.content.Context
-import com.colombia.credit.databinding.DialogPermissionBinding
+import com.colombia.credit.databinding.DialogHintBinding
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -9,7 +9,7 @@ import com.util.lib.ifShow
 
 class HintDialog constructor(context: Context) : DefaultDialog(context) {
 
-    private val mBinding by binding<DialogPermissionBinding>()
+    private val mBinding by binding<DialogHintBinding>()
 
     private var mCloseListener: (() -> Unit)? = null
 
