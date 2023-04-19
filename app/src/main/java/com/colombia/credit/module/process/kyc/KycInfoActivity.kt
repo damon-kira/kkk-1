@@ -154,8 +154,8 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 if (mGender.containsKey(info.DrD60)) {
                     setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
                 }
-                loadImage(info.fefFSZ, PicType.PIC_FRONT)
                 loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
+                loadImage(info.fefFSZ, PicType.PIC_BACK)
             }
         }
     }
