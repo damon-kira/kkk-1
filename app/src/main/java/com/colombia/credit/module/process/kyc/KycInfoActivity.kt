@@ -125,6 +125,13 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     override fun initObserver() {
         mViewModel.imageLivedata.observerNonSticky(this) {
             if (!it.isSuccess() || !mBinding.ilPic.isAllSuccess()) {
+                if (mViewModel.mImageType == PicType.PIC_FRONT) {
+                    mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_ERROR)
+                    mBinding.ilPic.setLeftImage(R.drawable.kyc_front_pic)
+                } else if (mViewModel.mImageType == PicType.PIC_BACK) {
+                    mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_ERROR)
+                    mBinding.ilPic.setRightImage(R.drawable.kyc_back_pic)
+                }
                 return@observerNonSticky
             }
             it.getData()?.let { info ->

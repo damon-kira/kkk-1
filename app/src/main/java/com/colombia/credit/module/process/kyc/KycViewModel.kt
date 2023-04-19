@@ -18,8 +18,12 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     BaseProcessViewModel() {
     private val _imageLiveData = generatorLiveData<BaseResponse<KycOcrInfo>>()
     val imageLivedata = _imageLiveData
+
+    var mImageType = -1
+
     fun uploadImage(path: String, type: Int) {
         showloading()
+        mImageType = type
         _imageLiveData.addSourceLiveData(repository.uploadImage(path, type)) {
             hideLoading()
             if (it.isSuccess()) {
