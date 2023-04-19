@@ -19,6 +19,7 @@
     <string name="logout_yes">Sí</string>
 
     <string name="webview_ssl_hint">Validación de certificado SSL fallido</string>
+    <string name="copy_success">Se copió el número de cuenta</string>
 
     <string name="login_text">Continuar</string>
     <string name="protocol_params"> Acuerdo de Privacidad</string>
