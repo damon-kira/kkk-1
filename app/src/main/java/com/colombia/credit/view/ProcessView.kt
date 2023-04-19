@@ -4,8 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.colombia.credit.R
@@ -46,10 +47,13 @@ class ProcessView : View {
         Paint().also {
             it.isAntiAlias = true
             it.style = Paint.Style.FILL
-            it.strokeCap = Paint.Cap.ROUND
             it.color = mCurrColor
             it.strokeWidth = mProcessHeight.toFloat()
         }
+    }
+
+    private val mRectLine by lazy {
+        RectF(0f, 0f, mProcessWidth * 1f, mProcessHeight * 1f)
     }
 
     private val mTextBgSpace = 6.dp()
@@ -90,12 +94,15 @@ class ProcessView : View {
         }
     }
 
+    private var mLineMoveX = 0f
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val bgWidth = mTextBg?.intrinsicWidth ?: 0
         val processWidth = (mProcessWidth + mProcessSpace) * mStepCount - mProcessSpace
-        val drawableWidth = (mTextBg?.intrinsicWidth ?: 0) * mStepCount
         val finalHeight = (mTextBg?.intrinsicHeight ?: 0) + mTextBgSpace + mProcessHeight
-        setMeasuredDimension(max(processWidth, drawableWidth), finalHeight.toInt())
+        mLineMoveX = if (bgWidth > mProcessWidth) (bgWidth - mProcessWidth) * 0.5f else 0f
+        setMeasuredDimension((processWidth + mLineMoveX * 2).toInt(), finalHeight.toInt())
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -106,25 +113,20 @@ class ProcessView : View {
 
     override fun onDraw(canvas: Canvas?) {
         canvas ?: return
-        Log.d(TAG, "onDraw: ===========mCurrStep = $mCurrStep")
-        val halfHeight = mHeight / 2f
-
-        canvas.save()
-        val bgWidth = mTextBg?.intrinsicWidth ?: 0
-        val moveX = if (bgWidth > mProcessWidth) (bgWidth - mProcessWidth) / 2f else 0f
-        drawText(canvas, moveX)
+        val processWidth = mProcessWidth * 1f
+        drawText(canvas, mLineMoveX)
         val moveY = mHeight - mProcessHeight * 1f
-        Log.d(TAG, "onDraw: moveY = $moveY")
-        canvas.translate(moveX, moveY / 2)
+        canvas.save()
+        canvas.translate(mLineMoveX, moveY)
+        val rectRadius = mProcessHeight / 0.75f
+        mPaint.color = mCurrColor
         for (index in 1..mStepCount) {
-            if (index <= mCurrStep) {
-                mPaint.color = mCurrColor
-            } else {
+            if (index > mCurrStep) {
                 mPaint.color = mNormalColor
             }
-            canvas.drawLine(0f, halfHeight, mProcessWidth * 1f, halfHeight, mPaint)
+            canvas.drawRoundRect(mRectLine, rectRadius, rectRadius, mPaint)
             if (index < mStepCount) {
-                canvas.translate((mProcessWidth + mProcessSpace) * 1f, 0f)
+                canvas.translate(processWidth + mProcessSpace, 0f)
             }
         }
         canvas.restore()
@@ -134,12 +136,18 @@ class ProcessView : View {
         canvas.save()
         val bgWidth = mTextBg?.intrinsicWidth ?: 0
         val bgHeight = mTextBg?.intrinsicHeight ?: 0
-        val moveX = (mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth
+        val moveX =
+            max(
+                ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth),
+                0f
+            )
         canvas.translate(moveX, 0f)
         mTextBg?.setBounds(0, 0, bgWidth, bgHeight)
         mTextBg?.draw(canvas)
         val text = "${(mCurrStep * 20)}%"
-        canvas.drawText(text, bgWidth / 2f, bgHeight - 8.dp(), mTextPaint)
+        val bound = Rect()
+        mTextPaint.getTextBounds(text, 0, text.length, bound)
+        canvas.drawText(text, bgWidth / 2f, bgHeight - bound.height() + 4.dp(), mTextPaint)
         canvas.restore()
     }
 
