@@ -2,6 +2,7 @@ package com.colombia.credit.bean.resp
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.colombia.credit.expand.transform
 
 class RspRepayOrders {
 
@@ -19,9 +20,11 @@ class RspRepayOrders {
         var QiZorG: String? = null     //1代表勾选中
         var q48Wml8N: String? = null   //1代表可以展期
         var X32HrYq4u: String? = null  //展期金额
+            get() = field?.transform()
         var prr9Ie61: String? = null    //展期后时间
         var GHMXDjtsUn: String? = null  //展期天数
         var rCC18KSG: String? = null    //最初应还金额
+            get() = field?.transform()
 
         //新增
         var BPKD: String? = null // 产品id

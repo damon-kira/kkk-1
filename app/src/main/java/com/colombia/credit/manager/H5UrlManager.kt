@@ -1,6 +1,7 @@
 package com.colombia.credit.manager
 
 import com.colombia.credit.Constant
+import com.colombia.credit.expand.getUserToken
 
 object H5UrlManager {
 
@@ -11,5 +12,9 @@ object H5UrlManager {
     val URL_ABOUT = "$base_url/about"
 
     val URL_PAY = "$base_url/pay"
+
+    fun getPayUrl(id: String, amount: String): String {
+        return "$URL_PAY?tk=${getUserToken()}&id=$id&amount=$amount"
+    }
 
 }

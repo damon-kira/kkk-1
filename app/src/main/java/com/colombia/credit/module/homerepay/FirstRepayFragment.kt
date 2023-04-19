@@ -29,23 +29,29 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
         LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
     }
 
+    private var mIds: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.repayToolbar)
         mBinding.tvUser.text = getString(R.string.hi_user, mUserName)
         mBinding.repayTvRepay.setBlockingOnClickListener {
+            if (mIds.isNullOrEmpty()) {
+                onPullToRefresh()
+                return@setBlockingOnClickListener
+            }
             // 跳转还款详情页面
-            Launch.skipRepayDetailActivity(getSupportContext())
+            Launch.skipRepayDetailActivity(getSupportContext(), mIds.orEmpty())
         }
         mHomeLoanViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.repayTvAmount.apply {
                 text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.orEmpty()))
                 isSelected = it.v3ItXF > 0 // 是否逾期
             }
-
             // vzXq3u 还款日期
             mBinding.tvRepaydate.text = it.vzXq3u
-            if (it.v3ItXF > 0){
+            mIds = it.ZXEUWfOy
+            if (it.v3ItXF > 0) {
                 mBinding.etvOverdue.show()
                 mBinding.etvOverdue.text = getString(R.string.overdue_tag, it.v3ItXF.toString())
             }

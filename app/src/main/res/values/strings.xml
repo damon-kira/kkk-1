@@ -235,7 +235,7 @@
     <string name="defer_hint_text">La solicitud original se modificará automáticamente después de que la solicitud de prórroga se haya aprobado. Posteriormente, tienes que hacer el pago de acuerdo con la nueva orden</string>
     <string name="defer_detail_hint">Detalles de la extensión</string>
     <string name="defer_days">Período de la prórroga</string>
-    <string name="repay_amount_value">Pagar ahora $%s</string>
+    <string name="repay_amount_value">Pagar ahora %s</string>
     <string name="defer_confirm1">Consejos amables</string>
     <string name="defer_confirm2">Una vez que la solicitud de extensión de pago  sea exitosa, el pedido original se liquidará  automáticamente. Solo debe pagar de  acuerdo con el tiempo de pago del nuevo  pedido, confirme si desea pagar  la tarifa por demora por el pago por demora</string>
     <string name="defer_apply">Confirmar extensión</string>

@@ -4,14 +4,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.RspRepayOrders
 import com.colombia.credit.databinding.FragmentTabRepayBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.home.BaseHomeLoanFragment
+import com.colombia.credit.module.home.MainEvent
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
@@ -49,7 +50,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.recyclerview.adapter = mAdapter
 
         mAdapter.mExtensionListener = {
-            Launch.skipDeferActivity(getSupportContext())
+            Launch.skipDeferActivity(getSupportContext(), "")
         }
         mAdapter.mSelectListener = {
             logger_d(TAG,"onViewCreated  mSelectListener =========")
@@ -78,6 +79,10 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             if (mAdapter.getSelectorItems().isNotEmpty()) {
                 // 调起支付
             }
+        }
+
+        mBinding.emptyLayout.tvApply.setBlockingOnClickListener {
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
         }
     }
 

@@ -101,7 +101,7 @@
         <activity
             android:name=".module.banklist.BankInfoAddActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".module.history.HistoryActivity"
             android:screenOrientation="portrait" />

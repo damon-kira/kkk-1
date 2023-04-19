@@ -5,9 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by mingfeng on 2020-03-27.
- */
+
 class HttpLogger {
     companion object {
         private const val TAG = "debug_HttpLogger"

@@ -141,4 +141,9 @@ interface ApiService {
     @POST("Fzr/DnfbJqlp")
     @Headers("kio8YGhwe6:Iv7mKp0TcE")
     fun getRepayOrders(): Flowable<BaseResponse<RspRepayOrders>>
+
+    // 获取还款详情
+    @POST("sWatUY/AaHOW")
+    @Headers("kio8YGhwe6:mekK1MgIDG")
+    fun getRepayDetail(@Body body: RequestBody):Flowable<BaseResponse<RspRepayDetail>>
 }

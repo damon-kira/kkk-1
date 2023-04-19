@@ -8,11 +8,13 @@
     android:orientation="vertical">
 
     <com.colombia.credit.view.ToolbarLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/white"
+        android:paddingEnd="6dp"
         app:tl_back_text_color="@color/color_333333"
-        app:tl_right_icon="@drawable/icon_customer"
+        app:tl_custom_icon="@drawable/ic_custom_gray"
         app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/defer_title" />
@@ -157,7 +159,7 @@
             android:textColor="@color/color_333333"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_amount"
+            app:layout_constraintTop_toTopOf="@id/tv_repay_amount"
             tools:text="$8.000" />
 
         <!-- 支付当前费用 -->
@@ -173,7 +175,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_amount" />
+            app:layout_constraintTop_toBottomOf="@id/tv_repay_amount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Space

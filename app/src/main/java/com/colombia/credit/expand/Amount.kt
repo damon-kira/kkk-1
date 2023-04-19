@@ -4,6 +4,8 @@ import android.content.Context
 import com.colombia.credit.R
 import com.colombia.credit.app.getAppContext
 import com.util.lib.PackageUtil.getLaunchIntentByPackageName
+import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 /**
  * 现金数值添加分隔符
@@ -51,4 +53,15 @@ fun maskString(str: String?, preCount: Int, postCount: Int): String {
  */
 fun Context.getUnitString(amount: String) = getString(R.string.amount_unit, formatCommon(amount))
 
-fun getUnitString(amount: String) = getAppContext().getString(R.string.amount_unit, formatCommon(amount))
+fun getUnitString(amount: String) =
+    getAppContext().getString(R.string.amount_unit, formatCommon(amount))
+
+fun String.transform(): String {
+    var result = this
+    if (this.contains(".")) {
+        this.toDoubleOrNull()?.let {
+            result = ceil(it).toInt().toString()
+        }
+    }
+    return result
+}

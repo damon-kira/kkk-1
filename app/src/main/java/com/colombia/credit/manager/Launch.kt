@@ -18,6 +18,7 @@ import com.colombia.credit.module.banklist.BankInfoAddActivity
 import com.colombia.credit.module.banklist.ConfirmBankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
 import com.colombia.credit.module.defer.DeferActivity
+import com.colombia.credit.module.defer.RepayTabDeferActivity
 import com.colombia.credit.module.history.HistoryActivity
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
@@ -84,7 +85,12 @@ object Launch {
     }
 
     // 银行账户页面
-    fun skipBankCardListActivity(context: Context, amount: String, productId: String, bankNo: String) {
+    fun skipBankCardListActivity(
+        context: Context,
+        amount: String,
+        productId: String,
+        bankNo: String
+    ) {
         val intent = Intent(context, ConfirmBankCardListActivity::class.java)
         intent.putExtra(ConfirmBankCardListActivity.EXTRA_LOAN_AMOUNT, amount)
         intent.putExtra(ConfirmBankCardListActivity.EXTRA_PRODUCT_ID, productId)
@@ -116,12 +122,21 @@ object Launch {
         launch(context, RepeatConfirmActivity::class.java)
     }
 
-    fun skipDeferActivity(context: Context) {
-        launch(context, DeferActivity::class.java)
+    fun skipDeferActivity(context: Context, infoJson: String) {
+        val intent = Intent(context, DeferActivity::class.java)
+        intent.putExtra(DeferActivity.EXTRA_INFO, infoJson)
+        launch(context, DeferActivity::class.java, intent)
+    }
+    fun skipRepayDeferActivity(context: Context, infoJson: String) {
+        val intent = Intent(context, RepayTabDeferActivity::class.java)
+        intent.putExtra(DeferActivity.EXTRA_INFO, infoJson)
+        launch(context, RepayTabDeferActivity::class.java, intent)
     }
 
-    fun skipRepayDetailActivity(context: Context) {
-        launch(context, RepayDetailActivity::class.java)
+    fun skipRepayDetailActivity(context: Context, productId: String) {
+        val intent = Intent(context, RepayDetailActivity::class.java)
+        intent.putExtra(RepayDetailActivity.EXTRA_ID, productId)
+        launch(context, RepayDetailActivity::class.java, intent)
     }
 
     fun skipWifiPage(context: Context) {
