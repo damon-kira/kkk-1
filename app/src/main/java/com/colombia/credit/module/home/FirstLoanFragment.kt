@@ -44,11 +44,15 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
                 it.getData()?.let {info ->
                     jumpProcess(getSupportContext(), info.getProcessType())
                 }
-            } else it.ShowErrorMsg()
+            } else it.ShowErrorMsg(::getProces)
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
-            mHomeViewModel.getCertProcess()
+            getProces()
         }
+    }
+
+    private fun getProces() {
+        mHomeViewModel.getCertProcess()
     }
 }

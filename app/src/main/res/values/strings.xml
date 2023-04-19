@@ -127,6 +127,7 @@
     <string name="error_bank_no">Información bancaria incorrecta, intenta de nuevo</string>
 
     <!-- 身份证信息 -->
+    <string name="kyc_title">Verificar identidad</string>
     <string name="kyc_front_text">Frente (retrato)</string>
     <string name="kyc_back_text">Foto trasera</string>
     <string name="kyc_nuip_hint">Por favor complete su número NUIP</string>

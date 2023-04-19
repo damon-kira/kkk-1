@@ -1,5 +1,6 @@
 package com.colombia.credit.expand
 
+import com.colombia.credit.app.AppInjector
 import com.common.lib.net.bean.BaseResponse
 import java.net.ConnectException
 import java.util.concurrent.TimeoutException
@@ -8,7 +9,9 @@ import java.util.concurrent.TimeoutException
 fun BaseResponse<*>.ShowErrorMsg(refresh: (() -> Unit)? = null) {
     val msg = msg
     if (e is ConnectException || e is TimeoutException) {
-        refresh?.invoke()
+        AppInjector.getTopActivity()?.showNetErrorDialog {
+            refresh?.invoke()
+        }
         return
     }
 
