@@ -104,15 +104,14 @@ class CameraXManager(
 
 
     override fun switchCamera(callback: (curCameraId: Int) -> Unit) {
-        val lensFacing = if (CameraSelector.LENS_FACING_FRONT == mCamera.getLensFacing()) {
-            CameraSelector.LENS_FACING_BACK
+        val cameraId = if (CameraSelector.LENS_FACING_FRONT == mCamera.getLensFacing()) {
+            FACING_BACK
         } else {
-            CameraSelector.LENS_FACING_FRONT
+            FACING_FRONT
         }
+        mCamera.setLensFacing(cameraId)
         bindCameraUseCases()
         activity.runOnUiThread {
-            val cameraId =
-                if (lensFacing == CameraSelector.LENS_FACING_BACK) FACING_BACK else FACING_FRONT
             callback(cameraId)
         }
     }
