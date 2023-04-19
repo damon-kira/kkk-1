@@ -238,6 +238,7 @@ fun Activity.showNoPermissionDialog(
 ): DefaultDialog? {
 
     if (deniedList.isEmpty()) {
+        cancel.invoke()
         return null
     }
 
@@ -251,9 +252,6 @@ fun Activity.showNoPermissionDialog(
     val dialog = HintDialog(this)
         .showClose(false)
         .setMessage(message)
-        .setOnCloseListener {
-            cancel.invoke()
-        }
         .setOnClickListener { rightListener.invoke() }
     dialog.show()
     return dialog

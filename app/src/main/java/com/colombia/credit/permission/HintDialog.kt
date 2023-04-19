@@ -51,8 +51,8 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
 
     fun setOnClickListener(listener: () -> Unit): HintDialog {
         mBinding.tvSkip.setBlockingOnClickListener {
-            listener.invoke()
             dismiss()
+            listener.invoke()
         }
         return this
     }

@@ -12,6 +12,7 @@ import com.bigdata.lib.LocationHelp
 import com.common.lib.base.BaseActivity
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
+import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 
@@ -226,7 +227,6 @@ object PermissionHelper {
                     deniedList[i].permissionName()
                 }
                 activity.reqPermission({ isNotAsk: Boolean, isAll: Boolean ->
-
                     if (isUIDestroyed(activity)) {
                         return@reqPermission
                     }
@@ -241,11 +241,12 @@ object PermissionHelper {
                         }
                     }
 //                    fixCalendarPermission()
+                    logger_d("debug_PermissionHelper", "result = ${(!isAll && isNotAsk && forceSettingDialog || forceSettingDialog)}")
                     if (!isAll && isNotAsk && forceSettingDialog || forceSettingDialog) {
                         mCheckPermissionDialog = activity.showNoPermissionDialog(deniedList.filter {
                             !it.hasThisPermission(activity)
                         }, cancel = {
-                            result.invoke(false)
+                            result.invoke(true)
                         }, rightListener = skipSettingListener
                         )
                     } else {

@@ -79,6 +79,7 @@ class LoginFragment : BaseLoginFragment() {
 
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
             if (time == -1L) {
+                mBinding.loginTvOtp.isEnabled = true
                 mBinding.loginTvOtp.setText(R.string.sms_otp)
             } else {
                 mBinding.loginTvOtp.text = getString(R.string.seconds, "$time")
@@ -87,6 +88,7 @@ class LoginFragment : BaseLoginFragment() {
 
         mViewModel.mAuthSmsCodeLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
+                mBinding.loginTvOtp.isEnabled = false
                 mViewModel.startCountdown(mobile = getMobile())
             } else {
                 it.ShowErrorMsg(::reqCode)

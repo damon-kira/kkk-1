@@ -10,6 +10,7 @@ import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
+import com.util.lib.MainHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +22,15 @@ class UploadActivity : BaseProcessActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MainHandler.postDelay({
+            hideLoading()
+        }, 3500)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLoading()
     }
 
     override fun checkCommitInfo(): Boolean {

@@ -154,7 +154,7 @@
                     app:if_can_edit="true"
                     app:inputType="number"
                     app:left_icon="@drawable/ic_birthday"
-                    app:max_length="8"
+                    app:max_length="16"
                     app:rightIcon_visiblity="gone"
                     app:title="@string/kyc_birthday" />
 

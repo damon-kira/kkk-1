@@ -18,12 +18,16 @@ import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
 import com.colombia.credit.expand.TYPE_SUCCESS
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.login.createCountDownTimer
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.permission.CameraPermission
+import com.colombia.credit.permission.PermissionHelper
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
+import com.mexico.camera.cameraview.ICamera
 import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.expand.getPicCacheFilePath
@@ -46,30 +50,27 @@ class FaceActivity : BaseProcessActivity() {
 
     private var mCountDownTimer: CountDownTimer? = null
 
+    private var mCameraManager: ICamera? = null
+
     override fun onCreate(savedInstanceState:  Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(true, R.color.transparent, false)
-        setCountDownText(4)
 
         mBinding.faceAivSwitch.ifShow(AppEnv.DEBUG)
 
-        val manager = CameraFactory.invoke(
-            CameraType.CameraX,
-            this,
-            mBinding.cameraview,
-            BaseCameraManager.FACING_FRONT,
-            BaseCameraManager.SCREEN_PORTRAIT
-        )
+        if (CameraPermission().hasThisPermission(this)) {
+            openCamera()
+        }
 
         mBinding.faceAivSwitch.setBlockingOnClickListener {
-            manager.switchCamera()
+            mCameraManager?.switchCamera()
         }
 
         faceWifi = WifiHelper.getSSid(this)
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))
             showLoading(true)
-            manager.takePicture(file) { success, f ->
+            mCameraManager?.takePicture(file) { success, f ->
                 if (BuildConfig.DEBUG) {
                     Log.i(
                         TAG,
@@ -80,7 +81,7 @@ class FaceActivity : BaseProcessActivity() {
                     hideLoading()
                     if (success && f.exists()) {
                         val rect = Rect(mBinding.aivFaceMask.left, mBinding.aivFaceMask.top, mBinding.aivFaceMask.right, mBinding.aivFaceMask.bottom)
-                        BitmapCrop.cropAndCompress(this, f, rect, manager.isFront()) { finalFile ->
+                        BitmapCrop.cropAndCompress(this, f, rect, mCameraManager?.isFront() ?: true) { finalFile ->
                             if (finalFile != null) {
                                 // 上传照片
                                 mViewModel.uploadInfo(ReqFaceInfo().also {
@@ -92,7 +93,30 @@ class FaceActivity : BaseProcessActivity() {
                 }
             }
         }
+    }
 
+    private fun openCamera() {
+        setCountDownText(4)
+        countDown(TYPE_FIRST_INT, 6)
+        mCameraManager = CameraFactory.invoke(
+            CameraType.CameraX,
+            this,
+            mBinding.cameraview,
+            BaseCameraManager.FACING_FRONT,
+            BaseCameraManager.SCREEN_PORTRAIT
+        )
+    }
+
+    private fun reqPermission() {
+        PermissionHelper.reqPermission(this, arrayListOf(CameraPermission()), true, { result ->
+            if (result) {
+                openCamera()
+            } else {
+                finish()
+            }
+        }, {
+            jumpToAppSettingPage()
+        })
     }
 
     override fun initObserver() {}
@@ -116,7 +140,7 @@ class FaceActivity : BaseProcessActivity() {
 
     override fun onStart() {
         super.onStart()
-        countDown(TYPE_FIRST_INT, 6)
+        reqPermission()
     }
 
     private fun setCountDownText(second: Long) {

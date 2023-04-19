@@ -49,11 +49,12 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.recyclerview.linearLayoutManager()
         mBinding.recyclerview.adapter = mAdapter
 
+        mBinding.tvRepay.text = getString(R.string.tab_repay_btn, "0")
+
         mAdapter.mExtensionListener = {
             Launch.skipDeferActivity(getSupportContext(), "")
         }
         mAdapter.mSelectListener = {
-            logger_d(TAG,"onViewCreated  mSelectListener =========")
             val amount = getUnitString(mAdapter.getTotalAmount().toString())
             mBinding.tvRepay.text = getString(R.string.tab_repay_btn, amount)
         }
