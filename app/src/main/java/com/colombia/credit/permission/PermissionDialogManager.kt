@@ -74,7 +74,7 @@ class PermissionDialogManager {
         val boolean =
             SharedPrefGlobal.getBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, false)
         logger_d("logout", "是否已经显示过>>>$boolean")
-        return !boolean
+        return !boolean || protocol
     }
 
     /**
@@ -83,6 +83,10 @@ class PermissionDialogManager {
     fun setShowDialogTips(isShow: Boolean) {
         SharedPrefGlobal.setBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, isShow)
     }
+
+    var protocol: Boolean
+        set(value) = SharedPrefGlobal.setBoolean("key_protocl", value)
+        get() = !SharedPrefGlobal.getBoolean("key_protocl", false)
 
     fun onDestroy() {
         mPermissionTipsDialog?.setOnDismissListener(null)

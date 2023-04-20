@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <com.colombia.credit.view.ToolbarLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/white"

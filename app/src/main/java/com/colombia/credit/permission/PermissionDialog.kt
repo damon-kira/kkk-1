@@ -43,6 +43,7 @@ class PermissionDialog(context: Context): DefaultDialog(context) {
         mBinding.aivProtocol.setBlockingOnClickListener {
             mBinding.aivProtocol.isSelected = !mBinding.aivProtocol.isSelected
             mBinding.okBtn.isEnabled = mBinding.aivProtocol.isSelected
+            PermissionDialogManager.getInstance().protocol = mBinding.aivProtocol.isSelected
         }
     }
 

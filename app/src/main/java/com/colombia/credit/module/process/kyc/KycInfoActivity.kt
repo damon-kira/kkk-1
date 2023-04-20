@@ -51,15 +51,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
         setViewModelLoading(mViewModel)
-        mBinding.tvCommit.setBlockingOnClickListener(this)
-        mBinding.kycBivGender.setBlockingOnClickListener(this)
-        mBinding.kycBivBirthday.setBlockingOnClickListener(this)
-        mBinding.ilPic.setClickListener({
-            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_FRONT)
-        }, {
-            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_BACK)
-        })
-
+        initView()
         mKycPicHelper.mResultListener = { filePath, picType ->
             if (!filePath.isNullOrEmpty()) {
                 GlideUtils.loadImageNoCache(
@@ -95,6 +87,18 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
         }
         mViewModel.getInfo()
+    }
+
+    private fun initView() {
+        mBinding.tvCommit.setBlockingOnClickListener(this)
+        mBinding.kycBivGender.setBlockingOnClickListener(this)
+        mBinding.kycBivBirthday.setBlockingOnClickListener(this)
+        mBinding.ilPic.setClickListener({
+            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_FRONT)
+        }, {
+            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_BACK)
+        })
+
     }
 
     private fun loadImage(url: String?, type: Int) {
@@ -134,9 +138,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 }
                 return@observerNonSticky
             }
-            if(!mBinding.ilPic.isAllSuccess()){
+            if (!mBinding.ilPic.isAllSuccess()) {
                 return@observerNonSticky
-        }
+            }
             it.getData()?.let { info ->
                 setDetailInfo(info)
                 mBinding.ilPic.setEnable(leftEnable = false, rightEnable = false)
@@ -216,7 +220,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         kycInfo.tAUA?.let {
             mBinding.kycBivBirthday.setViewText(it.OXOcXj.orEmpty())
             val gender = it.COXa.orEmpty()
-            if(mGender.containsKey(gender)) {
+            if (mGender.containsKey(gender)) {
                 setBaseInfo(mBinding.kycBivGender, mGender[gender], gender)
 
             }

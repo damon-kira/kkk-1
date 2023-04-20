@@ -29,6 +29,9 @@ class SettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        mBinding.toolbar.setOnbackListener {
+            finish()
+        }
 
         val dialog = HintDialog(this).setTitleText(getString(R.string.delete_hint_title))
             .setMessage(getString(R.string.delete_hint))
