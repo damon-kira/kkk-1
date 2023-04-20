@@ -112,17 +112,18 @@
                     tools:text="$ 9.000" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 提示信息 -->
-            <com.colombia.credit.view.TextViewDrawable
-                style="@style/marginLeftAndRight16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:drawableStart="@drawable/shape_error_hint"
-                android:drawablePadding="4dp"
-                android:text="@string/repeat_confirm_hint"
-                android:textColor="@color/color_333333"
-                android:textSize="10sp"
-                app:isAlignCenter="false" />
+            <!--            <com.colombia.credit.view.TextViewDrawable-->
+            <!--                style="@style/marginLeftAndRight16"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="12dp"-->
+            <!--                android:drawableStart="@drawable/shape_error_hint"-->
+            <!--                android:drawablePadding="4dp"-->
+            <!--                android:text="@string/repeat_confirm_hint"-->
+            <!--                android:textColor="@color/color_333333"-->
+            <!--                android:textSize="10sp"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:isAlignCenter="false" />-->
             <!-- 确认按钮 -->
             <TextView
                 android:id="@+id/tv_confirm"
@@ -139,18 +140,19 @@
                 android:textStyle="bold" />
 
             <!-- 取消按钮 -->
-            <com.colombia.credit.view.TextViewLine
-                android:id="@+id/tv_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:padding="4dp"
-                android:text="@string/confirm_cancel"
-                android:textColor="@color/color_666666"
-                android:textSize="16sp"
-                app:tvl_center="false"
-                app:tvl_isShow="true" />
+            <!--            <com.colombia.credit.view.TextViewLine-->
+            <!--                android:id="@+id/tv_cancel"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:layout_marginTop="12dp"-->
+            <!--                android:padding="4dp"-->
+            <!--                android:text="@string/confirm_cancel"-->
+            <!--                android:textColor="@color/color_666666"-->
+            <!--                android:textSize="16sp"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:tvl_center="false"-->
+            <!--                app:tvl_isShow="true" />-->
 
             <!-- 详细订单信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -268,13 +270,26 @@
 
                 <!-- 产品列表 -->
                 <LinearLayout
-                    android:id="@+id/ll_product_list"
+                    android:id="@+id/ll_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_f4f4f4_4"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_total_hint">
+
+                    <LinearLayout
+                        android:id="@+id/ll_product_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/aiv_arrow"
@@ -287,15 +302,27 @@
 
                 </LinearLayout>
 
-                <!--item layout/layout_repeat_confirm_item -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                <Space
+                    android:id="@+id/space"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_item" />
+
+
+                <FrameLayout
+                    android:id="@+id/fl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/ll_product_list" />
+                    app:layout_constraintTop_toBottomOf="@id/space">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+                </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -306,6 +333,10 @@
                 android:text="@string/repeat_confirm_bottom_hint"
                 android:textColor="#FF999999"
                 android:textSize="10sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="30dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

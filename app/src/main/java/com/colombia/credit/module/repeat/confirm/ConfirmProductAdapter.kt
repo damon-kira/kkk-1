@@ -44,6 +44,17 @@ class ConfirmProductAdapter(items: ArrayList<RspRepeatCalcul.CalculDetail>) :
         list.filter {
             it.isCheck == 1
         }
-        list
+    }
+
+    fun getTotalAmount() = run {
+        val list = currentItems
+        var result = 0L
+        list.filter {
+            it.isCheck == 1
+        }.map { it.kDyJFWE?.toLongOrNull() ?: 0 }
+            .forEach {
+                result += it
+            }
+        result
     }
 }

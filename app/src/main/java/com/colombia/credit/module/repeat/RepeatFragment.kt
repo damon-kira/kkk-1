@@ -33,7 +33,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
-        stopRefresh()
+        mHomeViewModel.getHomeInfo()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

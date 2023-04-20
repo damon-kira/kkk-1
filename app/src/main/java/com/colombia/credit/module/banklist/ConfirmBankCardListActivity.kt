@@ -7,6 +7,7 @@ import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.module.firstconfirm.ConfirmEvent
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.repeat.confirm.BankEvent
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -53,6 +54,13 @@ class ConfirmBankCardListActivity : BankCardListActivity() {
             bankNo = mAdapter.getSelectData()?.JJ41sQr.orEmpty(),
             productId = mProductId
         )
+    }
+
+    override fun finish() {
+        mCurrBankNo?.let {
+            LiveDataBus.post(BankEvent(BankEvent.EVENT_BANK, mCurrBankNo.orEmpty()))
+        }
+        super.finish()
     }
 
     private fun confirmLoan() {

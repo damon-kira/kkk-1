@@ -20,6 +20,9 @@ class RepeatConfirmViewModel @Inject constructor(private val repository: RepeatC
 
             if (it.isSuccess()) {
                 it.getData()?.vQDdL?.apply {
+                    this.forEach {info ->
+                        info.isCheck = 1
+                    }
                     mProListLiveData.postValue(this)
                 }
             }

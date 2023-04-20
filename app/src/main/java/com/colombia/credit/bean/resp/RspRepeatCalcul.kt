@@ -10,7 +10,6 @@ class RspRepeatCalcul {
     var SNgzk66y: String? = null //    预计到账时间
     var vQDdL: ArrayList<CalculDetail>? = null //    产品列表
 
-
     class CalculDetail {
         var kDyJFWE: String? = null //    产品金额
         var Bwh8vVa5wn: String? = null //    产品Code
