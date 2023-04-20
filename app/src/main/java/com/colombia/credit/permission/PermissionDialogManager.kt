@@ -1,12 +1,15 @@
 package com.colombia.credit.permission
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.cache.lib.SharedPrefGlobal
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
 import com.util.lib.log.logger_d
 
-class PermissionDialogManager {
+class PermissionDialogManager: LifecycleEventObserver {
 
     companion object {
         private val _instance = PermissionDialogManager()
@@ -25,6 +28,7 @@ class PermissionDialogManager {
             dismiss.invoke()
             return
         }
+        activity.lifecycle.addObserver(this)
 
         // 添加APPlist和相册声明
         val tempList = arrayListOf<AbsPermissionEntity>()
@@ -68,6 +72,12 @@ class PermissionDialogManager {
         }
     }
 
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if(event == Lifecycle.Event.ON_DESTROY) {
+            source.lifecycle.removeObserver(this)
+            onDestroy()
+        }
+    }
 
     /** 是否显示 */
     fun isShowDialogTips(): Boolean {
