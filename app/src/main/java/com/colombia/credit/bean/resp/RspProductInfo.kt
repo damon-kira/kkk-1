@@ -73,16 +73,25 @@ class FirstConfirmInfo {
 //"prTag":"1,2,3"
 // 复贷产品信息
 class RepeatProductInfo {
-    val g7tzi: Int = 0//范围金额最大值
-    val sF1DFWU: Int = 0 //范围金额最小值
+    val g7tzi: String? = null
+        //范围金额最大值
+        get() = field?.transform()
+    val sF1DFWU: String? = null //范围金额最小值
+        get() = field?.transform()
     val xXgaK4: String? = null // "0.1%" 日利息
-    val cQ75eX5: Int = 0 //周期最大值
-    val D9hR: Int = 0 // 周期最小值
+    val cQ75eX5: String? = null //周期最大值
+    val D9hR: String? = null // 周期最小值
     val S9ig78H: String? = null // 产品名称
     val Gk9MGh: String? = null // 产品logo url
     val eqOEs: String? = null // RST 产品编码
-    val RXYz: Int = 0 // // 是否选中 1：选中 0：未选中
+    var RXYz: String = "0" // // 是否选中 1：选中 0：未选中
     val ir3MCCmbF3: String? = null //"prTag":"1,2,3"
+
+    fun change(){
+        RXYz = if (RXYz == "0") "1" else "0"
+    }
+
+    fun selector() = RXYz == "1"
 }
 
 //"notRepayCount":2,//未还订单数

@@ -130,7 +130,7 @@ interface ApiService {
 
     @POST("6SgT4/N1WQmiq")
     @Headers("kio8YGhwe6:agNcUkPUCu")
-    fun getRepeatConfirmInfo(@Body body: RequestBody):Flowable<BaseResponse<RspRepeatConfirmInfo>>
+    fun getRepeatCalcul(@Body body: RequestBody):Flowable<BaseResponse<RspRepeatCalcul>>
 
     // 历史订单
     @POST("S56sI1etMP/bkz")

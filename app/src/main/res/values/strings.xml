@@ -101,7 +101,7 @@
     <string name="work_selector">Por favor elige</string>
     <string name="work_salary">Frecuencia de pago de salarios</string><!-- 发薪日 -->
     <string name="work_month_income">Ingreso Mensual</string>
-    <string name="work_life">Ingreso Mensual</string>
+    <string name="work_life">Código Postal</string>
     <string name="work_life_hint">¿Cuánto tiempo llevas en tu trabajo actual?</string>
 
     <!-- 联系人 -->
@@ -310,4 +310,11 @@
     <!-- 拉黑 -->
     <string name="black_text1">Producto de préstamo Cantidad</string>
     <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
+    <string name="hosta_s">Hasta %s</string>
+
+     <!--最多只能同时申请六个贷款产品-->
+    <string name="toast_product_up">Solo puede solicitar hasta %s productos de préstamo al mismo tiempo</string>
+    <!--您已经申请很多个应用了，达到了申请上限，请明天再来尝试-->
+    <string name="toast_product_app">Ha solicitado muchos productos y ha alcanzado el límite de aplicaciones, vuelva a intentarlo mañana</string>
+    <string name="toast_min_product">El límite mínimo de endeudamiento es un 1</string><!-- 最少勾选一个产品 -->
 </resources>

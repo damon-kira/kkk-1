@@ -35,6 +35,7 @@ class BlackFragment: BaseHomeFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setCustomListener(mBinding.toolbar)
         mBinding.includeBlack.let {
             it.tvText1.setText(R.string.black_text1)
             it.tvText2.setText(R.string.refused_days)

@@ -25,7 +25,8 @@ class UploadActivity : BaseProcessActivity() {
 
         MainHandler.postDelay({
             hideLoading()
-        }, 3500)
+            uploadSuccess()
+        }, 4500)
     }
 
     override fun onResume() {

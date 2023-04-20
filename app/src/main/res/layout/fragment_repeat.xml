@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/home_aiv"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:background="@drawable/image_home_bg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.colombia.credit.view.ToolbarLayout
-        android:id="@+id/review_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginRight="16dp"
@@ -31,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/review_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/repeat_recyclerview"
@@ -57,5 +58,24 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <com.colombia.credit.view.textview.EasyTextView
+        android:id="@+id/etv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="36dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="2dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:etv_left_top_corner="12dp"
+        app:etv_right_bottom_corner="12dp"
+        app:etv_right_top_corner="12dp"
+        app:etv_solid="@color/color_f5be41"
+        app:layout_constraintBottom_toBottomOf="@id/repeat_tv_apply"
+        app:layout_constraintRight_toRightOf="@id/repeat_tv_apply"
+        tools:text="@string/hosta_s" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

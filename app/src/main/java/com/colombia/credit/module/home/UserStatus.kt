@@ -1,9 +1,9 @@
 package com.colombia.credit.module.home
 
 object UserStatus {
+    const val STATUS_REPEAT = "0"
     const val STATUS_FIRST = "1"
-    const val STATUS_REPEAT = "2"
-    const val STATUS_BLACK = "3" // 只有复贷用户来黑，首贷不会
+    const val STATUS_BLACK = "2" // 只有复贷用户来黑，首贷不会
 }
 
 // 00：新用户确定额度,

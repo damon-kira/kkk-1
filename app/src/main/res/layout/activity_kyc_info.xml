@@ -116,7 +116,7 @@
                     app:if_can_edit="true"
                     app:left_icon="@drawable/ic_nuip"
                     app:max_length="15"
-                    app:digits="123456789."
+                    app:digits="0123456789."
                     app:rightIcon_visiblity="gone"
                     app:title="@string/kyc_nuip" />
 

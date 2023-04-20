@@ -44,6 +44,8 @@ class EmailMatchAdapter(items: ArrayList<String>) : BaseAdapter(), Filterable,
                 val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 it.setTextColor(ContextCompat.getColor(parent.context, R.color.colorPrimary))
                 it.textSize = 6.dp()
+                val padding2 = 2f.dp()
+                it.setPadding(6f.dp(), padding2, padding2, padding2)
                 it.layoutParams = params
             }
             holder = ViewHolder(view)

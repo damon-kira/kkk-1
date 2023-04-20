@@ -12,14 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/white"
-        app:tl_right_icon="@drawable/icon_customer"
-        app:tl_right_icon_show="true"
+        android:paddingEnd="6dp"
+        app:tl_back_text_color="@color/color_333333"
+        app:tl_custom_icon="@drawable/ic_custom_gray"
+        app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/repeat_confirm" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,11 +105,11 @@
                     android:id="@+id/tv_amount_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ 9.000"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintRight_toRightOf="@id/tv_bank_no"
-                    app:layout_constraintTop_toTopOf="@id/tv_amount_text" />
+                    app:layout_constraintTop_toTopOf="@id/tv_amount_text"
+                    tools:text="$ 9.000" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 提示信息 -->
             <com.colombia.credit.view.TextViewDrawable
@@ -229,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/total_interest_text"
+                    android:text="@string/history_repay_date"
                     android:textColor="@color/color_999999"
                     android:textSize="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"

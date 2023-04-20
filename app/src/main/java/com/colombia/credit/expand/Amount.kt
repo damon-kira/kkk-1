@@ -51,10 +51,10 @@ fun maskString(str: String?, preCount: Int, postCount: Int): String {
 /**
  * @param amount 不需要添加分隔符
  */
-fun Context.getUnitString(amount: String) = getString(R.string.amount_unit, formatCommon(amount))
+fun Context.getUnitString(amount: String?) = getString(R.string.amount_unit, formatCommon(amount ?: "0"))
 
-fun getUnitString(amount: String) =
-    getAppContext().getString(R.string.amount_unit, formatCommon(amount))
+fun getUnitString(amount: String?) =
+    getAppContext().getString(R.string.amount_unit, formatCommon(amount ?: "0"))
 
 fun String.transform(): String {
     var result = this

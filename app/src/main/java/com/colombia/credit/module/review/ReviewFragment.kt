@@ -5,6 +5,7 @@ import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentReviewBinding
 import com.colombia.credit.expand.formatCommon
+import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.mUserName
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
@@ -32,8 +33,7 @@ class ReviewFragment : BaseHomeLoanFragment() {
         setCustomListener(mBinding.reviewToolbar)
         mBinding.tvUser.text = getString(R.string.hi_user, mUserName)
         mHomeLoanViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            mBinding.reviewTvAmount.text =
-                formatCommon(getString(R.string.amount_unit, it.yqGhrjOF2.orEmpty()))
+            mBinding.reviewTvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
         }
     }
 }

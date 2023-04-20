@@ -26,7 +26,7 @@ import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseHomeFragment(), IHomeFragment {
+class HomeFragment : BaseHomeFragment() {
 
     private val mBinding by binding(FragmentHomeBinding::inflate)
 
@@ -150,7 +150,12 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
                 }
             }
             UserStatus.STATUS_REPEAT -> {
-                getInstance(getSupportContext(), RepeatFragment::class.java, null)
+                val empty = rspInfo.jBRR?.isEmpty() ?: true
+                if (empty){
+                    mNoProductFragment
+                } else {
+                    getInstance(getSupportContext(), RepeatFragment::class.java, null)
+                }
             }
             UserStatus.STATUS_BLACK -> {
                 getInstance(getSupportContext(), BlackFragment::class.java, null)
@@ -158,8 +163,6 @@ class HomeFragment : BaseHomeFragment(), IHomeFragment {
             else -> null
         }
     }
-
-    override fun getData(): RspProductInfo? = mHomeViewModel.mRspProductInfo
 
     private fun stopRefresh() {
         val fragment = FragmentHelper.getCurrFragment(

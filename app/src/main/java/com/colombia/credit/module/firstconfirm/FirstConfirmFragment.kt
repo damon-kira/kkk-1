@@ -1,10 +1,8 @@
 package com.colombia.credit.module.firstconfirm
 
 import android.os.Bundle
-import android.telephony.TelephonyCallback.DataActivityListener
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.RspProductInfo
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
@@ -14,7 +12,6 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.HomeLoanViewModel
-import com.colombia.credit.module.home.IHomeFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -49,6 +46,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModelLoading(mViewModel)
+        setCustomListener(mBinding.toolbar)
         initObserver()
 
         mBinding.rlPeriod2.setBlockingOnClickListener(this)

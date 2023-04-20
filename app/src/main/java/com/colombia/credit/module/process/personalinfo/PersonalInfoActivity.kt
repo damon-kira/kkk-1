@@ -117,7 +117,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
             R.id.biv_marriage -> {
                 showProcessSelectorDialog(
-                    getString(R.string.education),
+                    getString(R.string.marriage),
                     mMarriage,
                     mBinding.bivMarriage.tag?.toString().orEmpty()
                 ) {

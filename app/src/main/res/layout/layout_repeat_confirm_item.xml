@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
+    android:id="@+id/cl_item"
+    android:background="@drawable/selector_item_bg"
     android:paddingBottom="10dp">
 
     <!-- 选择态 -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/aiv_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginStart="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

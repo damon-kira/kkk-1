@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.colombia.credit.R
 import com.colombia.credit.databinding.LayoutEmailViewBinding
+import com.colombia.credit.expand.errorImageSpan
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.dip2px
 import com.util.lib.show
@@ -256,8 +257,8 @@ class EmailInfoView : AbsBaseInfoView {
     override fun setError(errorStr: String, hasIcon: Boolean) {
         mIsError = true
         val errorSpannable = SpannableStringBuilder(errorStr)
-//        if (hasIcon)
-//            errorSpannable.insert(0, errorImageSpan)
+        if (hasIcon)
+            errorSpannable.insert(0, errorImageSpan)
         mBinding.bivTvError.visibility = View.VISIBLE
         mBinding.bivTvError.text = errorSpannable
         mBinding.bivEdittext.isSelected = true

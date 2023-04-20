@@ -118,8 +118,10 @@ object Launch {
         launch(context, UploadActivity::class.java)
     }
 
-    fun skipRepeatConfirmActivity(context: Context) {
-        launch(context, RepeatConfirmActivity::class.java)
+    fun skipRepeatConfirmActivity(context: Context, ids: String) {
+        val intent = Intent(context, RepeatConfirmActivity::class.java)
+        intent.putExtra(RepeatConfirmActivity.EXTRA_IDS, ids)
+        launch(context, RepeatConfirmActivity::class.java, intent)
     }
 
     fun skipDeferActivity(context: Context, infoJson: String) {

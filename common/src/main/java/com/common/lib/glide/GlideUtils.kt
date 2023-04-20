@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -60,7 +61,7 @@ object GlideUtils {
         Glide.with(context)
             .asBitmap()
             .apply(
-                createCornerRequestOptions(
+                createCornerRequestOptions(context,
                     imageView.width,
                     imageView.height,
                     false,
@@ -124,6 +125,7 @@ object GlideUtils {
 
     @SuppressLint("CheckResult")
     private fun createCornerRequestOptions(
+        context: Context,
         width: Int,
         height: Int,
         skipMemory: Boolean = true,
@@ -143,10 +145,10 @@ object GlideUtils {
         requestOptions = requestOptions.skipMemoryCache(skipMemory).diskCacheStrategy(strategy)
             .override(width, height)
         if (placeholder != 0) {
-            requestOptions.placeholder(placeholder)
+            requestOptions.placeholder(AppCompatResources.getDrawable(context, placeholder))
         }
         if (errorDrawable != 0) {
-            requestOptions.error(errorDrawable)
+            requestOptions.error(AppCompatResources.getDrawable(context, errorDrawable))
         }
         return requestOptions
     }

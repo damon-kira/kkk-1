@@ -26,8 +26,6 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
 
     val mCertProcessLiveData = generatorLiveData<BaseResponse<RspCertProcessInfo>>()
 
-    var mRspProductInfo: RspProductInfo? = null
-
     init {
         _homeLiveData.observerNonStickyForever {response ->
             if (response.isSuccess()) {

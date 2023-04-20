@@ -8,10 +8,7 @@ import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.HomeLoanViewModel
-import com.colombia.credit.module.home.IHomeFragment
 import com.common.lib.livedata.LiveDataBus
-import com.common.lib.livedata.observerNonSticky
-import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
