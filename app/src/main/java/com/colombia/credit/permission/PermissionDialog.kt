@@ -8,10 +8,10 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.colombia.credit.manager.Launch
 import com.colombia.credit.R
 import com.colombia.credit.databinding.DlgPermissionLayoutBinding
 import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.manager.Launch
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -43,7 +43,6 @@ class PermissionDialog(context: Context): DefaultDialog(context) {
         mBinding.aivProtocol.setBlockingOnClickListener {
             mBinding.aivProtocol.isSelected = !mBinding.aivProtocol.isSelected
             mBinding.okBtn.isEnabled = mBinding.aivProtocol.isSelected
-            PermissionDialogManager.getInstance().protocol = mBinding.aivProtocol.isSelected
         }
     }
 

@@ -57,7 +57,10 @@ class PermissionDialogManager: LifecycleEventObserver {
 //        val message = activity.getString(R.string.permission_dlg_text1, notPermissionText)
 
         mPermissionTipsDialog = PermissionDialog(activity).also {
-            it.setData({ mPermissionTipsDialog?.dismiss() }, tempList)
+            it.setData({
+                setShowDialogTips(true)
+                mPermissionTipsDialog?.dismiss()
+                       }, tempList)
         }
         mPermissionTipsDialog?.setOnDismissListener {
             mPermissionTipsDialog?.setOnKeyListener(null)
@@ -68,7 +71,6 @@ class PermissionDialogManager: LifecycleEventObserver {
             mPermissionTipsDialog?.let {
                 activity.addDialog(it)
             }
-            setShowDialogTips(true)
         }
     }
 
@@ -84,7 +86,7 @@ class PermissionDialogManager: LifecycleEventObserver {
         val boolean =
             SharedPrefGlobal.getBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, false)
         logger_d("logout", "是否已经显示过>>>$boolean")
-        return !boolean || protocol
+        return !boolean
     }
 
     /**
@@ -93,10 +95,6 @@ class PermissionDialogManager: LifecycleEventObserver {
     fun setShowDialogTips(isShow: Boolean) {
         SharedPrefGlobal.setBoolean(SharedPrefKeyManager.KEY_SHOW_PERMISSION_DIA_FLAG, isShow)
     }
-
-    var protocol: Boolean
-        set(value) = SharedPrefGlobal.setBoolean("key_protocl", value)
-        get() = !SharedPrefGlobal.getBoolean("key_protocl", false)
 
     fun onDestroy() {
         mPermissionTipsDialog?.setOnDismissListener(null)

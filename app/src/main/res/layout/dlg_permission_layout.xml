@@ -75,9 +75,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/aiv_protocol"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:padding="4dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="4dp"
             app:srcCompat="@drawable/selector_checkbox_icon" />
 
         <TextView
