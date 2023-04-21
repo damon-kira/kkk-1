@@ -6,12 +6,10 @@ interface IWebHost {
 
     fun getSupportContext(): Context
 
-    fun <T> getCurrentActivity(): T?
+    fun exit()
 
-    fun toolbarGone(toolbarBgColor: String, isDark: Boolean)
+//    fun generateShortLink(template: String, inviteCode: String, channel: String, shareType: String)
 
-    fun finish()
-
-    fun generateShortLink(template: String, inviteCode: String, channel: String, shareType: String)
+    fun loading(show: Boolean)
 
 }

@@ -24,7 +24,7 @@ internal fun Activity.showLoadingDialog(cancelable: Boolean = true): DefaultDial
         dialog.dismiss()
     }
     dialog.setCancelable(cancelable)
-    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCanceledOnTouchOutside(cancelable)
     showDialoga(dialog)
     return dialog
 }

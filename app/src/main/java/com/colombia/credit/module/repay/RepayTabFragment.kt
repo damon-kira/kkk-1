@@ -11,6 +11,7 @@ import com.colombia.credit.expand.inValidToken
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
+import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.MainEvent
 import com.common.lib.expand.setBlockingOnClickListener
@@ -47,6 +48,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.group.referencedIds =
             intArrayOf(R.id.recyclerview, R.id.tv_repay, R.id.etv_repay_hint)
         setViewModelLoading(mViewModel)
+
         mBinding.recyclerview.linearLayoutManager()
         mBinding.recyclerview.adapter = mAdapter
 
@@ -61,21 +63,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
 
         changePage(false)
-
-        mViewModel.ordersLivedata.observerNonSticky(viewLifecycleOwner) {
-            stopRefresh()
-            if (!it.isSuccess()) {
-                it.ShowErrorMsg {
-                    mViewModel.getRepayOrders()
-                }
-            }
-        }
-
-        mViewModel.listLivedata.observerNonSticky(viewLifecycleOwner) { list ->
-            changePage(!list.isNullOrEmpty())
-            mAdapter.setItems(list ?: arrayListOf())
-        }
-
+        initObserver()
         onPullToRefresh()
 
         mBinding.tvRepay.setBlockingOnClickListener {
@@ -90,6 +78,28 @@ class RepayTabFragment : BaseHomeLoanFragment() {
 
         mBinding.emptyLayout.tvApply.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+        }
+
+        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(viewLifecycleOwner) {
+            if (it.event == PayEvent.EVENT_REFRESH) {
+                onPullToRefresh()
+            }
+        }
+    }
+
+    private fun initObserver() {
+        mViewModel.ordersLivedata.observerNonSticky(viewLifecycleOwner) {
+            stopRefresh()
+            if (!it.isSuccess()) {
+                it.ShowErrorMsg {
+                    mViewModel.getRepayOrders()
+                }
+            }
+        }
+
+        mViewModel.listLivedata.observerNonSticky(viewLifecycleOwner) { list ->
+            changePage(!list.isNullOrEmpty())
+            mAdapter.setItems(list ?: arrayListOf())
         }
     }
 

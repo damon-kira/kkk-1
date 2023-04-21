@@ -8,9 +8,12 @@ import com.colombia.credit.databinding.ActivityDeferBinding
 import com.colombia.credit.dialog.ExtensionConfirmDialog
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.showCustomDialog
-import com.colombia.credit.expand.toast
+import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.manager.Launch
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.GsonUtil
 import com.util.lib.StatusBarUtil.setStatusBarColor
@@ -28,6 +31,13 @@ open class DeferActivity : BaseActivity() {
     protected var orderId: String = ""
     protected var jine: String = ""
 
+    private val mObserver = { payEvent: PayEvent ->
+        if (payEvent.event == PayEvent.EVENT_EXIT) {
+            LiveDataBus.post(PayEvent(PayEvent.EVENT_REFRESH))
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
@@ -41,10 +51,16 @@ open class DeferActivity : BaseActivity() {
         mBinding.tvApply.setBlockingOnClickListener {
             // 调用支付
             ExtensionConfirmDialog(this).setOnClickListener {
-                toast("调H5支付，暂未处理")
-//                Launch.skipWebViewActivity(this, H5UrlManager.getPayUrl("",""))
+                Launch.skipWebViewActivity(this, H5UrlManager.getPayUrl(orderId, jine, "1"))
             }.show()
         }
+
+        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this, mObserver)
+    }
+
+    override fun onDestroy() {
+        LiveDataBus.removeObserve(PayEvent::class.java, mObserver)
+        super.onDestroy()
     }
 
     open fun getInfo() {

@@ -11,14 +11,14 @@
             <enum name="visible" value="1" />
             <enum name="gone" value="2" />
         </attr>
-        <attr name="tl_textsize" format="dimension"/>
+        <attr name="tl_textsize" format="dimension" />
         <attr name="tl_back_text_color" format="color" />
         <attr name="tl_left_icon" format="reference" />
         <attr name="tl_right_icon" format="reference" />
         <attr name="tl_right_icon_show" format="boolean" />
         <attr name="tl_right_point_bg" format="reference" />
         <attr name="tl_show_custom_icon" format="boolean" />
-        <attr name="tl_custom_icon" format="reference"/>
+        <attr name="tl_custom_icon" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="ProcessView">
@@ -53,7 +53,7 @@
             <enum name="email" value="1" />
             <enum name="password" value="2" />
         </attr>
-        <attr name="digits" format="string"/>
+        <attr name="digits" format="string" />
         <attr name="stringArray" format="reference" />
         <attr name="max_lines" format="integer" />
         <attr name="desc_text" format="string" />
@@ -211,13 +211,25 @@
         <attr name="iil_left_text" format="string|reference" />
         <attr name="iil_left_text_color" format="color" />
         <attr name="iil_left_text_size" format="dimension" />
-        <attr name="iil_left_text_bold" format="boolean"/>
+        <attr name="iil_left_text_bold" format="boolean" />
 
         <attr name="iil_right_text" format="string|reference" />
         <attr name="iil_right_text_color" format="color" />
         <attr name="iil_right_text_size" format="dimension" />
-        <attr name="iil_right_text_bold" format="boolean"/>
+        <attr name="iil_right_text_bold" format="boolean" />
 
         <attr name="iil_line_show" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="pickerview">
+        <attr name="pv_gravity" format="flags">
+            <flag name="center" value="1" />
+            <flag name="left" value="2"/>
+        </attr>
+        <attr name="pv_textColorOut" format="color" />
+        <attr name="pv_lineSpacingMultiplier" format="float" />
+        <attr name="pv_textColorCenter" format="color" />
+        <attr name="pv_dividerColor" format="color" />
+        <attr name="pv_textSize" format="dimension" />
     </declare-styleable>
 </resources>

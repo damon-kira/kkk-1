@@ -37,7 +37,7 @@ object AppUtil {
         return versionCode
     }
 
-    fun getVersionName(context: Context, pkgName: String): String {
+    fun getVersionName(context: Context, pkgName: String = context.packageName): String {
         var versionName = ""
         val pkgInfo = getAppPackageInfo(context, pkgName)
         if (pkgInfo != null) {

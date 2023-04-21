@@ -68,3 +68,7 @@ fun toast(str: String, @DrawableRes icon: Int = 0) {
         // Nothing to do
     }
 }
+
+fun String.toast(){
+    toast(this)
+}

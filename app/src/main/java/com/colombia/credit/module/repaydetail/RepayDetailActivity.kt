@@ -4,13 +4,13 @@ import android.graphics.Color
 import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityRepayDetailBinding
-import com.colombia.credit.expand.getUnitString
-import com.colombia.credit.expand.showCustomDialog
-import com.colombia.credit.expand.toast
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.defer.PayEvent
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.GsonUtil
@@ -30,29 +30,42 @@ class RepayDetailActivity : BaseActivity() {
 
     private val mViewModel by lazyViewModel<RepayDetailViewModel>()
 
-    var info: String = ""
+    private var info: String = ""
+    private var amount: String? = null
+    private var mIds: String? = null
+
+    private val mObserver = { event: PayEvent ->
+        if (event.event == PayEvent.EVENT_REFRESH) {
+            getDetail()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
-        val ids = intent?.getStringExtra(EXTRA_ID)
+        mIds = intent?.getStringExtra(EXTRA_ID)
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
         }
 
         mBinding.tvApply.setBlockingOnClickListener {
-            toast("调H5支付，暂未处理")
-//            Launch.skipWebViewActivity(this, H5UrlManager.URL_PAY)
+            Launch.skipWebViewActivity(
+                this,
+                H5UrlManager.getPayUrl(mIds.orEmpty(), amount.orEmpty(), "2")
+            )
         }
 
         mBinding.tvExtension.setBlockingOnClickListener {
             Launch.skipDeferActivity(this, info)
         }
 
+        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this, mObserver)
+
         mViewModel.detailLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 it.getData()?.let { data ->
+                    amount = data.TxksJTU8C
                     mBinding.tvAmount.text = getUnitString(data.TxksJTU8C.orEmpty())
                     mBinding.tvApply.text = getString(
                         R.string.repay_amount_value,
@@ -67,8 +80,17 @@ class RepayDetailActivity : BaseActivity() {
                         mBinding.tvExtension.show()
                     }
                 }
-            }
+            } else it.ShowErrorMsg(::getDetail)
         }
-        mViewModel.getDetail(ids.orEmpty())
+        getDetail()
+    }
+
+    private fun getDetail() {
+        mViewModel.getDetail(mIds.orEmpty())
+    }
+
+    override fun onDestroy() {
+        LiveDataBus.removeObserve(PayEvent::class.java, mObserver)
+        super.onDestroy()
     }
 }

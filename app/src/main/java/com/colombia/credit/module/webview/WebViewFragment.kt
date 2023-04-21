@@ -2,9 +2,7 @@ package com.colombia.credit.module.webview
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
@@ -20,12 +18,13 @@ import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.databinding.FragmentWebviewBinding
 import com.colombia.credit.manager.H5UrlManager
+import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.view.BaseWebView
 import com.common.lib.base.BaseFragment
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBar
-import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.expand.isEmpty
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -40,7 +39,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
     }
 
     var inflate: View? = null
-    private val mJsInterfaceName: String = "control"
+    private val mJsInterfaceName: String = "app"
 
     private val mJsInterface by lazy {
         JsInterface(this)
@@ -109,10 +108,9 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         }
         webViewSetting(mWebView)
         var url = arguments?.getString(EXTRA_URL).orEmpty()
-        logger_d(TAG, "url =$url")
+        logger_d(TAG, "webview url =$url")
         mUrl = url
         mWebView?.loadUrl(url)
-        mWebView?.reload()
         setStatusBarColor(isTitleShow, url)
 
         if (url == H5UrlManager.URL_PRIVACY) {
@@ -121,37 +119,6 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         }
     }
 
-
-    override fun generateShortLink(
-        template: String,
-        inviteCode: String,
-        channel: String,
-        shareType: String
-    ) {
-//        val resultLiveData = AppFirebaseInfoHelper.getShortAFLink(
-//            getSupportContext(),
-//            template,
-//            AppFirebaseInfoHelper.URI,
-//            inviteCode,
-//            channel,
-//            shareType
-//        )
-//
-//        resultLiveData?.observe(this) { inviteInfo ->
-//            resultLiveData.removeObservers(this)
-//            val inviteInfoJobj = GsonUtil.toJsonObject(inviteInfo)
-//            val success = inviteInfoJobj?.get("success")?.asBoolean ?: false
-//            val channel = inviteInfoJobj?.get("channel")?.toString().orEmpty()
-//            val errorMsg = inviteInfoJobj?.get("errormessage")?.toString().orEmpty()
-//            val linkData = inviteInfoJobj?.get("linkData")?.toString().orEmpty()
-//            val jsonObj = JsonObject()
-//            jsonObj.addProperty("code", if (success) 1 else 0)
-//            jsonObj.addProperty("data", linkData)
-//            jsonObj.addProperty("channel", channel)
-//            jsonObj.addProperty("msg", errorMsg)
-//            mWebView?.loadUrl("javascript:receiveAFLink('$jsonObj')")
-//        }
-    }
 
     private fun refreshNetView() {
 //        if (view == null || isDestroyView()) {
@@ -262,17 +229,6 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         return false
     }
 
-    override fun toolbarGone(toolbarBgColor: String, isDark: Boolean) {
-//        tl_toolbar?.visibility = View.GONE
-        try {
-            getBaseActivity()?.setStatusBarColor(
-                color = Color.parseColor(toolbarBgColor),
-                isDark = isDark
-            )
-        } catch (e: Exception) {
-        }
-    }
-
     inner class MyWebViewClient : WebViewClient() {
 //        private val protocolWebViewLoader = ProtocolWebViewLoader()
 
@@ -352,7 +308,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         ) {
             super.onReceivedSslError(view, handler, error)
 
-            getBaseActivity()?.let {activy ->
+            getBaseActivity()?.let { activy ->
                 val builder = AlertDialog.Builder(activy)
                     .setMessage(getString(R.string.webview_ssl_hint))
                     .setPositiveButton(
@@ -388,6 +344,9 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         if (mUrl == H5UrlManager.URL_PRIVACY) {
             readPrivacyTime = System.currentTimeMillis() - mEnterTime
         }
+        if (this.mUrl.contains(H5UrlManager.URL_PAY)){
+            LiveDataBus.post(PayEvent(PayEvent.EVENT_EXIT))
+        }
         mWebView?.let {
             WebViewPool.INSTANCE.recycle(it)
             mWebView = null
@@ -395,10 +354,14 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         System.gc()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        lifecycle.removeObserver(mJsInterface)
+
+    override fun loading(show: Boolean) {
+        MainHandler.post {
+            if (show) showLoading(true) else hideLoading()
+        }
     }
 
-
+    override fun exit() {
+        finish()
+    }
 }
