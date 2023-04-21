@@ -1,5 +1,6 @@
 package com.colombia.credit.module.setting
 
+import android.graphics.Color
 import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivitySettingBinding
@@ -17,6 +18,7 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,7 @@ class SettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+        setStatusBarColor(Color.WHITE, true)
         mBinding.toolbar.setOnbackListener {
             finish()
         }
