@@ -2,7 +2,7 @@ package com.colombia.credit.bean.resp
 
 import com.colombia.credit.expand.transform
 
-class RspProductInfo {
+class RspProductInfo{
     val yqGhrjOF2: String? = null // 最高可借金额，实际还款金额，借款金额
         get() = field?.transform()
     val HyulExS1ei: String? = null //客户名字
@@ -26,7 +26,7 @@ class RspProductInfo {
     val fyEV: ArrayList<FirstConfirmInfo>? = null // 新客户确定额度首页
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
     val gQ1J: RepeatRepayInfo? = null // 老客户待还
-    val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
+//    val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
 }
 
@@ -73,11 +73,14 @@ class FirstConfirmInfo {
 //"prTag":"1,2,3"
 // 复贷产品信息
 class RepeatProductInfo {
+    //范围金额最大值
     val g7tzi: String? = null
-        //范围金额最大值
         get() = field?.transform()
-    val sF1DFWU: String? = null //范围金额最小值
+
+    //范围金额最小值
+    val sF1DFWU: String? = null
         get() = field?.transform()
+
     val xXgaK4: String? = null // "0.1%" 日利息
     val cQ75eX5: String? = null //周期最大值
     val D9hR: String? = null // 周期最小值
@@ -87,11 +90,43 @@ class RepeatProductInfo {
     var RXYz: String = "0" // // 是否选中 1：选中 0：未选中
     val ir3MCCmbF3: String? = null //"prTag":"1,2,3"
 
-    fun change(){
+    fun change() {
         RXYz = if (RXYz == "0") "1" else "0"
     }
 
     fun selector() = RXYz == "1"
+
+    override fun hashCode(): Int {
+        var result = g7tzi?.hashCode() ?: 0
+        result = 31 * result + (sF1DFWU?.hashCode() ?: 0)
+        result = 31 * result + (xXgaK4?.hashCode() ?: 0)
+        result = 31 * result + (cQ75eX5?.hashCode() ?: 0)
+        result = 31 * result + (D9hR?.hashCode() ?: 0)
+        result = 31 * result + (S9ig78H?.hashCode() ?: 0)
+        result = 31 * result + (Gk9MGh?.hashCode() ?: 0)
+        result = 31 * result + (eqOEs?.hashCode() ?: 0)
+        result = 31 * result + (RXYz.hashCode())
+        result = 31 * result + (ir3MCCmbF3?.hashCode() ?: 0)
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as RepeatProductInfo
+        if (g7tzi != other.g7tzi) return false
+        if (sF1DFWU != other.sF1DFWU) return false
+        if (xXgaK4 != other.xXgaK4) return false
+        if (cQ75eX5 != other.cQ75eX5) return false
+        if (D9hR != other.D9hR) return false
+        if (S9ig78H != other.S9ig78H) return false
+        if (Gk9MGh != other.Gk9MGh) return false
+        if (eqOEs != other.eqOEs) return false
+//        if (RXYz != other.RXYz) return false
+        if (ir3MCCmbF3 != other.ir3MCCmbF3) return false
+        return true
+    }
 }
 
 //"notRepayCount":2,//未还订单数
@@ -118,13 +153,13 @@ class RepeatRepayInfo {
 //}
 //]
 // 复贷待确认订单
-class RepeatWaitConfirmInfo {
-    val yqGhrjOF2: Int = 0//范围金额最大值
-    val tQXtG0FYb: String? = null // 批次号
-    val I4Ai: ArrayList<WaitConfirm>? = null // 产品信息
-}
+//class RepeatWaitConfirmInfo {
+//    val yqGhrjOF2: Int = 0//范围金额最大值
+//    val tQXtG0FYb: String? = null // 批次号
+//    val I4Ai: ArrayList<WaitConfirm>? = null // 产品信息
+//}
 
-class WaitConfirm {
-    val S9ig78H: String? = null//产品名称
-    val Gk9MGh: String? = null//产品logo
-}
+//class WaitConfirm {
+//    val S9ig78H: String? = null//产品名称
+//    val Gk9MGh: String? = null//产品logo
+//}

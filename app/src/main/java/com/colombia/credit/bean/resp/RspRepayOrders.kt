@@ -1,16 +1,13 @@
 package com.colombia.credit.bean.resp
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.colombia.credit.expand.transform
-import java.math.BigDecimal
 
 class RspRepayOrders {
 
     var V0qlC: String? = null // 最大限制金额
     var list: ArrayList<RepayOrderDetail>? = null
 
-    class RepayOrderDetail() : Parcelable {
+    class RepayOrderDetail {
         var bS6qpg4E: String? = null   //详情传这个
         var W5KW6: String? = null      //计划id
         var RA9GEePdNs: String? = null //产品log
@@ -33,25 +30,6 @@ class RspRepayOrders {
         var JKEAEEnOUZ: String? = null // 订单状态
         var LvgWnBEX: String? = null //订单状态描述
 
-        constructor(parcel: Parcel) : this() {
-            bS6qpg4E = parcel.readString()
-            W5KW6 = parcel.readString()
-            RA9GEePdNs = parcel.readString()
-            C2O8E6jjzd = parcel.readString()
-            Eff0nA = parcel.readString()
-            zbRV6Lg8jO = parcel.readString()
-            gzBTFx = parcel.readString()
-            QiZorG = parcel.readString()
-            q48Wml8N = parcel.readString()
-            X32HrYq4u = parcel.readString()
-            prr9Ie61 = parcel.readString()
-            GHMXDjtsUn = parcel.readString()
-            rCC18KSG = parcel.readString()
-            BPKD = parcel.readString()
-            JKEAEEnOUZ = parcel.readString()
-            LvgWnBEX = parcel.readString()
-        }
-
         fun isCheck() = QiZorG == "1"
 
         fun isOverdue() = gzBTFx == "1"
@@ -60,37 +38,47 @@ class RspRepayOrders {
             QiZorG = if (isCheck()) "0" else "1"
         }
 
-        override fun writeToParcel(parcel: Parcel, flags: Int) {
-            parcel.writeString(bS6qpg4E)
-            parcel.writeString(W5KW6)
-            parcel.writeString(RA9GEePdNs)
-            parcel.writeString(C2O8E6jjzd)
-            parcel.writeString(Eff0nA)
-            parcel.writeString(zbRV6Lg8jO)
-            parcel.writeString(gzBTFx)
-            parcel.writeString(QiZorG)
-            parcel.writeString(q48Wml8N)
-            parcel.writeString(X32HrYq4u)
-            parcel.writeString(prr9Ie61)
-            parcel.writeString(GHMXDjtsUn)
-            parcel.writeString(rCC18KSG)
-            parcel.writeString(BPKD)
-            parcel.writeString(JKEAEEnOUZ)
-            parcel.writeString(LvgWnBEX)
+        override fun hashCode(): Int {
+            var result = bS6qpg4E?.hashCode() ?: 0
+            result = 31 * result + (W5KW6?.hashCode() ?: 0)
+            result = 31 * result + (RA9GEePdNs?.hashCode() ?: 0)
+            result = 31 * result + (C2O8E6jjzd?.hashCode() ?: 0)
+            result = 31 * result + (Eff0nA?.hashCode() ?: 0)
+            result = 31 * result + (zbRV6Lg8jO?.hashCode() ?: 0)
+            result = 31 * result + (gzBTFx?.hashCode() ?: 0)
+            result = 31 * result + (QiZorG?.hashCode() ?: 0)
+            result = 31 * result + (q48Wml8N.hashCode())
+            result = 31 * result + (X32HrYq4u?.hashCode() ?: 0)
+            result = 31 * result + (prr9Ie61?.hashCode() ?: 0)
+            result = 31 * result + (GHMXDjtsUn?.hashCode() ?: 0)
+            result = 31 * result + (rCC18KSG?.hashCode() ?: 0)
+            result = 31 * result + (BPKD?.hashCode() ?: 0)
+            result = 31 * result + (JKEAEEnOUZ?.hashCode() ?: 0)
+            result = 31 * result + (LvgWnBEX?.hashCode() ?: 0)
+            return result
         }
 
-        override fun describeContents(): Int {
-            return 0
-        }
+        override fun equals(other: Any?): Boolean {
+            if (other === this) return true
+            if (javaClass != other?.javaClass) return false
 
-        companion object CREATOR : Parcelable.Creator<RepayOrderDetail> {
-            override fun createFromParcel(parcel: Parcel): RepayOrderDetail {
-                return RepayOrderDetail(parcel)
-            }
-
-            override fun newArray(size: Int): Array<RepayOrderDetail?> {
-                return arrayOfNulls(size)
-            }
+            other as RepayOrderDetail
+            if (W5KW6 != other.W5KW6) return false
+            if (RA9GEePdNs != other.RA9GEePdNs) return false
+            if (C2O8E6jjzd != other.C2O8E6jjzd) return false
+            if (Eff0nA != other.Eff0nA) return false
+            if (zbRV6Lg8jO != other.zbRV6Lg8jO) return false
+            if (gzBTFx != other.gzBTFx) return false
+//            if (QiZorG != other.QiZorG) return false
+            if (q48Wml8N != other.q48Wml8N) return false
+            if (X32HrYq4u != other.X32HrYq4u) return false
+            if (prr9Ie61 != other.prr9Ie61) return false
+            if (GHMXDjtsUn != other.GHMXDjtsUn) return false
+            if (rCC18KSG != other.rCC18KSG) return false
+            if (BPKD != other.BPKD) return false
+            if (JKEAEEnOUZ != other.JKEAEEnOUZ) return false
+            if (LvgWnBEX != other.LvgWnBEX) return false
+            return true
         }
     }
 }

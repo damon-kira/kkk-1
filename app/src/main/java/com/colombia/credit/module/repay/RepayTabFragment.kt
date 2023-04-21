@@ -7,6 +7,7 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentTabRepayBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.expand.inValidToken
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
@@ -41,7 +42,6 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mViewModel.getRepayOrders()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding.group.referencedIds =
@@ -64,17 +64,18 @@ class RepayTabFragment : BaseHomeLoanFragment() {
 
         mViewModel.ordersLivedata.observerNonSticky(viewLifecycleOwner) {
             stopRefresh()
-            if (it.isSuccess()) {
-//                it.parseT(RspRepayOrders::class.java)
-                val list = it.getData()?.list
-                changePage(!list.isNullOrEmpty())
-                if (list?.isNotEmpty() == true) {
-                    mAdapter.setItems(list)
+            if (!it.isSuccess()) {
+                it.ShowErrorMsg {
+                    mViewModel.getRepayOrders()
                 }
-            } else it.ShowErrorMsg {
-                mViewModel.getRepayOrders()
             }
         }
+
+        mViewModel.listLivedata.observerNonSticky(viewLifecycleOwner) { list ->
+            changePage(!list.isNullOrEmpty())
+            mAdapter.setItems(list ?: arrayListOf())
+        }
+
         onPullToRefresh()
 
         mBinding.tvRepay.setBlockingOnClickListener {
@@ -108,7 +109,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     }
 
     private fun changeListPadding(offset: Int) {
-        val padding = mBinding.flHomeContent.height - offset + 20f.dp()
+        val padding = mBinding.clContent.height - offset + 20f.dp()
         mBinding.recyclerview.setPadding(
             mBinding.recyclerview.paddingLeft,
             mBinding.recyclerview.paddingTop,
@@ -120,6 +121,9 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     override fun onFragmentVisibilityChanged(visible: Boolean) {
         super.onFragmentVisibilityChanged(visible)
         if (visible) {
+            if (inValidToken()) {
+                changePage(false)
+            }
             getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
         }
     }

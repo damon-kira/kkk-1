@@ -48,15 +48,15 @@ class BlackFragment: BaseHomeFragment() {
         }
 
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
+            // 黑名单和拒绝用的一个布局，黑名单下面显示的是借款账期
             mBinding.includeBlack.tvAmount.text = getString(R.string.days, it.WTvE5G.toString())
 
             val data = it.gQ1J
             if (data == null || data.isEmpty()) return@observe
 
-            mBinding.includeBlack.llContent.show()
+            mBinding.inclueRepay.llContent.show()
             mBinding.inclueRepay.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
             mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
-
             mOrderIds = data.QLPGXTNU
         }
     }

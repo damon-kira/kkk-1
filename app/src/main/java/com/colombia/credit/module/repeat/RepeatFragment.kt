@@ -12,9 +12,13 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeLoanViewModel
+import com.colombia.credit.module.home.MainEvent
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.dp
+import com.util.lib.hide
+import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,6 +34,8 @@ class RepeatFragment : BaseHomeLoanFragment() {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
+    private var mOrderIds: String? = null
+
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
@@ -39,18 +45,25 @@ class RepeatFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
+        setOffset()
         mBinding.repeatRecyclerview.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         mBinding.repeatRecyclerview.adapter = mAdapter
         mBinding.repeatRecyclerview.addItemDecoration(
             SpaceItemDecoration(
-                SpaceItemDecoration.VERTICAL_LIST, 12f.dp())
+                SpaceItemDecoration.VERTICAL_LIST, 12f.dp()
+            )
         )
 
         mBinding.repeatTvApply.setBlockingOnClickListener {
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
             Launch.skipRepeatConfirmActivity(getSupportContext(), list.joinToString(","))
         }
+
+        mBinding.includeOrders.tvBtn.setBlockingOnClickListener {
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
+        }
+
         mBinding.repeatRecyclerview.itemAnimator?.changeDuration = 0
         mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
@@ -73,12 +86,43 @@ class RepeatFragment : BaseHomeLoanFragment() {
             }
         })
 
+        mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
+            mAdapter.setItems(it)
+            mBinding.etvTag.text =
+                getString(R.string.hosta_s, getUnitString(it?.first()?.g7tzi.orEmpty()))
+        }
+
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            it.jBRR?.let { list ->
-                mAdapter.setItems(list)
-                mBinding.etvTag.text =
-                    getString(R.string.hosta_s, getUnitString(list.first().g7tzi.orEmpty()))
+            val data = it.gQ1J
+            if (data == null || data.isEmpty()) {
+                mBinding.includeOrders.llContent.hide()
+                return@observe
+            }
+            mBinding.includeOrders.llContent.show()
+            mBinding.includeOrders.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
+            mBinding.includeOrders.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
+            mOrderIds = data.QLPGXTNU?.joinToString(",")
+        }
+    }
+
+    private fun setOffset() {
+        if (mBinding.etvTag.top > 0) {
+            changeListPadding(mBinding.etvTag.top)
+        } else {
+            mBinding.etvTag.post {
+                if (isDestroyView()) return@post
+                changeListPadding(mBinding.etvTag.top)
             }
         }
+    }
+
+    private fun changeListPadding(offset: Int) {
+        val padding = mBinding.clContent.height - offset
+        mBinding.repeatRecyclerview.setPadding(
+            mBinding.repeatRecyclerview.paddingLeft,
+            mBinding.repeatRecyclerview.paddingTop,
+            mBinding.repeatRecyclerview.paddingRight,
+            padding
+        )
     }
 }
