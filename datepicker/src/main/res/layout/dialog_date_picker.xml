@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvDialogTopCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:text="@string/strDateCancel"
+            android:textColor="@color/colorDefaultSetting"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/strDateSelect"
+            android:textColor="@color/colorTitle"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvDialogTopConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:text="ok"
+            android:textColor="@color/colorDefaultSetting"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.datepicker.lib.PickerView
+            android:id="@+id/mpv_day"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/date_picker_view_height"
+            android:layout_weight="1" />
+
+        <com.datepicker.lib.PickerView
+            android:id="@+id/mpv_month"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/date_picker_view_height"
+            android:layout_weight="1" />
+
+        <com.datepicker.lib.PickerView
+            android:id="@+id/mpv_year"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/date_picker_view_height"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
+

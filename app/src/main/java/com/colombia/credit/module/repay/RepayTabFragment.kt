@@ -40,6 +40,10 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
+        if (inValidToken()) {
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+            return
+        }
         mViewModel.getRepayOrders()
     }
 

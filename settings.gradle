@@ -44,3 +44,4 @@ if (isModule.toBoolean()) {
     include ':sdks:aes'
 }
 include ':camera'
+include ':datepicker'

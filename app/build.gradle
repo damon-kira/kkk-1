@@ -102,6 +102,7 @@ dependencies {
     implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
+    implementation project(path: ':datepicker')
     implementation rootProject.ext.other.aes
     implementation rootProject.ext.other.devoptions
 

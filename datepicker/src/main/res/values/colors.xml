@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8F30D8</color>
+    <color name="colorPrimaryDark">#8F30D8</color>
+    <color name="colorAccent">#8F30D8</color>
+    <!--title text color-->
+    <color name="colorTitle">#333333</color>
+    <color name="colorDefaultSetting">#cf1010</color>
+    <color name="colorDivider">#dbdbdb</color>
+
+    <color name="colorPickViewDefaultSelect">#ffa000</color>
+    <color name="colorPickViewDefaultNormal">#a2a2a2</color>
+</resources>

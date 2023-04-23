@@ -2,14 +2,15 @@ package com.colombia.credit.module.process.kyc
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
-import com.colombia.credit.dialog.DatePickerDialog
 import com.colombia.credit.expand.TYPE_FACE
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
@@ -24,9 +25,13 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.datepicker.lib.FontType
+import com.datepicker.lib.MDatePicker
+import com.util.lib.TimerUtil
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import com.util.lib.show
+import com.util.lib.time2Str
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +49,24 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mKycPicHelper by lazy {
         KycPicHelper()
+    }
+
+    private val mPickerDialog by lazy {
+        MDatePicker.create(this)
+            .setCanceledTouchOutside(true)
+            .setGravity(Gravity.BOTTOM)
+            .setOnlyYearMonth(false)
+            .setFontType(FontType.LARGE)
+            .setLeftText(R.string.cancel)
+            .setRightText(R.string.confirm)
+            .setDateSelectTextColor(ContextCompat.getColor(this, R.color.color_333333))
+            .setDateNormalTextColor(ContextCompat.getColor(this, R.color.color_999999))
+            .setTitle(getString(R.string.kyc_birthday))
+            .setOnDateResultListener {
+                val date = time2Str(it, TimerUtil.REGEX_DDMMYYYY)
+                mBinding.kycBivBirthday.setViewText(date)
+            }
+            .build()
     }
 
 
@@ -196,7 +219,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 }
             }
             R.id.kyc_biv_birthday -> {
-                DatePickerDialog(this).show()
+                mPickerDialog.show()
             }
             R.id.tv_commit -> {
                 uploadInfo()

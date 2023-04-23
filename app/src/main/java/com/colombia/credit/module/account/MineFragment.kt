@@ -41,8 +41,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val isLogin = !inValidToken()
-        mBinding.aivHead.isSelected = isLogin
         changeUserName()
 
         mBinding.etvCustom.setBlockingOnClickListener(this)
@@ -111,6 +109,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun changeUserName() {
+        mBinding.aivHead.isSelected = !inValidToken()
         if (!inValidToken()) {
             mBinding.tvMobile.show()
             mBinding.tvName.text = getString(R.string.me_hi, mUserName)

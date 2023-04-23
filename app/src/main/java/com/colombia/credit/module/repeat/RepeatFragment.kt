@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatProductInfo
 import com.colombia.credit.databinding.FragmentRepeatBinding
-import com.colombia.credit.expand.*
+import com.colombia.credit.expand.SimpleOnItemClickListener
+import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.expand.setOnItemClickListener
+import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.home.BaseHomeLoanFragment
@@ -46,14 +49,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
         setOffset()
-        mBinding.repeatRecyclerview.layoutManager =
-            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
-        mBinding.repeatRecyclerview.adapter = mAdapter
-        mBinding.repeatRecyclerview.addItemDecoration(
-            SpaceItemDecoration(
-                SpaceItemDecoration.VERTICAL_LIST, 12f.dp()
-            )
-        )
+        initRecyclerview(view)
 
         mBinding.repeatTvApply.setBlockingOnClickListener {
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
@@ -64,6 +60,18 @@ class RepeatFragment : BaseHomeLoanFragment() {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
         }
 
+        initObserver()
+    }
+
+    private fun initRecyclerview(view: View) {
+        mBinding.repeatRecyclerview.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+        mBinding.repeatRecyclerview.adapter = mAdapter
+        mBinding.repeatRecyclerview.addItemDecoration(
+            SpaceItemDecoration(
+                SpaceItemDecoration.VERTICAL_LIST, 12f.dp()
+            )
+        )
         mBinding.repeatRecyclerview.itemAnimator?.changeDuration = 0
         mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
@@ -85,7 +93,9 @@ class RepeatFragment : BaseHomeLoanFragment() {
                 mAdapter.notifyItemChanged(position)
             }
         })
+    }
 
+    private fun initObserver() {
         mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
             mAdapter.setItems(it)
             mBinding.etvTag.text =

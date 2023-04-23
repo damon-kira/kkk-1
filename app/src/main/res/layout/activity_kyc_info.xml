@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     app:hint="@string/kyc_birthday_hint"
-                    app:if_can_edit="true"
+                    app:if_can_edit="false"
                     app:inputType="number"
                     app:left_icon="@drawable/ic_birthday"
                     app:max_length="16"

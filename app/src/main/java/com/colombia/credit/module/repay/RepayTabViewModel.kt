@@ -17,7 +17,6 @@ class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepo
     val listLivedata = generatorLiveData<ArrayList<RspRepayOrders.RepayOrderDetail>?>()
 
     fun getRepayOrders() {
-        if (inValidToken()) return
         _ordersLivedata.addSourceLiveData(repository.getRepayOrders()) {
             if (it.isSuccess()) {
                 val list = it.getData()?.list
