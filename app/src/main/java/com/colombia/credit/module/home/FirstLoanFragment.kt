@@ -2,9 +2,11 @@ package com.colombia.credit.module.home
 
 import android.os.Bundle
 import android.view.View
-import com.bigdata.lib.StorageHelper
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
-import com.colombia.credit.expand.*
+import com.colombia.credit.expand.ShowErrorMsg
+import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.expand.jumpProcess
+import com.colombia.credit.expand.mFirstPageLoanAmount
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky

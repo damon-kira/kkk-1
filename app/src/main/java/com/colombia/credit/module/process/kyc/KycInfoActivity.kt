@@ -2,6 +2,8 @@ package com.colombia.credit.module.process.kyc
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.text.InputFilter
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -27,6 +29,7 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.datepicker.lib.FontType
 import com.datepicker.lib.MDatePicker
+import com.util.lib.StrMatchUtil
 import com.util.lib.TimerUtil
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -122,6 +125,19 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_BACK)
         })
 
+        val nameInfilter = InputFilter { source, start, end, dest, dstart, dend ->
+            Log.d(TAG, "initView: $source, $start, $end, $dest, $dstart, $dend")
+            if (StrMatchUtil.isLetter(
+                    source.toString().replace(" ".toRegex(), "")
+                ) || StrMatchUtil.isSpace(source) && dstart != 0
+            ) {
+                return@InputFilter null
+            } else {
+                return@InputFilter ""
+            }
+        }
+        mBinding.kycBivName.setFilters(arrayOf(nameInfilter))
+        mBinding.kycBivSurname.setFilters(arrayOf(nameInfilter))
     }
 
     private fun loadImage(url: String?, type: Int) {
