@@ -11,6 +11,7 @@ import com.colombia.credit.bean.resp.RspContactInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.ContactObtainHelper
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
@@ -197,4 +198,11 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
     override fun getNextType(): Int = TYPE_BANK
+
+    override fun uploadSuccess() {
+        if (isGp) {
+            Launch.skipApplySuccessActivity(this)
+            finish()
+        } else super.uploadSuccess()
+    }
 }

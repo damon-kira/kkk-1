@@ -38,6 +38,12 @@ fun inValidToken(): Boolean {
     return getUserToken().isEmpty()
 }
 
+var isRepeat: Boolean
+    get() = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, false)
+    set(value) = SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, value)
+
+var isGp: Boolean = false
+
 // 是否是gp审核账号
 fun isGpAccount(): Boolean {
     val json = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_INFO, null)
@@ -52,7 +58,7 @@ fun isFirstRegister(): Boolean {
         ?: 0) == 1
 }
 
-fun setLogout(){
+fun setLogout() {
     saveUserToken("")
     SharedPrefUser.clear()
     deleteCameraCache(getAppContext())

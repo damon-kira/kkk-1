@@ -105,7 +105,7 @@ class RepayTabAdapter(
     }
 
     fun getSelectIds(): String {
-        return getSelectorItems().map { it.BPKD }.joinToString(",")
+        return getSelectorItems().map { it.W5KW6 }.joinToString(",")
     }
 
     override fun getItemId(position: Int): Long {

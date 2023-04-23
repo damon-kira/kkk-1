@@ -23,4 +23,6 @@ object SharedPrefKeyManager {
     const val KEY_IMAGE_FACE = "image_face"
 
     const val KEY_APP_FRONT_BACK_TAG = "app_front_back_tag"
+
+    const val KEY_IS_REPEAT = "is_repeat"
 }

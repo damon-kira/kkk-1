@@ -13,7 +13,7 @@ import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
 import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
-import com.colombia.credit.module.banklist.BankCardListActivity
+import com.colombia.credit.module.applysuccess.ApplySuccessActivity
 import com.colombia.credit.module.banklist.BankInfoAddActivity
 import com.colombia.credit.module.banklist.ConfirmBankCardListActivity
 import com.colombia.credit.module.banklist.MeBankAccountListActivity
@@ -139,6 +139,10 @@ object Launch {
         val intent = Intent(context, RepayDetailActivity::class.java)
         intent.putExtra(RepayDetailActivity.EXTRA_ID, productId)
         launch(context, RepayDetailActivity::class.java, intent)
+    }
+
+    fun skipApplySuccessActivity(context: Context) {
+        launch(context, ApplySuccessActivity::class.java)
     }
 
     fun skipWifiPage(context: Context) {

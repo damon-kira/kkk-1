@@ -105,6 +105,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         mViewModel.confirmLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
                 mHomeViewModel.getHomeInfo()
+                Launch.skipApplySuccessActivity(getSupportContext())
             } else it.ShowErrorMsg(::confirmLoan)
         }
 

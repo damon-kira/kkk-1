@@ -316,5 +316,8 @@
     <string name="toast_product_up">Solo puede solicitar hasta %s productos de préstamo al mismo tiempo</string>
     <!--您已经申请很多个应用了，达到了申请上限，请明天再来尝试-->
     <string name="toast_product_app">Ha solicitado muchos productos y ha alcanzado el límite de aplicaciones, vuelva a intentarlo mañana</string>
-    <string name="toast_min_product">El límite mínimo de endeudamiento es un 1</string><!-- 最少勾选一个产品 -->
+    <string name="toast_min_product">El límite mínimo de endeudamiento es un 1</string>
+    <string name="gp_btn">ve a dar una buena reseña</string>
+    <string name="gp_title">¡Haz una buena reseña!</string>
+    <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string><!-- 最少勾选一个产品 -->
 </resources>

@@ -1,6 +1,7 @@
 package com.colombia.credit.permission
 
 import android.content.Context
+import androidx.annotation.DrawableRes
 import com.colombia.credit.databinding.DialogHintBinding
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
@@ -31,6 +32,11 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
 
     fun setTitleText(title: String): HintDialog {
         mBinding.tvTitle.text = title
+        return this
+    }
+
+    fun setIcon(@DrawableRes resId: Int): HintDialog {
+        mBinding.aivImage.setImageResource(resId)
         return this
     }
 

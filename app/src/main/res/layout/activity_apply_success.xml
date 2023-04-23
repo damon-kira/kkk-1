@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/white"
+        app:tl_back_text_color="@color/color_333333"
         app:tl_text_gravity="center"
+        app:tl_textsize="18sp"
         app:tl_title="@string/apply_success_title" />
 
     <androidx.appcompat.widget.AppCompatImageView

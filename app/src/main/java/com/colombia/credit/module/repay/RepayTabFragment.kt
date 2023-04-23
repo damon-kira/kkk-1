@@ -8,7 +8,7 @@ import com.colombia.credit.databinding.FragmentTabRepayBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.inValidToken
-import com.colombia.credit.expand.toast
+import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.defer.PayEvent
@@ -71,8 +71,14 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             if (list.isNotEmpty()) {
                 // 调起支付
                 list.map { it.W5KW6 }
-                mAdapter.getTotalAmount()
-                toast("调起支付，暂未处理")
+                Launch.skipWebViewActivity(
+                    getSupportContext(),
+                    H5UrlManager.getPayUrl(
+                        mAdapter.getSelectIds(),
+                        mAdapter.getTotalAmount().toString(),
+                        "2"
+                    )
+                )
             }
         }
 

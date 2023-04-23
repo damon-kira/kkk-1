@@ -79,6 +79,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mConfirmViewModel.confirmLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+                Launch.skipApplySuccessActivity(this)
                 finish()
             } else it.ShowErrorMsg(::confirm)
         }
