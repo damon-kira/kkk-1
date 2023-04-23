@@ -12,6 +12,8 @@
         android:background="@color/white"
         app:tl_back_text_color="@color/color_333333"
         app:tl_text_gravity="center"
+        app:tl_back_visibility="visible"
+        app:tl_left_icon="@drawable/svg_left_back_gray"
         app:tl_title="@string/app_name" />
 
     <FrameLayout

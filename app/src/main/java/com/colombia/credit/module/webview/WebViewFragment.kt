@@ -81,16 +81,17 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         super.onViewCreated(view, savedInstanceState)
         isInterceptWebViewBackKey =
             arguments?.getBoolean(WebViewActivity.EXTRA_INTERCEPT_WEBVIEW_BACK_KEY) ?: false
+
 //        isTitleShow = arguments?.getBoolean(WebViewActivity.EXTRA_SHOW_TITLE) ?: true
 //        tl_toolbar?.visibility = if (isTitleShow) View.VISIBLE else View.GONE
-//        tl_toolbar.setOnbackListener {
-//            val activity = activity
-//            if (activity != null) {
-//                activity.onBackPressed()
-//            } else {
-//                onFragmentBackPressed()
-//            }
-//        }
+        mBinding.toolbar.setOnbackListener {
+            val activity = activity
+            if (activity != null) {
+                activity.onBackPressed()
+            } else {
+                onFragmentBackPressed()
+            }
+        }
 
 
         try {
