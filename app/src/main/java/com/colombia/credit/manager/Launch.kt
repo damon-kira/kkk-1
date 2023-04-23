@@ -146,6 +146,11 @@ object Launch {
         context.startActivity(intent)
     }
 
+    fun skipDataPage(context: Context) {
+        val intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)
+        context.startActivity(intent)
+    }
+
     fun skipWebViewActivity(context: Context, url: String) {
         val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra(WebViewActivity.EXTRA_URL, url)

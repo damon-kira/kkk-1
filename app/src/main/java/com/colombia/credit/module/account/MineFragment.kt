@@ -101,6 +101,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             mBinding.tvMobile.text = maskString(getMobile(), 3, 4)
         } else {
             mBinding.tvMobile.hide()
+            mBinding.tvName.setText(R.string.account_not_login)
             mBinding.clRepay.hide()
             mBinding.tvRefused.hide()
         }

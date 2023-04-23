@@ -8,6 +8,7 @@ import com.colombia.credit.dialog.AppUpgradeDialog
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.NetErrorDialog
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.common.lib.BuildConfig
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
@@ -24,7 +25,8 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
         dialog.dismiss()
     }
     dialog.setonClickListener(refresh, mobileNet = {
-        Launch.skipMobileNetPage(this)
+        Launch.skipDataPage(this)
+//        Launch.skipMobileNetPage(this)
     }, wifi = {
         Launch.skipWifiPage(this)
     })
