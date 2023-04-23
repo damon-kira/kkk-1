@@ -31,6 +31,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
+    private val mViewModel by lazyViewModel<HomeLoanViewModel>()
+
     private var mStatus: Int = 0 // 大于0，跳转还款页面
 
     override fun onCreateView(
@@ -96,11 +98,11 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             }
         }
 
-        mHomeViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
+        mViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
             val isShow = it.isSuccess() && it.getData()?.isAllSuccess() == true || isRepeat
             showBank(isShow)
         }
-        mHomeViewModel.getCertProcess()
+        mViewModel.getCertProcess()
     }
 
     private fun showBank(isShow: Boolean) {
@@ -110,15 +112,15 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     private fun changeUserName() {
         mBinding.aivHead.isSelected = !inValidToken()
-        if (!inValidToken()) {
-            mBinding.tvMobile.show()
-            mBinding.tvName.text = getString(R.string.me_hi, mUserName)
-            mBinding.tvMobile.text = maskString(getMobile(), 3, 4)
-        } else {
+        if (inValidToken()) {
             mBinding.tvMobile.hide()
             mBinding.tvName.setText(R.string.account_not_login)
             mBinding.clRepay.hide()
             mBinding.tvRefused.hide()
+        } else {
+            mBinding.tvMobile.show()
+            mBinding.tvName.text = getString(R.string.me_hi, mUserName)
+            mBinding.tvMobile.text = maskString(getMobile(), 3, 4)
         }
     }
 

@@ -87,5 +87,10 @@ fun saveMobile(mobile: String) {
 }
 
 var mUserName: String
-    get() = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_NAME, "")
+    get() {
+        val cache = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_NAME, "")
+        return if (cache.isNullOrEmpty()) {
+            "user"
+        } else cache
+    }
     set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_NAME, value)

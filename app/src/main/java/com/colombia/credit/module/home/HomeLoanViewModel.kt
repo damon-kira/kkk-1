@@ -26,7 +26,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
     val mCertProcessLiveData = generatorLiveData<BaseResponse<RspCertProcessInfo>>()
 
     init {
-        _homeLiveData.observerNonStickyForever {response ->
+        _homeLiveData.observerNonStickyForever { response ->
             if (response.isSuccess()) {
                 response.getData()?.let { info ->
                     isGp = info.Wg5u.equals("G", true)
@@ -55,9 +55,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
 
     fun getHomeInfo() {
         if (inValidToken()) return
-        showloading()
         mHomeLiveData.addSourceLiveData(repository.getHomeInfo()) { response ->
-            hideLoading()
             _homeLiveData.postValue(response)
         }
     }
@@ -67,7 +65,13 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         mCertProcessLiveData.addSourceLiveData(repository.getCertProcess()) {
             hideLoading()
             if (isGp) {
-                mCertProcessLiveData.postValue(BaseResponse(ResponseCode.SUCCESS_CODE, RspCertProcessInfo(),null))
+                mCertProcessLiveData.postValue(
+                    BaseResponse(
+                        ResponseCode.SUCCESS_CODE,
+                        RspCertProcessInfo(),
+                        null
+                    )
+                )
             } else {
                 mCertProcessLiveData.postValue(it)
             }
