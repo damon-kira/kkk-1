@@ -165,9 +165,9 @@ object Launch {
      * 跳转到应用商店，并退出app
      * @param jumpAddress 跳转地址
      */
-    fun skipAppStore(jumpAddress: String?, isUpdate: Boolean = false) {
+    fun skipAppStore(jumpAddress: String?, pkgName: String? = null) {
         val ctx = getAppContext()
-        val packageName = ctx.packageName
+        val packageName = if (pkgName.isNullOrEmpty()) ctx.packageName else pkgName
         val appAddress = "https://play.google.com/store/apps/details?id=$packageName"
         try {
             var intent: Intent
@@ -223,7 +223,15 @@ object Launch {
             return
         }
         val url = "https://api.whatsapp.com/send?phone=57$whatsapp"
-        skipWebViewActivity(context, url)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        val pkgName = "com.whatsapp"
+        intent.setPackage("com.whatsapp")
+        if (intent.resolveActivity(context.packageManager) != null) {
+            context.startActivity(Intent.createChooser(intent, ""))
+        } else {
+            skipAppStore(null, pkgName)
+        }
     }
 
     fun skipCallPage(context: Context) {

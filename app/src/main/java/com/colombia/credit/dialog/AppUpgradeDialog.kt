@@ -28,7 +28,7 @@ class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
         setContentView(mBinding.root)
         setDisplaySize(0.88f, WRAP)
         mBinding.tvUpdate.setBlockingOnClickListener {
-            Launch.skipAppStore(mJumpAddress, true)
+            Launch.skipAppStore(mJumpAddress)
             mListener?.invoke(TYPE_APP_STORE)
         }
         mBinding.aivClose.setBlockingOnClickListener {
