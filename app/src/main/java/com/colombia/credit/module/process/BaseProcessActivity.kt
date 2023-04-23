@@ -4,20 +4,14 @@ import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.bean.DictionaryInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
-import com.colombia.credit.bean.resp.IRspBaseInfo
-import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.ProcessBackDialog
 import com.colombia.credit.dialog.ProcessSelectorDialog
-import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.isShowBackDialog
-import com.colombia.credit.expand.jumpProcess
-import com.colombia.credit.expand.saveShowBackDialog
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
-import com.colombia.credit.module.process.work.WorkInfoActivity_GeneratedInjector
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.colombia.credit.view.baseinfo.BaseInfoView
@@ -51,10 +45,6 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     private var mProcessSelectorDialog: ProcessSelectorDialog? = null
 
-    private val mCustomDialog by lazy {
-        CustomDialog(this)
-    }
-
     fun showProcessSelectorDialog(
         title: String,
         data: MutableMap<String, String>,
@@ -86,7 +76,7 @@ abstract class BaseProcessActivity : BaseActivity() {
             onBackPressed()
         }
         toolbarLayout.setCustomClickListener {
-            mCustomDialog.show()
+            showCustomDialog()
         }
     }
 

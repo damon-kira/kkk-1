@@ -11,6 +11,7 @@ import com.colombia.credit.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
+import com.util.lib.dp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,7 @@ class ApplySuccessActivity : BaseActivity() {
             it.setTitleText(getString(R.string.gp_title))
             it.setMessage(getString(R.string.gp_msg))
             it.setIcon(R.drawable.ic_zan)
+            it.updateBtnPadding(left = 16f.dp(), right = 16f.dp())
         }
     }
 

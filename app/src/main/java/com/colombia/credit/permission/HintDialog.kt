@@ -50,6 +50,16 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
         return this
     }
 
+    fun updateBtnPadding(
+        left: Int = mBinding.tvSkip.paddingLeft,
+        top: Int = mBinding.tvSkip.paddingTop,
+        right: Int = mBinding.tvSkip.paddingRight,
+        bottom: Int = mBinding.tvSkip.paddingBottom
+    ): HintDialog {
+        mBinding.tvSkip.setPadding(left, top, right, bottom)
+        return this
+    }
+
     fun setOnCloseListener(listener: () -> Unit): HintDialog {
         mCloseListener = listener
         return this

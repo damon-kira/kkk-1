@@ -34,4 +34,8 @@ class RspCertProcessInfo {
             TYPE_FACE
         } else TYPE_SUCCESS
     }
+
+    fun isAllSuccess():Boolean {
+        return getProcessType() == TYPE_SUCCESS
+    }
 }

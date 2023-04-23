@@ -1,14 +1,16 @@
 package com.colombia.credit.expand
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.colombia.credit.bean.resp.AppUpgradeInfo
 import com.colombia.credit.dialog.AppUpgradeDialog
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.NetErrorDialog
 import com.colombia.credit.manager.Launch
-import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.common.lib.BuildConfig
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
@@ -26,7 +28,6 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
     }
     dialog.setonClickListener(refresh, mobileNet = {
         Launch.skipDataPage(this)
-//        Launch.skipMobileNetPage(this)
     }, wifi = {
         Launch.skipWifiPage(this)
     })
@@ -34,8 +35,29 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
     return dialog
 }
 
-fun AppCompatActivity.showCustomDialog() {
-    CustomDialog(this).show()
+@SuppressLint("StaticFieldLeak")
+private var mCustomDialog: CustomDialog? = null
+fun BaseActivity.showCustomDialog(): CustomDialog {
+    var dialog = mCustomDialog
+    if (dialog == null) {
+        dialog = CustomDialog(this)
+        mCustomDialog = dialog
+    } else if (dialog.isShowing) {
+        return dialog
+    }
+    this.lifecycle.addObserver(object: LifecycleEventObserver{
+        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                source.lifecycle.removeObserver(this)
+                mCustomDialog?.dismiss()
+                mCustomDialog = null
+            }
+        }
+    })
+    mCustomDialog?.let {
+        addDialog(it)
+    }
+    return dialog
 }
 
 private var appUpgradeDialog: AppUpgradeDialog? = null

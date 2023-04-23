@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentAccountBinding
-import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.module.home.OrderStatus
-import com.colombia.credit.module.service.SerManager
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
+import com.util.lib.ifShow
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,6 +54,10 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         mBinding.flBank.setBlockingOnClickListener(this)
         mBinding.etvBtn.setBlockingOnClickListener(this)
 
+        initObserver()
+    }
+
+    private fun initObserver() {
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             when (it.xXkO) {
                 OrderStatus.STATUS_FIRST_PRODUCT -> {
@@ -66,7 +70,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                     mBinding.tvText.setText(R.string.me_loan_amount_hint)
                     mBinding.tvText2.hide()
                 }
-                OrderStatus.STATUS_REPAY, OrderStatus.STATUS_OVERDUE -> {
+                OrderStatus.STATUS_REPAY, OrderStatus.STATUS_OVERDUE,
+                OrderStatus.STATUS_REPEAT2, OrderStatus.STATUS_REPEAT4 -> {
                     mStatus = 1
                     mBinding.clRepay.show()
                     mBinding.tvRefused.hide()
@@ -92,6 +97,17 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 }
             }
         }
+
+        mHomeViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
+            val isShow = it.isSuccess() && it.getData()?.isAllSuccess() == true || isRepeat
+            showBank(isShow)
+        }
+        mHomeViewModel.getCertProcess()
+    }
+
+    private fun showBank(isShow: Boolean) {
+        mBinding.flBank.ifShow(isShow)
+        mBinding.viewLine.ifShow(isShow)
     }
 
     private fun changeUserName() {
@@ -111,8 +127,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         v ?: return
         when (v.id) {
             R.id.etv_custom -> {
-//                mCustomDialog.show()
-                SerManager.uploadData()
+                getBaseActivity()?.showCustomDialog()
             }
             R.id.ail_about -> {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_ABOUT)
@@ -135,9 +150,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             R.id.fl_bank -> {
                 if (!checkLogin()) return
                 Launch.skipMeBankCardListActivity(getSupportContext())
-            }
-            R.id.etv_custom -> {
-                CustomDialog(getSupportContext()).show()
             }
             R.id.etv_btn -> {
                 // 需要区分状态，还款状态--还款页面
@@ -172,6 +184,9 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             changeStatus()
             changeUserName()
             getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
+            if (inValidToken()) {
+                showBank(false)
+            }
         }
     }
 }

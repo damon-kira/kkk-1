@@ -1,10 +1,7 @@
 package com.colombia.credit.module.home
 
 import com.colombia.credit.bean.resp.*
-import com.colombia.credit.expand.inValidToken
-import com.colombia.credit.expand.isGp
-import com.colombia.credit.expand.mUserName
-import com.colombia.credit.expand.saveMobile
+import com.colombia.credit.expand.*
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
@@ -33,6 +30,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
             if (response.isSuccess()) {
                 response.getData()?.let { info ->
                     isGp = info.Wg5u.equals("G", true)
+                    isRepeat = info.EqyO == "0"
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
                     info.fyEV?.let {
