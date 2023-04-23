@@ -116,6 +116,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private fun initView() {
+        mBinding.ilPic.setEnable(false, rightEnable = false)
         mBinding.tvCommit.setBlockingOnClickListener(this)
         mBinding.kycBivGender.setBlockingOnClickListener(this)
         mBinding.kycBivBirthday.setBlockingOnClickListener(this)
@@ -126,7 +127,6 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         })
 
         val nameInfilter = InputFilter { source, start, end, dest, dstart, dend ->
-            Log.d(TAG, "initView: $source, $start, $end, $dest, $dstart, $dend")
             if (StrMatchUtil.isLetter(
                     source.toString().replace(" ".toRegex(), "")
                 ) || StrMatchUtil.isSpace(source) && dstart != 0
@@ -145,16 +145,24 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
             if (bitmap != null) {
                 if (type == PicType.PIC_FRONT) {
+                    mBinding.ilPic.setLeftEnable(false)
                     mBinding.ilPic.setLeftImage(bitmap)
                     mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_SUCCESS)
                     mBinding.ilPic.setLeftEnable(false)
                 } else {
+                    mBinding.ilPic.setRightEnable(false)
                     mBinding.ilPic.setRightImage(bitmap)
                     mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_SUCCESS)
                     mBinding.ilPic.setRightEnable(false)
                 }
             }
-        }, {})
+        }, {
+            if (type == PicType.PIC_FRONT) {
+                mBinding.ilPic.setLeftEnable(false)
+            } else {
+                mBinding.ilPic.setRightEnable(false)
+            }
+        })
     }
 
     override fun onRestart() {
@@ -188,6 +196,10 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspKycInfo) return@observerNonSticky
+            if (rspInfo.jmWujylO6j?.isUpload() == null || rspInfo.jmWujylO6j?.isUpload() == false){
+                mBinding.ilPic.setEnable(true, rightEnable = true)
+                return@observerNonSticky
+            }
             rspInfo.jmWujylO6j?.let { info ->
                 mBinding.llKycInfo.show()
                 mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())

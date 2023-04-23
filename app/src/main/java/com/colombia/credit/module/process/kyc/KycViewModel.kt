@@ -3,6 +3,7 @@ package com.colombia.credit.module.process.kyc
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
+import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.ImageInfoUtil
@@ -38,8 +39,9 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                it.getData()?.jmWujylO6j ?: return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
+            } else {
+                mInfoLiveData.postValue(RspKycInfo())
             }
         }
     }
