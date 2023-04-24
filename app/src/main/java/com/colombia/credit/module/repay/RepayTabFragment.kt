@@ -117,6 +117,9 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
             if (it.event == HomeEvent.EVENT_LOGOUT) {
                 changePage(false)
+                mViewModel.clearData()
+            } else if (it.event == HomeEvent.EVENT_LOGIN){
+                onPullToRefresh()
             }
         }
     }
@@ -151,6 +154,8 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         if (visible) {
             if (inValidToken()) {
                 changePage(false)
+            } else {
+                onPullToRefresh()
             }
             getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
         }

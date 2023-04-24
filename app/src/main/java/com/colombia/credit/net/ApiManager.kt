@@ -10,6 +10,7 @@ import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.expand.setLogout
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.net.*
@@ -53,6 +54,7 @@ class ApiManager @Inject constructor() {
                             val context = AppInjector.getTopActivity()
                                 ?: com.colombia.credit.app.getAppContext()
                             Launch.skipMainActivity(context)
+                            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
                             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
                         }
                     }

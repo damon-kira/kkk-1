@@ -1,6 +1,7 @@
 package com.colombia.credit.module.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,28 +54,35 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     override fun onRefresh() {
+        if(inValidToken()) {
+            stopRefresh()
+            return
+        }
         mAppUpdateViewModel.getAppUpdate()
         mHomeViewModel.getHomeInfo()
+    }
+
+    private val mHomeEventObserver = {event: HomeEvent ->
+        when (event.event) {
+            HomeEvent.EVENT_REFRESH -> {
+                onRefresh()
+            }
+            HomeEvent.EVENT_LOGIN -> {
+                onRefresh()
+                replaceChildFragment(getFragment())
+            }
+            HomeEvent.EVENT_LOGOUT -> {
+                mHomeViewModel.clearData()
+                replaceChildFragment(getFragment())
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         replaceChildFragment(getFragment())
 
-        LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
-            when (it.event) {
-                HomeEvent.EVENT_REFRESH -> {
-                    onRefresh()
-                }
-                HomeEvent.EVENT_LOGIN -> {
-                    onRefresh()
-                    replaceChildFragment(getFragment())
-                }
-                HomeEvent.EVENT_LOGOUT -> {
-                    replaceChildFragment(getFragment())
-                }
-            }
-        }
+        LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner, mHomeEventObserver)
 
         mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
             getBaseActivity()?.showAppUpgradeDialog(it) {
@@ -173,5 +181,19 @@ class HomeFragment : BaseHomeFragment() {
         if (fragment is BaseHomeLoanFragment) {
             fragment.stopRefresh()
         }
+    }
+
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if(visible) {
+            if (inValidToken()) {
+                replaceChildFragment(getFragment())
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        LiveDataBus.removeObserve(HomeEvent::class.java, mHomeEventObserver)
+        super.onDestroy()
     }
 }

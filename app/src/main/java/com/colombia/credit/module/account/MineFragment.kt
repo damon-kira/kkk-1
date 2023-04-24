@@ -16,7 +16,6 @@ import com.colombia.credit.module.home.OrderStatus
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
-import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
@@ -30,8 +29,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     private val mBinding by binding(FragmentAccountBinding::inflate)
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
-
-    private val mViewModel by lazyViewModel<HomeLoanViewModel>()
 
     private var mStatus: Int = 0 // 大于0，跳转还款页面
 
@@ -75,7 +72,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                     mStatus = 1
                     mBinding.clRepay.show()
                     mBinding.tvRefused.hide()
-                    mBinding.tvAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
+                    val amount = if (isRepeat) it.gQ1J?.RPBJ47rhC else it.yqGhrjOF2
+                    mBinding.tvAmount.text = getUnitString(amount.orEmpty())
                     mBinding.etvBtn.setText(R.string.me_repayment)
                     if (it.xXkO == OrderStatus.STATUS_OVERDUE) {
                         mBinding.etvBtn.setSolidColorRes(R.color.color_fe4f4f)
@@ -97,12 +95,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 }
             }
         }
-
-        mViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
-            val isShow = it.isSuccess() && it.getData()?.isAllSuccess() == true || isRepeat
-            showBank(isShow)
-        }
-        mViewModel.getCertProcess()
     }
 
     private fun showBank(isShow: Boolean) {
@@ -184,6 +176,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         if (visible) {
             changeStatus()
             changeUserName()
+            showBank(isRepeat || (orderStatus != OrderStatus.STATUS_FIRST_PRODUCT && orderStatus != null))
             getBaseActivity()?.setStatusBarColor(Color.WHITE, true)
             if (inValidToken()) {
                 showBank(false)

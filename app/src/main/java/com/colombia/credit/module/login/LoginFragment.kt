@@ -163,6 +163,8 @@ class LoginFragment : BaseLoginFragment() {
                     R.color.colorPrimary
                 ), false
             )
+        } else {
+            hideSoftInput()
         }
     }
 

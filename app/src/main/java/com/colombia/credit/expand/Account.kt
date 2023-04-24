@@ -43,6 +43,7 @@ var isRepeat: Boolean
     set(value) = SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, value)
 
 var isGp: Boolean = false
+var orderStatus:String? = null
 
 // 是否是gp审核账号
 fun isGpAccount(): Boolean {
@@ -59,6 +60,8 @@ fun isFirstRegister(): Boolean {
 }
 
 fun setLogout() {
+    orderStatus = null
+    isGp = false
     saveUserToken("")
     SharedPrefUser.clear()
     deleteCameraCache(getAppContext())

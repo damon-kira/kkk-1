@@ -16,7 +16,6 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
     private val _homeLiveData = generatorLiveData<BaseResponse<RspProductInfo>>()
     val mHomeLiveData = _homeLiveData
 
-    val firstConfirmLiveData = generatorLiveData<ArrayList<FirstConfirmInfo>>() // 首贷确认额度
     val repeatProductLiveData = generatorLiveData<ArrayList<RepeatProductInfo>>() // 复贷产品列表
     val repeatRepayLiveData = generatorLiveData<RepeatRepayInfo>() // 复贷还款列表
 //    val repeatConfirmLiveData = generatorLiveData<ArrayList<RepeatWaitConfirmInfo>>() // 复贷待确认产品列表
@@ -33,17 +32,12 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
                     isRepeat = info.EqyO == "0"
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
-                    info.fyEV?.let {
-                        firstConfirmLiveData.postValue(info.fyEV)
-                    }
 
                     if (repeatProductLiveData.value != info.jBRR) {
                         repeatProductLiveData.postValue(info.jBRR)
                     }
 
-                    info.gQ1J?.let {
-                        repeatRepayLiveData.postValue(it)
-                    }
+                    repeatRepayLiveData.postValue(info.gQ1J)
 //                    info.Jg4g2?.let {
 //                        repeatConfirmLiveData.postValue(it)
 //                    }
@@ -54,7 +48,6 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
     }
 
     fun getHomeInfo() {
-        if (inValidToken()) return
         mHomeLiveData.addSourceLiveData(repository.getHomeInfo()) { response ->
             _homeLiveData.postValue(response)
         }
@@ -76,5 +69,9 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
                 mCertProcessLiveData.postValue(it)
             }
         }
+    }
+
+    fun clearData(){
+        _homeLiveData.value = BaseResponse(ResponseCode.OTHER_ERROR_CODE, RspProductInfo(), null)
     }
 }
