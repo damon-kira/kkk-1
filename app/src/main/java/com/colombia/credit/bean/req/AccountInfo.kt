@@ -1,7 +1,9 @@
 package com.colombia.credit.bean.req
 
 
-interface IReqBaseInfo
+interface IReqBaseInfo {
+    fun isEmpty(): Boolean
+}
 
 class ReqPersonalInfo : IReqBaseInfo {
     var unH4I2vHXG: String? = null // email
@@ -12,6 +14,11 @@ class ReqPersonalInfo : IReqBaseInfo {
     var lh3bJ: String? = null // 详细地址
     var qoTp6AOTAZ: Long = 0 // 停留时长
     var XVQOOWFrF: String = "02" // 页面来源
+
+    override fun isEmpty(): Boolean {
+        return unH4I2vHXG.isNullOrEmpty() && m7pyaSk.isNullOrEmpty() && zgGtVHl9N2.isNullOrEmpty()
+                && QlCvCLnNx.isNullOrEmpty() && woTVOe.isNullOrEmpty() || lh3bJ.isNullOrEmpty()
+    }
 }
 
 class ReqWorkInfo : IReqBaseInfo {
@@ -21,6 +28,10 @@ class ReqWorkInfo : IReqBaseInfo {
     var AD8Jznx: String? = null // 工作类型
     val HeWTdLp3 = 0L // 停留时长
     val GdGN6viJS = "02" // 页面来源
+
+    override fun isEmpty(): Boolean {
+        return x6yR.isNullOrEmpty() && xgJ5.isNullOrEmpty() && u0pn.isNullOrEmpty() && AD8Jznx.isNullOrEmpty()
+    }
 }
 
 class ReqContactInfo : IReqBaseInfo {
@@ -35,6 +46,11 @@ class ReqContactInfo : IReqBaseInfo {
     var PqQz: String = "4" // 第二联系人关系
     var yB5L8A8mo = 0L // 停留时长
     var HkdIn = "02" // 页面来源
+
+    override fun isEmpty(): Boolean {
+        return zAqGvHgHls.isNullOrEmpty() && ifunMf6ZLx.isNullOrEmpty() && gQdRCJKOEJ.isNullOrEmpty()
+                && VWHN.isNullOrEmpty() && fHdl.isNullOrEmpty()
+    }
 }
 
 class ReqBankInfo : IReqBaseInfo {
@@ -44,6 +60,10 @@ class ReqBankInfo : IReqBaseInfo {
     var Bkmaj97: String? = null // 银行卡号
     var kQWn = 0 // 停留时长
     var cOzMNSKThS = "02" // 页面来源
+
+    override fun isEmpty(): Boolean {
+        return thXggvo.isNullOrEmpty() && SElc4.isNullOrEmpty() && GiQ40BKKr.isNullOrEmpty() && Bkmaj97.isNullOrEmpty()
+    }
 }
 
 class ReqKycInfo : IReqBaseInfo {
@@ -54,14 +74,27 @@ class ReqKycInfo : IReqBaseInfo {
 
     var Yqm8Lv = 0L // 停留时长
     var oOxsFrckdv = "02" // 页面来源
+
+    override fun isEmpty(): Boolean {
+        return (W8mqV.isNullOrEmpty() && ALKxGTZ4FQ.isNullOrEmpty() && y6hQBtv.isNullOrEmpty() && GJmhwzsK5.isNullOrEmpty())
+    }
+
+    override fun toString(): String {
+        return "ReqKycInfo(W8mqV=$W8mqV, ALKxGTZ4FQ=$ALKxGTZ4FQ, y6hQBtv=$y6hQBtv, GJmhwzsK5=$GJmhwzsK5, Yqm8Lv=$Yqm8Lv, oOxsFrckdv='$oOxsFrckdv')"
+    }
 }
 
 // 展期
 class ReqExtensionInfo : IReqBaseInfo {
-
+    override fun isEmpty(): Boolean {
+        return false
+    }
 }
 
 // 活体
 class ReqFaceInfo : IReqBaseInfo {
     var path: String? = null
+    override fun isEmpty(): Boolean {
+        return false
+    }
 }

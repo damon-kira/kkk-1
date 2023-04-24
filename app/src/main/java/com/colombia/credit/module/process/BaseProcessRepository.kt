@@ -8,6 +8,7 @@ import com.colombia.credit.bean.resp.IRspBaseInfo
 import com.colombia.credit.bean.resp.RspResult
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
+import com.util.lib.log.logger_d
 
 abstract class BaseProcessRepository<Rsp : IRspBaseInfo, T : IReqBaseInfo> : BaseRepository(),
     IBaseProcessRepository<Rsp> {
@@ -23,7 +24,8 @@ abstract class BaseProcessRepository<Rsp : IRspBaseInfo, T : IReqBaseInfo> : Bas
     override fun getCacheInfo(): IReqBaseInfo? {
         val cache = SharedPrefUser.getString(getCacheKey(), null)
         if (cache.isEmpty()) return null
-        return GsonUtil.fromJson(cache, getCacheClass()) as? IReqBaseInfo
+        logger_d("debug_BaseProcessRepository", "getCacheInfo: cache = $cache  class =${getCacheClass()}")
+        return GsonUtil.fromJsonNew(cache, getCacheClass()) as? IReqBaseInfo
     }
 
     abstract fun getCacheClass(): Class<T>

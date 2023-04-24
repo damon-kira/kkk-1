@@ -83,7 +83,8 @@ class RspKycInfo : IRspBaseInfo {
             get() = field?.replace(" ", "")
 
         fun isUpload(): Boolean {
-            return !(fefFSZ.isNullOrEmpty() || YZ7Mlc8yf.isNullOrEmpty() || DrD60 == "-1" || Wa7f.isNullOrEmpty() || FStwV6Fge7.isNullOrEmpty() || YiWtoa1.isNullOrEmpty())
+            return !(fefFSZ.isNullOrEmpty() && YZ7Mlc8yf.isNullOrEmpty() && DrD60 == "-1" && Wa7f.isNullOrEmpty()
+                    && FStwV6Fge7.isNullOrEmpty() && YiWtoa1.isNullOrEmpty())
         }
     }
 }

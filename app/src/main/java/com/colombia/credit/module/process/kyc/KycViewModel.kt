@@ -29,7 +29,8 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
             hideLoading()
             if (it.isSuccess()) {
                 val imageInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
-                val key = if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
+                val key =
+                    if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
                 ImageInfoUtil.saveInfo(key, imageInfo)
             }
             _imageLiveData.postValue(it)
@@ -70,5 +71,9 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
         repository.removeCacheInfo()
     }
 
-    override fun getCacheInfo(): IReqBaseInfo? = repository.getCacheInfo()
+    override fun getCacheInfo(): IReqBaseInfo? {
+        val cache = repository.getCacheInfo()
+        if (cache?.isEmpty() == true || cache == null) return null
+        return cache
+    }
 }

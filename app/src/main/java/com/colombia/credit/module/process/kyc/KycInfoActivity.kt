@@ -101,6 +101,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
         mViewModel.getCacheInfo()?.also { info ->
             info as ReqKycInfo
+            mBinding.llKycInfo.show()
             mBinding.kycBivNuip.setViewText(info.ALKxGTZ4FQ.orEmpty())
             val names = info.y6hQBtv?.split("|").orEmpty()
             if (names.size > 1) {
@@ -141,6 +142,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private fun loadImage(url: String?, type: Int) {
+        logger_d(TAG,"loadImage url = $url")
         if (url.isNullOrEmpty()) return
         GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
             if (bitmap != null) {
@@ -202,10 +204,18 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
             rspInfo.jmWujylO6j?.let { info ->
                 mBinding.llKycInfo.show()
-                mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
-                mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
-                mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
-                mBinding.kycBivBirthday.setViewText(info.YiWtoa1.orEmpty())
+                if (info.Wa7f.orEmpty().isNotEmpty()) {
+                    mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
+                }
+                if (info.JSusdh7YE.orEmpty().isNotEmpty()) {
+                    mBinding.kycBivName.setViewText(info.JSusdh7YE.orEmpty())
+                }
+                if (info.FStwV6Fge7.orEmpty().isNotEmpty()) {
+                    mBinding.kycBivSurname.setViewText(info.FStwV6Fge7.orEmpty())
+                }
+                if (info.YiWtoa1.orEmpty().isNotEmpty()) {
+                    mBinding.kycBivBirthday.setViewText(info.YiWtoa1.orEmpty())
+                }
                 if (mGender.containsKey(info.DrD60)) {
                     setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
                 }
@@ -292,7 +302,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             it.ALKxGTZ4FQ = mBinding.kycBivNuip.getViewText()
             val name = mBinding.kycBivName.getViewText()
             val surname = mBinding.kycBivSurname.getViewText()
-            it.y6hQBtv = "$surname|$name"
+            if (name.isNotEmpty() || surname.isNotEmpty()) {
+                it.y6hQBtv = "$surname|$name"
+            }
             it.W8mqV = mBinding.kycBivGender.tag?.toString().orEmpty()
             it.GJmhwzsK5 = mBinding.kycBivBirthday.getViewText()
         }
