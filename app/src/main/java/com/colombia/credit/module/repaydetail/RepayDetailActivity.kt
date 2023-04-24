@@ -34,6 +34,8 @@ class RepayDetailActivity : BaseActivity() {
     private var amount: String? = null
     private var mIds: String? = null
 
+    private var loansonId = ""
+
     private val mObserver = { event: PayEvent ->
         if (event.event == PayEvent.EVENT_REFRESH) {
             getDetail()
@@ -52,7 +54,7 @@ class RepayDetailActivity : BaseActivity() {
         mBinding.tvApply.setBlockingOnClickListener {
             Launch.skipWebViewActivity(
                 this,
-                H5UrlManager.getPayUrl(mIds.orEmpty(), amount.orEmpty(), "2")
+                H5UrlManager.getPayUrl(loansonId, amount.orEmpty(), "2")
             )
         }
 
@@ -73,6 +75,7 @@ class RepayDetailActivity : BaseActivity() {
                     )
                     val order = data.KUgC?.get(0) ?: return@observerNonSticky
                     info = GsonUtil.toJson(order).orEmpty()
+                    loansonId = order.PJpH0.orEmpty()
                     mBinding.iilBankInfo.setRightText(order.DaNhMLH.orEmpty())
                     mBinding.iilDateInfo.setRightText(order.ch4x.orEmpty())
                     mBinding.iilRepayStatus.setRightText(order.wIWdNgC.orEmpty())
