@@ -13,6 +13,7 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.module.home.BaseHomeLoanFragment
+import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.MainEvent
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
@@ -41,6 +42,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
 
     override fun onPullToRefresh() {
         if (inValidToken()) {
+            stopRefresh()
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             return
         }
@@ -110,6 +112,12 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mViewModel.listLivedata.observerNonSticky(viewLifecycleOwner) { list ->
             changePage(!list.isNullOrEmpty())
             mAdapter.setItems(list ?: arrayListOf())
+        }
+
+        LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
+            if (it.event == HomeEvent.EVENT_LOGOUT) {
+                changePage(false)
+            }
         }
     }
 
