@@ -40,7 +40,6 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
-        reqPermission()
         mBinding.bivContact1.setDescMarginLeft(35f.dp())
         mBinding.bivContact2.setDescMarginLeft(35f.dp())
         mBinding.tvCommit.setBlockingOnClickListener(this)
@@ -100,9 +99,14 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    private var mCurrView: BaseInfoView? = null
 
-    private fun reqPermission() {
-        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), true, {}, {
+    private fun reqPermission(baseInfoView: BaseInfoView) {
+        mCurrView = baseInfoView
+        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), !isGp, {
+            isJumpSetting = false
+            openContacts(baseInfoView)
+        }, {
             isJumpSetting = true
             jumpToAppSettingPage()
         })
@@ -111,7 +115,10 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     override fun onRestart() {
         super.onRestart()
         if (isJumpSetting) {
-            reqPermission()
+            isJumpSetting = false
+            mCurrView?.let {
+                reqPermission(it)
+            }
         }
     }
 
@@ -129,10 +136,10 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 }
             }
             R.id.biv_contact1 -> {
-                openContacts(mBinding.bivContact1)
+                reqPermission(mBinding.bivContact1)
             }
             R.id.biv_contact2 -> {
-                openContacts(mBinding.bivContact2)
+                reqPermission(mBinding.bivContact2)
             }
             R.id.tv_commit -> {
                 uploadInfo()
