@@ -97,70 +97,40 @@
             app:layout_constraintTop_toBottomOf="@id/etv_hint" />
 
         <!-- 展期天数 -->
-        <TextView
-            android:id="@+id/tv_days"
-            android:layout_width="wrap_content"
+        <com.colombia.credit.view.ItemInfoLayout
+            android:id="@+id/iil_days"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/defer_days"
-            android:textColor="@color/color_999999"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:iil_left_text="@string/defer_days"
+            app:iil_left_text_color="@color/color_999999"
+            app:iil_line_show="false"
+            app:iil_right_text_bold="true"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_hint" />
 
-        <TextView
-            android:id="@+id/tv_day_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_333333"
-            android:textSize="12sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_days"
-            tools:text="7 Dias" />
         <!-- 展期还款时间 -->
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+        <com.colombia.credit.view.ItemInfoLayout
+            android:id="@+id/iil_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/defer_days"
-            android:textColor="@color/color_999999"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_days"
-            app:layout_goneMarginTop="16dp" />
+            android:layout_marginTop="16dp"
+            app:iil_left_text="@string/history_repay_date"
+            app:iil_left_text_color="@color/color_999999"
+            app:iil_line_show="false"
+            app:iil_right_text_bold="true"
+            app:layout_constraintTop_toBottomOf="@id/iil_days" />
 
-        <TextView
-            android:id="@+id/tv_date_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_333333"
-            android:textSize="12sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_date"
-            tools:text="09/12/2023" />
         <!-- 展期还款金额 -->
-        <TextView
-            android:id="@+id/tv_repay_amount"
-            android:layout_width="wrap_content"
+        <com.colombia.credit.view.ItemInfoLayout
+            android:id="@+id/iil_amount"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/defer_days"
-            android:textColor="@color/color_999999"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_date"
-            app:layout_goneMarginTop="16dp" />
-
-        <TextView
-            android:id="@+id/tv_repay_amount_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_333333"
-            android:textSize="12sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_repay_amount"
-            tools:text="$8.000" />
+            android:layout_marginTop="16dp"
+            app:iil_left_text="@string/defer_amount"
+            app:iil_left_text_color="@color/color_999999"
+            app:iil_line_show="false"
+            app:iil_right_text_bold="true"
+            app:layout_constraintTop_toBottomOf="@id/iil_date" />
 
         <!-- 支付当前费用 -->
         <TextView
@@ -175,7 +145,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_repay_amount" />
+            app:layout_constraintTop_toBottomOf="@id/iil_amount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Space

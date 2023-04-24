@@ -69,9 +69,9 @@ open class DeferActivity : BaseActivity() {
             jine = detail?.dbhmAOVp56.orEmpty()
             val amount = getUnitString(detail?.dbhmAOVp56.orEmpty())
             mBinding.tvAmount.text = amount
-            mBinding.tvDayValue.text = getString(R.string.days, detail?.zlftJgf ?: "--")
-            mBinding.tvDateValue.text = detail?.YXtMfL6nAm
-            mBinding.tvRepayAmountValue.text = getUnitString(detail?.EA7nMOa ?: "--")
+            mBinding.iilDays.setRightText(getString(R.string.days, detail?.zlftJgf ?: "--"))
+            mBinding.iilDate.setRightText(detail?.YXtMfL6nAm.orEmpty())
+            mBinding.iilAmount.setRightText(getUnitString(detail?.EA7nMOa ?: "--"))
             mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
             orderId = detail?.PJpH0.orEmpty()
         }

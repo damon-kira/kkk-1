@@ -103,7 +103,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private fun reqPermission(baseInfoView: BaseInfoView) {
         mCurrView = baseInfoView
-        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), !isGp, {
+        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), !isGpAccount(), {
             isJumpSetting = false
             openContacts(baseInfoView)
         }, {
@@ -207,7 +207,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     override fun getNextType(): Int = TYPE_BANK
 
     override fun uploadSuccess() {
-        if (isGp) {
+        if (isGpAccount()) {
             Launch.skipApplySuccessActivity(this)
             finish()
         } else super.uploadSuccess()

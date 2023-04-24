@@ -15,6 +15,7 @@ fun saveUserInfo(info: RspLoginInfo) {
     SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_INFO, GsonUtil.toJson(info))
     setUserId(info.jsa2Dfw3.orEmpty())
     saveUserToken(info.token.orEmpty())
+    isNewUser = info.rSXY6ttC3w == "1"
 }
 
 fun getUserToken(): String {
@@ -42,26 +43,15 @@ var isRepeat: Boolean
     get() = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, false)
     set(value) = SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, value)
 
-var isGp: Boolean = false
-var orderStatus:String? = null
-
 // 是否是gp审核账号
 fun isGpAccount(): Boolean {
     val json = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_INFO, null)
-    return ((GsonUtil.fromJson(json, RspLoginInfo::class.java) as? RspLoginInfo)?.vhFsD8cK
-        ?: 0) == 1
-}
-
-// 是否是首次注册
-fun isFirstRegister(): Boolean {
-    val json = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_INFO, null)
-    return ((GsonUtil.fromJson(json, RspLoginInfo::class.java) as? RspLoginInfo)?.roiM2eg8uM
-        ?: 0) == 1
+    return (GsonUtil.fromJsonNew<RspLoginInfo>(json)?.IpZFxXYW
+        ?: "0") == "1"
 }
 
 fun setLogout() {
     orderStatus = null
-    isGp = false
     saveUserToken("")
     SharedPrefUser.clear()
     deleteCameraCache(getAppContext())
@@ -88,6 +78,9 @@ fun saveMobile(mobile: String) {
     }
     SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_MOBILE, temp)
 }
+
+var orderStatus: String? = null
+var isNewUser = false
 
 var mUserName: String
     get() {

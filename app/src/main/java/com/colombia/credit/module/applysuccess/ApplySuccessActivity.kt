@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityApplySuccessBinding
-import com.colombia.credit.expand.isGp
+import com.colombia.credit.expand.isGpAccount
 import com.colombia.credit.expand.isRepeat
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.permission.HintDialog
@@ -35,7 +35,7 @@ class ApplySuccessActivity : BaseActivity() {
         setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
 
-        if (!isRepeat && !isGp) {
+        if (!isRepeat && !isGpAccount()) {
             mHintDialog.setOnClickListener {
                 Launch.skipAppStore(null)
             }

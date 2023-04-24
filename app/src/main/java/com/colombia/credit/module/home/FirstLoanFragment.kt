@@ -38,18 +38,18 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         setViewModelLoading(mHomeViewModel)
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mBinding.tvMaxAmount.text = getUnitString(it.yqGhrjOF2.orEmpty())
-            mFirstPageLoanAmount = it.yqGhrjOF2.orEmpty()
         }
 
         mHomeViewModel.mCertProcessLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                it.getData()?.let {info ->
+                it.getData()?.let { info ->
                     jumpProcess(getSupportContext(), info.getProcessType())
                 }
             } else it.ShowErrorMsg(::getProces)
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
+            mFirstPageLoanAmount = mHomeViewModel.mRspInfoLiveData.value?.yqGhrjOF2.orEmpty()
             getProces()
         }
     }

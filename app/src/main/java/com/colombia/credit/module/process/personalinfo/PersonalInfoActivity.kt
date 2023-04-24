@@ -8,8 +8,8 @@ import com.colombia.credit.bean.req.ReqPersonalInfo
 import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
+import com.colombia.credit.dialog.FirstLoanHintDialog
 import com.colombia.credit.expand.*
-import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
@@ -42,6 +42,10 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    private val mFirstDialog: FirstLoanHintDialog by lazy {
+        FirstLoanHintDialog(this).setOnClickListener {  }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
@@ -68,6 +72,10 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
         if (cache == null) {
             mViewModel.getInfo()
+        }
+
+        if (isNewUser) {
+            mFirstDialog.show()
         }
     }
 

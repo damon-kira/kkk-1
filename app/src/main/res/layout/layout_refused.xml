@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/refused_days"
+            android:text="@string/refused_date"
             android:textColor="@color/color_999999"
             android:textSize="14sp" />
 

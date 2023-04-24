@@ -35,13 +35,13 @@ class RefusedFragment : BaseHomeLoanFragment() {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
         mViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            setText(it.WTvE5G, it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
+            setText(it.RdJ7nJ.orEmpty(), it.yqGhrjOF2.orEmpty(), it.K1v0Pz.orEmpty())
         }
     }
 
-    private fun setText(days: Int, amount: String, date: String) {
+    private fun setText(days: String, amount: String, date: String) {
         mBinding.layoutInfo.apply {
-            tvDays.text = getString(R.string.days, days.toString())
+            tvDays.text = days
             tvAmount.text = getString(R.string.amount_unit, formatCommon(amount))
             tvDesc.text = getString(R.string.refused_time, date)
         }

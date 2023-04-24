@@ -60,6 +60,7 @@
 
     <string name="refused_hint">Reseña rechazada</string>
     <string name="refused_days">Periodo de préstamo</string>
+    <string name="refused_date">Fecha de rechazo</string>
     <string name="refused_amount">Monto del préstamo</string>
     <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después del %s</string>
 
@@ -240,6 +241,7 @@
     <string name="defer_confirm1">Consejos amables</string>
     <string name="defer_confirm2">Una vez que la solicitud de extensión de pago  sea exitosa, el pedido original se liquidará  automáticamente. Solo debe pagar de  acuerdo con el tiempo de pago del nuevo  pedido, confirme si desea pagar  la tarifa por demora por el pago por demora</string>
     <string name="defer_apply">Confirmar extensión</string>
+    <string name="defer_amount">pagadero a su vencimiento</string>
     <string name="account_not_login">Registro/Acceso</string>
 
     <!-- 个人中心 -->
@@ -319,5 +321,6 @@
     <string name="toast_min_product">El límite mínimo de endeudamiento es un 1</string>
     <string name="gp_btn">ve a dar una buena reseña</string>
     <string name="gp_title">¡Haz una buena reseña!</string>
-    <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string><!-- 最少勾选一个产品 -->
+    <!-- 最少勾选一个产品 -->
+    <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string>
 </resources>

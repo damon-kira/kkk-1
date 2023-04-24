@@ -28,7 +28,6 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         _homeLiveData.observerNonStickyForever { response ->
             if (response.isSuccess()) {
                 response.getData()?.let { info ->
-                    isGp = info.Wg5u.equals("G", true)
                     isRepeat = info.EqyO == "0"
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
@@ -57,7 +56,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         showloading()
         mCertProcessLiveData.addSourceLiveData(repository.getCertProcess()) {
             hideLoading()
-            if (isGp) {
+            if (isGpAccount()) {
                 mCertProcessLiveData.postValue(
                     BaseResponse(
                         ResponseCode.SUCCESS_CODE,

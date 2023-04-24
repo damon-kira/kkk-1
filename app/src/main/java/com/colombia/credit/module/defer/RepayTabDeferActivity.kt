@@ -16,9 +16,9 @@ open class RepayTabDeferActivity : DeferActivity() {
             jine = detail?.rCC18KSG.orEmpty()
             val amount = getUnitString(jine)
             mBinding.tvAmount.text = amount
-            mBinding.tvDayValue.text = getString(R.string.days, detail?.GHMXDjtsUn ?: "--")
-            mBinding.tvDateValue.text = detail?.prr9Ie61
-            mBinding.tvRepayAmountValue.text = getUnitString(detail?.X32HrYq4u ?: "--")
+            mBinding.iilDays.setRightText(getString(R.string.days, detail?.GHMXDjtsUn ?: "--"))
+            mBinding.iilDate.setRightText(detail?.prr9Ie61.orEmpty())
+            mBinding.iilAmount.setRightText(getUnitString(detail?.X32HrYq4u ?: "--"))
             mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
             orderId = detail?.W5KW6.orEmpty()
         }

@@ -1,6 +1,5 @@
 package com.colombia.credit.module.login
 
-import android.accounts.NetworkErrorException
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
@@ -11,8 +10,7 @@ import androidx.core.content.ContextCompat
 import com.bigdata.lib.loginTime
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentLoginBinding
-import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.checkMobile
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
@@ -96,6 +94,10 @@ class LoginFragment : BaseLoginFragment() {
         }
         mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
+                if (isNewUser) {
+                    mFirstPageLoanAmount = "888888"
+                    jumpProcess(getSupportContext(), TYPE_PERSONAL)
+                }
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))
             } else {
                 it.ShowErrorMsg(::login)

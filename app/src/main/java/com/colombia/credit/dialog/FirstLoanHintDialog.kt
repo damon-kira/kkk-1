@@ -2,6 +2,7 @@ package com.colombia.credit.dialog
 
 import android.content.Context
 import com.colombia.credit.databinding.DialogFirstLoanBinding
+import com.colombia.credit.expand.isNewUser
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -23,5 +24,10 @@ class FirstLoanHintDialog constructor(context: Context):DefaultDialog(context) {
             dismiss()
         }
         return this
+    }
+
+    override fun show() {
+        super.show()
+        isNewUser = false
     }
 }
