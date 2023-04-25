@@ -91,7 +91,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             if (it.isSuccess()) {
                 val data = it.getData() ?: return@observerNonSticky
                 mBankNo = data.KcGqvf.orEmpty()
-                mBinding.tvBankNo.text = maskString(data.KcGqvf, 3, 3)
+                mBinding.tvBankNo.text = maskBank(data.KcGqvf)
                 mBinding.tvRepayData.text = data.jcSrg9
                 setText(data.bwAK6N3EuE.orEmpty(), data.FXE6B.orEmpty(), data.BM3HTNDY1b.orEmpty())
             } else {

@@ -48,6 +48,8 @@ fun maskString(str: String?, preCount: Int, postCount: Int): String {
     return array.joinToString("")
 }
 
+fun maskBank(str: String?) = maskString(str, 3,3)
+
 /**
  * @param amount 不需要添加分隔符
  */

@@ -6,7 +6,7 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
-import com.colombia.credit.expand.maskString
+import com.colombia.credit.expand.maskBank
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
@@ -41,7 +41,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
     private var mLoanBankNo: String? = null
         set(value) {
-            mBinding.tvBankNo.text = maskString(value.orEmpty(), 2, 2)
+            mBinding.tvBankNo.text = maskBank(value)
             field = value
         }
     private var mProductId: String? = null

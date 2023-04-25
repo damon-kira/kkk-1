@@ -14,7 +14,7 @@ import com.colombia.credit.bean.resp.RspBankAccount
 import com.colombia.credit.databinding.ActivityBankCardListBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.SimpleOnItemClickListener
-import com.colombia.credit.expand.maskString
+import com.colombia.credit.expand.maskBank
 import com.colombia.credit.expand.setOnItemClickListener
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
@@ -155,7 +155,7 @@ open class BankCardListActivity : BaseActivity() {
                 tv.text = item.RPZ7
                 tv.tag = item.oH3Jv
             }
-            holder.setText(R.id.tv_bank_no, maskString(item.JJ41sQr, 3, 3))
+            holder.setText(R.id.tv_bank_no, maskBank(item.JJ41sQr))
             holder.getView<AppCompatImageView>(R.id.aiv_selector).isSelected = item.isSelector()
             if (item.isSelector()) {
                 mSelectPosition = position
