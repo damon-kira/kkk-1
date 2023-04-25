@@ -5,11 +5,9 @@ import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.ImageInfoUtil
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // 上传活体照片
-@HiltViewModel
 class FaceViewModel @Inject constructor(private val repository: FaceRepository) :
     BaseProcessViewModel() {
 

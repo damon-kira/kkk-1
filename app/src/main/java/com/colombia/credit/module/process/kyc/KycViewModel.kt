@@ -10,11 +10,9 @@ import com.colombia.credit.module.service.SerManager
 import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // 上传身份证信息
-@HiltViewModel
 class KycViewModel @Inject constructor(private val repository: KycRepository) :
     BaseProcessViewModel() {
     private val _imageLiveData = generatorLiveData<BaseResponse<KycOcrInfo>>()

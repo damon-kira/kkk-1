@@ -94,9 +94,13 @@ dependencies {
     implementation rootProject.ext.android.multidex
     implementation rootProject.ext.view.swiperefreshlayout
 
+    implementation rootProject.ext.android.lifecycle_runtime
+    implementation rootProject.ext.android.lifecycle_livedataKtx
+    implementation rootProject.ext.android.livedata_viewmodelKtx
+
     implementation rootProject.ext.hilt.hilt_android
-    implementation project(path: ':sdks:cache')
     kapt rootProject.ext.hilt.hilt_compiler_android
+    implementation project(path: ':sdks:cache')
 
     implementation project(path: ":common")
     implementation project(path: ":camera")

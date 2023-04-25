@@ -12,8 +12,8 @@ import javax.inject.Provider
 /**
  * Created by weisl on 2019/9/23.
  */
-//@Module
-//@InstallIn(ActivityComponent::class, FragmentComponent::class)
+@Module
+@InstallIn(ActivityComponent::class, FragmentComponent::class)
 class ViewModelFactory @Inject constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
     ViewModelProvider.NewInstanceFactory() {
 

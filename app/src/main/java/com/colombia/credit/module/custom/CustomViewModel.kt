@@ -5,6 +5,7 @@ import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import javax.inject.Inject
 
+
 class CustomViewModel @Inject constructor(private val repository: CustomRepository): BaseViewModel() {
 
     fun getCustomInfo() {

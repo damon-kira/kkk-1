@@ -1,15 +1,19 @@
 package com.colombia.credit.module.home
 
-import com.colombia.credit.bean.resp.*
-import com.colombia.credit.expand.*
+import com.colombia.credit.bean.resp.RepeatProductInfo
+import com.colombia.credit.bean.resp.RepeatRepayInfo
+import com.colombia.credit.bean.resp.RspCertProcessInfo
+import com.colombia.credit.bean.resp.RspProductInfo
+import com.colombia.credit.expand.isGpAccount
+import com.colombia.credit.expand.isRepeat
+import com.colombia.credit.expand.mUserName
+import com.colombia.credit.expand.saveMobile
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
 class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepository) :
     BaseViewModel() {
 

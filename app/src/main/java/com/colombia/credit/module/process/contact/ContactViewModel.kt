@@ -3,11 +3,9 @@ package com.colombia.credit.module.process.contact
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.service.SerManager
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // 上传联系人信息
-@HiltViewModel
 class ContactViewModel @Inject constructor(private val repository: ContactRepository) :
     BaseProcessViewModel() {
 

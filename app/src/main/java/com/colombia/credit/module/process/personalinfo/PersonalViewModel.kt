@@ -7,11 +7,9 @@ import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.google.gson.reflect.TypeToken
 import com.util.lib.GsonUtil
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // 上传基本信息
-@HiltViewModel
 class PersonalViewModel @Inject constructor(private val repository: PersonalRepository) :
     BaseProcessViewModel() {
 

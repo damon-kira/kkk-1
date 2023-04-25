@@ -10,7 +10,6 @@ import com.colombia.credit.permission.SmsPermission
 import com.common.lib.livedata.observerNonStickyForever
 import javax.inject.Inject
 
-
 class UploadViewModel @Inject constructor(private val repository: UploadRepository) :
     BaseProcessViewModel() {
 

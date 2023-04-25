@@ -2,12 +2,9 @@ package com.colombia.credit.module.process.work
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.min
 
 // 上传工作信息
-@HiltViewModel
 class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepository) :
     BaseProcessViewModel() {
 
