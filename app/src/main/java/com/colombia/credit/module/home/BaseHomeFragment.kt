@@ -19,4 +19,9 @@ abstract class BaseHomeFragment : BaseFragment() {
             mCustomDialog = getBaseActivity()?.showCustomDialog()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mCustomDialog = null
+    }
 }

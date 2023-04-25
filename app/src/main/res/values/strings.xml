@@ -14,6 +14,7 @@
     <string name="day">días</string>
     <string name="selector_s">Elección %s</string>
     <string name="error_hint_blank">&#160;&#160;&#160;</string>
+    <string name="invalid_hint">Su cuenta ya ha iniciado sesión en otro dispositivo, inténtelo de nuevo</string>
 
     <string name="logout_no">No</string>
     <string name="logout_yes">Sí</string>

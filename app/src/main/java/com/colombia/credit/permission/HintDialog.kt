@@ -30,6 +30,11 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
         return this
     }
 
+    fun showTitle(show: Boolean): HintDialog {
+        mBinding.tvTitle.ifShow(show)
+        return this
+    }
+
     fun setTitleText(title: String): HintDialog {
         mBinding.tvTitle.text = title
         return this

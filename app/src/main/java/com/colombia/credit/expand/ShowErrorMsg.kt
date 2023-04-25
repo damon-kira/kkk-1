@@ -2,6 +2,7 @@ package com.colombia.credit.expand
 
 import android.accounts.NetworkErrorException
 import com.colombia.credit.app.AppInjector
+import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import java.net.ConnectException
 import java.util.concurrent.TimeoutException
@@ -13,6 +14,9 @@ fun BaseResponse<*>.ShowErrorMsg(refresh: (() -> Unit)? = null) {
         AppInjector.getTopActivity()?.showNetErrorDialog {
             refresh?.invoke()
         }
+        return
+    }
+    if (code == ResponseCode.INVALIDTOKEN) {
         return
     }
 

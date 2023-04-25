@@ -6,23 +6,41 @@ import android.app.Dialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.colombia.credit.R
 import com.colombia.credit.bean.resp.AppUpgradeInfo
 import com.colombia.credit.dialog.AppUpgradeDialog
 import com.colombia.credit.dialog.CustomDialog
 import com.colombia.credit.dialog.NetErrorDialog
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.permission.HintDialog
 import com.common.lib.BuildConfig
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogHandleMode
+import com.common.lib.livedata.LiveDataBus
+import java.lang.ref.WeakReference
 
 
-private var mNetErrorDialog: NetErrorDialog? = null
+private var mNetErrorDialog: WeakReference<NetErrorDialog>? = null
 fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
-    var dialog = mNetErrorDialog
+    var dialog = mNetErrorDialog?.get()
     if (dialog == null) {
         dialog = NetErrorDialog(this)
+        mNetErrorDialog = WeakReference(dialog)
     }
+    lifecycle.addObserver(object: LifecycleEventObserver{
+        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                source.lifecycle.removeObserver(this)
+                dialog?.dismiss()
+                mNetErrorDialog = null
+            } else if(event == Lifecycle.Event.ON_STOP){
+                dialog?.dismiss()
+            }
+        }
+    })
     if (dialog.isShowing) {
         dialog.dismiss()
     }
@@ -35,43 +53,50 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
     return dialog
 }
 
-@SuppressLint("StaticFieldLeak")
-private var mCustomDialog: CustomDialog? = null
-fun BaseActivity.showCustomDialog(): CustomDialog {
-    var dialog = mCustomDialog
-    if (dialog == null) {
-        dialog = CustomDialog(this)
-        mCustomDialog = dialog
-    } else if (dialog.isShowing) {
-        return dialog
-    }
-    this.lifecycle.addObserver(object: LifecycleEventObserver{
-        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-            if (event == Lifecycle.Event.ON_DESTROY) {
-                source.lifecycle.removeObserver(this)
-                mCustomDialog?.dismiss()
-                mCustomDialog = null
-            }
+fun BaseActivity.showInvalidDialog() {
+    val dialog = HintDialog(this)
+        .setOnClickListener {
+            Launch.skipMainActivity(this)
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+            LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
         }
-    })
-    mCustomDialog?.let {
-        addDialog(it)
-    }
+        .showClose(false)
+        .showTitle(false)
+        .setMessage(getString(R.string.invalid_hint))
+        .setBtnText(getString(R.string.confirm))
+    addDialog(dialog)
+}
+
+
+fun BaseActivity.showCustomDialog(): CustomDialog {
+    val dialog = CustomDialog(this)
+    addDialog(dialog)
     return dialog
 }
 
-private var appUpgradeDialog: AppUpgradeDialog? = null
+@SuppressLint("StaticFieldLeak")
+private var appUpgradeDialog: WeakReference<AppUpgradeDialog>? = null
 fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo, clickListener: (type: Int) -> Unit) {
-    var updateDialog = appUpgradeDialog
-    if (updateDialog?.isShowing == true) {
+    if (appUpgradeDialog?.get()?.isShowing == true) {
         return
     }
-    appUpgradeDialog = AppUpgradeDialog(this).setAppUpdateInfo(info)
-    updateDialog = appUpgradeDialog
-    updateDialog?.mListener = clickListener
+    lifecycle.addObserver(object: LifecycleEventObserver{
+        override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                source.lifecycle.removeObserver(this)
+                appUpgradeDialog = null
+            } else if (event == Lifecycle.Event.ON_STOP) {
+                appUpgradeDialog?.get()?.dismiss()
+            }
+        }
+    })
+    val dialog = AppUpgradeDialog(this).setAppUpdateInfo(info)
+    appUpgradeDialog = WeakReference(dialog)
+    dialog.mListener = clickListener
     val mode =
         if (info.CHDnt3v == 2) DialogHandleMode.REMOVE_OTHERS else DialogHandleMode.ALL_PRIORITY_FIRST
-    addDialog(updateDialog!!, mode = mode)
+
+    addDialog(dialog, mode = mode)
 }
 
 

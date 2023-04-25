@@ -8,11 +8,8 @@ import com.colombia.credit.app.AppEnv
 import com.colombia.credit.app.AppInjector
 import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.expand.setLogout
-import com.colombia.credit.manager.Launch
-import com.colombia.credit.module.home.HomeEvent
-import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.expand.showInvalidDialog
 import com.colombia.credit.util.GPInfoUtils
-import com.common.lib.livedata.LiveDataBus
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor
@@ -51,11 +48,7 @@ class ApiManager @Inject constructor() {
                     result.code == ResponseCode.INVALIDTOKEN -> {
                         setLogout()
                         if (gotoLogin) {
-                            val context = AppInjector.getTopActivity()
-                                ?: com.colombia.credit.app.getAppContext()
-                            Launch.skipMainActivity(context)
-                            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
-                            LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
+                            AppInjector.getTopActivity()?.showInvalidDialog()
                         }
                     }
 //                    result.code == ResponseCode.SERVICE_ERROR_CODE -> {
