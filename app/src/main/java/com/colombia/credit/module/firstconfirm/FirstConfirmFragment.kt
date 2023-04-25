@@ -9,9 +9,14 @@ import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.maskString
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.HomeLoanViewModel
+import com.colombia.credit.module.service.SerManager
+import com.colombia.credit.module.upload.UploadViewModel
+import com.colombia.credit.permission.PermissionHelper
+import com.colombia.credit.permission.appPermissions
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -27,7 +32,10 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     private val mBinding by binding(FragmentFirstConfirmBinding::inflate)
 
     private val mViewModel by lazyViewModel<FirstConfirmViewModel>()
+
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
+
+    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     override fun contentView(): View = mBinding.root
 
@@ -46,8 +54,15 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModelLoading(mViewModel)
+        setViewModelLoading(mUploadViewModel)
         setCustomListener(mBinding.toolbar)
         initObserver()
+
+        PermissionHelper.reqPermission(getBaseActivity()!!, appPermissions.toList(), true, {
+            SerManager.uploadData()
+        }, {
+            getSupportContext().jumpToAppSettingPage()
+        })
 
         mBinding.rlPeriod2.setBlockingOnClickListener(this)
         mBinding.rlPeriod3.setBlockingOnClickListener(this)
@@ -69,7 +84,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 firstConfirmInfo.WTvE5G?.split(",")?.let { dateList ->
                     var isLock = false
                     for (index in 0 until dateList.take(4).size) {
-                        val s = dateList.get(index)
+                        val s = dateList[index]
                         val view = when (index) {
                             0 -> {
                                 mBinding.rlPeriod1
@@ -116,6 +131,10 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 }
             }
         }
+
+        mUploadViewModel.resultLiveData.observerNonSticky(viewLifecycleOwner) {
+            confirmLoan()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -135,7 +154,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 )
             }
             R.id.confirm_tv_apply -> {
-                confirmLoan()
+                mUploadViewModel.checkAndUpload()
             }
             R.id.aiv_jian -> {
                 toast(R.string.toast_mix_amount)

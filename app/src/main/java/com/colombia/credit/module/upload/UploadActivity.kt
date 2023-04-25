@@ -40,7 +40,7 @@ class UploadActivity : BaseProcessActivity() {
 
     private fun reqPermission() {
         PermissionHelper.reqPermission(this, appPermissions.toList(), true, {
-            mViewModel.getInfo()
+            mViewModel.checkAndUpload()
         }, {
             jumpToAppSettingPage()
         })

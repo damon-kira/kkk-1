@@ -140,8 +140,8 @@ class ApiManager @Inject constructor() {
 
     private val mDataApiService by lazy {
         val options = NetOptions()
-            .setReadTimeout(DEFAULT_TIMEOUT)
-            .setConnectTimeout(DEFAULT_TIMEOUT)
+            .setReadTimeout(UPLOAD_TIMEOUT)
+            .setConnectTimeout(UPLOAD_TIMEOUT)
             .setTimeUnit(TimeUnit.MILLISECONDS)
             .setInterceptors(defaultInterceptor)
             .setBaseUrl(BASEURL)

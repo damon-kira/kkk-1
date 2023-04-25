@@ -22,6 +22,8 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
 
     val resultLiveData = generatorLiveData<RspResult>()
 
+    val checkLiveData = generatorLiveData<Boolean>()
+
     override fun uploadInfo(info: IReqBaseInfo) {
         resultLiveData.addSourceLiveData(repository.uploadInfo()) {
             hideLoading()
@@ -30,6 +32,18 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
     }
 
     override fun getInfo() {
+        showloading()
+        checkLiveData.addSourceLiveData(repository.getInfo()) {
+            hideLoading()
+            var result = false
+            if (it.isSuccess()) {
+                result = it.getData()?.isNew() == true
+            }
+            checkLiveData.postValue(result)
+        }
+    }
+
+    fun checkAndUpload() {
         showloading()
         resultLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess() && it.getData()?.isNew() == true) {
@@ -53,7 +67,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
             TYPE_APP -> {
                 repository.uploadApp().observerNonStickyForever { }
             }
-            TYPE_CONTACT ->{
+            TYPE_CONTACT -> {
                 if (ContactPermission().hasThisPermission(getAppContext()))
                     repository.uploadCo().observerNonStickyForever { }
             }

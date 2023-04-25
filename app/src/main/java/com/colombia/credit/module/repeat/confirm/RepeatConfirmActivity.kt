@@ -18,6 +18,7 @@ import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.module.upload.UploadViewModel
 import com.colombia.credit.util.AnimtorUtils
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -48,6 +49,8 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private val mConfirmViewModel by lazyViewModel<FirstConfirmViewModel>()
 
     private val mInfoViewModel by lazyViewModel<RepeatConfirmViewModel>()
+
+    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private var mIds = ""
     private var mBankNo = ""
@@ -107,6 +110,9 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         }
+        mUploadViewModel.resultLiveData.observerNonSticky(this) {
+            confirm()
+        }
     }
 
     private fun setText(product: String, interest: String, loan: String) {
@@ -127,7 +133,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         v ?: return
         when (v.id) {
             R.id.tv_confirm -> {
-                confirm()
+                mUploadViewModel.checkAndUpload()
             }
             R.id.aiv_arrow -> {
                 // 底部list展开或收起
