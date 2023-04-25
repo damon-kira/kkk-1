@@ -12,6 +12,8 @@ import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
+import com.colombia.credit.dialog.KycHintDialog
+import com.colombia.credit.dialog.PicImageDialog
 import com.colombia.credit.expand.TYPE_FACE
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
@@ -51,6 +53,10 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mKycPicHelper by lazy {
         KycPicHelper()
+    }
+
+    private val mKycHintDialog by lazy {
+        KycHintDialog(this)
     }
 
     private val mPickerDialog by lazy {
@@ -121,9 +127,13 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.kycBivGender.setBlockingOnClickListener(this)
         mBinding.kycBivBirthday.setBlockingOnClickListener(this)
         mBinding.ilPic.setClickListener({
-            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_FRONT)
+            showHintDialog(mViewModel.mFrontException, KycHintDialog.TYPE_FRONT) {
+                mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_FRONT)
+            }
         }, {
-            mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_BACK)
+            showHintDialog(mViewModel.mBackException, KycHintDialog.TYPE_BACK) {
+                mKycPicHelper.showPicImageModeDialog(this, PicType.PIC_BACK)
+            }
         })
 
         val nameInfilter = InputFilter { source, start, end, dest, dstart, dend ->
@@ -140,8 +150,18 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.kycBivSurname.setFilters(arrayOf(nameInfilter))
     }
 
+    private fun showHintDialog(isException: Boolean,type: Int, result: () -> Unit) {
+        if (isException) {
+            mKycHintDialog.setOnClickListener(result)
+                .setType(type)
+                .show()
+        } else {
+            result.invoke()
+        }
+    }
+
     private fun loadImage(url: String?, type: Int) {
-        logger_d(TAG,"loadImage url = $url")
+        logger_d(TAG, "loadImage url = $url")
         if (url.isNullOrEmpty()) return
         GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
             if (bitmap != null) {
@@ -198,7 +218,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspKycInfo) return@observerNonSticky
             val jmWujylO6j = rspInfo.jmWujylO6j
-            if (jmWujylO6j == null || !jmWujylO6j.isUpload()){
+            if (jmWujylO6j == null || !jmWujylO6j.isUpload()) {
                 mBinding.ilPic.setEnable(true, rightEnable = true)
                 return@observerNonSticky
             }

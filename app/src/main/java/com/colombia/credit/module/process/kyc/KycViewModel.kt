@@ -20,18 +20,32 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
 
     var mImageType = -1
 
+    var mFrontException = false
+    var mBackException = false
+
     fun uploadImage(path: String, type: Int) {
         showloading()
         mImageType = type
         _imageLiveData.addSourceLiveData(repository.uploadImage(path, type)) {
             hideLoading()
             if (it.isSuccess()) {
+                updateResult(type, false)
                 val imageInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
                 val key =
                     if (type == PicType.PIC_FRONT) SharedPrefKeyManager.KEY_IMAGE_FRONT else SharedPrefKeyManager.KEY_IMAGE_BACK
                 ImageInfoUtil.saveInfo(key, imageInfo)
+            } else {
+                updateResult(type, true)
             }
             _imageLiveData.postValue(it)
+        }
+    }
+
+    private fun updateResult(type: Int, result: Boolean) {
+        if (type == PicType.PIC_FRONT) {
+            mFrontException = result
+        } else if (type == PicType.PIC_BACK) {
+            mBackException = result
         }
     }
 

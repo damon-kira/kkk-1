@@ -54,8 +54,8 @@ class KycHintDialog constructor(context: Context): DefaultDialog(context) {
 
     fun setOnClickListener(listener: () -> Unit): KycHintDialog{
         mBinding.kycDialogTvBtn.setBlockingOnClickListener {
-            listener.invoke()
             dismiss()
+            listener.invoke()
         }
         return this
     }
