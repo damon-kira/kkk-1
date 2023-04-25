@@ -28,9 +28,8 @@ object SmsHelper {
     @JvmStatic
     fun getMessage(context: Context): ArrayList<SmsInfo> {
         val list = arrayListOf<SmsInfo>()
-        val ctx = BigDataManager.get().getNetDataListener()?.getContext()
         if (BaseParamsManager.isPermissionAuth(
-                ctx!!, Manifest.permission.READ_SMS
+                context , Manifest.permission.READ_SMS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return list

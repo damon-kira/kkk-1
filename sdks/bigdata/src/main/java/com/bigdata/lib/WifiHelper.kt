@@ -13,7 +13,7 @@ import com.util.lib.GsonUtil
 object WifiHelper {
 
     fun getWifiInfo(context: Context): String {
-        val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wm = getWifiManager(context)
         val connectionInfo = wm.connectionInfo
         val scanResults = wm.scanResults
         val array = JsonArray()
@@ -29,19 +29,22 @@ object WifiHelper {
 
     @SuppressLint("MissingPermission")
     fun getMac(context: Context): String {
-        val cm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val cm = getWifiManager(context)
         return cm.connectionInfo.macAddress
     }
 
     fun getSSid(context: Context): String {
-        val cm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val cm = getWifiManager(context)
         return cm.connectionInfo.ssid
     }
 
     fun getIp(context: Context): String {
-        val cm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val cm = getWifiManager(context)
         return int2Str(cm.connectionInfo.ipAddress)
     }
+
+    private fun getWifiManager(context: Context) =
+        context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
     private fun int2Str(ipInt: Int): String {
         val sb = java.lang.StringBuilder()

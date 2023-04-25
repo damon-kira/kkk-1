@@ -138,6 +138,16 @@ class ApiManager @Inject constructor() {
         ServiceClient.getInstance().createService(options, ApiService::class.java)
     }
 
+    private val mDataApiService by lazy {
+        val options = NetOptions()
+            .setReadTimeout(DEFAULT_TIMEOUT)
+            .setConnectTimeout(DEFAULT_TIMEOUT)
+            .setTimeUnit(TimeUnit.MILLISECONDS)
+            .setInterceptors(defaultInterceptor)
+            .setBaseUrl(BASEURL)
+        ServiceClient.getInstance().createService(options, DataApiService::class.java)
+    }
+
     /**
      * 上传图片 基础信息不在拦截器中添加
      */
@@ -246,8 +256,8 @@ class ApiManager @Inject constructor() {
     /** 上传图片45s */
     fun createApiUploadService(): ApiService = mApiUploadService
 
-    /** 默认15s */
-    fun getApiDefaultService(): ApiService = createApiService()
+    // 大数据相关接口
+    fun getDataApiService(): DataApiService = mDataApiService
 
     fun getBaseH5Url(): String = BASE_H5_URL
 

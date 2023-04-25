@@ -2,16 +2,19 @@ package com.colombia.credit.module.process.contact
 
 import android.os.Bundle
 import android.view.View
-import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.R
 import com.colombia.credit.bean.PhoneAndName
-import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
+import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.resp.RspContactInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
-import com.colombia.credit.expand.*
+import com.colombia.credit.expand.TYPE_BANK
+import com.colombia.credit.expand.getMobile
+import com.colombia.credit.expand.isGpAccount
+import com.colombia.credit.expand.isSameNumber
 import com.colombia.credit.manager.ContactObtainHelper
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission

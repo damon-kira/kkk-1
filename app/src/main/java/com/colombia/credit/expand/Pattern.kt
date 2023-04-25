@@ -112,7 +112,7 @@ fun isIllegalFamilyPhone(phone: String): Boolean {
 * @param input
 * @return
 */
- fun isEmoji(input: String): Boolean {
+fun isEmoji(input: String): Boolean {
     val p =
         Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\ud83e\udc00-\ud83e\udfff]" + "|[\u2100-\u32ff]|[\u0030-\u007f][\u20d0-\u20ff]|[\u0080-\u00ff]")
     val m = p.matcher(input)

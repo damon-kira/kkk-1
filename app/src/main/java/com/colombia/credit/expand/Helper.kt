@@ -9,6 +9,7 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.colombia.credit.R
+import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.DictionaryInfo
 
 
@@ -45,3 +46,9 @@ fun mapToPopData(dataMap: Map<String, String>, selectorTag: String): ArrayList<D
     }
     return list as ArrayList<DictionaryInfo>
 }
+
+fun getColor(@ColorRes res: Int) = ContextCompat.getColor(getAppContext(),  res)
+
+fun Context.getColor(@ColorRes res: Int) = ContextCompat.getColor(this, res)
+
+fun getStatusBarColor() = ContextCompat.getColor(getAppContext(),  R.color.statusbar_color)

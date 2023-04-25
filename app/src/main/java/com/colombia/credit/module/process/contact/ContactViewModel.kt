@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.contact
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.module.service.SerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -13,6 +14,7 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
 
     override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
+        SerManager.startCon()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()

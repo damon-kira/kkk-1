@@ -50,6 +50,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         mBinding.flHistory.setBlockingOnClickListener(this)
         mBinding.flBank.setBlockingOnClickListener(this)
         mBinding.etvBtn.setBlockingOnClickListener(this)
+        mBinding.aivHead.setBlockingOnClickListener(this)
+        mBinding.llUserinfo.setBlockingOnClickListener(this)
 
         initObserver()
     }
@@ -119,6 +121,9 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         v ?: return
         when (v.id) {
+            R.id.aiv_head, R.id.ll_userinfo->{
+                checkLogin()
+            }
             R.id.etv_custom -> {
                 getBaseActivity()?.showCustomDialog()
             }

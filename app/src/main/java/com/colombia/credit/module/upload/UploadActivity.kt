@@ -4,13 +4,18 @@ import android.os.Bundle
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.databinding.ActivityUploadBinding
+import com.colombia.credit.expand.getStatusBarColor
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.permission.PermissionHelper
+import com.colombia.credit.permission.appPermissions
 import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.MainHandler
+import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,16 +27,23 @@ class UploadActivity : BaseProcessActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        MainHandler.postDelay({
-            hideLoading()
+        setStatusBarColor(getStatusBarColor(), true)
+        mViewModel.resultLiveData.observerNonSticky(this) {
             uploadSuccess()
-        }, 4500)
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        showLoading()
+    override fun onStart() {
+        super.onStart()
+        reqPermission()
+    }
+
+    private fun reqPermission() {
+        PermissionHelper.reqPermission(this, appPermissions.toList(), true, {
+            mViewModel.getInfo()
+        }, {
+            jumpToAppSettingPage()
+        })
     }
 
     override fun checkCommitInfo(): Boolean {

@@ -31,6 +31,6 @@ class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepo
 
     fun clearData(){
         listLivedata.value = null
-        _ordersLivedata.value = BaseResponse(ResponseCode.SUCCESS_CODE, RspRepayOrders(), null)
+        _ordersLivedata.value = BaseResponse(ResponseCode.OTHER_ERROR_CODE, RspRepayOrders(), null)
     }
 }

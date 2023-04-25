@@ -6,10 +6,10 @@ import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.module.service.SerManager
 import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
-import com.util.lib.ThreadPoolUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -49,6 +49,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
 
     override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
+        SerManager.uploadData()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()

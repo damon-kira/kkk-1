@@ -2,13 +2,12 @@ package com.bigdata.lib
 
 import android.os.Build
 import android.util.Log
+import androidx.annotation.WorkerThread
 import com.bigdata.lib.SpKeyManager.CASH_KEY_POST_MCLC
 import com.bigdata.lib.net.BaseParamsManager
 import com.bigdata.lib.net.NetWorkManager
 import com.cache.lib.SharedPrefUser
 import com.google.gson.JsonObject
-import com.project.util.AESMCLCUtil
-import com.project.util.AESNormalUtil
 import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
@@ -128,53 +127,57 @@ class MCLCManager {
          * 上传 信息
          */
         fun postMCLCinfoReal(listener: Result) {
-            uploadData(listener)
+            asynUploadData(listener)
         }
 
         /**
          * @param extra 额外信息
          * @param ignoreInterval 是否忽略时间间隔 true:忽略时间间隔检查， false: 不忽略
          */
-        private var isUploadComplete = true
-        private fun uploadData(listener: ((result: Boolean) -> Unit)? = null) {
+        private fun asynUploadData(listener: ((result: Boolean) -> Unit)? = null) {
             ThreadPoolUtil.executor("cash info post") {
-                LocationHelp.requestLocation()
-                if (!isUploadComplete) return@executor
-                if (checkPostMCLCSuccessTimer()) {
-                    isUploadComplete = false
-                    val jsonCashInfo = getCashInfo()
-                    val beforePostInfo = jsonCashInfo.toString()
-                    logger_i(TAG, "cash info post encryt before = $beforePostInfo")
-                    val zipInfo = GzipUtils.zip(beforePostInfo)
-//                    ${zipInfo.size / 1024f}
-                    logger_i(
-                        TAG,
-                        "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
-                    )
-//                    val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
-                    val postInfo = beforePostInfo
-                    logger_i(TAG, "cash info post encryt after = $postInfo")
-                    if (postInfo != null) {
-                        doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
-                        val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
-                            ?: return@executor
-                        val response = NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
-                        var result = false
-                        isUploadComplete = true
-                        if (response.isSuccessful) {
-                            response.body()?.string()?.let { body ->
-                                val jobj = JSONObject(body)
-                                val code = jobj.optInt("code")
-                                Log.d(TAG, "uploadData: code= $code")
-                                result = code == 200
-                            }
-                        }
-                        logger_d(TAG, "result = $result")
-                        listener?.invoke(result)
-                    } else {
-                        isUploadComplete = true
+                listener?.invoke(synUpload())
+            }
+        }
+
+        private var isUploadComplete = true
+
+        @WorkerThread
+        fun synUpload(): Boolean {
+            LocationHelp.requestLocation()
+            if (!isUploadComplete) return true
+            if (checkPostMCLCSuccessTimer()) {
+                isUploadComplete = false
+                val jsonCashInfo = getCashInfo()
+                val beforePostInfo = jsonCashInfo.toString()
+                logger_i(TAG, "cash info post encryt before = $beforePostInfo")
+                val zipInfo = GzipUtils.zip(beforePostInfo)
+        //                    ${zipInfo.size / 1024f}
+                logger_i(
+                    TAG,
+                    "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
+                )
+        //        val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
+                val postInfo = beforePostInfo
+                logger_i(TAG, "cash info post encryt after = $postInfo")
+                doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
+                val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
+                    ?: return false
+                val response = NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
+                var result = false
+                isUploadComplete = true
+                if (response.isSuccessful) {
+                    response.body()?.string()?.let { body ->
+                        val jobj = JSONObject(body)
+                        val code = jobj.optInt("code")
+                        Log.d(TAG, "uploadData: code= $code")
+                        result = code == 200
                     }
                 }
+                logger_d(TAG, "result = $result")
+                return result
+            } else {
+                return false
             }
         }
 

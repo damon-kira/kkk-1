@@ -51,16 +51,7 @@ class LoginFragment : BaseLoginFragment() {
         setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
         showSoftInput(mBinding.loginEditPhone)
-        val param = getString(R.string.protocol_params)
-        val protocol = getString(R.string.login_protocol, param)
-        val span = SpannableImpl().init(protocol)
-            .color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary), param)
-            .getSpannable()
-        mBinding.loginTvProtocol.movementMethod = LinkMovementMethod()
-        mBinding.loginTvProtocol.text = span
-        mBinding.loginTvProtocol.setBlockingOnClickListener {
-            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
-        }
+        initProtocol()
 
         mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
@@ -128,6 +119,19 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvCodeError.hide()
             }
         })
+    }
+
+    private fun initProtocol() {
+        val param = getString(R.string.protocol_params)
+        val protocol = getString(R.string.login_protocol, param)
+        val span = SpannableImpl().init(protocol)
+            .color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary), param)
+            .getSpannable()
+        mBinding.loginTvProtocol.movementMethod = LinkMovementMethod()
+        mBinding.loginTvProtocol.text = span
+        mBinding.loginTvProtocol.setBlockingOnClickListener {
+            Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
+        }
     }
 
     private fun reqCode() {
