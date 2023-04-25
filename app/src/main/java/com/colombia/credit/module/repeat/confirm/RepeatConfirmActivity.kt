@@ -57,7 +57,6 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
         mIds = intent.getStringExtra(EXTRA_IDS).orEmpty()
         mBinding.toolbar.setCustomClickListener {
@@ -107,6 +106,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             if (it.evnet == BankEvent.EVENT_BANK) {
                 if (!it.params.isNullOrEmpty()) {
                     mBankNo = it.params.orEmpty()
+                    mBinding.tvBankNo.text = maskBank(mBankNo)
                 }
             }
         }
