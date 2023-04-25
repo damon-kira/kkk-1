@@ -52,18 +52,19 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
     private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
-    private var mIds = ""
+    private var mPrdIds = "" // 上一个页面带过来的产品id
     private var mBankNo = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBarColor(Color.WHITE, true)
-        mIds = intent.getStringExtra(EXTRA_IDS).orEmpty()
+        mPrdIds = intent.getStringExtra(EXTRA_IDS).orEmpty()
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
         }
         setViewModelLoading(mConfirmViewModel)
         setViewModelLoading(mInfoViewModel)
+        setViewModelLoading(mUploadViewModel)
         setAdapter()
         mBinding.aivArrow.setBlockingOnClickListener(this)
         mBinding.tvConfirm.setBlockingOnClickListener(this)
@@ -123,7 +124,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun getInfo() {
-        mInfoViewModel.getConfirmInfo(productIds = mIds)
+        mInfoViewModel.getConfirmInfo(productIds = mPrdIds)
 
     }
 
@@ -156,15 +157,17 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 Launch.skipBankCardListActivity(
                     this,
                     mAdapter.getTotalAmount().toString(),
-                    mIds,
+                    getOrderIds(),
                     mBankNo
                 )
             }
         }
     }
 
+    private fun getOrderIds() = mAdapter.getSelectorList().map { it.ekrpWqU0 }.joinToString(",")
+
     private fun confirm() {
-        mConfirmViewModel.confirmLoan(mBankNo, mIds)
+        mConfirmViewModel.confirmLoan(mBankNo, getOrderIds())
     }
 
     private fun setAdapter() {
@@ -191,7 +194,6 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                     interest += (it.lceAYgef?.toLongOrNull() ?: 0)
                     loan += (it.UvS8UJEFy9?.toLongOrNull() ?: 0)
                 }
-                mIds = list.map { it.Bwh8vVa5wn }.joinToString(",")
                 logger_d(TAG, "onItemClick: $productAmount,,,$interest,,,,$loan")
                 setText(productAmount.toString(), interest.toString(), loan.toString())
             }

@@ -3,17 +3,13 @@ package com.colombia.credit.module.home
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.colombia.credit.R
-import com.colombia.credit.bean.resp.RspProductInfo
 import com.colombia.credit.databinding.ActivityMainBinding
-import com.colombia.credit.expand.showAppUpgradeDialog
 import com.colombia.credit.module.account.MineFragment
-import com.colombia.credit.module.appupdate.AppUpdateViewModel
 import com.colombia.credit.module.repay.RepayTabFragment
 import com.common.lib.base.BaseFragment
 import com.common.lib.base.BaseFragmentActivity
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.LiveDataBusObserve
-import com.common.lib.livedata.observerNonSticky
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint

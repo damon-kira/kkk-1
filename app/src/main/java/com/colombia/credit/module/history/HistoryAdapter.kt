@@ -1,9 +1,7 @@
 package com.colombia.credit.module.history
 
 import android.widget.TextView
-import androidx.appcompat.widget.MenuItemHoverListener
 import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspHistoryInfo
 import com.colombia.credit.expand.getUnitString
@@ -11,7 +9,6 @@ import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
 import com.colombia.credit.module.adapter.BaseViewHolder
 import com.colombia.credit.view.textview.EasyTextView
 import com.common.lib.expand.setBlockingOnClickListener
-import com.util.lib.hide
 import com.util.lib.invisible
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
@@ -52,12 +49,14 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
             STATUS_REVIEW, STATUS_VERIFI, STATUS_REPAY, STATUS_OVERDUE, STATUS_SETTLE -> {
                 holder.setVisibility(R.id.ll_normal, true)
                 holder.setVisibility(R.id.ll_failure, false)
-                holder.setText(R.id.tv_amount, getUnitString(item.pnFU.orEmpty())) // 还款金额
-                holder.setText(R.id.tv_date, item.znxlON0.orEmpty()) // 还款日期
-                if (item.hlDgN == STATUS_REVIEW) {
+                if (STATUS_REVIEW == item.hlDgN || item.hlDgN == STATUS_VERIFI) {
+                    holder.setText(R.id.tv_amount, getUnitString(item.eeiu2lKWI.orEmpty())) // 借款金额
                     holder.setText(R.id.history_tv_date_text, R.string.history_review_date)
+                    holder.setText(R.id.tv_date, item.IIIn.orEmpty()) // 到账日期
                 } else {
+                    holder.setText(R.id.tv_amount, getUnitString(item.pnFU.orEmpty())) // 还款金额
                     holder.setText(R.id.history_tv_date_text, R.string.history_repay_date)
+                    holder.setText(R.id.tv_date, item.znxlON0.orEmpty()) // 还款日期
                 }
             }
             else -> {
@@ -68,7 +67,10 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
                     val refusedText = holder.getContext()
                         .getString(R.string.history_refused_text, item.H0WVJP.orEmpty())
                     textView.text = SpannableImpl().init(refusedText)
-                        .color(getColor(holder.getContext(), R.color.color_FE4F4F), item.H0WVJP.orEmpty())
+                        .color(
+                            getColor(holder.getContext(), R.color.color_FE4F4F),
+                            item.H0WVJP.orEmpty()
+                        )
                         .getSpannable()
                     holder.setVisibility(R.id.history_tv_btn, false)
                 } else if (item.hlDgN == STATUS_FAILURE) {// 失效，异常关闭
@@ -87,17 +89,19 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
     private fun setItemStatus(holder: BaseViewHolder, item: RspHistoryInfo.HistoryOrderInfo) {
         val tvStatus = holder.getView<EasyTextView>(R.id.etv_status)
         val itemTvBtn = holder.getView<TextView>(R.id.tv_repay)
+        val itemText = holder.getView<TextView>(R.id.tv_text)
         itemTvBtn.setBlockingOnClickListener {
             mRepayListener?.invoke(item)
         }
         when (item.hlDgN) {
-            STATUS_REPAY, STATUS_OVERDUE -> { // 审核中
+            STATUS_REVIEW -> { // 审核中
                 tvStatus.solidColor = ContextCompat.getColor(
                     holder.getContext(),
                     R.color.color_FFF1DD
                 )
                 tvStatus.setTextColor(getColor(holder.getContext(), R.color.color_ff8200))
                 tvStatus.setText(R.string.history_status_repay)
+                itemText.setText(R.string.history_loan)
                 itemTvBtn.invisible()
                 itemTvBtn.isEnabled = false
             }
@@ -108,16 +112,18 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
                 )
                 tvStatus.setTextColor(getColor(holder.getContext(), R.color.color_666666))
                 tvStatus.setText(R.string.history_status_settle)
+                itemText.setText(R.string.repay_amount)
                 itemTvBtn.invisible()
                 itemTvBtn.isEnabled = false
             }
-            STATUS_REVIEW -> {
+            STATUS_REPAY, STATUS_OVERDUE -> {
                 tvStatus.solidColor = ContextCompat.getColor(
                     holder.getContext(),
                     R.color.color_D5FCDF
                 )
                 tvStatus.setTextColor(getColor(holder.getContext(), R.color.color_32C558))
                 tvStatus.setText(R.string.history_status_review)
+                itemText.setText(R.string.repay_amount)
                 itemTvBtn.show()
                 itemTvBtn.isEnabled = true
             }
@@ -144,7 +150,7 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
         }
     }
 
-    var mFailureListener:(() -> Unit)? = null
+    var mFailureListener: (() -> Unit)? = null
 
     var mRepayListener: ((RspHistoryInfo.HistoryOrderInfo) -> Unit)? = null
 }

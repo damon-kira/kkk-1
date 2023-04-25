@@ -76,7 +76,7 @@ fun BaseActivity.showCustomDialog(): CustomDialog {
 
 @SuppressLint("StaticFieldLeak")
 private var appUpgradeDialog: WeakReference<AppUpgradeDialog>? = null
-fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo, clickListener: (type: Int) -> Unit) {
+fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo) {
     if (appUpgradeDialog?.get()?.isShowing == true) {
         return
     }
@@ -92,7 +92,13 @@ fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo, clickListener: (type
     })
     val dialog = AppUpgradeDialog(this).setAppUpdateInfo(info)
     appUpgradeDialog = WeakReference(dialog)
-    dialog.mListener = clickListener
+    dialog.mListener = {
+        if (it == AppUpgradeDialog.TYPE_APP_STORE) {
+            Launch.skipAppStore(info.aTzLhoFtcl)
+        } else {
+            dialog.dismiss()
+        }
+    }
     val mode =
         if (info.CHDnt3v == 2) DialogHandleMode.REMOVE_OTHERS else DialogHandleMode.ALL_PRIORITY_FIRST
 

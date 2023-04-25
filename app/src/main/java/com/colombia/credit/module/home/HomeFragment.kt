@@ -54,11 +54,11 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     override fun onRefresh() {
+        mAppUpdateViewModel.getAppUpdate()
         if(inValidToken()) {
             stopRefresh()
             return
         }
-        mAppUpdateViewModel.getAppUpdate()
         mHomeViewModel.getHomeInfo()
     }
 
@@ -85,8 +85,7 @@ class HomeFragment : BaseHomeFragment() {
         LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner, mHomeEventObserver)
 
         mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
-            getBaseActivity()?.showAppUpgradeDialog(it) {
-            }
+            getBaseActivity()?.showAppUpgradeDialog(it)
         }
         mAppUpdateViewModel.getAppUpdate()
 

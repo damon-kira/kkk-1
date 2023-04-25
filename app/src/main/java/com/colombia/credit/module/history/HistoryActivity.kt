@@ -2,22 +2,17 @@ package com.colombia.credit.module.history
 
 import android.graphics.Color
 import android.os.Bundle
-import com.colombia.credit.bean.resp.RspHistoryInfo
 import com.colombia.credit.databinding.ActivityHistoryBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.manager.Launch
-import com.colombia.credit.module.adapter.SafeLinearLayoutManager
 import com.colombia.credit.module.adapter.linearLayoutManager
-import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.MainEvent
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.project.util.AESNormalUtil
 import com.util.lib.StatusBarUtil.setStatusBarColor
-import com.util.lib.StatusBarUtil.statusNormal
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +37,7 @@ class HistoryActivity : BaseActivity() {
 
         mViewModel.mInfoLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
-                it.getData()?.list?.let { list ->
+                it.getData()?.jNgnZUXNGq?.let { list ->
                     change(list.isNotEmpty())
                     mAdapter.setItems(list)
                 }
@@ -60,7 +55,7 @@ class HistoryActivity : BaseActivity() {
         }
 
         mAdapter.mRepayListener = {
-            // 去支付
+            Launch.skipRepayDetailActivity(this, it.KxX0GIRzo.orEmpty())
         }
 
         mAdapter.mFailureListener = {

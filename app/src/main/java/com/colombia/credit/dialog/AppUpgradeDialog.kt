@@ -47,7 +47,7 @@ class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
         mBinding.tvTitle.text = info.iteL2w
         mBinding.tvText1.text = info.Fjg55aR0kc
         mJumpAddress = info.aTzLhoFtcl
-        mBinding.aivClose.ifShow(info.CHDnt3v != 2)
+        mBinding.aivClose.ifShow(info.bt35AvNbu != 2)
         return this
     }
 }
