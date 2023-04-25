@@ -20,14 +20,15 @@ class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepo
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                it.getData()?.hQYeCtjtJh ?: return@addSourceLiveData
+                val hQYeCtjtJh = it.getData()?.hQYeCtjtJh
+                if (hQYeCtjtJh == null || hQYeCtjtJh.isEmpty()) return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }
     }
 
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess){
+        if (isUploadSuccess) {
             removeCacheInfo()
             return
         }

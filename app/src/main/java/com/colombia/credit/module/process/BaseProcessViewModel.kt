@@ -8,7 +8,13 @@ import com.common.lib.net.bean.BaseResponse
 
 abstract class BaseProcessViewModel : BaseViewModel(), IBaseProcessViewModel {
 
-    protected var isUploadSuccess = false // 是否上传成功，上传成功不保存进件填写信息
+    protected var isUploadSuccess: Boolean = false // 是否上传成功，上传成功不保存进件填写信息
+        set(value) {
+            if (value) {
+                removeCacheInfo()
+            }
+            field = value
+        }
 
     val mUploadLiveData = generatorLiveData<BaseResponse<RspResult>>()
 

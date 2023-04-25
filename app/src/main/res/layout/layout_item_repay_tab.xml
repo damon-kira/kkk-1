@@ -38,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_repay_status"
+            android:gravity="center_horizontal"
             android:minWidth="96dp"
             android:paddingLeft="4dp"
             android:paddingTop="2dp"
@@ -61,7 +62,7 @@
     <LinearLayout
         android:id="@+id/ll_normal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -117,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/history_repay_date"
-                android:textColor="#FF999999"
+                android:textColor="@color/color_999999"
                 android:textSize="12sp" />
         </LinearLayout>
 

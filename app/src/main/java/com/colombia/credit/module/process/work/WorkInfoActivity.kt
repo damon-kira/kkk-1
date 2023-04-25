@@ -52,7 +52,7 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivJobYear.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
-        val cache = mViewModel.getCacheInfo()?.also { info ->
+        mViewModel.getCacheInfo()?.also { info ->
             info as ReqWorkInfo
             val jobTime = info.x6yR
             if (mJobYear.containsKey(jobTime)) {
@@ -71,15 +71,13 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
         }
-        if (cache == null) {
-            mViewModel.getInfo()
-        }
+        mViewModel.getInfo()
     }
 
     override fun initObserver() {
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspWorkInfo) return@observerNonSticky
-            rspInfo.dbxhWe4XWA?.let {info ->
+            rspInfo.dbxhWe4XWA?.let { info ->
                 val jobTime = info.iBwnjiNbTX
                 if (mJobYear.containsKey(jobTime)) {
                     setBaseInfo(mBinding.bivJobYear, mJobYear[jobTime], jobTime)
@@ -174,5 +172,5 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int =TYPE_CONTACT
+    override fun getNextType(): Int = TYPE_CONTACT
 }

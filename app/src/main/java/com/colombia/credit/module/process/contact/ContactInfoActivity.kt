@@ -50,7 +50,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivContact1.setBlockingOnClickListener(this)
         mBinding.bivContact2.setBlockingOnClickListener(this)
 
-        val cache = mViewModel.getCacheInfo()?.also { info ->
+        mViewModel.getCacheInfo()?.also { info ->
             info as ReqContactInfo
             if (mRelationship.containsKey(info.gQdRCJKOEJ)) {
                 setBaseInfo(
@@ -71,9 +71,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 mBinding.bivContact2.tag = info.fHdl
             }
         }
-        if (cache == null) {
-            mViewModel.getInfo()
-        }
+        mViewModel.getInfo()
     }
 
     override fun initObserver() {

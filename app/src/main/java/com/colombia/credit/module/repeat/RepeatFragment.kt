@@ -116,6 +116,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     }
 
     private fun setOffset() {
+//        if (mAdapter.itemCount < 3) return
         if (mBinding.etvTag.top > 0) {
             changeListPadding(mBinding.etvTag.top)
         } else {

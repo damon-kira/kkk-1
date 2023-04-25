@@ -46,8 +46,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="93dp"
-                android:layout_height="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/total_orders"
                 android:textColor="@color/color_999999"
@@ -71,8 +71,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="93dp"
-                android:layout_height="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/total_repay"
                 android:textColor="@color/color_999999"

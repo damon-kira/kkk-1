@@ -1,7 +1,9 @@
 package com.colombia.credit.bean.resp
 
 
-interface IRspBaseInfo
+interface IRspBaseInfo {
+
+}
 
 class RspPersonalInfo : IRspBaseInfo {
 
@@ -14,6 +16,11 @@ class RspPersonalInfo : IRspBaseInfo {
         var tKgYzqB7yP: String? = null // 省份
         var ZzBVPho: String? = null // 市区
         var fomX9KPzpi: String? = null // 详细地址
+
+        fun isEmpty(): Boolean {
+            return OloW.isNullOrEmpty() && rtA8s2HSB.isNullOrEmpty() && wXlWnOHPzK.isNullOrEmpty() && tKgYzqB7yP.isNullOrEmpty() && ZzBVPho.isNullOrEmpty() &&
+                    fomX9KPzpi.isNullOrEmpty()
+        }
     }
 
     var Vi4Jtj: String = "0" // 是否允许编辑 1：允许 1：不允许
@@ -28,6 +35,10 @@ class RspWorkInfo : IRspBaseInfo {
         var P2i72V: String? = null // 月收入
         var RbNJgGj: String? = null // 工资支付频率
         var V33vxNjkQf: String? = null // 工作类型
+
+        fun isEmpty(): Boolean {
+            return iBwnjiNbTX.isNullOrEmpty() && P2i72V.isNullOrEmpty() && RbNJgGj.isNullOrEmpty() && V33vxNjkQf.isNullOrEmpty()
+        }
     }
 }
 
@@ -46,6 +57,10 @@ class RspContactInfo : IRspBaseInfo {
         var dZgCz3: String? = null // 第二联系人姓名
         var fWvRFuMb: String? = null // 第二联系人电话
         var Is8p43A: String = "4" // 第二联系人关系
+
+        fun isEmpty(): Boolean {
+            return yYVUx.isNullOrEmpty() && MGwL.isNullOrEmpty() && fTvY4N5.isNullOrEmpty() && dZgCz3.isNullOrEmpty() && fWvRFuMb.isNullOrEmpty()
+        }
     }
 }
 
@@ -58,16 +73,20 @@ class RspBankInfo : IRspBaseInfo {
         var `87hVygkzSb`: String? = null // 银行类型
         var TA2B58tdUU: String? = null // 银行编码
         var owuNUS9vAj: String? = null // 银行卡号
+
+        fun isEmpty(): Boolean {
+            return N61kI40HaH.isNullOrEmpty() && TA2B58tdUU.isNullOrEmpty() && owuNUS9vAj.isNullOrEmpty() && `87hVygkzSb`.isNullOrEmpty()
+        }
     }
 }
 
 class RspKycInfo : IRspBaseInfo {
 
     val jmWujylO6j: KycInfo? = null
-    get() {
-        if (field?.isUpload() == true) return field
-        else return null
-    }
+        get() {
+            if (field?.isUpload() == true) return field
+            else return null
+        }
 
     class KycInfo {
         var DrD60: String? = null // 性别

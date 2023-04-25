@@ -127,7 +127,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     private fun changePage(isShowList: Boolean) {
         mBinding.group.ifShow(isShowList)
         mBinding.emptyLayout.llEmpty.ifShow(!isShowList)
-        if (isShowList) {
+        if (isShowList && mAdapter.itemCount > 3) {
             if (mBinding.etvRepayHint.top > 0) {
                 changeListPadding(mBinding.etvRepayHint.top)
             } else {

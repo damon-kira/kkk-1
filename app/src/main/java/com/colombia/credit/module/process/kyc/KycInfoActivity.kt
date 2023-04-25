@@ -3,7 +3,6 @@ package com.colombia.credit.module.process.kyc
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -198,7 +197,8 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspKycInfo) return@observerNonSticky
-            if (rspInfo.jmWujylO6j?.isUpload() == null || rspInfo.jmWujylO6j?.isUpload() == false){
+            val jmWujylO6j = rspInfo.jmWujylO6j
+            if (jmWujylO6j == null || !jmWujylO6j.isUpload()){
                 mBinding.ilPic.setEnable(true, rightEnable = true)
                 return@observerNonSticky
             }
@@ -289,12 +289,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun checkCommitInfo(): Boolean {
-        var result = checkAndSetErrorHint(mBinding.kycBivNuip)
+        return checkAndSetErrorHint(mBinding.kycBivNuip)
             .and(checkAndSetErrorHint(mBinding.kycBivSurname))
             .and(checkAndSetErrorHint(mBinding.kycBivName))
             .and(checkAndSetErrorHint(mBinding.kycBivGender))
             .and(checkAndSetErrorHint(mBinding.kycBivBirthday))
-        return result
     }
 
     override fun getCommitInfo(): IReqBaseInfo {

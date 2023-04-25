@@ -21,7 +21,7 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
     }
 
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess){
+        if (isUploadSuccess) {
             removeCacheInfo()
             return
         }
@@ -31,7 +31,8 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                it.getData()?.Rwfbhdu1 ?: return@addSourceLiveData
+                val Rwfbhdu1 = it.getData()?.Rwfbhdu1
+                if (Rwfbhdu1 == null || Rwfbhdu1.isEmpty()) return@addSourceLiveData
                 mInfoLiveData.postValue(it.getData())
             }
         }

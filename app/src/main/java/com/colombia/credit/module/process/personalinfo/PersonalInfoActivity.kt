@@ -43,7 +43,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private val mFirstDialog: FirstLoanHintDialog by lazy {
-        FirstLoanHintDialog(this).setOnClickListener {  }
+        FirstLoanHintDialog(this).setOnClickListener { }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +70,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
             }
         }
-        if (cache == null) {
-            mViewModel.getInfo()
-        }
+        mViewModel.getInfo()
 
         if (isNewUser) {
             mFirstDialog.show()
@@ -86,7 +84,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
             mAddrDialog.setAddressInfo(list).show()
         }
 
-        mViewModel.mInfoLiveData.observerNonSticky(this) {rspInfo ->
+        mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspPersonalInfo) return@observerNonSticky
             rspInfo.MFL57Df?.let { info ->
                 mBinding.bivEmail.setViewText(info.OloW.orEmpty())
