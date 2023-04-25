@@ -29,14 +29,14 @@ class LoginViewModel @Inject constructor(
 
     val loginLiveData = generatorLiveData<BaseResponse<RspLoginInfo>>()
 
-    private var mCodeUUid: String? = null
+    private var mCodeUUid: ArrayList<String> = arrayListOf()
 
     fun reqSmsCode(mobile: String) {
         showloading()
         mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
             hideLoading()
             if (it.isSuccess()) {
-                mCodeUUid = it.getData()?.FSo4NScBct
+                mCodeUUid.add(it.getData()?.FSo4NScBct.orEmpty())
             }
             mAuthSmsCodeLiveData.postValue(it)
         }
@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
     fun reqLogin(mobile: String, smsCode: String) {
         showloading()
-        loginLiveData.addSourceLiveData(repository.loginSms(mobile, smsCode, mCodeUUid.orEmpty())) {
+        loginLiveData.addSourceLiveData(repository.loginSms(mobile, smsCode, mCodeUUid.joinToString(","))) {
             hideLoading()
             if (it.isSuccess()) {
                 val ctx = getAppContext()
