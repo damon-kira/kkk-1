@@ -224,6 +224,20 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 return@observerNonSticky
             }
             rspInfo.jmWujylO6j?.let { info ->
+                if (info.YZ7Mlc8yf.orEmpty().isNotEmpty()) {
+                    loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
+                } else {
+                    mBinding.ilPic.setLeftEnable(true)
+                }
+                if (info.fefFSZ.orEmpty().isNotEmpty()) {
+                    loadImage(info.fefFSZ, PicType.PIC_BACK)
+                } else {
+                    mBinding.ilPic.setRightEnable(true)
+                }
+
+                if (info.YZ7Mlc8yf.isNullOrEmpty() || info.fefFSZ.isNullOrEmpty()) {
+                    return@observerNonSticky
+                }
                 mBinding.llKycInfo.show()
                 if (info.Wa7f.orEmpty().isNotEmpty()) {
                     mBinding.kycBivNuip.setViewText(info.Wa7f.orEmpty())
@@ -240,8 +254,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 if (mGender.containsKey(info.DrD60)) {
                     setBaseInfo(mBinding.kycBivGender, mGender[info.DrD60], info.DrD60)
                 }
-                loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
-                loadImage(info.fefFSZ, PicType.PIC_BACK)
+
             }
         }
     }
