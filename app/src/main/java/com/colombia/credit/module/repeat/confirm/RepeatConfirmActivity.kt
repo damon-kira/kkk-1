@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bigdata.lib.loanPageStayTime
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspRepeatCalcul
 import com.colombia.credit.databinding.ActivityRepeatConfirmBinding
@@ -55,8 +56,10 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private var mPrdIds = "" // 上一个页面带过来的产品id
     private var mBankNo = ""
 
+    private var mStartTime = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mStartTime = System.currentTimeMillis()
         setStatusBarColor(Color.WHITE, true)
         mPrdIds = intent.getStringExtra(EXTRA_IDS).orEmpty()
         mBinding.toolbar.setCustomClickListener {
@@ -223,5 +226,10 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         }
         mBinding.llItem.requestLayout()
         mBinding.llProductList.requestLayout()
+    }
+
+    override fun onDestroy() {
+        loanPageStayTime = System.currentTimeMillis() - mStartTime
+        super.onDestroy()
     }
 }

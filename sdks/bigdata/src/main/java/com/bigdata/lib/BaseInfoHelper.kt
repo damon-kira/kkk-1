@@ -12,7 +12,7 @@ import com.google.gson.JsonObject
 import com.util.lib.*
 import java.util.*
 
-class BaseInfoHelper {
+object BaseInfoHelper {
 
     @SuppressLint("MissingPermission")
     fun getBaseInfo(context: Context): JsonObject {

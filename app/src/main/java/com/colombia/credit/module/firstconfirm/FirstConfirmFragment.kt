@@ -2,6 +2,7 @@ package com.colombia.credit.module.firstconfirm
 
 import android.os.Bundle
 import android.view.View
+import com.bigdata.lib.loanPageStayTime
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
 import com.colombia.credit.expand.ShowErrorMsg
@@ -175,5 +176,15 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
             return
         }
         mViewModel.confirmLoan(mLoanBankNo.orEmpty(), mProductId.orEmpty())
+    }
+
+    private var startTime = 0L
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if (visible) {
+            startTime = System.currentTimeMillis()
+        } else {
+            loanPageStayTime = System.currentTimeMillis() - startTime
+        }
     }
 }
