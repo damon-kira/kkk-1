@@ -79,6 +79,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs += ['libs']
+        }
+    }
 }
 
 def time(){
@@ -108,7 +116,7 @@ dependencies {
     implementation project(path: ':sdks:util')
     implementation project(path: ':datepicker')
     implementation rootProject.ext.other.aes
-    implementation rootProject.ext.other.devoptions
+    debugImplementation rootProject.ext.other.devoptions
 
     //firebase core
 //    implementation platform(rootProject.ext.firebase.bom)

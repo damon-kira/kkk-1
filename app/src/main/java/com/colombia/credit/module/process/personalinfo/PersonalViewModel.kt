@@ -32,7 +32,7 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
                 val data = it.getData()
                 (data is RspPersonalInfo)
                 if(data?.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
-                mInfoLiveData.postValue(it.getData())
+                mInfoLiveData.postValue(data)
             }
         }
     }

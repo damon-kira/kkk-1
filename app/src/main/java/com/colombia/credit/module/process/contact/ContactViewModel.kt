@@ -31,9 +31,10 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                val Rwfbhdu1 = it.getData()?.Rwfbhdu1
+                val data = it.getData()
+                val Rwfbhdu1 = data?.Rwfbhdu1
                 if (Rwfbhdu1 == null || Rwfbhdu1.isEmpty()) return@addSourceLiveData
-                mInfoLiveData.postValue(it.getData())
+                mInfoLiveData.postValue(data)
             }
         }
     }

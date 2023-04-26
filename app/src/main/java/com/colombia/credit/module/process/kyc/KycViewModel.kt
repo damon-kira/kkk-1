@@ -52,7 +52,9 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                mInfoLiveData.postValue(it.getData())
+                it.getData()?.let {data ->
+                    mInfoLiveData.postValue(data)
+                }
             } else {
                 mInfoLiveData.postValue(RspKycInfo())
             }

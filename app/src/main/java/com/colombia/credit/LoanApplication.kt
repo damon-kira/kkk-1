@@ -2,6 +2,7 @@ package com.colombia.credit
 
 import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDex
 import com.bigdata.lib.BigDataManager
 import com.bigdata.lib.net.NetConfigDataInterface
 import com.cache.lib.CacheInit
@@ -24,6 +25,12 @@ class LoanApplication: Application() {
     companion object {
         private lateinit var mAppContext: Context
         fun getAppContext(): Context = mAppContext
+    }
+
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     override fun onCreate() {

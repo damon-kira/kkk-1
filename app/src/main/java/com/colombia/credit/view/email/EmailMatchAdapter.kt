@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import com.colombia.credit.R
 import com.util.lib.StringUtils
 import com.util.lib.dp
-import com.util.lib.sp
 
 
 /**
@@ -59,7 +58,7 @@ class EmailMatchAdapter(items: ArrayList<String>) : BaseAdapter(), Filterable,
             emailInputBean.inputText
         )
         holder?.tv?.text = span
-        return view!!
+        return view
     }
 
     override fun getItem(position: Int): String {

@@ -42,14 +42,14 @@ class MyDividerItemDecoration(private val context: Context, orientation: Int) :
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (mOrientation == HORIZONTAL_LIST) {
-            drawHorizontalLine(c, parent, state)
+            drawHorizontalLine(c, parent)
         } else {
-            drawVerticalLine(c, parent, state)
+            drawVerticalLine(c, parent)
         }
     }
 
     //画横线, 这里的parent其实是显示在屏幕显示的这部分
-    private fun drawHorizontalLine(c: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    private fun drawHorizontalLine(c: Canvas, parent: RecyclerView) {
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
         val childCount = parent.childCount
@@ -64,7 +64,7 @@ class MyDividerItemDecoration(private val context: Context, orientation: Int) :
     }
 
     //画竖线
-    private fun drawVerticalLine(c: Canvas, parent: RecyclerView, state: RecyclerView.State?) {
+    private fun drawVerticalLine(c: Canvas, parent: RecyclerView) {
         val top = parent.paddingTop
         val bottom = parent.height - parent.paddingBottom
         val childCount = parent.childCount
