@@ -58,6 +58,7 @@
     <string name="repay_date">Fecha de Pago</string>
     <string name="repay_btn">Pagar ahora</string>
     <string name="overdue_tag">%s días \nde retraso</string>
+    <string name="dialog_update">Actualizar</string>
 
     <string name="refused_hint">Reseña rechazada</string>
     <string name="refused_days">Periodo de préstamo</string>

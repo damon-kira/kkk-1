@@ -17,17 +17,22 @@ import com.bigdata.lib.readPrivacyTime
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.databinding.FragmentWebviewBinding
+import com.colombia.credit.databinding.LayoutNetErrorBinding
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.view.BaseWebView
 import com.common.lib.base.BaseFragment
+import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
+import com.util.lib.NetWorkUtils
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.expand.isEmpty
+import com.util.lib.hide
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
+import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -126,28 +131,18 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 //            CrashManager.reportException(NullPointerException("webViewFragment view is null, isDestroyView = ${isDestroyView()}"))
 //            return
 //        }
-//
-//        if (inflate == null) {
-//            inflate = view_stub.inflate()
-//
-//            web_update.setBlockingOnClickListener {
-//                showLoading()
-//                reload()
-//                refreshNetView()
-//            }
-//        }
-//
-//        if (!NetWorkUtil.isNetConnected(getSupportContext()) || isLoadError) {
-//            if (!isTitleShow) {
-//                tl_toolbar?.visibility = View.VISIBLE
-//            }
-//            ll_not_net.visibility = View.VISIBLE
-//        } else {
-//            if (!isTitleShow) {
-//                tl_toolbar?.visibility = View.GONE
-//            }
-//            ll_not_net.visibility = View.GONE
-//        }
+
+        mBinding.layoutError.etvUpdate.setBlockingOnClickListener {
+            showLoading()
+            reload()
+            refreshNetView()
+        }
+
+        if (!NetWorkUtils.isNetConnected(getSupportContext()) || isLoadError) {
+            mBinding.layoutError.llError.show()
+        } else {
+            mBinding.layoutError.llError.hide()
+        }
     }
 
     fun reload() {
@@ -345,7 +340,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         if (mUrl == H5UrlManager.URL_PRIVACY) {
             readPrivacyTime = System.currentTimeMillis() - mEnterTime
         }
-        if (this.mUrl.contains(H5UrlManager.URL_PAY)){
+        if (this.mUrl.contains(H5UrlManager.URL_PAY)) {
             LiveDataBus.post(PayEvent(PayEvent.EVENT_EXIT))
         }
         mWebView?.let {

@@ -11,15 +11,25 @@
         android:layout_height="?actionBarSize"
         android:background="@color/white"
         app:tl_back_text_color="@color/color_333333"
-        app:tl_text_gravity="center"
         app:tl_back_visibility="visible"
         app:tl_left_icon="@drawable/svg_left_back_gray"
+        app:tl_text_gravity="center"
         app:tl_title="@string/app_name" />
 
     <FrameLayout
-        android:id="@+id/fl_webview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent">
 
+        <FrameLayout
+            android:id="@+id/fl_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/layout_error"
+            layout="@layout/layout_net_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
 </LinearLayout>
