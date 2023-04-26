@@ -45,6 +45,7 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
 
         setItemStatus(holder, item)
 
+        holder.setText(R.id.tv_name, item.npGPjAP)
         when (item.hlDgN) {
             STATUS_REVIEW, STATUS_VERIFI, STATUS_REPAY, STATUS_OVERDUE, STATUS_SETTLE -> {
                 holder.setVisibility(R.id.ll_normal, true)
