@@ -14,12 +14,12 @@ object DevicesHelper {
 
     fun getDevicesInfo(context: Context): DeviceInfo {
         return DeviceInfo().also {
-            it.model = Build.MODEL
-            it.brand = Build.BRAND
-            it.devicesId = SysUtils.getImei(context)
+            it.l9uzoD39Q8 = Build.MODEL
+            it.TAEgE = Build.BRAND
+            it.OCwx = SysUtils.getImei(context)
             val locationInfo = LocationHelp.getLocationInfo()
-            it.longitude = locationInfo?.first ?: "0"
-            it.latitude = locationInfo?.second ?: "0"
+            it.uXBlXBew = locationInfo?.first ?: "0"
+            it.u3zNZE = locationInfo?.second ?: "0"
         }
     }
 

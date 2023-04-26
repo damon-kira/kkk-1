@@ -142,7 +142,7 @@ var loanPageStayTime: Long
 
 var bgRecoverCount: Int
     set(value) = SharedPrefUser.setInt(SpKeyManager.KEY_BG_RECOVER_COUNT, value)
-    get() = SharedPrefUser.getInt(SpKeyManager.KEY_BG_RECOVER_COUNT, 0)
+    get() = SharedPrefUser.getInt(SpKeyManager.KEY_BG_RECOVER_COUNT, -1)
 var loginTime: Long
     set(value) = SharedPrefUser.setLong(SpKeyManager.KEY_LOGIN_TIME, value)
     get() = SharedPrefUser.getLong(SpKeyManager.KEY_LOGIN_TIME, 0)

@@ -2,7 +2,6 @@ package com.bigdata.lib
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.FloatProperty
 import com.bigdata.lib.bean.AppInfo
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -86,17 +85,17 @@ object DevicesAppHelper {
             var info: AppInfo
             appInfors.forEach {
                 info = AppInfo()
-                info.pkgname = it.packageName
-                info.appname =
+                info.KkXYU = it.packageName
+                info.nY9jdxtbN =
                     packageManager.getApplicationLabel(it.applicationInfo).toString() //app名
-                info.installtime =
-                    time2Str(it.firstInstallTime, locale = Locale.getDefault()) //本地安装时间
-                info.installtime_utc = utcTimeToStr(it.firstInstallTime) //utc 安装时间
-                info.timestamps = it.firstInstallTime.toString()// 第一次按照时间
-                info.last_timestamps = it.lastUpdateTime.toString() // 最后更新时间
-                info.type = if (PackageUtil.isPreInstall(it)) 0 else 1
-                info.appInfoVersion = it.versionName
-                info.devicesId = imei
+//                info.kT2wAsVN =
+//                    time2Str(it.firstInstallTime, locale = Locale.getDefault()) //本地安装时间
+//                info.installtime_utc = utcTimeToStr(it.firstInstallTime) //utc 安装时间
+                info.kT2wAsVN = it.firstInstallTime.toString()// 第一次按照时间
+                info.k1gCFs = it.lastUpdateTime.toString() // 最后更新时间
+                info.BUjkAjl = if (PackageUtil.isPreInstall(it)) 0 else 1
+                info.buWMs = it.versionName
+                info.uh9U = imei
                 list.add(info)
             }
             if (isDebug()) {

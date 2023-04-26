@@ -8,11 +8,11 @@ import com.colombia.credit.app.BaseRepository
 import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.resp.RspCheckData
 import com.colombia.credit.bean.resp.RspResult
-import com.colombia.credit.manager.ContactHelper
 import com.colombia.credit.net.DataApiService
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
+import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -34,7 +34,9 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
 
     fun uploadsms()= ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val sms = SmsHelper.getMessage(getAppContext())
-        dataApiService.uploadSms(createRequestBody(GsonUtil.toJson(sms).orEmpty()))
+        val jobj = JsonObject()
+        jobj.addProperty("MGTnhn", GsonUtil.toJson(sms).orEmpty())
+        dataApiService.uploadSms(createRequestBody(jobj.toString()))
     }
 
     fun uploadApp()= ApiServiceLiveDataProxy.request(RspResult::class.java) {

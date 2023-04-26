@@ -39,6 +39,8 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
     override fun contentView(): View = mBinding.root
 
+    private var time = 0L
+
     private var mLoanBankNo: String? = null
         set(value) {
             mBinding.tvBankNo.text = maskBank(value)
@@ -53,6 +55,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        time = System.currentTimeMillis()
         setViewModelLoading(mViewModel)
         setViewModelLoading(mUploadViewModel)
         setCustomListener(mBinding.toolbar)
@@ -165,6 +168,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         }
     }
 
+
     private fun confirmLoan() {
         if (mLoanBankNo.isNullOrEmpty() || mProductId.isNullOrEmpty()) {
             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
@@ -172,5 +176,4 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         }
         mViewModel.confirmLoan(mLoanBankNo.orEmpty(), mProductId.orEmpty())
     }
-
 }

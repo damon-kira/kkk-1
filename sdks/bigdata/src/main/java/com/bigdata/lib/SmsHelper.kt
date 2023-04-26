@@ -4,9 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.media.session.PlaybackState.CustomAction
 import android.net.Uri
 import android.provider.Telephony
+import android.util.Log
 import com.bigdata.lib.bean.SmsInfo
 import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
@@ -29,7 +29,7 @@ object SmsHelper {
     fun getMessage(context: Context): ArrayList<SmsInfo> {
         val list = arrayListOf<SmsInfo>()
         if (BaseParamsManager.isPermissionAuth(
-                context , Manifest.permission.READ_SMS
+                context, Manifest.permission.READ_SMS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return list
@@ -56,13 +56,24 @@ object SmsHelper {
                 var info: SmsInfo
                 while (cursor.moveToNext()) {
                     info = SmsInfo()
+
                     //如果是已发出信息就是收件人手机号 如果是收到的信息就是发件人的手机号
-                    info.tel = cursor.getString(0).orEmpty()
-                    info.body = cursor.getString(1)//短信具体内容
-                    info.time = cursor.getLong(2) / 1000 // 接受时间
-                    info.read = cursor.getString(3)//是否阅读0未读，1已读
-                    info.status = cursor.getString(4)//短信状态,-1 接收，0 complete,64 pending128 failed
-                    info.type = cursor.getString(5)//短信类型1是接收到的，2是已发出
+                    info.nKYZyncfJM = getString(cursor, Telephony.Sms.ADDRESS)
+                    info.mLAbob = getString(cursor, Telephony.Sms.BODY)//短信具体内容
+                    info.S6G6Y3xr = getLong(cursor, Telephony.Sms.DATE)// 接受时间
+                    info.YNcz54 = getString(cursor, Telephony.Sms.READ)//是否阅读0未读，1已读
+                    info.status = getString(cursor, Telephony.Sms.STATUS)//短信状态,-1 接收，0 complete,64 pending128 failed
+                    info.h18jUUhUq = getString(cursor, Telephony.Sms.TYPE)//短信类型 ALL = 0;INBOX = 1;SENT = 2;DRAFT = 3;OUTBOX = 4;FAILED = 5; QUEUED = 6;
+                    info.nKYZyncfJM?.let {
+                        var temp = it.replace("+", "").replace("-", "").replace(" ", "")
+                        if (temp.startsWith("57")) {
+                            temp = temp.substring(2)
+                        }
+                        if (temp.startsWith("0")) {
+                            temp = temp.substring(1)
+                        }
+                        info.puN3px = temp
+                    }
                     list.add(info)
                 }
                 if (isDebug()) {
@@ -74,5 +85,21 @@ object SmsHelper {
             logger_e(TAG, " getmessage e = $e")
         }
         return list
+    }
+
+    private fun getString(cursor: Cursor, type: String): String? {
+        val index = cursor.getColumnIndex(type)
+        if (index != -1) {
+            return cursor.getString(index)
+        }
+        return null
+    }
+
+    private fun getLong(cursor: Cursor, type: String): Long {
+        val index = cursor.getColumnIndex(type)
+        if (index != -1) {
+            return cursor.getLong(index)
+        }
+        return 0
     }
 }

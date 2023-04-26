@@ -6,10 +6,10 @@ import com.colombia.credit.app.getAppContext
 import com.colombia.credit.databinding.DialogCutomBinding
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.service.SerManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
-import com.util.lib.copyFile
 import com.util.lib.ifShow
 
 class CustomDialog constructor(context: Context) : DefaultDialog(context) {
@@ -22,9 +22,17 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
         setCancelable(true)
         setCanceledOnTouchOutside(false)
 
-        binding.etvWhatsapp.ifShow(!getWhatsAppTel().isNullOrEmpty())
-        binding.etvTelephone.ifShow(!getServiceTel().isNullOrEmpty())
-        binding.etvEmail.ifShow(!getEmail().isNullOrEmpty())
+        val whatsapp = getWhatsAppTel()
+        val tel = getServiceTel()
+        val email = getEmail()
+
+        binding.etvWhatsapp.ifShow(whatsapp.isNotEmpty())
+        binding.etvTelephone.ifShow(tel.isNotEmpty())
+        binding.etvEmail.ifShow(email.isNotEmpty())
+
+        if (whatsapp.isEmpty() && tel.isEmpty() && email.isEmpty()) {
+            SerManager.getCustom()
+        }
 
         binding.aivClose.setBlockingOnClickListener {
             dismiss()
@@ -33,7 +41,7 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
             Launch.skipWhatsApp(getAppContext())
             dismiss()
         }
-        binding.etvEmail.setBlockingOnClickListener{
+        binding.etvEmail.setBlockingOnClickListener {
             val email = getEmail()
             copyClick(email)
             toast(R.string.copy_success)

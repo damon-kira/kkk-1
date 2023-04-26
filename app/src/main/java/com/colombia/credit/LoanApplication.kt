@@ -26,7 +26,6 @@ class LoanApplication: Application() {
         fun getAppContext(): Context = mAppContext
     }
 
-
     override fun onCreate() {
         super.onCreate()
         mAppContext = this

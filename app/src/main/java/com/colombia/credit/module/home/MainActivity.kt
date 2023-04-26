@@ -39,7 +39,6 @@ class MainActivity : BaseFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(mBinding.root)
         initRadioButton()
 
         mMainEventObserve = LiveDataBus.getLiveData(MainEvent::class.java).observerNonStickyForever {

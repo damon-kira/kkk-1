@@ -1,11 +1,16 @@
 package com.colombia.credit.module.process.face
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import com.bigdata.lib.WifiHelper
 import com.bigdata.lib.faceWifi
+import com.bigdata.lib.isSwitchPage
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
@@ -31,6 +36,7 @@ import com.mexico.camera.cameraview.ICamera
 import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.expand.getPicCacheFilePath
+import com.util.lib.log.logger_d
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -52,7 +58,9 @@ class FaceActivity : BaseProcessActivity() {
 
     private var mCameraManager: ICamera? = null
 
-    override fun onCreate(savedInstanceState:  Bundle?) {
+    private var mHomeReceiver: HomeReceiver? = HomeReceiver()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(true, R.color.transparent, false)
 
@@ -61,6 +69,7 @@ class FaceActivity : BaseProcessActivity() {
         if (CameraPermission().hasThisPermission(this)) {
             openCamera()
         }
+        registerReceiver(mHomeReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
 
         mBinding.faceAivSwitch.setBlockingOnClickListener {
             mCameraManager?.switchCamera()
@@ -80,8 +89,18 @@ class FaceActivity : BaseProcessActivity() {
                 MainHandler.post {
                     hideLoading()
                     if (success && f.exists()) {
-                        val rect = Rect(mBinding.aivFaceMask.left, mBinding.aivFaceMask.top, mBinding.aivFaceMask.right, mBinding.aivFaceMask.bottom)
-                        BitmapCrop.cropAndCompress(this, f, rect, mCameraManager?.isFront() ?: true) { finalFile ->
+                        val rect = Rect(
+                            mBinding.aivFaceMask.left,
+                            mBinding.aivFaceMask.top,
+                            mBinding.aivFaceMask.right,
+                            mBinding.aivFaceMask.bottom
+                        )
+                        BitmapCrop.cropAndCompress(
+                            this,
+                            f,
+                            rect,
+                            mCameraManager?.isFront() ?: true
+                        ) { finalFile ->
                             if (finalFile != null) {
                                 // 上传照片
                                 mViewModel.uploadInfo(ReqFaceInfo().also {
@@ -178,9 +197,37 @@ class FaceActivity : BaseProcessActivity() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        mHomeReceiver?.stop()
+    }
+
 
     override fun onDestroy() {
+        unregisterReceiver(mHomeReceiver)
+        mHomeReceiver = null
         super.onDestroy()
         mCountDownTimer?.cancel()
+    }
+
+    class HomeReceiver : BroadcastReceiver() {
+        var isHome = true
+
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent ?: return
+            val action = intent.action
+            logger_d("debug_home", "onReceive: action=$action")
+            if (action == Intent.ACTION_CLOSE_SYSTEM_DIALOGS) {
+                val text = intent.getStringExtra("reason")
+                logger_d("debug_home", "onReceive: text = $text")
+                isHome = text == "homekey" || text == "recentapps"
+            }
+        }
+
+        fun stop() {
+            if (isHome) {
+                isSwitchPage++
+            }
+        }
     }
 }

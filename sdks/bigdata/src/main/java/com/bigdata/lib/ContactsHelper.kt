@@ -50,12 +50,13 @@ object ContactsHelper {
             val projection = arrayOf(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.DATA1,
-                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP,
-                ContactsContract.CommonDataKinds.Phone.DATA6,
-                ContactsContract.CommonDataKinds.Phone.TIMES_CONTACTED,
-                ContactsContract.CommonDataKinds.Phone.LAST_TIME_CONTACTED,
-                ContactsContract.CommonDataKinds.Phone.ACCOUNT_TYPE_AND_DATA_SET,
-                ContactsContract.CommonDataKinds.GroupMembership.CONTACT_ID
+                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP
+//                ,
+//                ContactsContract.CommonDataKinds.Phone.DATA6,
+//                ContactsContract.CommonDataKinds.Phone.TIMES_CONTACTED,
+//                ContactsContract.CommonDataKinds.Phone.LAST_TIME_CONTACTED,
+//                ContactsContract.CommonDataKinds.Phone.ACCOUNT_TYPE_AND_DATA_SET,
+//                ContactsContract.CommonDataKinds.GroupMembership.CONTACT_ID
             )
             val selection =
                 ContactsContract.CommonDataKinds.StructuredName.IN_VISIBLE_GROUP + " = 1"
@@ -72,26 +73,26 @@ object ContactsHelper {
                 while (cursor.moveToNext()) {
                     info = ContactInfo()
                     //联系人姓名
-                    info.name = cursor.getString(0).orEmpty()
+                    info.daQgH = cursor.getString(0).orEmpty()
                     if (firstNameIndex != -1) {
-                        info.firstName = cursor.getString(firstNameIndex)
+                        info.cr8c7xX = cursor.getString(firstNameIndex)
                     }
                     if (lastNameIndex != -1) {
-                        info.lastName = cursor.getString(lastNameIndex)
+                        info.UpokGx = cursor.getString(lastNameIndex)
                     }
-                    info.tel = formatPhone(cursor.getString(1).orEmpty())//联系人电话
-                    info.lastUpdateTime = formatPhone(cursor.getString(2).orEmpty()) //最后更新时间
-                    info.address = cursor.getString(3).orEmpty()
-                    info.timesContacted = cursor.getLong(4)
-                    info.lastTimeContacted = cursor.getLong(5)
-                    val typeAndData = cursor.getString(6).orEmpty()
-                    val is_sim = if (typeAndData.contains("sim", true)) {
-                        1
-                    } else 0
-                    info.is_sim = is_sim
-                    val groupId = cursor.getString(7)
-                    val groupName = getGroupName(groupId)
-                    info.group = groupName
+                    info.Uy3I = formatPhone(cursor.getString(1).orEmpty())//联系人电话
+                    info.hpEIahj2fG = formatPhone(cursor.getString(2).orEmpty()) //最后更新时间
+//                    info.address = cursor.getString(3).orEmpty()
+//                    info.timesContacted = cursor.getLong(4)
+//                    info.lastTimeContacted = cursor.getLong(5)
+//                    val typeAndData = cursor.getString(6).orEmpty()
+//                    val is_sim = if (typeAndData.contains("sim", true)) {
+//                        1
+//                    } else 0
+//                    info.is_sim = is_sim
+//                    val groupId = cursor.getString(7)
+//                    val groupName = getGroupName(groupId)
+//                    info.group = groupName
                     list.add(info)
                 }
                 if (isDebug()) {
@@ -127,19 +128,24 @@ object ContactsHelper {
             if (cursor != null) {
                 val firstNameIndex =
                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
+                val lastNameIndex =
+                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
                 var info: ContactInfo
                 while (cursor.moveToNext()) {
                     info = ContactInfo()
                     //联系人姓名
-                    info.name = cursor.getString(0).orEmpty()
+                    info.daQgH = cursor.getString(0).orEmpty()
                     if (firstNameIndex != -1) {
-                        info.firstName = cursor.getString(firstNameIndex)
+                        info.cr8c7xX = cursor.getString(firstNameIndex)
                     }
-                    info.tel = formatPhone(cursor.getString(1).orEmpty())//联系人电话
-                    info.lastUpdateTime = formatPhone(cursor.getString(2).orEmpty()) //最后更新时间
+                    if (lastNameIndex != -1) {
+                        info.UpokGx = cursor.getString(lastNameIndex)
+                    }
+                    info.Uy3I = formatPhone(cursor.getString(1).orEmpty())//联系人电话
+                    info.hpEIahj2fG = formatPhone(cursor.getString(2).orEmpty()) //最后更新时间
 
-                    info.address = ""
-                    info.group = ""
+//                    info.address = ""
+//                    info.group = ""
                     list.add(info)
                 }
                 if (isDebug()) {
