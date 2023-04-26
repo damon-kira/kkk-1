@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Rect
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -29,6 +30,7 @@ import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
+import com.colombia.credit.util.MediaHelper
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
@@ -59,6 +61,10 @@ class FaceActivity : BaseProcessActivity() {
     private var mCameraManager: ICamera? = null
 
     private var mHomeReceiver: HomeReceiver? = HomeReceiver()
+
+    private val mMediaHelper by lazy {
+        MediaHelper(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -187,25 +193,50 @@ class FaceActivity : BaseProcessActivity() {
     private fun countDownFinish(type: Int) {
         if (type == TYPE_FIRST_INT) {
             // 获取动作提示
+            mBinding.llAction.show()
+            mBinding.tvText.hide()
             val index = (Math.random() * 100 % mActions.size).toInt()
-            mBinding.tvText.text = mActions[index]
+            mBinding.tvAction.text = mActions[index]
+            mBinding.aivAction.setImageResource(getActionImage(index))
+            (mBinding.aivAction.drawable as? AnimationDrawable)?.start()
+            mMediaHelper.doPlay(getActionAudio(index))
             countDown(TYPE_ACTION, 4)
         } else {
             // 显示拍照
+            mMediaHelper.close()
             mBinding.tvText.hide()
+            mBinding.llAction.hide()
             mBinding.llTake.show()
+        }
+    }
+
+    private fun getActionAudio(index: Int): Int {
+        return when (index) {
+            0 -> R.raw.alive_blink
+            1 -> R.raw.alive_mouth_open
+            else -> R.raw.alive_turn
+        }
+    }
+
+    private fun getActionImage(index: Int): Int {
+        return when (index) {
+            0 -> R.drawable.alive_anim_blink
+            1 -> R.drawable.alive_anim_mouth
+            else -> R.drawable.alive_anim_turn
         }
     }
 
     override fun onStop() {
         super.onStop()
         mHomeReceiver?.stop()
+        mMediaHelper.stop()
     }
 
 
     override fun onDestroy() {
         unregisterReceiver(mHomeReceiver)
         mHomeReceiver = null
+        mMediaHelper.close()
         super.onDestroy()
         mCountDownTimer?.cancel()
     }

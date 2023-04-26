@@ -21,10 +21,9 @@
     </string-array>
 
     <string-array name="face_action">
-        <item>Asentir arriba y abajo</item><!-- 点头 -->
-        <item>sacudir la cabeza de izquierda a derecha</item><!-- 左右摇头 -->
         <item>parpadear</item><!-- 眨眼 -->
         <item>abrir la boca</item><!-- 张嘴 -->
+        <item>Sacudir la cabeza</item><!-- 左右摇头 -->
     </string-array>
 
     <!-- 教育程度 -->
