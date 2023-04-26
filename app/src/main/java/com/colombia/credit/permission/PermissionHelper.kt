@@ -177,6 +177,7 @@ object PermissionHelper {
         activity: BaseActivity,
         permissions: List<AbsPermissionEntity>,
         forceDialog: Boolean,
+        isFixGroup: Boolean = true,
         result: (isAllGranted: Boolean) -> Unit = {},
         skipSettingListener: () -> Unit
     ) {
@@ -184,7 +185,9 @@ object PermissionHelper {
             if (activity.isFinishing || activity.isDestroyed) {
                 return@checkPermissions
             }
-            fixGroupPermission(activity)
+            if (isFixGroup) {
+                fixGroupPermission(activity)
+            }
             if (deniedList.isNotEmpty()) {
                 showPermissionDialog(
                     activity,
@@ -241,7 +244,10 @@ object PermissionHelper {
                         }
                     }
 //                    fixCalendarPermission()
-                    logger_d("debug_PermissionHelper", "result = ${(!isAll && isNotAsk && forceSettingDialog || forceSettingDialog)}")
+                    logger_d(
+                        "debug_PermissionHelper",
+                        "result = ${(!isAll && isNotAsk && forceSettingDialog || forceSettingDialog)}"
+                    )
                     if (!isAll && isNotAsk && forceSettingDialog || forceSettingDialog) {
                         mCheckPermissionDialog = activity.showNoPermissionDialog(deniedList.filter {
                             !it.hasThisPermission(activity)
@@ -274,6 +280,7 @@ object PermissionHelper {
                 activity,
                 arrayListOf,
                 true,
+                isFixGroup =  true,
                 function,
                 skipSettingListener = skipSettingListener
             )

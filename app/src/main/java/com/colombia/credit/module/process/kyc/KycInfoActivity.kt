@@ -151,7 +151,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.kycBivSurname.setFilters(arrayOf(nameInfilter))
     }
 
-    private fun showHintDialog(isException: Boolean,type: Int, result: () -> Unit) {
+    private fun showHintDialog(isException: Boolean, type: Int, result: () -> Unit) {
         if (isException) {
             mKycHintDialog.setOnClickListener(result)
                 .setType(type)
@@ -249,7 +249,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     private fun reqPermission() {
         PermissionHelper.reqPermission(this,
             arrayListOf(CameraPermission(), StoragePermission()),
-            true, result = {
+            true, isFixGroup = true, result = {
             }, skipSettingListener = {
                 isJumpSetting = true
                 jumpToAppSettingPage()
@@ -336,6 +336,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             mBinding.kycBivNuip.setError(R.string.kyc_nuip_error, true)
         }
     }
+
     override fun getViewModel(): BaseProcessViewModel = mViewModel
     override fun getNextType(): Int = TYPE_FACE
 }

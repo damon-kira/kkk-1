@@ -85,8 +85,6 @@ fun BaseActivity.showAppUpgradeDialog(info: AppUpgradeInfo) {
             if (event == Lifecycle.Event.ON_DESTROY) {
                 source.lifecycle.removeObserver(this)
                 appUpgradeDialog = null
-            } else if (event == Lifecycle.Event.ON_STOP) {
-                appUpgradeDialog?.get()?.dismiss()
             }
         }
     })

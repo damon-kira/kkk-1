@@ -104,7 +104,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private fun reqPermission(baseInfoView: BaseInfoView) {
         mCurrView = baseInfoView
-        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), !isGpAccount(), {
+        PermissionHelper.reqPermission(this, arrayListOf(ContactPermission()), !isGpAccount(), false,{
             isJumpSetting = false
             openContacts(baseInfoView)
         }, {

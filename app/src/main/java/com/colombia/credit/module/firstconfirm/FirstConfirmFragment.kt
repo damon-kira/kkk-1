@@ -62,7 +62,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         setCustomListener(mBinding.toolbar)
         initObserver()
 
-        PermissionHelper.reqPermission(getBaseActivity()!!, appPermissions.toList(), true, {
+        PermissionHelper.reqPermission(getBaseActivity()!!, appPermissions.toList(), true, isFixGroup = true,{
             SerManager.uploadData()
         }, {
             getSupportContext().jumpToAppSettingPage()

@@ -127,7 +127,7 @@ class FaceActivity : BaseProcessActivity() {
     }
 
     private fun reqPermission() {
-        PermissionHelper.reqPermission(this, arrayListOf(CameraPermission()), true, { result ->
+        PermissionHelper.reqPermission(this, arrayListOf(CameraPermission()), true, isFixGroup = false,{ result ->
             if (result) {
                 openCamera()
             } else {

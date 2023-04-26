@@ -49,7 +49,7 @@ class UploadActivity : BaseProcessActivity() {
     }
 
     private fun reqPermission() {
-        PermissionHelper.reqPermission(this, appPermissions.toList(), true, {
+        PermissionHelper.reqPermission(this, appPermissions.toList(), true, isFixGroup = true,{
             showDialog()
             mViewModel.checkAndUpload()
         }, {
