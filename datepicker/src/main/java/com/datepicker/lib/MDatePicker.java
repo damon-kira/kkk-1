@@ -107,22 +107,18 @@ public class MDatePicker extends Dialog implements PickerView.OnSelectListener, 
 //        binding.mpvDialogDay.setText(mContext.getString(R.string.strDateDay));
 
         // Year
-        if (mYearValue > MAX_YEAR || mYearValue < YEAR_SPACE) {
-            mCurrentYear = mCalendar.get(Calendar.YEAR);
-            if (mYearValue != -1) {
-                Log.w(TAG, "year init value is illegal, so select current year.");
-            }
-        }
-
+        int currentYear = mCalendar.get(Calendar.YEAR);
         int offset = 18;
-        int mMaxYear = mCurrentYear - (offset + 47);
-        int mMinYear = mCurrentYear - offset;
-        for (int i = mMaxYear; i <= mMinYear; i++) {
+        int maxYear = currentYear - (offset + 47);
+        int minYear = currentYear - offset;
+        for (int i = maxYear; i <= minYear; i++) {
             mDataYear.add(String.valueOf(i));
         }
         binding.mpvYear.setData(mDataYear);
-        binding.mpvYear.setDefaultValue(String.valueOf(mMinYear), DateType.YEAR, "-1");
-
+        if (mCurrentYear > minYear || mCurrentYear < maxYear) {
+            mCurrentYear = minYear;
+        }
+        binding.mpvYear.setDefaultValue(String.valueOf(mCurrentYear), DateType.YEAR, "-1");
         // Month
         DecimalFormat mDecimalFormat = new DecimalFormat("#00");
         for (int i = 1; i < 13; i++) {
@@ -389,6 +385,9 @@ public class MDatePicker extends Dialog implements PickerView.OnSelectListener, 
         private OnDateResultListener mOnDateResultListener;
         private String mLeftText;
         private String mRightText;
+        private int mCurrYear = 0;
+        private int mCurrMonth = 0;
+        private int mCurrDay = 0;
 
         public Builder(Context mContext) {
             this.mContext = mContext;
@@ -494,6 +493,21 @@ public class MDatePicker extends Dialog implements PickerView.OnSelectListener, 
             return this;
         }
 
+        public Builder setCurrYear(int currYear) {
+            this.mCurrYear = currYear;
+            return this;
+        }
+
+        public Builder setCurrMonth(int currMonth) {
+            this.mCurrMonth = currMonth;
+            return this;
+        }
+
+        public Builder setCurrDay(int currDay) {
+            this.mCurrDay = currDay;
+            return this;
+        }
+
         private void applyConfig(MDatePicker dialog) {
             if (this.mGravity == 0) this.mGravity = Gravity.CENTER;
             dialog.mContext = this.mContext;
@@ -515,6 +529,9 @@ public class MDatePicker extends Dialog implements PickerView.OnSelectListener, 
             dialog.mOnDateResultListener = this.mOnDateResultListener;
             dialog.mLeftText = this.mLeftText;
             dialog.mRightText = this.mRightText;
+            dialog.mCurrentYear = this.mCurrYear;
+            dialog.mCurrentMonth = this.mCurrMonth;
+            dialog.mCurrentDay = this.mCurrDay;
         }
 
         public MDatePicker build() {

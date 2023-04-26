@@ -30,13 +30,11 @@ import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import com.datepicker.lib.FontType
 import com.datepicker.lib.MDatePicker
-import com.util.lib.StrMatchUtil
-import com.util.lib.TimerUtil
+import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
-import com.util.lib.show
-import com.util.lib.time2Str
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 
 @AndroidEntryPoint
 class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
@@ -59,7 +57,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         KycHintDialog(this)
     }
 
-    private val mPickerDialog by lazy {
+    private val mPickerDialogBuilder by lazy {
         MDatePicker.create(this)
             .setCanceledTouchOutside(true)
             .setGravity(Gravity.BOTTOM)
@@ -74,7 +72,6 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 val date = time2Str(it, TimerUtil.REGEX_DDMMYYYY)
                 mBinding.kycBivBirthday.setViewText(date)
             }
-            .build()
     }
 
 
@@ -287,7 +284,17 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 }
             }
             R.id.kyc_biv_birthday -> {
-                mPickerDialog.show()
+                val bir = mBinding.kycBivBirthday.getViewText()
+                if (bir.isNotEmpty()) {
+                    val longBir = str2Time(bir)
+                    val calendar = Calendar.getInstance()
+                    calendar.timeInMillis = longBir
+                    val year = calendar.get(Calendar.YEAR)
+                    val month = calendar.get(Calendar.MONTH) + 1
+                    val day = calendar.get(Calendar.DAY_OF_MONTH) + 1
+                    mPickerDialogBuilder.setCurrYear(year).setCurrMonth(month).setCurrDay(day)
+                }
+                mPickerDialogBuilder.build().show()
             }
             R.id.tv_commit -> {
                 uploadInfo()

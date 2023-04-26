@@ -228,7 +228,7 @@ class BaseInfoView : AbsBaseInfoView {
     }
 
     override fun getViewText(): String {
-        return mBinding.bivEdittext.getRealText()
+        return mBinding.bivEdittext.text.toString()
     }
 
     override fun setViewText(text: String) {
