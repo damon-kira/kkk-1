@@ -263,6 +263,7 @@ class BaseInfoView : AbsBaseInfoView {
         mBinding.bivTvError.show()
         mBinding.bivTvError.text = errorSpannable
         mBinding.bivEdittext.isSelected = true
+        mBinding.llContent.isSelected = true
     }
 
     override fun setError(errorRes: Int, hasIcon: Boolean) {
@@ -297,6 +298,7 @@ class BaseInfoView : AbsBaseInfoView {
     override fun clearTextError() {
         if (!mIsError) return
         mIsError = false
+        mBinding.llContent.isSelected = false
         mBinding.bivTvError.visibility = View.GONE
         mBinding.bivEdittext.isSelected = false
     }

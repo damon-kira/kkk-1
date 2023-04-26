@@ -27,6 +27,7 @@ import com.colombia.credit.view.identity.IdentityPicStatus
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.observerNonSticky
+import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import com.datepicker.lib.FontType
 import com.datepicker.lib.MDatePicker
@@ -329,6 +330,12 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
+    override fun uploadException(response: BaseResponse<*>) {
+        super.uploadException(response)
+        if (response.code == 500) {
+            mBinding.kycBivNuip.setError(R.string.kyc_nuip_error, true)
+        }
+    }
     override fun getViewModel(): BaseProcessViewModel = mViewModel
     override fun getNextType(): Int = TYPE_FACE
 }

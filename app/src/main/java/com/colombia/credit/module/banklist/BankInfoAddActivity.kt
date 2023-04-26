@@ -82,7 +82,13 @@ class BankInfoAddActivity : BaseActivity() {
             if (it.isSuccess()) {
                 setResult(RESULT_OK)
                 finish()
-            } else it.ShowErrorMsg()
+            } else {
+                it.ShowErrorMsg()
+                if (it.code == 500) {
+                    mBinding.layoutBank.bivBankno.setError(R.string.error_bank_no, true)
+                    mBinding.layoutBank.bivBanknoTow.setError(R.string.error_bank_no, true)
+                }
+            }
         }
     }
 

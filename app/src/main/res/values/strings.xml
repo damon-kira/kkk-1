@@ -145,6 +145,7 @@
     <string name="kyc_surname">Apellidos</string>
     <string name="kyc_name">Nombres</string>
     <string name="kyc_nuip">Número NUIP</string>
+    <string name="kyc_nuip_error">Ingrese el número NUIP correcto</string>
     <string name="kyc_warning">Consejo: asegúrese de que toda la información sea su  información verdadera, de lo contrario, afectará el préstamo</string>
     <string name="kyc_top_hint">Fotografía cedula de ciudadania frente</string>
     <string name="camera">Disparar con cámara</string>

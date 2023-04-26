@@ -15,7 +15,7 @@ class AppUpdateViewModel @Inject constructor(private val repository: AppUpdateRe
         repository.getAppUpdate().observerNonStickyForever {
             if (it.isSuccess()) {
                 val data = it.getData() ?: return@observerNonStickyForever
-                if (data.bt35AvNbu == 0 || data.CHDnt3v == 1 || data.bt35AvNbu == 3) {
+                if (data.bt35AvNbu == 0 || data.bt35AvNbu == 3) {
                     return@observerNonStickyForever
                 }
                 updateLiveData.postValue(data)

@@ -27,6 +27,8 @@ class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
     init {
         setContentView(mBinding.root)
         setDisplaySize(0.88f, WRAP)
+        setCancelable(false)
+        setCanceledOnTouchOutside(false)
         mBinding.tvUpdate.setBlockingOnClickListener {
             Launch.skipAppStore(mJumpAddress)
             mListener?.invoke(TYPE_APP_STORE)
@@ -45,7 +47,7 @@ class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
 
     fun setAppUpdateInfo(info: AppUpgradeInfo): AppUpgradeDialog {
         mBinding.tvTitle.text = info.iteL2w
-        mBinding.tvText1.text = info.Fjg55aR0kc
+        mBinding.tvText1.text = info.Fjg55aR0kc?.replace("\\n", "\n")
         mJumpAddress = info.aTzLhoFtcl
         mBinding.aivClose.ifShow(info.bt35AvNbu != 2)
         return this

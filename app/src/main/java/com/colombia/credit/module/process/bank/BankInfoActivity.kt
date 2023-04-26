@@ -9,12 +9,12 @@ import com.colombia.credit.bean.resp.RspBankInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
 import com.colombia.credit.expand.TYPE_IDENTITY
-import com.colombia.credit.expand.jumpProcess
 import com.colombia.credit.module.banklist.BankCardViewModel
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
+import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -115,6 +115,11 @@ class BankInfoActivity : BaseProcessActivity() {
             it.SElc4 = mBankType.toString()// 银行类型
             it.GiQ40BKKr = mBinding.layoutBank.bivName.tag?.toString().orEmpty() // 银行编码
         }
+    }
+
+    override fun uploadException(response: BaseResponse<*>) {
+        super.uploadException(response)
+        mBinding.layoutBank.bivBankno.setError(R.string.error_bank_no, true)
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel

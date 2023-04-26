@@ -262,6 +262,7 @@ class EmailInfoView : AbsBaseInfoView {
         mBinding.bivTvError.visibility = View.VISIBLE
         mBinding.bivTvError.text = errorSpannable
         mBinding.bivEdittext.isSelected = true
+        mBinding.llContent.isSelected = true
     }
 
     override fun setError(errorRes: Int, hasIcon: Boolean) {
@@ -287,6 +288,7 @@ class EmailInfoView : AbsBaseInfoView {
         mIsError = false
         mBinding.bivTvError.visibility = View.GONE
         mBinding.bivEdittext.isSelected = false
+        mBinding.llContent.isSelected = false
     }
 
     override fun isError(): Boolean = mIsError

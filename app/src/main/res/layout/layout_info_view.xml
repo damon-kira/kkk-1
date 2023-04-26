@@ -24,9 +24,10 @@
         tools:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_gray_edit_bg"
+        android:background="@drawable/selector_baseinfo_bg"
         android:gravity="center_vertical"
         android:minHeight="48dp"
         android:orientation="horizontal">
@@ -67,6 +68,17 @@
             app:srcCompat="@drawable/svg_arrow_right_padding"
             tools:visibility="visible" />
     </LinearLayout>
+    <!-- 异常提示 -->
+    <TextView
+        android:id="@+id/biv_tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/color_FF5033"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:text="error"
+        tools:visibility="visible" />
 
     <!-- 提示 -->
     <TextView
@@ -80,15 +92,4 @@
         tools:text="hint"
         tools:visibility="visible" />
 
-    <!-- 异常提示 -->
-    <TextView
-        android:id="@+id/biv_tv_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:textColor="@color/color_FF5033"
-        android:textSize="12sp"
-        android:visibility="gone"
-        tools:text="error"
-        tools:visibility="visible" />
 </merge>
