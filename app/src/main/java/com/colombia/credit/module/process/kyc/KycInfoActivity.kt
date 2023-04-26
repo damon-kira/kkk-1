@@ -200,9 +200,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             if (!it.isSuccess()) {
                 if (mViewModel.mImageType == PicType.PIC_FRONT) {
                     mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_ERROR)
+                    mBinding.ilPic.setLeftEnable(true)
                     mBinding.ilPic.setLeftImage(R.drawable.kyc_front_pic)
                 } else if (mViewModel.mImageType == PicType.PIC_BACK) {
                     mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_ERROR)
+                    mBinding.ilPic.setRightEnable(true)
                     mBinding.ilPic.setRightImage(R.drawable.kyc_back_pic)
                 }
                 return@observerNonSticky
