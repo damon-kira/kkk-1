@@ -25,16 +25,21 @@ abstract class BaseProcessActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStatusBar(false, R.color.colorPrimary, false)
-        val viewModel = getViewModel()
-        setViewModelLoading(viewModel)
-        viewModel.mUploadLiveData.observerNonSticky(this) {
-            if (it.isSuccess()) {
-                uploadSuccess()
-            } else {
-                uploadException(it)
+        initViewModel()
+        initObserver()
+    }
+
+    open fun initViewModel() {
+        getViewModel()?.let {viewModel ->
+            setViewModelLoading(viewModel)
+            viewModel.mUploadLiveData.observerNonSticky(this) {
+                if (it.isSuccess()) {
+                    uploadSuccess()
+                } else {
+                    uploadException(it)
+                }
             }
         }
-        initObserver()
     }
 
     private val mBackDialog by lazy {
@@ -67,7 +72,7 @@ abstract class BaseProcessActivity : BaseActivity() {
     protected fun uploadInfo() {
         if (checkCommitInfo()) {
             val commitInfo = getCommitInfo()
-            getViewModel().uploadInfo(commitInfo)
+            getViewModel()?.uploadInfo(commitInfo)
         }
     }
 
@@ -111,7 +116,7 @@ abstract class BaseProcessActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        getViewModel().saveCacheInfo(getCommitInfo())
+        getViewModel()?.saveCacheInfo(getCommitInfo())
         super.onDestroy()
     }
 
@@ -153,5 +158,5 @@ abstract class BaseProcessActivity : BaseActivity() {
 
     abstract fun getCommitInfo(): IReqBaseInfo
 
-    abstract fun getViewModel(): BaseProcessViewModel
+    abstract fun getViewModel(): BaseProcessViewModel?
 }

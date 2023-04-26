@@ -25,4 +25,12 @@ class UploadDialog constructor(context: Context) : DefaultDialog(context) {
         super.dismiss()
         mBinding.uploadView.cancel()
     }
+
+    fun resume(){
+        mBinding.uploadView.animResume()
+    }
+
+    fun end(){
+        mBinding.uploadView.end()
+    }
 }

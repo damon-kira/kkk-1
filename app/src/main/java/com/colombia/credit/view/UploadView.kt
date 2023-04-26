@@ -109,12 +109,12 @@ class UploadView : View {
 
     private val mAnim by lazy {
         ValueAnimator.ofInt(0, MAX_PROCESS).apply {
-            duration = 5000
+            duration = 10000
             addUpdateListener {
                 val value = it.animatedValue as Int
                 mCurrProcess = value
                 postInvalidate()
-                if (value == 90) {
+                if (value == 95) {
                     pause()
                 }
             }
@@ -129,6 +129,11 @@ class UploadView : View {
 
     fun cancel() {
         mAnim.cancel()
+    }
+
+    fun end(){
+        cancel()
+        mCurrProcess = MAX_PROCESS
     }
 
     fun animPause() {
