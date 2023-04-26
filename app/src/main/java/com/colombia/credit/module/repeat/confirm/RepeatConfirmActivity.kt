@@ -15,11 +15,14 @@ import com.colombia.credit.databinding.ActivityRepeatConfirmBinding
 import com.colombia.credit.databinding.LayoutRepeatItemProductBinding
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.upload.UploadViewModel
+import com.colombia.credit.permission.PermissionHelper
+import com.colombia.credit.permission.appPermissions
 import com.colombia.credit.util.AnimtorUtils
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -137,7 +140,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         v ?: return
         when (v.id) {
             R.id.tv_confirm -> {
-                mUploadViewModel.checkAndUpload()
+                reqPermission()
             }
             R.id.aiv_arrow -> {
                 // 底部list展开或收起
@@ -166,6 +169,22 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
+
+    private fun reqPermission() {
+        PermissionHelper.reqPermission(
+            this,
+            appPermissions.toList(),
+            true,
+            isFixGroup = true,
+            {
+                mUploadViewModel.checkAndUpload()
+            },
+            {
+                jumpToAppSettingPage()
+            })
+    }
+
 
     private fun getOrderIds() = mAdapter.getSelectorList().map { it.ekrpWqU0 }.joinToString(",")
 

@@ -14,7 +14,6 @@ import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.HomeLoanViewModel
-import com.colombia.credit.module.service.SerManager
 import com.colombia.credit.module.upload.UploadViewModel
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.appPermissions
@@ -61,13 +60,6 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         setViewModelLoading(mUploadViewModel)
         setCustomListener(mBinding.toolbar)
         initObserver()
-
-        PermissionHelper.reqPermission(getBaseActivity()!!, appPermissions.toList(), true, isFixGroup = true,{
-            SerManager.uploadData()
-        }, {
-            getSupportContext().jumpToAppSettingPage()
-        })
-
         mBinding.rlPeriod2.setBlockingOnClickListener(this)
         mBinding.rlPeriod3.setBlockingOnClickListener(this)
         mBinding.rlPeriod4.setBlockingOnClickListener(this)
@@ -75,6 +67,20 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         mBinding.confirmTvApply.setBlockingOnClickListener(this)
         mBinding.aivJian.setBlockingOnClickListener(this)
         mBinding.aivPlus.setBlockingOnClickListener(this)
+    }
+
+    private fun reqPermission() {
+        PermissionHelper.reqPermission(
+            getBaseActivity()!!,
+            appPermissions.toList(),
+            true,
+            isFixGroup = true,
+            {
+                mUploadViewModel.checkAndUpload()
+            },
+            {
+                getSupportContext().jumpToAppSettingPage()
+            })
     }
 
     private fun initObserver() {
@@ -158,7 +164,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 )
             }
             R.id.confirm_tv_apply -> {
-                mUploadViewModel.checkAndUpload()
+                reqPermission()
             }
             R.id.aiv_jian -> {
                 toast(R.string.toast_mix_amount)
