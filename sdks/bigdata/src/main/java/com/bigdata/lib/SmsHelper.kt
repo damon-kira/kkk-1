@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.provider.Telephony
-import android.util.Log
 import com.bigdata.lib.bean.SmsInfo
 import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
@@ -48,9 +47,9 @@ object SmsHelper {
                     Telephony.Sms.STATUS,
                     Telephony.Sms.TYPE
                 ),
-                "date>?",
-                arrayOf(MCLCManager.getLast_6_Month_time().toString()),
-                "date DESC limit $MAX_ITEM"
+                /*"date>?"*/null,
+                /*arrayOf(MCLCManager.getLast_6_Month_time().toString())*/null,
+                /*"date DESC limit $MAX_ITEM"*/null
             )
             cursor?.use {
                 var info: SmsInfo
