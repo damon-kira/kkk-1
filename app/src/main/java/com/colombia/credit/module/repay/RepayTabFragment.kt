@@ -110,8 +110,8 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
 
         mViewModel.listLivedata.observerNonSticky(viewLifecycleOwner) { list ->
-            changePage(!list.isNullOrEmpty())
             mAdapter.setItems(list ?: arrayListOf())
+            changePage(!list.isNullOrEmpty())
         }
 
         LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner) {
