@@ -13,7 +13,6 @@ import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.KycHintDialog
-import com.colombia.credit.dialog.PicImageDialog
 import com.colombia.credit.expand.TYPE_FACE
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
@@ -167,23 +166,12 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
             if (bitmap != null) {
                 if (type == PicType.PIC_FRONT) {
-                    mBinding.ilPic.setLeftEnable(false)
                     mBinding.ilPic.setLeftImage(bitmap)
-                    mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_SUCCESS)
-                    mBinding.ilPic.setLeftEnable(false)
                 } else {
-                    mBinding.ilPic.setRightEnable(false)
                     mBinding.ilPic.setRightImage(bitmap)
-                    mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_SUCCESS)
-                    mBinding.ilPic.setRightEnable(false)
                 }
             }
         }, {
-            if (type == PicType.PIC_FRONT) {
-                mBinding.ilPic.setLeftEnable(false)
-            } else {
-                mBinding.ilPic.setRightEnable(false)
-            }
         })
     }
 
@@ -227,13 +215,19 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
             }
             rspInfo.jmWujylO6j?.let { info ->
                 if (info.YZ7Mlc8yf.orEmpty().isNotEmpty()) {
+                    mBinding.ilPic.setLeftEnable(false)
+                    mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_SUCCESS)
                     loadImage(info.YZ7Mlc8yf, PicType.PIC_FRONT)
                 } else {
+                    mBinding.ilPic.setLeftStatus(IdentityPicStatus.STATUS_NORMAL)
                     mBinding.ilPic.setLeftEnable(true)
                 }
                 if (info.fefFSZ.orEmpty().isNotEmpty()) {
+                    mBinding.ilPic.setRightEnable(false)
+                    mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_SUCCESS)
                     loadImage(info.fefFSZ, PicType.PIC_BACK)
                 } else {
+                    mBinding.ilPic.setRightStatus(IdentityPicStatus.STATUS_NORMAL)
                     mBinding.ilPic.setRightEnable(true)
                 }
 
