@@ -53,9 +53,8 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
-//            mFirstPageLoanAmount = mHomeViewModel.mRspInfoLiveData.value?.yqGhrjOF2.orEmpty()
-//            getProces()
-            Launch.skipFaceActivity(getSupportContext())
+            mFirstPageLoanAmount = mHomeViewModel.mRspInfoLiveData.value?.yqGhrjOF2.orEmpty()
+            getProces()
         }
     }
 
