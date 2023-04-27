@@ -9,10 +9,7 @@ import android.provider.ContactsContract
 import com.colombia.credit.bean.PhoneAndName
 import com.colombia.credit.permission.PermissionHelper
 
-/**
- * author: weishl
- * data: 2020/08/17
- **/
+
 object ContactHelper {
 
     private val NAME_LENGTH = 30 //姓名最大长度
@@ -65,10 +62,11 @@ object ContactHelper {
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     name = cursor.getString(0)
-                    num = cursor.getString(1).replace("[^0-9]".toRegex(), "")
-                    if (name != null) {
-                        name = name.replace("[^a-zA-Z0-9\\s\\u4e00-\\u9fa5]".toRegex(), "")
-                    }
+                    num = cursor.getString(1).replace("-".toRegex(), "").replace(" ", "")
+//                    num = cursor.getString(1).replace("[^0-9]".toRegex(), "")
+//                    if (name != null) {
+//                        name = name.replace("[^a-zA-Z0-9\\s\\u4e00-\\u9fa5]".toRegex(), "")
+//                    }
                     break
                     //最后更新时间
 //                val time =
@@ -94,18 +92,19 @@ object ContactHelper {
     }
 
     private fun parsingMobile(mobile: String): String {
-        if (mobile.length < 3) {
-            return mobile
-        }
-        return if (mobile.startsWith("+52")) {
-            mobile.substring(3)
-        } else if (mobile.startsWith("+")) {
-            mobile.substring(1)
-        } else if (mobile.startsWith("52")) {
-            mobile.substring(2)
-        } else {
-            mobile
-        }
+//        if (mobile.length < 3) {
+//            return mobile
+//        }
+//        return if (mobile.startsWith("+52")) {
+//            mobile.substring(3)
+//        } else if (mobile.startsWith("+")) {
+//            mobile.substring(1)
+//        } else if (mobile.startsWith("52")) {
+//            mobile.substring(2)
+//        } else {
+//            mobile
+//        }
+        return mobile
     }
 
     /** Android 9.0是否有读取联系人权限 */

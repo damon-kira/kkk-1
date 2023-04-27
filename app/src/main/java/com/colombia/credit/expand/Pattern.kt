@@ -51,23 +51,24 @@ fun isVaildCheckNumber(str: String):Boolean{
  * @param str String
  */
 fun isValidCharNumber(str: String): Boolean {
-    return Regex("""[0-9]+""").matches(str)
+    return Regex("""\d+""").matches(str)
 }
 
 /** 是否全是数字 */
-fun String.isValidNumber() = Regex("[0-9]+").matches(this)
+fun String.isValidNumber() = Regex("\\d+").matches(this)
 
 fun isSameNumber(str1: String ,str2: String): Boolean{
     var s1 = str1
     var s2 = str2
     if (s1.isNotEmpty() && s2.isNotEmpty()) {
-        if (s1.startsWith("0")) {
-            s1 = s1.substring(1)
-        }
-        if (s2.startsWith("0")) {
-            s2 = s2.substring(1)
-        }
-        return s1 == s2
+//        if (s1.startsWith("0")) {
+//            s1 = s1.substring(1)
+//        }
+//        if (s2.startsWith("0")) {
+//            s2 = s2.substring(1)
+//        }
+//        return s1 == s2
+        return s1.contains(s2) || s2.contains(s1)
     }
     return false
 }

@@ -175,5 +175,5 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = TYPE_WORK
+    override fun getNextType(): Int = STEP2
 }

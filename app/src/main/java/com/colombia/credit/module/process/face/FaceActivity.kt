@@ -22,7 +22,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.camera.BitmapCrop
 import com.colombia.credit.databinding.ActivityFaceBinding
-import com.colombia.credit.expand.TYPE_SUCCESS
+import com.colombia.credit.expand.STEP_OK
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.login.createCountDownTimer
@@ -161,7 +161,7 @@ class FaceActivity : BaseProcessActivity() {
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
 
-    override fun getNextType(): Int = TYPE_SUCCESS
+    override fun getNextType(): Int = STEP_OK
 
     override fun onStart() {
         super.onStart()

@@ -13,7 +13,7 @@ import com.colombia.credit.bean.resp.KycOcrInfo
 import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.databinding.ActivityKycInfoBinding
 import com.colombia.credit.dialog.KycHintDialog
-import com.colombia.credit.expand.TYPE_FACE
+import com.colombia.credit.expand.STEP6
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -354,5 +354,5 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = TYPE_FACE
+    override fun getNextType(): Int = STEP6
 }

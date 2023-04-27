@@ -5,36 +5,36 @@ import com.cache.lib.SharedPrefUser
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.SharedPrefKeyManager
 
-val TYPE_PERSONAL = 1
-val TYPE_WORK = 2
-val TYPE_CONTACT = 3
-val TYPE_BANK = 4
-val TYPE_IDENTITY = 5
-val TYPE_FACE = 6
-val TYPE_SUCCESS = 100
+val STEP1 = 1
+val STEP2 = 2
+val STEP3 = 3
+val STEP4 = 4
+val STEP5 = 5
+val STEP6 = 6
+val STEP_OK = 100
 
 fun jumpProcess(context: Context, type: Int) {
     saveShowBackDialog(true)
     when (type) {
-        TYPE_PERSONAL -> {
+        STEP1 -> {
             Launch.skipPersonalInfoActivity(context)
         }
-        TYPE_WORK -> {
+        STEP2 -> {
             Launch.skipWorkInfoActivity(context)
         }
-        TYPE_CONTACT -> {
+        STEP3 -> {
             Launch.skipContactInfoActivity(context)
         }
-        TYPE_BANK -> {
+        STEP4 -> {
             Launch.skipBankInfoActivity(context)
         }
-        TYPE_IDENTITY -> {
+        STEP5 -> {
             Launch.skipKycInfoActivity(context)
         }
-        TYPE_FACE -> {
+        STEP6 -> {
             Launch.skipFaceActivity(context)
         }
-        TYPE_SUCCESS -> {
+        STEP_OK -> {
             Launch.skipUploadActivity(context)
         }
     }

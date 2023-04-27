@@ -7,11 +7,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqWorkInfo
 import com.colombia.credit.bean.resp.RspWorkInfo
 import com.colombia.credit.databinding.ActivityWorkInfoBinding
-import com.colombia.credit.expand.TYPE_CONTACT
-import com.colombia.credit.expand.TYPE_IDENTITY
-import com.colombia.credit.expand.jumpProcess
-import com.colombia.credit.manager.Launch
-import com.colombia.credit.manager.Launch.jumpToAppSettingPage
+import com.colombia.credit.expand.STEP3
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
@@ -19,7 +15,6 @@ import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -172,5 +167,5 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = TYPE_CONTACT
+    override fun getNextType(): Int = STEP3
 }

@@ -87,7 +87,7 @@ class LoginFragment : BaseLoginFragment() {
             if (it.isSuccess()) {
                 if (isNewUser) {
                     mFirstPageLoanAmount = "888888"
-                    jumpProcess(getSupportContext(), TYPE_PERSONAL)
+                    jumpProcess(getSupportContext(), STEP1)
                 }
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))
             } else {

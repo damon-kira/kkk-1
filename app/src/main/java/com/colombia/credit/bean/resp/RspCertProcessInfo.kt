@@ -21,21 +21,21 @@ class RspCertProcessInfo {
 
     fun getProcessType(): Int {
         return if (isCertInfo(hj15t)) {
-            TYPE_PERSONAL
+            STEP1
         } else if (isCertInfo(M82WVQF)) {
-            TYPE_WORK
+            STEP2
         } else if (isCertInfo(pfimInrSb)) {
-            TYPE_CONTACT
+            STEP3
         } else if (isCertInfo(peFgT)) {
-            TYPE_BANK
+            STEP4
         } else if (isCertInfo(nTVc)) {
-            TYPE_IDENTITY
+            STEP5
         } else if (isCertInfo(BzXT)) {
-            TYPE_FACE
-        } else TYPE_SUCCESS
+            STEP6
+        } else STEP_OK
     }
 
     fun isAllSuccess():Boolean {
-        return getProcessType() == TYPE_SUCCESS
+        return getProcessType() == STEP_OK
     }
 }

@@ -8,7 +8,7 @@ import com.colombia.credit.bean.req.ReqBankInfo
 import com.colombia.credit.bean.resp.RspBankInfo
 import com.colombia.credit.databinding.ActivityBankInfoBinding
 import com.colombia.credit.dialog.BankSearchDialog
-import com.colombia.credit.expand.TYPE_IDENTITY
+import com.colombia.credit.expand.STEP5
 import com.colombia.credit.module.banklist.BankCardViewModel
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -123,5 +123,5 @@ class BankInfoActivity : BaseProcessActivity() {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = TYPE_IDENTITY
+    override fun getNextType(): Int = STEP5
 }

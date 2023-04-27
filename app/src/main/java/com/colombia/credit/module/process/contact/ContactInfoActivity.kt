@@ -8,7 +8,7 @@ import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqContactInfo
 import com.colombia.credit.bean.resp.RspContactInfo
 import com.colombia.credit.databinding.ActivityContactInfoBinding
-import com.colombia.credit.expand.TYPE_BANK
+import com.colombia.credit.expand.STEP4
 import com.colombia.credit.expand.getMobile
 import com.colombia.credit.expand.isGpAccount
 import com.colombia.credit.expand.isSameNumber
@@ -160,16 +160,17 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private fun setContactInfo(infoView: BaseInfoView, data: PhoneAndName) {
         val loginMobile = getMobile()
-        if (data.phone.startsWith("57") && data.phone.length > 10) {
-            val mobile = data.phone
-            data.phone = mobile.substring(2, mobile.length)
-        } else if (data.phone.startsWith("+57") && data.phone.length > 10) {
-            val mobile = data.phone
-            data.phone = mobile.substring(2, mobile.length)
-        }
+//        if (data.phone.startsWith("57") && data.phone.length > 10) {
+//            val mobile = data.phone
+//            data.phone = mobile.substring(2, mobile.length)
+//        } else if (data.phone.startsWith("+57") && data.phone.length > 10) {
+//            val mobile = data.phone
+//            data.phone = mobile.substring(2, mobile.length)
+//        }
 
         // 是否与登录手机号是一个
-        if (loginMobile == data.phone) {
+        if (loginMobile.contains(data.phone) || data.phone.contains(loginMobile)) {
+            clearInfo(infoView)
             infoView.setError(R.string.error_mobile_same_login)
             return
         }
@@ -180,11 +181,15 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val contact1 = mBinding.bivContact1.tag?.toString().orEmpty()
         val contact2 = mBinding.bivContact2.tag?.toString().orEmpty()
         if (isSameNumber(contact1, contact2)) {
-            infoView.setViewText("")
-            infoView.setDesc("")
-            infoView.tag = ""
+            clearInfo(infoView)
             infoView.setError(R.string.error_mobile_same)
         }
+    }
+
+    private fun clearInfo(infoView: BaseInfoView) {
+        infoView.setViewText("")
+        infoView.setDesc("")
+        infoView.tag = ""
     }
 
     override fun checkCommitInfo(): Boolean {
@@ -205,7 +210,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = TYPE_BANK
+    override fun getNextType(): Int = STEP4
 
     override fun uploadSuccess() {
         if (isGpAccount()) {

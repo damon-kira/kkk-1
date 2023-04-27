@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.databinding.ActivityFaceFailedBinding
-import com.colombia.credit.expand.TYPE_FACE
+import com.colombia.credit.expand.STEP6
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
@@ -28,7 +28,7 @@ class FaceFailedActivity : BaseProcessActivity() {
         }
     }
 
-    override fun getNextType(): Int = TYPE_FACE
+    override fun getNextType(): Int = STEP6
 
     override fun initObserver() {}
 
