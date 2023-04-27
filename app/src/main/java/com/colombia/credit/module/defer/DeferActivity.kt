@@ -40,10 +40,13 @@ open class DeferActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
+//        setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
+        }
+        mBinding.toolbar.setOnbackListener {
+            finish()
         }
 
         getInfo()

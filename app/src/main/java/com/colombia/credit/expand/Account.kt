@@ -52,6 +52,7 @@ fun isGpAccount(): Boolean {
 
 fun setLogout() {
     orderStatus = null
+    isNewUser = false
     saveUserToken("")
     SharedPrefUser.clear()
     deleteCameraCache(getAppContext())

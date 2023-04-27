@@ -33,6 +33,9 @@ class HistoryActivity : BaseActivity() {
         change(false)
         setStatusBarColor(Color.WHITE, true)
 
+        mBinding.toolbar.setOnbackListener {
+            finish()
+        }
         setRecyclerView()
 
         mViewModel.mInfoLiveData.observerNonSticky(this) {

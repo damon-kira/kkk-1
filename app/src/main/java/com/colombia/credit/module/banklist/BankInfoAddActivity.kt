@@ -45,6 +45,11 @@ class BankInfoAddActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mBinding.toolbar.setOnbackListener {
+            finish()
+        }
+
         setViewModelLoading(mViewModel)
         setViewModelLoading(mBankViewModel)
         lifecycle.addObserver(mBankViewModel)

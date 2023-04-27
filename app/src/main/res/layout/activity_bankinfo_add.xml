@@ -7,10 +7,13 @@
     android:orientation="vertical">
 
     <com.colombia.credit.view.ToolbarLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/white"
         app:tl_back_text_color="@color/color_333333"
+        app:tl_back_visibility="visible"
+        app:tl_left_icon="@drawable/svg_left_back_gray"
         app:tl_text_gravity="center"
         app:tl_title="@string/bank_add_title" />
 

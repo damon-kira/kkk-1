@@ -4,10 +4,7 @@ import com.colombia.credit.bean.resp.RepeatProductInfo
 import com.colombia.credit.bean.resp.RepeatRepayInfo
 import com.colombia.credit.bean.resp.RspCertProcessInfo
 import com.colombia.credit.bean.resp.RspProductInfo
-import com.colombia.credit.expand.isGpAccount
-import com.colombia.credit.expand.isRepeat
-import com.colombia.credit.expand.mUserName
-import com.colombia.credit.expand.saveMobile
+import com.colombia.credit.expand.*
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
@@ -33,6 +30,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
             if (response.isSuccess()) {
                 response.getData()?.let { info ->
                     isRepeat = info.EqyO == "0"
+                    orderStatus = info.xXkO
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
 
