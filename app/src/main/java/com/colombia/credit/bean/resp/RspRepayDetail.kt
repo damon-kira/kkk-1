@@ -6,6 +6,7 @@ class RspRepayDetail {
 
     val productName: String? = null
     val Ab85: String? = null // 产品URL
+
     //总金额
     val TxksJTU8C: String? = null
         get() = field?.transform()
@@ -21,29 +22,39 @@ class RspRepayDetail {
         val KER10faeq9: String? = null // 订单id
         val PJpH0: String? = null//生成还款码传这个id
         val RKGqbRy: String? = null // 产品id
-//        val qh1yC1M: String? = null
+
+        //        val qh1yC1M: String? = null
 //        val cx2Te: String? = null //总期数
 //        val vR7HkDeZP: String? = null //当前期数
 //        val CI6jcXNI: String? = null
 //        val PmuEMR5ESD: String? = null //RPS
-//        val VJJxo2: String? = null// 2018000//还款金额
+        // 2018000//还款金额
+        val VJJxo2: String? = null
+            get() = field?.transform()
+
 //        val RPKfna: String? = null //760000
 //        val uALonXNeY: String? = null //0
         val ch4x: String? = null //11-02-2023//还款时间
-//        val rm7fqlDid: String? = null //- 2//剩余时间
+        val rm7fqlDid: String? = null //- 2//剩余时间
+
 //        val vzcAyk: String? = null //0
         val DlYbHlY: String? = null //1 是否可以展期 1可以
         val zlftJgf: String? = null //展期天数
         val EA7nMOa: String? = null //展期金额
             get() = field?.transform()
-//        val vlSH: String? = null //1
+
+        //        val vlSH: String? = null //1
         val DaNhMLH: String? = null //放款银行卡
         val cHum8: String? = null //罚息
+            get() = field?.transform()
         val YXtMfL6nAm: String? = null //22-02-2023//展期后应还时间
-        // 990000//到手金额
+
+        //到手金额
         val pHSUCa43: String? = null
             get() = field?.transform()
         val Dmj7UQm: String? = null //|830000//利息
+            get() = field?.transform()
+
         // 830000 // 最初应还金额
         val dbhmAOVp56: String? = null
             get() = field?.transform()

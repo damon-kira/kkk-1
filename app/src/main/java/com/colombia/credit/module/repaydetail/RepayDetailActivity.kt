@@ -2,8 +2,10 @@ package com.colombia.credit.module.repaydetail
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityRepayDetailBinding
+import com.colombia.credit.dialog.RepayDetailDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
@@ -37,14 +39,19 @@ class RepayDetailActivity : BaseActivity() {
     private var loansonId = ""
 
     private val mObserver = { event: PayEvent ->
+        Log.d(TAG, "event = $event")
         if (event.event == PayEvent.EVENT_REFRESH) {
             getDetail()
         }
     }
 
+    private val detailDialog by lazy {
+        RepayDetailDialog(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
+//        setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
         mIds = intent?.getStringExtra(EXTRA_ID)
         mBinding.toolbar.setCustomClickListener {
@@ -59,6 +66,10 @@ class RepayDetailActivity : BaseActivity() {
             )
         }
 
+        mBinding.tvAmount.setBlockingOnClickListener{
+            detailDialog.show()
+        }
+
         mBinding.tvExtension.setBlockingOnClickListener {
             Launch.skipDeferActivity(this, info)
         }
@@ -69,14 +80,15 @@ class RepayDetailActivity : BaseActivity() {
             if (it.isSuccess()) {
                 it.getData()?.let { data ->
                     changeEnable(true)
-                    amount = data.TxksJTU8C
-                    mBinding.tvAmount.text = getUnitString(data.TxksJTU8C.orEmpty())
-                    mBinding.tvApply.text = getString(
-                        R.string.repay_amount_value,
-                        getUnitString(data.TxksJTU8C.orEmpty())
-                    )
-                    if (data.KUgC?.isNotEmpty() == true){
+                    if (data.KUgC?.isNotEmpty() == true) {
                         val order = data.KUgC?.get(0) ?: return@observerNonSticky
+                        amount = order.VJJxo2
+                        mBinding.tvAmount.text = getUnitString(amount.orEmpty())
+                        mBinding.tvApply.text = getString(
+                            R.string.repay_amount_value,
+                            getUnitString(amount.orEmpty())
+                        )
+
                         info = GsonUtil.toJson(order).orEmpty()
                         loansonId = order.PJpH0.orEmpty()
                         mBinding.iilBankInfo.setRightText(order.DaNhMLH.orEmpty())
@@ -85,6 +97,14 @@ class RepayDetailActivity : BaseActivity() {
                         if (order.DlYbHlY == "1") {
                             mBinding.tvExtension.show()
                         }
+
+                        // 还款明细弹窗
+                        detailDialog.setDetail(
+                            order.pHSUCa43.orEmpty(),
+                            order.Dmj7UQm.orEmpty(),
+                            order.cHum8.orEmpty(),
+                            amount.orEmpty()
+                        )
                     }
                 }
             } else {
@@ -95,7 +115,7 @@ class RepayDetailActivity : BaseActivity() {
         getDetail()
     }
 
-    private fun changeEnable(enable: Boolean){
+    private fun changeEnable(enable: Boolean) {
         mBinding.tvApply.isEnabled = enable
         mBinding.tvExtension.isEnabled = enable
     }

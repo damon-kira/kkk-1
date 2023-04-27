@@ -15,6 +15,7 @@ class RspHistoryInfo {
         var znxlON0: String? = null     // 还款日期
         var H0WVJP: String? = null      // 拒绝日期
         var eeiu2lKWI: String? = null   // 借款金额
+            get() = field?.transform()
 //        var tAnV: String? = null        // 待还期数
 //        var mjMt2dTqSd: String? = null  // 订单期数
 //        var lK97: String? = null        // 剩余天数

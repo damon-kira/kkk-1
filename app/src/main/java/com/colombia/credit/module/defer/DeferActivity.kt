@@ -40,7 +40,6 @@ open class DeferActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
@@ -69,8 +68,8 @@ open class DeferActivity : BaseActivity() {
     open fun getInfo() {
         intent?.getStringExtra(EXTRA_INFO)?.let {
             val detail = GsonUtil.fromJsonNew<RspRepayDetail.RepayDetail>(it)
-            jine = detail?.dbhmAOVp56.orEmpty()
-            val amount = getUnitString(detail?.EA7nMOa.orEmpty())
+            jine = detail?.EA7nMOa.orEmpty()
+            val amount = getUnitString(jine)
             mBinding.tvAmount.text = amount
             mBinding.iilDays.setRightText(getString(R.string.days, detail?.zlftJgf ?: "--"))
             mBinding.iilDate.setRightText(detail?.YXtMfL6nAm.orEmpty())

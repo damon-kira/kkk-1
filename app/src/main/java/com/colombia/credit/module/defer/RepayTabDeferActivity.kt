@@ -13,12 +13,12 @@ open class RepayTabDeferActivity : DeferActivity() {
     override fun getInfo() {
         intent.getStringExtra(EXTRA_INFO)?.let {
             val detail = GsonUtil.fromJsonNew<RspRepayOrders.RepayOrderDetail>(it)
-            jine = detail?.rCC18KSG.orEmpty()
+            jine = detail?.X32HrYq4u.orEmpty()
             val amount = getUnitString(jine)
             mBinding.tvAmount.text = amount
             mBinding.iilDays.setRightText(getString(R.string.days, detail?.GHMXDjtsUn ?: "--"))
             mBinding.iilDate.setRightText(detail?.prr9Ie61.orEmpty())
-            mBinding.iilAmount.setRightText(getUnitString(detail?.X32HrYq4u.orEmpty()))
+            mBinding.iilAmount.setRightText(getUnitString(detail?.rCC18KSG.orEmpty()))
             mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
             orderId = detail?.W5KW6.orEmpty()
         }

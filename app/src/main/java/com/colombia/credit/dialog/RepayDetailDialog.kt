@@ -1,9 +1,8 @@
 package com.colombia.credit.dialog
 
 import android.content.Context
-import com.colombia.credit.R
 import com.colombia.credit.databinding.DialogRepayDetailBinding
-import com.colombia.credit.expand.formatCommon
+import com.colombia.credit.expand.getUnitString
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.viewbinding.binding
 
@@ -17,18 +16,29 @@ class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
         setDisplaySize(0.85f, WRAP)
     }
 
+    private var text1: String? = null
+    private var text2:String? = null
+    private var text3: String? = null
+    private var text4: String? = null
+
     fun setDetail(
         loan: String,
         interest: String,
         overdue: String,
         repay: String
     ): RepayDetailDialog {
-        mBinding.iilLoan.setRightText(getUnitText(loan))
-        mBinding.iilInterest.setRightText(getUnitText(interest))
-        mBinding.iilOverdue.setRightText(getUnitText(overdue))
-        mBinding.iilRepay.setRightText(getUnitText(repay))
+        text1 = loan
+        text2 = interest
+        text3 = overdue
+        text4 = repay
         return this
     }
 
-    private fun getUnitText(loan: String) = getString(R.string.amount_unit, formatCommon(loan))
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        mBinding.iilLoan.setRightText(getUnitString(text1))
+        mBinding.iilInterest.setRightText(getUnitString(text2))
+        mBinding.iilOverdue.setRightText(getUnitString(text3))
+        mBinding.iilRepay.setRightText(getUnitString(text4))
+    }
 }

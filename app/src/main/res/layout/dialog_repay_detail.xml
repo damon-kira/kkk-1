@@ -30,6 +30,7 @@
         android:layout_marginTop="7dp"
         android:paddingTop="14dp"
         app:iil_left_text="@string/dialog_loan_amount_text"
+        app:iil_right_text_bold="true"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
     <!-- 利息 -->
     <com.colombia.credit.view.ItemInfoLayout
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="14dp"
         app:iil_left_text="@string/loan_interest_text"
+        app:iil_right_text_bold="true"
         app:layout_constraintTop_toBottomOf="@id/iil_loan" />
     <!-- 逾期金额 -->
     <com.colombia.credit.view.ItemInfoLayout
@@ -46,6 +48,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="14dp"
         app:iil_left_text="@string/dialog_loan_amount_text"
+        app:iil_right_text_bold="true"
+        app:iil_right_text_color="@color/color_FE4F4F"
         app:layout_constraintTop_toBottomOf="@id/iil_interest" />
 
     <com.colombia.credit.view.ItemInfoLayout
@@ -54,6 +58,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="14dp"
         app:iil_left_text="@string/repay_detail_hint"
+        app:iil_right_text_bold="true"
         app:layout_constraintTop_toBottomOf="@id/iil_overdue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

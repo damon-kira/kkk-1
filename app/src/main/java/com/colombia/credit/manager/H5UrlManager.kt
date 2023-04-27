@@ -3,6 +3,7 @@ package com.colombia.credit.manager
 import com.colombia.credit.Constant
 import com.colombia.credit.app.AppEnv
 import com.colombia.credit.app.getAppContext
+import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.util.GPInfoUtils
 import com.util.lib.SysUtils
@@ -28,7 +29,7 @@ object H5UrlManager {
      */
     fun getPayUrl(id: String, amount: String, type: String): String {
         return StringBuilder(URL_PAY)
-            .append("&aw1513few=").append(amount)
+            .append("&aw1513few=").append(formatCommon(amount))
             .append("&gPV7c5=").append(id)
             .append("&NVLXhwe=").append(type)
             .toString()

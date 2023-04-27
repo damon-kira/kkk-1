@@ -43,14 +43,16 @@ object LiveDataBus {
         }
     }
 
-    fun <T> removeObserve(clazz: Class<T>, observer: Observer<T>?) {
+    fun <T> removeObserve(clazz: Class<T>, observer: Observer<T>?, isRemoveClazz: Boolean = false) {
         observer?.let {
             if (bus.containsKey(clazz)) {
                 if (observer is LiveDataBusObserve) {
                     observer.onChange = null
                 }
                 getLiveData(clazz).removeObserver(it)
-                remove(clazz)
+                if (isRemoveClazz) {
+                    remove(clazz)
+                }
             }
         }
     }
