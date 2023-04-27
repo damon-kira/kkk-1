@@ -41,11 +41,15 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
 
     fun uploadApp()= ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val list = DevicesAppHelper.getAppList()
-        dataApiService.uploadAppList(createRequestBody(GsonUtil.toJson(list).orEmpty()))
+        val jobj = JsonObject()
+        jobj.addProperty("bPp7hQmh", GsonUtil.toJson(list))
+        dataApiService.uploadAppList(createRequestBody(jobj.toString()))
     }
 
     fun uploadCo() = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val cons = ContactsHelper.getContacts(getAppContext())
-        dataApiService.uploadCo(createRequestBody(GsonUtil.toJson(cons).orEmpty()))
+        val jobj = JsonObject()
+        jobj.addProperty("P7r2", GsonUtil.toJson(cons))
+        dataApiService.uploadCo(createRequestBody(GsonUtil.toJson(jobj).orEmpty()))
     }
 }

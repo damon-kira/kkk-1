@@ -50,7 +50,9 @@ object ContactsHelper {
             val projection = arrayOf(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.DATA1,
-                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP
+                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP,
+                ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME,
+                ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME
 //                ,
 //                ContactsContract.CommonDataKinds.Phone.DATA6,
 //                ContactsContract.CommonDataKinds.Phone.TIMES_CONTACTED,
@@ -118,7 +120,9 @@ object ContactsHelper {
             val projection = arrayOf(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.DATA1,
-                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP
+                ContactsContract.CommonDataKinds.Phone.CONTACT_LAST_UPDATED_TIMESTAMP,
+                ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME,
+                ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME
             )
             val selection =
                 ContactsContract.CommonDataKinds.StructuredName.IN_VISIBLE_GROUP + " = 1"
@@ -126,15 +130,16 @@ object ContactsHelper {
                 ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME + " COLLATE LOCALIZED ASC"
             cursor = resolver.query(uri, projection, selection, null, sortOrder)
             if (cursor != null) {
-                val firstNameIndex =
-                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
-                val lastNameIndex =
-                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
+
                 var info: ContactInfo
                 while (cursor.moveToNext()) {
                     info = ContactInfo()
                     //联系人姓名
                     info.daQgH = cursor.getString(0).orEmpty()
+                    val firstNameIndex =
+                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
+                    val lastNameIndex =
+                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
                     if (firstNameIndex != -1) {
                         info.cr8c7xX = cursor.getString(firstNameIndex)
                     }
