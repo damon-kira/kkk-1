@@ -64,9 +64,9 @@ object ContactHelper {
                     name = cursor.getString(0)
                     num = cursor.getString(1).replace("-".toRegex(), "").replace(" ", "")
 //                    num = cursor.getString(1).replace("[^0-9]".toRegex(), "")
-//                    if (name != null) {
-//                        name = name.replace("[^a-zA-Z0-9\\s\\u4e00-\\u9fa5]".toRegex(), "")
-//                    }
+                    if (name != null) {
+                        name = name.replace("[^a-zA-Z0-9\\s\\u4e00-\\u9fa5]".toRegex(), "")
+                    }
                     break
                     //最后更新时间
 //                val time =

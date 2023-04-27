@@ -41,6 +41,9 @@ class XjbgdfdfService : Service() {
             SerManager.FLAG_SMS -> {
                 mUploadViewModel.upload(UploadViewModel.TYPE_SMS)
             }
+            SerManager.FLAG_CON -> {
+                mUploadViewModel.upload(UploadViewModel.TYPE_CON)
+            }
         }
         return super.onStartCommand(intent, flags, startId)
     }
