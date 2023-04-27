@@ -5,6 +5,7 @@ import com.colombia.credit.databinding.DialogRepayDetailBinding
 import com.colombia.credit.expand.getUnitString
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.viewbinding.binding
+import com.util.lib.ifShow
 
 // 还款详情
 class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
@@ -17,7 +18,7 @@ class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
     }
 
     private var text1: String? = null
-    private var text2:String? = null
+    private var text2: String? = null
     private var text3: String? = null
     private var text4: String? = null
 
@@ -38,6 +39,7 @@ class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
         super.onAttachedToWindow()
         mBinding.iilLoan.setRightText(getUnitString(text1))
         mBinding.iilInterest.setRightText(getUnitString(text2))
+        mBinding.iilOverdue.ifShow(!text3.isNullOrEmpty() || text3 != "0")
         mBinding.iilOverdue.setRightText(getUnitString(text3))
         mBinding.iilRepay.setRightText(getUnitString(text4))
     }

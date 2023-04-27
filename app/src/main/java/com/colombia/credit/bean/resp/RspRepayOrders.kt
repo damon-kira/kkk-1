@@ -15,7 +15,7 @@ class RspRepayOrders {
         var Eff0nA: String? = null     //待还金额
             get() = field?.transform()
         var zbRV6Lg8jO: String? = null //还款日期
-        var gzBTFx: String? = null     //是否逾期
+        var gzBTFx: Int = 0     //是否逾期
         var QiZorG: String? = null     //1代表勾选中
         var q48Wml8N: String? = null   //1代表可以展期
         var X32HrYq4u: String? = null  //展期金额
@@ -32,7 +32,7 @@ class RspRepayOrders {
 
         fun isCheck() = QiZorG == "1"
 
-        fun isOverdue() = gzBTFx == "1"
+        fun isOverdue() = gzBTFx < 0
 
         fun changeSelect() {
             QiZorG = if (isCheck()) "0" else "1"

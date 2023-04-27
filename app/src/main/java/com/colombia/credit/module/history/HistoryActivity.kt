@@ -2,6 +2,8 @@ package com.colombia.credit.module.history
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityHistoryBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.manager.Launch
@@ -38,7 +40,18 @@ class HistoryActivity : BaseActivity() {
         }
         setRecyclerView()
 
+        mBinding.swipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            )
+        )
+        mBinding.swipeRefresh.setOnRefreshListener {
+            getInfo()
+        }
+
         mViewModel.mInfoLiveData.observerNonSticky(this) {
+            stopRefresh()
             if (it.isSuccess()) {
                 it.getData()?.jNgnZUXNGq?.let { list ->
                     change(list.isNotEmpty())
@@ -46,11 +59,11 @@ class HistoryActivity : BaseActivity() {
                 }
             } else {
                 it.ShowErrorMsg {
-                    mViewModel.getHistoryList()
+                    getInfo()
                 }
             }
         }
-        mViewModel.getHistoryList()
+        getInfo()
 
         mBinding.historyTvApply.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
@@ -65,6 +78,19 @@ class HistoryActivity : BaseActivity() {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             finish()
         }
+    }
+
+
+    private fun stopRefresh() {
+        mBinding.swipeRefresh.run {
+            if (isRefreshing) {
+                isRefreshing = false
+            }
+        }
+    }
+
+    private fun getInfo() {
+        mViewModel.getHistoryList()
     }
 
     private fun change(isShow: Boolean) {

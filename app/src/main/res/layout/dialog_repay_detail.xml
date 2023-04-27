@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="14dp"
-        app:iil_left_text="@string/dialog_loan_amount_text"
+        app:iil_left_text="@string/overdue_text"
         app:iil_right_text_bold="true"
         app:iil_right_text_color="@color/color_FE4F4F"
         app:layout_constraintTop_toBottomOf="@id/iil_interest" />

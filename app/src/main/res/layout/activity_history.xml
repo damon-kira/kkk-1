@@ -25,50 +25,60 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/image_apply_success" />
 
-    <!-- 没有历史订单 -->
-    <LinearLayout
-        android:id="@+id/ll_not_orders"
-        style="@style/marginLeftAndRight16"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/shape_white_top16"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            app:srcCompat="@drawable/image_home_empty" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 没有历史订单 -->
+            <LinearLayout
+                android:id="@+id/ll_not_orders"
+                style="@style/marginLeftAndRight16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_white_top16"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="@string/history_not_orders"
-            android:textColor="@color/color_333333"
-            android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="38dp"
+                    app:srcCompat="@drawable/image_home_empty" />
 
-        <TextView
-            android:id="@+id/history_tv_apply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:background="@drawable/shape_apply_bg"
-            android:paddingLeft="56dp"
-            android:paddingTop="12dp"
-            android:paddingRight="56dp"
-            android:paddingBottom="12dp"
-            android:text="@string/history_btn"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/history_not_orders"
+                    android:textColor="@color/color_333333"
+                    android:textSize="14sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+                <TextView
+                    android:id="@+id/history_tv_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:background="@drawable/shape_apply_bg"
+                    android:paddingLeft="56dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="56dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/history_btn"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
