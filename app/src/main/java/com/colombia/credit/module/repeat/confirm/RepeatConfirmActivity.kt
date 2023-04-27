@@ -68,6 +68,9 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
         }
+        mBinding.toolbar.setOnbackListener {
+            finish()
+        }
         setViewModelLoading(mConfirmViewModel)
         setViewModelLoading(mInfoViewModel)
         setViewModelLoading(mUploadViewModel)
@@ -145,7 +148,8 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             R.id.aiv_arrow -> {
                 // 底部list展开或收起
                 mBinding.aivArrow.isEnabled = false
-                mBinding.aivArrow.animate().rotationBy(180f).setDuration(550)
+                val duration = mAdapter.itemCount * 120L
+                mBinding.aivArrow.animate().rotationBy(180f).setDuration(duration)
                     .setListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator?) {
                             mBinding.aivArrow.isEnabled = true
@@ -156,7 +160,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 }
                 val start = if (mBinding.recyclerview.visibility == View.GONE) 0f else 1f
                 val end = if (start == 0f) 1f else 0f
-                AnimtorUtils.startAnima(mBinding.recyclerview, start, end, mRHeight, 550) {
+                AnimtorUtils.startAnima(mBinding.recyclerview, start, end, mRHeight, duration) {
                 }
             }
             R.id.tv_bank_no -> {

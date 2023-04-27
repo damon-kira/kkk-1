@@ -329,4 +329,5 @@
     <string name="gp_title">¡Haz una buena reseña!</string>
     <!-- 最少勾选一个产品 -->
     <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string>
+    <string name="extension_btn">Prórroga</string>
 </resources>
