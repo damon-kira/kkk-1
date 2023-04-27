@@ -122,7 +122,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             if (it.event == HomeEvent.EVENT_LOGOUT) {
                 changePage(false)
                 mViewModel.clearData()
-            } else if (it.event == HomeEvent.EVENT_LOGIN){
+            } else if (it.event == HomeEvent.EVENT_LOGIN) {
                 onPullToRefresh()
             }
         }
@@ -132,7 +132,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.group.ifShow(isShowList)
         mBinding.emptyLayout.llEmpty.ifShow(!isShowList)
         if (isShowList && mAdapter.itemCount > 3) {
-            if (mBinding.etvRepayHint.top > 0) {
+            if (mBinding.etvRepayHint.top > 100) {
                 changeListPadding(mBinding.etvRepayHint.top)
             } else {
                 mBinding.etvRepayHint.post {

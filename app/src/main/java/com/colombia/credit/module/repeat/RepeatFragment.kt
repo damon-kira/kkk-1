@@ -16,6 +16,7 @@ import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.permission.HintDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
@@ -39,6 +40,15 @@ class RepeatFragment : BaseHomeLoanFragment() {
 
     private var mOrderIds: String? = null
 
+    private val mHintDialog by lazy {
+        HintDialog(getSupportContext()).also {
+            it.showClose(true)
+                .setTitleText(getString(R.string.repeat_error_title))
+                .setIcon(R.drawable.ic_error_image)
+                .setBtnText(getString(R.string.kyc_dialog_btn))
+        }
+    }
+
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
@@ -52,7 +62,19 @@ class RepeatFragment : BaseHomeLoanFragment() {
         initRecyclerview(view)
 
         mBinding.repeatTvApply.setBlockingOnClickListener {
+            val leftNum = mHomeViewModel.mRspInfoLiveData.value?.GbiDSBdW ?: 0
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
+            if (leftNum < list.size || leftNum == 0) {
+                mHintDialog.setOnClickListener {
+                    mAdapter.getSelectorItems().forEach {item ->
+                        item.change()
+                    }
+                    mAdapter.notifyDataSetChanged()
+                }.setMessage(getString(R.string.toast_product_app))
+                getBaseActivity()?.addDialog(mHintDialog)
+                return@setBlockingOnClickListener
+            }
+
             Launch.skipRepeatConfirmActivity(getSupportContext(), list.joinToString(","))
         }
 
@@ -75,17 +97,19 @@ class RepeatFragment : BaseHomeLoanFragment() {
         mBinding.repeatRecyclerview.itemAnimator?.changeDuration = 0
         mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                val maxNum = mHomeViewModel.mRspInfoLiveData.value?.A04fSYQdHM ?: 0
+                val info = mHomeViewModel.mRspInfoLiveData.value
+                val maxNum = info?.A04fSYQdHM ?: 0
                 val item = mAdapter.getItemData<RepeatProductInfo>(position)
                 if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
                     if (maxNum > 0) {
-                        toast(getString(R.string.toast_product_up, maxNum.toString()))
-                    } else {
-                        toast(R.string.toast_product_app)
+                        mHintDialog.setMessage(getString(R.string.toast_product_up, maxNum.toString()))
+                            .setOnClickListener {  }
+                        getBaseActivity()?.addDialog(mHintDialog)
                     }
                     return
                 }
-                if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1) {
+                val leftNum = info?.GbiDSBdW ?: 0 // 最大可申请笔数
+                if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0) {
                     toast(R.string.toast_min_product)
                     return
                 }

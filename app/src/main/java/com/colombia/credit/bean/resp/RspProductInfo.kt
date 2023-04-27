@@ -28,6 +28,8 @@ class RspProductInfo{
     val gQ1J: RepeatRepayInfo? = null // 老客户待还
 //    val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
+
+    val GbiDSBdW: Int = 0// 剩余申请可贷笔数
 }
 
 //"handAt":100,//到手金额

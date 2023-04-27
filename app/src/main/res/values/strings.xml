@@ -20,6 +20,8 @@
     <string name="logout_no">No</string>
     <string name="logout_yes">Sí</string>
 
+    <string name="repeat_error_title">Solicitud fallida</string>
+
     <string name="webview_ssl_hint">Validación de certificado SSL fallido</string>
     <string name="copy_success">Se copió el número de cuenta</string>
 
