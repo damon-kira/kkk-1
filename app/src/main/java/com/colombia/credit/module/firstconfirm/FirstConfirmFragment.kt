@@ -5,6 +5,7 @@ import android.view.View
 import com.bigdata.lib.loanPageStayTime
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
+import com.colombia.credit.dialog.UploadDialog
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.maskBank
@@ -21,6 +22,7 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.MainHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -49,6 +51,10 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     private var mProductId: String? = null
     private var mLoanAmount: String? = null// 借款金额
 
+    private val mProcessDialog by lazy {
+        UploadDialog(getSupportContext())
+    }
+
     override fun onPullToRefresh() {
         mHomeViewModel.getHomeInfo()
     }
@@ -56,8 +62,6 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         time = System.currentTimeMillis()
-        setViewModelLoading(mViewModel)
-        setViewModelLoading(mUploadViewModel)
         setCustomListener(mBinding.toolbar)
         initObserver()
         mBinding.rlPeriod2.setBlockingOnClickListener(this)
@@ -76,6 +80,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
             true,
             isFixGroup = true,
             {
+                mProcessDialog.show()
                 mUploadViewModel.checkAndUpload()
             },
             {
@@ -129,9 +134,16 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
         mViewModel.confirmLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                mHomeViewModel.getHomeInfo()
-                Launch.skipApplySuccessActivity(getSupportContext())
-            } else it.ShowErrorMsg(::confirmLoan)
+                mProcessDialog.end()
+                MainHandler.postDelay({
+                    mProcessDialog.dismiss()
+                    mHomeViewModel.getHomeInfo()
+                    Launch.skipApplySuccessActivity(getSupportContext())
+                },260)
+            } else {
+                mProcessDialog.dismiss()
+                it.ShowErrorMsg(::confirmLoan)
+            }
         }
 
         LiveDataBus.getLiveData(ConfirmEvent::class.java).observerNonSticky(viewLifecycleOwner) {

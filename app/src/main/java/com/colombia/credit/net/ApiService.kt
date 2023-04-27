@@ -15,6 +15,7 @@ interface ApiService {
     @Headers("kio8YGhwe6:Rf4hTm8JkN")
     fun getAppUpdate(): Flowable<BaseResponse<AppUpgradeInfo>>
 
+    // 获取客服信息
     @POST("XRmN4gV/3YiUwQ")
     @Headers("kio8YGhwe6:bW41VrzLl3")
     fun getCustom(): Flowable<BaseResponse<RspCustom>>

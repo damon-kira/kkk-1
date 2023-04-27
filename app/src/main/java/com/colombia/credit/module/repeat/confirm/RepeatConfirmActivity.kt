@@ -13,6 +13,7 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspRepeatCalcul
 import com.colombia.credit.databinding.ActivityRepeatConfirmBinding
 import com.colombia.credit.databinding.LayoutRepeatItemProductBinding
+import com.colombia.credit.dialog.UploadDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
@@ -30,6 +31,7 @@ import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.TimerUtil
 import com.util.lib.dp
@@ -59,6 +61,10 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private var mPrdIds = "" // 上一个页面带过来的产品id
     private var mBankNo = ""
 
+    private val mProcessDialog by lazy {
+        UploadDialog(this)
+    }
+
     private var mStartTime = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +77,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mBinding.toolbar.setOnbackListener {
             finish()
         }
-        setViewModelLoading(mConfirmViewModel)
         setViewModelLoading(mInfoViewModel)
-        setViewModelLoading(mUploadViewModel)
         setAdapter()
         mBinding.aivArrow.setBlockingOnClickListener(this)
         mBinding.tvConfirm.setBlockingOnClickListener(this)
@@ -90,10 +94,17 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private fun initObserver() {
         mConfirmViewModel.confirmLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
-                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
-                Launch.skipApplySuccessActivity(this)
-                finish()
-            } else it.ShowErrorMsg(::confirm)
+                mProcessDialog.end()
+                MainHandler.postDelay({
+                    mProcessDialog.dismiss()
+                    LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+                    Launch.skipApplySuccessActivity(this)
+                    finish()
+                }, 260)
+            } else {
+                mProcessDialog.dismiss()
+                it.ShowErrorMsg(::confirm)
+            }
         }
 
         mInfoViewModel.mConfirmInfoLiveData.observerNonSticky(this) {
@@ -182,6 +193,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             true,
             isFixGroup = true,
             {
+                mProcessDialog.show()
                 mUploadViewModel.checkAndUpload()
             },
             {
