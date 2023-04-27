@@ -36,7 +36,10 @@ class ConfirmProductAdapter(items: ArrayList<RspRepeatCalcul.CalculDetail>) :
         )
         holder.setText(R.id.tv_product_name, item.um7clL0I)
         holder.setText(R.id.tv_product_amount, getUnitString(item.kDyJFWE))
-        holder.setText(R.id.tv_product_interest, getUnitString(item.lceAYgef))
+        holder.setText(
+            R.id.tv_product_interest,
+            holder.getContext().getString(R.string.product_interest, getUnitString(item.lceAYgef))
+        )
     }
 
     fun getSelectorList() = run {

@@ -54,6 +54,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         mBinding.group.referencedIds =
             intArrayOf(R.id.recyclerview, R.id.tv_repay, R.id.etv_repay_hint)
         setViewModelLoading(mViewModel)
+        mBinding.emptyLayout.tvEmptyText.setText(R.string.repay_empty)
 
         mBinding.recyclerview.linearLayoutManager()
         mBinding.recyclerview.adapter = mAdapter

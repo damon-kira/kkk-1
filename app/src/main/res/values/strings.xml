@@ -15,6 +15,7 @@
     <string name="selector_s">Elección %s</string>
     <string name="error_hint_blank">&#160;&#160;&#160;</string>
     <string name="invalid_hint">Su cuenta ya ha iniciado sesión en otro dispositivo, inténtelo de nuevo</string>
+    <string name="amount_unit">$&#160;%s</string>
 
     <string name="logout_no">No</string>
     <string name="logout_yes">Sí</string>
@@ -74,7 +75,6 @@
     <string name="total_orders">Número de orden</string>
     <string name="total_order_hint">Pago pendiente</string>
     <string name="orders">%s ordenes</string>
-    <string name="amount_unit">$%s</string>
     <string name="product_tag_risk">Monto alto</string>
     <string name="product_tag_safety">100% Aprobado</string>
 
@@ -215,6 +215,7 @@
     <string name="tab_repay_overdue">Pago Vencido</string>
     <string name="tab_repay_normal">@string/history_status_review</string>
     <string name="tab_repay_btn_hint">Puede pagar varios pedidos al mismo tiempo</string>
+    <string name="repay_empty">Actualmente no hay una orden de préstamo,  vaya y solicite</string>
 
     <string name="loan_amount_text">Importe real recibido</string>
     <string name="repay_amount">Monto Pagado</string>

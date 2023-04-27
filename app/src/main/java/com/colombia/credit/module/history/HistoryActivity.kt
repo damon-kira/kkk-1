@@ -65,7 +65,7 @@ class HistoryActivity : BaseActivity() {
         }
         getInfo()
 
-        mBinding.historyTvApply.setBlockingOnClickListener {
+        mBinding.layoutEmpty.tvApply.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             finish()
         }
@@ -95,10 +95,10 @@ class HistoryActivity : BaseActivity() {
 
     private fun change(isShow: Boolean) {
         if (isShow) {
-            mBinding.llNotOrders.hide()
+            mBinding.layoutEmpty.llEmpty.hide()
             mBinding.recyclerview.show()
         } else {
-            mBinding.llNotOrders.show()
+            mBinding.layoutEmpty.llEmpty.show()
             mBinding.recyclerview.hide()
         }
     }

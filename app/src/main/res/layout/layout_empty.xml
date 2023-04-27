@@ -16,9 +16,11 @@
 
     <TextView
         android:id="@+id/tv_empty_text"
-        android:layout_width="wrap_content"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:gravity="center_horizontal"
         android:text="@string/history_not_orders"
         android:textColor="@color/color_333333"
         android:textSize="14sp" />
