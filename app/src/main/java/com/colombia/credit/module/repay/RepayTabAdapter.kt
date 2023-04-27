@@ -76,7 +76,7 @@ class RepayTabAdapter(
             item.RA9GEePdNs.orEmpty(),
             aivIcon,
             4f,
-            R.drawable.svg_home_logo
+            R.drawable.ic_normal_image
         )
         holder.setText(R.id.tv_name, item.C2O8E6jjzd)
         holder.getView<TextView>(R.id.tv_status).apply {

@@ -21,7 +21,7 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>) :
             item.Gk9MGh.orEmpty(),
             img,
             4.dp(),
-            R.drawable.svg_home_logo
+            R.drawable.ic_normal_image
         )
         holder.setText(R.id.tv_appname, item.S9ig78H)
         holder.setText(

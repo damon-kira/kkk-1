@@ -255,7 +255,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 product.rOVhdGR.orEmpty(),
                 binding.aivIcon,
                 4.dp(),
-                R.drawable.svg_home_logo
+                R.drawable.ic_normal_image
             )
             binding.tvName.text = product.um7clL0I
         }

@@ -39,7 +39,7 @@ class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
         super.onAttachedToWindow()
         mBinding.iilLoan.setRightText(getUnitString(text1))
         mBinding.iilInterest.setRightText(getUnitString(text2))
-        mBinding.iilOverdue.ifShow(!text3.isNullOrEmpty() || text3 != "0")
+        mBinding.iilOverdue.ifShow(!text3.isNullOrEmpty() && text3 != "0")
         mBinding.iilOverdue.setRightText(getUnitString(text3))
         mBinding.iilRepay.setRightText(getUnitString(text4))
     }

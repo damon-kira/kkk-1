@@ -32,7 +32,7 @@ class ConfirmProductAdapter(items: ArrayList<RspRepeatCalcul.CalculDetail>) :
             item.rOVhdGR.orEmpty(),
             iconView,
             4.dp(),
-            R.drawable.svg_home_logo
+            R.drawable.ic_normal_image
         )
         holder.setText(R.id.tv_product_name, item.um7clL0I)
         holder.setText(R.id.tv_product_amount, getUnitString(item.kDyJFWE))
