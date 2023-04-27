@@ -8,6 +8,7 @@
     android:background="@drawable/shape_white_10dp"
     android:orientation="vertical"
     android:paddingLeft="12dp"
+    android:id="@+id/ll_item"
     android:paddingRight="12dp">
 
     <LinearLayout

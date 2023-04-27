@@ -67,6 +67,9 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             val amount = getUnitString(mAdapter.getTotalAmount().toString())
             mBinding.tvRepay.text = getString(R.string.tab_repay_btn, amount)
         }
+        mAdapter.mOnItemClick = {
+            Launch.skipRepayDetailActivity(getSupportContext(), it.bS6qpg4E.orEmpty())
+        }
 
         changePage(false)
         initObserver()

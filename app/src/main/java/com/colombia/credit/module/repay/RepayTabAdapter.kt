@@ -1,6 +1,7 @@
 package com.colombia.credit.module.repay
 
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,12 @@ class RepayTabAdapter(
             val position = recyclerView.getChildLayoutPosition(holder.itemView)
             getItemData<RspRepayOrders.RepayOrderDetail>(position)?.apply {
                 mExtensionListener?.invoke(this)
+            }
+        }
+        holder.getView<LinearLayout>(R.id.ll_item).setBlockingOnClickListener {
+            val position = recyclerView.getChildLayoutPosition(holder.itemView)
+            getItemData<RspRepayOrders.RepayOrderDetail>(position)?.apply {
+                mOnItemClick?.invoke(this)
             }
         }
         return holder
@@ -115,4 +122,6 @@ class RepayTabAdapter(
     var mExtensionListener: ((RspRepayOrders.RepayOrderDetail) -> Unit)? = null
 
     var mSelectListener: (() -> Unit)? = null
+
+    var mOnItemClick: ((RspRepayOrders.RepayOrderDetail) -> Unit)? = null
 }

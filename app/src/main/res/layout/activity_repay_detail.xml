@@ -15,6 +15,7 @@
         android:paddingRight="6dp"
         app:tl_back_text_color="@color/color_333333"
         app:tl_custom_icon="@drawable/ic_custom_gray"
+        app:tl_left_icon="@drawable/svg_left_back_gray"
         app:tl_show_custom_icon="true"
         app:tl_text_gravity="center"
         app:tl_title="@string/repay_detail_title" />

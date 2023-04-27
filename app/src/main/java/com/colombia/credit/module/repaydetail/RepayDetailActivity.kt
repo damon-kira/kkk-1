@@ -50,6 +50,7 @@ class RepayDetailActivity : BaseActivity() {
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
         }
+        mBinding.toolbar.setOnbackListener { finish() }
 
         mBinding.tvApply.setBlockingOnClickListener {
             Launch.skipWebViewActivity(
@@ -67,25 +68,36 @@ class RepayDetailActivity : BaseActivity() {
         mViewModel.detailLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 it.getData()?.let { data ->
+                    changeEnable(true)
                     amount = data.TxksJTU8C
                     mBinding.tvAmount.text = getUnitString(data.TxksJTU8C.orEmpty())
                     mBinding.tvApply.text = getString(
                         R.string.repay_amount_value,
                         getUnitString(data.TxksJTU8C.orEmpty())
                     )
-                    val order = data.KUgC?.get(0) ?: return@observerNonSticky
-                    info = GsonUtil.toJson(order).orEmpty()
-                    loansonId = order.PJpH0.orEmpty()
-                    mBinding.iilBankInfo.setRightText(order.DaNhMLH.orEmpty())
-                    mBinding.iilDateInfo.setRightText(order.ch4x.orEmpty())
-                    mBinding.iilRepayStatus.setRightText(order.wIWdNgC.orEmpty())
-                    if (order.DlYbHlY == "1") {
-                        mBinding.tvExtension.show()
+                    if (data.KUgC?.isNotEmpty() == true){
+                        val order = data.KUgC?.get(0) ?: return@observerNonSticky
+                        info = GsonUtil.toJson(order).orEmpty()
+                        loansonId = order.PJpH0.orEmpty()
+                        mBinding.iilBankInfo.setRightText(order.DaNhMLH.orEmpty())
+                        mBinding.iilDateInfo.setRightText(order.ch4x.orEmpty())
+                        mBinding.iilRepayStatus.setRightText(order.wIWdNgC.orEmpty())
+                        if (order.DlYbHlY == "1") {
+                            mBinding.tvExtension.show()
+                        }
                     }
                 }
-            } else it.ShowErrorMsg(::getDetail)
+            } else {
+                changeEnable(false)
+                it.ShowErrorMsg(::getDetail)
+            }
         }
         getDetail()
+    }
+
+    private fun changeEnable(enable: Boolean){
+        mBinding.tvApply.isEnabled = enable
+        mBinding.tvExtension.isEnabled = enable
     }
 
     private fun getDetail() {

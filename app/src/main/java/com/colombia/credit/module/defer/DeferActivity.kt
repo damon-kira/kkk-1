@@ -70,11 +70,11 @@ open class DeferActivity : BaseActivity() {
         intent?.getStringExtra(EXTRA_INFO)?.let {
             val detail = GsonUtil.fromJsonNew<RspRepayDetail.RepayDetail>(it)
             jine = detail?.dbhmAOVp56.orEmpty()
-            val amount = getUnitString(detail?.dbhmAOVp56.orEmpty())
+            val amount = getUnitString(detail?.EA7nMOa.orEmpty())
             mBinding.tvAmount.text = amount
             mBinding.iilDays.setRightText(getString(R.string.days, detail?.zlftJgf ?: "--"))
             mBinding.iilDate.setRightText(detail?.YXtMfL6nAm.orEmpty())
-            mBinding.iilAmount.setRightText(getUnitString(detail?.EA7nMOa ?: "--"))
+            mBinding.iilAmount.setRightText(getUnitString(detail?.dbhmAOVp56.orEmpty()))
             mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
             orderId = detail?.PJpH0.orEmpty()
         }

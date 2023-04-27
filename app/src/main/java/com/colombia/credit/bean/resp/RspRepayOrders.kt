@@ -12,7 +12,7 @@ class RspRepayOrders {
         var W5KW6: String? = null      //计划id
         var RA9GEePdNs: String? = null //产品log
         var C2O8E6jjzd: String? = null //产品名字
-        var Eff0nA: String? = null            //待还金额
+        var Eff0nA: String? = null     //待还金额
             get() = field?.transform()
         var zbRV6Lg8jO: String? = null //还款日期
         var gzBTFx: String? = null     //是否逾期
