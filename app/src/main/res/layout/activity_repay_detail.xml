@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:iil_left_text="@string/defer_days"
+            app:iil_left_text="@string/apply_status"
             app:iil_left_text_color="@color/color_999999"
             app:iil_line_show="false"
             app:iil_right_text="@string/repay_status"

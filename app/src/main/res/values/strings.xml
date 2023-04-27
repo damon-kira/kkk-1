@@ -330,4 +330,5 @@
     <!-- 最少勾选一个产品 -->
     <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string>
     <string name="extension_btn">Prórroga</string>
+    <string name="apply_status">Estatus de la solicitud</string>
 </resources>

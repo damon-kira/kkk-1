@@ -237,7 +237,11 @@ object SysUtils {
 
     @SuppressLint("HardwareIds")
     fun getAId(context: Context): String {
-        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        return try {
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        } catch (e: Exception) {
+            ""
+        }
     }
 
     fun isDevelop(context: Context) : Int{
