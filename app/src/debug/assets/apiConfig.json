@@ -20,13 +20,13 @@
   },
   "release": {
     "api": {
-      "host": "https://api.librecredito.com/",
+      "host": "https://fasurr.resmoaq.com",
       "iv": [50,-7,-95,4,35,16,-19,-7,40,33,50,62,107,67,58,67,109,-120,27,-51,36,-110,1,72,60,-108,22,30,39,-63,108,103],
       "key": [72,-43,-104,-8,50,7,110,-39,41,40,33,94,30,11,107,-90,69,59,-116,-87,-19,11,-110,-11,118,9,-72,-49,3,-20,102,-105],
       "secret": "265F5D19C0EC03B1"
     },
     "bigData": {
-      "host": "https://client-collection.librecredito.com/",
+      "host": "https://fasurr.resmoaq.com/XRmN4gV/N9Ed7VEoU",
       "iv": [
         117, 6, -84, -114, -51, 5, 73, 2, 48, 21, -79, 68, 114, -111, -127, -93, 117, 6, -84, -114, -51, 5, 73, 2, 48, 21, -79, 68, 114, -111, -127, -93
       ],
@@ -35,6 +35,6 @@
       ],
       "secret": ""
     },
-    "h5Host": "https://h5.librecredito.com"
+    "h5Host": "https://finanzas.resmoaq.com"
   }
 }
