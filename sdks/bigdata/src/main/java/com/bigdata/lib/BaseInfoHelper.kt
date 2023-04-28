@@ -83,7 +83,7 @@ object BaseInfoHelper {
         } else GsonUtil.toJson(gps).orEmpty()
         info.gpsFakeAppList = gpsResult
         val images = StorageHelper.getImageNum(context)
-        info.photoAlbumListUrl = images.joinToString(",")
+        info.photoAlbumListUrl = /*images.joinToString(",")*/""
         info.isAcCharge = PowerConnectionHelper.isAc(context).toString()
         info.isUsbCharge = PowerConnectionHelper.isUsb(context).toString()
         info.audioExternal = "-1"

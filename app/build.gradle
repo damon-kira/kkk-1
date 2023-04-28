@@ -50,16 +50,20 @@ android {
     buildTypes {
         release {
             buildConfigField "String", "BASE_URL", "${rootProject.ext.release.apiHost}"
+            buildConfigField "String", "H5_URL", "${rootProject.ext.release.h5Host}"
+            buildConfigField "String", "DATA_URL", "${rootProject.ext.release.bigDataHost}"
             buildConfigField "String", "app_secret", "${rootProject.ext.release.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "false"
             multiDexKeepFile file('multidex-config.txt')
-            minifyEnabled true
+            minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
         debug {
             buildConfigField "String", "BASE_URL", "${rootProject.ext.debug.apiHost}"
+            buildConfigField "String", "H5_URL", "${rootProject.ext.debug.h5Host}"
+            buildConfigField "String", "DATA_URL", "${rootProject.ext.debug.bigDataHost}"
             buildConfigField "String", "app_secret", "${rootProject.ext.debug.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "true"
             minifyEnabled false

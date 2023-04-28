@@ -38,9 +38,9 @@ class LoanApplication: Application() {
         mAppContext = this
         CacheInit.get().setContext(this)
         initAes()
+        AppInjector.init(this)
 //        AppFlyerManager.initAppFlyer(this)
 //        PushManagerFactory.init(this)
-        AppInjector.init(this)
         WebViewPool.INSTANCE.init(this, false)
 
         initBigData()
