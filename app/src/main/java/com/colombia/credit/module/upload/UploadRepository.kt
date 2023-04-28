@@ -36,7 +36,6 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
                 }
                 try {
                     it.onNext(BaseResponse(code, result, null, throwable))
-                    it.onComplete()
                 } catch (e: Exception) {
                     it.onError(throwable ?: e)
                 }

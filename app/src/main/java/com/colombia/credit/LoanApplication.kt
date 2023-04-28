@@ -52,15 +52,16 @@ class LoanApplication: Application() {
         AesConstant.apiIv = Constant.API_IV
     }
 
-    private fun initBigData(){
-        BigDataManager.get().setNetDataListener(object: NetConfigDataInterface{
+    private fun initBigData() {
+        BigDataManager.get().setNetDataListener(object : NetConfigDataInterface {
             override fun getContext(): Context = getAppContext()
 
             override fun getGaid(): String = GPInfoUtils.getGdid()
 
             override fun isDebug(): Boolean = AppEnv.DEBUG
 
-            override fun isAppFront(): Boolean = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
+            override fun isAppFront(): Boolean =
+                SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
 
             override fun getAppToken(): String = getUserToken()
 
@@ -68,9 +69,16 @@ class LoanApplication: Application() {
 
             override fun addBaseParams(jobj: JsonObject) {
                 // ocrPhotoExif
-                jobj.addProperty("p4yg", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FRONT))
+                jobj.addProperty(
+                    "p4yg",
+                    ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FRONT)
+                )
                 // faceExif
-                jobj.addProperty("Bgp3rnTyWw", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE))
+                jobj.addProperty(
+                    "Bgp3rnTyWw",
+                    ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
+                )
+
             }
         })
     }

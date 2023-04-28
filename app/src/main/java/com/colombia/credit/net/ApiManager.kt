@@ -186,7 +186,9 @@ class ApiManager @Inject constructor() {
     private val mHeaderInterceptor = Interceptor { chain ->
         val original = chain.request()
         val builder = original.newBuilder()
-        NetBaseParamsManager.addHeader(builder)
+        val headers = original.headers()
+        val type = headers.get("temp")
+        NetBaseParamsManager.addHeader(builder, type)
         builder.method(original.method(), original.body())
         chain.proceed(builder.build())
     }
@@ -204,7 +206,7 @@ class ApiManager @Inject constructor() {
     //默认拦截器集合
     private val defaultInterceptor = ArrayList<Interceptor>().apply {
 //        add(BaseDataAddInterceptor())//必传参数拦截器
-//        add(EncryptDecryptInterceptor())//加解密拦截器
+        add(EncryptDecryptInterceptor())//加解密拦截器
         add(mHeaderInterceptor)
         if (logInterceptor != null) {
             add(logInterceptor)
@@ -214,7 +216,7 @@ class ApiManager @Inject constructor() {
     //无需加密拦截器
     private val notEncryptInterceptor = ArrayList<Interceptor>().apply {
 //        add(BaseDataAddInterceptor())
-//        add(DecryptInterceptor())//解密拦截器
+        add(DecryptInterceptor())//解密拦截器
         add(mHeaderInterceptor)
         if (logInterceptor != null) {
             add(logInterceptor)
@@ -240,14 +242,7 @@ class ApiManager @Inject constructor() {
 
     fun createApiService(): ApiService = mApiService
 
-    /** 检查是否有密码的接口设置4s超时 */
-    fun createDownloadApiService(): ApiService = mDownloadService
-
-    /** 检查是否有密码的接口设置4s超时 */
-    fun createCheckApiService(): ApiService = mCheckService
-
-    /** 上传图片45s */
-    fun createApiUploadService(): ApiService = mApiUploadService
+    fun createUploadService() = mApiUploadService
 
     // 大数据相关接口
     fun getDataApiService(): DataApiService = mDataApiService

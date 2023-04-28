@@ -82,7 +82,8 @@ class NetBaseParamsManager {
                 )
                 str2 = localBufferedReader.readLine()// 读取meminfo第一行，系统总内存大小
 
-                arrayOfString = str2.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                arrayOfString =
+                    str2.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 //                for (num in arrayOfString) {
 //                    Log.i(str2, num + "\t")
 //                }
@@ -152,7 +153,10 @@ class NetBaseParamsManager {
         fun getCashNormalBaseParams(jsonObject: JsonObject) {
             val supplier = getExternalParamsSupplier()
             jsonObject.addProperty("os", "android ${Build.VERSION.RELEASE}")
-            jsonObject.addProperty("imei", SysUtils.getDeviceId(supplier.getContext(), supplier.getAdvertisingId()))
+            jsonObject.addProperty(
+                "imei",
+                SysUtils.getDeviceId(supplier.getContext(), supplier.getAdvertisingId())
+            )
             jsonObject.addProperty("imei1", "")
             jsonObject.addProperty("imei2", "")
             addImeiList(jsonObject, false)
@@ -174,7 +178,10 @@ class NetBaseParamsManager {
             jsonObject.addProperty("city", "")
             // 优先google服务  0:google 1:华为
 //            jsonObject.addProperty("channel_fm", PushManagerFactory.getChannel())
-            jsonObject.addProperty("is_use_vpn", if (NetWorkUtils.isVPN(supplier.getContext())) "1" else "0")
+            jsonObject.addProperty(
+                "is_use_vpn",
+                if (NetWorkUtils.isVPN(supplier.getContext())) "1" else "0"
+            )
         }
 
 
@@ -186,12 +193,18 @@ class NetBaseParamsManager {
             jsonObject.addProperty("app_version", supplier.getAppVersionName())
             jsonObject.addProperty("app_version_code", supplier.getAppVersionCode())
 
-            jsonObject.addProperty("noise", getRandomString(Random().nextInt(16) + 16))//随机串,噪音元素 (16-32)位
+            jsonObject.addProperty(
+                "noise",
+                getRandomString(Random().nextInt(16) + 16)
+            )//随机串,噪音元素 (16-32)位
             jsonObject.addProperty("request_time", System.currentTimeMillis().toString())
             jsonObject.addProperty("access_token", supplier.getToken())
             jsonObject.addProperty("ui_version", supplier.getUiVersion())
             jsonObject.addProperty("cid", supplier.getChannelId())
-            jsonObject.addProperty("is_google_service", if (supplier.isGoogleServiceAvailable()) "1" else "0")
+            jsonObject.addProperty(
+                "is_google_service",
+                if (supplier.isGoogleServiceAvailable()) "1" else "0"
+            )
             jsonObject.addProperty("system_language", SysUtils.getLanguage())
             jsonObject.addProperty("platform", "android")
             addThirdSdkIdParams(jsonObject)
@@ -221,8 +234,9 @@ class NetBaseParamsManager {
         }
 
         //添加header信息
-        fun addHeader(builder: Request.Builder) {
+        fun addHeader(builder: Request.Builder, type: String?) {
             val supplier = getExternalParamsSupplier()
+            builder.addHeader("Content-type", type ?: "application/json;charset=utf-8")
             // app版本
             builder.addHeader("vMRdV0dUmj", supplier.getAppVersionCode().toString())// app 版本
             // 设备id
@@ -251,11 +265,20 @@ class NetBaseParamsManager {
             return JsonObject().also {
                 it.addProperty("sms", isPermissionAuth(Manifest.permission.READ_SMS))
                 it.addProperty("contact", isPermissionAuth(Manifest.permission.READ_CONTACTS))
-                it.addProperty("read_phone_state", isPermissionAuth(Manifest.permission.READ_PHONE_STATE))
-                it.addProperty("location", isPermissionAuth(Manifest.permission.ACCESS_FINE_LOCATION))
+                it.addProperty(
+                    "read_phone_state",
+                    isPermissionAuth(Manifest.permission.READ_PHONE_STATE)
+                )
+                it.addProperty(
+                    "location",
+                    isPermissionAuth(Manifest.permission.ACCESS_FINE_LOCATION)
+                )
                 it.addProperty(
                     "calendar",
-                    isPermissionAuth(Manifest.permission.READ_CALENDAR,Manifest.permission.WRITE_CALENDAR)
+                    isPermissionAuth(
+                        Manifest.permission.READ_CALENDAR,
+                        Manifest.permission.WRITE_CALENDAR
+                    )
                 )
             }.toString()
         }
@@ -268,9 +291,12 @@ class NetBaseParamsManager {
             val supplier = getExternalParamsSupplier()
             val context = supplier.getContext()
             val notGrantPermission = permissions.find {
-                PermissionChecker.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(context, it)
+                PermissionChecker.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(
+                    context,
+                    it
+                )
             }
-            return if(notGrantPermission == null) 1 else 0
+            return if (notGrantPermission == null) 1 else 0
         }
     }
 }

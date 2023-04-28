@@ -31,7 +31,9 @@ class LiveDataCall<T>(
             }.doOnNext {
                 if (!it.isSuccess()) {
                     throw HttpResponseException(it.code, it.msg, it.e)
-                }
+                }/* else {
+                    it.parseT(clazz)
+                }*/
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

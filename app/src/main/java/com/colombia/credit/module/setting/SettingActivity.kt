@@ -6,7 +6,6 @@ import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivitySettingBinding
 import com.colombia.credit.dialog.LogoutDialog
 import com.colombia.credit.expand.ShowErrorMsg
-import com.colombia.credit.expand.saveUserToken
 import com.colombia.credit.expand.setLogout
 import com.colombia.credit.expand.toast
 import com.colombia.credit.module.home.HomeEvent

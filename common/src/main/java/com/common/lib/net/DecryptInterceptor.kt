@@ -2,15 +2,11 @@ package com.common.lib.net
 
 import android.util.Log
 import com.project.util.AESNormalUtil
+import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
 import okhttp3.*
-import org.json.JSONObject
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/1 10:13 上午
- */
+
 class DecryptInterceptor : Interceptor {
 
     companion object {
@@ -38,19 +34,22 @@ class DecryptInterceptor : Interceptor {
             logger_i(TAG, "${request.url()}  body = $body")
             var newResponseBody: ResponseBody = it
             try {
-                val jsonObject = JSONObject(body)
-
-                val obj = JSONObject(body)
-                if (obj.has("data")) {
-                    val encryptStr = obj.optString("data")
-                    val decryptStr = if (jsonObject.optString("code").equals("0")) {
-                        AESNormalUtil.mexicoDecrypt(encryptStr)
-                    }else{
-                        " "
-                    }
-                    obj.put("data", decryptStr)
-                    newResponseBody = ResponseBody.create(contentType, obj.toString())
-                }
+//                val jsonObject = JSONObject(body)
+//
+//                val obj = JSONObject(body)
+//                if (obj.has("data")) {
+//                    val encryptStr = obj.optString("data")
+//                    val decryptStr = if (jsonObject.optString("code").equals("0")) {
+//                        AESNormalUtil.mexicoDecrypt(encryptStr)
+//                    }else{
+//                        " "
+//                    }
+//                    obj.put("data", decryptStr)
+//                    newResponseBody = ResponseBody.create(contentType, obj.toString())
+//                }
+                val decrypt = AESNormalUtil.mexicoDecrypt(body, false)
+                logger_d(TAG,"解密后 decrypt = $decrypt")
+                newResponseBody = ResponseBody.create(contentType, decrypt)
                 response = response.newBuilder().body(newResponseBody).build()
 
             } catch (e: Exception) {

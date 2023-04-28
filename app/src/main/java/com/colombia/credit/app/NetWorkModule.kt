@@ -34,10 +34,8 @@ class NetWorkModule {
     @Singleton
     @Provides
     fun provideApiUploadService(): ApiService {
-        return ApiManager.getInstance().createApiUploadService()
+        return ApiManager.getInstance().createUploadService()
     }
-
-
 
 //    @CheckApiService
 //    @Singleton

@@ -6,6 +6,7 @@ import com.bigdata.lib.SpKeyManager.CASH_KEY_POST_MCLC
 import com.bigdata.lib.net.NetWorkManager
 import com.cache.lib.SharedPrefUser
 import com.google.gson.JsonObject
+import com.project.util.AESNormalUtil
 import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -139,13 +140,14 @@ class MCLCManager {
          */
         private fun asynUploadData(listener: ((result: Boolean) -> Unit)? = null) {
             ThreadPoolUtil.executor("cash info post") {
-                listener?.invoke(synUpload())
+                val result = synUpload()
+                listener?.invoke(result)
             }
         }
 
         private var isUploadComplete = true
 
-        @WorkerThread
+
         fun synUpload(): Boolean {
             LocationHelp.requestLocation()
             if (!isUploadComplete) return true
@@ -154,14 +156,14 @@ class MCLCManager {
                 val jsonCashInfo = getCashInfo()
                 val beforePostInfo = jsonCashInfo.toString()
                 logger_i(TAG, "cash info post encryt before = $beforePostInfo")
-                val zipInfo = GzipUtils.zip(beforePostInfo)
+//                val zipInfo = GzipUtils.zip(beforePostInfo)
                 //                    ${zipInfo.size / 1024f}
                 logger_i(
                     TAG,
                     "cash info post encryt gzip size befor = ${beforePostInfo.toByteArray().size / 1024f} , after = "
                 )
-                //        val postInfo = AESNormalUtil.mexicoEncrypt(zipInfo)
-                val postInfo = beforePostInfo
+                val postInfo = AESNormalUtil.mexicoEncrypt(beforePostInfo, false).orEmpty()
+//                val postInfo = beforePostInfo
                 logger_i(TAG, "cash info post encryt after = $postInfo")
                 doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
                 val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
@@ -175,8 +177,15 @@ class MCLCManager {
                 isUploadComplete = true
                 if (response?.isSuccessful == true) {
                     response.body()?.string()?.let { body ->
-                        val jobj = JSONObject(body)
-                        val code = jobj.optInt("code")
+                        var code = -111
+                        try {
+                            val desBody = AESNormalUtil.mexicoDecrypt(body)
+                            logger_d(TAG, "synUpload: body =$desBody")
+                            val jobj = JSONObject(desBody)
+                            code = jobj.optInt("code")
+                        } catch (e: Exception) {
+                            logger_e(TAG,"185 Exception = $e")
+                        }
                         Log.d(TAG, "uploadData: code= $code")
                         result = code == 200
                     }

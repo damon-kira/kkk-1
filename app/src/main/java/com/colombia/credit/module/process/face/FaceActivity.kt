@@ -150,6 +150,11 @@ class FaceActivity : BaseProcessActivity() {
         Launch.skipFaceFailedActivity(this)
     }
 
+    override fun uploadSuccess() {
+        super.uploadSuccess()
+        finish()
+    }
+
 
     override fun checkCommitInfo(): Boolean {
         return false

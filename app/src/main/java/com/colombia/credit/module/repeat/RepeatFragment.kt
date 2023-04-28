@@ -66,7 +66,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
             if (leftNum < list.size || leftNum == 0) {
                 mHintDialog.setOnClickListener {
-                    mAdapter.getSelectorItems().forEach {item ->
+                    mAdapter.getSelectorItems().forEach { item ->
                         item.change()
                     }
                     mAdapter.notifyDataSetChanged()
@@ -103,7 +103,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
                 if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
                     if (maxNum > 0) {
                         mHintDialog.setMessage(getString(R.string.toast_product_up, maxNum.toString()))
-                            .setOnClickListener {  }
+                            .setOnClickListener { }
                         getBaseActivity()?.addDialog(mHintDialog)
                     }
                     return

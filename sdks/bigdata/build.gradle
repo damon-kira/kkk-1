@@ -31,8 +31,9 @@ dependencies {
     implementation rootProject.ext.android.appcompat
 
     implementation project(path: ":sdks:util")
-    implementation project(path: ":sdks:aes")
+//    implementation project(path: ":sdks:aes")
     implementation project(path: ":sdks:cache")
+    implementation rootProject.ext.other.aes
 
     implementation rootProject.ext.retrofit.gson
     implementation rootProject.ext.retrofit.logging_interceptor

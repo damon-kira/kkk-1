@@ -36,7 +36,7 @@ class EncryptDecryptInterceptor : Interceptor {
         //post 请求加密处理
         if (method == "POST") {
             request = buildEncryptRequest(request)
-        } else if(method == "GET") {
+        } else if (method == "GET") {
             request = buildEncryptRequestGet(request)
         }
 
@@ -61,7 +61,8 @@ class EncryptDecryptInterceptor : Interceptor {
             val datas = url.substring(startIndex).split("=")
             if (datas.size > 1) {
                 val reqBody = datas[1]
-                reqDataNew = "data=${URLEncoder.encode( handle(getURLDecoderString(reqBody).orEmpty()))}"
+                reqDataNew =
+                    "data=${URLEncoder.encode(handle(getURLDecoderString(reqBody).orEmpty()))}"
             }
             val newUrl = "$realUrl${reqDataNew.orEmpty()}"
             request = request.newBuilder().url(newUrl).build()
@@ -92,14 +93,21 @@ class EncryptDecryptInterceptor : Interceptor {
             }
         }
         val reqData: JsonObject
-        val encryptData: String?
         try {
             //请求参数转换为JsonObject
-            val needEncryptData = getURLDecoderString( requestData )?.substring("data=".length)
-            reqData = if (needEncryptData.isNullOrEmpty()) JsonObject() else GsonUtil.toJsonObject(needEncryptData) ?: JsonObject()
-            encryptData = "data=${URLEncoder.encode(handle(reqData.toString()))}"
+//            val needEncryptData = getURLDecoderString( requestData )?.substring("data=".length)
+            reqData = if (requestData.isNullOrEmpty()) JsonObject() else GsonUtil.toJsonObject(requestData) ?: JsonObject()
+            val signature = SignatureManager.mexicoSign(reqData)
+            reqData.addProperty("signature", signature)
+            requestData = reqData.toString()
+            logger_e(TAG, "加密前 requestData=$requestData")
+//            encryptData = "data=${URLEncoder.encode(handle(reqData.toString()))}"
+            val encryptData = if (requestData.isNotEmpty()) {
+                handle(requestData)
+            } else ""
+            logger_d(TAG, "加密后 request data = $encryptData")
             //构建新的请求体
-            val newRequestBody = encryptData.let { RequestBody.create(contentType, it) }
+            val newRequestBody = RequestBody.create(contentType, encryptData)
             //构建新的requestBuilder
             val newRequestBuilder = request.newBuilder()
             //根据请求方式构建相应的请求
@@ -118,22 +126,25 @@ class EncryptDecryptInterceptor : Interceptor {
             val charset = contentType?.charset(utf8) ?: utf8
             val source = it.source().apply { request(Long.MAX_VALUE) }
             val body = source.buffer().clone().readString(charset)
-            logger_i(TAG, "${request.url()}  body = $body")
+            logger_i(TAG, "${request.url()}  解密前 body = $body")
             var newResponseBody: ResponseBody = it
             try {
-                val jsonObject = JSONObject(body)
-
-                val obj = JSONObject(body)
-                if (obj.has("data")) {
-                    val encryptStr = obj.optString("data")
-                    val decryptStr = if (jsonObject.optString("code").equals("0")) {
-                        AESNormalUtil.mexicoDecrypt(encryptStr)
-                    }else{
-                        " "
-                    }
-                    obj.put("data", decryptStr)
-                    newResponseBody = ResponseBody.create(contentType, obj.toString())
-                }
+//                val jsonObject = JSONObject(body)
+//
+//                val obj = JSONObject(body)
+//                if (obj.has("data")) {
+//                    val encryptStr = obj.optString("data")
+//                    val decryptStr = if (jsonObject.optString("code").equals("0")) {
+//                        AESNormalUtil.mexicoDecrypt(encryptStr)
+//                    }else{
+//                        " "
+//                    }
+//                    obj.put("data", decryptStr)
+//                    newResponseBody = ResponseBody.create(contentType, obj.toString())
+//                }
+                val decrypt = AESNormalUtil.mexicoDecrypt(body, false).orEmpty()
+                logger_d(TAG, "解密后 body = $decrypt")
+                newResponseBody = ResponseBody.create(contentType, JSONObject(decrypt).toString())
                 response = response.newBuilder().body(newResponseBody).build()
 
             } catch (e: Exception) {
@@ -146,7 +157,7 @@ class EncryptDecryptInterceptor : Interceptor {
     }
 
 
-    private fun handle(data: String): String? {
+    private fun handle(data: String): String {
         logger_i(TAG, " 需加密的参数 $data")
         return AESNormalUtil.mexicoEncrypt(data, false).orEmpty()
     }

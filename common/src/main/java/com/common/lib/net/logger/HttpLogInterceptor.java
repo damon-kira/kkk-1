@@ -284,13 +284,14 @@ public final class HttpLogInterceptor implements Interceptor {
     private String decryptJsonData(String content) {
         try {
             if (content.isEmpty()) return "";
-            JSONObject jsonObject = new JSONObject(content);
-            String dataStr = jsonObject.optString("data");
+//            JSONObject jsonObject = new JSONObject(content);
+//            String dataStr = jsonObject.optString("data");
+            String dataStr = content;
             if (!TextUtils.isEmpty(dataStr)) {
-                String d = AESNormalUtil.mexicoDecrypt(dataStr, true);
+                String d = AESNormalUtil.mexicoDecrypt(dataStr, false);
                 return d;
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return content;

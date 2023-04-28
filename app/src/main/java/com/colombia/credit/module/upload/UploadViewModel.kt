@@ -50,7 +50,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         resultLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess() && it.getData()?.isNew() == true) {
                 hideLoading()
-                resultLiveData.postValue(BaseResponse(ResponseCode.SUCCESS_CODE, true, null))
+                resultLiveData.postValue(BaseResponse<Boolean>(ResponseCode.SUCCESS_CODE, true, null))
             } else {
                 uploadInfo(ReqKycInfo())
             }

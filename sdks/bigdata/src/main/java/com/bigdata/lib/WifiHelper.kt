@@ -2,9 +2,6 @@ package com.bigdata.lib
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.session.MediaSessionManager.RemoteUserInfo
-import android.net.ConnectivityManager
-import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -14,7 +11,7 @@ object WifiHelper {
 
     fun getWifiInfo(context: Context): String {
         val wm = getWifiManager(context)
-        val connectionInfo = wm.connectionInfo
+//        val connectionInfo = wm.connectionInfo
         val scanResults = wm.scanResults
         val array = JsonArray()
         var jobj: JsonObject

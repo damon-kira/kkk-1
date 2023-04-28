@@ -70,6 +70,7 @@ internal object NetWorkManager {
             builder.addHeader("pg77Foy4PL", listener.getGaid())
             builder.addHeader("wCxyJuAwkK", listener.getAppToken())// token
             builder.addHeader("kio8YGhwe6", "Xs8jKf5LmN")// 固定值
+            builder.addHeader("Content-type","application/json;charset=utf-8")
         }
         builder.method(original.method(), original.body())
         chain.proceed(builder.build())
