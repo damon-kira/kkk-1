@@ -40,8 +40,6 @@ fun jumpProcess(context: Context, type: Int) {
     }
 }
 
-var mFirstPageLoanAmount = ""
-
 fun isShowBackDialog() = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_SHOW_BACK_DIALOG, true)
 
 fun saveShowBackDialog(isShow: Boolean) {

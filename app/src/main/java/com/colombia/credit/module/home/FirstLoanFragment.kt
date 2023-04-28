@@ -6,7 +6,6 @@ import com.colombia.credit.databinding.FragmentHomeLoanBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.jumpProcess
-import com.colombia.credit.expand.mFirstPageLoanAmount
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -49,7 +48,6 @@ class FirstLoanFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.loanTvApply.setBlockingOnClickListener {
-            mFirstPageLoanAmount = mHomeViewModel.mRspInfoLiveData.value?.yqGhrjOF2.orEmpty()
             getProces()
         }
     }

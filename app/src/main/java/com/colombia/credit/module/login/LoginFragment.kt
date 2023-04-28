@@ -86,7 +86,6 @@ class LoginFragment : BaseLoginFragment() {
         mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
                 if (isNewUser) {
-                    mFirstPageLoanAmount = "888888"
                     jumpProcess(getSupportContext(), STEP1)
                 }
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))

@@ -34,10 +34,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:gravity="center_horizontal"
+            android:text="@string/amount_88888"
             android:textColor="@color/color_8f30d8"
             android:textSize="30sp"
-            android:textStyle="bold"
-            tools:text="$ 50.000" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/retention_tv_cancel"

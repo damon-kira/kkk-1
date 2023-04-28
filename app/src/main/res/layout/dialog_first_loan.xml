@@ -31,7 +31,7 @@
             android:layout_marginTop="6dp"
             android:textColor="@color/color_8f30d8"
             android:textSize="30sp"
-            android:text="$888.888"
+            android:text="@string/amount_88888"
             android:textStyle="bold" />
 
         <TextView
