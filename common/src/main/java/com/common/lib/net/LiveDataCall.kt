@@ -30,7 +30,7 @@ class LiveDataCall<T>(
                 flowable()
             }.doOnNext {
                 if (!it.isSuccess()) {
-                    throw HttpResponseException(it.code, it.msg)
+                    throw HttpResponseException(it.code, it.msg, it.e)
                 }
             }
             .subscribeOn(Schedulers.io())

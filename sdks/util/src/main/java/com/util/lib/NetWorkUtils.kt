@@ -186,16 +186,24 @@ object NetWorkUtils {
 
     @SuppressLint("MissingPermission", "HardwareIds")
     fun getIMSI(context: Context): String? {
-        val tl = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        return tl.subscriberId
+        return try {
+            val tl = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            tl.subscriberId
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun getOperator(context: Context): String? {
-        val tl = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        return tl.networkOperatorName
+        return try {
+            val tl = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            tl.networkOperatorName
+        } catch (e: Exception) {
+            null
+        }
     }
 
-    fun getMnc(context: Context): String? {
+    fun getMnc(context: Context): String {
         val tl = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         val str = tl.networkOperator
         return if (str != null && !str.isEmpty()) {

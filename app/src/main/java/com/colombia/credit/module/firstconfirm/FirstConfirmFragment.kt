@@ -157,7 +157,12 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         }
 
         mUploadViewModel.resultLiveData.observerNonSticky(viewLifecycleOwner) {
-            confirmLoan()
+            if (it.isSuccess()) {
+                confirmLoan()
+            } else {
+                mProcessDialog.dismiss()
+                it.ShowErrorMsg(::reqPermission)
+            }
         }
     }
 

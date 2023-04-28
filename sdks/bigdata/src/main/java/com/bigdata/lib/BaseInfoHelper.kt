@@ -17,9 +17,9 @@ object BaseInfoHelper {
     @SuppressLint("MissingPermission")
     fun getBaseInfo(context: Context): JsonObject {
         val info = BaseInfo()
-        info.isSwitchPages = isSwitchPage
-        info.readPrivacyAgreementTime = readPrivacyTime
-        info.readPrivacyAgreementTimes = readPrivacyCount
+        info.isSwitchPages = isSwitchPage.toString()
+        info.readPrivacyAgreementTime = readPrivacyTime.toString()
+        info.readPrivacyAgreementTimes = readPrivacyCount.toString()
         info.registWifi = registWifi
         info.registIp = registIP
         info.faceCheckWifi = faceWifi
@@ -28,12 +28,12 @@ object BaseInfoHelper {
         info.bootDate =
             ((System.currentTimeMillis() - SystemClock.elapsedRealtime()) / 1000).toString()
         info.bootTime = (SystemClock.elapsedRealtime() / 1000).toString()
-        info.batteryMax = BatteryManager.getMaxBattery()
-        info.batteryPower = BatteryManager.getLevelBattery()
-        info.isRoot = if (RootUtil.isRoot()) 1 else 0
+        info.batteryMax = BatteryManager.getMaxBattery().toString()
+        info.batteryPower = BatteryManager.getLevelBattery().toString()
+        info.isRoot = if (RootUtil.isRoot()) "1" else "0"
         info.systemVersion = Build.VERSION.SDK_INT.toString()
-        info.screenRateLong = DisplayUtils.getRealScreenHeight(context)
-        info.screenRateWidth = DisplayUtils.getRealScreenWidth(context)
+        info.screenRateLong = DisplayUtils.getRealScreenHeight(context).toString()
+        info.screenRateWidth = DisplayUtils.getRealScreenWidth(context).toString()
 //        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
 //        info.faceCheckExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
         val imeis = SysUtils.getAllImei(context)
@@ -60,12 +60,12 @@ object BaseInfoHelper {
         info.storageAvailableSize = AppMemoryManager.getDeviceAvailableMemory(context)
         info.sdCardTotalSize = AppMemoryManager.getSdTotalSize()
         info.sdCardAvailableSize = AppMemoryManager.getSdAvaliSize()
-//        info.usageTimeBeforeOrder
-//        info.firstUseAndRequestIntervalTime
-        info.backgroundRecoveryTimes = bgRecoverCount
-        info.loginAccountEnterTime = loginTime
-        info.chargingStatus = if (PowerConnectionHelper.isCharging(context)) 1 else 0
-        info.simState = DevicesHelper.getSimState(context)
+        info.usageTimeBeforeOrder = "0"
+        info.firstUseAndRequestIntervalTime = "0"
+        info.backgroundRecoveryTimes = bgRecoverCount.toString()
+        info.loginAccountEnterTime = loginTime.toString()
+        info.chargingStatus = if (PowerConnectionHelper.isCharging(context)) "1" else "0"
+        info.simState = DevicesHelper.getSimState(context).toString()
         info.timeZone = TimeZone.getDefault().id
         info.vpn = if (NetWorkUtils.isVPN(context)) "0" else "1"
         info.phoneLanguage = SysUtils.getLanguage()
@@ -77,20 +77,24 @@ object BaseInfoHelper {
         info.operators = NetWorkUtils.getOperator(context)
         info.loanPageStayTime = loanPageStayTime
         info.wifiList = WifiHelper.getWifiInfo(context)
-        info.gpsFakeAppList = GsonUtil.toJson(PackageUtil.getGpsMockApp(context))
+        val gps = PackageUtil.getGpsMockApp(context)
+        val gpsResult = if (gps.size() == 0) {
+            ""
+        } else GsonUtil.toJson(gps).orEmpty()
+        info.gpsFakeAppList = gpsResult
         val images = StorageHelper.getImageNum(context)
         info.photoAlbumListUrl = images.joinToString(",")
-        info.isAcCharge = PowerConnectionHelper.isAc(context)
-        info.isUsbCharge = PowerConnectionHelper.isUsb(context)
-        info.audioExternal = -1
-        info.audioInternal = -1
-        info.downloadFiles = StorageHelper.getDownFileNum()
+        info.isAcCharge = PowerConnectionHelper.isAc(context).toString()
+        info.isUsbCharge = PowerConnectionHelper.isUsb(context).toString()
+        info.audioExternal = "-1"
+        info.audioInternal = "-1"
+        info.downloadFiles = StorageHelper.getDownFileNum().toString()
 
-        info.imagesExternal = images.size
-        info.imagesInternal = -1
-        info.isUsingProxyport = NetWorkUtils.isProxy()
-        info.batteryMax = BatteryManager.getMaxBattery()
-        info.cpuNum = Runtime.getRuntime().availableProcessors()
+        info.imagesExternal = images.size.toString()
+        info.imagesInternal = "-1"
+        info.isUsingProxyport = NetWorkUtils.isProxy().toString()
+        info.batteryMax = BatteryManager.getMaxBattery().toString()
+        info.cpuNum = Runtime.getRuntime().availableProcessors().toString()
         info.wifiMac = WifiHelper.getMac(context)
         info.wifiSsid = WifiHelper.getSSid(context)
         info.dbm = "2dbm"

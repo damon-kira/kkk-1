@@ -132,7 +132,12 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             }
         }
         mUploadViewModel.resultLiveData.observerNonSticky(this) {
-            confirm()
+            if(it.isSuccess()) {
+                confirm()
+            } else {
+                mProcessDialog.dismiss()
+                it.ShowErrorMsg(::reqPermission)
+            }
         }
     }
 

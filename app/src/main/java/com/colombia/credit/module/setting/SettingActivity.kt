@@ -30,6 +30,7 @@ class SettingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setViewModelLoading(mViewModel)
         setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
         mBinding.toolbar.setOnbackListener {

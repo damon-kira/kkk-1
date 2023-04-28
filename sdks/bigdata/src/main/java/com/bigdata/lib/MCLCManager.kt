@@ -1,15 +1,14 @@
 package com.bigdata.lib
 
-import android.os.Build
 import android.util.Log
 import androidx.annotation.WorkerThread
 import com.bigdata.lib.SpKeyManager.CASH_KEY_POST_MCLC
-import com.bigdata.lib.net.BaseParamsManager
 import com.bigdata.lib.net.NetWorkManager
 import com.cache.lib.SharedPrefUser
 import com.google.gson.JsonObject
 import com.util.lib.*
 import com.util.lib.log.logger_d
+import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 import org.json.JSONObject
 import kotlin.math.abs
@@ -115,9 +114,13 @@ class MCLCManager {
             try {
                 // 埋点数据
                 val jsonBase = BaseInfoHelper.getBaseInfo(ctx)
+                jsonBase.entrySet().forEach {
+                    jsonBase.addProperty(it.key, it.value.asString)
+                }
                 jsonObject.add("FQhZcGE67l", jsonBase)
                 logger_d(TAG, "mclc base = $jsonBase")
             } catch (e: Exception) {
+                logger_e(TAG, "exception=$e")
             }
             return jsonObject
         }
@@ -163,10 +166,14 @@ class MCLCManager {
                 doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
                 val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
                     ?: return false
-                val response = NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
+                val response = try {
+                    NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
+                } catch (e: Exception) {
+                    null
+                }
                 var result = false
                 isUploadComplete = true
-                if (response.isSuccessful) {
+                if (response?.isSuccessful == true) {
                     response.body()?.string()?.let { body ->
                         val jobj = JSONObject(body)
                         val code = jobj.optInt("code")

@@ -24,6 +24,9 @@ object WifiHelper {
             jobj.addProperty("ip", "")
             array.add(jobj)
         }
+        if (array.size() == 0) {
+            return  ""
+        }
         return GsonUtil.toJson(array).orEmpty()
     }
 

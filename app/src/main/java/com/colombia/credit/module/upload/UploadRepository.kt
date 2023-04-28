@@ -14,17 +14,32 @@ import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
+import com.util.lib.NetWorkUtils
 import io.reactivex.Flowable
+import java.net.ConnectException
 import javax.inject.Inject
 
-class UploadRepository @Inject constructor(private val dataApiService: DataApiService) : BaseRepository() {
+class UploadRepository @Inject constructor(private val dataApiService: DataApiService) :
+    BaseRepository() {
 
     fun uploadInfo() =
         ApiServiceLiveDataProxy.request(Boolean::class.java) {
             Flowable.fromPublisher {
                 val result = MCLCManager.synUpload()
-                it.onNext(BaseResponse(ResponseCode.SUCCESS_CODE, result, null))
-                it.onComplete()
+                var code = ResponseCode.SUCCESS_CODE
+                var throwable: Throwable? = null
+                if (!result) {
+                    code = ResponseCode.OTHER_ERROR_CODE
+                    if (!NetWorkUtils.isNetConnected(getAppContext())) {
+                        throwable = ConnectException("connection exception")
+                    }
+                }
+                try {
+                    it.onNext(BaseResponse(code, result, null, throwable))
+                    it.onComplete()
+                } catch (e: Exception) {
+                    it.onError(throwable ?: e)
+                }
             }
         }
 
@@ -32,14 +47,14 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
         dataApiService.checkData()
     }
 
-    fun uploadsms()= ApiServiceLiveDataProxy.request(RspResult::class.java) {
+    fun uploadsms() = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val sms = SmsHelper.getMessage(getAppContext())
         val jobj = JsonObject()
         jobj.addProperty("MGTnhn", GsonUtil.toJson(sms).orEmpty())
         dataApiService.uploadSms(createRequestBody(jobj.toString()))
     }
 
-    fun uploadApp()= ApiServiceLiveDataProxy.request(RspResult::class.java) {
+    fun uploadApp() = ApiServiceLiveDataProxy.request(RspResult::class.java) {
         val list = DevicesAppHelper.getAppList()
         val jobj = JsonObject()
         jobj.addProperty("bPp7hQmh", GsonUtil.toJson(list))

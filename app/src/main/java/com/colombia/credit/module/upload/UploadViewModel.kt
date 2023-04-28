@@ -3,11 +3,12 @@ package com.colombia.credit.module.upload
 import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
-import com.colombia.credit.bean.resp.RspResult
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
 import com.colombia.credit.permission.SmsPermission
 import com.common.lib.livedata.observerNonStickyForever
+import com.common.lib.net.ResponseCode
+import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
 
 class UploadViewModel @Inject constructor(private val repository: UploadRepository) :
@@ -20,7 +21,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         const val TYPE_CON = 0x13
     }
 
-    val resultLiveData = generatorLiveData<RspResult>()
+    val resultLiveData = generatorLiveData<BaseResponse<Boolean>>()
 
     val checkLiveData = generatorLiveData<Boolean>()
 
@@ -28,7 +29,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         resultLiveData.addSourceLiveData(repository.uploadInfo()) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
-            resultLiveData.postValue(RspResult())
+            resultLiveData.postValue(it)
         }
     }
 
@@ -49,7 +50,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         resultLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess() && it.getData()?.isNew() == true) {
                 hideLoading()
-                resultLiveData.postValue(RspResult())
+                resultLiveData.postValue(BaseResponse(ResponseCode.SUCCESS_CODE, true, null))
             } else {
                 uploadInfo(ReqKycInfo())
             }
