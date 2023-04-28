@@ -37,13 +37,19 @@ class LoanApplication: Application() {
         super.onCreate()
         mAppContext = this
         CacheInit.get().setContext(this)
+        initAes()
+//        AppFlyerManager.initAppFlyer(this)
+//        PushManagerFactory.init(this)
         AppInjector.init(this)
         WebViewPool.INSTANCE.init(this, false)
+
+        initBigData()
+    }
+
+    private fun initAes() {
         AesConstant.AES_SECRET = Constant.API_SECRET
         AesConstant.apiKey = Constant.API_KEY
         AesConstant.apiIv = Constant.API_IV
-
-        initBigData()
     }
 
     private fun initBigData(){

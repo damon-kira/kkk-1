@@ -10,7 +10,7 @@ object AESMCLCUtil {
      * app数据抓取加密（短信，通话记录，通讯录）
      */
     @JvmStatic
-    fun encryptMessageCallLogContact(src: String): String? {
+    fun encrypt(src: String): String? {
         return AESUtil.mexicoEncrypt(src, AesConstant.bigKey, AesConstant.bigIv)
     }
 
@@ -18,7 +18,7 @@ object AESMCLCUtil {
      * app数据抓取加密（短信，通话记录，通讯录）
      */
     @JvmStatic
-    fun encryptMessageCallLogContact(src: ByteArray): String? {
+    fun encrypt(src: ByteArray): String? {
         return AESUtil.mexicoEncrypt(src, AesConstant.bigKey, AesConstant.bigIv)
     }
 
@@ -26,7 +26,7 @@ object AESMCLCUtil {
      * app数据抓取解密（短信，通话记录，通讯录）
      */
     @JvmStatic
-    fun decryptMessageCallLogContact(src: String): String? {
+    fun decrypt(src: String): String? {
         return AESUtil.mexicoDecrypt(src,  AesConstant.bigKey, AesConstant.bigIv)
     }
 }

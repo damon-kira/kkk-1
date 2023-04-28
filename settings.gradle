@@ -39,7 +39,7 @@ if (isModule.toBoolean()) {
     include ':sdks:util'
     include ':sdks:devoptions'
     include ':sdks:devoptions_op'
-    include 'sdks:location'
+    include ':sdks:location'
     include ':sdks:cache'
     include ':sdks:aes'
 }

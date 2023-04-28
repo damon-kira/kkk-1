@@ -11,7 +11,7 @@ object AESNormalUtil {
      * cash loan 通用加密
      */
     @JvmStatic
-    fun mexicoEncrypt(src: String, needUrlEncoder: Boolean = true): String? {
+    fun encrypt(src: String, needUrlEncoder: Boolean = true): String? {
         return AESUtil.mexicoEncrypt(
             src, AesConstant.apiKey, AesConstant.apiIv,
             needUrlEncoder
@@ -22,7 +22,7 @@ object AESNormalUtil {
      * app数据抓取加密（短信，通话记录，通讯录）
      */
     @JvmStatic
-    fun mexicoEncrypt(src: ByteArray, needUrlEncoder: Boolean = true): String? {
+    fun encrypt(src: ByteArray, needUrlEncoder: Boolean = true): String? {
         return AESUtil.mexicoEncrypt(src, AesConstant.bigKey, AesConstant.bigIv, needUrlEncoder)
     }
 
@@ -30,7 +30,7 @@ object AESNormalUtil {
      * cash loan 通用解密
      */
     @JvmStatic
-    fun mexicoDecrypt(src: String, needUrlDecoder: Boolean = true): String? {
+    fun decrypt(src: String, needUrlDecoder: Boolean = true): String? {
         return AESUtil.mexicoDecrypt(
             src,
             AesConstant.apiKey, AesConstant.apiIv,
