@@ -12,10 +12,7 @@ import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 
-/**
- * Created by weishl on 2020/12/31
- *
- */
+// 联系人获取
 object ContactsHelper {
 
     private const val TAG = "debug_ContactHelper"
@@ -76,9 +73,9 @@ object ContactsHelper {
                     info = ContactInfo()
                     //联系人姓名
                     info.daQgH = cursor.getString(0).orEmpty()
-                    if (firstNameIndex != -1) {
-                        info.cr8c7xX = cursor.getString(firstNameIndex)
-                    }
+//                    if (firstNameIndex != -1) {
+//                        info.cr8c7xX = cursor.getString(firstNameIndex)
+//                    }
                     if (lastNameIndex != -1) {
                         info.UpokGx = cursor.getString(lastNameIndex)
                     }
@@ -140,9 +137,9 @@ object ContactsHelper {
                         cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME)
                     val lastNameIndex =
                         cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME)
-                    if (firstNameIndex != -1) {
-                        info.cr8c7xX = cursor.getString(firstNameIndex)
-                    }
+//                    if (firstNameIndex != -1) {
+//                        info.cr8c7xX = cursor.getString(firstNameIndex)
+//                    }
                     if (lastNameIndex != -1) {
                         info.UpokGx = cursor.getString(lastNameIndex)
                     }

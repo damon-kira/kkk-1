@@ -2,7 +2,6 @@ package com.common.lib.base
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.lifecycle.Observer
 import com.common.lib.BuildConfig
 import com.common.lib.dialog.*
@@ -71,6 +70,10 @@ open class BaseActivity : InjectorActivity(), ILoading, IDialogTask, Injectable 
         hideLoading()
     }
 
+    override fun onDestroy() {
+        mLoadingDialog = null
+        super.onDestroy()
+    }
 
     protected fun setViewModelLoading(viewModel: BaseViewModel) {
         viewModel.loading.observe(this, Observer {
