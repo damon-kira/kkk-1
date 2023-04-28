@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="4dp"
-            android:text="@string/repay_extension"
+            android:text="@string/extension_btn"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:visibility="gone"

@@ -294,7 +294,7 @@
     <string name="history_status_failed">Fallar</string><!-- 失效 -->
 
     <string name="history_btn_failure">Solicitar</string><!-- 订单失效 -->
-    <string name="history_repay_date">Día de Pago</string>
+    <string name="history_repay_date">Fecha de Pago</string>
     <string name="history_refused_text">Su pedido ha sido rechazado, intente nuevamente después del %s</string>
     <string name="history_failure">Su pedido ha caducado, solicite un nuevo préstamo</string>
     <string name="history_review_date">Fecha de llegada estimada</string>
@@ -309,7 +309,6 @@
     <string name="repay_detail_hint">monto de reembolso</string>
     <string name="detail_repay_date">fecha de vencimiento</string>
     <string name="repay_status">Pago en Proceso</string>
-    <string name="repay_extension">Dese la vuelta</string>
     <string name="detail_title">Detalles de la cantidad de reembolso</string>
     <string name="dialog_loan_amount_text">Monto Recibido</string>
     <string name="overdue_text">Comisión por Pago Tardío</string>

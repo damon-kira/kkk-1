@@ -11,6 +11,7 @@ import com.colombia.credit.bean.resp.RspLoginInfo
 import com.colombia.credit.bean.resp.RspSmsCode
 import com.colombia.credit.expand.saveMobile
 import com.colombia.credit.expand.saveUserInfo
+import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
@@ -53,6 +54,9 @@ class LoginViewModel @Inject constructor(
                 saveMobile(mobile)
                 it.getData()?.let { data ->
                     saveUserInfo(data)
+                    if (data.rSXY6ttC3w == "1") {
+                        GPInfoUtils.saveTag(GPInfoUtils.TAG1)
+                    }
                 }
             }
             loginLiveData.postValue(it)

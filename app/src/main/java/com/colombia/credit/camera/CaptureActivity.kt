@@ -2,12 +2,10 @@ package com.colombia.credit.camera
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
-import android.content.res.Resources
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.exifinterface.media.ExifInterface
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
@@ -15,13 +13,13 @@ import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityCaptureBinding
 import com.colombia.credit.util.ImageInfoUtil
+import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class CaptureActivity : BaseActivity() {
@@ -63,7 +61,7 @@ class CaptureActivity : BaseActivity() {
             finish()
         }
 
-        if (picType == TYPE_FRONT) {
+        if (picType == PicType.PIC_FRONT) {
             mBinding.aivImageHint.setImageResource(R.drawable.image_front_hint)
             mBinding.tvImageHint.setText(R.string.capture_front_hint)
         } else {
