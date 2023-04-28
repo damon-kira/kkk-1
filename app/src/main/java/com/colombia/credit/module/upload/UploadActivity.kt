@@ -13,6 +13,7 @@ import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.appPermissions
+import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
@@ -36,6 +37,7 @@ class UploadActivity : BaseProcessActivity() {
         setStatusBarColor(getStatusBarColor(), true)
         mViewModel.resultLiveData.observerNonSticky(this) {
             uploadSuccess()
+            GPInfoUtils.saveTag(GPInfoUtils.TAG7)
         }
     }
 
@@ -49,7 +51,7 @@ class UploadActivity : BaseProcessActivity() {
     }
 
     private fun reqPermission() {
-        PermissionHelper.reqPermission(this, appPermissions.toList(), true, isFixGroup = true,{
+        PermissionHelper.reqPermission(this, appPermissions.toList(), true, isFixGroup = true, {
             showDialog()
             mViewModel.checkAndUpload()
         }, {

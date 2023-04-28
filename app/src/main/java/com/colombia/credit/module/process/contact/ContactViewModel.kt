@@ -3,6 +3,7 @@ package com.colombia.credit.module.process.contact
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.service.SerManager
+import com.colombia.credit.util.GPInfoUtils
 import javax.inject.Inject
 
 // 上传联系人信息
@@ -16,6 +17,9 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
+            if (isUploadSuccess) {
+                GPInfoUtils.saveTag(GPInfoUtils.TAG3)
+            }
             mUploadLiveData.postValue(it)
         }
     }

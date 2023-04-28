@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.bank
 
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.util.GPInfoUtils
 import javax.inject.Inject
 
 // 上传银行卡信息
@@ -13,6 +14,9 @@ class BankInfoViewModel @Inject constructor(private val repository: BankInfoRepo
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
+            if (isUploadSuccess) {
+                GPInfoUtils.saveTag(GPInfoUtils.TAG4)
+            }
             mUploadLiveData.postValue(it)
         }
     }

@@ -7,6 +7,7 @@ import com.colombia.credit.bean.resp.RspKycInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.service.SerManager
+import com.colombia.credit.util.GPInfoUtils
 import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
@@ -68,6 +69,7 @@ class KycViewModel @Inject constructor(private val repository: KycRepository) :
             hideLoading()
             isUploadSuccess = it.isSuccess()
             if (isUploadSuccess) {
+                GPInfoUtils.saveTag(GPInfoUtils.TAG5)
                 com.colombia.credit.expand.mUserName = (info as ReqKycInfo).y6hQBtv.orEmpty()
             }
             mUploadLiveData.postValue(it)

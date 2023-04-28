@@ -5,6 +5,7 @@ import com.colombia.credit.bean.AddressInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
+import com.colombia.credit.util.GPInfoUtils
 import com.google.gson.reflect.TypeToken
 import com.util.lib.GsonUtil
 import javax.inject.Inject
@@ -22,6 +23,9 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
+            if (isUploadSuccess) {
+                GPInfoUtils.saveTag(GPInfoUtils.TAG2)
+            }
             mUploadLiveData.postValue(it)
         }
     }
@@ -31,14 +35,14 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
             if (it.isSuccess()) {
                 val data = it.getData()
                 (data is RspPersonalInfo)
-                if(data?.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
+                if (data?.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
                 mInfoLiveData.postValue(data)
             }
         }
     }
 
     override fun saveCacheInfo(info: IReqBaseInfo) {
-        if (isUploadSuccess){
+        if (isUploadSuccess) {
             removeCacheInfo()
             return
         }

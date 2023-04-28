@@ -18,6 +18,7 @@ import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.upload.UploadViewModel
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.permission.appPermissions
+import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -134,6 +135,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
         mViewModel.confirmLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
+                GPInfoUtils.saveTag(GPInfoUtils.TAG8)
                 mProcessDialog.end()
                 MainHandler.postDelay({
                     mProcessDialog.dismiss()

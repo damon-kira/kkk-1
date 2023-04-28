@@ -27,6 +27,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
     override fun uploadInfo(info: IReqBaseInfo) {
         resultLiveData.addSourceLiveData(repository.uploadInfo()) {
             hideLoading()
+            isUploadSuccess = it.isSuccess()
             resultLiveData.postValue(RspResult())
         }
     }
