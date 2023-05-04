@@ -33,6 +33,9 @@ dependencyResolutionManagement {
 rootProject.name = "A1"
 include ':app'
 include ':common'
+include ':camera'
+include ':datepicker'
+//include ':analysis'
 
 if (isModule.toBoolean()) {
     include ':sdks:bigdata'
@@ -43,5 +46,3 @@ if (isModule.toBoolean()) {
     include ':sdks:cache'
     include ':sdks:aes'
 }
-include ':camera'
-include ':datepicker'

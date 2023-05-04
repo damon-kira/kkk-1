@@ -14,6 +14,7 @@ import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.webview.WebViewPool
 import com.colombia.credit.util.GPInfoUtils
 import com.colombia.credit.util.ImageInfoUtil
+//import com.finance.analysis.push.PushManagerFactory
 import com.google.gson.JsonObject
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
@@ -39,7 +40,6 @@ class LoanApplication: Application() {
         CacheInit.get().setContext(this)
         initAes()
         AppInjector.init(this)
-//        AppFlyerManager.initAppFlyer(this)
 //        PushManagerFactory.init(this)
         WebViewPool.INSTANCE.init(this, false)
 

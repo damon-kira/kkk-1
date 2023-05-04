@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk rootProject.ext.version.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.ext.version.minSdk
+        targetSdk rootProject.ext.version.targetSdk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    compileOnly rootProject.ext.android.core_ktx
+    compileOnly rootProject.ext.android.appcompat
+    compileOnly rootProject.ext.view.constraintlayout
+
+    //firebase core
+    compileOnly platform(rootProject.ext.firebase.bom)
+    compileOnly rootProject.ext.firebase.messaging
+    compileOnly rootProject.ext.firebase.analytics
+    api rootProject.ext.firebase.crashlytics
+    compileOnly rootProject.ext.google.play_services_gcm
+//    implementation 'com.google.android.gms:play-services-base:18.0.1'
+//    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.9'
+    implementation project(path:":sdks:util")
+    implementation project(path:":sdks:cache")
+//    compileOnly rootProject.ext.other.util
+
+    // hilt
+    compileOnly rootProject.ext.hilt.hilt_android
+    kapt rootProject.ext.hilt.hilt_compiler_android
+}

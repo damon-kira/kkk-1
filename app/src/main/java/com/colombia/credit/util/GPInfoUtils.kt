@@ -1,17 +1,21 @@
 package com.colombia.credit.util
 
 import com.colombia.credit.app.getAppContext
+//import com.finance.analysis.FirebaseInfo
+//import com.finance.analysis.push.PushManagerFactory
 
 object GPInfoUtils {
 
     // 获取广告id
     @JvmStatic
     fun getGdid(): String {
+//        return PushManagerFactory.getGaid(getAppContext()).orEmpty()
         return ""
     }
 
     @JvmStatic
     fun getFcmToken(): String {
+//        return FirebaseInfo.getFcmToken(getAppContext())
         return ""
     }
 
