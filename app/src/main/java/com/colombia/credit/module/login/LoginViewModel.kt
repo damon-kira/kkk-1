@@ -50,7 +50,7 @@ class LoginViewModel @Inject constructor(
             if (it.isSuccess()) {
                 val ctx = getAppContext()
                 registWifi = WifiHelper.getSSid(ctx)
-                registIP = WifiHelper.getIp(ctx)
+                registIP = WifiHelper.getIp()
                 saveMobile(mobile)
                 it.getData()?.let { data ->
                     saveUserInfo(data)

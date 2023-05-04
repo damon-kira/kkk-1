@@ -6,6 +6,10 @@ import android.net.wifi.WifiManager
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
+import com.util.lib.log.logger_d
+import java.net.Inet6Address
+import java.net.InetAddress
+import java.net.NetworkInterface
 
 object WifiHelper {
 
@@ -38,9 +42,27 @@ object WifiHelper {
         return cm.connectionInfo.ssid
     }
 
-    fun getIp(context: Context): String {
-        val cm = getWifiManager(context)
-        return int2Str(cm.connectionInfo.ipAddress)
+    fun getIp(): String {
+        var resultIP = ""
+        val networkInterfaces = NetworkInterface.getNetworkInterfaces()
+        var ia: InetAddress? = null
+        while (networkInterfaces.hasMoreElements()) {
+            val nextElement = networkInterfaces.nextElement()
+            val inetAddresses = nextElement.inetAddresses
+            while (inetAddresses.hasMoreElements()) {
+                ia = inetAddresses.nextElement()
+                if (ia is Inet6Address) {
+                    continue
+                }
+                val hostAddress = ia.hostAddress
+                logger_d("debug_WifiHelper", "getIp: hostAddress = $hostAddress")
+                if (hostAddress != "127.0.0.1") {
+                    resultIP = hostAddress
+                    break
+                }
+            }
+        }
+        return resultIP
     }
 
     private fun getWifiManager(context: Context) =
