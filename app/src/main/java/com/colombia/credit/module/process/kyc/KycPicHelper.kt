@@ -2,7 +2,7 @@ package com.colombia.credit.module.process.kyc
 
 import com.camera.lib.CameraOneUtils
 import com.colombia.credit.dialog.PicImageDialog
-import com.colombia.credit.util.ImageInfoUtil
+import com.util.lib.ImageInfoUtil
 import com.colombia.credit.util.image.ImageObtainHelper
 import com.colombia.credit.util.image.annotations.ImageType
 import com.colombia.credit.util.image.annotations.PicType

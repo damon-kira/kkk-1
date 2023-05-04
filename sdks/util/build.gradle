@@ -26,6 +26,7 @@ dependencies {
     implementation rootProject.ext.exifinterface.exifinterface
     implementation rootProject.ext.other.aes
     implementation project(path: ':sdks:cache')
+    implementation rootProject.ext.exifinterface.exifinterface
 }
 
 apply from: '../../maven_push.gradle'

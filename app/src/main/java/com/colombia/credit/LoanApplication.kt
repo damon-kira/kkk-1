@@ -13,7 +13,7 @@ import com.colombia.credit.expand.getUserToken
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.webview.WebViewPool
 import com.colombia.credit.util.GPInfoUtils
-import com.colombia.credit.util.ImageInfoUtil
+import com.util.lib.ImageInfoUtil
 //import com.finance.analysis.push.PushManagerFactory
 import com.google.gson.JsonObject
 import com.project.util.AesConstant

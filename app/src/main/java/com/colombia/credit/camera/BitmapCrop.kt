@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Rect
 import android.media.ExifInterface
+import com.util.lib.ImageInfoUtil
 import com.common.lib.base.BaseActivity
 import com.util.lib.DisplayUtils
 import com.util.lib.image.ExifInterfaceImpl
@@ -83,6 +84,7 @@ object BitmapCrop {
 
                 val ops = BitmapFactory.Options()
                 ops.inJustDecodeBounds = true
+                val imageExifInfo = ImageInfoUtil.getImageExifInfo(originFile.absolutePath)
                 BitmapFactory.decodeFile(originFile.absolutePath, ops)
                 val exif = ExifInterfaceImpl(originFile.absolutePath)
                 val orientation = exif.getAttributeInt(
@@ -169,6 +171,7 @@ object BitmapCrop {
                 if (!bitmap.isRecycled) {
                     bitmap.recycle()
                 }
+                ImageInfoUtil.saveExifInfo(originFile.absolutePath, imageExifInfo)
                 fos.flush()
                 fos.close()
                 it.onNext(originFile)

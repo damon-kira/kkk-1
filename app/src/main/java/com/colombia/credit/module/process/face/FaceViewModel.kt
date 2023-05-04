@@ -5,7 +5,7 @@ import com.colombia.credit.bean.req.ReqFaceInfo
 import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.GPInfoUtils
-import com.colombia.credit.util.ImageInfoUtil
+import com.util.lib.ImageInfoUtil
 import javax.inject.Inject
 
 // 上传活体照片
@@ -18,10 +18,10 @@ class FaceViewModel @Inject constructor(private val repository: FaceRepository) 
             isUploadSuccess = it.isSuccess()
             if (isUploadSuccess) {
                 GPInfoUtils.saveTag(GPInfoUtils.TAG6)
-            }
-            (info as ReqFaceInfo).path?.let {path ->
-                val info = ImageInfoUtil.getExifInfo(path).orEmpty()
-                ImageInfoUtil.saveInfo(SharedPrefKeyManager.KEY_IMAGE_FACE, info)
+                (info as ReqFaceInfo).path?.let {path ->
+                    val imageExifInfo = ImageInfoUtil.getExifInfo(path).orEmpty()
+                    ImageInfoUtil.saveInfo(SharedPrefKeyManager.KEY_IMAGE_FACE, imageExifInfo)
+                }
             }
             mUploadLiveData.postValue(it)
         }

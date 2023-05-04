@@ -12,7 +12,6 @@ import com.camera.lib.CameraType
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityCaptureBinding
-import com.colombia.credit.util.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -97,13 +96,11 @@ class CaptureActivity : BaseActivity() {
                         it.right = scannerRect.right.toInt()
                         it.bottom = scannerRect.bottom.toInt()
                     }
-                    val exifInfo = ImageInfoUtil.getImageExifInfo(f.absolutePath)
                     BitmapCrop.crop(this, f, rect, manager.isFront()) { finalFile ->
                         if (finalFile != null) {
                             if (BuildConfig.DEBUG) {
                                 logger_e(TAG, "success = ${finalFile.length()}")
                             }
-                            ImageInfoUtil.saveExifInfo(finalFile.absolutePath, exifInfo)
                             val result = intent
                             result.data = Uri.fromFile(finalFile)
                             setResult(Activity.RESULT_OK, result)

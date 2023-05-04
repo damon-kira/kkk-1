@@ -1,9 +1,8 @@
-package com.colombia.credit.util
+package com.util.lib
 
 import androidx.exifinterface.media.ExifInterface
 import com.cache.lib.SharedPrefUser
 import com.google.gson.JsonObject
-import com.util.lib.GsonUtil
 import com.util.lib.log.logger_d
 import java.io.File
 

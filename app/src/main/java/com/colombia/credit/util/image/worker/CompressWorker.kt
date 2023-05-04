@@ -3,9 +3,9 @@ package com.colombia.credit.util.image.worker
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
-import androidx.exifinterface.media.ExifInterface
-import com.colombia.credit.util.ImageInfoUtil
+import com.util.lib.ImageInfoUtil
 import com.colombia.credit.util.image.ImagePathUtil
 import com.colombia.credit.util.image.agent.AgentContainer
 import com.colombia.credit.util.image.builder.ImageCompressor

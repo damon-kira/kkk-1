@@ -8,6 +8,7 @@ import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.util.Log
+import com.util.lib.ImageInfoUtil
 import com.util.lib.MainHandler
 import com.util.lib.StorageUriUtils
 import com.util.lib.ThreadPoolUtil
@@ -24,6 +25,7 @@ val IMAGE_DEFAULT_HEIGHT = 1080
  * 服务端图片比对 分辨率不能小于 512*512 宽高 都不能小于
  */
 val IMAGE_MIN_SIZE = 512
+
 /**
  * 服务端图片比对 分辨率不能大于 4096 宽高 都不能大于这个值
  */
@@ -44,8 +46,10 @@ val COMPRESS_TAG = "compress"
  * @param targetPath
  * @return
  */
-fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, targetHeight: Int,
-                      bitmapConfig:Bitmap.Config = Bitmap.Config.ARGB_8888,quality: Int = 85): Boolean {
+fun commonCompressPic(
+    sourcePath: String, targetPath: String, targetWidth: Int, targetHeight: Int,
+    bitmapConfig: Bitmap.Config = Bitmap.Config.ARGB_8888, quality: Int = 85
+): Boolean {
     var width = targetWidth
     var height = targetHeight
     var isSuccess = false
@@ -60,18 +64,19 @@ fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, 
 
     var fos: FileOutputStream? = null
     var isNeedRepeadCompress = false
-    if(isDebug()) {
+    if (isDebug()) {
         Log.i(COMPRESS_TAG, "bitmapConfig = $bitmapConfig")
     }
     var rotation = 0f
     var targetFileExceedsLimit = false
+    val exifInfo = ImageInfoUtil.getImageExifInfo(sourcePath)
     try {
-
         val exif = ExifInterfaceImpl(sourcePath)
-        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+        val orientation =
+            exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
         rotation = getPhotoOrientation(orientation).toFloat()
 
-        if(isDebug()) {
+        if (isDebug()) {
             Log.i(COMPRESS_TAG, "压缩旋转前图片旋转角度 $rotation")
         }
         // 旋转
@@ -81,19 +86,21 @@ fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, 
         opt.inJustDecodeBounds = true//只取大小，不放在内存
         BitmapFactory.decodeFile(sourcePath, opt)
 
-        if(isDebug()){
+        if (isDebug()) {
             val inFile = File(sourcePath)
-            Log.i(COMPRESS_TAG,"压缩&旋转前图片大小 width:${opt.outWidth},height:${opt.outHeight}," +
-                    "size:${if(inFile.exists()) inFile.length() else 0}")
+            Log.i(
+                COMPRESS_TAG, "压缩&旋转前图片大小 width:${opt.outWidth},height:${opt.outHeight}," +
+                        "size:${if (inFile.exists()) inFile.length() else 0}"
+            )
         }
 
         // 先调用GC清理内存，然后再进行压缩
         try {
             System.gc()
             Thread.sleep(100)
-        }catch (e: Throwable){
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"GC和Sleep过程出错:$e")
+        } catch (e: Throwable) {
+            if (isDebug()) {
+                Log.i(COMPRESS_TAG, "GC和Sleep过程出错:$e")
             }
         }
         opt.inSampleSize = calculateInSampleSize(opt, width, height)
@@ -129,9 +136,9 @@ fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, 
 
         rotateBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         //如果原文件和目标文件相同路径 删除原文件
-        if(sourcePath == targetPath){
+        if (sourcePath == targetPath) {
             val sourceFile = File(sourcePath)
-            if(sourceFile.exists()){
+            if (sourceFile.exists()) {
                 sourceFile.delete()
             }
         }
@@ -203,6 +210,8 @@ fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, 
         }
         return commonCompressPic_565(sourcePath,targetPath,targetWidth,targetHeight,compressQuality)
     }
+    // 设置exif信息
+    ImageInfoUtil.saveExifInfo(targetPath, exifInfo)
     return isSuccess
 }
 
@@ -469,7 +478,10 @@ fun getPhotoOrientation(sourcePath: String): Int {
     try {
         val exif = ExifInterfaceImpl(sourcePath)
         if (exif != null) {
-            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+            orientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            )
         }
     } catch (e: Exception) {
 
@@ -478,11 +490,11 @@ fun getPhotoOrientation(sourcePath: String): Int {
     return orientation
 }
 
-fun copyFile(sourcePath: String,targetPath: String): Boolean {
-    if(sourcePath == targetPath){
+fun copyFile(sourcePath: String, targetPath: String): Boolean {
+    if (sourcePath == targetPath) {
         return true
     }
-    if(File(sourcePath).exists()){
+    if (File(sourcePath).exists()) {
         val fis = FileInputStream(sourcePath)
         fis.use {
             val fos = FileOutputStream(targetPath)
@@ -490,7 +502,7 @@ fun copyFile(sourcePath: String,targetPath: String): Boolean {
                 val buffer = ByteArray(8 * 1024)
                 var len = fis.read(buffer)
                 while (len != -1) {
-                    fos.write(buffer,0,len)
+                    fos.write(buffer, 0, len)
                     len = fis.read(buffer)
                 }
                 return true
@@ -519,8 +531,8 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
         val widthRatio = (width.toFloat() / reqWidth.toFloat()).roundToInt()
         inSampleSize = if (heightRatio < widthRatio) heightRatio else widthRatio
 
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"获取inSampleSize:第一次计算(根据宽高比) - $inSampleSize")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "获取inSampleSize:第一次计算(根据宽高比) - $inSampleSize")
         }
 
         val totalPixels = (width * height).toFloat()
@@ -529,32 +541,32 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
             inSampleSize++
         }
 
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"获取inSampleSize:第二次计算(根据面积) - $inSampleSize")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "获取inSampleSize:第二次计算(根据面积) - $inSampleSize")
         }
 
         // 把inSampleSize修正为2的n次方幂
         var pow = 0.0
-        while(Math.pow(2.0,pow) < inSampleSize){
+        while (Math.pow(2.0, pow) < inSampleSize) {
             val temp = pow + 1
-            if(Math.pow(2.0,temp) <= inSampleSize){
+            if (Math.pow(2.0, temp) <= inSampleSize) {
                 pow = temp
-            }else{
+            } else {
                 break
             }
         }
 
-        inSampleSize = Math.pow(2.0,pow).toInt()
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"获取inSampleSize:第三次计算(修复成2的倍数) - $inSampleSize")
+        inSampleSize = Math.pow(2.0, pow).toInt()
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "获取inSampleSize:第三次计算(修复成2的倍数) - $inSampleSize")
         }
         // 如果计算结果导致图片size小于256，则修改inSampleSize的值
-        while ((height / inSampleSize < IMAGE_MIN_SIZE || width / inSampleSize < IMAGE_MIN_SIZE) && inSampleSize >= 2){
+        while ((height / inSampleSize < IMAGE_MIN_SIZE || width / inSampleSize < IMAGE_MIN_SIZE) && inSampleSize >= 2) {
             inSampleSize /= 2
         }
 
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"获取inSampleSize:第四次计算(根据256计算出来的最终结果) - $inSampleSize")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "获取inSampleSize:第四次计算(根据256计算出来的最终结果) - $inSampleSize")
         }
     }
     return inSampleSize

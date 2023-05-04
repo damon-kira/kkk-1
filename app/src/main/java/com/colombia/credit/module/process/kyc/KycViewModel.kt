@@ -8,7 +8,7 @@ import com.colombia.credit.manager.SharedPrefKeyManager
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.module.service.SerManager
 import com.colombia.credit.util.GPInfoUtils
-import com.colombia.credit.util.ImageInfoUtil
+import com.util.lib.ImageInfoUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
