@@ -44,14 +44,14 @@ object AppMemoryManager {
         return BaseParamsManager.getFormatSize(value.toDouble())
     }
 
-    fun getDeviceTotalMemory(context: Context): String {
+    fun getRamTotalMemory(context: Context): String {
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val memInfo = MemoryInfo()
         am.getMemoryInfo(memInfo)
         return format(memInfo.totalMem)
     }
 
-    fun getDeviceAvailableMemory(context: Context): String {
+    fun getRamAvailableMemory(context: Context): String {
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val memInfo = MemoryInfo()
         am.getMemoryInfo(memInfo)
@@ -71,4 +71,15 @@ object AppMemoryManager {
         return format(statFs.availableBytes)
     }
 
+    fun getDeviceTotal(): String {
+        val path = Environment.getDataDirectory().absolutePath
+        val statFs = StatFs(path)
+        return format(statFs.totalBytes)
+    }
+
+    fun getDeviceAvali(): String {
+        val path = Environment.getDataDirectory().absolutePath
+        val statFs = StatFs(path)
+        return format(statFs.availableBytes)
+    }
 }

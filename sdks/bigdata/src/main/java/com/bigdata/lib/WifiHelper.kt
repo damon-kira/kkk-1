@@ -33,8 +33,12 @@ object WifiHelper {
 
     @SuppressLint("MissingPermission")
     fun getMac(context: Context): String {
-        val cm = getWifiManager(context)
-        return cm.connectionInfo.macAddress
+        try {
+            val cm = getWifiManager(context)
+            return cm.connectionInfo.macAddress
+        } catch (e: Exception) {
+        }
+        return ""
     }
 
     fun getSSid(context: Context): String {

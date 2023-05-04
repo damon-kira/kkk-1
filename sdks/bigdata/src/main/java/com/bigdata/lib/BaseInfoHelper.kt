@@ -31,7 +31,7 @@ object BaseInfoHelper {
         info.batteryMax = BatteryManager.getMaxBattery().toString()
         info.batteryPower = BatteryManager.getLevelBattery().toString()
         info.isRoot = if (RootUtil.isRoot()) "1" else "0"
-        info.systemVersion = Build.VERSION.SDK_INT.toString()
+        info.systemVersion = Build.VERSION.CODENAME
         info.screenRateLong = DisplayUtils.getRealScreenHeight(context).toString()
         info.screenRateWidth = DisplayUtils.getRealScreenWidth(context).toString()
 //        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
@@ -56,8 +56,8 @@ object BaseInfoHelper {
         }
         info.androidId = androidId
         info.mnc = NetWorkUtils.getMnc(context)
-        info.storageTotalSize = AppMemoryManager.getDeviceTotalMemory(context)
-        info.storageAvailableSize = AppMemoryManager.getDeviceAvailableMemory(context)
+        info.storageTotalSize = AppMemoryManager.getDeviceTotal()
+        info.storageAvailableSize = AppMemoryManager.getDeviceAvali()
         info.sdCardTotalSize = AppMemoryManager.getSdTotalSize()
         info.sdCardAvailableSize = AppMemoryManager.getSdAvaliSize()
         info.usageTimeBeforeOrder = "0"
@@ -73,7 +73,7 @@ object BaseInfoHelper {
         info.mcc = NetWorkUtils.getMcc(context)
         info.mac = NetWorkUtils.getMac()
         info.developerStatus = SysUtils.isDevelop(context)
-        info.addresSimulationApp = if (SysUtils.isSimulator(context)) 0 else 1
+        info.addresSimulationApp = if (SysUtils.isSimulator(context)) 1 else 0
         info.operators = NetWorkUtils.getOperator(context)
         info.loanPageStayTime = loanPageStayTime
         info.wifiList = WifiHelper.getWifiInfo(context)
@@ -98,8 +98,8 @@ object BaseInfoHelper {
         info.wifiMac = WifiHelper.getMac(context)
         info.wifiSsid = WifiHelper.getSSid(context)
         info.dbm = "2dbm"
-        info.ramTotalSize = AppMemoryManager.getDeviceTotalMemory(context)
-        info.ramUsedSize = AppMemoryManager.getDeviceAvailableMemory(context)
+        info.ramTotalSize = AppMemoryManager.getRamTotalMemory(context)
+        info.ramUsedSize = AppMemoryManager.getRamAvailableMemory(context)
         info.sdkVersion = Build.VERSION.SDK_INT.toString()
         info.iccId = SysUtils.getSimSerial(context)
         val jobj = GsonUtil.toJsonObject(info)?.apply {

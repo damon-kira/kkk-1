@@ -54,8 +54,8 @@ object NetWorkUtils {
         val proxyHost = System.getProperty("http.proxyHost")
         val proxyPort = System.getProperty("http.proxyPort")
         return if (TextUtils.isEmpty(proxyHost) && TextUtils.isEmpty(proxyPort)) {
-            1
-        } else 0
+            0
+        } else 1
     }
 
     /**
