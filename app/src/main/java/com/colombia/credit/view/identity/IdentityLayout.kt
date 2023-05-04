@@ -68,8 +68,8 @@ class IdentityLayout : LinearLayout {
     }
 
     fun setEnable(leftEnable: Boolean, rightEnable: Boolean) {
-        mBinding.ivLeft.isEnabled  = leftEnable
-        mBinding.ivRight.isEnabled = rightEnable
+        setLeftEnable(leftEnable)
+        setRightEnable(rightEnable)
     }
 
     fun setLeftEnable(leftEnable: Boolean) {

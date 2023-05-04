@@ -2,7 +2,6 @@ package com.colombia.credit.module.process.kyc
 
 import com.camera.lib.CameraOneUtils
 import com.colombia.credit.dialog.PicImageDialog
-import com.util.lib.ImageInfoUtil
 import com.colombia.credit.util.image.ImageObtainHelper
 import com.colombia.credit.util.image.annotations.ImageType
 import com.colombia.credit.util.image.annotations.PicType
@@ -55,8 +54,6 @@ class KycPicHelper {
             .fileToSave(File(targetPath))
             .start(object : AdapterCallback<CompressResult>() {
                 override fun onSuccess(result: CompressResult) {
-                    val info = ImageInfoUtil.getImageExifInfo(targetPath)
-                    ImageInfoUtil.saveExifInfo(captureFile.absolutePath, info)
                     deleteFiles(captureFile)
                     val filePath = result.uri?.path ?: return
                     mResultListener?.invoke(filePath, picType)

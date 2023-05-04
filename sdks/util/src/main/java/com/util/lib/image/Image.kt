@@ -296,10 +296,11 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
     }
     var rotation = 0f
     var targetFileExceedsLimit = false
+    var imageExifInfo: HashMap<String, String?>? = null
     try {
         val fd: FileDescriptor = context.contentResolver.openFileDescriptor(source, "r")?.fileDescriptor!!
-        val exif = androidx.exifinterface.media.ExifInterface(fd)
-        val orientation = exif.getAttributeInt(androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION, androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL)
+        imageExifInfo = ImageInfoUtil.getImageExifInfo(fd)
+        val orientation = imageExifInfo[androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION]?.toIntOrNull() ?: androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL
         rotation = getPhotoOrientation(orientation).toFloat()
         if(isDebug()) {
             Log.i(COMPRESS_TAG, "压缩旋转前图片旋转角度 $rotation")
@@ -419,6 +420,9 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
             85
         }
         commonCompressPic(context,source,targetPath,targetWidth,targetHeight,Bitmap.Config.RGB_565,compressQuality)
+    }
+    imageExifInfo?.let {imageInfo ->
+        ImageInfoUtil.saveExifInfo(targetPath, imageInfo)
     }
     return isSuccess
 }

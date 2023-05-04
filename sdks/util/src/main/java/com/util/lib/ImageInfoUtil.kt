@@ -5,6 +5,7 @@ import com.cache.lib.SharedPrefUser
 import com.google.gson.JsonObject
 import com.util.lib.log.logger_d
 import java.io.File
+import java.io.FileDescriptor
 
 object ImageInfoUtil {
 
@@ -49,27 +50,48 @@ object ImageInfoUtil {
         val data = HashMap<String, String?>(50)
         path ?: return data
         try {
-            val ex = ExifInterface(path);
-            val exifInfo = getExifCommonInfo(ex)
-            data.putAll(exifInfo)
-            val field = ExifInterface::class.java.getDeclaredField("mAttributes")
-            field.isAccessible = true
-            when (val value: Any? = field.get(ex)) {
-                is Array<*> -> {
-                    value.filterIsInstance<HashMap<*, *>>().forEach {
-                        data.putAll(getImageInfo(it, ex))
-                    }
-                }
-                is HashMap<*, *> -> {
-                    data.putAll(getImageInfo(value, ex))
-                }
-            }
+            val ex = ExifInterface(path)
+            exifToMap(ex, data)
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
         logger_d("debug_ImageInfoUtil", "getImageExifInfo: ${GsonUtil.toJson(data)}")
         return data
+    }
+
+    fun getImageExifInfo(file: FileDescriptor?): HashMap<String, String?> {
+        val data = HashMap<String, String?>(50)
+        file ?: return data
+        try {
+            val ex = ExifInterface(file)
+            exifToMap(ex, data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        logger_d("debug_ImageInfoUtil", "getImageExifInfo: ${GsonUtil.toJson(data)}")
+        return data
+    }
+
+    private fun exifToMap(
+        ex: ExifInterface,
+        data: HashMap<String, String?>
+    ) {
+        val exifInfo = getExifCommonInfo(ex)
+        data.putAll(exifInfo)
+        val field = ExifInterface::class.java.getDeclaredField("mAttributes")
+        field.isAccessible = true
+        when (val value: Any? = field.get(ex)) {
+            is Array<*> -> {
+                value.filterIsInstance<HashMap<*, *>>().forEach {
+                    data.putAll(getImageInfo(it, ex))
+                }
+            }
+            is HashMap<*, *> -> {
+                data.putAll(getImageInfo(value, ex))
+            }
+        }
     }
 
     fun saveExifInfo(path: String, info: Map<String, String?>) {

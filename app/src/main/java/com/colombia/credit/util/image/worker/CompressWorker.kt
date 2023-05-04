@@ -45,7 +45,6 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
         val dis = Observable.just(params)
             .map {
                 val compressor = it.customCompressor ?: this@CompressWorker
-                val imageInfo = ImageInfoUtil.getImageExifInfo(source.encodedPath)
                 val compressResult = compressor.compress(
                     source,
                     outputFile,
@@ -55,7 +54,6 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
                     it.targetWidth,
                     it.targetHeight
                 )
-                ImageInfoUtil.saveExifInfo(outputFile.absolutePath, imageInfo)
                 compressResult
             }
             .subscribeOn(Schedulers.io())
