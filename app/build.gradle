@@ -54,7 +54,6 @@ android {
             buildConfigField "String", "DATA_URL", "${rootProject.ext.release.bigDataHost}"
             buildConfigField "String", "APP_SECRET", "${rootProject.ext.release.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "false"
-            multiDexKeepFile file('multidex-config.txt')
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
