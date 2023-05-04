@@ -52,7 +52,7 @@ android {
             buildConfigField "String", "BASE_URL", "${rootProject.ext.release.apiHost}"
             buildConfigField "String", "H5_URL", "${rootProject.ext.release.h5Host}"
             buildConfigField "String", "DATA_URL", "${rootProject.ext.release.bigDataHost}"
-            buildConfigField "String", "app_secret", "${rootProject.ext.release.apiSecret}"
+            buildConfigField "String", "APP_SECRET", "${rootProject.ext.release.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "false"
             multiDexKeepFile file('multidex-config.txt')
             minifyEnabled false
@@ -64,7 +64,7 @@ android {
             buildConfigField "String", "BASE_URL", "${rootProject.ext.debug.apiHost}"
             buildConfigField "String", "H5_URL", "${rootProject.ext.debug.h5Host}"
             buildConfigField "String", "DATA_URL", "${rootProject.ext.debug.bigDataHost}"
-            buildConfigField "String", "app_secret", "${rootProject.ext.debug.apiSecret}"
+            buildConfigField "String", "APP_SECRET", "${rootProject.ext.debug.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "true"
             minifyEnabled false
             signingConfig signingConfigs.debug

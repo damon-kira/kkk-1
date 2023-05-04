@@ -6,7 +6,7 @@ object Constant {
 
     const val BASE_H5_URL = BuildConfig.H5_URL
 
-    const val API_SECRET = "265F5D19C0EC03B1"
+    const val API_SECRET = BuildConfig.APP_SECRET
 
     const val BIG_DATA_URL = BuildConfig.DATA_URL
 
