@@ -8,10 +8,10 @@ import android.net.NetworkInfo
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import androidx.annotation.RequiresPermission
+import com.util.lib.log.logger_d
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
-import java.text.DecimalFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -222,7 +222,8 @@ object NetWorkUtils {
             try {
                 str.substring(0, 3)
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                logger_d("debug_NetworkUtils","exception = $e")
+                return ""
             }
         } else ""
     }

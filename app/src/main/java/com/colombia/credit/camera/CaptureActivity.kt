@@ -16,6 +16,7 @@ import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import com.mexico.camera.cameraview.ICamera
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -44,6 +45,8 @@ class CaptureActivity : BaseActivity() {
 
     }
 
+    private var mCameraManger: ICamera? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val filePath = intent.getStringExtra(KEY_CAPTURE_IMAGE_PATH)
@@ -68,7 +71,7 @@ class CaptureActivity : BaseActivity() {
             mBinding.tvImageHint.setText(R.string.capture_back_hint)
         }
 
-        val manager = CameraFactory.invoke(
+        mCameraManger = CameraFactory.invoke(
             CameraType.CameraX,
             this,
             mBinding.cameraview,
@@ -79,7 +82,7 @@ class CaptureActivity : BaseActivity() {
         mBinding.captureTakePhoto.setBlockingOnClickListener {
             val file = File(filePath)
             showLoading(false)
-            manager.takePicture(file) { success, f ->
+            mCameraManger?.takePicture(file) { success, f ->
                 if (BuildConfig.DEBUG) {
                     Log.i(
                         TAG,
@@ -96,7 +99,7 @@ class CaptureActivity : BaseActivity() {
                         it.right = scannerRect.right.toInt()
                         it.bottom = scannerRect.bottom.toInt()
                     }
-                    BitmapCrop.crop(this, f, rect, manager.isFront()) { finalFile ->
+                    BitmapCrop.crop(this, f, rect, mCameraManger?.isFront() ?: true) { finalFile ->
                         if (finalFile != null) {
                             if (BuildConfig.DEBUG) {
                                 logger_e(TAG, "success = ${finalFile.length()}")
@@ -120,6 +123,12 @@ class CaptureActivity : BaseActivity() {
     override fun onStop() {
         super.onStop()
         finish()
+    }
+
+    override fun onDestroy() {
+        mCameraManger?.close()
+        mCameraManger = null
+        super.onDestroy()
     }
 
     override fun finish() {

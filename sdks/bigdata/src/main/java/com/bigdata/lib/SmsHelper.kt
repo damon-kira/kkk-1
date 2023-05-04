@@ -61,7 +61,7 @@ object SmsHelper {
                     info.mLAbob = getString(cursor, Telephony.Sms.BODY)//短信具体内容
                     info.S6G6Y3xr = getLong(cursor, Telephony.Sms.DATE)// 接受时间
                     info.YNcz54 = getString(cursor, Telephony.Sms.READ)//是否阅读0未读，1已读
-                    info.status = getString(cursor, Telephony.Sms.STATUS)//短信状态,-1 接收，0 complete,64 pending128 failed
+//                    info.status = getString(cursor, Telephony.Sms.STATUS)//短信状态,-1 接收，0 complete,64 pending128 failed
                     info.h18jUUhUq = getString(cursor, Telephony.Sms.TYPE)//短信类型 ALL = 0;INBOX = 1;SENT = 2;DRAFT = 3;OUTBOX = 4;FAILED = 5; QUEUED = 6;
                     info.nKYZyncfJM?.let {
                         var temp = it.replace("+", "").replace("-", "").replace(" ", "")

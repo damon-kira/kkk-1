@@ -239,6 +239,8 @@ class CameraOneManager(
 
     override fun close() {
         mCamera.close()
+        textureView = null
+        mSurface = null
     }
 
     override fun autoFocus() {
@@ -351,6 +353,4 @@ class CameraOneManager(
         }
         return rotateAngle
     }
-
-
 }

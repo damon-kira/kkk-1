@@ -43,7 +43,9 @@ object WifiHelper {
 
     fun getSSid(context: Context): String {
         val cm = getWifiManager(context)
-        return cm.connectionInfo.ssid
+        val ssid = cm.connectionInfo.ssid
+        if(ssid.contains("unknown ssid")) return ""
+        return ssid
     }
 
     fun getIp(): String {

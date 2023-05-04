@@ -242,6 +242,8 @@ class FaceActivity : BaseProcessActivity() {
         unregisterReceiver(mHomeReceiver)
         mHomeReceiver = null
         mMediaHelper.close()
+        mCameraManager?.close()
+        mCameraManager = null
         super.onDestroy()
         mCountDownTimer?.cancel()
     }

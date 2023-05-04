@@ -31,12 +31,14 @@ object BaseInfoHelper {
         info.batteryMax = BatteryManager.getMaxBattery().toString()
         info.batteryPower = BatteryManager.getLevelBattery().toString()
         info.isRoot = if (RootUtil.isRoot()) "1" else "0"
-        info.systemVersion = Build.VERSION.CODENAME
+        info.systemVersion = Build.VERSION.RELEASE
         info.screenRateLong = DisplayUtils.getRealScreenHeight(context).toString()
         info.screenRateWidth = DisplayUtils.getRealScreenWidth(context).toString()
 //        info.ocrPhotoExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
 //        info.faceCheckExif = ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
         val imeis = SysUtils.getAllImei(context)
+        info.imei = ""
+        info.imei2 = ""
         if (imeis.isNotEmpty()) {
             info.imei = imeis[0]
             info.imei2 = try {
@@ -67,11 +69,11 @@ object BaseInfoHelper {
         info.chargingStatus = if (PowerConnectionHelper.isCharging(context)) "1" else "0"
         info.simState = DevicesHelper.getSimState(context).toString()
         info.timeZone = TimeZone.getDefault().id
-        info.vpn = if (NetWorkUtils.isVPN(context)) "0" else "1"
+        info.vpn = if (!NetWorkUtils.isVPN(context)) "0" else "1"
         info.phoneLanguage = SysUtils.getLanguage()
         info.screenBrightness = DevicesHelper.getBrightness(context)
         info.mcc = NetWorkUtils.getMcc(context)
-        info.mac = NetWorkUtils.getMac()
+        info.mac = NetWorkUtils.getMac().orEmpty()
         info.developerStatus = SysUtils.isDevelop(context)
         info.addresSimulationApp = if (SysUtils.isSimulator(context)) 1 else 0
         info.operators = NetWorkUtils.getOperator(context)
@@ -101,6 +103,8 @@ object BaseInfoHelper {
         info.ramTotalSize = AppMemoryManager.getRamTotalMemory(context)
         info.ramUsedSize = AppMemoryManager.getRamAvailableMemory(context)
         info.sdkVersion = Build.VERSION.SDK_INT.toString()
+        info.videoExternal = "0"
+        info.videoInternal = "0"
         info.iccId = SysUtils.getSimSerial(context)
         val jobj = GsonUtil.toJsonObject(info)?.apply {
             BigDataManager.get().getNetDataListener()?.addBaseParams(this)
