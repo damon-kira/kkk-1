@@ -20,6 +20,11 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class UploadActivity : BaseProcessActivity() {
@@ -31,6 +36,8 @@ class UploadActivity : BaseProcessActivity() {
     private val mUploadDialog by lazy {
         UploadDialog(this)
     }
+
+    private var mDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +82,21 @@ class UploadActivity : BaseProcessActivity() {
 
     override fun uploadSuccess() {
         mUploadDialog.end()
-        MainHandler.postDelay({
-            mUploadDialog.dismiss()
-            LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
-            Launch.skipMainActivity(this)
-        }, 600)
+        mDisposable = Flowable.just(2).delay(400, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                mUploadDialog.dismiss()
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+                Launch.skipMainActivity(this)
+                finish()
+            }
+    }
+
+    override fun onDestroy() {
+        mDisposable?.dispose()
+        mDisposable = null
+        super.onDestroy()
     }
 
     override fun initObserver() {}

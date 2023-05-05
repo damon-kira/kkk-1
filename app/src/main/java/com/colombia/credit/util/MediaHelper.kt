@@ -15,15 +15,20 @@ class MediaHelper(private val context: Context) {
 
     }
 
+    private var mRawId: Int = 0
+    private val mRunnable by lazy {
+        Runnable {
+            doPlay(mRawId)
+        }
+    }
+
     @Synchronized
     fun doPlay(rawId: Int) {
         try {
             val mediaPlay = mMediaPlayer ?: return
             mediaPlay.reset()
             setPlayCompleteListener {
-                MainHandler.postDelay({
-                    doPlay(rawId)
-                }, 100)
+                MainHandler.postDelayed(mRunnable, 100)
             }
             context.resources.openRawResourceFd(rawId).use { assetFileDescriptor ->
                 mediaPlay.setDataSource(
@@ -61,7 +66,7 @@ class MediaHelper(private val context: Context) {
     fun close() {
         try {
             stop()
-            MainHandler.removeAll()
+            MainHandler.remove(mRunnable)
             mMediaPlayer?.setOnCompletionListener(null)
             mMediaPlayer?.reset()
             mMediaPlayer?.release()
