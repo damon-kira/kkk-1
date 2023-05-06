@@ -33,9 +33,8 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                val data = it.getData()
-                (data is RspPersonalInfo)
-                if (data?.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
+                val data = it.getData() ?: return@addSourceLiveData
+                if (data.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
                 mInfoLiveData.postValue(data)
             }
         }

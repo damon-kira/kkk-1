@@ -20,9 +20,11 @@ class WorkInfoViewModel @Inject constructor(private val repository: WorkInfoRepo
     override fun getInfo() {
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
-                val info = it.getData()?.dbxhWe4XWA
-                if (info == null || info.isEmpty())  return@addSourceLiveData
-                mInfoLiveData.postValue(it.getData())
+                it.getData()?.let {data ->
+                    val info = data.dbxhWe4XWA
+                    if (info == null || info.isEmpty())  return@addSourceLiveData
+                    mInfoLiveData.postValue(data)
+                }
             }
         }
     }

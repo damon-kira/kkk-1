@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdk rootProject.ext.version.minSdk
         targetSdk rootProject.ext.version.targetSdk
+
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -40,11 +42,12 @@ dependencies {
     compileOnly rootProject.ext.firebase.analytics
     api rootProject.ext.firebase.crashlytics
     compileOnly rootProject.ext.google.play_services_gcm
-//    implementation 'com.google.android.gms:play-services-base:18.0.1'
-//    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.9'
     implementation project(path:":sdks:util")
     implementation project(path:":sdks:cache")
 //    compileOnly rootProject.ext.other.util
+
+    implementation 'com.adjust.sdk:adjust-android:4.33.0'
+    implementation rootProject.ext.appsflyer.installreferrer
 
     // hilt
     compileOnly rootProject.ext.hilt.hilt_android

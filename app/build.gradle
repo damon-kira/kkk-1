@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+//    id 'com.google.gms.google-services'
+//    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -54,7 +56,7 @@ android {
             buildConfigField "String", "DATA_URL", "${rootProject.ext.release.bigDataHost}"
             buildConfigField "String", "APP_SECRET", "${rootProject.ext.release.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "false"
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
@@ -115,7 +117,6 @@ dependencies {
 
     implementation project(path: ":common")
     implementation project(path: ":camera")
-//    implementation project(path: ":analysis")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
     implementation project(path: ':datepicker')
@@ -123,6 +124,7 @@ dependencies {
     debugImplementation rootProject.ext.other.devoptions
 
     //firebase core
+//    implementation project(path: ":analysis")
 //    implementation platform(rootProject.ext.firebase.bom)
 //    implementation rootProject.ext.firebase.messaging
 //    implementation rootProject.ext.firebase.analytics

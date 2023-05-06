@@ -58,10 +58,10 @@ rootProject.ext {
             autosize: "me.jessyan:autosize:1.2.1"
     ]
 
-//    appsflyer = [
+    appsflyer = [
 //            af_android_sdk   : "com.appsflyer:af-android-sdk:6.5.0",
-//            installreferrer  : "com.android.installreferrer:installreferrer:2.2",
-//    ]
+            installreferrer  : "com.android.installreferrer:installreferrer:2.2",
+    ]
 
     google = [
             play_services_gcm       : "com.google.android.gms:play-services-gcm:17.0.0",
