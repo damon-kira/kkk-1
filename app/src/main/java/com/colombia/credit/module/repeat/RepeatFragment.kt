@@ -122,8 +122,14 @@ class RepeatFragment : BaseHomeLoanFragment() {
     private fun initObserver() {
         mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
             mAdapter.setItems(it)
+            val params =
+            if (it.isNotEmpty()) {
+                it?.first()?.g7tzi.orEmpty()
+            } else {
+                "0"
+            }
             mBinding.etvTag.text =
-                getString(R.string.hosta_s, getUnitString(it?.first()?.g7tzi.orEmpty()))
+                getString(R.string.hosta_s, getUnitString(params))
         }
 
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
