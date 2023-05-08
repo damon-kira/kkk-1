@@ -45,7 +45,7 @@ object PermissionHelper {
             add(CameraPermission())
             add(LocationPermission())
             add(StoragePermission())
-            add(AccountPermission())
+//            add(AccountPermission())
         }
         return list
     }
@@ -323,7 +323,7 @@ object PermissionHelper {
         arrayOf(Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR)
 
     private val contactPermissions =
-        arrayOf(Manifest.permission.GET_ACCOUNTS, Manifest.permission.READ_CONTACTS)
+        arrayOf(/*Manifest.permission.GET_ACCOUNTS, */Manifest.permission.READ_CONTACTS)
 
     private val smsPermissions =
         arrayOf(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
@@ -350,9 +350,9 @@ object PermissionHelper {
             return
         }
         val deniedList = arrayListOf<String>()
-        checkGroup(activity, calendarPermissions)?.let {
-            deniedList.addAll(it)
-        }
+//        checkGroup(activity, calendarPermissions)?.let {
+//            deniedList.addAll(it)
+//        }
 
         checkGroup(activity, contactPermissions)?.let {
             deniedList.addAll(it)

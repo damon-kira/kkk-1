@@ -36,11 +36,11 @@ val appPermissions = arrayOf(
     ContactPermission(),
     ReadPhonePermission(),
     LocationPermission(),
-    AccountPermission(),
+//    AccountPermission(),
     CameraPermission(),
     PhotoAlbumPermission(),
-    CalendarReadPermission(),
-    CalendarWritePermission()
+//    CalendarReadPermission(),
+//    CalendarWritePermission()
 )
 //是否是6.0以及以上系统
 

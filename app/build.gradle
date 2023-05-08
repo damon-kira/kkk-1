@@ -31,7 +31,7 @@ android {
 
         android.applicationVariants.all { variant ->
             variant.outputs.all {
-                outputFileName = "FinanzasExtremas_v${variant.versionName}_${time()}.apk"
+                outputFileName = "FinanzasExtremas_v${variant.versionName}_${variant.buildType.name}_${time()}.apk"
             }
         }
     }

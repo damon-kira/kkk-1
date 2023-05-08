@@ -22,8 +22,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <!-- 日历权限 -->
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+<!--    <uses-permission android:name="android.permission.READ_CALENDAR" />-->
+<!--    <uses-permission android:name="android.permission.WRITE_CALENDAR" />-->
 
     <!--    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"-->
     <!--        tools:ignore="ProtectedPermissions" />-->
@@ -36,7 +36,7 @@
     <!-- 闪光灯 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<!--    <uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
 
     <queries>
         <intent>
