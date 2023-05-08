@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/home_aiv"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:background="@drawable/image_home_bg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,6 +25,15 @@
         app:tl_show_custom_icon="true"
         app:tl_title="@string/app_name" />
 
+    <include
+        android:id="@+id/include_orders"
+        style="@style/marginLeftAndRight16"
+        layout="@layout/layout_home_repay_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <LinearLayout
         style="@style/marginLeftAndRight16"
@@ -35,7 +44,7 @@
         android:background="@drawable/shape_white_10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/include_orders">
 
         <Space
             android:layout_width="wrap_content"
