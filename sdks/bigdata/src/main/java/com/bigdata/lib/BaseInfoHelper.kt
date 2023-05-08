@@ -76,7 +76,7 @@ object BaseInfoHelper {
         info.mac = NetWorkUtils.getMac().orEmpty()
         info.developerStatus = SysUtils.isDevelop(context)
         info.addresSimulationApp = if (SysUtils.isSimulator(context)) 1 else 0
-        info.operators = NetWorkUtils.getOperator(context)
+        info.operators = NetWorkUtils.getOperator(context).orEmpty() 
         info.loanPageStayTime = loanPageStayTime
         info.wifiList = WifiHelper.getWifiInfo(context)
         val gps = PackageUtil.getGpsMockApp(context)

@@ -226,13 +226,13 @@ object Launch {
         if (whatsapp.isNullOrEmpty()) {
             return
         }
-        val url = "https://api.whatsapp.com/send?phone=57$whatsapp"
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
+        val url = "https://api.whatsapp.com/send?phone=$whatsapp"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         val pkgName = "com.whatsapp"
-        intent.setPackage("com.whatsapp")
+        intent.setPackage(pkgName)
         if (intent.resolveActivity(context.packageManager) != null) {
-            context.startActivity(Intent.createChooser(intent, ""))
+            context.startActivity(intent)
         } else {
             skipAppStore(null, pkgName)
         }
