@@ -46,7 +46,7 @@ dependencies {
     implementation project(path:":sdks:cache")
 //    compileOnly rootProject.ext.other.util
 
-    implementation 'com.adjust.sdk:adjust-android:4.33.0'
+    implementation rootProject.ext.appsflyer.adjust
     implementation rootProject.ext.appsflyer.installreferrer
 
     // hilt
