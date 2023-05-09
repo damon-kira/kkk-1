@@ -16,6 +16,5 @@ rootProject.ext {
             apiSecret    : "\"265F5D19C0EC03B1\"",
     ]
 
-//    com.nequi.mano.daviqu.extrem.fanzaso
-    pkgName = "com.loan.librecredito.prestamos.efectivo.cash"
+    pkgName = "com.nequi.mano.daviqu.extrem.fanzaso"
 }

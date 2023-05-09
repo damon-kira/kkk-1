@@ -1,7 +1,6 @@
 package com.finance.analysis.push
 
 import android.content.Context
-import androidx.annotation.WorkerThread
 
 /**
  * author: weishl
@@ -11,7 +10,6 @@ interface IPushManager {
 
     fun init(context: Context)
 
-    @WorkerThread
     fun getGaid(context: Context): String?
 
     fun reportException(t: Throwable)

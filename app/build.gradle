@@ -41,6 +41,12 @@ android {
         viewBinding = true
     }
     signingConfigs {
+        release {
+            storeFile file("keystore/finanzans.jks")
+            storePassword "finanzas2023"
+            keyAlias "finanzas"
+            keyPassword "finanzas2023"
+        }
         debug {
             storeFile file("keystore/debug.keystore")
             storePassword "android"
@@ -60,7 +66,7 @@ android {
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
         debug {
             buildConfigField "String", "BASE_URL", "${rootProject.ext.debug.apiHost}"

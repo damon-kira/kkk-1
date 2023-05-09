@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.annotation.WorkerThread
 import com.finance.analysis.FirebaseInfo.getInstanceId
 import com.finance.analysis.FirebaseInfo.saveFcmToken
 import com.finance.analysis.FirebaseInfo.saveInstanceId
@@ -12,18 +11,20 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
+import com.util.lib.ThreadPoolUtil
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 
 
-class FirebaseManager: IPushManager {
+class FirebaseManager : IPushManager {
 
     private val TAG = "debug_FirebaseManager"
 
+    private var mGaid: String? = null
     override fun init(context: Context) {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener {task ->
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
                 if (isDebug()) {
@@ -38,13 +39,20 @@ class FirebaseManager: IPushManager {
         getFirebaseInstanceId(context)
     }
 
-    @WorkerThread
+
     override fun getGaid(context: Context): String {
-        val gaid= AdvertisingIdClient.getAdvertisingIdInfo(context).id.orEmpty()
-        if (isDebug()) {
-            logger_e(TAG, "getGaid()  = $gaid")
+        ThreadPoolUtil.executor("gaid"){
+            val gaid = try {
+                AdvertisingIdClient.getAdvertisingIdInfo(context).id.orEmpty()
+            }catch (e: Exception) {
+                ""
+            }
+            mGaid = gaid
+            if (isDebug()) {
+                logger_e(TAG, "getGaid()  = $gaid")
+            }
         }
-        return gaid
+        return mGaid.orEmpty()
     }
 
     override fun reportException(t: Throwable) {

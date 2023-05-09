@@ -44,5 +44,4 @@ if (isModule.toBoolean()) {
     include ':sdks:devoptions_op'
     include ':sdks:location'
     include ':sdks:cache'
-    include ':sdks:aes'
 }
