@@ -18,9 +18,6 @@
             <option value="$PROJECT_DIR$/sdks" />
             <option value="$PROJECT_DIR$/sdks/bigdata" />
             <option value="$PROJECT_DIR$/sdks/cache" />
-            <option value="$PROJECT_DIR$/sdks/devoptions" />
-            <option value="$PROJECT_DIR$/sdks/devoptions_op" />
-            <option value="$PROJECT_DIR$/sdks/location" />
             <option value="$PROJECT_DIR$/sdks/util" />
           </set>
         </option>

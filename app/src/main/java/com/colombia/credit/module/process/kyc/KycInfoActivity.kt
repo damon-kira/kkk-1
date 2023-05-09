@@ -34,7 +34,7 @@ import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
+import java.util.*
 
 @AndroidEntryPoint
 class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
@@ -355,4 +355,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
     override fun getNextType(): Int = STEP6
+
+    override fun onDestroy() {
+        mKycPicHelper.destroy()
+        super.onDestroy()
+    }
 }

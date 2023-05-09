@@ -80,4 +80,8 @@ class KycPicHelper {
                 }
             })
     }
+
+    fun destroy() {
+        mKycInfo.deleteImage()
+    }
 }

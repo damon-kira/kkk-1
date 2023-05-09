@@ -22,6 +22,11 @@ class CacheInit {
         return this
     }
 
+    fun setDebug(debug: Boolean): CacheInit {
+        this.isDebug = debug
+        return this
+    }
+
     fun isDebug() = isDebug
 
     fun getContext() = mContext

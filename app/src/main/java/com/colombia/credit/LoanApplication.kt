@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.cache.lib.CacheInit
+import com.colombia.credit.app.AppEnv
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
 
@@ -25,7 +26,7 @@ class LoanApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         mAppContext = this
-        CacheInit.get().setContext(this)
+        CacheInit.get().setContext(this).setDebug(AppEnv.DEBUG)
         initAes()
         ApplicationDelegate.init(this)
 //        PushManagerFactory.init(this)

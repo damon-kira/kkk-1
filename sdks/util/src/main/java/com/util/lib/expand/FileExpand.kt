@@ -7,6 +7,7 @@ import android.os.Environment
 import androidx.core.content.FileProvider
 import com.cache.lib.SharedPrefUser
 import com.util.lib.ThreadPoolUtil
+import com.util.lib.log.logger_d
 import java.io.File
 
 /**
@@ -132,7 +133,7 @@ fun getTempPhotoSavePath(context: Context, fileName: String): String{
 fun deleteDir(dir: File) {
     if (dir.isDirectory) {
         val children = dir.listFiles()
-        if (children != null && !children.isEmpty()) {
+        if (children != null && children.isNotEmpty()) {
             children.forEach {
                 if (it.isFile) {
                     it.delete()
@@ -156,6 +157,7 @@ fun deleteFiles(file: File?) {
 
 fun deleteFiles(filePath: String?) {
     try {
+        logger_d("debug_File","deleteFiles =$filePath")
         val file = File(filePath)
         deleteFiles(file)
     } catch (e: Exception) {
