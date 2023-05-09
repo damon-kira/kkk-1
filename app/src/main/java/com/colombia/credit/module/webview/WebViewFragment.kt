@@ -3,6 +3,7 @@ package com.colombia.credit.module.webview
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Bitmap
+import android.net.Uri
 import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
@@ -63,6 +64,10 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
     private var mEnterTime: Long = 0
 
     private val mBinding by binding(FragmentWebviewBinding::inflate)
+
+    private val mFileHelper by lazy(LazyThreadSafetyMode.NONE) {
+        FileHelper(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -189,13 +194,13 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
                 mBinding.toolbar.setText(title.orEmpty())
             }
 
-//            override fun onShowFileChooser(
-//                webView: WebView?,
-//                filePathCallback: ValueCallback<Array<Uri>>?,
-//                fileChooserParams: FileChooserParams?
-//            ): Boolean {
-//                return mZCFileHelper.onShowFileChooser(webView, filePathCallback, fileChooserParams)
-//            }
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                return mFileHelper.onShowFileChooser(webView, filePathCallback, fileChooserParams)
+            }
         }
 
         webView.setOnKeyListener(this)
