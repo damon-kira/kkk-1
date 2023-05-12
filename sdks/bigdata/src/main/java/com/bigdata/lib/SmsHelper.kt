@@ -12,10 +12,7 @@ import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 
-/**
- * Created by weishl on 2020/12/31
- *
- */
+
 object SmsHelper {
 
     private const val TAG = "debug_SmsHelper"

@@ -16,7 +16,9 @@ inline fun <reified VB : ViewBinding> ComponentActivity.binding() =
     }
 
 inline fun <reified VB : ViewBinding> Dialog.binding() = lazy {
-    inflateBinding<VB>(layoutInflater).apply { setContentView(root) }
+    inflateBinding<VB>(layoutInflater).apply {
+        setContentView(root)
+    }
 }
 
 inline fun <reified VB : ViewBinding> inflateBinding(layoutInflater: LayoutInflater): VB {

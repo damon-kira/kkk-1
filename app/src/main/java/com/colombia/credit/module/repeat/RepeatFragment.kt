@@ -3,13 +3,10 @@ package com.colombia.credit.module.repeat
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatProductInfo
 import com.colombia.credit.databinding.FragmentRepeatBinding
-import com.colombia.credit.expand.SimpleOnItemClickListener
 import com.colombia.credit.expand.getUnitString
-import com.colombia.credit.expand.setOnItemClickListener
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.SpaceItemDecoration
@@ -22,6 +19,7 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.util.lib.dp
 import com.util.lib.hide
+import com.util.lib.ifShow
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +31,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     private val mBinding by binding(FragmentRepeatBinding::inflate)
 
     private val mAdapter: RepeatProductAdapter by lazy {
-        RepeatProductAdapter(arrayListOf())
+        RepeatProductAdapter(arrayListOf(), mBinding.repeatRecyclerview)
     }
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
@@ -58,9 +56,13 @@ class RepeatFragment : BaseHomeLoanFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
+        mBinding.groupBtn.referencedIds = intArrayOf(R.id.etv_tag, R.id.repeat_tv_apply)
         setOffset()
         initRecyclerview(view)
-
+        mBinding.clContent.post {
+            val maxHeight = mBinding.clContent.height - mBinding.toolbar.bottom - 30f.dp()
+            mAdapter.setEmptyMaxHeight(maxHeight)
+        }
         mBinding.repeatTvApply.setBlockingOnClickListener {
             val leftNum = mHomeViewModel.mRspInfoLiveData.value?.GbiDSBdW ?: 0
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
@@ -81,7 +83,6 @@ class RepeatFragment : BaseHomeLoanFragment() {
         mBinding.includeOrders.tvBtn.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
         }
-
         initObserver()
     }
 
@@ -95,55 +96,74 @@ class RepeatFragment : BaseHomeLoanFragment() {
             )
         )
         mBinding.repeatRecyclerview.itemAnimator?.changeDuration = 0
-        mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
-            override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                val info = mHomeViewModel.mRspInfoLiveData.value
-                val maxNum = info?.A04fSYQdHM ?: 0
-                val item = mAdapter.getItemData<RepeatProductInfo>(position)
-                if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
-                    if (maxNum > 0) {
-                        mHintDialog.setMessage(getString(R.string.toast_product_up, maxNum.toString()))
-                            .setOnClickListener { }
-                        getBaseActivity()?.addDialog(mHintDialog)
-                    }
-                    return
+        mAdapter.mWaitListener = { position ->
+            val data = mAdapter.getWaitItemData(position)
+            Launch.skipRepeatConfirmActivity(getSupportContext(),"", orderIds = data?.tQXtG0FYb.orEmpty())
+        }
+        mAdapter.mNormalListener = { position ->
+            val finalPosi = mAdapter.getNormalItemPosition(position)
+            val info = mHomeViewModel.mRspInfoLiveData.value
+            val maxNum = info?.A04fSYQdHM ?: 0
+            val item = mAdapter.getItemData<RepeatProductInfo>(finalPosi)
+            if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
+                if (maxNum > 0) {
+                    mHintDialog.setMessage(
+                        getString(
+                            R.string.toast_product_up,
+                            maxNum.toString()
+                        )
+                    ).setOnClickListener { }
+                    getBaseActivity()?.addDialog(mHintDialog)
                 }
+            } else {
                 val leftNum = info?.GbiDSBdW ?: 0 // 最大可申请笔数
                 if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0) {
                     toast(R.string.toast_min_product)
-                    return
+                } else {
+                    item?.change()
+                    mAdapter.notifyItemChanged(position)
                 }
-                item?.change()
-                mAdapter.notifyItemChanged(position)
             }
-        })
+        }
     }
 
     private fun initObserver() {
         mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
             mAdapter.setItems(it)
-            val params = if (it?.isNotEmpty() == true) {
-                it.first().g7tzi.orEmpty()
-            } else "0"
-            mBinding.etvTag.text =
-                getString(R.string.hosta_s, getUnitString(params))
+            val params = it?.firstOrNull()?.g7tzi ?: "0"
+            mBinding.groupBtn.ifShow(!it.isNullOrEmpty())
+            mBinding.etvTag.text = getString(R.string.hosta_s, getUnitString(params))
         }
 
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
+            mAdapter.setWaitItems(it.Jg4g2)
+
             val data = it.gQ1J
             if (data == null || data.isEmpty()) {
                 mBinding.includeOrders.llContent.hide()
+                mOrderIds = null
                 return@observe
             }
             mBinding.includeOrders.llContent.show()
             mBinding.includeOrders.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
             mBinding.includeOrders.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
             mOrderIds = data.QLPGXTNU?.joinToString(",")
+            setOffset()
+        }
+
+        mHomeViewModel.waitConfirmLiveData.observe(viewLifecycleOwner) {
+            if (it == null || it.isEmpty()) {
+                mBinding.includeWait.root.hide()
+                return@observe
+            }
         }
     }
 
     private fun setOffset() {
-//        if (mAdapter.itemCount < 3) return
+        if (mAdapter.itemCount < 3) {
+            changeListPadding(0)
+            return
+        }
         if (mBinding.etvTag.top > 0) {
             changeListPadding(mBinding.etvTag.top)
         } else {
@@ -155,7 +175,9 @@ class RepeatFragment : BaseHomeLoanFragment() {
     }
 
     private fun changeListPadding(offset: Int) {
-        val padding = mBinding.clContent.height - offset
+        val padding = if (offset == 0) {
+            0
+        } else mBinding.clContent.height - offset
         mBinding.repeatRecyclerview.setPadding(
             mBinding.repeatRecyclerview.paddingLeft,
             mBinding.repeatRecyclerview.paddingTop,

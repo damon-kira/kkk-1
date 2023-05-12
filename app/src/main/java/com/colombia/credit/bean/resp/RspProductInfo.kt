@@ -2,7 +2,7 @@ package com.colombia.credit.bean.resp
 
 import com.colombia.credit.expand.transform
 
-class RspProductInfo{
+class RspProductInfo {
     val yqGhrjOF2: String? = null // 最高可借金额，实际还款金额，借款金额
         get() = field?.transform()
     val HyulExS1ei: String? = null //客户名字
@@ -12,8 +12,18 @@ class RspProductInfo{
     val EqyO: String = "1"// 客户类型 1 :新客户 0 老客户 2 被拉黑客户
     val Wg5u: String? = null //客户类型 A :正常用户 G:谷歌审查用户
 
-    // 状态 00：新用户确定额度,01：订单审核中,02：待还款,03:逾期,04:拒单，05：认证未通过，新用户起始页，06:被拒到期 07:复借客户没有待还订单、未确定订单  08：复借客户有待还订单，没有待确定订单  09：复借客户没有待还订单，有待确定订单 10：复借客户既有待还订单也有待确定订单
-    val xXkO: String = "05"
+    // 状态 00：新用户确定额度,
+    // 01：订单审核中
+    // 02：待还款,
+    // 03:逾期,
+    // 04:拒单，
+    // 05：认证未通过，新用户起始页，
+    // 06:被拒到期
+    // 07:复借客户没有待还订单、未确定订单
+    // 08：复借客户有待还订单，没有待确定订单
+    // 09：复借客户没有待还订单，有待确定订单
+    // 10：复借客户既有待还订单也有待确定订单
+    var xXkO: String = "05"
     val vzXq3u: String? = null// 还款日期
     val y5MbVG: Int = 0// 总期数
     val y7GxqEUf: Int = 0// 当前期数
@@ -26,35 +36,26 @@ class RspProductInfo{
     val fyEV: ArrayList<FirstConfirmInfo>? = null // 新客户确定额度首页
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
     val gQ1J: RepeatRepayInfo? = null // 老客户待还
-//    val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
+    val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
 
     val GbiDSBdW: Int = 0// 剩余申请可贷笔数
 }
 
-//"handAt":100,//到手金额
-//"applyAt":100,//贷款金额,
-//"sumPer": 2,//期数
-//"backAt":110,// 应还金额
-//"moreAt":222,//利息
-//"applyInteger":"7,14,90,108",//贷款周期,
-//"reBackDate":"2023-05-01",//还款时间
-//"applyId":23,// 产品id
-//"applyCode":"RTS"// 产品code
 // 首贷产品信息
 class FirstConfirmInfo {
+    //到手金额
     val u5kCNqk: String? = null
-        //到手金额
         get() = field?.transform()
+    //贷款金额,
     val RIoDBuyjO: String? = null
-        //贷款金额,
         get() = field?.transform()
     val y5MbVG: String? = null//期数
+    // 应还金额
     val b6O2Joc: String? = null
-        // 应还金额
         get() = field?.transform()
+    //利息
     val ihm3G2: String? = null
-        //利息
         get() = field?.transform()
     val WTvE5G: String? = null//贷款周期  "7,14,90,108"
     val vzXq3u: String? = null // 还款时间"2023-05-01"
@@ -155,13 +156,15 @@ class RepeatRepayInfo {
 //}
 //]
 // 复贷待确认订单
-//class RepeatWaitConfirmInfo {
-//    val yqGhrjOF2: Int = 0//范围金额最大值
-//    val tQXtG0FYb: String? = null // 批次号
-//    val I4Ai: ArrayList<WaitConfirm>? = null // 产品信息
-//}
+class RepeatWaitConfirmInfo {
+    //范围金额最大值
+    val yqGhrjOF2: String? = null
+        get() = field?.transform()
+    val tQXtG0FYb: String? = null // 批次号
+    val I4Ai: ArrayList<WaitConfirm>? = null // 产品信息
+}
 
-//class WaitConfirm {
-//    val S9ig78H: String? = null//产品名称
-//    val Gk9MGh: String? = null//产品logo
-//}
+class WaitConfirm {
+    val S9ig78H: String? = null//产品名称
+    val Gk9MGh: String? = null//产品logo
+}

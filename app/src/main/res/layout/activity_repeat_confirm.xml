@@ -113,18 +113,20 @@
                     tools:text="$ 9.000" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 提示信息 -->
-            <!--            <com.colombia.credit.view.TextViewDrawable-->
-            <!--                style="@style/marginLeftAndRight16"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:drawableStart="@drawable/shape_error_hint"-->
-            <!--                android:drawablePadding="4dp"-->
-            <!--                android:text="@string/repeat_confirm_hint"-->
-            <!--                android:textColor="@color/color_333333"-->
-            <!--                android:textSize="10sp"-->
-            <!--                android:visibility="gone"-->
-            <!--                app:isAlignCenter="false" />-->
+            <com.colombia.credit.view.TextViewDrawable
+                android:id="@+id/tvd_auto"
+                style="@style/marginLeftAndRight16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:drawableStart="@drawable/shape_error_hint"
+                android:drawablePadding="4dp"
+                android:text="@string/repeat_confirm_hint"
+                android:textColor="@color/color_333333"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:isAlignCenter="false"
+                tools:visibility="visible" />
             <!-- 确认按钮 -->
             <TextView
                 android:id="@+id/tv_confirm"
@@ -141,19 +143,20 @@
                 android:textStyle="bold" />
 
             <!-- 取消按钮 -->
-            <!--            <com.colombia.credit.view.TextViewLine-->
-            <!--                android:id="@+id/tv_cancel"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:padding="4dp"-->
-            <!--                android:text="@string/confirm_cancel"-->
-            <!--                android:textColor="@color/color_666666"-->
-            <!--                android:textSize="16sp"-->
-            <!--                android:visibility="gone"-->
-            <!--                app:tvl_center="false"-->
-            <!--                app:tvl_isShow="true" />-->
+            <com.colombia.credit.view.TextViewLine
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:padding="4dp"
+                android:text="@string/confirm_cancel"
+                android:textColor="@color/color_666666"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:tvl_center="false"
+                app:tvl_isShow="true"
+                tools:visibility="visible" />
 
             <!-- 详细订单信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout

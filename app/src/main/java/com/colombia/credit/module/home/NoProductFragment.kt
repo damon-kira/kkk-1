@@ -3,7 +3,7 @@ package com.colombia.credit.module.home
 import android.os.Bundle
 import android.view.View
 import com.colombia.credit.R
-import com.colombia.credit.databinding.LayoutNoProductBinding
+import com.colombia.credit.databinding.FragmentNoProductBinding
 import com.colombia.credit.expand.getUnitString
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NoProductFragment : BaseHomeLoanFragment() {
 
-    private val mBinding by binding(LayoutNoProductBinding::inflate)
+    private val mBinding by binding(FragmentNoProductBinding::inflate)
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 

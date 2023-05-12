@@ -6,6 +6,7 @@ import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
 
 
+// 复贷确认额度
 class RepeatConfirmViewModel @Inject constructor(private val repository: RepeatConfirmRepository) :
     BaseViewModel() {
 

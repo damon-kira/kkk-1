@@ -157,12 +157,12 @@ class HomeFragment : BaseHomeFragment() {
                 }
             }
             UserStatus.STATUS_REPEAT -> {
-                val empty = rspInfo.jBRR?.isEmpty() ?: true
-                if (empty){
-                    mNoProductFragment
-                } else {
-                    getInstance(getSupportContext(), RepeatFragment::class.java, null)
-                }
+//                val empty = rspInfo.jBRR?.isEmpty() ?: true
+//                if (empty){
+//                    mNoProductFragment
+//                } else {
+                getInstance(getSupportContext(), RepeatFragment::class.java, null)
+//                }
             }
             UserStatus.STATUS_BLACK -> {
                 getInstance(getSupportContext(), BlackFragment::class.java, null)

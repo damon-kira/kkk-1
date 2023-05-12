@@ -7,18 +7,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bigdata.lib.loanPageStayTime
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspRepeatCalcul
 import com.colombia.credit.databinding.ActivityRepeatConfirmBinding
 import com.colombia.credit.databinding.LayoutRepeatItemProductBinding
+import com.colombia.credit.dialog.CancelAutoHintDialog
 import com.colombia.credit.dialog.UploadDialog
 import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.adapter.linearLayoutManager
+import com.colombia.credit.module.firstconfirm.AutoConfirmViewModel
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.upload.UploadViewModel
@@ -31,19 +34,19 @@ import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.MainHandler
+import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBarColor
-import com.util.lib.TimerUtil
-import com.util.lib.dp
 import com.util.lib.log.logger_d
-import com.util.lib.time2Str
+import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
         const val EXTRA_IDS = "key_ids"
+        const val EXTRA_ORDER_IDS = "key_order_ids"
     }
 
     private val mBinding by binding<ActivityRepeatConfirmBinding>()
@@ -52,6 +55,8 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         ConfirmProductAdapter(arrayListOf())
     }
 
+    private val mAutoConfirmModel by lazyViewModel<AutoConfirmViewModel>()
+
     private val mConfirmViewModel by lazyViewModel<FirstConfirmViewModel>()
 
     private val mInfoViewModel by lazyViewModel<RepeatConfirmViewModel>()
@@ -59,6 +64,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private var mPrdIds = "" // 上一个页面带过来的产品id
+    private var mOrderId = "" // 复贷有待确认订单时传过来
     private var mBankNo = ""
 
     private val mProcessDialog by lazy {
@@ -71,6 +77,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mStartTime = System.currentTimeMillis()
         setStatusBarColor(Color.WHITE, true)
         mPrdIds = intent.getStringExtra(EXTRA_IDS).orEmpty()
+        mOrderId = intent.getStringExtra(EXTRA_ORDER_IDS).orEmpty()
         mBinding.toolbar.setCustomClickListener {
             showCustomDialog()
         }
@@ -78,10 +85,12 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             finish()
         }
         setViewModelLoading(mInfoViewModel)
+        setViewModelLoading(mAutoConfirmModel)
         setAdapter()
         mBinding.aivArrow.setBlockingOnClickListener(this)
         mBinding.tvConfirm.setBlockingOnClickListener(this)
         mBinding.tvBankNo.setBlockingOnClickListener(this)
+        mBinding.tvCancel.setBlockingOnClickListener(this)
 
         mBinding.tvLoanList.text = getString(
             R.string.loan_success_data,
@@ -120,9 +129,12 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         }
 
         mInfoViewModel.mProListLiveData.observerNonSticky(this) {
+            // 获取自动确认确认额度时间
+            mAutoConfirmModel.getDownTimeMill(mOrderId, it.firstOrNull()?.Bwh8vVa5wn.orEmpty())
             addHorizontalProduct(it)
             mAdapter.setItems(it)
         }
+
         LiveDataBus.getLiveData(BankEvent::class.java).observerNonSticky(this) {
             if (it.evnet == BankEvent.EVENT_BANK) {
                 if (!it.params.isNullOrEmpty()) {
@@ -132,13 +144,44 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             }
         }
         mUploadViewModel.resultLiveData.observerNonSticky(this) {
-            if(it.isSuccess()) {
+            if (it.isSuccess()) {
                 confirm()
             } else {
                 mProcessDialog.dismiss()
                 it.ShowErrorMsg(::reqPermission)
             }
         }
+
+        mAutoConfirmModel.downTimerLiveData.observerNonSticky(this) {
+            if (it < 0) {
+                // 获取数据，自动确认额度接口
+                hideAutoView()
+                reqPermission()
+            } else {
+                mBinding.tvdAuto.show()
+                val param = timeToTimeStr(it, TimeUnit.SECONDS, true)
+                val text = getString(R.string.auto_confirm_hint, param)
+                val span = SpannableImpl().init(text)
+                    .color(ContextCompat.getColor(this, R.color.color_FE4F4F), param)
+                    .getSpannable()
+                mBinding.tvdAuto.text = span
+            }
+        }
+
+        mAutoConfirmModel.cancelLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                hideAutoView()
+            } else it.ShowErrorMsg(::cancelLoan)
+        }
+    }
+
+    private fun cancelLoan() {
+        mAutoConfirmModel.cancel(mOrderId, mPrdIds)
+    }
+
+    private fun hideAutoView() {
+        mBinding.tvdAuto.hide()
+        mBinding.tvCancel.hide()
     }
 
     private fun setText(product: String, interest: String, loan: String) {
@@ -186,6 +229,14 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                     getOrderIds(),
                     mBankNo
                 )
+            }
+            R.id.tv_cancel -> {
+                CancelAutoHintDialog(this)
+                    .setAmount(mAdapter.getTotalAmount().toString())
+                    .setConfirmListener {
+                        cancelLoan()
+                    }
+                    .show()
             }
         }
     }

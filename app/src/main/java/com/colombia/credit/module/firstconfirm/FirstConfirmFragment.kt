@@ -1,10 +1,13 @@
 package com.colombia.credit.module.firstconfirm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.bigdata.lib.loanPageStayTime
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentFirstConfirmBinding
+import com.colombia.credit.dialog.CancelAutoHintDialog
 import com.colombia.credit.dialog.UploadDialog
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
@@ -23,12 +26,13 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.MainHandler
+import com.util.lib.*
+import com.util.lib.log.logger_d
+import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
-/**
- * 首贷确认额度页面
- */
+// 首贷确认额度页面
 @AndroidEntryPoint
 class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
@@ -40,6 +44,8 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
     private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
+    private val mAutoConfirmModel by lazyViewModel<AutoConfirmViewModel>()
+
     override fun contentView(): View = mBinding.root
 
     private var time = 0L
@@ -50,6 +56,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
             field = value
         }
     private var mProductId: String? = null
+    private var mProductCode: String? = null
     private var mLoanAmount: String? = null// 借款金额
 
     private val mProcessDialog by lazy {
@@ -60,8 +67,13 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         mHomeViewModel.getHomeInfo()
     }
 
+    override fun onRefresh() {
+        getTime()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycle.addObserver(mAutoConfirmModel)
         time = System.currentTimeMillis()
         setCustomListener(mBinding.toolbar)
         initObserver()
@@ -72,6 +84,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         mBinding.confirmTvApply.setBlockingOnClickListener(this)
         mBinding.aivJian.setBlockingOnClickListener(this)
         mBinding.aivPlus.setBlockingOnClickListener(this)
+        mBinding.tvCancel.setBlockingOnClickListener(this)
     }
 
     private fun reqPermission() {
@@ -90,6 +103,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
     }
 
     private fun initObserver() {
+        setViewModelLoading(mAutoConfirmModel)
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) { info ->
             mBinding.tvMax.text = getUnitString(info.yqGhrjOF2.orEmpty())
             mLoanBankNo = info.yMiEwn3
@@ -120,8 +134,9 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                         isLock = true
                     }
                 }
-
                 mProductId = firstConfirmInfo.ZXEUWfOy
+                mProductCode = firstConfirmInfo.XbCqhjDV
+                getTime()
                 mLoanAmount = firstConfirmInfo.RIoDBuyjO
                 val amount = getUnitString(firstConfirmInfo.RIoDBuyjO.orEmpty())
                 mBinding.tvAmount.text = amount
@@ -141,7 +156,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                     mProcessDialog.dismiss()
                     mHomeViewModel.getHomeInfo()
                     Launch.skipApplySuccessActivity(getSupportContext())
-                },260)
+                }, 260)
             } else {
                 mProcessDialog.dismiss()
                 it.ShowErrorMsg(::confirmLoan)
@@ -164,6 +179,41 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
                 it.ShowErrorMsg(::reqPermission)
             }
         }
+
+        mAutoConfirmModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it < 0) {
+                logger_d(TAG, "initObserver: time == $it")
+                // 获取数据，自动确认额度接口
+                mBinding.tvAuto.hide()
+                mBinding.tvCancel.hide()
+                reqPermission()
+            } else {
+                mBinding.tvAuto.show()
+                mBinding.tvCancel.show()
+                val param = timeToTimeStr(it, TimeUnit.SECONDS,true)
+                val text = getString(R.string.auto_confirm_hint, param)
+                val span = SpannableImpl().init(text)
+                    .color(ContextCompat.getColor(getSupportContext(), R.color.color_FE4F4F), param)
+                    .getSpannable()
+                mBinding.tvAuto.text = span
+            }
+        }
+
+        mAutoConfirmModel.cancelLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                mAutoConfirmModel.stopCountDown()
+                mBinding.tvAuto.hide()
+                mBinding.tvCancel.hide()
+            } else it.ShowErrorMsg(::cancelLoan)
+        }
+    }
+
+    private fun getTime() {
+        mAutoConfirmModel.getDownTimeMill("", mProductCode.orEmpty())
+    }
+
+    private fun cancelLoan(){
+        mAutoConfirmModel.cancel("", mProductId.orEmpty())
     }
 
     override fun onClick(v: View?) {
@@ -190,6 +240,14 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
             }
             R.id.aiv_plus -> {
                 toast(R.string.toast_max_amount)
+            }
+            R.id.tv_cancel -> {
+                CancelAutoHintDialog(getSupportContext())
+                    .setAmount(mLoanAmount.orEmpty())
+                    .setConfirmListener {
+                        cancelLoan()
+                    }
+                    .show()
             }
         }
     }

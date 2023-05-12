@@ -23,8 +23,8 @@
         app:tl_back_text_color="@color/white"
         app:tl_back_visibility="gone"
         app:tl_show_custom_icon="true"
-        app:tl_title="@string/confirm_title"
-        app:tl_text_gravity="center" />
+        app:tl_text_gravity="center"
+        app:tl_title="@string/confirm_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_content"
@@ -341,18 +341,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    <com.colombia.credit.view.TextViewDrawable-->
-    <!--        style="@style/marginLeftAndRight16"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:drawableLeft="@drawable/ic_time"-->
-    <!--        android:drawablePadding="4dp"-->
-    <!--        android:text="@string/auto_confirm_hint"-->
-    <!--        android:textColor="@color/color_333333"-->
-    <!--        android:textSize="10sp"-->
-    <!--        app:isAlignCenter="false"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/ll_content" />-->
+    <com.colombia.credit.view.TextViewDrawable
+        android:id="@+id/tv_auto"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:drawableStart="@drawable/ic_time"
+        android:drawablePadding="4dp"
+        android:text="@string/auto_confirm_hint"
+        android:textColor="@color/color_333333"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:isAlignCenter="false"
+        app:layout_constraintTop_toBottomOf="@id/ll_content"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/confirm_tv_apply"
@@ -367,7 +370,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/tv_cancel" />
 
     <com.colombia.credit.view.textview.EasyTextView
         android:layout_width="wrap_content"
@@ -388,15 +391,19 @@
         app:layout_constraintBottom_toBottomOf="@id/confirm_tv_apply"
         app:layout_constraintRight_toRightOf="@id/confirm_tv_apply" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tv_cancel"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginBottom="20dp"-->
-    <!--        android:text="@string/confirm_cancel"-->
-    <!--        android:textColor="@color/color_666666"-->
-    <!--        android:textSize="16sp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--        app:layout_constraintRight_toRightOf="parent" />-->
+    <com.colombia.credit.view.TextViewLine
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/confirm_cancel"
+        android:textColor="@color/color_666666"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:tvl_center="false"
+        app:tvl_isShow="true"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

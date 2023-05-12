@@ -147,4 +147,14 @@ interface ApiService {
     @POST("sWatUY/AaHOW")
     @Headers("kio8YGhwe6:mekK1MgIDG")
     fun getRepayDetail(@Body body: RequestBody):Flowable<BaseResponse<RspRepayDetail>>
+
+    // 获取还款详情
+    @POST("YGEVMl5jL/tvCwKuE")
+    @Headers("kio8YGhwe6:Xy6rDs1FkB")
+    fun getCountdownTime(@Body body: RequestBody):Flowable<BaseResponse<Long>>
+
+    // 获取还款详情
+    @POST("QFnzPxjvvn/qLLgs7QX7")
+    @Headers("kio8YGhwe6:Tj8nHs5RqN")
+    fun cancelAuto(@Body body: RequestBody):Flowable<BaseResponse<RspResult>>
 }

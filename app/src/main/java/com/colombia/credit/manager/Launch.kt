@@ -118,9 +118,14 @@ object Launch {
         launch(context, UploadActivity::class.java)
     }
 
-    fun skipRepeatConfirmActivity(context: Context, ids: String) {
+    /**
+     * @param ids 产品id
+     * @param orderIds 只有复贷 待确认订单点击时使用，其它情况下为空
+     */
+    fun skipRepeatConfirmActivity(context: Context, ids: String, orderIds: String? = null) {
         val intent = Intent(context, RepeatConfirmActivity::class.java)
         intent.putExtra(RepeatConfirmActivity.EXTRA_IDS, ids)
+        intent.putExtra(RepeatConfirmActivity.EXTRA_ORDER_IDS, orderIds)
         launch(context, RepeatConfirmActivity::class.java, intent)
     }
 

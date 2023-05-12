@@ -5,6 +5,7 @@ import com.colombia.credit.di.ViewModelKey
 import com.colombia.credit.module.appupdate.AppUpdateViewModel
 import com.colombia.credit.module.banklist.BankCardViewModel
 import com.colombia.credit.module.custom.CustomViewModel
+import com.colombia.credit.module.firstconfirm.AutoConfirmViewModel
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
 import com.colombia.credit.module.history.HistoryViewModel
 import com.colombia.credit.module.home.HomeLoanViewModel
@@ -120,4 +121,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CustomViewModel::class)
     abstract fun bindCustomViewModel(viewModel: CustomViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AutoConfirmViewModel::class)
+    abstract fun bindAutoConfirmViewModel(viewModel: AutoConfirmViewModel): ViewModel
 }

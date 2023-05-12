@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    fun startCountdown(type: Int = 0, mobile: String) {
+    fun startCountdown(type: Int = CountDownHelper.TYPE_SMS, mobile: String) {
         mCountDownHelper.stopCountdown()
         mCountDownHelper.startCountDown(type = type, mobile = mobile)
     }

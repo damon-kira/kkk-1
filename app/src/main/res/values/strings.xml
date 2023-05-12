@@ -204,7 +204,7 @@
     <string name="uploading_text">Su límite de crédito se evalúa utilizando nuestro  propio algoritmo patentado. La evaluación se basa en el  análisis de la información recopilada de usted. Espere  pacientemente los resultados</string>
 
     <!--  确认借款页面 -->
-    <string name="auto_confirm_hint">Si no cancela la solicitud de pago después de que finalice la cuenta regresiva, automáticamente solicitará el préstamo por usted</string>
+    <string name="auto_confirm_hint">%s | Si no cancela la solicitud de pago después de que finalice la cuenta regresiva, automáticamente solicitará el préstamo por usted</string>
     <string name="confirm_btn">Obtener dinero ahora</string>
     <string name="confirm_cancel">No necesito dinero</string>
     <string name="confirm_apply_hint">El 99% de los usuarios lo eligen</string>
@@ -225,7 +225,7 @@
     <string name="loan_bank">Cuenta bancaria receptora</string>
     <string name="loan_stage">Número de plazos</string>
     <string name="laon_detail_text">Plan de pago esperado</string>
-    <string name="repeat_confirm_hint">Si el dinero no se abandona después de las 30:26, se confirmará automáticamente</string>
+    <string name="repeat_confirm_hint">Si el dinero no se abandona después de las %s, se confirmará automáticamente</string>
     <string name="repeat_confir_title">Cantidad total del préstamo</string>
     <string name="repeat_confirm">Confirmación de préstamo</string>
     <string name="total_amount">Cantidad total realmente recibida</string>
@@ -335,4 +335,9 @@
     <string name="extension_btn">Prórroga</string>
     <string name="apply_status">Estatus de la solicitud</string>
     <string name="amount_88888">$ 88.888</string>
+
+    <string name="cancel_auto_hint">Considere cuidadosamente, después de  cancelar la solicitud de confirmación  automática, la nueva solicitud puede ser  rechazada, opere con precaución.  ¿Estás seguro de que no quieres el dinero?</string>
+    <string name="consider">Necesito dinero</string>
+    <string name="dialog_confirm_cancel">Confirmar cancelar</string>
+    <string name="wait_confirm">Tomar el dinero</string>
 </resources>

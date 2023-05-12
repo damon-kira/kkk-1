@@ -107,6 +107,10 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return findViewById(viewId)
     }
 
+    fun <T : View> getView(rootView: View, @IdRes viewId: Int): T {
+        return rootView.findViewById(viewId)
+    }
+
     fun setTextColor(@IdRes viewId: Int, @ColorRes colorRes: Int) {
         findViewById<TextView>(viewId)
             .setTextColor(getContext().resources.getColor(colorRes))

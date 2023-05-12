@@ -1,9 +1,6 @@
 package com.colombia.credit.module.home
 
-import com.colombia.credit.bean.resp.RepeatProductInfo
-import com.colombia.credit.bean.resp.RepeatRepayInfo
-import com.colombia.credit.bean.resp.RspCertProcessInfo
-import com.colombia.credit.bean.resp.RspProductInfo
+import com.colombia.credit.bean.resp.*
 import com.colombia.credit.expand.*
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
@@ -19,7 +16,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
 
     val repeatProductLiveData = generatorLiveData<ArrayList<RepeatProductInfo>>() // 复贷产品列表
     val repeatRepayLiveData = generatorLiveData<RepeatRepayInfo>() // 复贷还款列表
-//    val repeatConfirmLiveData = generatorLiveData<ArrayList<RepeatWaitConfirmInfo>>() // 复贷待确认产品列表
+    val waitConfirmLiveData = generatorLiveData<ArrayList<RepeatWaitConfirmInfo>?>() // 复贷待确认产品列表
 
     val mRspInfoLiveData = generatorLiveData<RspProductInfo>()
 
@@ -34,14 +31,14 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
 
-                    if (repeatProductLiveData.value != info.jBRR) {
+                    if (repeatProductLiveData.value != info.jBRR || repeatProductLiveData.value == null) {
                         repeatProductLiveData.postValue(info.jBRR)
                     }
 
                     repeatRepayLiveData.postValue(info.gQ1J)
-//                    info.Jg4g2?.let {
-//                        repeatConfirmLiveData.postValue(it)
-//                    }
+
+                    waitConfirmLiveData.postValue(info.Jg4g2)
+
                     mRspInfoLiveData.postValue(info)
                 }
             }
@@ -72,7 +69,7 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
         }
     }
 
-    fun clearData(){
+    fun clearData() {
         _homeLiveData.value = BaseResponse(ResponseCode.OTHER_ERROR_CODE, RspProductInfo(), null)
     }
 }

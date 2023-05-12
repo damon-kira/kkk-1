@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/home_aiv"
@@ -33,7 +34,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:visibility="visible" />
+
+    <!-- 待确认订单 -->
+    <include
+        android:id="@+id/include_wait"
+        style="@style/marginLeftAndRight16"
+        layout="@layout/layout_wait_order_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/include_orders"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/repeat_recyclerview"
@@ -43,7 +57,7 @@
         android:layout_marginTop="12dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include_orders" />
+        app:layout_constraintTop_toBottomOf="@id/include_wait" />
 
     <TextView
         android:id="@+id/repeat_tv_apply"
@@ -80,5 +94,12 @@
         app:layout_constraintBottom_toBottomOf="@id/repeat_tv_apply"
         app:layout_constraintRight_toRightOf="@id/repeat_tv_apply"
         tools:text="@string/hosta_s" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="etv_tag,repeat_tv_apply"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

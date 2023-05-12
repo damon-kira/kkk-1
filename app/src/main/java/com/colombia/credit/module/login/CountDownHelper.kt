@@ -4,10 +4,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.MediatorLiveData
 import com.util.lib.TimerUtil
 
-/**
- * Created by weishl on 2022/4/15
- *
- */
+// 倒计时
 class CountDownHelper {
 
     companion object {
@@ -16,6 +13,10 @@ class CountDownHelper {
         private object Holder {
             val INSTANCE = CountDownHelper()
         }
+
+        const val TYPE_SMS = 1
+        const val TYPE_VOICE = 2
+        const val TYPE_AUTO = 3
     }
 
     private var mCurrCodeType = -1 // 短信 or 语音
