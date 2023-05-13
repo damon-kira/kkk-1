@@ -15,11 +15,10 @@ import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
 import com.colombia.credit.module.adapter.BaseViewHolder
-import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils
 import com.util.lib.dp
-
-internal typealias Listener = ((Int) -> Unit)
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: RecyclerView) :
     BaseRecyclerViewAdapter<RepeatProductInfo>(items, R.layout.layout_repeat_product_item) {
@@ -37,12 +36,7 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val holder = when (viewType) {
             TYPE_NORMAL -> {
-                val holder = super.onCreateViewHolder(parent, viewType)
-                holder.itemView.setBlockingOnClickListener {
-                    val position = rv.getChildLayoutPosition(holder.itemView)
-                    mNormalListener?.invoke(position)
-                }
-                holder
+                super.onCreateViewHolder(parent, viewType)
             }
             TYPE_EMPTY -> {
                 BaseViewHolder(
@@ -54,12 +48,7 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
                 BaseViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(R.layout.layout_wait_order_item, parent, false)
-                ).also { holder ->
-                    holder.getView<TextView>(R.id.etv_btn).setBlockingOnClickListener {
-                        val position = rv.getChildLayoutPosition(holder.itemView)
-                        mWaitListener?.invoke(position)
-                    }
-                }
+                )
             }
         }
         return holder
@@ -85,10 +74,6 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
         if (position > items.size) return
         val item = items[position]
         holder.setText(R.id.tv_amount, getUnitString(item.yqGhrjOF2))
-
-        holder.getView<TextView>(R.id.etv_btn).setBlockingOnClickListener {
-            mWaitListener?.invoke(position)
-        }
 
         val llItemLayout = holder.getView<LinearLayout>(R.id.ll_product)
         val products = item.I4Ai
@@ -129,9 +114,10 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     }
 
     private fun convertEmpty(holder: BaseViewHolder, position: Int) {
+        val scale = 1 - min(mWaitItems.size, 3) / 10f
         holder.getView<LinearLayout>(R.id.ll_empty).apply {
             updateLayoutParams<RecyclerView.LayoutParams> {
-                height = mEmptyMaxHeight
+                height = (mEmptyMaxHeight * scale).roundToInt()
             }
             requestLayout()
             parent?.requestLayout()
@@ -215,8 +201,4 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     }
 
     fun getWaitItemCount() = mWaitItems.size
-
-    var mWaitListener: Listener? = null
-
-    var mNormalListener: Listener? = null
 }

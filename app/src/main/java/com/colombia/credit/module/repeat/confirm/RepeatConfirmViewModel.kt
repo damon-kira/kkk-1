@@ -10,12 +10,13 @@ import javax.inject.Inject
 class RepeatConfirmViewModel @Inject constructor(private val repository: RepeatConfirmRepository) :
     BaseViewModel() {
 
+    // 复贷产品首页 勾选产品进入
     val mConfirmInfoLiveData = generatorLiveData<BaseResponse<RspRepeatCalcul>>()
 
     val mProListLiveData = generatorLiveData<ArrayList<RspRepeatCalcul.CalculDetail>>()
 
-    fun getConfirmInfo(productIds: String) {
-        mConfirmInfoLiveData.addSourceLiveData(repository.getConfirmInfo(productIds)) {
+    fun getConfirmInfo(productIds: String = "", orderId:String = "") {
+        mConfirmInfoLiveData.addSourceLiveData(repository.getConfirmInfo(productIds, orderId)) {
             mConfirmInfoLiveData.postValue(it)
 
             if (it.isSuccess()) {

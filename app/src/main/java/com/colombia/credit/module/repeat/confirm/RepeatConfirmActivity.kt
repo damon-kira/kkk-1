@@ -192,7 +192,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun getInfo() {
-        mInfoViewModel.getConfirmInfo(productIds = mPrdIds)
+        mInfoViewModel.getConfirmInfo(productIds = mPrdIds, orderId = mOrderId)
 
     }
 

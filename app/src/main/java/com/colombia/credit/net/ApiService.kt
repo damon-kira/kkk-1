@@ -128,10 +128,10 @@ interface ApiService {
     @POST("tZyFyDwU/wD9X")
     @Headers("kio8YGhwe6:UzB5rkIgVd")
     fun logout(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
-
+    // 复借客户勾选产品进入确认金额期限页面
     @POST("6SgT4/N1WQmiq")
     @Headers("kio8YGhwe6:agNcUkPUCu")
-    fun getRepeatCalcul(@Body body: RequestBody):Flowable<BaseResponse<RspRepeatCalcul>>
+    fun getRepeatCalcul(@Body body: RequestBody): Flowable<BaseResponse<RspRepeatCalcul>>
 
     // 历史订单
     @POST("S56sI1etMP/bkz")
@@ -146,15 +146,15 @@ interface ApiService {
     // 获取还款详情
     @POST("sWatUY/AaHOW")
     @Headers("kio8YGhwe6:mekK1MgIDG")
-    fun getRepayDetail(@Body body: RequestBody):Flowable<BaseResponse<RspRepayDetail>>
+    fun getRepayDetail(@Body body: RequestBody): Flowable<BaseResponse<RspRepayDetail>>
 
     // 获取还款详情
     @POST("YGEVMl5jL/tvCwKuE")
     @Headers("kio8YGhwe6:Xy6rDs1FkB")
-    fun getCountdownTime(@Body body: RequestBody):Flowable<BaseResponse<Long>>
+    fun getCountdownTime(@Body body: RequestBody): Flowable<BaseResponse<Long>>
 
     // 获取还款详情
     @POST("QFnzPxjvvn/qLLgs7QX7")
     @Headers("kio8YGhwe6:Tj8nHs5RqN")
-    fun cancelAuto(@Body body: RequestBody):Flowable<BaseResponse<RspResult>>
+    fun cancelAuto(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 }

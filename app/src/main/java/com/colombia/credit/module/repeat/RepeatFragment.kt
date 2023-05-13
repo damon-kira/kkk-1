@@ -3,10 +3,13 @@ package com.colombia.credit.module.repeat
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatProductInfo
 import com.colombia.credit.databinding.FragmentRepeatBinding
+import com.colombia.credit.expand.SimpleOnItemClickListener
 import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.expand.setOnItemClickListener
 import com.colombia.credit.expand.toast
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.SpaceItemDecoration
@@ -96,35 +99,46 @@ class RepeatFragment : BaseHomeLoanFragment() {
             )
         )
         mBinding.repeatRecyclerview.itemAnimator?.changeDuration = 0
-        mAdapter.mWaitListener = { position ->
-            val data = mAdapter.getWaitItemData(position)
-            Launch.skipRepeatConfirmActivity(getSupportContext(),"", orderIds = data?.tQXtG0FYb.orEmpty())
-        }
-        mAdapter.mNormalListener = { position ->
-            val finalPosi = mAdapter.getNormalItemPosition(position)
-            val info = mHomeViewModel.mRspInfoLiveData.value
-            val maxNum = info?.A04fSYQdHM ?: 0
-            val item = mAdapter.getItemData<RepeatProductInfo>(finalPosi)
-            if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
-                if (maxNum > 0) {
-                    mHintDialog.setMessage(
-                        getString(
-                            R.string.toast_product_up,
-                            maxNum.toString()
-                        )
-                    ).setOnClickListener { }
-                    getBaseActivity()?.addDialog(mHintDialog)
-                }
-            } else {
-                val leftNum = info?.GbiDSBdW ?: 0 // 最大可申请笔数
-                if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0) {
-                    toast(R.string.toast_min_product)
-                } else {
-                    item?.change()
-                    mAdapter.notifyItemChanged(position)
+
+        mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
+            override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
+                val viewType = mAdapter.getItemViewType(position)
+                if (viewType == RepeatProductAdapter.TYPE_WAIT) {
+                    val data = mAdapter.getWaitItemData(position)
+                    Launch.skipRepeatConfirmActivity(
+                        getSupportContext(),
+                        "",
+                        orderIds = data?.tQXtG0FYb.orEmpty()
+                    )
+                } else if (viewType == RepeatProductAdapter.TYPE_NORMAL) {
+                    val finalPosi = mAdapter.getNormalItemPosition(position)
+                    val info = mHomeViewModel.mRspInfoLiveData.value
+                    val maxNum = info?.A04fSYQdHM ?: 0
+                    val item = mAdapter.getItemData<RepeatProductInfo>(finalPosi)
+                    if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
+                        if (maxNum > 0) {
+                            mHintDialog.setMessage(
+                                getString(
+                                    R.string.toast_product_up,
+                                    maxNum.toString()
+                                )
+                            ).setOnClickListener { }
+                            getBaseActivity()?.addDialog(mHintDialog)
+                        }
+                        return
+                    }
+
+                    val leftNum = info?.GbiDSBdW ?: 0 // 最大可申请笔数
+                    if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0) {
+                        toast(R.string.toast_min_product)
+                    } else {
+                        item?.change()
+                        mAdapter.notifyItemChanged(position)
+                    }
+
                 }
             }
-        }
+        })
     }
 
     private fun initObserver() {
