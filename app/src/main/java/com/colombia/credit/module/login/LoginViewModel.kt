@@ -33,10 +33,16 @@ class LoginViewModel @Inject constructor(
 
     private var mCodeUUid: ArrayList<String> = arrayListOf()
 
-    fun reqSmsCode(mobile: String) {
+    private var mCurrMobile: String? = null
+
+    var isAutoGetCode: Boolean = false
+
+    fun reqSmsCode(mobile: String, isAuto: Boolean) {
+        isAutoGetCode = isAuto
         showloading()
         mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
             hideLoading()
+            mCurrMobile = mobile
             if (it.isSuccess()) {
                 mCodeUUid.add(it.getData()?.FSo4NScBct.orEmpty())
             }
@@ -46,7 +52,13 @@ class LoginViewModel @Inject constructor(
 
     fun reqLogin(mobile: String, smsCode: String) {
         showloading()
-        loginLiveData.addSourceLiveData(repository.loginSms(mobile, smsCode, mCodeUUid.joinToString(","))) {
+        loginLiveData.addSourceLiveData(
+            repository.loginSms(
+                mobile,
+                smsCode,
+                mCodeUUid.joinToString(",")
+            )
+        ) {
             hideLoading()
             if (it.isSuccess()) {
                 val ctx = getAppContext()

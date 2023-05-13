@@ -21,6 +21,8 @@ class SmsCodeHelper : LifecycleEventObserver {
 
     val codeLivedata = MutableLiveData<String>()
 
+    var isAutoInsert = false
+
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         if (event == Lifecycle.Event.ON_DESTROY) {
             source.lifecycle.removeObserver(this)
@@ -36,6 +38,7 @@ class SmsCodeHelper : LifecycleEventObserver {
     fun registerObserver(editText: EditText) {
         this.mEditText = editText
         editText.registerSmsObserver(mSmsObserver) { code ->
+            isAutoInsert = true
             codeLivedata.postValue(code)
         }
     }

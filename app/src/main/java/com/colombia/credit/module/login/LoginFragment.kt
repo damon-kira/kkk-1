@@ -1,6 +1,7 @@
 package com.colombia.credit.module.login
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,10 @@ class LoginFragment : BaseLoginFragment() {
         SmsCodeHelper()
     }
 
+    private val mLoginHelper by lazy {
+        LoginHelper()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +55,7 @@ class LoginFragment : BaseLoginFragment() {
         setViewModelLoading(mViewModel)
         lifecycle.addObserver(mViewModel)
         lifecycle.addObserver(mSmsHelper)
+        lifecycle.addObserver(mLoginHelper)
         setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
         showSoftInput(mBinding.loginEditPhone)
@@ -103,6 +109,7 @@ class LoginFragment : BaseLoginFragment() {
                 return@setBlockingOnClickListener
             }
             mSmsHelper.updateReceiverTime()
+            mLoginHelper.isFirst(getMobile())
             reqCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
@@ -115,11 +122,35 @@ class LoginFragment : BaseLoginFragment() {
                 super.onTextChanged(s, start, before, count)
                 mBinding.loginTvPhoneError.hide()
             }
+
+            override fun afterTextChanged(s: Editable?) {
+                super.afterTextChanged(s)
+                s?.let {
+                    if (s.length >= 10) {
+                        val text = s.toString()
+                        if (mLoginHelper.isFirst(text)) {
+                            reqCode(true)
+                        }
+                    }
+                }
+            }
         })
         mBinding.loginEditCode.addTextChangedListener(object : InputHelper.TextWatchAdapter() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 super.onTextChanged(s, start, before, count)
                 mBinding.loginTvCodeError.hide()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                super.afterTextChanged(s)
+                if ((s?.length ?: 0) < 4) {
+                    mSmsHelper.isAutoInsert = false
+                }
+                s?.let {
+                    if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()) || mSmsHelper.isAutoInsert) && !mViewModel.isAutoGetCode) {
+                        login()
+                    }
+                }
             }
         })
     }
@@ -137,10 +168,11 @@ class LoginFragment : BaseLoginFragment() {
         }
     }
 
-    private fun reqCode() {
+    private fun reqCode(isAuto: Boolean = false) {
+        mBinding.loginEditCode.setText("")
         mBinding.loginEditCode.requestFocus()
         showSoftInput(mBinding.loginEditCode)
-        reqSmsCode()
+        reqSmsCode(isAuto)
     }
 
     private fun login() {
@@ -157,8 +189,8 @@ class LoginFragment : BaseLoginFragment() {
         mViewModel.reqLogin(mobile, code)
     }
 
-    private fun reqSmsCode() {
-        mViewModel.reqSmsCode(getMobile())
+    private fun reqSmsCode(isAuto: Boolean) {
+        mViewModel.reqSmsCode(getMobile(), isAuto)
     }
 
     private fun getMobile() = mBinding.loginEditPhone.getRealText()

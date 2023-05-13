@@ -2,7 +2,8 @@ package com.colombia.credit.manager
 
 object SharedPrefKeyManager {
 
-    const val KEY_USER_NAME: String = "user_name"
+    const val KEY_LOGIN_MOBILE = "login_mobile"
+    const val KEY_USER_NAME = "user_name"
     const val KEY_SHOW_BACK_DIALOG = "show_back_dialog"
     const val KEY_USER_INFO = "user_info"
     const val KEY_USER_MOBILE = "user_mobile"
