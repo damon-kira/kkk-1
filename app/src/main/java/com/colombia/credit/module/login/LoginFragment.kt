@@ -33,6 +33,10 @@ class LoginFragment : BaseLoginFragment() {
 
     private val mViewModel by lazyViewModel<LoginViewModel>()
 
+    private val mSmsHelper by lazy(LazyThreadSafetyMode.NONE) {
+        SmsCodeHelper()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,10 +49,12 @@ class LoginFragment : BaseLoginFragment() {
         super.onViewCreated(view, savedInstanceState)
         setViewModelLoading(mViewModel)
         lifecycle.addObserver(mViewModel)
+        lifecycle.addObserver(mSmsHelper)
         setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
         showSoftInput(mBinding.loginEditPhone)
         initProtocol()
+        mSmsHelper.registerObserver(mBinding.loginEditCode)
 
         mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
@@ -96,6 +102,7 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvPhoneError.show()
                 return@setBlockingOnClickListener
             }
+            mSmsHelper.updateReceiverTime()
             reqCode()
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {

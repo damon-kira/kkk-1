@@ -34,7 +34,8 @@
     <string name="login_hint3">Límites elevado de crédito, sin aval</string>
     <string name="login_sms_error">Código incorrecto. Intenta de nuevo</string>
     <string name="login_phone_error">Por favor, introduzca el número de móvil correcto</string>
-    <string name="login_sms_get_error">获取验证码失败，请重试</string>
+    <string name="login_voice_params">Intenta recibirlo por mensaje de voz</string>
+    <string name="login_voice">¿No lo recibiste? %s</string>
 
     <string name="home_banner_text">Préstamo confiable</string>
     <string name="loan_apply">Obtener monto del prestamo</string>
