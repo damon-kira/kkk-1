@@ -218,6 +218,10 @@
         <attr name="iil_right_text_size" format="dimension" />
         <attr name="iil_right_text_bold" format="boolean" />
 
+        <attr name="iil_right_image" format="reference"/>
+        <attr name="iil_right_image_width" format="dimension"/>
+        <attr name="iil_right_image_height" format="dimension"/>
+
         <attr name="iil_line_show" format="boolean" />
     </declare-styleable>
 

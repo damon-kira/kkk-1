@@ -16,6 +16,7 @@ import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
 
+// 登录页面
 class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : BaseViewModel(), LifecycleEventObserver {

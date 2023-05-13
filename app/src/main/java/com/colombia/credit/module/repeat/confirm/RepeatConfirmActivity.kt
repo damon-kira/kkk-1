@@ -89,7 +89,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         setAdapter()
         mBinding.aivArrow.setBlockingOnClickListener(this)
         mBinding.tvConfirm.setBlockingOnClickListener(this)
-        mBinding.tvBankNo.setBlockingOnClickListener(this)
+        mBinding.iilBank.setBlockingOnClickListener(this)
         mBinding.tvCancel.setBlockingOnClickListener(this)
 
         mBinding.tvLoanList.text = getString(
@@ -120,8 +120,8 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             if (it.isSuccess()) {
                 val data = it.getData() ?: return@observerNonSticky
                 mBankNo = data.KcGqvf.orEmpty()
-                mBinding.tvBankNo.text = maskBank(data.KcGqvf)
-                mBinding.tvRepayData.text = data.jcSrg9
+                mBinding.iilBank.setRightText(maskBank(data.KcGqvf))
+                mBinding.iilRepayDate.setRightText(data.jcSrg9.orEmpty())
                 setText(data.bwAK6N3EuE.orEmpty(), data.FXE6B.orEmpty(), data.BM3HTNDY1b.orEmpty())
             } else {
                 it.ShowErrorMsg(::getInfo)
@@ -139,7 +139,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             if (it.evnet == BankEvent.EVENT_BANK) {
                 if (!it.params.isNullOrEmpty()) {
                     mBankNo = it.params.orEmpty()
-                    mBinding.tvBankNo.text = maskBank(mBankNo)
+                    mBinding.iilBank.setRightText(maskBank(mBankNo))
                 }
             }
         }
@@ -187,8 +187,8 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private fun setText(product: String, interest: String, loan: String) {
         mBinding.tvAmount.text = getUnitString(product)
         mBinding.tvTotalAmount.text = getUnitString(product)
-        mBinding.tvAmountValue.text = getUnitString(loan)
-        mBinding.tvTotalInterest.text = getUnitString(interest)
+        mBinding.iilAmount.setRightText(getUnitString(loan))
+        mBinding.iilTotalInterest.setRightText(getUnitString(interest))
     }
 
     private fun getInfo() {
@@ -222,7 +222,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 AnimtorUtils.startAnima(mBinding.recyclerview, start, end, mRHeight, duration) {
                 }
             }
-            R.id.tv_bank_no -> {
+            R.id.iil_bank -> {
                 Launch.skipBankCardListActivity(
                     this,
                     mAdapter.getTotalAmount().toString(),

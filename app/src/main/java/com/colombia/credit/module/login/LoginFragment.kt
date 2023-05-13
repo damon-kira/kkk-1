@@ -26,10 +26,7 @@ import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Created by weishl on 2023/3/27
- *
- */
+// 登录页面
 @AndroidEntryPoint
 class LoginFragment : BaseLoginFragment() {
     private val mBinding by binding(FragmentLoginBinding::inflate)

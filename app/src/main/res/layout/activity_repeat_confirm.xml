@@ -53,7 +53,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- 放款金额 -->
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,51 +66,39 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_loan_title"
                     tools:text="$ 9.000" />
 
-                <TextView
-                    android:id="@+id/tv_bank_text"
-                    android:layout_width="wrap_content"
+                <com.colombia.credit.view.ItemInfoLayout
+                    android:id="@+id/iil_bank"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="12dp"
-                    android:text="@string/loan_bank"
-                    android:textColor="@color/color_ccffffff"
-                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    app:iil_left_text="@string/loan_bank"
+                    app:iil_left_text_color="@color/white"
+                    app:iil_right_image_width="12dp"
+                    app:iil_right_image_height="12dp"
+                    app:iil_left_text_size="12sp"
+                    app:iil_line_show="false"
+                    app:iil_right_image="@drawable/svg_arrow_right_white"
+                    app:iil_right_text_color="@color/white"
+                    app:iil_right_text_size="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
-                <TextView
-                    android:id="@+id/tv_bank_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="4dp"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:drawableEndCompat="@drawable/shape_arrow_right_white"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_bank_text"
-                    tools:text="454829********0102" />
-
                 <!-- 借款金额 包含利息、费率-->
-                <TextView
-                    android:id="@+id/tv_amount_text"
-                    android:layout_width="wrap_content"
+                <com.colombia.credit.view.ItemInfoLayout
+                    android:id="@+id/iil_amount"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/total_amount"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_bank_text"
-                    app:layout_constraintTop_toBottomOf="@id/tv_bank_text" />
+                    app:iil_left_text="@string/total_amount"
+                    app:iil_left_text_color="@color/white"
+                    app:iil_left_text_size="12sp"
+                    app:iil_line_show="false"
+                    app:iil_right_text_color="@color/white"
+                    app:iil_right_text_size="12sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iil_bank" />
 
-                <TextView
-                    android:id="@+id/tv_amount_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintRight_toRightOf="@id/tv_bank_no"
-                    app:layout_constraintTop_toTopOf="@id/tv_amount_text"
-                    tools:text="$ 9.000" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 提示信息 -->
             <com.colombia.credit.view.TextViewDrawable
@@ -180,7 +168,22 @@
                     app:etv_right_top_corner="10dp"
                     app:etv_solid="@color/color_f1dfff"
                     app:layout_constraintTop_toTopOf="parent" />
-
+                <!-- 总借款金额 -->
+                <com.colombia.credit.view.ItemInfoLayout
+                    android:id="@+id/iil_total_amount"
+                    style="@style/marginLeftAndRight12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:iil_left_text="@string/total_loan_amount"
+                    app:iil_left_text_color="@color/color_999999"
+                    app:iil_left_text_size="12sp"
+                    app:iil_line_show="false"
+                    app:iil_right_text_bold="true"
+                    app:iil_right_text_color="@color/color_333333"
+                    app:iil_right_text_size="12sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_loan_list" />
                 <!-- 总借款金额 -->
                 <TextView
                     android:id="@+id/tv_total_amount_text"
@@ -207,54 +210,38 @@
                     tools:text="$ 65.000" />
 
                 <!-- 总利息 -->
-                <TextView
-                    android:id="@+id/tv_total_interest_text"
-                    android:layout_width="wrap_content"
+                <com.colombia.credit.view.ItemInfoLayout
+                    android:id="@+id/iil_total_interest"
+                    style="@style/marginLeftAndRight12"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/total_interest_text"
-                    android:textColor="@color/color_999999"
-                    android:textSize="12sp"
+                    app:iil_left_text="@string/total_interest_text"
+                    app:iil_left_text_color="@color/color_999999"
+                    app:iil_left_text_size="12sp"
+                    app:iil_line_show="false"
+                    app:iil_right_text_bold="true"
+                    app:iil_right_text_color="@color/color_333333"
+                    app:iil_right_text_size="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total_amount_text" />
-
-                <TextView
-                    android:id="@+id/tv_total_interest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_total_interest_text"
-                    tools:text="$ 65.000" />
+                    app:layout_constraintTop_toBottomOf="@id/iil_total_amount" />
 
                 <!-- 还款日期 -->
-                <TextView
-                    android:id="@+id/tv_repay_data_text"
-                    android:layout_width="wrap_content"
+                <com.colombia.credit.view.ItemInfoLayout
+                    android:id="@+id/iil_repay_date"
+                    style="@style/marginLeftAndRight12"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/history_repay_date"
-                    android:textColor="@color/color_999999"
-                    android:textSize="12sp"
+                    app:iil_left_text="@string/history_repay_date"
+                    app:iil_left_text_color="@color/color_999999"
+                    app:iil_left_text_size="12sp"
+                    app:iil_line_show="false"
+                    app:iil_right_text_bold="true"
+                    app:iil_right_text_color="@color/color_333333"
+                    app:iil_right_text_size="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total_interest_text" />
-
-                <TextView
-                    android:id="@+id/tv_repay_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_repay_data_text"
-                    tools:text="$ 65.000" />
+                    app:layout_constraintTop_toBottomOf="@id/iil_total_interest" />
 
                 <TextView
                     android:id="@+id/tv_total_hint"
@@ -270,7 +257,7 @@
                     app:drawableStartCompat="@drawable/shape_shader_line_left"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_repay_data_text" />
+                    app:layout_constraintTop_toBottomOf="@id/iil_repay_date" />
 
                 <!-- 产品列表 -->
                 <LinearLayout

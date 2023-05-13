@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 产品借款金额 -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="$3.000" />
     <!--产品利率 -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_interest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
