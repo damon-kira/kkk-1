@@ -26,6 +26,18 @@ class LoginViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : BaseViewModel(), LifecycleEventObserver {
 
+    companion object {
+        private const val SMS_TYPE_NORMAL = "phone"
+        private const val SMS_TYPE_VOICE = "phonesounds"
+
+        const val TYPE_SMS = CountDownHelper.TYPE_SMS
+        const val TYPE_VOICE = CountDownHelper.TYPE_VOICE
+
+        fun type2ReqType(type: Int): String {
+            return if (type == TYPE_SMS) SMS_TYPE_NORMAL else SMS_TYPE_VOICE
+        }
+    }
+
     private val mCountDownHelper by lazy(LazyThreadSafetyMode.NONE) {
         CountDownHelper.get()
     }
@@ -36,28 +48,44 @@ class LoginViewModel @Inject constructor(
 
     val loginLiveData = generatorLiveData<BaseResponse<RspLoginInfo>>()
 
+    private val _voiceLivedata = generatorLiveData<Boolean>()
+    val mVoiceLiveData = _voiceLivedata
+
     private var mCodeUUid: ArrayList<String> = arrayListOf()
 
     private var mCurrMobile: String? = null
 
+    private var mCurrCodeType: Int = -1
+
+    private var mSmsCodeCount = 0
+        private set(value) {
+            field = value
+            if (value > 2) {
+                _voiceLivedata.postValue(true)
+            }
+        }
+
     // 输入手机号后是否自动触发获取验证码
     var isAutoGetCode: Boolean = false
 
-    // 第一次触发验证码后，倒计时30s，若没有调用登录接口，则再次发送验证码
+    // 第一次触发验证码后，倒计时30s，若没有调用登录接口/没有读取到验证码，则再次发送验证码
     private var mDown30Mill: Disposable? = null
 
     var isDown30Auto = false
 
-    fun reqSmsCode(mobile: String, isAuto: Boolean) {
+    fun reqSmsCode(mobile: String, isAuto: Boolean, type: Int = TYPE_SMS) {
+        mCurrCodeType = type
         if (!isDown30Auto)
             showloading()
         isAutoGetCode = isAuto
-        mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
+        mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(type2ReqType(type), mobile)) {
             hideLoading()
             mCurrMobile = mobile
             if (it.isSuccess()) {
-                if (!isDown30Auto)
+                if (!isDown30Auto) {
                     startDown30Mill()
+                    mSmsCodeCount++
+                }
                 mCodeUUid.add(it.getData()?.FSo4NScBct.orEmpty())
             }
             mAuthSmsCodeLiveData.postValue(it)
@@ -98,7 +126,7 @@ class LoginViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 isDown30Auto = true
-                reqSmsCode(mCurrMobile.orEmpty(), isAutoGetCode)
+                reqSmsCode(mCurrMobile.orEmpty(), isAutoGetCode, getCurrCodeType())
             }, {
 
             })
@@ -106,6 +134,10 @@ class LoginViewModel @Inject constructor(
 
     fun cancelDown30() {
         mDown30Mill?.dispose()
+    }
+
+    fun getCurrCodeType(): Int {
+        return mCurrCodeType
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {

@@ -1,7 +1,6 @@
 package com.colombia.credit.module.firstconfirm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bigdata.lib.loanPageStayTime
@@ -26,9 +25,12 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
-import com.util.lib.*
+import com.util.lib.MainHandler
+import com.util.lib.hide
 import com.util.lib.log.logger_d
+import com.util.lib.show
 import com.util.lib.span.SpannableImpl
+import com.util.lib.timeToTimeStr
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 

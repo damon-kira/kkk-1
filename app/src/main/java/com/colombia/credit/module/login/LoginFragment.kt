@@ -23,6 +23,7 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.hide
+import com.util.lib.ifShow
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +62,7 @@ class LoginFragment : BaseLoginFragment() {
         showSoftInput(mBinding.loginEditPhone)
         initProtocol()
         initText()
+        mBinding.loginTvVoice.isEnabled = true
         mSmsHelper.registerObserver(mBinding.loginEditCode)
 
         initObserver()
@@ -89,6 +91,9 @@ class LoginFragment : BaseLoginFragment() {
         }
         mBinding.loginTvBtn.setBlockingOnClickListener {
             login()
+        }
+        mBinding.loginTvVoice.setBlockingOnClickListener {
+            reqCode(false, LoginViewModel.TYPE_VOICE)
         }
 
 
@@ -134,6 +139,7 @@ class LoginFragment : BaseLoginFragment() {
     private fun initObserver() {
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
             if (time == -1L) {
+                mBinding.loginTvVoice.isEnabled = true
                 mBinding.loginTvOtp.isEnabled = true
                 mBinding.loginTvOtp.setText(R.string.sms_otp)
             } else {
@@ -141,10 +147,17 @@ class LoginFragment : BaseLoginFragment() {
             }
         }
 
+        mViewModel.mVoiceLiveData.observerNonSticky(viewLifecycleOwner) {
+            mBinding.loginTvVoice.ifShow(it)
+        }
+
         mViewModel.mAuthSmsCodeLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
+                mViewModel.startCountdown(type = mViewModel.getCurrCodeType(), mobile = getMobile())
                 mBinding.loginTvOtp.isEnabled = false
-                mViewModel.startCountdown(mobile = getMobile())
+                if (mViewModel.getCurrCodeType() == LoginViewModel.TYPE_VOICE) {
+                    mBinding.loginTvVoice.isEnabled = false
+                }
             } else {
                 it.ShowErrorMsg(::reqCode)
             }
@@ -169,11 +182,10 @@ class LoginFragment : BaseLoginFragment() {
     private fun initText() {
         val voiceParam = getString(R.string.login_voice_params)
         val voiceText = getString(R.string.login_voice, voiceParam)
-        mBinding.tvVoice.text = SpannableImpl().init(voiceText).commonParams(voiceParam)
+        mBinding.loginTvVoice.text = SpannableImpl().init(voiceText).commonParams(voiceParam)
             .color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary))
             .getSpannable()
     }
-
 
     private fun initProtocol() {
         val param = getString(R.string.protocol_params)
@@ -188,12 +200,12 @@ class LoginFragment : BaseLoginFragment() {
         }
     }
 
-    private fun reqCode(isAuto: Boolean = false) {
+    private fun reqCode(isAuto: Boolean = false, type: Int = LoginViewModel.TYPE_SMS) {
         mBinding.loginEditCode.setText("")
         mBinding.loginEditCode.requestFocus()
         showSoftInput(mBinding.loginEditCode)
         mViewModel.isDown30Auto = false
-        reqSmsCode(isAuto)
+        reqSmsCode(isAuto, type)
     }
 
     private fun login() {
@@ -210,8 +222,8 @@ class LoginFragment : BaseLoginFragment() {
         mViewModel.reqLogin(mobile, code)
     }
 
-    private fun reqSmsCode(isAuto: Boolean) {
-        mViewModel.reqSmsCode(getMobile(), isAuto)
+    private fun reqSmsCode(isAuto: Boolean, type: Int = LoginViewModel.TYPE_SMS) {
+        mViewModel.reqSmsCode(getMobile(), isAuto, type)
     }
 
     private fun getMobile() = mBinding.loginEditPhone.getRealText()

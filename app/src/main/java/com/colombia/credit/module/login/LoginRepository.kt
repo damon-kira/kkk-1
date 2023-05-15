@@ -27,9 +27,9 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         apiService.loginSms(createRequestBody(jobj.toString()))
     }
 
-    fun reqSmsCode(mobile: String) = ApiServiceLiveDataProxy.request(RspSmsCode::class.java) {
+    fun reqSmsCode(type: String, mobile: String) = ApiServiceLiveDataProxy.request(RspSmsCode::class.java) {
         val jobj = JsonObject()
-        jobj.addProperty("ZF2FqPB8gZ", "phone") //类型（手机短信=phone,手机语音=phonesounds）
+        jobj.addProperty("ZF2FqPB8gZ", type) //类型（手机短信=phone,手机语音=phonesounds）
         jobj.addProperty("sbSsC", "1") // 验证码类型 （1=注册 3=忘记密码）
         jobj.addProperty("Y4WsSnBl", "57|$mobile")
         apiService.getSmsCode(RequestBody.create(MEDIA_TYPE, jobj.toString()))
