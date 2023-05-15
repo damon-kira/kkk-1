@@ -14,6 +14,11 @@ import com.colombia.credit.expand.saveUserInfo
 import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 // 登录页面
@@ -35,15 +40,24 @@ class LoginViewModel @Inject constructor(
 
     private var mCurrMobile: String? = null
 
+    // 输入手机号后是否自动触发获取验证码
     var isAutoGetCode: Boolean = false
 
+    // 第一次触发验证码后，倒计时30s，若没有调用登录接口，则再次发送验证码
+    private var mDown30Mill: Disposable? = null
+
+    var isDown30Auto = false
+
     fun reqSmsCode(mobile: String, isAuto: Boolean) {
+        if (!isDown30Auto)
+            showloading()
         isAutoGetCode = isAuto
-        showloading()
         mAuthSmsCodeLiveData.addSourceLiveData(repository.reqSmsCode(mobile)) {
             hideLoading()
             mCurrMobile = mobile
             if (it.isSuccess()) {
+                if (!isDown30Auto)
+                    startDown30Mill()
                 mCodeUUid.add(it.getData()?.FSo4NScBct.orEmpty())
             }
             mAuthSmsCodeLiveData.postValue(it)
@@ -52,6 +66,7 @@ class LoginViewModel @Inject constructor(
 
     fun reqLogin(mobile: String, smsCode: String) {
         showloading()
+        cancelDown30()
         loginLiveData.addSourceLiveData(
             repository.loginSms(
                 mobile,
@@ -76,16 +91,34 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    private fun startDown30Mill() {
+        mDown30Mill = Flowable.just(1)
+            .delay(30, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                isDown30Auto = true
+                reqSmsCode(mCurrMobile.orEmpty(), isAutoGetCode)
+            }, {
+
+            })
+    }
+
+    fun cancelDown30() {
+        mDown30Mill?.dispose()
+    }
+
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         if (event == Lifecycle.Event.ON_DESTROY) {
             mCountDownHelper.stopCountdown()
+            mDown30Mill?.dispose()
             source.lifecycle.removeObserver(this)
 
         }
     }
 
-
     fun startCountdown(type: Int = CountDownHelper.TYPE_SMS, mobile: String) {
+        if (isDown30Auto) return
         mCountDownHelper.stopCountdown()
         mCountDownHelper.startCountDown(type = type, mobile = mobile)
     }

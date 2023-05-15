@@ -60,7 +60,10 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginEditPhone.requestFocus()
         showSoftInput(mBinding.loginEditPhone)
         initProtocol()
+        initText()
         mSmsHelper.registerObserver(mBinding.loginEditCode)
+
+        initObserver()
 
         mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
@@ -72,34 +75,6 @@ class LoginFragment : BaseLoginFragment() {
                 } else {
                     startTime = System.currentTimeMillis()
                 }
-            }
-        }
-
-        mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
-            if (time == -1L) {
-                mBinding.loginTvOtp.isEnabled = true
-                mBinding.loginTvOtp.setText(R.string.sms_otp)
-            } else {
-                mBinding.loginTvOtp.text = getString(R.string.seconds, "$time")
-            }
-        }
-
-        mViewModel.mAuthSmsCodeLiveData.observerNonSticky(viewLifecycleOwner) {
-            if (it.isSuccess()) {
-                mBinding.loginTvOtp.isEnabled = false
-                mViewModel.startCountdown(mobile = getMobile())
-            } else {
-                it.ShowErrorMsg(::reqCode)
-            }
-        }
-        mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
-            if (it.isSuccess()) {
-                if (isNewUser) {
-                    jumpProcess(getSupportContext(), STEP1)
-                }
-                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))
-            } else {
-                it.ShowErrorMsg(::login)
             }
         }
 
@@ -147,6 +122,7 @@ class LoginFragment : BaseLoginFragment() {
                     mSmsHelper.isAutoInsert = false
                 }
                 s?.let {
+                    // 非自动触发获取验证码 || 非自动回填验证码 会自动触发登录接口
                     if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()) || mSmsHelper.isAutoInsert) && !mViewModel.isAutoGetCode) {
                         login()
                     }
@@ -154,6 +130,50 @@ class LoginFragment : BaseLoginFragment() {
             }
         })
     }
+
+    private fun initObserver() {
+        mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
+            if (time == -1L) {
+                mBinding.loginTvOtp.isEnabled = true
+                mBinding.loginTvOtp.setText(R.string.sms_otp)
+            } else {
+                mBinding.loginTvOtp.text = getString(R.string.seconds, "$time")
+            }
+        }
+
+        mViewModel.mAuthSmsCodeLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                mBinding.loginTvOtp.isEnabled = false
+                mViewModel.startCountdown(mobile = getMobile())
+            } else {
+                it.ShowErrorMsg(::reqCode)
+            }
+        }
+        mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                if (isNewUser) {
+                    jumpProcess(getSupportContext(), STEP1)
+                }
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGIN))
+            } else {
+                it.ShowErrorMsg(::login)
+            }
+        }
+
+        mSmsHelper.codeLivedata.observerNonSticky(viewLifecycleOwner) {
+            mViewModel.cancelDown30()
+        }
+    }
+
+
+    private fun initText() {
+        val voiceParam = getString(R.string.login_voice_params)
+        val voiceText = getString(R.string.login_voice, voiceParam)
+        mBinding.tvVoice.text = SpannableImpl().init(voiceText).commonParams(voiceParam)
+            .color(ContextCompat.getColor(getSupportContext(), R.color.colorPrimary))
+            .getSpannable()
+    }
+
 
     private fun initProtocol() {
         val param = getString(R.string.protocol_params)
@@ -172,6 +192,7 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginEditCode.setText("")
         mBinding.loginEditCode.requestFocus()
         showSoftInput(mBinding.loginEditCode)
+        mViewModel.isDown30Auto = false
         reqSmsCode(isAuto)
     }
 

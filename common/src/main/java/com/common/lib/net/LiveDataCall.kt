@@ -12,9 +12,6 @@ import io.reactivex.schedulers.Schedulers
 import javax.net.ssl.SSLHandshakeException
 
 
-/**
- * Created by weisl on 2019/8/12.
- */
 class LiveDataCall<T>(
     private val clazz: Class<T>,
     private val skipLogin: Boolean,

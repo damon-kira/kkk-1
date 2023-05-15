@@ -184,30 +184,6 @@
                     app:iil_right_text_size="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_loan_list" />
-                <!-- 总借款金额 -->
-                <TextView
-                    android:id="@+id/tv_total_amount_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/total_loan_amount"
-                    android:textColor="@color/color_999999"
-                    android:textSize="12sp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_loan_list" />
-
-                <TextView
-                    android:id="@+id/tv_total_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:textColor="@color/color_333333"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_total_amount_text"
-                    tools:text="$ 65.000" />
 
                 <!-- 总利息 -->
                 <com.colombia.credit.view.ItemInfoLayout

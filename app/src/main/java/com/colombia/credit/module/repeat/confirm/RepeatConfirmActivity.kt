@@ -186,7 +186,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
     private fun setText(product: String, interest: String, loan: String) {
         mBinding.tvAmount.text = getUnitString(product)
-        mBinding.tvTotalAmount.text = getUnitString(product)
+        mBinding.iilTotalAmount.setRightText(getUnitString(product))
         mBinding.iilAmount.setRightText(getUnitString(loan))
         mBinding.iilTotalInterest.setRightText(getUnitString(interest))
     }

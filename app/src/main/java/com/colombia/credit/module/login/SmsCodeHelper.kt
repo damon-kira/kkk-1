@@ -44,7 +44,6 @@ class SmsCodeHelper : LifecycleEventObserver {
     }
 
     fun unRegisterObserver(editText: EditText?) {
-        mSmsObserver.setOnCodeCallBack(null)
         editText?.unRegisterSmsObserver(mSmsObserver)
     }
 }
