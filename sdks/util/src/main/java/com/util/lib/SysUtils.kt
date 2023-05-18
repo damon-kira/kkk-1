@@ -318,10 +318,10 @@ object SysUtils {
         if (PermissionChecker.checkSelfPermission(
                 mContext,
                 Manifest.permission.READ_PHONE_STATE
-            ) == PermissionChecker.PERMISSION_DENIED && PermissionChecker.checkSelfPermission(
+            ) == PermissionChecker.PERMISSION_DENIED/* && PermissionChecker.checkSelfPermission(
                 mContext,
                 Manifest.permission.READ_PHONE_NUMBERS
-            ) == PermissionChecker.PERMISSION_DENIED
+            ) == PermissionChecker.PERMISSION_DENIED*/
         ) {
             return true
         }
