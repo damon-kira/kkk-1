@@ -28,6 +28,7 @@ import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.SysUtils
 import com.util.lib.hide
 import com.util.lib.ifShow
+import com.util.lib.log.logger_e
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,15 +53,30 @@ class LoginFragment : BaseLoginFragment() {
 
     private var mMobileLayout: SysMobileLayout? = null
         get() {
-            return SysMobileLayout(getSupportContext()).also {
-                it.setItemClick { item ->
-                    isAutoGetMobile = false
-                    mBinding.loginEditPhone.setText(item)
-                    mBinding.clInput.removeView(it)
-                    mMobileLayout = null
+            if (field == null) {
+             field = SysMobileLayout(getSupportContext()).also {
+                    it.setItemClick { item ->
+                        isAutoGetMobile = false
+                        mBinding.loginEditPhone.setText(item)
+                        removeSysMobileLayout()
+                    }
                 }
             }
+            return field
         }
+
+    private fun removeSysMobileLayout() {
+        mMobileLayout?.let {
+            if (it.parent != null) {
+                try {
+                    mBinding.clInput.removeView(it)
+                } catch (e: Exception) {
+                    logger_e(TAG,"removeSysMobileLayout == $e")
+                }
+            }
+            mMobileLayout = null
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,7 +118,7 @@ class LoginFragment : BaseLoginFragment() {
             mBinding.loginEditPhone.setSelection(text.length)
             return
         }
-        mMobileLayout?.let {layout ->
+        mMobileLayout?.let { layout ->
             layout.setData(mobiles)
             val locations = IntArray(2)
             mBinding.loginEditPhone.getLocationInWindow(locations)
@@ -158,6 +174,7 @@ class LoginFragment : BaseLoginFragment() {
                 super.afterTextChanged(s)
                 s?.let {
                     if (s.length >= 10) {
+                        removeSysMobileLayout()
                         val text = s.toString()
                         if (mLoginHelper.isFirst(text)) {
                             reqCode(true)

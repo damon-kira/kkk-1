@@ -78,13 +78,13 @@ class SysMobileLayout : CardView {
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
             tv.setBackgroundResource(R.color.selector_pop_item)
             tv.setTextColor(ContextCompat.getColor(parent.context, R.color.color_999999))
-            tv.setPadding(0, 0, 0, 8f.dp())
             val params = RecyclerView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            params.topMargin = 8f.dp()
+            params.topMargin = 4f.dp()
             params.leftMargin = 10f.dp()
+            params.bottomMargin = 4f.dp()
             tv.layoutParams = params
             return BaseViewHolder(tv)
         }
