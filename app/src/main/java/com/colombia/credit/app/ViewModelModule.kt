@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.colombia.credit.di.ViewModelKey
 import com.colombia.credit.module.appupdate.AppUpdateViewModel
 import com.colombia.credit.module.banklist.BankCardViewModel
+import com.colombia.credit.module.config.ConfigViewModel
 import com.colombia.credit.module.custom.CustomViewModel
 import com.colombia.credit.module.firstconfirm.AutoConfirmViewModel
 import com.colombia.credit.module.firstconfirm.FirstConfirmViewModel
@@ -126,4 +127,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AutoConfirmViewModel::class)
     abstract fun bindAutoConfirmViewModel(viewModel: AutoConfirmViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConfigViewModel::class)
+    abstract fun bindConfigViewModel(viewModel: ConfigViewModel): ViewModel
 }

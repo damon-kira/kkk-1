@@ -15,6 +15,11 @@ interface ApiService {
     @Headers("kio8YGhwe6:Rf4hTm8JkN")
     fun getAppUpdate(): Flowable<BaseResponse<AppUpgradeInfo>>
 
+    // 获取配置
+    @POST("OASJDnjka/vaknNJNAifjos")
+    @Headers("kio8YGhwe6:0jjayBHSDygfsHI")
+    fun getConfig(@Body body: RequestBody): Flowable<BaseResponse<RspConfig>>
+
     // 获取客服信息
     @POST("XRmN4gV/3YiUwQ")
     @Headers("kio8YGhwe6:bW41VrzLl3")

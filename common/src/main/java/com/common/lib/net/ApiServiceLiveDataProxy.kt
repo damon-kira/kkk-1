@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
 import io.reactivex.Flowable
 
-/**
- * Created by weisl on 2019/8/28.
- */
 
 object ApiServiceLiveDataProxy {
 
@@ -16,6 +13,12 @@ object ApiServiceLiveDataProxy {
         flowable: () -> Flowable<BaseResponse<T>>
     ): LiveData<BaseResponse<T>> =
         LiveDataCall(clazz, true, flowable)
+
+    @JvmStatic
+    fun <T> request(
+        flowable: () -> Flowable<BaseResponse<T>>
+    ): LiveData<BaseResponse<T>> =
+        LiveDataCall(null, true, flowable)
 
     @JvmStatic
     fun <T> requestIgnoreLogin(

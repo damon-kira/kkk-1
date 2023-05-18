@@ -17,6 +17,7 @@ import com.colombia.credit.expand.*
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.config.ConfigViewModel
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.view.SysMobileLayout
 import com.common.lib.expand.setBlockingOnClickListener
@@ -40,6 +41,8 @@ class LoginFragment : BaseLoginFragment() {
     private val mBinding by binding(FragmentLoginBinding::inflate)
 
     private val mViewModel by lazyViewModel<LoginViewModel>()
+
+    private val mConfigViewModel by lazyViewModel<ConfigViewModel>()
 
     private val mSmsHelper by lazy(LazyThreadSafetyMode.NONE) {
         SmsCodeHelper()
@@ -78,6 +81,10 @@ class LoginFragment : BaseLoginFragment() {
         }
     }
 
+    override fun onRefresh() {
+        mConfigViewModel.getConfig(ConfigViewModel.KEY_VOICE)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -105,12 +112,15 @@ class LoginFragment : BaseLoginFragment() {
             if (isDestroyView()) return@postDelayed
             getSysMobile()
         }, 600)
+
+        onRefresh()
     }
 
     // 获取手机号
     private fun getSysMobile() {
         val mobiles = SysUtils.getPhoneNumbers(getSupportContext())
         if (mobiles.isNullOrEmpty()) return
+        // 获取到一个手机号，直接显示到输入框
         if (mobiles.size == 1) {
             isAutoGetMobile = true
             val text = mobiles[0]
@@ -131,6 +141,10 @@ class LoginFragment : BaseLoginFragment() {
             mBinding.clInput.addView(layout, layoutParams)
         }
         hideSoftInput()
+    }
+
+    private fun getConfig(){
+        mConfigViewModel.getConfig(ConfigViewModel.KEY_VOICE)
     }
 
     private fun initView() {
@@ -220,7 +234,7 @@ class LoginFragment : BaseLoginFragment() {
         }
 
         mViewModel.mVoiceLiveData.observerNonSticky(viewLifecycleOwner) {
-            mBinding.loginTvVoice.ifShow(it)
+            mBinding.loginTvVoice.ifShow(it && mConfigViewModel.mConfig?.isShowVoice() == true)
         }
 
         mViewModel.mAuthSmsCodeLiveData.observerNonSticky(viewLifecycleOwner) {

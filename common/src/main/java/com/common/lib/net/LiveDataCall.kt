@@ -13,7 +13,7 @@ import javax.net.ssl.SSLHandshakeException
 
 
 class LiveDataCall<T>(
-    private val clazz: Class<T>,
+    private val clazz: Class<T>?,
     private val skipLogin: Boolean,
     private val flowable: () -> Flowable<BaseResponse<T>>
 ) : LiveData<BaseResponse<T>>() {
