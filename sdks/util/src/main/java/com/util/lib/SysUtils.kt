@@ -8,12 +8,12 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
 import android.provider.Settings
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
-import androidx.core.content.PermissionChecker.PermissionResult
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -21,6 +21,7 @@ import com.util.lib.log.logger_i
 import com.util.lib.uuid.UUIDHelper
 import com.util.lib.uuid.UUidCheck
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by weisl on 2019/10/15.
@@ -168,19 +169,10 @@ object SysUtils {
 
     @JvmStatic
     @SuppressLint("MissingPermission")
-    fun getPhoneNumber(mContext: Context): String {
-        if (PermissionChecker.checkSelfPermission(
-                mContext,
-                Manifest.permission.READ_PHONE_STATE
-            ) == PermissionChecker.PERMISSION_DENIED && PermissionChecker.checkSelfPermission(
-                mContext,
-                Manifest.permission.READ_PHONE_NUMBERS
-            ) == PermissionChecker.PERMISSION_DENIED
-        ) {
-            return ""
-        }
+    fun getPhoneNumber(context: Context): String {
+        if (checkReadPhonePermission(context)) return ""
         try {
-            val phoneMgr = mContext.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val phoneMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             val phoneNumber = phoneMgr.line1Number.orEmpty()
             if (BuildConfig.DEBUG) {
                 logger_d(TAG, "phone number = $phoneNumber")
@@ -191,10 +183,63 @@ object SysUtils {
                 Log.e(TAG, e.toString())
             }
         }
-
         return ""
     }
 
+    fun getPhoneNumbers(context: Context): ArrayList<String>? {
+        if (checkReadPhonePermission(context)) return null
+        val arrays = arrayListOf<String>()
+        try {
+            val phoneMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                val sm =
+                    context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
+                val list = sm.activeSubscriptionInfoList
+                list.take(2).forEachIndexed { index, item ->
+                    val number = getRealMobile(item.number)
+                    if (number.isNotEmpty()) {
+                        arrays.add(number)
+                    }
+                }
+            } else {
+                var phoneNumber = phoneMgr.line1Number.orEmpty()
+                phoneNumber = getRealMobile(phoneNumber)
+                if (phoneNumber.isNotEmpty()) {
+                    arrays.add(phoneNumber)
+                }
+                try {
+                    phoneNumber = phoneMgr.groupIdLevel1
+                    phoneNumber = getRealMobile(phoneNumber)
+                    if (phoneNumber.isNotEmpty()) {
+                        arrays.add(phoneNumber)
+                    }
+                } catch (e: Exception) {
+                    logger_e(TAG, "num2 exception = $e")
+                }
+            }
+        } catch (e: Exception) {
+            logger_e(TAG, e.toString())
+        }
+        logger_d(TAG, "phone number = ${arrays.joinToString(",")}")
+        return arrays
+    }
+
+    private fun getRealMobile(mobile: String): String {
+        var temp = mobile
+        if (temp.startsWith("+")) {
+            temp = temp.substring(1)
+        }
+        if (!temp.isValidNumber()) {
+            return ""
+        }
+        if (temp.length > 10) {
+            temp = temp.substring(temp.length - 10)
+        }
+        return temp
+    }
+
+    fun String.isValidNumber() = Regex("\\d+").matches(this)
 
     /**
      * 根据包名判断app 是否安装
@@ -251,17 +296,8 @@ object SysUtils {
     }
 
     @SuppressLint("MissingPermission")
-    fun getSimSerial(context: Context):String{
-        if (PermissionChecker.checkSelfPermission(
-                context,
-                Manifest.permission.READ_PHONE_STATE
-            ) == PermissionChecker.PERMISSION_DENIED && PermissionChecker.checkSelfPermission(
-                context,
-                Manifest.permission.READ_PHONE_NUMBERS
-            ) == PermissionChecker.PERMISSION_DENIED
-        ) {
-            return ""
-        }
+    fun getSimSerial(context: Context): String {
+        if (checkReadPhonePermission(context)) return ""
         try {
             val phoneMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             val phoneNumber = phoneMgr.simSerialNumber.orEmpty()
@@ -276,6 +312,20 @@ object SysUtils {
         }
 
         return ""
+    }
+
+    private fun checkReadPhonePermission(mContext: Context): Boolean {
+        if (PermissionChecker.checkSelfPermission(
+                mContext,
+                Manifest.permission.READ_PHONE_STATE
+            ) == PermissionChecker.PERMISSION_DENIED && PermissionChecker.checkSelfPermission(
+                mContext,
+                Manifest.permission.READ_PHONE_NUMBERS
+            ) == PermissionChecker.PERMISSION_DENIED
+        ) {
+            return true
+        }
+        return false
     }
 
     /**

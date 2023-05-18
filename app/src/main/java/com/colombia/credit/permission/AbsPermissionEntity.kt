@@ -71,13 +71,13 @@ class LocationPermission : AbsPermissionEntity() {
     }
 
     override fun hasPermissionUnder6(context: Context): Boolean {
-  /*      var locationHas = false
-        val location = LocationHelp.getLocationInfo()
-        if (location != null) {
-            if (location.longitude.toInt() != -1) {
-                locationHas = true
-            }
-        }*/
+        /*      var locationHas = false
+              val location = LocationHelp.getLocationInfo()
+              if (location != null) {
+                  if (location.longitude.toInt() != -1) {
+                      locationHas = true
+                  }
+              }*/
         return true
     }
 
@@ -141,7 +141,7 @@ class CameraPermission : AbsPermissionEntity() {
 }
 
 //相册
-class PhotoAlbumPermission: AbsPermissionEntity(){
+class PhotoAlbumPermission : AbsPermissionEntity() {
 
     override fun permissionName(): String {
         return Manifest.permission.READ_EXTERNAL_STORAGE

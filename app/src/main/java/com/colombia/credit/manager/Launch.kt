@@ -228,7 +228,7 @@ object Launch {
 
     fun skipWhatsApp(context: Context) {
         val whatsapp = getWhatsAppTel()
-        if (whatsapp.isNullOrEmpty()) {
+        if (whatsapp.isEmpty()) {
             return
         }
         val url = "https://api.whatsapp.com/send?phone=$whatsapp"

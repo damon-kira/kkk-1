@@ -40,20 +40,20 @@
 
     <queries>
         <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
         <intent>
-            <action android:name="android.media.action.VIDEO_CAPTURE"/>
+            <action android:name="android.media.action.VIDEO_CAPTURE" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.OPEN_DOCUMENT"/>
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.PICK"/>
+            <action android:name="android.intent.action.PICK" />
             <data android:mimeType="*/*" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.GET_CONTENT"/>
+            <action android:name="android.intent.action.GET_CONTENT" />
             <data android:mimeType="*/*" />
         </intent>
         <intent>

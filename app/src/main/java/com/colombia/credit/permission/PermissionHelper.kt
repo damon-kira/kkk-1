@@ -325,6 +325,9 @@ object PermissionHelper {
     private val contactPermissions =
         arrayOf(/*Manifest.permission.GET_ACCOUNTS, */Manifest.permission.READ_CONTACTS)
 
+    private val readPhonePermission =
+        arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS)
+
     private val smsPermissions =
         arrayOf(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
 
@@ -363,6 +366,9 @@ object PermissionHelper {
         }
 
         checkGroup(activity, storagePermissions)?.let {
+            deniedList.addAll(it)
+        }
+        checkGroup(activity, readPhonePermission)?.let{
             deniedList.addAll(it)
         }
         result.invoke(deniedList)

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.bigdata.lib.loginTime
 import com.colombia.credit.R
@@ -16,17 +18,20 @@ import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.InputHelper
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.HomeEvent
+import com.colombia.credit.view.SysMobileLayout
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.expand.showSoftInput
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
+import com.util.lib.SysUtils
 import com.util.lib.hide
 import com.util.lib.ifShow
 import com.util.lib.show
 import com.util.lib.span.SpannableImpl
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 // 登录页面
 @AndroidEntryPoint
@@ -43,6 +48,20 @@ class LoginFragment : BaseLoginFragment() {
         LoginHelper()
     }
 
+    private var isAutoGetMobile: Boolean = false
+
+    private var mMobileLayout: SysMobileLayout? = null
+        get() {
+            return SysMobileLayout(getSupportContext()).also {
+                it.setItemClick { item ->
+                    isAutoGetMobile = false
+                    mBinding.loginEditPhone.setText(item)
+                    mBinding.clInput.removeView(it)
+                    mMobileLayout = null
+                }
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,20 +72,52 @@ class LoginFragment : BaseLoginFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setCustomListener(mBinding.loginToolbar)
         setViewModelLoading(mViewModel)
         lifecycle.addObserver(mViewModel)
         lifecycle.addObserver(mSmsHelper)
         lifecycle.addObserver(mLoginHelper)
-        setCustomListener(mBinding.loginToolbar)
         mBinding.loginEditPhone.requestFocus()
         showSoftInput(mBinding.loginEditPhone)
         initProtocol()
         initText()
         mBinding.loginTvVoice.isEnabled = true
-        mSmsHelper.registerObserver(mBinding.loginEditCode)
-
         initObserver()
+        initView()
 
+        mBinding.loginEditPhone.postDelayed({
+            if (isDestroyView()) return@postDelayed
+            getSysMobile()
+        }, 600)
+    }
+
+    // 获取手机号
+    private fun getSysMobile() {
+        val mobiles = SysUtils.getPhoneNumbers(getSupportContext())
+        if (mobiles.isNullOrEmpty()) return
+        if (mobiles.size == 1) {
+            isAutoGetMobile = true
+            val text = mobiles[0]
+            mBinding.loginEditPhone.setText(text)
+            mBinding.loginEditPhone.setSelection(text.length)
+            return
+        }
+        mMobileLayout?.let {layout ->
+            layout.setData(mobiles)
+            val locations = IntArray(2)
+            mBinding.loginEditPhone.getLocationInWindow(locations)
+            val finalX = mBinding.loginEditPhone.x.roundToInt()
+            val finalY = mBinding.llMobile.y + mBinding.llMobile.height
+            layout.x = finalX.toFloat()
+            layout.y = finalY
+            val layoutWidth = ((mBinding.llMobile.width - finalX) * 0.88f).toInt()
+            val layoutParams = ConstraintLayout.LayoutParams(layoutWidth, LayoutParams.WRAP_CONTENT)
+            mBinding.clInput.addView(layout, layoutParams)
+        }
+        hideSoftInput()
+    }
+
+    private fun initView() {
         mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
@@ -128,7 +179,10 @@ class LoginFragment : BaseLoginFragment() {
                 }
                 s?.let {
                     // 非自动触发获取验证码 || 非自动回填验证码 会自动触发登录接口
-                    if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()) || mSmsHelper.isAutoInsert) && !mViewModel.isAutoGetCode) {
+                    if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()) || mSmsHelper.isAutoInsert)
+                        && !mViewModel.isAutoGetCode && !isAutoGetMobile
+                    ) {
+                        isAutoGetMobile = false
                         login()
                     }
                 }
@@ -137,6 +191,7 @@ class LoginFragment : BaseLoginFragment() {
     }
 
     private fun initObserver() {
+        mSmsHelper.registerObserver(mBinding.loginEditCode)
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
             if (time == -1L) {
                 mBinding.loginTvVoice.isEnabled = true
