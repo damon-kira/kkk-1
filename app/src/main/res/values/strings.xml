@@ -324,7 +324,7 @@
     <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
     <string name="hosta_s">Hasta %s</string>
 
-     <!--最多只能同时申请六个贷款产品-->
+    <!--最多只能同时申请六个贷款产品-->
     <string name="toast_product_up">Solo puede solicitar hasta %s productos de préstamo al mismo tiempo</string>
     <!--您已经申请很多个应用了，达到了申请上限，请明天再来尝试-->
     <string name="toast_product_app">Ha solicitado muchos productos y ha alcanzado el límite de aplicaciones, vuelva a intentarlo mañana</string>
@@ -341,4 +341,10 @@
     <string name="consider">Necesito dinero</string>
     <string name="dialog_confirm_cancel">Confirmar cancelar</string>
     <string name="wait_confirm">Tomar el dinero</string>
+
+    <string name="recommend_text1">Solicite ahora y obtenga dinero en su cuenta en 3 minutos</string>
+    <string name="recommend_text2">Cuanto más rápida sea la solicitud, mayor será el monto del préstamo y más largo el período del préstamo;</string>
+    <string name="recommend_text3">El 99% de los usuarios eligió este producto y la tasa de aprobación es muy alta;</string>
+    <string name="recommend_hint">100% Aprobado</string>
+    <string name="recomm_amount_hint">Créditos hasta de</string>
 </resources>

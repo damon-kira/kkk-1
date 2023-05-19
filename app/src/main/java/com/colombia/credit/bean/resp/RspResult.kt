@@ -1,4 +1,3 @@
 package com.colombia.credit.bean.resp
 
-class RspResult {
-}
+class RspResult

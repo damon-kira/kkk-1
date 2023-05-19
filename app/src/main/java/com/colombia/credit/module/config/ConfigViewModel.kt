@@ -11,8 +11,9 @@ class ConfigViewModel @Inject constructor(private val repository: ConfigReposito
 
     companion object {
         const val KEY_VOICE = "PjuFXVzXgcd9iiRBgT7T" // 语音配置
-        const val KEY_RECOMMEND = "c3lzX3N3aXRjZV9ldmFsdWF0ZV9zY29yZQ==" // 获取推荐弹窗显示时间
     }
+
+    var configLiveData = generatorLiveData<RspConfig>()
 
     var mConfig: RspConfig? = null
 
@@ -20,6 +21,9 @@ class ConfigViewModel @Inject constructor(private val repository: ConfigReposito
         repository.getConfig(keys).observerNonStickyForever {
             if (it.isSuccess()) {
                 mConfig = it.getData()
+                mConfig?.let {config ->
+                    configLiveData.postValue(config)
+                }
             }
         }
     }

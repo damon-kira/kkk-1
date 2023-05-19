@@ -45,7 +45,7 @@ class RspRepayOrders {
             result = 31 * result + (C2O8E6jjzd?.hashCode() ?: 0)
             result = 31 * result + (Eff0nA?.hashCode() ?: 0)
             result = 31 * result + (zbRV6Lg8jO?.hashCode() ?: 0)
-            result = 31 * result + (gzBTFx?.hashCode() ?: 0)
+            result = 31 * result + (gzBTFx.hashCode())
             result = 31 * result + (QiZorG?.hashCode() ?: 0)
             result = 31 * result + (q48Wml8N.hashCode())
             result = 31 * result + (X32HrYq4u?.hashCode() ?: 0)

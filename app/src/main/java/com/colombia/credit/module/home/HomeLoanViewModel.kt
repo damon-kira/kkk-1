@@ -31,15 +31,16 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
                     mUserName = info.HyulExS1ei.orEmpty()
                     saveMobile(info.cusTell.orEmpty())
 
+                    mRspInfoLiveData.postValue(info)
+
                     if (repeatProductLiveData.value != info.jBRR || repeatProductLiveData.value == null) {
                         repeatProductLiveData.postValue(info.jBRR)
                     }
-
+                    // 复贷还款信息
                     repeatRepayLiveData.postValue(info.gQ1J)
-
+                    // 复贷待确认订单
                     waitConfirmLiveData.postValue(info.Jg4g2)
 
-                    mRspInfoLiveData.postValue(info)
                 }
             }
         }

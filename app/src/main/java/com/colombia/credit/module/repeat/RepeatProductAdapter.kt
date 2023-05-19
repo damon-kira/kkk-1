@@ -200,5 +200,7 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
         return position - mWaitItems.size
     }
 
+    fun getNormalItemCount() = currentItems.size
+
     fun getWaitItemCount() = mWaitItems.size
 }

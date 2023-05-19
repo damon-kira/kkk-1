@@ -3,9 +3,7 @@ package com.common.lib.net.bean
 import com.common.lib.net.ResponseCode
 import java.lang.reflect.ParameterizedType
 
-/**
- * Created by weisl on 2019/8/12.
- */
+
 class BaseResponse<T> @JvmOverloads constructor(
     var code: Int,
     var data: T?,
