@@ -38,6 +38,19 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mBinding by binding<ActivityWorkInfoBinding>()
 
+    private val mAutoHelper by lazy(LazyThreadSafetyMode.NONE) {
+        object : WorkAutoHelper(mBinding) {
+            override fun showItemDialog(index: Int) {
+                when (index) {
+                    ITEM_TYPE -> onClick(mBinding.bivType)
+                    ITEM_PAYDAY -> onClick(mBinding.bivPayday)
+                    ITEM_INCOME -> onClick(mBinding.bivIncome)
+                    ITEM_JOB_YEAR -> onClick(mBinding.bivJobYear)
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
@@ -47,6 +60,11 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivJobYear.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
+        initCache()
+        mViewModel.getInfo()
+    }
+
+    private fun initCache() {
         mViewModel.getCacheInfo()?.also { info ->
             info as ReqWorkInfo
             val jobTime = info.x6yR
@@ -66,7 +84,6 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
         }
-        mViewModel.getInfo()
     }
 
     override fun initObserver() {
@@ -147,6 +164,7 @@ class WorkInfoActivity : BaseProcessActivity(), View.OnClickListener {
         ) {
             baseInfoView.setViewText(it.value)
             baseInfoView.tag = it.key
+            mAutoHelper.startCheckNext()
         }
     }
 

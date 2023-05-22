@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    android:focusableInTouchMode="true">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
@@ -44,6 +46,7 @@
         app:pv_curr_step="1" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsl_content"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -68,8 +71,8 @@
                 android:layout_marginTop="20dp"
                 app:hint="@string/email_hint"
                 app:left_icon="@drawable/svg_email"
-                app:rightIcon_visiblity="gone"
                 app:max_length="50"
+                app:rightIcon_visiblity="gone"
                 app:stringArray="@array/email_list"
                 app:title="@string/email" />
 
@@ -104,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 app:hint="@string/address_detail"
-                app:rightIcon_visiblity="gone"
                 app:max_length="100"
+                app:rightIcon_visiblity="gone"
                 app:title_visiblity="gone" />
             <!-- 婚姻 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView

@@ -25,6 +25,7 @@ object WifiHelper {
             jobj.addProperty("ip", "")
             array.add(jobj)
         }
+        logger_d("debug_wifiHelpoer", "getWifiInfo == ${array.joinToString(",")}")
         if (array.size() == 0) {
             return  ""
         }

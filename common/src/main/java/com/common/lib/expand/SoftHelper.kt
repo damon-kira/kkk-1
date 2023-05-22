@@ -33,6 +33,7 @@ fun hideSoftInput(view: View){
  * @param view
  */
 fun showSoftInput(view: View) {
+    view.requestFocus()
     val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 }

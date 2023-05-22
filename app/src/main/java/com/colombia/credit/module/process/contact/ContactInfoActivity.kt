@@ -40,6 +40,18 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         DictionaryUtil.getRelationShip()
     }
 
+    private val mAutoHelper by lazy(LazyThreadSafetyMode.NONE) {
+        object :ContactAutoHelper(mBinding) {
+            override fun showItemDialog(index: Int) {
+                when (index) {
+                    ITEM_RELATIONSHIP -> onClick(mBinding.bivRelationship)
+                    ITEM_CONTACT1 -> onClick(mBinding.bivContact1)
+                    ITEM_CONTACT2 -> onClick(mBinding.bivContact2)
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
@@ -134,6 +146,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 ) {
                     mBinding.bivRelationship.setViewText(it.value)
                     mBinding.bivRelationship.tag = it.key
+                    mAutoHelper.startCheckNext()
                 }
             }
             R.id.biv_contact1 -> {
@@ -155,6 +168,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         ContactObtainHelper.createObtainContact(this).openContact { _, data ->
             data ?: return@openContact
             setContactInfo(infoView, data)
+            mAutoHelper.startCheckNext()
         }
     }
 

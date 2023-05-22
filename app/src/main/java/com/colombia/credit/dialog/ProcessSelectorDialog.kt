@@ -86,8 +86,8 @@ class ProcessSelectorDialog constructor(context: Context) : DefaultDialog(contex
             SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 mAdapter?.getItemData<DictionaryInfo>(position)?.let { item ->
-                    mListener?.invoke(item)
                     dismiss()
+                    mListener?.invoke(item)
                 }
             }
         })

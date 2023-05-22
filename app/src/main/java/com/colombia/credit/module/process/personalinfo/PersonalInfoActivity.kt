@@ -2,6 +2,7 @@ package com.colombia.credit.module.process.personalinfo
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqPersonalInfo
@@ -9,7 +10,9 @@ import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.dialog.FirstLoanHintDialog
-import com.colombia.credit.expand.*
+import com.colombia.credit.expand.STEP2
+import com.colombia.credit.expand.checkEmailFormat
+import com.colombia.credit.expand.isNewUser
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
@@ -38,25 +41,74 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 address?.let {
                     mBinding.bivAddress.setViewText("${address.cingorium},${address.trophful}")
                 }
+                mAutoHelper.startCheckNext()
             }
         }
     }
 
     private val mFirstDialog: FirstLoanHintDialog by lazy {
-        FirstLoanHintDialog(this).setOnClickListener { }
+        FirstLoanHintDialog(this)
+            .also {
+                it.setOnClickListener { }
+                it.setOnDismissListener {
+                    mAutoHelper.startCheckNext()
+                }
+            }
+    }
+
+    private val mAutoHelper by lazy {
+        object : PersonalAutoHelper(mBinding, !isNewUser) {
+            override fun showItemDialog(index: Int) {
+                when (index) {
+                    ITEM_EDUCATION -> {
+                        showEducation()
+                    }
+                    ITEM_ADDR -> {
+                        showAddr()
+                    }
+                    ITEM_MARRIAGE -> {
+                        showMarriage()
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setToolbarListener(mBinding.processToolbar)
+        initView()
+        initCache()
+        mViewModel.getInfo()
+
+        if (isNewUser) {
+            mFirstDialog.show()
+        }
+    }
+
+    private fun initView() {
         mBinding.bivEducation.setBlockingOnClickListener(this)
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
 
+        val onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                mAutoHelper.startCheckNext()
+            }
+        }
+        mBinding.bivEmail.getEditView().onFocusChangeListener = onFocusChangeListener
+        mBinding.bivAddrDetail.getEditView().onFocusChangeListener = onFocusChangeListener
+    }
+
+    private fun initCache() {
         val cache = mViewModel.getCacheInfo()?.also { info ->
             info as ReqPersonalInfo
-            mBinding.bivEmail.setViewText(info.unH4I2vHXG.orEmpty())
+            val email = info.unH4I2vHXG.orEmpty()
+            if (email.isNotEmpty()) {
+                mBinding.bivEmail.setViewText(email)
+                mBinding.bivEmail.getEditView().setSelection(email.length)
+            }
             if (!info.QlCvCLnNx.isNullOrEmpty() && !info.woTVOe.isNullOrEmpty()) {
                 mBinding.bivAddress.setViewText(info.QlCvCLnNx.orEmpty() + "," + info.woTVOe)
             }
@@ -70,13 +122,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
             }
         }
-        mViewModel.getInfo()
-
-        if (isNewUser) {
-            mFirstDialog.show()
-        }
     }
-
 
     override fun initObserver() {
         mViewModel.mAddrLiveData.observerNonSticky(this) { list ->
@@ -109,31 +155,45 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         v ?: return
         when (v.id) {
             R.id.biv_education -> {
-                showProcessSelectorDialog(
-                    getString(R.string.education),
-                    mEducation,
-                    mBinding.bivEducation.tag?.toString().orEmpty()
-                ) {
-                    mBinding.bivEducation.setViewText(it.value)
-                    mBinding.bivEducation.tag = it.key
-                }
+                showEducation()
             }
             R.id.biv_address -> {
-                mViewModel.getAddrInfo()
+                showAddr()
             }
             R.id.biv_marriage -> {
-                showProcessSelectorDialog(
-                    getString(R.string.marriage),
-                    mMarriage,
-                    mBinding.bivMarriage.tag?.toString().orEmpty()
-                ) {
-                    mBinding.bivMarriage.setViewText(it.value)
-                    mBinding.bivMarriage.tag = it.key
-                }
+                showMarriage()
             }
             R.id.tv_commit -> {
                 uploadInfo()
             }
+        }
+    }
+
+    protected fun showMarriage() {
+        showProcessSelectorDialog(
+            getString(R.string.marriage),
+            mMarriage,
+            mBinding.bivMarriage.tag?.toString().orEmpty()
+        ) {
+            mBinding.bivMarriage.setViewText(it.value)
+            mBinding.bivMarriage.tag = it.key
+            mAutoHelper.startCheckNext()
+        }
+    }
+
+    protected fun showAddr() {
+        mViewModel.getAddrInfo()
+    }
+
+    protected fun showEducation() {
+        showProcessSelectorDialog(
+            getString(R.string.education),
+            mEducation,
+            mBinding.bivEducation.tag?.toString().orEmpty()
+        ) {
+            mBinding.bivEducation.setViewText(it.value)
+            mBinding.bivEducation.tag = it.key
+            mAutoHelper.startCheckNext()
         }
     }
 

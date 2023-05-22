@@ -1,6 +1,7 @@
 package com.colombia.credit.view.baseinfo
 
 import android.content.Context
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.*
 import android.text.method.DigitsKeyListener
@@ -312,4 +313,8 @@ class EmailInfoView : AbsBaseInfoView {
         setPadding(padding, paddingTop, padding, padding / 2)
     }
 
+    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
+        mBinding.bivEdittext.requestFocus(direction, previouslyFocusedRect)
+        return super.requestFocus(direction, previouslyFocusedRect)
+    }
 }

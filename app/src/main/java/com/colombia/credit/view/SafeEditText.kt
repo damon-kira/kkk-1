@@ -6,7 +6,6 @@ import android.text.Selection
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
-import com.google.android.gms.common.util.CrashUtils
 import com.util.lib.log.debug
 import kotlin.math.min
 
