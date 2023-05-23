@@ -129,14 +129,15 @@ dependencies {
 
     implementation rootProject.ext.hilt.hilt_android
     kapt rootProject.ext.hilt.hilt_compiler_android
-    implementation project(path: ':sdks:cache')
 
+//    implementation project(path: ':sdks:cache')
     implementation project(path: ":common")
     implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
     implementation project(path: ':datepicker')
     implementation rootProject.ext.other.aes
+    implementation rootProject.ext.other.cache
     debugImplementation rootProject.ext.other.devoptions
 
     //firebase core

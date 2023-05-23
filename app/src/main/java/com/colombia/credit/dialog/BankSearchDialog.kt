@@ -15,9 +15,9 @@ import com.colombia.credit.module.adapter.linearLayoutManager
 import com.colombia.credit.view.SearchView
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
-import com.common.lib.expand.hideSoftInput
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import com.util.lib.expand.hideSoftInput
 
 class BankSearchDialog(context: Context) : DefaultDialog(context) {
 

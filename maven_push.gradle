@@ -1,4 +1,3 @@
-
 apply plugin: 'maven-publish'
 //apply plugin: 'signing'
 
@@ -19,26 +18,28 @@ apply plugin: 'maven-publish'
 //    }
 //}
 
-publishing {
-    publications {
-        maven (MavenPublication) {
-            // 打包源码和Class
-//            from components.java // 发布Java组建
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                // 打包源码和Class
+                from components.release // 发布Java组建
 
-            //定义源码task
+                //定义源码task
 //            artifact sourceJar
 
-            // 定义包的坐标
+                // 定义包的坐标
 //            groupId 'com.test.test'
 //            artifactId 'test'
 //            version '1.0.0'
+            }
         }
-    }
 
 // 定义目标仓库
-    repositories {
-        maven {
-            url uri("${rootProject.rootDir}/repo")
+        repositories {
+            maven {
+                url uri("${rootProject.rootDir}/repo")
+            }
         }
     }
 }

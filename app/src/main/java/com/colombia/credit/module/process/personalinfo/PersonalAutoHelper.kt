@@ -4,8 +4,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.module.process.AbsAutoCheckHelper
-import com.common.lib.expand.hideSoftInput
-import com.common.lib.expand.showSoftInput
+import com.util.lib.expand.hideSoftInput
+import com.util.lib.expand.showSoftInput
 
 // 基本信息
 abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boolean) :

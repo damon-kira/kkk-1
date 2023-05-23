@@ -25,8 +25,8 @@ dependencies {
     implementation rootProject.ext.retrofit.gson
     implementation rootProject.ext.exifinterface.exifinterface
     implementation rootProject.ext.other.aes
+    implementation rootProject.ext.other.cache
     implementation project(path: ':sdks:cache')
-    implementation rootProject.ext.exifinterface.exifinterface
 }
 
 apply from: '../../maven_push.gradle'

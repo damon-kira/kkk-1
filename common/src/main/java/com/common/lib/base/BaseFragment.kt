@@ -183,7 +183,7 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
 
     fun hideSoftInput() {
         activity?.let {
-            com.common.lib.expand.hideSoftInput(it)
+            com.util.lib.expand.hideSoftInput(it)
         }
     }
 

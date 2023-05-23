@@ -103,7 +103,8 @@ rootProject.ext {
             aes             : 'com.aes.lib:aes:1.0.0',
 //            userBehavior    : 'com.behavior.lib:userBehavior:1.0.2',
 //            bigdata         : 'com.bigdata.lib:bigdata:1.0.0',
-            devoptions      : 'com.devoptions.lib:devoptions:1.0.1'
+            devoptions      : 'com.devoptions.lib:devoptions:1.0.1',
+            cache           : 'com.cache.lib:cache:1.0.0'
     ]
 
 

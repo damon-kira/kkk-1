@@ -7,8 +7,6 @@ import android.text.TextUtils
 import java.io.*
 
 /**
- * Created by weishl on 2021/4/22
- *
  * 在URI中获取照片地址，copy到APP目录下
  */
 fun getFilePathFromUri(

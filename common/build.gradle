@@ -63,6 +63,7 @@ dependencies {
 //    implementation rootProject.ext.other.util
 //    implementation rootProject.ext.other.userBehavior
       implementation rootProject.ext.other.aes
+      implementation rootProject.ext.other.cache
 
     api project(path: ':sdks:util')
 //    implementation project(path: ':sdks:userBehavior')

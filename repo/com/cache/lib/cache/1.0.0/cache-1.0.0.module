@@ -1,0 +1,88 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.cache.lib",
+    "module": "cache",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cache-1.0.0.aar",
+          "url": "cache-1.0.0.aar",
+          "size": 19638,
+          "sha512": "0a49741089179b73f21c762892ee863778a673341dae377960b27c0a5c33e161d179a0b2f1ffe123ce93f3560051f0692ba315709d9384e72c57dab41af6c28f",
+          "sha256": "707444c1ee338d483afb6db042663a02bfe7e1f5dba3e72c00cc5e1879894ca5",
+          "sha1": "3c11c8e1d4e8313c477e34dfbf8bac93d62729a7",
+          "md5": "f26372e7e37cbd904b9a96154418d5bc"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.21"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.4.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cache-1.0.0.aar",
+          "url": "cache-1.0.0.aar",
+          "size": 19638,
+          "sha512": "0a49741089179b73f21c762892ee863778a673341dae377960b27c0a5c33e161d179a0b2f1ffe123ce93f3560051f0692ba315709d9384e72c57dab41af6c28f",
+          "sha256": "707444c1ee338d483afb6db042663a02bfe7e1f5dba3e72c00cc5e1879894ca5",
+          "sha1": "3c11c8e1d4e8313c477e34dfbf8bac93d62729a7",
+          "md5": "f26372e7e37cbd904b9a96154418d5bc"
+        }
+      ]
+    }
+  ]
+}

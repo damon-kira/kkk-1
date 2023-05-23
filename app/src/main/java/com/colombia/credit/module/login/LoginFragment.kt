@@ -21,12 +21,12 @@ import com.colombia.credit.module.config.ConfigViewModel
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.view.SysMobileLayout
 import com.common.lib.expand.setBlockingOnClickListener
-import com.common.lib.expand.showSoftInput
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.SysUtils
+import com.util.lib.expand.showSoftInput
 import com.util.lib.hide
 import com.util.lib.ifShow
 import com.util.lib.log.logger_e
