@@ -7,6 +7,7 @@ import android.net.Uri
 import com.finance.analysis.FirebaseInfo.getInstanceId
 import com.finance.analysis.FirebaseInfo.saveFcmToken
 import com.finance.analysis.FirebaseInfo.saveInstanceId
+import com.finance.analysis.googleIsAvailable
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -24,6 +25,7 @@ class FirebaseManager : IPushManager {
 
     private var mGaid: String? = null
     override fun init(context: Context) {
+        if (!googleIsAvailable(context)) return
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
@@ -41,6 +43,7 @@ class FirebaseManager : IPushManager {
 
 
     override fun getGaid(context: Context): String {
+        if (!googleIsAvailable(context)) return ""
         ThreadPoolUtil.executor("gaid"){
             val gaid = try {
                 AdvertisingIdClient.getAdvertisingIdInfo(context).id.orEmpty()
@@ -56,7 +59,10 @@ class FirebaseManager : IPushManager {
     }
 
     override fun reportException(t: Throwable) {
-        FirebaseCrashlytics.getInstance().recordException(t)
+        try {
+            FirebaseCrashlytics.getInstance().recordException(t)
+        } catch (e: Exception) {
+        }
     }
 
     override fun getChannel(): Int = 0
@@ -87,6 +93,7 @@ class FirebaseManager : IPushManager {
 
     @SuppressLint("MissingPermission")
     private fun getFirebaseInstanceId(ctx: Context) {
+        if (!googleIsAvailable(ctx)) return
         FirebaseAnalytics.getInstance(ctx).appInstanceId.addOnCompleteListener {
             logger_d(TAG, "onClick: isSuccessful = ${it.isSuccessful}")
             if (it.isSuccessful) {
