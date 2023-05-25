@@ -302,11 +302,6 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-//    override fun onBackPressed() {
-//        Launch.skipMainActivity(this)
-//        super.onBackPressed()
-//    }
-
     // 显示详细信息
     private fun setDetailInfo(kycInfo: KycOcrInfo) {
         mBinding.llKycInfo.show()
