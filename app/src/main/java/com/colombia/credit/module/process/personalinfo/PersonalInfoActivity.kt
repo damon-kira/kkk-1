@@ -91,14 +91,6 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
-
-        val onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                mAutoHelper.startCheckNext()
-            }
-        }
-        mBinding.bivEmail.getEditView().onFocusChangeListener = onFocusChangeListener
-        mBinding.bivAddrDetail.getEditView().onFocusChangeListener = onFocusChangeListener
     }
 
     private fun initCache() {
@@ -153,7 +145,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         v ?: return
-        mBinding.clContent.requestFocus()
+        mAutoHelper.clearFocus()
         when (v.id) {
             R.id.biv_education -> {
                 showEducation()

@@ -309,11 +309,11 @@ class BaseInfoView : AbsBaseInfoView {
     override fun setTextArray(array: ArrayList<String>) {
     }
 
-    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
-        mBinding.bivEdittext.requestFocus(direction, previouslyFocusedRect)
-        return super.requestFocus(direction, previouslyFocusedRect)
-    }
-
+//    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
+//        mBinding.bivEdittext.requestFocus(direction, previouslyFocusedRect)
+//        return super.requestFocus(direction, previouslyFocusedRect)
+//    }
+//
     override fun clearFocus() {
         super.clearFocus()
         mBinding.bivEdittext.clearFocus()

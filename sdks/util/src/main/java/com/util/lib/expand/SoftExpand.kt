@@ -24,7 +24,10 @@ fun hideSoftInput(activity: Activity) {
 
 fun hideSoftInput(view: View){
     val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    imm?.hideSoftInputFromWindow(view.windowToken, 0) //强制隐藏键盘
+    imm?.hideSoftInputFromWindow(
+        view.windowToken,
+        InputMethodManager.HIDE_IMPLICIT_ONLY.and(InputMethodManager.HIDE_NOT_ALWAYS)
+    ) //强制隐藏键盘
 }
 
 fun showSoftInput(view: View){

@@ -20,6 +20,7 @@ abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boole
     }
 
     override fun checkByValue(index: Int) {
+        clearFocus()
         when (index) {
             ITEM_EMAIL -> checkItem1()
             ITEM_EDUCATION -> checkItem2()
@@ -38,9 +39,9 @@ abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boole
     private fun initView() {
         val editorActionListener = TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
-                vb.clContent.requestFocus()
+                clearFocus()
                 hideSoftInput(v)
-                _startCheckNext()
+                startCheckNext()
             }
             false
         }
@@ -48,12 +49,18 @@ abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boole
         vb.bivAddrDetail.getEditView().setOnEditorActionListener(editorActionListener)
     }
 
+    fun clearFocus() {
+        vb.nslContent.requestFocus()
+        vb.bivEmail.clearFocus()
+        vb.bivAddrDetail.clearFocus()
+    }
+
     private fun checkItem1() {
         if (!checkInfoEmpty(vb.bivEmail)) {
-            hideSoftInput(vb.bivEmail)
             checkNextView()
             return
         }
+        vb.bivEmail.requestFocus()
         vb.bivEmail.getEditView().requestFocus()
         showSoftInput(vb.bivEmail)
     }
@@ -76,6 +83,7 @@ abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boole
 
     private fun checkItem4() {
         if (!checkInfoEmpty(vb.bivAddrDetail)) {
+            vb.bivAddrDetail.clearFocus()
             checkNextView()
             return
         }
