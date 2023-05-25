@@ -121,6 +121,7 @@
     <string name="error_contact_hint">Contacto</string>
     <string name="error_mobile_same">El teléfono de contacto no puede ser el mismo</string><!-- 联系人手机号不能是一个 -->
     <string name="error_mobile_same_login">El número de teléfono de contacto no puede ser su número de teléfono registrado</string><!-- 不能与登录的手机号是一个 -->
+    <string name="contact_no_hint">No se pueden obtener los datos, verifique</string>
 
     <!-- 银行信息 -->
     <string name="bank_title">Información del contacto</string>

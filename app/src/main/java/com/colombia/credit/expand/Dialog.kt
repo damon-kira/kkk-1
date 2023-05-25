@@ -61,7 +61,7 @@ fun BaseActivity.showInvalidDialog() {
             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
         }
         .showClose(false)
-        .showTitle(false)
+        .showTitle(HintDialog.type_GONE)
         .setMessage(getString(R.string.invalid_hint))
         .setBtnText(getString(R.string.confirm))
     addDialog(dialog)

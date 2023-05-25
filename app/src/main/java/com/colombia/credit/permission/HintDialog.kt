@@ -1,14 +1,22 @@
 package com.colombia.credit.permission
 
 import android.content.Context
+import android.util.TypedValue
 import androidx.annotation.DrawableRes
 import com.colombia.credit.databinding.DialogHintBinding
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.ifShow
+import com.util.lib.invisible
 
 class HintDialog constructor(context: Context) : DefaultDialog(context) {
+
+    companion object {
+        const val TYPE_VISIBLE = 0x10
+        const val type_GONE = 0x11
+        const val TYPE_INVISIBLE = 0x12
+    }
 
     private val mBinding by binding<DialogHintBinding>()
 
@@ -30,8 +38,18 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
         return this
     }
 
-    fun showTitle(show: Boolean): HintDialog {
-        mBinding.tvTitle.ifShow(show)
+    fun showTitle(visibility: Int): HintDialog {
+        when (visibility) {
+            type_GONE ->mBinding.tvTitle.ifShow(false)
+            TYPE_VISIBLE ->mBinding.tvTitle.ifShow(true)
+            TYPE_INVISIBLE ->mBinding.tvTitle.invisible()
+        }
+
+        return this
+    }
+
+    fun showBtn(show: Boolean): HintDialog {
+        mBinding.tvSkip.ifShow(show)
         return this
     }
 
@@ -46,7 +64,12 @@ class HintDialog constructor(context: Context) : DefaultDialog(context) {
     }
 
     fun setMessage(message: String): HintDialog {
-        mBinding.tvPermissionText.text = message
+        mBinding.tvText.text = message
+        return this
+    }
+
+    fun setMessageTextSize(textSize: Float): HintDialog {
+        mBinding.tvText.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
         return this
     }
 

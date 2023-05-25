@@ -18,6 +18,7 @@ import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.ContactPermission
+import com.colombia.credit.permission.HintDialog
 import com.colombia.credit.permission.PermissionHelper
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.view.baseinfo.BaseInfoView
@@ -38,6 +39,13 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private val mRelationship by lazy {
         DictionaryUtil.getRelationShip()
+    }
+
+    private val mHintDialog by lazy {
+        HintDialog(this).setMessage(getString(R.string.contact_no_hint))
+            .showBtn(false)
+            .setMessageTextSize(18f)
+            .showTitle(HintDialog.TYPE_INVISIBLE)
     }
 
     private val mAutoHelper by lazy(LazyThreadSafetyMode.NONE) {
@@ -168,6 +176,11 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         ContactObtainHelper.createObtainContact(this).openContact { _, data ->
             data ?: return@openContact
             setContactInfo(infoView, data)
+            if (data.phone.isNullOrEmpty()) {
+                // 弹窗提示
+                addDialog(mHintDialog)
+                return@openContact
+            }
             mAutoHelper.startCheckNext()
         }
     }

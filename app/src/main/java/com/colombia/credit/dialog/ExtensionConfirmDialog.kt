@@ -18,7 +18,7 @@ class ExtensionConfirmDialog constructor(context: Context) : DefaultDialog(conte
         setCancelable(false)
         setDisplaySize(0.88f, WRAP)
         mBinding.tvTitle.setText(R.string.defer_confirm1)
-        mBinding.tvPermissionText.setText(R.string.defer_confirm2)
+        mBinding.tvText.setText(R.string.defer_confirm2)
         mBinding.tvSkip.setText(R.string.defer_apply)
         val padding = 25f.dp()
         mBinding.tvSkip.setPadding(
