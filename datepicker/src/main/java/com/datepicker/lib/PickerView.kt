@@ -3,18 +3,16 @@ package com.datepicker.lib
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.RectF
 import android.os.Handler
 import android.os.Message
-import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.manu.mdatepicker.R
-import java.lang.Math.pow
 import java.lang.ref.WeakReference
 import java.util.*
 import kotlin.math.abs
@@ -106,6 +104,7 @@ open class PickerView @JvmOverloads constructor(
     }
     private var mOnSelectListener: OnSelectListener? = null
 
+    private val mRectf by lazy { RectF() }
     private val TAG = "debug_PickerView"
 
     init {
@@ -164,10 +163,15 @@ open class PickerView @JvmOverloads constructor(
         }
         mWidth = measuredWidth
         mHeight = measuredHeight
+        mRectf.left = 0f
+        mRectf.top = 0f
+        mRectf.right = mWidth * 1f
+        mRectf.bottom = mHeight * 1f
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
+//        super.onDraw(canvas)
+        canvas.clipRect(mRectf)
         mPaddingStart = paddingStart.toFloat()
         mPaddingEnd = paddingEnd.toFloat()
         // 绘制中间位置
@@ -182,7 +186,7 @@ open class PickerView @JvmOverloads constructor(
             draw(canvas, 1, i, mPaintNormal)
             i++
         }
-        invalidate()
+//        invalidate()
     }
 
     private fun draw(canvas: Canvas, type: Int, position: Int, paint: Paint) {
@@ -198,7 +202,7 @@ open class PickerView @JvmOverloads constructor(
         val baseline = y + (fmi.bottom - fmi.top) / 2.0f - fmi.descent - 2
         val width = mPaintText.measureText("年")
         val index = mSelectPosition + type * position
-        if (mData.isEmpty() || index < 0 || index >= mData.size) return
+        if (mData.isEmpty() || index < 0 || index >= mData.size || baseline < 0 || y > mHeight) return
         canvas.drawText(
             mData[index],
             x - width / 2 + mPaddingStart - mPaddingEnd,

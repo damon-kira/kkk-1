@@ -151,14 +151,20 @@ object Launch {
     }
 
     fun skipWifiPage(context: Context) {
-        val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
-        context.startActivity(intent)
+        try {
+            val intent = Intent(Settings.ACTION_WIFI_SETTINGS)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
 
     fun skipDataPage(context: Context) {
-        val intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)
-        context.startActivity(intent)
-    }
+        try {
+            val intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
+     }
 
     fun skipWebViewActivity(context: Context, url: String) {
         val intent = Intent(context, WebViewActivity::class.java)

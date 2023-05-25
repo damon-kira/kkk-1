@@ -1,6 +1,7 @@
 package com.colombia.credit.view.baseinfo
 
 import android.content.Context
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.*
 import android.text.method.DigitsKeyListener
@@ -306,5 +307,15 @@ class BaseInfoView : AbsBaseInfoView {
     override fun isError(): Boolean = mIsError
 
     override fun setTextArray(array: ArrayList<String>) {
+    }
+
+    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
+        mBinding.bivEdittext.requestFocus(direction, previouslyFocusedRect)
+        return super.requestFocus(direction, previouslyFocusedRect)
+    }
+
+    override fun clearFocus() {
+        super.clearFocus()
+        mBinding.bivEdittext.clearFocus()
     }
 }

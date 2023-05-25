@@ -20,6 +20,7 @@ abstract class PersonalAutoHelper(vb: ActivityPersonalInfoBinding, isAuto: Boole
     }
 
     override fun checkByValue(index: Int) {
+        vb.clContent.requestFocus()
         when (index) {
             ITEM_EMAIL -> checkItem1()
             ITEM_EDUCATION -> checkItem2()
