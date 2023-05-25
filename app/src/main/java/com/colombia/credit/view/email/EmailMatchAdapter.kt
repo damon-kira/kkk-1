@@ -13,9 +13,7 @@ import com.util.lib.StringUtils
 import com.util.lib.dp
 
 
-/**
- * Created by weisl on 2019/4/4.
- */
+
 class EmailMatchAdapter(items: ArrayList<String>) : BaseAdapter(), Filterable,
     EmailFilter.IFilterResultListener {
 
@@ -62,7 +60,7 @@ class EmailMatchAdapter(items: ArrayList<String>) : BaseAdapter(), Filterable,
     }
 
     override fun getItem(position: Int): String {
-        return mSearchResultList[position].email ?: ""
+        return mSearchResultList[position].email.orEmpty()
     }
 
     override fun getItemId(position: Int): Long {

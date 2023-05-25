@@ -28,15 +28,11 @@ import java.util.*
 /**
  * 基本信息和其他信息页面 条目view
  */
-class EmailInfoView : AbsBaseInfoView {
-
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
+class EmailInfoView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AbsBaseInfoView(context, attrs, defStyleAttr) {
 
     companion object {
         const val VISIBLE = BaseInfoVisibility.VISIBLE

@@ -8,7 +8,7 @@ class EmailFilter constructor(private val emailList: ArrayList<String>?): Filter
 
     override fun performFiltering(constraint: CharSequence?): FilterResults {
         val results = FilterResults()
-        if (constraint == null || constraint.isEmpty()) {
+        if (constraint.isNullOrEmpty()) {
             results.values = ArrayList<EmailInputBean>()
             results.count = 0
         } else {

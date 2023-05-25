@@ -153,6 +153,7 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         v ?: return
+        mBinding.clContent.requestFocus()
         when (v.id) {
             R.id.biv_education -> {
                 showEducation()

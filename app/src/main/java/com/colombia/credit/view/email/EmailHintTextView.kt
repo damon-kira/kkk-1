@@ -6,6 +6,7 @@ import android.text.Selection
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
+import com.util.lib.log.logger_d
 
 
 class EmailHintTextView : AppCompatAutoCompleteTextView {
@@ -21,16 +22,13 @@ class EmailHintTextView : AppCompatAutoCompleteTextView {
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(context, attributeSet, defStyle)
 
     private fun init() {
+        threshold = 1
         mAdapter = EmailMatchAdapter(mItems)
         setAdapter(mAdapter)
         addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable?) {}
 
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
                 mAdapter?.filter?.filter(text)
