@@ -196,6 +196,12 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 //        }
 
         // 是否与登录手机号是一个
+        val tempMobile = data.phone
+        if (tempMobile.isNullOrEmpty()) {
+            clearInfo(infoView)
+            infoView.setError(R.string.contact_no_hint)
+            return
+        }
         if (loginMobile.contains(data.phone) || data.phone.contains(loginMobile)) {
             clearInfo(infoView)
             infoView.setError(R.string.error_mobile_same_login)
