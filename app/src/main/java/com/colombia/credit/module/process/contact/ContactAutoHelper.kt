@@ -9,16 +9,16 @@ abstract class ContactAutoHelper(vb: ActivityContactInfoBinding): AbsAutoCheckHe
     companion object {
         const val ITEM_RELATIONSHIP = 0
         const val ITEM_CONTACT1 = 1
-        const val ITEM_CONTACT2 = 2
+//        const val ITEM_CONTACT2 = 2
     }
 
-    override fun checkIndexResult(index: Int): Boolean = index > ITEM_CONTACT2
+    override fun checkIndexResult(index: Int): Boolean = index > ITEM_CONTACT1
 
     override fun checkByValue(index: Int) {
         when (index) {
             ITEM_RELATIONSHIP -> checkRelationShip()
             ITEM_CONTACT1 -> checkContact(index, vb.bivContact1)
-            ITEM_CONTACT2 -> checkContact(index, vb.bivContact2)
+//            ITEM_CONTACT2 -> checkContact(index, vb.bivContact2)
         }
     }
 

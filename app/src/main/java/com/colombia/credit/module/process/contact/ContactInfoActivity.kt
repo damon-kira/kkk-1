@@ -54,7 +54,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 when (index) {
                     ITEM_RELATIONSHIP -> onClick(mBinding.bivRelationship)
                     ITEM_CONTACT1 -> onClick(mBinding.bivContact1)
-                    ITEM_CONTACT2 -> onClick(mBinding.bivContact2)
+//                    ITEM_CONTACT2 -> onClick(mBinding.bivContact2)
                 }
             }
         }
@@ -176,30 +176,18 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         ContactObtainHelper.createObtainContact(this).openContact { _, data ->
             data ?: return@openContact
             setContactInfo(infoView, data)
-            if (data.phone.isNullOrEmpty()) {
-                // 弹窗提示
-                addDialog(mHintDialog)
-                return@openContact
-            }
-            mAutoHelper.startCheckNext()
         }
     }
 
     private fun setContactInfo(infoView: BaseInfoView, data: PhoneAndName) {
         val loginMobile = getMobile()
-//        if (data.phone.startsWith("57") && data.phone.length > 10) {
-//            val mobile = data.phone
-//            data.phone = mobile.substring(2, mobile.length)
-//        } else if (data.phone.startsWith("+57") && data.phone.length > 10) {
-//            val mobile = data.phone
-//            data.phone = mobile.substring(2, mobile.length)
-//        }
-
-        // 是否与登录手机号是一个
+        // 选择的手机号为空
         val tempMobile = data.phone
         if (tempMobile.isNullOrEmpty()) {
             clearInfo(infoView)
             infoView.setError(R.string.contact_no_hint)
+            // 弹窗提示
+            addDialog(mHintDialog)
             return
         }
         if (loginMobile.contains(data.phone) || data.phone.contains(loginMobile)) {
@@ -216,6 +204,11 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         if (isSameNumber(contact1, contact2)) {
             clearInfo(infoView)
             infoView.setError(R.string.error_mobile_same)
+            return
+        }
+
+        if (infoView != mBinding.bivContact2) {
+            mAutoHelper.startCheckNext()
         }
     }
 
