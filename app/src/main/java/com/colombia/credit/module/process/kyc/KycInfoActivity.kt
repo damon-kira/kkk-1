@@ -157,12 +157,12 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-    private fun loadImage(url: String?, type: Int) {
+    private fun loadImage(url: String?, picType: Int) {
         logger_d(TAG, "loadImage url = $url")
         if (url.isNullOrEmpty()) return
         GlideUtils.loadImageNoCache(this, 0, 0, url, 4f, { bitmap ->
             if (bitmap != null) {
-                if (type == PicType.PIC_FRONT) {
+                if (picType == PicType.PIC_FRONT) {
                     mBinding.ilPic.setLeftImage(bitmap)
                 } else {
                     mBinding.ilPic.setRightImage(bitmap)
@@ -195,6 +195,11 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                 return@observerNonSticky
             }
             if (!mBinding.ilPic.isAllSuccess()) {
+                if (mViewModel.mImageType == PicType.PIC_FRONT) {
+                    mKycPicHelper.autoShow(this, PicType.PIC_BACK)
+                } else if (mViewModel.mImageType == PicType.PIC_BACK){
+                    mKycPicHelper.autoShow(this, PicType.PIC_FRONT)
+                }
                 return@observerNonSticky
             }
             it.getData()?.let { info ->

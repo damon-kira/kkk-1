@@ -14,9 +14,15 @@ import java.io.File
 
 class KycPicHelper {
 
-    private val TAG = "KycPicHelper"
+    companion object {
+        private const val TYPE_NULL = 0X10
+        private const val TYPE_CAMERA = 0X11
+        private const val TYPE_ALBUM = 0X12
+    }
 
-    var mCurrType = 0 // 当前选择的照片，PicType.PIC_FRONT=2 PicType.PIC_BACK=1
+    var mCurrPicType = 0 // 当前选择的照片，PicType.PIC_FRONT=2 PicType.PIC_BACK=1
+
+    var mSelectType = TYPE_NULL // 相机 or 相册
 
     private val mKycInfo by lazy {
         KycTempInfo()
@@ -28,6 +34,7 @@ class KycPicHelper {
         activity: BaseActivity,
         @PicType picType: Int
     ) {
+        mSelectType = TYPE_NULL
         PicImageDialog(activity)
             .setOnImageClick({
                 openCamera(activity, picType)
@@ -37,9 +44,9 @@ class KycPicHelper {
             .show()
     }
 
-
     fun openCamera(activity: BaseActivity, @PicType picType: Int) {
-        mCurrType = picType
+        mCurrPicType = picType
+        mSelectType = TYPE_CAMERA
         val isFront = picType == PicType.PIC_FRONT
         val targetPath = if (isFront) mKycInfo.pathFront else mKycInfo.pathBack
         val captureFile = File(mKycInfo.getTempPath())
@@ -62,7 +69,8 @@ class KycPicHelper {
     }
 
     fun pickPicture(activity: BaseActivity, @PicType picType: Int) {
-        mCurrType = picType
+        mCurrPicType = picType
+        mSelectType = TYPE_ALBUM
         val isFront = picType == PicType.PIC_FRONT
         val targetPath = if (isFront) mKycInfo.pathFront else mKycInfo.pathBack
         ImageObtainHelper
@@ -79,6 +87,14 @@ class KycPicHelper {
                     mResultListener?.invoke(filePath, picType)
                 }
             })
+    }
+
+    fun autoShow(activity: BaseActivity, picType: Int){
+        if (mSelectType == TYPE_CAMERA) {
+            openCamera(activity, picType)
+        } else if (mSelectType == TYPE_ALBUM) {
+            showPicImageModeDialog(activity, picType)
+        }
     }
 
     fun destroy() {

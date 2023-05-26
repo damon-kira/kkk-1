@@ -12,21 +12,11 @@ import com.colombia.credit.databinding.LayoutIdentityBinding
 import com.common.lib.expand.setBlockingOnClickListener
 
 
-class IdentityLayout : LinearLayout {
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
-
-    constructor(
-        context: Context?,
-        attrs: AttributeSet?,
-        defStyleAttr: Int,
-        defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes)
+class IdentityLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     private val mBinding: LayoutIdentityBinding =
         LayoutIdentityBinding.inflate(LayoutInflater.from(context), this)
@@ -63,9 +53,13 @@ class IdentityLayout : LinearLayout {
         mBinding.ivRight.toggleStatus(status)
     }
 
-    fun isAllSuccess():Boolean {
+    fun isAllSuccess(): Boolean {
         return mBinding.ivLeft.getStatus() == IdentityPicStatus.STATUS_SUCCESS && mBinding.ivRight.getStatus() == IdentityPicStatus.STATUS_SUCCESS
     }
+
+    fun isLeftSuccess() = mBinding.ivLeft.getStatus() == IdentityPicStatus.STATUS_SUCCESS
+
+    fun isRightSuccess() = mBinding.ivRight.getStatus() == IdentityPicStatus.STATUS_SUCCESS
 
     fun setEnable(leftEnable: Boolean, rightEnable: Boolean) {
         setLeftEnable(leftEnable)
@@ -73,11 +67,11 @@ class IdentityLayout : LinearLayout {
     }
 
     fun setLeftEnable(leftEnable: Boolean) {
-        mBinding.ivLeft.isEnabled  = leftEnable
+        mBinding.ivLeft.isEnabled = leftEnable
     }
 
     fun setRightEnable(leftEnable: Boolean) {
-        mBinding.ivRight.isEnabled  = leftEnable
+        mBinding.ivRight.isEnabled = leftEnable
     }
 
     fun setClickListener(leftListener: (View) -> Unit, rightListener: (View) -> Unit) {
