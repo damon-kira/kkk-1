@@ -95,7 +95,7 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
             mRepayListener?.invoke(item)
         }
         when (item.hlDgN) {
-            STATUS_REVIEW -> { // 审核中
+            STATUS_REVIEW, STATUS_VERIFI -> { // 审核中
                 tvStatus.solidColor = ContextCompat.getColor(
                     holder.getContext(),
                     R.color.color_FFF1DD
