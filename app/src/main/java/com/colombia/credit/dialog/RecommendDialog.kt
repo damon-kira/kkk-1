@@ -8,7 +8,9 @@ import com.colombia.credit.databinding.DialogRecommenBinding
 import com.colombia.credit.expand.getUnitString
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.glide.GlideUtils
 import com.common.lib.viewbinding.binding
+import com.util.lib.dp
 
 
 typealias ClickRecommend = ((RepeatProductInfo) -> Unit)
@@ -49,6 +51,13 @@ class RecommendDialog constructor(context: Context) : DefaultDialog(context) {
         val periods = StringBuilder()
         val text = periods.append(info.D9hR.orEmpty()).append("~").append(info.cQ75eX5.orEmpty()).toString()
         mBinding.tvRight.text = text
+
+        GlideUtils.loadCornerImageFromUrl(context,
+            info.Gk9MGh.orEmpty(),
+            mBinding.aivIcon,
+            4.dp(),
+            R.drawable.ic_normal_image
+        )
     }
 
     fun setClickListener(click: ClickRecommend): RecommendDialog{

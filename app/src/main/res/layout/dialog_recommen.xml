@@ -44,7 +44,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etv_hint"
-        app:srcCompat="@drawable/svg_home_logo" />
+        app:srcCompat="@drawable/ic_normal_image" />
 
     <TextView
         android:id="@+id/tv_name"
