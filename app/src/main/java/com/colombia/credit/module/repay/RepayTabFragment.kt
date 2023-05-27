@@ -74,7 +74,9 @@ class RepayTabFragment : BaseHomeLoanFragment() {
 
         changePage(false)
         initObserver()
-        onPullToRefresh()
+        if (!inValidToken()) {
+            mViewModel.getRepayOrders()
+        }
 
         mBinding.tvRepay.setBlockingOnClickListener {
             val list = mAdapter.getSelectorItems()
@@ -127,6 +129,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             }
         }
     }
+
 
     private fun changePage(isShowList: Boolean) {
         mBinding.group.ifShow(isShowList)

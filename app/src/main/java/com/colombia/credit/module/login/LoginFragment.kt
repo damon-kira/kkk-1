@@ -100,8 +100,7 @@ class LoginFragment : BaseLoginFragment() {
         lifecycle.addObserver(mViewModel)
         lifecycle.addObserver(mSmsHelper)
         lifecycle.addObserver(mLoginHelper)
-        mBinding.loginEditPhone.requestFocus()
-        showSoftInput(mBinding.loginEditPhone)
+        mobileFocus()
         initProtocol()
         initText()
         mBinding.loginTvVoice.isEnabled = true
@@ -114,6 +113,11 @@ class LoginFragment : BaseLoginFragment() {
         }, 600)
 
         onRefresh()
+    }
+
+    private fun mobileFocus() {
+        mBinding.loginEditPhone.requestFocus()
+        showSoftInput(mBinding.loginEditPhone)
     }
 
     // 获取手机号
@@ -323,6 +327,7 @@ class LoginFragment : BaseLoginFragment() {
                     R.color.colorPrimary
                 ), false
             )
+            mobileFocus()
         } else {
             hideSoftInput()
         }
