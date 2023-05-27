@@ -228,9 +228,6 @@ class RepeatFragment : BaseHomeLoanFragment() {
             return
         }
 
-        val location = IntArray(2)
-        mBinding.etvTag.getLocationInWindow(location)
-        logger_d(TAG, "location x = ${location[0]}  Y=${location[1]}")
         if (mBinding.etvTag.top > 0) {
             changeListPadding(mBinding.etvTag.top)
         } else {

@@ -277,7 +277,12 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         mBinding.recyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 // 计算还款信息
-                mAdapter.getItemData<RspRepeatCalcul.CalculDetail>(position)?.change()
+                val data = mAdapter.getItemData<RspRepeatCalcul.CalculDetail>(position)
+                if (data?.isCheck == 1 && mAdapter.getSelectorList().size <= 1){
+                    toast(R.string.toast_min_product)
+                    return
+                }
+                data?.change()
                 mAdapter.notifyItemChanged(position)
                 val list = mAdapter.getSelectorList()
                 var productAmount: Long = 0 // 产品金额
