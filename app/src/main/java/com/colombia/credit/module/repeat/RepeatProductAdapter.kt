@@ -17,6 +17,8 @@ import com.colombia.credit.module.adapter.BaseRecyclerViewAdapter
 import com.colombia.credit.module.adapter.BaseViewHolder
 import com.common.lib.glide.GlideUtils
 import com.util.lib.dp
+import com.util.lib.hide
+import com.util.lib.show
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -144,10 +146,16 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
         holder.getView<AppCompatImageView>(R.id.aiv_check).isSelected = item.RXYz == "1"
 
         holder.getView<TextView>(R.id.tv_tag).let {
-            it.isSelected = item.ir3MCCmbF3 == "1"
-            if (item.ir3MCCmbF3 == "1") {
+            val tag = item.ir3MCCmbF3
+            if (tag != "1" && tag != "2") {
+                it.hide()
+                return
+            }
+            it.show()
+            it.isSelected = tag == "1"
+            if (tag == "1") {
                 it.setText(R.string.product_tag_risk)
-            } else {
+            } else if (tag == "2"){
                 it.setText(R.string.product_tag_safety)
             }
         }
