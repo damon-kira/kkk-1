@@ -86,6 +86,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         }
         setViewModelLoading(mInfoViewModel)
         setViewModelLoading(mAutoConfirmModel)
+        lifecycle.addObserver(mAutoConfirmModel)
         setAdapter()
         mBinding.aivArrow.setBlockingOnClickListener(this)
         mBinding.tvConfirm.setBlockingOnClickListener(this)

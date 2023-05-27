@@ -27,7 +27,6 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.dp
 import com.util.lib.hide
 import com.util.lib.ifShow
-import com.util.lib.log.logger_d
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.min
@@ -111,7 +110,12 @@ class RepeatFragment : BaseHomeLoanFragment() {
         mBinding.repeatTvApply.setBlockingOnClickListener {
             val leftNum = mHomeViewModel.mRspInfoLiveData.value?.GbiDSBdW ?: 0
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
-            if (leftNum < list.size || leftNum == 0) {
+            var orderIds: String? = null
+            if (list.isEmpty()) { // 没有选择产品时，获取待确认订单第一个
+                if (mAdapter.getWaitItemCount() > 0){
+                    orderIds = mAdapter.getWaitItemData(0)?.tQXtG0FYb.orEmpty()
+                }
+            } else if (leftNum < list.size || leftNum == 0) {
                 mHintDialog.setOnClickListener {
                     mAdapter.getSelectorItems().forEach { item ->
                         item.change()
@@ -121,7 +125,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
                 getBaseActivity()?.addDialog(mHintDialog)
                 return@setBlockingOnClickListener
             }
-            Launch.skipRepeatConfirmActivity(getSupportContext(), list.joinToString(","))
+            Launch.skipRepeatConfirmActivity(getSupportContext(), list.joinToString(","), orderIds)
         }
 
         mBinding.includeOrders.tvBtn.setBlockingOnClickListener {
@@ -155,7 +159,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
                     val info = mHomeViewModel.mRspInfoLiveData.value
                     val maxNum = info?.A04fSYQdHM ?: 0
                     val item = mAdapter.getItemData<RepeatProductInfo>(finalPosi)
-                    if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size) {
+                    if (item != null && !item.selector() && maxNum <= mAdapter.getSelectorItems().size && mAdapter.getWaitItemCount() == 0) {
                         if (maxNum > 0) {
                             mHintDialog.setMessage(
                                 getString(
@@ -169,7 +173,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
                     }
 
                     val leftNum = info?.GbiDSBdW ?: 0 // 最大可申请笔数
-                    if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0) {
+                    if (item != null && item.selector() && mAdapter.getSelectorItems().size == 1 && leftNum > 0 && mAdapter.getWaitItemCount() == 0) {
                         toast(R.string.toast_min_product)
                     } else {
                         item?.change()
@@ -218,8 +222,11 @@ class RepeatFragment : BaseHomeLoanFragment() {
     override fun onFragmentVisibilityChanged(visible: Boolean) {
         super.onFragmentVisibilityChanged(visible)
         if(visible) {
-            mRecommHelper.reset()
-        } else mRecommHelper.cancel()
+            onPullToRefresh()
+            mRecommHelper.reset ()
+        } else {
+            mRecommHelper.cancel()
+        }
     }
 
     private fun setOffset() {
