@@ -348,4 +348,11 @@
     <string name="recommend_text3">El 99% de los usuarios eligió este producto y la tasa de aprobación es muy alta;</string>
     <string name="recommend_hint">100% Aprobado</string>
     <string name="recomm_amount_hint">Créditos hasta de</string>
+
+    <!--当前订单已结清，请勿重复操作 。。。详情页面调用还款使用-->
+    <string name="repay_success1">El pedido actual ha sido liquidado, por favor no repita la operación</string>
+    <!--您的订单已结清，无需延期还款。。。展期还款使用-->
+    <string name="repay_success2">Su pedido se ha liquidado, no es necesario extender el reembolso</string>
+    <!--部分订单已经结清，请重新发起。。-->
+    <string name="repay_success3">Parte de pedidos se ha liquidado, por favor envíe de nuevo</string>
 </resources>

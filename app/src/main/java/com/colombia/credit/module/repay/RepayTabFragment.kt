@@ -15,6 +15,7 @@ import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.permission.HintDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -31,6 +32,8 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     private val mBinding by binding(FragmentTabRepayBinding::inflate)
 
     private val mViewModel by lazyViewModel<RepayTabViewModel>()
+
+    private val mCheckViewModel by lazyViewModel<RepayCheckViewModel>()
 
     private val mAdapter by lazy {
         RepayTabAdapter(arrayListOf(), mBinding.recyclerview).also {
@@ -79,19 +82,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.tvRepay.setBlockingOnClickListener {
-            val list = mAdapter.getSelectorItems()
-            if (list.isNotEmpty()) {
-                // 调起支付
-                list.map { it.W5KW6 }
-                Launch.skipWebViewActivity(
-                    getSupportContext(),
-                    H5UrlManager.getPayUrl(
-                        mAdapter.getSelectIds(),
-                        mAdapter.getTotalAmount().toString(),
-                        "2"
-                    )
-                )
-            }
+            checkOrder()
         }
 
         mBinding.emptyLayout.tvApply.setBlockingOnClickListener {
@@ -105,7 +96,16 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
     }
 
+    private fun checkOrder() {
+        val list = mAdapter.getSelectorItems()
+        if (list.isNotEmpty()) {
+            val loanIds = list.map { it.W5KW6 }
+            mCheckViewModel.checkStatus(loanIds.joinToString(","))
+        }
+    }
+
     private fun initObserver() {
+        setViewModelLoading(mCheckViewModel)
         mViewModel.ordersLivedata.observerNonSticky(viewLifecycleOwner) {
             stopRefresh()
             if (!it.isSuccess()) {
@@ -127,6 +127,31 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             } else if (it.event == HomeEvent.EVENT_LOGIN) {
                 onPullToRefresh()
             }
+        }
+
+        mCheckViewModel.mCheckLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                if ( it.getData()?.oasdnjuxnjas == true) {
+                    // 调起支付
+                    Launch.skipWebViewActivity(
+                        getSupportContext(),
+                        H5UrlManager.getPayUrl(
+                            mAdapter.getSelectIds(),
+                            mAdapter.getTotalAmount().toString(),
+                            "2"
+                        )
+                    )
+                } else {
+                    val dialog = HintDialog(getSupportContext()).showTitle(HintDialog.TYPE_INVISIBLE)
+                        .setMessage(getString(R.string.repay_success3))
+                        .setBtnText(getString(R.string.confirm))
+                        .showClose(false)
+                        .setOnClickListener {
+                            onPullToRefresh()
+                        }
+                    getBaseActivity()?.addDialog(dialog)
+                }
+            } else it.ShowErrorMsg(::checkOrder)
         }
     }
 

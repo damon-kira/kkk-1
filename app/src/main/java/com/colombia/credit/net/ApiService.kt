@@ -162,4 +162,9 @@ interface ApiService {
     @POST("QFnzPxjvvn/qLLgs7QX7")
     @Headers("kio8YGhwe6:Tj8nHs5RqN")
     fun cancelAuto(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
+
+    // 查询订单是否已还
+    @POST("visajndASj9NS/BVBHA9dsNCS")
+    @Headers("kio8YGhwe6:ojusajVDSVyhbBHCDA")
+    fun checkRepayStatus(@Body body: RequestBody): Flowable<BaseResponse<RspCheckOrder>>
 }

@@ -7,11 +7,13 @@ import com.colombia.credit.databinding.FragmentHomeRepayBinding
 import com.colombia.credit.expand.formatCommon
 import com.colombia.credit.expand.mUserName
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeEvent
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +56,12 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
             if (it.v3ItXF > 0) {
                 mBinding.etvOverdue.show()
                 mBinding.etvOverdue.text = getString(R.string.overdue_tag, it.v3ItXF.toString())
+            }
+        }
+
+        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(viewLifecycleOwner) {
+            if (it.event == PayEvent.EVENT_REFRESH) {
+                onPullToRefresh()
             }
         }
     }

@@ -17,6 +17,7 @@ import com.colombia.credit.module.process.face.FaceViewModel
 import com.colombia.credit.module.process.kyc.KycViewModel
 import com.colombia.credit.module.process.personalinfo.PersonalViewModel
 import com.colombia.credit.module.process.work.WorkInfoViewModel
+import com.colombia.credit.module.repay.RepayCheckViewModel
 import com.colombia.credit.module.repay.RepayTabViewModel
 import com.colombia.credit.module.repaydetail.RepayDetailViewModel
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmViewModel
@@ -132,4 +133,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ConfigViewModel::class)
     abstract fun bindConfigViewModel(viewModel: ConfigViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RepayCheckViewModel::class)
+    abstract fun bindRepayCheckViewModel(viewModel: RepayCheckViewModel): ViewModel
 }

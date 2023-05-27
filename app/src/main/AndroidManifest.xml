@@ -128,6 +128,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".module.history.HistoryActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".camera.CaptureActivity"
@@ -142,6 +143,9 @@
         <activity
             android:name=".module.repaydetail.RepayDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.repaydetail.RepayDetailHisActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".module.applysuccess.ApplySuccessActivity"
@@ -151,6 +155,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.defer.RepayTabDeferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.defer.DeferHisActivity"
             android:screenOrientation="portrait" />
 
         <activity

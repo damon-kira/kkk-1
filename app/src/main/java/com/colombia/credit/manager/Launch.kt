@@ -28,6 +28,7 @@ import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
 import com.colombia.credit.module.process.work.WorkInfoActivity
 import com.colombia.credit.module.repaydetail.RepayDetailActivity
+import com.colombia.credit.module.repaydetail.RepayDetailHisActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
 import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
@@ -144,6 +145,12 @@ object Launch {
         val intent = Intent(context, RepayDetailActivity::class.java)
         intent.putExtra(RepayDetailActivity.EXTRA_ID, productId)
         launch(context, RepayDetailActivity::class.java, intent)
+    }
+
+    fun skipRepayDetailHisActivity(context: Context, productId: String) {
+        val intent = Intent(context, RepayDetailHisActivity::class.java)
+        intent.putExtra(RepayDetailActivity.EXTRA_ID, productId)
+        launch(context, RepayDetailHisActivity::class.java, intent)
     }
 
     fun skipApplySuccessActivity(context: Context) {

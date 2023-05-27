@@ -8,6 +8,7 @@ import com.colombia.credit.databinding.ActivityHistoryBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.adapter.linearLayoutManager
+import com.colombia.credit.module.defer.PayEvent
 import com.colombia.credit.module.home.MainEvent
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -35,20 +36,13 @@ class HistoryActivity : BaseActivity() {
         change(false)
         setStatusBarColor(Color.WHITE, true)
 
-        mBinding.toolbar.setOnbackListener {
-            finish()
+        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this) {
+            if (it.event == PayEvent.EVENT_REFRESH) {
+                getInfo()
+            }
         }
-        setRecyclerView()
 
-        mBinding.swipeRefresh.setColorSchemeColors(
-            ContextCompat.getColor(
-                this,
-                R.color.colorPrimary
-            )
-        )
-        mBinding.swipeRefresh.setOnRefreshListener {
-            getInfo()
-        }
+        initClick()
 
         mViewModel.mInfoLiveData.observerNonSticky(this) {
             stopRefresh()
@@ -71,12 +65,29 @@ class HistoryActivity : BaseActivity() {
         }
 
         mAdapter.mRepayListener = {
-            Launch.skipRepayDetailActivity(this, it.KxX0GIRzo.orEmpty())
+            Launch.skipRepayDetailHisActivity(this, it.KxX0GIRzo.orEmpty())
         }
 
         mAdapter.mFailureListener = {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             finish()
+        }
+    }
+
+    private fun initClick() {
+        mBinding.toolbar.setOnbackListener {
+            finish()
+        }
+        setRecyclerView()
+
+        mBinding.swipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                this,
+                R.color.colorPrimary
+            )
+        )
+        mBinding.swipeRefresh.setOnRefreshListener {
+            getInfo()
         }
     }
 

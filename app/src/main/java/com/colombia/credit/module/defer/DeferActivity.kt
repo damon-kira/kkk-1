@@ -6,10 +6,13 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RspRepayDetail
 import com.colombia.credit.databinding.ActivityDeferBinding
 import com.colombia.credit.dialog.ExtensionConfirmDialog
+import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString
 import com.colombia.credit.expand.showCustomDialog
 import com.colombia.credit.manager.H5UrlManager
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.repay.RepayCheckViewModel
+import com.colombia.credit.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
@@ -30,6 +33,10 @@ open class DeferActivity : BaseActivity() {
     protected val mBinding by binding<ActivityDeferBinding>()
     protected var orderId: String = ""
     protected var jine: String = ""
+
+    protected var mLoanId: String = ""
+
+    private val mCheckViewModel by lazyViewModel<RepayCheckViewModel>()
 
     private val mObserver = { payEvent: PayEvent ->
         if (payEvent.event == PayEvent.EVENT_EXIT) {
@@ -58,6 +65,32 @@ open class DeferActivity : BaseActivity() {
         }
 
         LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this, mObserver)
+
+        mCheckViewModel.mCheckLiveData.observerNonSticky(this) {
+            if (it.isSuccess()) {
+                if(it.getData()?.oasdnjuxnjas == true) {
+                    Launch.skipWebViewActivity(
+                        this,
+                        H5UrlManager.getPayUrl(orderId, jine, "2")
+                    )
+                } else {
+                    val dialog = HintDialog(this).showTitle(HintDialog.TYPE_INVISIBLE)
+                        .setMessage(getString(R.string.repay_success2))
+                        .setBtnText(getString(R.string.confirm))
+                        .showClose(false)
+                        .setOnClickListener {
+                            checkOrderRepay()
+                        }
+                    addDialog(dialog)
+
+                }
+            } else it.ShowErrorMsg(::checkOrder)
+        }
+    }
+
+
+    private fun checkOrder(){
+        mCheckViewModel.checkStatus(orderId)
     }
 
     override fun onDestroy() {
@@ -76,6 +109,12 @@ open class DeferActivity : BaseActivity() {
             mBinding.iilAmount.setRightText(getUnitString(detail?.dbhmAOVp56.orEmpty()))
             mBinding.tvApply.text = getString(R.string.repay_amount_value, amount)
             orderId = detail?.PJpH0.orEmpty()
+            mLoanId = detail?.KER10faeq9.orEmpty()
         }
+    }
+
+    open fun checkOrderRepay() {
+        LiveDataBus.post(PayEvent(PayEvent.EVENT_REFRESH))
+        finish()
     }
 }
