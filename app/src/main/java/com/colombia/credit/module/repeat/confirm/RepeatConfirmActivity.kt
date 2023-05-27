@@ -159,6 +159,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 reqPermission()
             } else {
                 mBinding.tvdAuto.show()
+                mBinding.tvCancel.show()
                 val param = timeToTimeStr(it, TimeUnit.SECONDS, true)
                 val text = getString(R.string.auto_confirm_hint, param)
                 val span = SpannableImpl().init(text)
@@ -170,6 +171,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
 
         mAutoConfirmModel.cancelLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
+                mAutoConfirmModel.stopCountDown()
                 hideAutoView()
             } else it.ShowErrorMsg(::cancelLoan)
         }
