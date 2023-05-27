@@ -20,7 +20,7 @@ android {
         multiDexEnabled true
 
         resConfigs 'id'
-        versionCode 2
+        versionCode 4
         versionName "1.0.1"
 
         ndk {
