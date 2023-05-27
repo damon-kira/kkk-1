@@ -215,6 +215,13 @@ class RepeatFragment : BaseHomeLoanFragment() {
         }
     }
 
+    override fun onFragmentVisibilityChanged(visible: Boolean) {
+        super.onFragmentVisibilityChanged(visible)
+        if(visible) {
+            mRecommHelper.reset()
+        } else mRecommHelper.cancel()
+    }
+
     private fun setOffset() {
         if (mAdapter.itemCount < 3) {
             changeListPadding(0)
@@ -247,7 +254,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     }
 
     private fun showRecommend() {
-        if (mRecommendDialog.isShowing) return
+        if (mRecommendDialog.isShowing || !isFragmentVisible()) return
         val count = min(3, mAdapter.getNormalItemCount())
         if (count == 0) return
         val index = (Math.random() * 100).toInt() % count
