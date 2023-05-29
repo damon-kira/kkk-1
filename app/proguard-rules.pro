@@ -337,7 +337,3 @@
     public static int d(...);
     public static int e(...);
 }
-
--obfuscationdictionary proguard.txt
--classobfuscationdictionary proguard_cl.txt
--packageobfuscationdictionary proguard_pk.txt
