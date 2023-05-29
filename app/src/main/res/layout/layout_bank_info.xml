@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +10,17 @@
     android:paddingTop="12dp"
     android:paddingRight="12dp"
     android:paddingBottom="16dp">
+
+    <com.colombia.credit.view.TextViewDrawable
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawableStart="@drawable/svg_error_hint"
+        android:drawablePadding="4dp"
+        android:text="@string/bank_hint"
+        android:textColor="@color/color_FE4F4F"
+        android:textSize="12sp"
+        app:isAlignCenter="false" />
 
     <!--银行类型-->
     <com.colombia.credit.view.baseinfo.BaseInfoView

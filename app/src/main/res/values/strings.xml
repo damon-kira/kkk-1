@@ -133,6 +133,7 @@
     <string name="bank_card_corriente">CORRIENTE</string>
     <string name="bank_no_desc">*Use la cuenta bancaria vinculada a su tarjeta de identificación y no use las tarjetas bancarias de otras personas para evitar la falla del préstamo</string>
     <string name="error_bank_no">Información bancaria incorrecta, intenta de nuevo</string>
+    <string name="bank_hint">¡Atención! Cuando seleccione el Banco Nequi para realizar un pago, por favor, compruebe que tiene suficiente saldo para recibir el pago, de lo contrario el pago fallará.</string>
 
     <!-- 身份证信息 -->
     <string name="kyc_title">Verificar identidad</string>
