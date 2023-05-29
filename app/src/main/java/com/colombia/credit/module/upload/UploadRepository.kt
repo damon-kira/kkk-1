@@ -54,7 +54,7 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
     }
 
     fun uploadApp() = ApiServiceLiveDataProxy.request(RspResult::class.java) {
-        val list = DevicesAppHelper.getAppList()
+        val list = DevicesAppHelper.getAppListInfo(getAppContext())
         val jobj = JsonObject()
         jobj.addProperty("bPp7hQmh", GsonUtil.toJson(list))
         dataApiService.uploadAppList(createRequestBody(jobj.toString()))

@@ -77,7 +77,7 @@ class MCLCManager {
             }
             try {
                 // app list
-                jsonObject.add("bPp7hQmh", DevicesAppHelper.getAppList())
+                jsonObject.addProperty("bPp7hQmh", GsonUtil.toJson(DevicesAppHelper.getAppListInfo(ctx)))
             } catch (e: Exception) {
             } catch (e: OutOfMemoryError) {
             }

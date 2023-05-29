@@ -25,7 +25,7 @@ object DevicesAppHelper {
     /**
      * 获取应用列表
      */
-    fun getAppList(): JsonArray {
+    private fun getAppList(): JsonArray {
         val jsonArray = JsonArray()
         try {
             val config = BigDataManager.get().getNetDataListener() ?: return jsonArray

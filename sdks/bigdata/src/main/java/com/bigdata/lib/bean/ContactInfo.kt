@@ -1,5 +1,8 @@
 package com.bigdata.lib.bean
 
+import androidx.annotation.Keep
+
+@Keep
 class ContactInfo {
     var cr8c7xX: String? = null
     var UpokGx: String? = null

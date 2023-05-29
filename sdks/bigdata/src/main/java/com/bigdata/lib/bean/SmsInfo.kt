@@ -1,5 +1,8 @@
 package com.bigdata.lib.bean
 
+import androidx.annotation.Keep
+
+@Keep
 class SmsInfo {
     var puN3px: String? = null // 电话
     var mLAbob: String? = null // 短信内容

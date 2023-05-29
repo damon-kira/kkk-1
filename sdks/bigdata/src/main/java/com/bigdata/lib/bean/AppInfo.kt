@@ -1,5 +1,8 @@
 package com.bigdata.lib.bean
 
+import androidx.annotation.Keep
+
+@Keep
 class AppInfo {
     var KkXYU: String? = null //包名
     var nY9jdxtbN: String? = null//名称

@@ -1,7 +1,9 @@
 package com.bigdata.lib.bean
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 class BaseInfo {
     @SerializedName("Z2Zu")
     var isSwitchPages: String = "0"// 	认证时，是否有切换去别的页面，只要有一次就是传 1是0否

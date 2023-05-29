@@ -1,5 +1,8 @@
 package com.bigdata.lib.bean
 
+import androidx.annotation.Keep
+
+@Keep
 class DeviceInfo {
     var l9uzoD39Q8: String? = null // 设备型号
     var TAEgE: String? = null      // 设备品牌
