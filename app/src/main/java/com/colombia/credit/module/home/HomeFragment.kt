@@ -1,8 +1,8 @@
 package com.colombia.credit.module.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.colombia.credit.R
@@ -105,6 +105,10 @@ class HomeFragment : BaseHomeFragment() {
         onRefresh()
     }
 
+    override fun onTouchEvent(ev: MotionEvent?) {
+        getCurrChildFragment()?.onTouchEvent(ev)
+    }
+
     private fun getFragment(): BaseHomeFragment {
         val fragment = if (inValidToken()) {
             mLoginFragment
@@ -116,6 +120,10 @@ class HomeFragment : BaseHomeFragment() {
 
     private fun replaceChildFragment(fragment: BaseFragment) {
         FragmentHelper.replaceFragment(childFragmentManager, R.id.fl_home_content, fragment)
+    }
+
+    private fun getCurrChildFragment(): BaseFragment? {
+        return FragmentHelper.getCurrFragment(childFragmentManager, R.id.fl_home_content, mCurrTag)
     }
 
     private fun getCurrFragment(rspInfo: RspProductInfo): BaseFragment? {

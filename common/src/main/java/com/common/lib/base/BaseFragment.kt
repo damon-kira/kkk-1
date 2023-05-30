@@ -2,6 +2,7 @@ package com.common.lib.base
 
 import android.content.Context
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
@@ -19,7 +20,7 @@ import com.util.lib.log.logger_i
  * laotie#liuliuliu
  */
 open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListener,
-    View.OnAttachStateChangeListener, ILoading, IFragmentSwitch {
+    View.OnAttachStateChangeListener, ILoading, IFragmentSwitch, IFragmentTouch {
 
     protected val TAG = "debug_${this.javaClass.simpleName}"
 
@@ -78,6 +79,8 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
             checkVisibility(!hidden)
         }
     }
+
+    override fun onTouchEvent(ev: MotionEvent?) {}
 
     open fun onRefresh() {}
 

@@ -1,5 +1,6 @@
 package com.common.lib.base
 
+import android.view.MotionEvent
 import androidx.annotation.IdRes
 import com.common.lib.helper.FragmentHelper
 
@@ -38,6 +39,15 @@ abstract class BaseFragmentActivity : BaseActivity(), IFragmentSwitch {
             }
         }
         return result
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        getCurrFragment()?.let {
+            if (it is IFragmentTouch) {
+                it.onTouchEvent(ev)
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     @IdRes

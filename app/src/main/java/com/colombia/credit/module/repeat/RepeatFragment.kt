@@ -19,7 +19,6 @@ import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
 import com.colombia.credit.permission.HintDialog
-import com.colombia.credit.view.MyConstraintLayout
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -85,20 +84,17 @@ class RepeatFragment : BaseHomeLoanFragment() {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
 
-        mBinding.clContent.setTouchEvent(object : MyConstraintLayout.ITouchEvent {
-            override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-                if (ev?.action == MotionEvent.ACTION_UP) {
-                    mRecommHelper.startCountDown()
-                } else
-                    mRecommHelper.cancel()
-                return false
-            }
-        })
         viewLifecycleOwner.lifecycle.addObserver(mRecommHelper)
         mBinding.groupBtn.referencedIds = intArrayOf(R.id.etv_tag, R.id.repeat_tv_apply)
         setOffset()
         initView(view)
         initObserver()
+    }
+
+    override fun onTouchEvent(ev: MotionEvent?) {
+        if (ev?.action == MotionEvent.ACTION_UP || ev?.action == MotionEvent.ACTION_CANCEL || ev?.action == MotionEvent.ACTION_POINTER_UP) {
+            mRecommHelper.startCountDown()
+        } else mRecommHelper.cancel()
     }
 
     private fun initView(view: View) {
