@@ -344,8 +344,8 @@
     <string name="wait_confirm">Tomar el dinero</string>
 
     <string name="recommend_text1">Solicite ahora y obtenga dinero en su cuenta en 3 minutos</string>
-    <string name="recommend_text2">Cuanto más rápida sea la solicitud, mayor será el monto del préstamo y más largo el período del préstamo;</string>
-    <string name="recommend_text3">El 99% de los usuarios eligió este producto y la tasa de aprobación es muy alta;</string>
+    <string name="recommend_text2">Cuanto más rápida sea la solicitud, mayor será el monto del préstamo y más largo el período del préstamo</string>
+    <string name="recommend_text3">El 99% de los usuarios eligió este producto y la tasa de aprobación es muy alta</string>
     <string name="recommend_hint">100% Aprobado</string>
     <string name="recomm_amount_hint">Créditos hasta de</string>
 
