@@ -169,6 +169,11 @@ class EasyTextView : AppCompatTextView {
         mBorderText?.layout(left, top, right, bottom)
     }
 
+    override fun setBackgroundColor(color: Int) {
+//        super.setBackgroundColor(color)
+        mSolidColor = color
+    }
+
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
         super.setLayoutParams(params)
         mBorderText?.layoutParams = params

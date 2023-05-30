@@ -296,6 +296,7 @@
     <string name="history_status_refused">Rechazar</string><!-- 拒绝 -->
     <string name="history_status_failed">Fallar</string><!-- 失效 -->
 
+    <string name="btn_review">Controlar</string> <!--审核中-->
     <string name="history_btn_failure">Solicitar</string><!-- 订单失效 -->
     <string name="history_repay_date">Fecha de Pago</string>
     <string name="history_refused_text">Su pedido ha sido rechazado, intente nuevamente después del %s</string>
@@ -355,4 +356,18 @@
     <string name="repay_success2">Su pedido se ha liquidado, no es necesario extender el reembolso</string>
     <!--部分订单已经结清，请重新发起。。-->
     <string name="repay_success3">Parte de pedidos se ha liquidado, por favor envíe de nuevo</string>
+
+    <!-- 复贷审核中 -->
+    <string name="review_item_text1">Pedidos solicitados</string>
+    <string name="review_item_text2">Fecha de solicitud</string>
+    <string name="review_item_orders">Pedidos en revisión</string>
+    <string name="review_item_total">Importe total</string>
+    <string name="review_item_btn">Ver los pedidos</string>
+    <string name="review_item_order_s">%s órdenes</string>
+    <string name="review_title">Revisando</string>
+    <string name="review_text1">Congratulations!</string>
+    <string name="review_text2">Hemos recibido su solicitud de préstamo y estamos revisando la elegibilidad del préstamo.por favor espere pacientemente.</string>
+    <string name="review_text3">El tiempo de consulta es de 1~5 minutos.</string>
+    <string name="review_text4">Una vez que se aprueba la solicitud de préstamo,el préstamo se transferirá a su cuenta.</string>
+    <string name="review_btn">Servicio al cliente</string>
 </resources>

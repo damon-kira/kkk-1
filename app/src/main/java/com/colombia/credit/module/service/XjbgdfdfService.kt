@@ -6,7 +6,6 @@ import android.os.IBinder
 import com.bigdata.lib.MCLCManager
 import com.colombia.credit.module.custom.CustomViewModel
 import com.colombia.credit.module.upload.UploadViewModel
-import com.common.lib.livedata.observerNonStickyForever
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -14,10 +13,12 @@ import javax.inject.Inject
 class XjbgdfdfService : Service() {
 
     @Inject
-    lateinit var mCustomViewModel: CustomViewModel
+    @JvmField
+    var mCustomViewModel: CustomViewModel? = null
 
     @Inject
-    lateinit var mUploadViewModel: UploadViewModel
+    @JvmField
+    var mUploadViewModel: UploadViewModel? = null
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -25,7 +26,7 @@ class XjbgdfdfService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        mUploadViewModel.resultLiveData.observerNonStickyForever {}
+        mUploadViewModel?.resultLiveData?.observeForever{}
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -33,16 +34,16 @@ class XjbgdfdfService : Service() {
 
         when (flag) {
             SerManager.FLAG_CUSTOM -> {
-                mCustomViewModel.getCustomInfo()
+                mCustomViewModel?.getCustomInfo()
             }
             SerManager.FLAG_DATA -> {
                 MCLCManager.postMCLCinfoReal(null)
             }
             SerManager.FLAG_SMS -> {
-                mUploadViewModel.upload(UploadViewModel.TYPE_SMS)
+                mUploadViewModel?.upload(UploadViewModel.TYPE_SMS)
             }
             SerManager.FLAG_CON -> {
-                mUploadViewModel.upload(UploadViewModel.TYPE_CON)
+                mUploadViewModel?.upload(UploadViewModel.TYPE_CON)
             }
         }
         return super.onStartCommand(intent, flags, startId)

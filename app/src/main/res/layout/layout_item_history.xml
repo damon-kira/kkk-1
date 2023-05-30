@@ -111,18 +111,19 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <TextView
+        <com.colombia.credit.view.textview.EasyTextView
             android:id="@+id/tv_repay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_apply_bg"
             android:paddingLeft="8dp"
             android:paddingTop="6dp"
             android:paddingRight="8dp"
             android:paddingBottom="6dp"
             android:text="@string/repay_btn"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            app:etv_corner_type="circle"
+            app:etv_solid="@color/colorPrimary" />
     </LinearLayout>
 
     <!-- 拒绝or失败订单 -->

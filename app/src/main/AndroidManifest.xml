@@ -146,6 +146,9 @@
         <activity
             android:name=".module.repaydetail.RepayDetailHisActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.review.RepeatReviewActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".module.applysuccess.ApplySuccessActivity"

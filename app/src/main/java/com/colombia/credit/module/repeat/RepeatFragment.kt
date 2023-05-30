@@ -94,7 +94,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     override fun onTouchEvent(ev: MotionEvent?) {
         if (ev?.action == MotionEvent.ACTION_UP || ev?.action == MotionEvent.ACTION_CANCEL || ev?.action == MotionEvent.ACTION_POINTER_UP) {
             mRecommHelper.startCountDown()
-        } else mRecommHelper.cancel()
+        } else if(ev?.action == MotionEvent.ACTION_DOWN) mRecommHelper.cancel()
     }
 
     private fun initView(view: View) {
@@ -143,8 +143,11 @@ class RepeatFragment : BaseHomeLoanFragment() {
         mBinding.repeatRecyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 val viewType = mAdapter.getItemViewType(position)
-                if (viewType == RepeatProductAdapter.TYPE_WAIT) {
-                    val data = mAdapter.getWaitItemData(position)
+                if(viewType == RepeatProductAdapter.TYPE_REVIEW) {
+                    Launch.skipHistoryActivity(getSupportContext())
+                } else if (viewType == RepeatProductAdapter.TYPE_WAIT) {
+                    val finalPosi = mAdapter.getWaitItemPosition(position)
+                    val data = mAdapter.getWaitItemData(finalPosi)
                     Launch.skipRepeatConfirmActivity(
                         getSupportContext(),
                         "",
@@ -193,6 +196,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
             mRecommHelper.setCountDownTime(it.swOwF0KJ)
             mRecommHelper.reset()
+            mAdapter.setRepeatReview(it.getReviewItem())
             mAdapter.setWaitItems(it.Jg4g2)
             setOffset()
             val data = it.gQ1J

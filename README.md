@@ -9,3 +9,5 @@
         // id 'com.google.firebase.crashlytics'
    2).放开 firebase 相关注释，在 dependencies 中
 4.放开LoanApplication 中firebase相关注释
+
+5.GPInfoUtils中放开注释

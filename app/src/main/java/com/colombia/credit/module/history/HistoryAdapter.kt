@@ -92,7 +92,7 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
         val itemTvBtn = holder.getView<TextView>(R.id.tv_repay)
         val itemText = holder.getView<TextView>(R.id.tv_text)
         itemTvBtn.setBlockingOnClickListener {
-            mRepayListener?.invoke(item)
+            mRepayListener?.invoke(item.hlDgN == STATUS_REVIEW || item.hlDgN == STATUS_VERIFI, item)
         }
         when (item.hlDgN) {
             STATUS_REVIEW, STATUS_VERIFI -> { // 审核中
@@ -103,8 +103,10 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
                 tvStatus.setTextColor(getColor(holder.getContext(), R.color.color_ff8200))
                 tvStatus.setText(R.string.history_status_repay)
                 itemText.setText(R.string.history_loan)
-                itemTvBtn.invisible()
-                itemTvBtn.isEnabled = false
+                itemTvBtn.setText(R.string.btn_review)
+                itemTvBtn.setBackgroundColor(getColor(holder.getContext(), R.color.color_ff8200))
+                itemTvBtn.show()
+                itemTvBtn.isEnabled = true
             }
             STATUS_SETTLE -> { // 结清
                 tvStatus.solidColor = ContextCompat.getColor(
@@ -125,6 +127,7 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
                 tvStatus.setTextColor(getColor(holder.getContext(), R.color.color_32C558))
                 tvStatus.setText(R.string.history_status_review)
                 itemText.setText(R.string.repay_amount)
+                itemTvBtn.setBackgroundColor(getColor(holder.getContext(), R.color.colorPrimary))
                 itemTvBtn.show()
                 itemTvBtn.isEnabled = true
             }
@@ -153,5 +156,5 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
 
     var mFailureListener: (() -> Unit)? = null
 
-    var mRepayListener: ((RspHistoryInfo.HistoryOrderInfo) -> Unit)? = null
+    var mRepayListener: ((isReview: Boolean, RspHistoryInfo.HistoryOrderInfo) -> Unit)? = null
 }

@@ -9,6 +9,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatProductInfo
+import com.colombia.credit.bean.resp.RepeatReview
 import com.colombia.credit.bean.resp.RepeatWaitConfirmInfo
 import com.colombia.credit.databinding.LayoutRepeatItemProductBinding
 import com.colombia.credit.expand.formatCommon
@@ -26,12 +27,15 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     BaseRecyclerViewAdapter<RepeatProductInfo>(items, R.layout.layout_repeat_product_item) {
 
     companion object {
-        const val TYPE_WAIT = 10
-        const val TYPE_NORMAL = 11
+        const val TYPE_WAIT = 10 // 等待确认订单
+        const val TYPE_NORMAL = 11 // 默认产品列表
+        const val TYPE_REVIEW = 12 // 审核中
         const val TYPE_EMPTY = 100
     }
 
     private var mWaitItems: ArrayList<RepeatWaitConfirmInfo> = arrayListOf()
+
+    private var mRepeatReview: RepeatReview? = null
 
     private var mEmptyMaxHeight: Int = 0
 
@@ -44,6 +48,12 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
                 BaseViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(R.layout.layout_no_product, parent, false)
+                )
+            }
+            TYPE_REVIEW -> {
+                BaseViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.layout_item_repeat_review, parent, false)
                 )
             }
             else -> {
@@ -59,16 +69,26 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (getItemViewType(position)) {
             TYPE_NORMAL -> {
-                val finalPosi = position - getWaitItemCount()
+                val finalPosi = getNormalItemPosition(position)
                 convert(holder, currentItems[finalPosi], finalPosi)
             }
             TYPE_EMPTY -> {
                 convertEmpty(holder, position)
             }
+            TYPE_REVIEW -> {
+                convertReview(holder, position)
+            }
             else -> {
-                convertWait(holder, position)
+                convertWait(holder, getWaitItemPosition(position))
             }
         }
+    }
+
+    private fun convertReview(holder: BaseViewHolder, position: Int){
+        val item = mRepeatReview ?:return
+        holder.setText(R.id.tv_order, holder.getContext().getString(R.string.review_item_order_s, item.orders))
+        holder.setText(R.id.tv_amount, getUnitString(item.amount))
+        holder.setText(R.id.tv_date, item.date)
     }
 
     private fun convertWait(holder: BaseViewHolder, position: Int) {
@@ -172,10 +192,13 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position < getWaitItemCount()) {
+        if (position < getReviewItemCount()) {
+            return TYPE_REVIEW
+        }
+        if (position - getReviewItemCount() < getWaitItemCount()) {
             return TYPE_WAIT
         }
-        if (position - getWaitItemCount() < currentItems.size) {
+        if (position - getReviewItemCount() - getWaitItemCount() < currentItems.size) {
             return TYPE_NORMAL
         }
         return TYPE_EMPTY
@@ -184,10 +207,11 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
     override fun getItemCount(): Int {
         val waitSize = getWaitItemCount()
         val itemSize = currentItems.size
+        val reviewSize = getReviewItemCount()
         if (itemSize > 0) {
-            return waitSize + itemSize
+            return waitSize + itemSize + reviewSize
         }
-        return waitSize + 1
+        return waitSize + 1 + reviewSize
     }
 
     fun getSelectorItems(): List<RepeatProductInfo> {
@@ -204,11 +228,23 @@ class RepeatProductAdapter(items: ArrayList<RepeatProductInfo>, private val rv: 
         return mWaitItems[position]
     }
 
+    fun getWaitItemPosition(position: Int): Int {
+        return position - getReviewItemCount()
+    }
+
     fun getNormalItemPosition(position: Int): Int {
-        return position - mWaitItems.size
+        return position - getReviewItemCount() - getWaitItemCount()
     }
 
     fun getNormalItemCount() = currentItems.size
 
     fun getWaitItemCount() = mWaitItems.size
+
+    fun setRepeatReview(repeatReview: RepeatReview?) {
+        this.mRepeatReview = repeatReview
+    }
+
+    private fun getReviewItemCount(): Int {
+        return if (mRepeatReview == null) 0 else 1
+    }
 }

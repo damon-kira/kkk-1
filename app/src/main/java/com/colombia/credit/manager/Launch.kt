@@ -11,7 +11,6 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
-import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.expand.*
 import com.colombia.credit.module.applysuccess.ApplySuccessActivity
 import com.colombia.credit.module.banklist.BankInfoAddActivity
@@ -20,6 +19,7 @@ import com.colombia.credit.module.banklist.MeBankAccountListActivity
 import com.colombia.credit.module.defer.DeferActivity
 import com.colombia.credit.module.defer.RepayTabDeferActivity
 import com.colombia.credit.module.history.HistoryActivity
+import com.colombia.credit.module.home.MainActivity
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.face.FaceActivity
@@ -30,11 +30,11 @@ import com.colombia.credit.module.process.work.WorkInfoActivity
 import com.colombia.credit.module.repaydetail.RepayDetailActivity
 import com.colombia.credit.module.repaydetail.RepayDetailHisActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
+import com.colombia.credit.module.review.RepeatReviewActivity
 import com.colombia.credit.module.setting.SettingActivity
 import com.colombia.credit.module.upload.UploadActivity
 import com.colombia.credit.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
-import com.common.lib.base.BaseFragment
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
@@ -181,6 +181,11 @@ object Launch {
 
     fun skipSettingActivity(context: Context) {
         launch(context, SettingActivity::class.java)
+    }
+
+    // 复贷审核中页面
+    fun skipRepeatReviewActivity(context: Context){
+        launch(context, RepeatReviewActivity::class.java)
     }
 
     /**

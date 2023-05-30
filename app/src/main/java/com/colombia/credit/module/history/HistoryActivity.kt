@@ -64,8 +64,12 @@ class HistoryActivity : BaseActivity() {
             finish()
         }
 
-        mAdapter.mRepayListener = {
-            Launch.skipRepayDetailHisActivity(this, it.KxX0GIRzo.orEmpty())
+        mAdapter.mRepayListener = { isReview, item ->
+            if (isReview) {
+                Launch.skipRepeatReviewActivity(this)
+            } else {
+                Launch.skipRepayDetailHisActivity(this, item.KxX0GIRzo.orEmpty())
+            }
         }
 
         mAdapter.mFailureListener = {

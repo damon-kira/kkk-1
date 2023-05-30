@@ -40,6 +40,24 @@ class RspProductInfo {
     val RdJ7nJ: String? = null // y3 新增字段
 
     val GbiDSBdW: Int = 0// 剩余申请可贷笔数
+
+    var ocvxDc2fd: String? = null // 审核订单数
+    var kfFVSGG2s: String? = null // 审核订单总金额
+        get() = field?.transform()
+    var ksdVnwe1fV: String? = null // 审核请求时间
+
+    fun getReviewItem(): RepeatReview? {
+        if (isEmpty(ocvxDc2fd) || isEmpty(kfFVSGG2s) || isEmpty(ksdVnwe1fV)) {
+            return null
+        }
+        return RepeatReview().also {
+            it.orders = ocvxDc2fd
+            it.amount = kfFVSGG2s
+            it.date = ksdVnwe1fV
+        }
+    }
+
+    fun isEmpty(value: String?) = value.isNullOrEmpty() || value == "0"
 }
 
 // 首贷产品信息
@@ -47,13 +65,16 @@ class FirstConfirmInfo {
     //到手金额
     val u5kCNqk: String? = null
         get() = field?.transform()
+
     //贷款金额,
     val RIoDBuyjO: String? = null
         get() = field?.transform()
     val y5MbVG: String? = null//期数
+
     // 应还金额
     val b6O2Joc: String? = null
         get() = field?.transform()
+
     //利息
     val ihm3G2: String? = null
         get() = field?.transform()
@@ -167,4 +188,14 @@ class RepeatWaitConfirmInfo {
 class WaitConfirm {
     val S9ig78H: String? = null//产品名称
     val Gk9MGh: String? = null//产品logo
+}
+
+class RepeatReview { // 审核中
+    var orders: String? = null
+    var amount: String? = null
+    var date: String? = null
+
+    fun isEmpty(): Boolean {
+        return orders.isNullOrEmpty() || amount.isNullOrEmpty() || date.isNullOrEmpty()
+    }
 }
