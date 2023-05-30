@@ -9,6 +9,8 @@ android {
     defaultConfig {
         minSdk rootProject.ext.version.minSdk
         targetSdk rootProject.ext.version.targetSdk
+
+        consumerProguardFiles "proguard-rules.pro"
     }
 
     buildTypes {

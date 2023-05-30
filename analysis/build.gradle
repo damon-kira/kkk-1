@@ -40,7 +40,7 @@ dependencies {
     compileOnly platform(rootProject.ext.firebase.bom)
     compileOnly rootProject.ext.firebase.messaging
     compileOnly rootProject.ext.firebase.analytics
-    api rootProject.ext.firebase.crashlytics
+    compileOnly rootProject.ext.firebase.crashlytics
     compileOnly rootProject.ext.google.play_services_gcm
     implementation project(path:":sdks:util")
     implementation project(path:":sdks:cache")

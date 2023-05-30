@@ -1,10 +1,6 @@
 package com.common.lib.net.bean
 
 import com.common.lib.net.ResponseCode
-import com.project.util.AESNormalUtil
-import com.util.lib.GsonUtil
-import com.util.lib.log.logger_e
-import org.json.JSONException
 import java.lang.reflect.ParameterizedType
 
 /**

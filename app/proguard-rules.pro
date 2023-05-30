@@ -20,12 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keepclassmembers class * implements androidx.viewbinding.ViewBinding {
-  public static ** inflate(...);
-  public static ** bind(***);
-}
-
-
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
@@ -39,12 +33,6 @@
 -dontwarn android.support.v4.**
 -dontwarn android.support.v7.**
 -dontwarn de.greenrobot.event.**
-
-#Androidx
--dontwarn com.google.android.material.**
--dontnote com.google.android.material.**
--dontwarn androidx.**
--keep class androidx.core.app.CoreComponentFactory { *; }
 
 -keepclassmembers public class * extends android.view.View {*;}
 
@@ -86,6 +74,75 @@
     public *;
 }
 
+#------------------  下方是android平台自带的排除项，这里不要动         ----------------
+
+-keep public class * extends androidx.appcompat.app.AppCompatActivity {
+	public <fields>;
+	public <methods>;
+}
+-keep public class * extends androidx.fragment.app.Fragment {
+	public <fields>;
+	public <methods>;
+}
+-keep public class * extends android.app.Application{
+	public <fields>;
+	public <methods>;
+}
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclasseswithmembers class * {
+	public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+	public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepattributes *Annotation*
+
+-keepclasseswithmembernames class *{
+	native <methods>;
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+#------------------  下方是共性的排除项目         ----------------
+# 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
+# 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
+
+-keepclasseswithmembers class * {
+    ... *JNI*(...);
+}
+
+-keepclasseswithmembernames class * {
+	... *JRI*(...);
+}
+
+-keep class **JNI* {*;}
+#-keep public class com.project.Constant
+
+# log配置  不能有关闭优化的配置-dontoptimize,否则失效
+-assumenosideeffects class android.util.Log{
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}
+
+
 # for appsflyerlib
 #-dontwarn com.google.android.gms.ads.**.
 #-dontwarn android.content.pm.**
@@ -97,6 +154,19 @@
 # for appsflyer sdk end
 
 -dontwarn com.google.android.gms.**
+
+#viewbinding
+-keepclassmembers class * implements androidx.viewbinding.ViewBinding {
+  public static ** inflate(...);
+  public static ** bind(***);
+}
+
+#Androidx
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+-keep class androidx.core.app.CoreComponentFactory { *; }
+
 
 # Google Play Services library
 -keep class * extends java.util.ListResourceBundle {
@@ -201,71 +271,3 @@
 -keep interface me.jessyan.autosize.** { *; }
 
 -keep class com.common.lib.net.bean.BaseResponse {*;}
-
-#------------------  下方是android平台自带的排除项，这里不要动         ----------------
-
--keep public class * extends androidx.appcompat.app.AppCompatActivity {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends androidx.fragment.app.Fragment {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Application{
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends android.app.backup.BackupAgentHelper
--keep public class * extends android.preference.Preference
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet);
-}
-
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepattributes *Annotation*
-
--keepclasseswithmembernames class *{
-	native <methods>;
-}
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
-#------------------  下方是共性的排除项目         ----------------
-# 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
-# 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
-
--keepclasseswithmembers class * {
-    ... *JNI*(...);
-}
-
--keepclasseswithmembernames class * {
-	... *JRI*(...);
-}
-
--keep class **JNI* {*;}
-#-keep public class com.project.Constant
-
-# log配置  不能有关闭优化的配置-dontoptimize,否则失效
--assumenosideeffects class android.util.Log{
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
