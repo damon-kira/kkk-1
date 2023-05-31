@@ -75,7 +75,6 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             Launch.skipRepayDetailActivity(getSupportContext(), it.bS6qpg4E.orEmpty())
         }
 
-        changePage(false)
         initObserver()
         if (!inValidToken()) {
             mViewModel.getRepayOrders()

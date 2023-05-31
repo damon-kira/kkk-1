@@ -33,7 +33,7 @@ class HistoryActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        change(false)
+
         setStatusBarColor(Color.WHITE, true)
 
         LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this) {
