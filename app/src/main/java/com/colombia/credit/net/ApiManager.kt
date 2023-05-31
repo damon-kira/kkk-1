@@ -19,6 +19,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 /**
@@ -37,6 +38,7 @@ class ApiManager @Inject constructor() {
 
     }
 
+    private var isShowInvalidDialog = AtomicBoolean(false)
     init {
         ServiceClient.getInstance().setGlobalFailedListener(object : ApiFailedListener {
             override fun onFailed(result: BaseResponse<*>, gotoLogin: Boolean) {
@@ -47,8 +49,10 @@ class ApiManager @Inject constructor() {
 //                    }
                     result.code == ResponseCode.INVALIDTOKEN -> {
                         setLogout()
-                        if (gotoLogin) {
-                            AppInjector.getTopActivity()?.showInvalidDialog()
+                        if (gotoLogin && isShowInvalidDialog.compareAndSet(false, true)) {
+                            AppInjector.getTopActivity()?.showInvalidDialog()?.setOnDismissListener {
+                                isShowInvalidDialog.compareAndSet(true , false)
+                            }
                         }
                     }
 //                    result.code == ResponseCode.SERVICE_ERROR_CODE -> {

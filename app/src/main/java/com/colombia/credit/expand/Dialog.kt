@@ -53,7 +53,7 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
     return dialog
 }
 
-fun BaseActivity.showInvalidDialog() {
+fun BaseActivity.showInvalidDialog(): DefaultDialog {
     val dialog = HintDialog(this)
         .setOnClickListener {
             Launch.skipMainActivity(this)
@@ -65,6 +65,7 @@ fun BaseActivity.showInvalidDialog() {
         .setMessage(getString(R.string.invalid_hint))
         .setBtnText(getString(R.string.confirm))
     addDialog(dialog)
+    return dialog
 }
 
 
