@@ -107,10 +107,8 @@ class RepeatFragment : BaseHomeLoanFragment() {
             val leftNum = mHomeViewModel.mRspInfoLiveData.value?.GbiDSBdW ?: 0
             val list = mAdapter.getSelectorItems().map { it.eqOEs }
             var orderIds: String? = null
-            if (list.isEmpty()) { // 没有选择产品时，获取待确认订单第一个
-                if (mAdapter.getWaitItemCount() > 0){
-                    orderIds = mAdapter.getWaitItemData(0)?.tQXtG0FYb.orEmpty()
-                }
+            if (list.isEmpty() && mAdapter.getWaitItemCount() > 0) { // 没有选择产品时，获取待确认订单第一个
+                orderIds = mAdapter.getWaitItemData(0)?.tQXtG0FYb.orEmpty()
             } else if (leftNum < list.size || leftNum == 0) {
                 mHintDialog.setOnClickListener {
                     mAdapter.getSelectorItems().forEach { item ->
