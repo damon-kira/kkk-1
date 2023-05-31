@@ -28,15 +28,13 @@
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 -renamesourcefileattribute Paramount
--keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,EnclosingMethod,*Annotation*
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,EnclosingMethod,*Annotation*,JavascriptInterface
 
 -dontwarn android.support.v4.**
 -dontwarn android.support.v7.**
 -dontwarn de.greenrobot.event.**
 
 -keepclassmembers public class * extends android.view.View {*;}
-
--keepattributes Signature
 
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -99,25 +97,10 @@
     public static ** valueOf(java.lang.String);
 }
 
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet);
-}
-
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepattributes *Annotation*
-
--keepclasseswithmembernames class *{
-	native <methods>;
-}
-
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
 
-#------------------  下方是共性的排除项目         ----------------
 # 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
 # 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
 
@@ -141,6 +124,7 @@
     public static int d(...);
     public static int e(...);
 }
+#------------------  上方是共性的排除项目         ----------------
 
 
 # for appsflyerlib
@@ -204,8 +188,6 @@
 -dontnote retrofit2.Platform
 -dontnote retrofit2.Platform$IOS$MainThreadExecutor
 -dontwarn retrofit2.Platform$Java8
--keepattributes Signature
--keepattributes Exceptions
 
 # OkHttp3
 -dontwarn okhttp3.logging.**
@@ -234,7 +216,6 @@
 
 # Gson
 -keep class com.google.gson.stream.** { *; }
--keepattributes EnclosingMethod
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -257,9 +238,6 @@
 #-dontwarn com.finance.credit.banner.**
 #-keep class com.finance.credit.banner.** {*;}
 
--keepattributes JavascriptInterface
-
-
 -optimizations !method/inlining/*
 
 -keepclasseswithmembers class * {
@@ -270,70 +248,3 @@
 -keep class me.jessyan.autosize.** { *; }
 -keep interface me.jessyan.autosize.** { *; }
 
-#------------------  下方是android平台自带的排除项，这里不要动         ----------------
-
--keep public class * extends androidx.appcompat.app.AppCompatActivity {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends androidx.fragment.app.Fragment {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Application{
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends android.app.backup.BackupAgentHelper
--keep public class * extends android.preference.Preference
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet);
-}
-
--keepclasseswithmembers class * {
-	public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepattributes *Annotation*
-
--keepclasseswithmembernames class *{
-	native <methods>;
-}
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
-#------------------  下方是共性的排除项目         ----------------
-# 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
-# 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
-
--keepclasseswithmembers class * {
-    ... *JNI*(...);
-}
-
--keepclasseswithmembernames class * {
-	... *JRI*(...);
-}
-
--keep class **JNI* {*;}
-#-keep public class com.project.Constant
-
-# log配置  不能有关闭优化的配置-dontoptimize,否则失效
--assumenosideeffects class android.util.Log{
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
