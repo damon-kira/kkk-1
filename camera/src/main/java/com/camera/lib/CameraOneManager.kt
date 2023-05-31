@@ -16,11 +16,7 @@ import com.util.lib.log.logger_i
 import java.io.File
 import java.io.FileOutputStream
 
-/**
- *@author zhujun
- *@description:CameraOne
- *@date : 2022/7/26 4:01 下午
- */
+
 class CameraOneManager(
     activity: AppCompatActivity,
     cameraView: TextureView,

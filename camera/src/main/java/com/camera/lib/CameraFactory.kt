@@ -3,13 +3,8 @@ package com.camera.lib
 import android.view.TextureView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.view.PreviewView
-import com.mexico.camera.cameraview.ICamera
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/7/27 10:09 上午
- */
+
 object CameraFactory {
 
     /**

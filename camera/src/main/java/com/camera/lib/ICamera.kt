@@ -1,12 +1,8 @@
-package com.mexico.camera.cameraview
+package com.camera.lib
 
 import java.io.File
 
-/**
- *@author zhujun
- *@description:相机接口
- *@date : 2022/7/26 2:13 下午
- */
+
 interface ICamera {
 
     /**

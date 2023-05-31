@@ -2,14 +2,8 @@ package com.camera.lib
 
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
-import com.mexico.camera.cameraview.ICamera
 
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/7/26 3:55 下午
- */
 abstract class BaseCameraManager(val activity: AppCompatActivity) : ICamera {
 
     companion object {

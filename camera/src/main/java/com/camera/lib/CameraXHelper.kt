@@ -18,13 +18,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/7/27 5:03 下午
- */
-class CameraXHelper(val activity: AppCompatActivity) {
 
+class CameraXHelper(val activity: AppCompatActivity) {
 
     private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
 

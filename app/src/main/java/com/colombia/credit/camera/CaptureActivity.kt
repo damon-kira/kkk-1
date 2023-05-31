@@ -9,6 +9,7 @@ import android.util.Log
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
+import com.camera.lib.ICamera
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.databinding.ActivityCaptureBinding
@@ -16,7 +17,6 @@ import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
-import com.mexico.camera.cameraview.ICamera
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File

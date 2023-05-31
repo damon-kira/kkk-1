@@ -15,6 +15,7 @@ import com.bigdata.lib.isSwitchPage
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
+import com.camera.lib.ICamera
 import com.colombia.credit.BuildConfig
 import com.colombia.credit.R
 import com.colombia.credit.app.AppEnv
@@ -34,7 +35,6 @@ import com.colombia.credit.util.MediaHelper
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
-import com.mexico.camera.cameraview.ICamera
 import com.util.lib.*
 import com.util.lib.StatusBarUtil.setStatusBar
 import com.util.lib.expand.getPicCacheFilePath

@@ -12,16 +12,11 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-/**
- *@author zhujun
- *@description:CameraX
- *@date : 2022/7/26 2:07 下午
- */
+
 class CameraXManager(
     activity: AppCompatActivity, mCameraView: PreviewView,
     cameraOrientation: Int
-) :
-    BaseCameraManager(activity) {
+) : BaseCameraManager(activity) {
 
     private var previewView: PreviewView? = null
 
@@ -57,30 +52,23 @@ class CameraXManager(
         val screenHeight = DisplayUtils.getRealScreenHeight(activity)
         val screenAspectRatio = aspectRatio(screenWidth, screenHeight)
         logger_d(TAG, "Preview aspect ratio: $screenAspectRatio")
-        val rotation = previewView?.display?.rotation
+        val rotation = previewView?.display?.rotation ?: 0
         //创建ImageCapture
-        if (rotation != null) {
-            mCamera.buildImageCapture(screenAspectRatio, rotation)
-        }
+        mCamera.buildImageCapture(screenAspectRatio, rotation)
         //打开相机
         previewView?.surfaceProvider?.let { mCamera.bindCamera(it) }
-
     }
-
 
     override fun openCamera(targetCameraId: Int): Int {
         setUpCamera()
         return -1
     }
 
-
     override fun takePicture(file: File, callback: (success: Boolean, filePath: File) -> Unit) {
         mCamera.takePicture(file, callback)
     }
 
-
     override fun autoFocus() {
-
         previewView?.let { mCamera.autoFocus(it) }
 
     }
@@ -95,13 +83,11 @@ class CameraXManager(
 
     override fun hasBackCamera(): Boolean {
         return mCamera.hasBackCamera()
-
     }
 
     override fun hasFrontCamera(): Boolean {
         return mCamera.hasFrontCamera()
     }
-
 
     override fun switchCamera(callback: (curCameraId: Int) -> Unit) {
         val cameraId = if (CameraSelector.LENS_FACING_FRONT == mCamera.getLensFacing()) {

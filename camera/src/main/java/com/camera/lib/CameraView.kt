@@ -8,11 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.camera.view.PreviewView
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/7/27 4:52 下午
- */
+
 class CameraView : FrameLayout {
 
     private var cameraType = CameraType.CameraX
