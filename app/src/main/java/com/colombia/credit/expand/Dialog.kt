@@ -56,9 +56,9 @@ fun BaseActivity.showNetErrorDialog(refresh: () -> Unit): DefaultDialog {
 fun BaseActivity.showInvalidDialog(): DefaultDialog {
     val dialog = HintDialog(this)
         .setOnClickListener {
-            Launch.skipMainActivity(this)
-            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
+            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+            Launch.skipMainActivity(this)
         }
         .showClose(false)
         .showTitle(HintDialog.type_GONE)

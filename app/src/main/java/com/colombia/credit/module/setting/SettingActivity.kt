@@ -59,8 +59,8 @@ class SettingActivity : BaseActivity() {
         mViewModel.mLogoutLivedata.observerNonSticky(this) {
             if (it.isSuccess()) {
                 setLogout()
-                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
+                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
                 finish()
             } else {
                 it.ShowErrorMsg()
