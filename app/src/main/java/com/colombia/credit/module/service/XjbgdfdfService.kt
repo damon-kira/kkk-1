@@ -24,10 +24,6 @@ class XjbgdfdfService : Service() {
         return null
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        mUploadViewModel?.resultLiveData?.observeForever{}
-    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val flag = intent?.getIntExtra(SerManager.EXTRA_KEY_FLAG, -1) ?: -1
