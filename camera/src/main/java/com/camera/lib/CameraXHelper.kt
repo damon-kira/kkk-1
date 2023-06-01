@@ -9,6 +9,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import com.google.common.util.concurrent.ListenableFuture
+import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
@@ -248,7 +249,11 @@ class CameraXHelper(val activity: AppCompatActivity) {
         lensFacing = when {
             defaultFacing == BaseCameraManager.FACING_BACK && hasBackCamera() -> CameraSelector.LENS_FACING_BACK
             defaultFacing == BaseCameraManager.FACING_FRONT && hasFrontCamera() -> CameraSelector.LENS_FACING_FRONT
-            else -> throw IllegalStateException("Back and front camera are unavailable")
+            else -> {
+                if (isDebug()) {
+                    throw IllegalStateException("Back and front camera are unavailable")
+                } else CameraSelector.LENS_FACING_BACK
+            }
         }
     }
 

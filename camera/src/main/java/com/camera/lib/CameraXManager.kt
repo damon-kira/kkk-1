@@ -60,7 +60,9 @@ class CameraXManager(
     }
 
     override fun openCamera(targetCameraId: Int): Int {
-        setUpCamera()
+        previewView?.post {
+            setUpCamera()
+        }
         return -1
     }
 
