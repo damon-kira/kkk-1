@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tl_back_text_color="@color/white"
         app:tl_show_custom_icon="true"
+        app:tl_textsize="18sp"
         app:tl_text_gravity="center"
         app:tl_title="@string/bank_title" />
 
