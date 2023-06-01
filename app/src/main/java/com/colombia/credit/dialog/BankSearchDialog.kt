@@ -37,10 +37,10 @@ class BankSearchDialog(context: Context) : DefaultDialog(context) {
         mBinding.dialogBankRecyclerview.setOnItemClickListener(object :
             SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                mBinding.dialogBankSearchview.clearSearchText()
                 mAdapter.getItemData<RspBankNameInfo.BankNameInfo>(position)?.let {
                     mListener?.invoke(it)
                 }
+                mBinding.dialogBankSearchview.clearSearchText()
                 dismiss()
             }
         })
