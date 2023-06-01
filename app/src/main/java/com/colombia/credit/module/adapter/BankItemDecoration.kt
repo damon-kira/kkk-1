@@ -238,9 +238,9 @@ class BankItemDecoration(
                     null
                 )
             }
-            if (drawable != null && !drawable.isRecycled) {
-                drawable.recycle()
-            }
+//            if (drawable != null && !drawable.isRecycled) {
+//                drawable.recycle()
+//            }
         }
     }
 
