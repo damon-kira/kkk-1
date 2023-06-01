@@ -21,13 +21,13 @@ class BankCardViewModel @Inject constructor(private val repository: BankCardRepo
     val mUpdateLiveData = generatorLiveData<BaseResponse<RspResult>>()
 
     private var _rspBankNameList: ArrayList<RspBankNameInfo.BankNameInfo>? = null
-        set(value) {
-            value ?: return
-            val hotList = value.filter { it.isHot() }
-            val sortList = value.filter { !it.isHot() }.sortedBy { it.getTag() }.toMutableList()
-            sortList.addAll(0, hotList)
-            field = sortList as ArrayList<RspBankNameInfo.BankNameInfo>
-        }
+//        set(value) {
+//            value ?: return
+//            val hotList = value.filter { it.isHot() }
+//            val sortList = value.filter { !it.isHot() }.sortedBy { it.getTag() }.toMutableList()
+//            sortList.addAll(0, hotList)
+//            field = sortList as ArrayList<RspBankNameInfo.BankNameInfo>
+//        }
 
     val mRspBankNameList: ArrayList<RspBankNameInfo.BankNameInfo>?
         get() {
