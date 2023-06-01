@@ -29,11 +29,14 @@ android {
 
         manifestPlaceholders = [pkgName: "${rootProject.ext.pkgName}"]
 
-        android.applicationVariants.all { variant ->
-            variant.outputs.all {
-                outputFileName = "FinanzasExtremas_v${variant.versionName}_${variant.buildType.name}_${time()}.apk"
-            }
-        }
+        setProperty("archivesBaseName", "FinanzasExtremas_v${versionName}_${time()}")
+
+//        android.applicationVariants.all { variant ->
+//            variant.outputs.all {
+//                println("variant = $variant")
+//                outputFileName = "FinanzasExtremas_v${variant.versionName}_${variant.buildType.name}_${time()}.apk"
+//            }
+//        }
     }
 
     packagingOptions {
@@ -111,7 +114,7 @@ android {
 }
 
 def time(){
-    return new Date().format("yyyyMMddhhmm")
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {
