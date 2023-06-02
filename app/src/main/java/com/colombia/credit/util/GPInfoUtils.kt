@@ -1,6 +1,9 @@
 package com.colombia.credit.util
 
 import com.colombia.credit.app.getAppContext
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+
 //import com.finance.analysis.FirebaseInfo
 //import com.finance.analysis.push.PushManagerFactory
 
@@ -30,5 +33,21 @@ object GPInfoUtils {
 
     fun saveTag(tag: String){
 //        FirebaseAnalytics.getInstance(getAppContext()).logEvent(tag, null)
+        saveFbTag(tag)
+    }
+    fun saveFbTag(tag: String) {
+        when (tag) {
+            TAG1 -> AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION
+            TAG2 -> AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT
+            TAG3 -> AppEventsConstants.EVENT_NAME_PURCHASED
+            TAG4 -> AppEventsConstants.EVENT_NAME_ADDED_TO_CART
+            TAG5 -> AppEventsConstants.EVENT_NAME_ADDED_PAYMENT_INFO
+            TAG6 -> AppEventsConstants.EVENT_NAME_COMPLETED_TUTORIAL
+            TAG7 -> AppEventsConstants.EVENT_NAME_ACHIEVED_LEVEL
+            TAG8 -> AppEventsConstants.EVENT_NAME_ADDED_TO_WISHLIST
+            else -> null
+        }?.let {finalTag ->
+            AppEventsLogger.newLogger(getAppContext()).logEvent(finalTag)
+        }
     }
 }

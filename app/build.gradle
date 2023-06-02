@@ -113,8 +113,8 @@ android {
     }
 }
 
-def time(){
-    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
+def time() {
+    return new Date().format("yyyyMMddHHmm")
 }
 
 dependencies {
@@ -152,6 +152,7 @@ dependencies {
 //    implementation rootProject.ext.firebase.firebase_perf
 //    implementation rootProject.ext.google.play_services_gcm
 
+    implementation rootProject.ext.facebook.fb
 
     implementation rootProject.ext.permission.rxpermission
 
