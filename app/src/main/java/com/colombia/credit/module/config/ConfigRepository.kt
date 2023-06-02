@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ConfigRepository @Inject constructor(): BaseRepository() {
 
     fun getConfig(keys: String) =
-        ApiServiceLiveDataProxy.request {
+        ApiServiceLiveDataProxy.requestIgnoreLogin {
             val jobj = JsonObject()
             jobj.addProperty("ovaGBHVDSubds8sd", keys)
             apiService.getConfig(createRequestBody(jobj.toString()))

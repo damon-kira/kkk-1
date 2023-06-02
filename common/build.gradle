@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk
+
+        consumerProguardFiles "proguard-rules.pro"
     }
 
     buildFeatures {

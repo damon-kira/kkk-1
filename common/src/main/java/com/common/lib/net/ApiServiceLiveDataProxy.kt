@@ -22,8 +22,7 @@ object ApiServiceLiveDataProxy {
 
     @JvmStatic
     fun <T> requestIgnoreLogin(
-        clazz: Class<T>,
         flowable: () -> Flowable<BaseResponse<T>>
     ): LiveData<BaseResponse<T>> =
-        LiveDataCall(clazz, false, flowable)
+        LiveDataCall(null,false, flowable)
 }
