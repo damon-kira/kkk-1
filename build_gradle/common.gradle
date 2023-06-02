@@ -78,7 +78,7 @@ rootProject.ext {
 
     facebook = [
 //            fb: "com.facebook.android:facebook-login:14.0.0"
-            fb: "com.facebook.android:facebook-android-sdk:4.38.0"
+            fb: "com.facebook.android:facebook-android-sdk:[8,9)"
     ]
 
     glide = [
