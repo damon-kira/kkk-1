@@ -124,6 +124,9 @@
     public static int d(...);
     public static int e(...);
 }
+-keepattributes JavascriptInterface
+-dontobfuscate
+#-dontoptimize
 #------------------  上方是共性的排除项目         ----------------
 
 
@@ -216,6 +219,10 @@
 
 # Gson
 -keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.**{*;}
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontobfuscate
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule

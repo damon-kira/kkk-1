@@ -62,7 +62,6 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
             return
         }
         mAddrLiveData.addSourceLiveData(repository.getAddrInfo()) {
-            Log.d(TAG, "getAddrInfo: it =$it")
             val info = GsonUtil.fromJson(it, object : TypeToken<ArrayList<AddressInfo>>() {})
             mAddrLiveData.postValue(info)
             mCache = info
