@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.cache.lib.CacheInit
 import com.colombia.credit.app.AppEnv
-import com.facebook.appevents.AppEventsLogger
+//import com.facebook.appevents.AppEventsLogger
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
 
@@ -30,7 +30,7 @@ class LoanApplication: Application() {
         CacheInit.get().setContext(this).setDebug(AppEnv.DEBUG)
         initAes()
         ApplicationDelegate.init(this)
-        AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id))
+//        AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id))
 //        PushManagerFactory.init(this)
 //        PushManagerFactory.getGaid(this)
 //        AdjustManager.init(this, AppEnv.DEBUG)

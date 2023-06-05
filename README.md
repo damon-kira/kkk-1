@@ -8,6 +8,9 @@
         // id 'com.google.gms.google-services'
         // id 'com.google.firebase.crashlytics'
    2).放开 firebase 相关注释，在 dependencies 中
+   3).放开Facebook 注释,在dependencies中
 4.放开LoanApplication 中firebase相关注释
 5.GPInfoUtils中放开注释
 6.添加google-service.json文件
+7.androidManifest中最后Facebook meta-data信息放开注释
+8.LoanApplication放开Facebook注释
