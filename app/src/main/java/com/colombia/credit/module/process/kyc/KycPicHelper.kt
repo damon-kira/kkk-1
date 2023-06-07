@@ -78,6 +78,7 @@ class KycPicHelper {
             .pick()
             .range(PickRange.PICK_DICM)
             .type(ImageType.ALL)
+            .checkPermission(false)
             .then()
             .compress()
             .fileToSave(File(targetPath))

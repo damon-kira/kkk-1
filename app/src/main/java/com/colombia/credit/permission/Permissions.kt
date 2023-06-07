@@ -38,7 +38,7 @@ val appPermissions = arrayOf(
     LocationPermission(),
 //    AccountPermission(),
     CameraPermission(),
-    PhotoAlbumPermission(),
+//    PhotoAlbumPermission(),
 //    CalendarReadPermission(),
 //    CalendarWritePermission()
 )

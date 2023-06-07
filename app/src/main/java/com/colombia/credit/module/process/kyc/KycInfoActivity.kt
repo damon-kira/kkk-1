@@ -259,7 +259,7 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     private fun reqPermission() {
         PermissionHelper.reqPermission(this,
-            arrayListOf(CameraPermission(), StoragePermission()),
+            arrayListOf(CameraPermission()),
             true, isFixGroup = true, result = {
             }, skipSettingListener = {
                 isJumpSetting = true

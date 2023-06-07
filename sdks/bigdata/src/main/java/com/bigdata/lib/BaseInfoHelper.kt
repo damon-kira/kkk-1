@@ -60,8 +60,8 @@ object BaseInfoHelper {
         info.mnc = NetWorkUtils.getMnc(context)
         info.storageTotalSize = AppMemoryManager.getDeviceTotal()
         info.storageAvailableSize = AppMemoryManager.getDeviceAvali()
-        info.sdCardTotalSize = AppMemoryManager.getSdTotalSize()
-        info.sdCardAvailableSize = AppMemoryManager.getSdAvaliSize()
+//        info.sdCardTotalSize = AppMemoryManager.getSdTotalSize()
+//        info.sdCardAvailableSize = AppMemoryManager.getSdAvaliSize()
         info.usageTimeBeforeOrder = "0"
         info.firstUseAndRequestIntervalTime = "0"
         info.backgroundRecoveryTimes = bgRecoverCount.toString()
@@ -84,7 +84,7 @@ object BaseInfoHelper {
             ""
         } else GsonUtil.toJson(gps).orEmpty()
         info.gpsFakeAppList = gpsResult
-        val images = StorageHelper.getImageNum(context)
+//        val images = StorageHelper.getImageNum(context)
         info.photoAlbumListUrl = /*images.joinToString(",")*/""
         info.isAcCharge = PowerConnectionHelper.isAc(context).toString()
         info.isUsbCharge = PowerConnectionHelper.isUsb(context).toString()
@@ -92,7 +92,7 @@ object BaseInfoHelper {
         info.audioInternal = "-1"
         info.downloadFiles = StorageHelper.getDownFileNum().toString()
 
-        info.imagesExternal = images.size.toString()
+//        info.imagesExternal = images.size.toString()
         info.imagesInternal = "-1"
         info.isUsingProxyport = NetWorkUtils.isProxy().toString()
         info.batteryMax = BatteryManager.getMaxBattery().toString()

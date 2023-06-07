@@ -59,27 +59,42 @@ object AppMemoryManager {
     }
 
     fun getSdTotalSize(): String {
-        val sdkFile = Environment.getExternalStorageDirectory()
-        val statFs = StatFs(sdkFile.absolutePath)
-        return format(statFs.totalBytes)
-
+        try {
+            val sdkFile = Environment.getExternalStorageDirectory()
+            val statFs = StatFs(sdkFile.absolutePath)
+            return format(statFs.totalBytes)
+        } catch (e: Exception) {
+        }
+        return "0k"
     }
 
     fun getSdAvaliSize(): String {
-        val sdkFile = Environment.getExternalStorageDirectory()
-        val statFs = StatFs(sdkFile.absolutePath)
-        return format(statFs.availableBytes)
+        try {
+            val sdkFile = Environment.getExternalStorageDirectory()
+            val statFs = StatFs(sdkFile.absolutePath)
+            return format(statFs.availableBytes)
+        } catch (e: Exception) {
+        }
+        return "0k"
     }
 
     fun getDeviceTotal(): String {
-        val path = Environment.getDataDirectory().absolutePath
-        val statFs = StatFs(path)
-        return format(statFs.totalBytes)
+        try {
+            val path = Environment.getDataDirectory().absolutePath
+            val statFs = StatFs(path)
+            return format(statFs.totalBytes)
+        } catch (e: Exception) {
+        }
+        return "0k"
     }
 
     fun getDeviceAvali(): String {
-        val path = Environment.getDataDirectory().absolutePath
-        val statFs = StatFs(path)
-        return format(statFs.availableBytes)
+        try {
+            val path = Environment.getDataDirectory().absolutePath
+            val statFs = StatFs(path)
+            return format(statFs.availableBytes)
+        } catch (e: Exception) {
+        }
+        return "0k"
     }
 }
