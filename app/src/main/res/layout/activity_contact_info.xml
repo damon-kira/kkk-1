@@ -96,7 +96,7 @@
                 app:if_can_edit="false"
                 app:inputType="normal"
                 app:left_icon="@drawable/svg_contact"
-                app:max_length="20"
+                app:max_length="25"
                 app:right_icon="@drawable/svg_contact_num"
                 app:title="@string/contact_number" />
             <!-- 手机号 -->
@@ -111,7 +111,7 @@
                 app:if_can_edit="true"
                 app:inputType="number"
                 app:left_icon="@drawable/svg_contact"
-                app:max_length="12"
+                app:max_length="20"
                 app:rightIcon_visiblity="gone"
                 app:title="@string/contact_mobile" />
 
@@ -136,7 +136,7 @@
                 app:if_can_edit="false"
                 app:inputType="normal"
                 app:left_icon="@drawable/svg_contact"
-                app:max_length="20"
+                app:max_length="25"
                 app:right_icon="@drawable/svg_contact_num"
                 app:title="@string/contact_number" />
             <!-- 手机号 -->
@@ -151,7 +151,7 @@
                 app:if_can_edit="true"
                 app:inputType="number"
                 app:left_icon="@drawable/svg_contact"
-                app:max_length="12"
+                app:max_length="20"
                 app:rightIcon_visiblity="gone"
                 app:title="@string/contact_mobile" />
 

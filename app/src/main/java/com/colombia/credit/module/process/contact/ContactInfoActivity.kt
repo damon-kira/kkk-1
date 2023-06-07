@@ -1,6 +1,7 @@
 package com.colombia.credit.module.process.contact
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import com.colombia.credit.R
 import com.colombia.credit.bean.PhoneAndName
@@ -19,6 +20,7 @@ import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.util.lib.StrMatchUtil
 import com.util.lib.dp
 import com.util.lib.isHide
 import com.util.lib.show
@@ -66,6 +68,19 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         if (!mContactResult) { // 是否进入联系人选择后无法带回信息
             showMobileEdit()
         }
+        val nameInfilter = InputFilter { source, start, end, dest, dstart, dend ->
+            if (StrMatchUtil.isLetter(
+                    source.toString().replace(" ".toRegex(), "")
+                ) || StrMatchUtil.isSpace(source) && dstart != 0
+            ) {
+                return@InputFilter null
+            } else {
+                return@InputFilter ""
+            }
+        }
+        val nameFilters = arrayOf(nameInfilter)
+        mBinding.bivContact1.setFilters(nameFilters)
+        mBinding.bivContact2.setFilters(nameFilters)
 
         mViewModel.getCacheInfo()?.also { info ->
             info as ReqContactInfo
@@ -172,7 +187,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
             return
         }
         infoView.setViewText(data.name)
-        infoView.tag = data.phone
+        infoView.setCanEdit(true)
         mobileInfoView.show()
         mobileInfoView.setViewText(data.phone)
 
@@ -224,7 +239,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private fun checkMobileText(infoView: BaseInfoView): Boolean {
-        return checkMobile(infoView.getViewText()).also {result ->
+        return  (infoView.getViewText().length in 10..20).also {result ->
             if (!result) {
                 infoView.setError(R.string.contact_error_mobile)
             }
