@@ -2,7 +2,6 @@ package com.colombia.credit.module.home
 
 import android.os.Bundle
 import android.view.View
-import com.bigdata.lib.MCLCManager
 import com.colombia.credit.databinding.FragmentHomeLoanBinding
 import com.colombia.credit.expand.ShowErrorMsg
 import com.colombia.credit.expand.getUnitString

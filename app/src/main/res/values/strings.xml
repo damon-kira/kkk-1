@@ -122,7 +122,10 @@
     <string name="error_mobile_same">El teléfono de contacto no puede ser el mismo</string><!-- 联系人手机号不能是一个 -->
     <string name="error_mobile_same_login">El número de teléfono de contacto no puede ser su número de teléfono registrado</string><!-- 不能与登录的手机号是一个 -->
     <string name="contact_no_hint">No se pueden obtener los datos, verifique</string>
-
+    <string name="contact_input_mobile">Por favor ingrese el número de contacto</string><!-- 提示输入手机号 -->
+    <string name="contact_input_name">Por favor ingrese un nombre de contacto</string><!-- 提示输入姓名 -->
+    <string name="contact_error_name">Error de entrada, vuelva a introducir el nombre</string><!-- 提示姓名异常 -->
+    <string name="contact_error_mobile">Error de entrada, vuelve a introducir el número de teléfono</string><!-- 提示手机号异常 -->
     <!-- 银行信息 -->
     <string name="bank_title">Información del contacto</string>
     <string name="bank_name_title">Seleccione su banco</string>

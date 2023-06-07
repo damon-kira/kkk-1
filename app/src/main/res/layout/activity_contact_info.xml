@@ -85,6 +85,7 @@
                 app:title="@string/retationship" />
 
             <!-- 联系人1 -->
+            <!-- 姓名 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact1"
                 android:layout_width="match_parent"
@@ -93,9 +94,25 @@
                 app:desc_color="@color/color_333333"
                 app:hint="@string/education_hint"
                 app:if_can_edit="false"
+                app:inputType="normal"
                 app:left_icon="@drawable/svg_contact"
+                app:max_length="20"
                 app:right_icon="@drawable/svg_contact_num"
                 app:title="@string/contact_number" />
+            <!-- 手机号 -->
+            <com.colombia.credit.view.baseinfo.BaseInfoView
+                android:id="@+id/biv_contact1_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                app:desc_color="@color/color_333333"
+                app:hint="@string/contact_input_mobile"
+                app:if_can_edit="true"
+                app:inputType="number"
+                app:left_icon="@drawable/svg_contact"
+                app:max_length="12"
+                app:rightIcon_visiblity="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,6 +124,7 @@
                 android:textStyle="bold" />
 
             <!-- 联系人2 -->
+            <!-- 姓名 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact2"
                 android:layout_width="match_parent"
@@ -115,8 +133,25 @@
                 app:desc_color="@color/color_333333"
                 app:hint="@string/address_hint"
                 app:if_can_edit="false"
+                app:inputType="normal"
                 app:left_icon="@drawable/svg_contact"
+                app:max_length="20"
                 app:right_icon="@drawable/svg_contact_num"
+                app:title="@string/address" />
+            <!-- 手机号 -->
+            <com.colombia.credit.view.baseinfo.BaseInfoView
+                android:id="@+id/biv_contact2_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                app:desc_color="@color/color_333333"
+                app:hint="@string/contact_input_mobile"
+                app:if_can_edit="true"
+                app:inputType="number"
+                app:left_icon="@drawable/svg_contact"
+                app:max_length="12"
+                app:rightIcon_visiblity="gone"
                 app:title="@string/address" />
 
             <Space

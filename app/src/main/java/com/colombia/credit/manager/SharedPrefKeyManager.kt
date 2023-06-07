@@ -26,4 +26,6 @@ object SharedPrefKeyManager {
     const val KEY_APP_FRONT_BACK_TAG = "app_front_back_tag"
 
     const val KEY_IS_REPEAT = "is_repeat"
+
+    const val KEY_CONTACT_RESULT = "key_contact_result"
 }

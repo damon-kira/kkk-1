@@ -19,7 +19,7 @@
     <!-- 录像/照相 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!--通讯录-->
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+<!--    <uses-permission android:name="android.permission.READ_CONTACTS" />-->
 
     <!-- 日历权限 -->
 <!--    <uses-permission android:name="android.permission.READ_CALENDAR" />-->

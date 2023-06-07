@@ -13,7 +13,6 @@ class ContactViewModel @Inject constructor(private val repository: ContactReposi
 
     override fun uploadInfo(info: IReqBaseInfo) {
         showloading()
-        SerManager.startCon()
         mUploadLiveData.addSourceLiveData(repository.uploadInfo(info)) {
             hideLoading()
             isUploadSuccess = it.isSuccess()
