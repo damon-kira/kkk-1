@@ -33,7 +33,7 @@ val TAG = "debug_Permissions"
 val appPermissions = arrayOf(
     SmsPermission(),
     ReceivePermission(),
-    ContactPermission(),
+//    ContactPermission(),
     ReadPhonePermission(),
     LocationPermission(),
 //    AccountPermission(),

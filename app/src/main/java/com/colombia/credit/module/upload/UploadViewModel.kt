@@ -4,7 +4,6 @@ import com.colombia.credit.app.getAppContext
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqKycInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
-import com.colombia.credit.permission.ContactPermission
 import com.colombia.credit.permission.SmsPermission
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
@@ -18,7 +17,7 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
         const val TYPE_SMS = 0x10
         const val TYPE_APP = 0x11
         const val TYPE_ALL = 0x12
-        const val TYPE_CON = 0x13
+//        const val TYPE_CON = 0x13
     }
 
     val resultLiveData = generatorLiveData<BaseResponse<Boolean>>()
@@ -69,10 +68,10 @@ class UploadViewModel @Inject constructor(private val repository: UploadReposito
             TYPE_APP -> {
                 repository.uploadApp().observerNonStickyForever { }
             }
-            TYPE_CON -> {
-                if (ContactPermission().hasThisPermission(getAppContext()))
-                    repository.uploadCo().observerNonStickyForever { }
-            }
+//            TYPE_CON -> {
+//                if (ContactPermission().hasThisPermission(getAppContext()))
+//                    repository.uploadCo().observerNonStickyForever { }
+//            }
         }
     }
 

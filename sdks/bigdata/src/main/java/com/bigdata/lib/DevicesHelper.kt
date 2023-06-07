@@ -17,7 +17,7 @@ object DevicesHelper {
             it.l9uzoD39Q8 = Build.MODEL
             it.TAEgE = Build.BRAND
             it.OCwx = SysUtils.getImei(context)
-            val locationInfo = LocationHelp.getLocationInfo()
+            val locationInfo = LocationHelp.getLastLocation()
             it.uXBlXBew = locationInfo?.first ?: "0"
             it.u3zNZE = locationInfo?.second ?: "0"
         }

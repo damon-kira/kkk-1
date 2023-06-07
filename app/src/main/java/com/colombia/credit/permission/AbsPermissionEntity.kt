@@ -67,7 +67,7 @@ class ReceivePermission : AbsPermissionEntity() {
 //定位权限
 class LocationPermission : AbsPermissionEntity() {
     override fun permissionName(): String {
-        return Manifest.permission.ACCESS_FINE_LOCATION
+        return Manifest.permission.ACCESS_COARSE_LOCATION
     }
 
     override fun hasPermissionUnder6(context: Context): Boolean {
@@ -166,19 +166,19 @@ class PhotoAlbumPermission : AbsPermissionEntity() {
 }
 
 //联系人权限
-class ContactPermission : AbsPermissionEntity() {
-    override fun permissionName(): String {
-        return Manifest.permission.READ_CONTACTS
-    }
-
-    override fun hasPermissionUnder6(context: Context): Boolean {
-        return true
-    }
-
-    override fun getHintIfNoPermission(): Pair<Int, Int> {
-        return Pair(R.string.permission_contact, R.string.permission_dlg_text_contacts)
-    }
-}
+//class ContactPermission : AbsPermissionEntity() {
+//    override fun permissionName(): String {
+//        return Manifest.permission.READ_CONTACTS
+//    }
+//
+//    override fun hasPermissionUnder6(context: Context): Boolean {
+//        return true
+//    }
+//
+//    override fun getHintIfNoPermission(): Pair<Int, Int> {
+//        return Pair(R.string.permission_contact, R.string.permission_dlg_text_contacts)
+//    }
+//}
 
 /** 读取日历权限 */
 class CalendarReadPermission : AbsPermissionEntity() {

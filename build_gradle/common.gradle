@@ -86,7 +86,7 @@ rootProject.ext {
     ]
 
     location = [
-            location: "com.location.lib:location:1.0.0"
+            location: "com.location.lib:location:1.0.1"
     ]
 
 
@@ -117,6 +117,7 @@ rootProject.ext {
     allDesList.addAll(retrofit.values())
     allDesList.addAll(glide.values())
     allDesList.addAll(firebase.values())
+    allDesList.addAll(location.values())
 //    allDesList.addAll(appsflyer.values())
     allDesList.addAll(room.values())
     allDesList.addAll(other.values())

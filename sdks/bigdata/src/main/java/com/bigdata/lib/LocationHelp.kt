@@ -1,8 +1,11 @@
 package com.bigdata.lib
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.PermissionChecker
 import com.bigdata.lib.SpKeyManager.CASH_KEY_LOCATION_INFO
 import com.bigdata.lib.SpKeyManager.CASH_KEY_REQUEST_CICY_TIMER
 import com.bigdata.lib.SpKeyManager.CASH_KEY_REQUEST_LOCATION_TIMER
@@ -45,6 +48,15 @@ class LocationHelp {
             return null
         }
 
+        fun getLastLocation(): Pair<String, String>?  {
+            val ctx = config?.getContext() ?: return null
+            if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) == PermissionChecker.PERMISSION_DENIED) return null
+            OLocationManager.create(config.getContext())
+            OLocationManager.getLastLocation()
+            val locationInfo = OLocationManager.getNewLastLocation(ctx) ?: return null
+            return  Pair(locationInfo.longitude.toString(), locationInfo.latitude.toString())
+        }
+
         /**
          * 请求定位和获取经纬度城市
          */
@@ -61,7 +73,7 @@ class LocationHelp {
                 logger_i(TAG, "request location")
                 OLocationManager.create(config.getContext())
                 OLocationManager.getOnceLocationCallbackByAsync { location ->
-                    Log.i(TAG, "requestLocation: location = $location")
+                    logger_i(TAG, "requestLocation: location = $location")
                     location?.let {
                         saveLocationInfo(it)
                     }

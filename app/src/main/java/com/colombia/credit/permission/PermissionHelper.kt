@@ -40,7 +40,7 @@ object PermissionHelper {
         val list = arrayListOf<AbsPermissionEntity>()
         with(list) {
             add(SmsPermission())
-            add(ContactPermission())
+//            add(ContactPermission())
             add(ReadPhonePermission())
             add(CameraPermission())
             add(LocationPermission())

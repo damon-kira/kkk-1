@@ -18,10 +18,7 @@ import java.io.FileReader
 import java.math.BigDecimal
 import java.util.*
 
-/**
- * Created by sunsg on 2018/1/31.
- * 网络请求公共参数管理类
- */
+
 class NetBaseParamsManager {
     companion object {
 

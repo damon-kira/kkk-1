@@ -22,9 +22,6 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
-/**
- * Created by weisl on 2019/8/12.
- */
 
 class ApiManager @Inject constructor() {
 
