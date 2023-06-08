@@ -22,12 +22,12 @@ class PicImageDialog constructor(context: Context) : DefaultDialog(context) {
 
     fun setOnImageClick(cameraListener: () -> Unit, albumListener: () -> Unit): PicImageDialog {
         mBinding.tvCamera.setBlockingOnClickListener{
-            cameraListener()
             dismiss()
+            cameraListener()
         }
         mBinding.tvAlbum.setBlockingOnClickListener{
-            albumListener()
             dismiss()
+            albumListener()
         }
         return this
     }

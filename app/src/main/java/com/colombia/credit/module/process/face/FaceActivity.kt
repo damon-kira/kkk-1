@@ -101,10 +101,11 @@ class FaceActivity : BaseProcessActivity() {
                             mBinding.aivFaceMask.right,
                             mBinding.aivFaceMask.bottom
                         )
+                        val previewRect = Rect(0,0, mBinding.cameraview.width, mBinding.cameraview.height)
                         BitmapCrop.cropAndCompress(
                             this,
                             f,
-                            rect,
+                            rect, previewRect,
                             mCameraManager?.isFront() ?: true
                         ) { finalFile ->
                             if (finalFile != null) {
@@ -124,7 +125,7 @@ class FaceActivity : BaseProcessActivity() {
         setCountDownText(4)
         countDown(TYPE_FIRST_INT, 6)
         mCameraManager = CameraFactory.invoke(
-            CameraType.CameraX,
+            CameraType.CameraOne,
             this,
             mBinding.cameraview,
             BaseCameraManager.FACING_FRONT,

@@ -222,7 +222,7 @@ class CameraOneManager(
                     TAG, "拍照结果 - 成功:${file.absolutePath}," +
                             "file length:${if (file.exists()) file.length() else 0}"
                 )
-                callback(false, file)
+                callback(true, file)
             }
         }
     }

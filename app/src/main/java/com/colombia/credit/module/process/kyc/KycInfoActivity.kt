@@ -19,7 +19,6 @@ import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.permission.CameraPermission
 import com.colombia.credit.permission.PermissionHelper
-import com.colombia.credit.permission.StoragePermission
 import com.colombia.credit.util.DictionaryUtil
 import com.colombia.credit.util.image.annotations.PicType
 import com.colombia.credit.view.identity.IdentityPicStatus

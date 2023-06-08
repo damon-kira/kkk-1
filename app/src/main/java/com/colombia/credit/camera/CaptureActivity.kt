@@ -72,7 +72,7 @@ class CaptureActivity : BaseActivity() {
         }
 
         mCameraManger = CameraFactory.invoke(
-            CameraType.CameraX,
+            CameraType.CameraOne,
             this,
             mBinding.cameraview,
             BaseCameraManager.FACING_BACK,
@@ -99,7 +99,10 @@ class CaptureActivity : BaseActivity() {
                         it.right = scannerRect.right.toInt()
                         it.bottom = scannerRect.bottom.toInt()
                     }
-                    BitmapCrop.crop(this, f, rect, mCameraManger?.isFront() ?: true) { finalFile ->
+                    val width = mBinding.cameraview.width
+                    val height = mBinding.cameraview.height
+                    val previewRect = Rect(0,0,width, height)
+                    BitmapCrop.crop(this, f, rect, previewRect, mCameraManger?.isFront() ?: true) { finalFile ->
                         if (finalFile != null) {
                             if (BuildConfig.DEBUG) {
                                 logger_e(TAG, "success = ${finalFile.length()}")
