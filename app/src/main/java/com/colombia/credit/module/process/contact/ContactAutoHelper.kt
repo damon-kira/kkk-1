@@ -22,6 +22,14 @@ abstract class ContactAutoHelper(vb: ActivityContactInfoBinding): AbsAutoCheckHe
         }
     }
 
+    fun clearFocus() {
+        vb.clContent.requestFocus()
+        vb.bivContact1.clearFocus()
+        vb.bivContact1Number.clearFocus()
+        vb.bivContact2.clearFocus()
+        vb.bivContact2Number.clearFocus()
+    }
+
     private fun checkRelationShip() {
         if (!checkInfoEmpty(vb.bivRelationship)) {
             checkNextView()

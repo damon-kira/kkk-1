@@ -134,6 +134,7 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         v ?: return
+        mAutoHelper.clearFocus()
         when (v.id) {
             R.id.biv_relationship -> {
                 showProcessSelectorDialog(
@@ -243,11 +244,32 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private fun checkMobileText(infoView: BaseInfoView): Boolean {
-        return  (infoView.getViewText().length in 10..20).also {result ->
+        val text = infoView.getViewText()
+         val checkLength = (text.length in 10..20).also {result ->
             if (!result) {
                 infoView.setError(R.string.contact_error_mobile)
             }
         }
+        // 长度校验
+        if (!checkLength) return false
+        // 是否与登录手机号一样
+        val loginMobile = getMobile()
+        if (text.contains(loginMobile) || loginMobile.contains(text)) {
+            infoView.setViewText("")
+            infoView.setError(R.string.error_mobile_same_login)
+            return false
+        }
+        // 是否两个手机号一样
+        val mobile1 = mBinding.bivContact1Number.getViewText()
+        val mobile2 = mBinding.bivContact2Number.getViewText()
+        if (mobile1.isNotEmpty() && mobile2.isNotEmpty() && (mobile2.contains(mobile1) || mobile1.contains(mobile2))) {
+            infoView.setError(R.string.error_mobile_same)
+            return false
+        } else {
+            mBinding.bivContact2Number.clearTextError()
+            mBinding.bivContact1Number.clearTextError()
+        }
+        return true
     }
 
     private fun checkInfoView(infoView: BaseInfoView, errorHint: String): Boolean {
