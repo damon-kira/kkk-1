@@ -10,7 +10,7 @@ object StrMatchUtil {
      * 匹配字母
      */
     fun isLetter(content: CharSequence?): Boolean {
-        return Regex("""[a-zA-ZÁáÉéÍíÓóÚúÜüÏïñÑ]+""").matches(content.toString())
+        return Regex("""[0-9a-zA-ZÁáÉéÍíÓóÚúÜüÏïñÑ]+""").matches(content.toString())
     }
 
 

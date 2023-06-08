@@ -198,6 +198,10 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
             infoView.setError(R.string.error_mobile_same)
             return
         }
+        if (data.name.isEmpty()) {
+            infoView.setError(R.string.contact_error_name)
+            return
+        }
 
         if (infoView != mBinding.bivContact2) {
             mAutoHelper.startCheckNext()
