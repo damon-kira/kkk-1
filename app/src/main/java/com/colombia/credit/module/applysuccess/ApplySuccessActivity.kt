@@ -7,8 +7,10 @@ import com.colombia.credit.databinding.ActivityApplySuccessBinding
 import com.colombia.credit.expand.isGpAccount
 import com.colombia.credit.expand.isRepeat
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.module.config.ConfigViewModel
 import com.colombia.credit.permission.HintDialog
 import com.common.lib.base.BaseActivity
+import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp
@@ -18,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class ApplySuccessActivity : BaseActivity() {
 
     private val mBinding by binding<ActivityApplySuccessBinding>()
+
+    private val mViewModel by lazyViewModel<ConfigViewModel>()
 
     private val mHintDialog by lazy {
         HintDialog(this).also {
@@ -35,6 +39,16 @@ class ApplySuccessActivity : BaseActivity() {
         setContentView(mBinding.root)
         setStatusBarColor(Color.WHITE, true)
 
+        setViewModelLoading(mViewModel)
+        mViewModel.configLiveData.observerNonSticky(this) {
+            if (it.isOpen()) {
+                showDialog()
+            }
+        }
+        mViewModel.getConfig(ConfigViewModel.KEY_GP_PJ)
+    }
+
+    private fun showDialog() {
         if (!isRepeat && !isGpAccount()) {
             mHintDialog.setOnClickListener {
                 Launch.skipAppStore(null)
