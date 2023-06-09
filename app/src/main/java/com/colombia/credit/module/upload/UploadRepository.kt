@@ -14,9 +14,7 @@ import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
-import com.util.lib.NetWorkUtils
 import io.reactivex.Flowable
-import java.net.ConnectException
 import javax.inject.Inject
 
 class UploadRepository @Inject constructor(private val dataApiService: DataApiService) :
@@ -27,17 +25,13 @@ class UploadRepository @Inject constructor(private val dataApiService: DataApiSe
             Flowable.fromPublisher {
                 val result = MCLCManager.synUpload()
                 var code = ResponseCode.SUCCESS_CODE
-                var throwable: Throwable? = null
-                if (!result) {
+                if (!result.isSuccess()) {
                     code = ResponseCode.OTHER_ERROR_CODE
-                    if (!NetWorkUtils.isNetConnected(getAppContext())) {
-                        throwable = ConnectException("connection exception")
-                    }
                 }
                 try {
-                    it.onNext(BaseResponse(code, result, null, throwable))
+                    it.onNext(BaseResponse(code, result.isSuccess(), result.exception?.message, result.exception))
                 } catch (e: Exception) {
-                    it.onError(throwable ?: e)
+                    it.onError(e)
                 }
             }
         }

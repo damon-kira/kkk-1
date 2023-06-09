@@ -9,11 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/3/1 11:57 上午
- */
+
 internal object NetWorkManager {
     val TAG = "debug_bigData_NetWorkManager"
 
@@ -30,9 +26,9 @@ internal object NetWorkManager {
             MediaType.parse("application/json; charset=utf-8"),
             bigDataInfo
         )
-        val okHttpClient = OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(15, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
+        val okHttpClient = OkHttpClient.Builder().connectTimeout(45, TimeUnit.SECONDS)
+            .readTimeout(45, TimeUnit.SECONDS)
+            .writeTimeout(45, TimeUnit.SECONDS)
             .addInterceptor(mHeaderInterceptor)
             .addInterceptor(httpLog)
             .build()

@@ -12,19 +12,19 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
-import android.util.Log
 import com.cache.lib.SharedPrefGlobal
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.log.isDebug
+import com.util.lib.log.logger_d
+import com.util.lib.log.logger_e
+import com.util.lib.log.logger_i
 import java.util.*
 
-/**
- * Created by weisl on 2019/10/14.
- */
+
 object PackageUtil {
 
-    private const val TAG = "PackageUtilCash"
+    private const val TAG = "PackageUtil"
     private val DEBUG = isDebug()
     fun getInstallApp(context: Context): List<PackageInfo> {
         val list = context.packageManager.getInstalledPackages(
@@ -63,7 +63,7 @@ object PackageUtil {
                     array.add(jobj)
                     return@forEach
                 }
-                Log.d(TAG, "getGpsMockApp: permission = ${permissionName}")
+                logger_d(TAG, "getGpsMockApp: permission = ${permissionName}")
             }
         }
         return array
@@ -75,7 +75,7 @@ object PackageUtil {
             return pm.getPackageInfo(pkgName, PackageManager.GET_SIGNATURES)
         } catch (e: Exception) {
             if (DEBUG) {
-                Log.e(TAG, "error = $e")
+                logger_e(TAG, "error = $e")
             }
         }
 
@@ -121,7 +121,7 @@ object PackageUtil {
     fun queryAppUsageStats(context: Context): List<UsageStats>? {
         val enable = true//需要检查权限 把代码先删了
         if (DEBUG) {
-            Log.i(TAG, "ENABLE= $enable")
+            logger_i(TAG, "ENABLE= $enable")
         }
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             val usageStatsManager = context.applicationContext
@@ -161,13 +161,13 @@ object PackageUtil {
                 context.startActivity(intent)
             } else {
                 if (DEBUG) {
-                    Log.e(TAG, "can not find default browser")
+                    logger_e(TAG, "can not find default browser")
                 }
                 return false
             }
         } catch (e: Exception) {
             if (DEBUG) {
-                Log.e(TAG, "系统自动处理失败 $e")
+                logger_e(TAG, "系统自动处理失败 $e")
                 throw e
             }
             return false

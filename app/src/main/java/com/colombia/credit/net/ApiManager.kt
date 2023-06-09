@@ -136,6 +136,7 @@ class ApiManager @Inject constructor() {
         val options = NetOptions()
             .setReadTimeout(UPLOAD_TIMEOUT)
             .setConnectTimeout(UPLOAD_TIMEOUT)
+            .setWriteTimeout(UPLOAD_TIMEOUT)
             .setTimeUnit(TimeUnit.MILLISECONDS)
             .setInterceptors(defaultInterceptor)
             .setBaseUrl(BASEURL)

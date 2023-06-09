@@ -1,7 +1,5 @@
 package com.bigdata.lib
 
-import android.util.Log
-import androidx.annotation.WorkerThread
 import com.bigdata.lib.SpKeyManager.CASH_KEY_POST_MCLC
 import com.bigdata.lib.net.NetWorkManager
 import com.cache.lib.SharedPrefUser
@@ -15,7 +13,7 @@ import org.json.JSONObject
 import kotlin.math.abs
 
 
-typealias Result = ((result: Boolean) -> Unit)?
+typealias Result = ((result: UploadResult) -> Unit)?
 
 class MCLCManager {
     companion object {
@@ -138,7 +136,7 @@ class MCLCManager {
          * @param extra 额外信息
          * @param ignoreInterval 是否忽略时间间隔 true:忽略时间间隔检查， false: 不忽略
          */
-        private fun asynUploadData(listener: ((result: Boolean) -> Unit)? = null) {
+        private fun asynUploadData(listener: ((result: UploadResult) -> Unit)? = null) {
             ThreadPoolUtil.executor("cash info post") {
                 val result = synUpload()
                 listener?.invoke(result)
@@ -147,10 +145,13 @@ class MCLCManager {
 
         private var isUploadComplete = true
 
-
-        fun synUpload(): Boolean {
+        fun synUpload(): UploadResult {
             LocationHelp.requestLocation()
-            if (!isUploadComplete) return true
+            val result = UploadResult()
+            if (!isUploadComplete) {
+                result.result = UploadResult.RESULT_UPLOADING
+                return UploadResult()
+            }
             if (checkPostMCLCSuccessTimer()) {
                 isUploadComplete = false
                 val jsonCashInfo = getCashInfo()
@@ -167,13 +168,15 @@ class MCLCManager {
                 logger_i(TAG, "cash info post encryt after = $postInfo")
                 doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
                 val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
-                    ?: return false
+                    ?: return UploadResult()
+
                 val response = try {
                     NetWorkManager.synUploadlogMessage(postInfo, remoteUrl)
                 } catch (e: Exception) {
+                    result.exception = e
                     null
                 }
-                var result = false
+
                 isUploadComplete = true
                 if (response?.isSuccessful == true) {
                     response.body()?.string()?.let { body ->
@@ -184,16 +187,17 @@ class MCLCManager {
                             val jobj = JSONObject(desBody)
                             code = jobj.optInt("code")
                         } catch (e: Exception) {
+                            result.exception = e
                             logger_e(TAG,"185 Exception = $e")
                         }
-                        Log.d(TAG, "uploadData: code= $code")
-                        result = code == 200
+                        logger_d(TAG, "uploadData: code= $code")
+                        result.result = if (code == 200) UploadResult.RESULT_SUCCESS else UploadResult.RESULT_EXCEPTION
                     }
                 }
                 logger_d(TAG, "result = $result")
                 return result
             } else {
-                return false
+                return result
             }
         }
 
