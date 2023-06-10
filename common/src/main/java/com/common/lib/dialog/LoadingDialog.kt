@@ -12,7 +12,7 @@ import com.common.lib.R
  */
 
 /** 显示loading框*/
-internal fun Activity.showLoadingDialog(cancelable: Boolean = true): DefaultDialog? {
+internal fun Activity.showLoadingDialog(cancelable: Boolean = false): DefaultDialog? {
     val dialog = DefaultDialog(this)
     try {
         dialog.setContentView(R.layout.view_loading)

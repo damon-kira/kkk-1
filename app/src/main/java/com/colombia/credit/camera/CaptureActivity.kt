@@ -17,6 +17,7 @@ import com.colombia.credit.util.image.annotations.PicType
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
+import com.util.lib.image.commonCompressPicIO
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -102,13 +103,13 @@ class CaptureActivity : BaseActivity() {
                     val width = mBinding.cameraview.width
                     val height = mBinding.cameraview.height
                     val previewRect = Rect(0,0,width, height)
-                    BitmapCrop.crop(this, f, rect, previewRect, mCameraManger?.isFront() ?: true) { finalFile ->
-                        if (finalFile != null) {
+                    commonCompressPicIO(f.absolutePath, f.absolutePath) { finalPath ->
+                        if (filePath != null) {
                             if (BuildConfig.DEBUG) {
-                                logger_e(TAG, "success = ${finalFile.length()}")
+                                logger_e(TAG, "success = $finalPath")
                             }
                             val result = intent
-                            result.data = Uri.fromFile(finalFile)
+                            result.data = Uri.fromFile(File(finalPath))
                             setResult(Activity.RESULT_OK, result)
                             finish()
                         } else {
@@ -118,6 +119,22 @@ class CaptureActivity : BaseActivity() {
                             finish()
                         }
                     }
+//                    BitmapCrop.crop(this, f, rect, previewRect, mCameraManger?.isFront() ?: true) { finalFile ->
+//                        if (finalFile != null) {
+//                            if (BuildConfig.DEBUG) {
+//                                logger_e(TAG, "success = ${finalFile.length()}")
+//                            }
+//                            val result = intent
+//                            result.data = Uri.fromFile(finalFile)
+//                            setResult(Activity.RESULT_OK, result)
+//                            finish()
+//                        } else {
+//                            if (BuildConfig.DEBUG) {
+//                                logger_e(TAG, "error = $it")
+//                            }
+//                            finish()
+//                        }
+//                    }
                 }
             }
         }

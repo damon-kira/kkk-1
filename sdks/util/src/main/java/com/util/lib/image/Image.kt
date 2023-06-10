@@ -452,11 +452,11 @@ fun commonCompressPic(sourcePath: String, targetPath: String):Boolean{
  * @param targetPath 压缩后路径
  * @param success 压缩成功回调
  * */
-fun commonCompressPicIO(sourcePath: String, targetPath: String, success: (path: String) -> Unit) {
+fun commonCompressPicIO(sourcePath: String, targetPath: String, success: (path: String?) -> Unit) {
     ThreadPoolUtil.executor("commonCompressPicIO"){
-        commonCompressPic(sourcePath, targetPath)
+        val result = commonCompressPic(sourcePath, targetPath)
         MainHandler.post {
-            success(targetPath)
+            success(if (result) targetPath else null)
         }
     }
 //    return Observable.fromArray(sourcePath)
