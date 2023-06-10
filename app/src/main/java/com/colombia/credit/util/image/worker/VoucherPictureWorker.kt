@@ -12,12 +12,13 @@ import com.colombia.credit.util.image.agent.AgentContainer
 import com.colombia.credit.util.image.callback.ResultCallback
 import com.colombia.credit.util.image.data.ResultData
 import com.colombia.credit.util.image.data.VoucherPictureParams
+import com.common.lib.base.BaseActivity
 
 
 class VoucherPictureWorker(container: AgentContainer, params: VoucherPictureParams) : BaseWorker<VoucherPictureParams, ResultData>(container, params) {
 
     override fun start(flowData: ResultData?, callback: ResultCallback<ResultData>) {
-        val activity = container.getActivity() ?: return
+        val activity = (container.getActivity() as? BaseActivity) ?: return
         val permission = Manifest.permission.CAMERA
         if (params.checkPermission) {
             if (PermissionHelper.checkPermission(activity, permission)) {

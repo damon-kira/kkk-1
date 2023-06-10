@@ -51,7 +51,7 @@ object PermissionHelper {
      *
      */
     fun checkCalendarPermissionDialog(
-        activity: Activity,
+        activity: BaseActivity,
         result: (granted: Boolean) -> Unit,
         noPermissionRightListener: () -> Unit = {}
     ) {

@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.colombia.credit.R
+import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogManager
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -231,7 +232,7 @@ inline fun Activity.isNotAskChecked(permission: String): Boolean {
 /**
  * 权限对话框
  */
-fun Activity.showNoPermissionDialog(
+fun BaseActivity.showNoPermissionDialog(
     deniedList: List<AbsPermissionEntity>,
     cancel: () -> Unit = {},
     rightListener: () -> Unit = {}
@@ -253,7 +254,7 @@ fun Activity.showNoPermissionDialog(
         .showClose(false)
         .setMessage(message)
         .setOnClickListener { rightListener.invoke() }
-    dialog.show()
+    addDialog(dialog)
     return dialog
 }
 

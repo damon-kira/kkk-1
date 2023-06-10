@@ -15,13 +15,14 @@ import com.colombia.credit.util.image.agent.AgentContainer
 import com.colombia.credit.util.image.callback.ResultCallback
 import com.colombia.credit.util.image.data.IdPictureParams
 import com.colombia.credit.util.image.data.ResultData
+import com.common.lib.base.BaseActivity
 import java.io.File
 
 class IdPictureWorker(container: AgentContainer, params: IdPictureParams) :
     BaseWorker<IdPictureParams, ResultData>(container, params) {
 
     override fun start(flowData: ResultData?, callback: ResultCallback<ResultData>) {
-        val activity = container.getActivity() ?: return
+        val activity = (container.getActivity() as? BaseActivity) ?: return
         val permission = Manifest.permission.CAMERA
         if (params.checkPermission) {
             if (PermissionHelper.checkPermission(activity, permission)) {

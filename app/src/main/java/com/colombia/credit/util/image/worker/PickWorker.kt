@@ -16,11 +16,12 @@ import com.colombia.credit.util.image.annotations.PickRange
 import com.colombia.credit.util.image.callback.ResultCallback
 import com.colombia.credit.util.image.data.PickPictureParams
 import com.colombia.credit.util.image.data.ResultData
+import com.common.lib.base.BaseActivity
 
 class PickWorker(container: AgentContainer, params: PickPictureParams) : BaseWorker<PickPictureParams, ResultData>(container, params) {
 
     override fun start(flowData: ResultData?, callback: ResultCallback<ResultData>) {
-        val activity = container.getActivity() ?: return
+        val activity = (container.getActivity() as? BaseActivity) ?: return
         if (params.checkPermission) {
             val storagePermission = Manifest.permission.READ_EXTERNAL_STORAGE
 //            val permissions = mutableListOf<String>()

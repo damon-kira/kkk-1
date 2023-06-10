@@ -21,13 +21,14 @@ import com.colombia.credit.util.image.callback.ResultCallback
 import com.colombia.credit.util.image.data.ResultData
 import com.colombia.credit.util.image.data.TakePhotoParams
 import com.colombia.credit.util.image.exception.BaseException
+import com.common.lib.base.BaseActivity
 import java.io.File
 
 class TakePhotoWorker(container: AgentContainer, params: TakePhotoParams) :
     BaseWorker<TakePhotoParams, ResultData>(container, params) {
 
     override fun start(flowData: ResultData?, callback: ResultCallback<ResultData>) {
-        val activity = container.getActivity()
+        val activity = container.getActivity() as? BaseActivity
         if (activity == null) {
             callback.onFailed(BaseException("activity is null"))
             return
