@@ -36,16 +36,12 @@ object PermissionHelper {
      * 在产品首页
      * @param isIncludeCamera 是否包含相机权限
      * */
-    fun getExcludeCalendarPermission(): ArrayList<AbsPermissionEntity> {
+    fun getExcludeCameraPermission(): ArrayList<AbsPermissionEntity> {
         val list = arrayListOf<AbsPermissionEntity>()
         with(list) {
             add(SmsPermission())
-//            add(ContactPermission())
             add(ReadPhonePermission())
-            add(CameraPermission())
             add(LocationPermission())
-            add(StoragePermission())
-//            add(AccountPermission())
         }
         return list
     }

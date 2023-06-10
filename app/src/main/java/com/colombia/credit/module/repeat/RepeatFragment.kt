@@ -9,16 +9,16 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.resp.RepeatProductInfo
 import com.colombia.credit.databinding.FragmentRepeatBinding
 import com.colombia.credit.dialog.RecommendDialog
-import com.colombia.credit.expand.SimpleOnItemClickListener
-import com.colombia.credit.expand.getUnitString
-import com.colombia.credit.expand.setOnItemClickListener
-import com.colombia.credit.expand.toast
+import com.colombia.credit.expand.*
 import com.colombia.credit.manager.Launch
+import com.colombia.credit.manager.Launch.jumpToAppSettingPage
 import com.colombia.credit.module.adapter.SpaceItemDecoration
 import com.colombia.credit.module.home.BaseHomeLoanFragment
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
+import com.colombia.credit.module.upload.UploadViewModel
 import com.colombia.credit.permission.HintDialog
+import com.colombia.credit.permission.PermissionHelper
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -43,7 +43,10 @@ class RepeatFragment : BaseHomeLoanFragment() {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
-    private var mOrderIds: String? = null
+    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
+
+    private var mOrderIds: String? = null // 待确认订单
+    private var mProductIds: String? = null // 产品id
 
     private val mRecommHelper by lazy {
         RecommHelper().also {
@@ -57,7 +60,8 @@ class RepeatFragment : BaseHomeLoanFragment() {
         RecommendDialog(getSupportContext()).also {
             it.setClickListener { info ->
                 it.dismiss()
-                Launch.skipRepeatConfirmActivity(getSupportContext(), info.eqOEs.orEmpty())
+                setProductIdAndOrderId(info.eqOEs, null)
+                checkAndUpload()
             }
             it.setOnDismissListener {
                 mRecommHelper.reset()
@@ -119,12 +123,18 @@ class RepeatFragment : BaseHomeLoanFragment() {
                 getBaseActivity()?.addDialog(mHintDialog)
                 return@setBlockingOnClickListener
             }
-            Launch.skipRepeatConfirmActivity(getSupportContext(), list.joinToString(","), orderIds)
+            setProductIdAndOrderId(list.joinToString(","), orderIds)
+            checkAndUpload()
         }
 
         mBinding.includeOrders.tvBtn.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
         }
+    }
+
+    private fun setProductIdAndOrderId(productId: String?, orderId: String?) {
+        mOrderIds = orderId
+        mProductIds = productId
     }
 
     private fun initRecyclerview(view: View) {
@@ -183,6 +193,7 @@ class RepeatFragment : BaseHomeLoanFragment() {
     }
 
     private fun initObserver() {
+        setViewModelLoading(mUploadViewModel)
         mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
             mAdapter.setItems(it)
             val params = it?.firstOrNull()?.g7tzi ?: "0"
@@ -200,13 +211,11 @@ class RepeatFragment : BaseHomeLoanFragment() {
             val data = it.gQ1J
             if (data == null || data.isEmpty()) {
                 mBinding.includeOrders.llContent.hide()
-                mOrderIds = null
                 return@observe
             }
             mBinding.includeOrders.llContent.show()
             mBinding.includeOrders.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
             mBinding.includeOrders.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
-            mOrderIds = data.QLPGXTNU?.joinToString(",")
         }
 
         mHomeViewModel.waitConfirmLiveData.observe(viewLifecycleOwner) {
@@ -214,6 +223,28 @@ class RepeatFragment : BaseHomeLoanFragment() {
                 mBinding.includeWait.root.hide()
                 return@observe
             }
+        }
+
+        mUploadViewModel.resultLiveData.observerNonSticky(viewLifecycleOwner) {
+            if (it.isSuccess()) {
+                Launch.skipRepeatConfirmActivity(
+                    getSupportContext(),
+                    mProductIds.orEmpty(),
+                    mOrderIds.orEmpty()
+                )
+            } else it.ShowErrorMsg{
+                checkAndUpload()
+            }
+        }
+    }
+
+    private fun checkAndUpload() {
+        getBaseActivity()?.let {
+            PermissionHelper.reqPermission(it, PermissionHelper.getExcludeCameraPermission(), true, true, {
+                mUploadViewModel.checkAndUpload()
+            }, {
+                getSupportContext().jumpToAppSettingPage()
+            })
         }
     }
 
