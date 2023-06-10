@@ -237,8 +237,13 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
         } else {
             result.and(checkInfoView(mBinding.bivContact1, getString(R.string.contact_error_name)))
                 .and(checkInfoView(mBinding.bivContact2, getString(R.string.contact_error_name)))
-                .and(checkMobileText(mBinding.bivContact1Number))
-                .and(checkMobileText(mBinding.bivContact2Number))
+
+            val check1 = checkMobileText(mBinding.bivContact1Number)
+            val check2 = checkMobileText(mBinding.bivContact2Number)
+            if (check1 && check2) {
+                result = result.and(!checkContactSame())
+            }
+            result.and(check1).and(check2)
         }
         return result
     }
@@ -259,17 +264,22 @@ class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
             infoView.setError(R.string.error_mobile_same_login)
             return false
         }
-        // 是否两个手机号一样
+        return true
+    }
+
+    // 是否两个手机号一样
+    private fun checkContactSame(): Boolean {
         val mobile1 = mBinding.bivContact1Number.getViewText()
         val mobile2 = mBinding.bivContact2Number.getViewText()
         if (mobile1.isNotEmpty() && mobile2.isNotEmpty() && (mobile2.contains(mobile1) || mobile1.contains(mobile2))) {
-            infoView.setError(R.string.error_mobile_same)
-            return false
+            mBinding.bivContact1Number.setError(R.string.error_mobile_same)
+            mBinding.bivContact2Number.setError(R.string.error_mobile_same)
+            return true
         } else {
             mBinding.bivContact2Number.clearTextError()
             mBinding.bivContact1Number.clearTextError()
         }
-        return true
+        return false
     }
 
     private fun checkInfoView(infoView: BaseInfoView, errorHint: String): Boolean {
