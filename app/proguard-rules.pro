@@ -224,7 +224,7 @@
 -keep class com.google.gson.**{*;}
 -keepattributes Signature
 -keepattributes *Annotation*
-#-dontobfuscate
+-dontobfuscate
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
