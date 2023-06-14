@@ -76,7 +76,7 @@ class SysMobileLayout : CardView {
             val tv = TextView(parent.context)
             tv.gravity = Gravity.CENTER_VERTICAL
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-            tv.setBackgroundResource(R.color.selector_pop_item)
+            tv.setBackgroundResource(R.drawable.selector_pop_item)
             tv.setTextColor(ContextCompat.getColor(parent.context, R.color.color_999999))
             val params = RecyclerView.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

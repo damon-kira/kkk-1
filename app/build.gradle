@@ -161,12 +161,12 @@ dependencies {
     implementation rootProject.ext.rxjava.rxjava
 
     //retrofit
-    implementation rootProject.ext.retrofit.retrofit
-    implementation rootProject.ext.retrofit.converter_gson
-    implementation rootProject.ext.retrofit.adapter_rxjava2
-    implementation rootProject.ext.retrofit.gson
-    implementation rootProject.ext.retrofit.logging_interceptor
-    implementation rootProject.ext.retrofit.okhttp
+//    implementation rootProject.ext.retrofit.retrofit
+//    implementation rootProject.ext.retrofit.converter_gson
+//    implementation rootProject.ext.retrofit.adapter_rxjava2
+//    implementation rootProject.ext.retrofit.gson
+//    implementation rootProject.ext.retrofit.logging_interceptor
+//    implementation rootProject.ext.retrofit.okhttp
 
     implementation rootProject.ext.exifinterface.exifinterface
 }

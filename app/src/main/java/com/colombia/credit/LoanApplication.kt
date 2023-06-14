@@ -1,27 +1,20 @@
 package com.colombia.credit
 
-import android.app.Application
+//import com.facebook.appevents.AppEventsLogger
 import android.content.Context
-import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
 import com.colombia.credit.app.AppEnv
-//import com.facebook.appevents.AppEventsLogger
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class LoanApplication: Application() {
+class LoanApplication: MultiDexApplication() {
 
     companion object {
         private lateinit var mAppContext: Context
         fun getAppContext(): Context = mAppContext
-    }
-
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
     }
 
     override fun onCreate() {
