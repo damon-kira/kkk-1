@@ -125,7 +125,8 @@
     public static int e(...);
 }
 -keepattributes JavascriptInterface
--dontobfuscate
+-keepattributes EnclosingMethod
+#-dontobfuscate
 #-dontoptimize
 #------------------  上方是共性的排除项目         ----------------
 
@@ -191,6 +192,7 @@
 -dontnote retrofit2.Platform
 -dontnote retrofit2.Platform$IOS$MainThreadExecutor
 -dontwarn retrofit2.Platform$Java8
+-keepattributes Exceptions
 
 # OkHttp3
 -dontwarn okhttp3.logging.**
@@ -222,7 +224,7 @@
 -keep class com.google.gson.**{*;}
 -keepattributes Signature
 -keepattributes *Annotation*
--dontobfuscate
+#-dontobfuscate
 
 #glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
