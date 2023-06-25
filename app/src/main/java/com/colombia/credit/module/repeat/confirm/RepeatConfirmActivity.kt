@@ -179,7 +179,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun cancelLoan() {
-        mAutoConfirmModel.cancel(mOrderId, mPrdIds)
+        mAutoConfirmModel.cancel(mOrderId, getOrderIds())
     }
 
     private fun hideAutoView() {
