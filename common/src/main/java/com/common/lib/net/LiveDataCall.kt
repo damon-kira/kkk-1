@@ -25,18 +25,26 @@ class LiveDataCall<T>(
         mDispose = Flowable.just(0)
             .flatMap {
                 flowable()
-            }.doOnNext {
+            }
+            /*.doOnNext {
                 if (!it.isSuccess()) {
                     throw HttpResponseException(it.code, it.msg, it.e)
-                }/* else {
+                }*//* else {
                     it.parseT(clazz)
-                }*/
-            }
+                }*//*
+            }*/
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 logger_d("debug_LiveDataCall", "onActive success = $it")
-                postValue(it)
+                if (!it.isSuccess()) {
+                    val exception = HttpResponseException(it.code, it.msg, it.e)
+                    postValue(getErrorReponse(exception))
+                    ServiceClient.getInstance().getGlobalFailedListener()
+                        ?.onFailed(getErrorReponse(exception), skipLogin)
+                } else {
+                    postValue(it)
+                }
             }, { throwable ->
                 logger_e("debug_LiveDataCall", "onActive error ===  $throwable")
                 postValue(getErrorReponse(throwable))

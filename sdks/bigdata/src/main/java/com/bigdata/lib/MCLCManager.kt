@@ -186,6 +186,10 @@ class MCLCManager {
                             logger_d(TAG, "synUpload: body =$desBody")
                             val jobj = JSONObject(desBody)
                             code = jobj.optInt("code")
+                            if (code != 200) {
+                                val msg = jobj.optString("msg")
+                                result.exception = java.lang.IllegalArgumentException(msg)
+                            }
                         } catch (e: Exception) {
                             result.exception = e
                             logger_e(TAG,"185 Exception = $e")
