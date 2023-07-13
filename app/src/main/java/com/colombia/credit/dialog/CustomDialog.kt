@@ -30,6 +30,8 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
         binding.etvTelephone.ifShow(tel.isNotEmpty())
         binding.etvEmail.ifShow(email.isNotEmpty())
 
+        binding.etvEmail.text = email
+
         if (whatsapp.isEmpty() && tel.isEmpty() && email.isEmpty()) {
             SerManager.getCustom()
         }
