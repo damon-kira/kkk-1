@@ -93,8 +93,7 @@
 
         <activity
             android:name=".module.process.personalinfo.PersonalInfoActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.process.contact.ContactInfoActivity"
             android:screenOrientation="portrait" />
