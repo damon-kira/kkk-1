@@ -181,7 +181,7 @@ class MCLCManager {
                     response.body()?.string()?.let { body ->
                         var code = -111
                         try {
-                            val desBody = AESNormalUtil.mexicoDecrypt(body)
+                            val desBody = AESNormalUtil.mexicoDecrypt(body, false)
                             logger_d(TAG, "synUpload: body =$desBody")
                             val jobj = JSONObject(desBody)
                             code = jobj.optInt("code")
