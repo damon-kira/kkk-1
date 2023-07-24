@@ -1,18 +1,13 @@
 package com.colombia.credit.view
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.colombia.credit.R
 import com.util.lib.dp
 import com.util.lib.sp
-import kotlin.math.max
 import kotlin.math.min
 
 class ProcessView : View {
@@ -39,6 +34,11 @@ class ProcessView : View {
     private val mProcessHeight = 6f.dp()
     private val mProcessSpace = 10f.dp()
     private val mStepCount = 4
+
+    private val TEXT_PADDING_LEFT = 2.dp()
+    private val TEXT_PADDING_TOP = 1.dp()
+
+    private val mRect by lazy { Rect() }
 
     private val mCurrColor = Color.WHITE
     private val mNormalColor = Color.parseColor("#4dffffff")
@@ -100,7 +100,7 @@ class ProcessView : View {
         val processWidth = (mProcessWidth + mProcessSpace) * mStepCount - mProcessSpace
         val finalHeight = (mTextBg?.intrinsicHeight ?: 0) + mTextBgSpace + mProcessHeight
         mLineMoveX = if (bgWidth > mProcessWidth) (bgWidth - mProcessWidth) * 0.5f else 0f
-        setMeasuredDimension((processWidth + mLineMoveX * 2).toInt(), finalHeight.toInt())
+        setMeasuredDimension((processWidth + mLineMoveX * 2 + 4.dp()).toInt(), finalHeight.toInt())
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -135,10 +135,20 @@ class ProcessView : View {
         val bgWidth = mTextBg?.intrinsicWidth ?: 0
         val bgHeight = mTextBg?.intrinsicHeight ?: 0
         val moveX = ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth).coerceAtLeast(0f)
-        canvas.translate(moveX, 0f)
-        mTextBg?.setBounds(0, 0, bgWidth, bgHeight)
-        mTextBg?.draw(canvas)
         val text = "${(mCurrStep * 25)}%"
+        mTextPaint.getTextBounds(text, 0, text.length, mRect)
+        val measureWidth = mRect.width() + TEXT_PADDING_LEFT * 2
+        val measureHeight = mRect.height() + TEXT_PADDING_TOP * 2
+        canvas.translate(moveX, 0f)
+        val offsetLeft = if (measureWidth > bgWidth) {
+            (measureWidth - bgWidth) / 2
+        } else 0
+        val offsetTop = if (measureHeight > bgHeight) {
+            (measureHeight - bgHeight) / 2
+        } else 0
+
+        mTextBg?.setBounds(0 - offsetLeft.toInt(), 0 - offsetTop.toInt(), bgWidth + offsetLeft.toInt(), bgHeight + offsetTop.toInt())
+        mTextBg?.draw(canvas)
         val bound = Rect()
         mTextPaint.getTextBounds(text, 0, text.length, bound)
         canvas.drawText(text, bgWidth / 2f, bgHeight - bound.height() + 4.dp(), mTextPaint)

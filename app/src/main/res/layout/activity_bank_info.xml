@@ -43,7 +43,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/process_toolbar"
         app:layout_constraintTop_toTopOf="@id/aiv_top_bg"
-        app:pv_curr_step="4" />
+        app:pv_curr_step="3" />
 
     <androidx.core.widget.NestedScrollView
         style="@style/marginLeftAndRight16"
