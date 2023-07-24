@@ -16,7 +16,6 @@ import com.cache.lib.SharedPrefGlobal
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.log.isDebug
-import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 import java.util.*
@@ -63,7 +62,6 @@ object PackageUtil {
                     array.add(jobj)
                     return@forEach
                 }
-                logger_d(TAG, "getGpsMockApp: permission = ${permissionName}")
             }
         }
         return array
