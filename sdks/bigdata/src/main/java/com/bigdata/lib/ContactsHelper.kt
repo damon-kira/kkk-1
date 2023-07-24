@@ -7,10 +7,10 @@ import android.os.Build
 import android.provider.ContactsContract
 import androidx.core.content.PermissionChecker
 import com.bigdata.lib.bean.ContactInfo
-import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
+import java.io.IOException
 
 // 联系人获取
 object ContactsHelper {
@@ -21,7 +21,7 @@ object ContactsHelper {
      * 获取联系人信息
      */
     fun getContacts(context: Context): ArrayList<ContactInfo> {
-        if (BaseParamsManager.isPermissionAuth(
+        if (PermissionHelper.isPermissionAuth(
                 context,
                 Manifest.permission.READ_CONTACTS
             ) != PermissionChecker.PERMISSION_GRANTED
@@ -199,5 +199,14 @@ object ContactsHelper {
      */
     private fun formatPhone(phoneNumber: String): String {
         return phoneNumber.replace(" ", "")
+    }
+
+    private fun close(cursor: Cursor?): Boolean {
+        try {
+            cursor?.close()
+            return true
+        } catch (e: IOException) {
+        }
+        return false
     }
 }

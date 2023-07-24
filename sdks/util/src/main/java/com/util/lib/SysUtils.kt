@@ -3,10 +3,8 @@ package com.util.lib
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Looper
 import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -17,11 +15,7 @@ import androidx.core.content.PermissionChecker
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
-import com.util.lib.log.logger_i
-import com.util.lib.uuid.UUIDHelper
-import com.util.lib.uuid.UUidCheck
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by weisl on 2019/10/15.
@@ -30,8 +24,6 @@ object SysUtils {
 
     private val DEBUG = isDebug()
     private const val TAG = "debug_SysUtils"
-    private const val DEVICE_ID_FILENAME_NEW = "DEV2"
-    private const val INVALID_IMEI_FILENAME = "non_imei"
     private var sDeviceId: String? = null
 
     fun getAllImei(context: Context): List<String> {
@@ -64,57 +56,18 @@ object SysUtils {
         return imeiList
     }
 
-
-    @JvmStatic
-    @Synchronized
-    fun getDeviceId(context: Context, gaid: String?): String {
-        if (Build.VERSION.SDK_INT >= 29) { // 无论是否有权限，都会报SecurityException
-            // 华为服务关闭的时候返回的都是0
-            return if (gaid.isNullOrEmpty() || (gaid == "00000000-0000-0000-0000-000000000000")) {
-                generateCashUUID(context)
-            } else gaid
+    fun getDeviceId(context: Context): String {
+        if (!sDeviceId.isNullOrEmpty()) return sDeviceId.orEmpty()
+        var imei = ""
+        if (Build.VERSION.SDK_INT < 29) { // 小于29,获取IMEI
+            imei = getImei(context)
         }
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.READ_PHONE_STATE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return if (gaid.isNullOrEmpty()) {
-                generateCashUUID(context)
-            } else gaid
+        if (imei.isEmpty()) { // IMEI没有获取android id
+            imei = getAId(context)
         }
-//        if (IMEIDialogHelper.isGetIMEIAgree()) {
-        logger_i(TAG, "用户同意抓取imei")
-        try {
-            // IMEI
-            var imei = getImei(context)
-
-            if (UUidCheck.invalidCashDeviceId(context, imei)) {
-                logger_i(TAG, "imei 无效")
-                return generateCashUUID(context)
-            }
-            if (TextUtils.isEmpty(imei)) {
-                logger_i(TAG, "imei 为空")
-                return generateCashUUID(context)
-            }
-            logger_i(TAG, "imei = $imei")
-
-            // imei不能是0;IMEI必须大于10位
-            return if ("0" == imei || imei.length <= 10) {
-                generateCashUUID(context)
-            } else imei.orEmpty()
-
-        } catch (e: Exception) {
-            logger_e(TAG, "获取IMEI e = $e")
-        }
-
-        return generateCashUUID(context)
-//        } else {
-//            logger_i(TAG, "用户不同意抓取imei")
-//            return generateCashUUID(context)
-//        }
+        sDeviceId = imei
+        return imei
     }
-
 
     @SuppressLint("MissingPermission")
     fun getImei(context: Context): String {
@@ -144,46 +97,6 @@ object SysUtils {
             logger_d(TAG, "exception = $e")
         }
         return imei.orEmpty()
-    }
-
-    /**
-     * 获取UUID
-     */
-    @JvmStatic
-    @Synchronized
-    fun generateCashUUID(context: Context): String {
-//        if (sDeviceId == null) {
-        val helper = UUIDHelper(context)
-        val uuid = if (Looper.getMainLooper() == Looper.myLooper()) {
-            helper.getSpUUid()
-        } else {
-            helper.getUUid()
-        }
-//        }
-        if (DEBUG) {
-            Log.d(TAG, "UUID() =$uuid")
-        }
-        return uuid
-    }
-
-
-    @JvmStatic
-    @SuppressLint("MissingPermission")
-    fun getPhoneNumber(context: Context): String {
-        if (checkReadPhonePermission(context)) return ""
-        try {
-            val phoneMgr = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            val phoneNumber = phoneMgr.line1Number.orEmpty()
-            if (BuildConfig.DEBUG) {
-                logger_d(TAG, "phone number = $phoneNumber")
-            }
-            return phoneNumber
-        } catch (e: Exception) {
-            if (DEBUG) {
-                Log.e(TAG, e.toString())
-            }
-        }
-        return ""
     }
 
     fun getPhoneNumbers(context: Context): ArrayList<String>? {
@@ -242,42 +155,12 @@ object SysUtils {
     fun String.isValidNumber() = Regex("\\d+").matches(this)
 
     /**
-     * 根据包名判断app 是否安装
-     *
-     * @param packageName 包名
-     * @return true：安装  false 未安装
-     */
-    fun isInstall(context: Context, packageName: String): Boolean {
-        val packageInfo: PackageInfo? = try {
-            PackageUtil.getAppPackageInfo(context, packageName)
-        } catch (e: Exception) {
-            null
-        }
-
-        return packageInfo != null
-    }
-
-    /**
      * 获取系统语言
      */
     fun getLanguage(): String {
         val locale = Locale.getDefault()
         return java.lang.StringBuilder().append(locale.language).append("-").append(locale.country)
             .toString()
-    }
-
-    /**
-     * 获取状态栏高度
-     * @param context
-     * @return
-     */
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resId > 0) {
-            result = context.resources.getDimensionPixelOffset(resId)
-        }
-        return result
     }
 
     @SuppressLint("HardwareIds")

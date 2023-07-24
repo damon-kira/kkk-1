@@ -7,7 +7,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.Telephony
 import com.bigdata.lib.bean.SmsInfo
-import com.bigdata.lib.net.BaseParamsManager
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
@@ -24,7 +23,7 @@ object SmsHelper {
     @JvmStatic
     fun getMessage(context: Context): ArrayList<SmsInfo> {
         val list = arrayListOf<SmsInfo>()
-        if (BaseParamsManager.isPermissionAuth(
+        if (PermissionHelper.isPermissionAuth(
                 context, Manifest.permission.READ_SMS
             ) != PackageManager.PERMISSION_GRANTED
         ) {

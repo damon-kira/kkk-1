@@ -38,7 +38,7 @@ class ProcessView : View {
     private val mProcessWidth = 24f.dp()
     private val mProcessHeight = 6f.dp()
     private val mProcessSpace = 10f.dp()
-    private val mStepCount = 5
+    private val mStepCount = 4
 
     private val mCurrColor = Color.WHITE
     private val mNormalColor = Color.parseColor("#4dffffff")
@@ -75,8 +75,6 @@ class ProcessView : View {
 
     private var mWidth = 0
     private var mHeight = 0
-
-    private val TAG = "debug_ProcessView"
 
     private fun init(
         context: Context?,
@@ -140,7 +138,7 @@ class ProcessView : View {
         canvas.translate(moveX, 0f)
         mTextBg?.setBounds(0, 0, bgWidth, bgHeight)
         mTextBg?.draw(canvas)
-        val text = "${(mCurrStep * 20)}%"
+        val text = "${(mCurrStep * 25)}%"
         val bound = Rect()
         mTextPaint.getTextBounds(text, 0, text.length, bound)
         canvas.drawText(text, bgWidth / 2f, bgHeight - bound.height() + 4.dp(), mTextPaint)

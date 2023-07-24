@@ -26,7 +26,6 @@ import com.colombia.credit.module.process.face.FaceActivity
 import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
-import com.colombia.credit.module.process.work.WorkInfoActivity
 import com.colombia.credit.module.repaydetail.RepayDetailActivity
 import com.colombia.credit.module.repaydetail.RepayDetailHisActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
@@ -49,10 +48,6 @@ object Launch {
 
     fun skipPersonalInfoActivity(context: Context) {
         launch(context, PersonalInfoActivity::class.java)
-    }
-
-    fun skipWorkInfoActivity(context: Context) {
-        launch(context, WorkInfoActivity::class.java)
     }
 
     fun skipContactInfoActivity(context: Context) {

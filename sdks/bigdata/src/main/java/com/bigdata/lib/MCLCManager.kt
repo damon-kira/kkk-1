@@ -166,7 +166,6 @@ class MCLCManager {
                 val postInfo = AESNormalUtil.mexicoEncrypt(beforePostInfo, false).orEmpty()
 //                val postInfo = beforePostInfo
                 logger_i(TAG, "cash info post encryt after = $postInfo")
-                doEvent(EventKeyManager.ConstantDot.EVENT_RESULT_UPLOAD)
                 val remoteUrl = BigDataManager.get().getNetDataListener()?.getBigUrl()
                     ?: return UploadResult()
 

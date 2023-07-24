@@ -2,7 +2,6 @@ package com.colombia.credit.module.process.personalinfo
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import com.colombia.credit.R
 import com.colombia.credit.bean.req.IReqBaseInfo
 import com.colombia.credit.bean.req.ReqPersonalInfo
@@ -10,12 +9,12 @@ import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.databinding.ActivityPersonalInfoBinding
 import com.colombia.credit.dialog.AddressSelectorDialog
 import com.colombia.credit.dialog.FirstLoanHintDialog
-import com.colombia.credit.expand.STEP2
-import com.colombia.credit.expand.checkEmailFormat
+import com.colombia.credit.expand.STEP3
 import com.colombia.credit.expand.isNewUser
 import com.colombia.credit.module.process.BaseProcessActivity
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.DictionaryUtil
+import com.colombia.credit.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
@@ -33,6 +32,12 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
     private val mMarriage by lazy(LazyThreadSafetyMode.NONE) {
         DictionaryUtil.getMaritalData()
+    }
+    private val mJobType by lazy {
+        DictionaryUtil.getJobTypeData()
+    }
+    private val mJobIncomeSource by lazy {
+        DictionaryUtil.getIncomeSourceData()
     }
 
     private val mAddrDialog by lazy(LazyThreadSafetyMode.NONE) {
@@ -60,15 +65,11 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         object : PersonalAutoHelper(mBinding, !isNewUser) {
             override fun showItemDialog(index: Int) {
                 when (index) {
-                    ITEM_EDUCATION -> {
-                        showEducation()
-                    }
-                    ITEM_ADDR -> {
-                        showAddr()
-                    }
-                    ITEM_MARRIAGE -> {
-                        showMarriage()
-                    }
+                    ITEM_JOB_TYPE -> onClick(mBinding.bivType)
+                    ITEM_EDUCATION -> onClick(mBinding.bivEducation)
+                    ITEM_MARRIAGE -> onClick(mBinding.bivMarriage)
+                    ITEM_INCOME -> onClick(mBinding.bivIncome)
+                    ITEM_ADDR -> onClick(mBinding.bivAddress)
                 }
             }
         }
@@ -87,31 +88,35 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private fun initView() {
+        mBinding.bivType.setBlockingOnClickListener(this)
         mBinding.bivEducation.setBlockingOnClickListener(this)
-        mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.bivMarriage.setBlockingOnClickListener(this)
+        mBinding.bivIncome.setBlockingOnClickListener(this)
+        mBinding.bivAddress.setBlockingOnClickListener(this)
         mBinding.tvCommit.setBlockingOnClickListener(this)
     }
 
     private fun initCache() {
-        val cache = mViewModel.getCacheInfo()?.also { info ->
+        mViewModel.getCacheInfo()?.also { info ->
             info as ReqPersonalInfo
-            val email = info.unH4I2vHXG.orEmpty()
-            if (email.isNotEmpty()) {
-                mBinding.bivEmail.setViewText(email)
-                mBinding.bivEmail.getEditView().setSelection(email.length)
+            val jobType = info.kBHCAbhdwbh
+            if (mJobType.containsKey(jobType)) {
+                setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
             }
-            if (!info.QlCvCLnNx.isNullOrEmpty() && !info.woTVOe.isNullOrEmpty()) {
-                mBinding.bivAddress.setViewText(info.QlCvCLnNx.orEmpty() + "," + info.woTVOe)
-            }
-            mBinding.bivAddrDetail.setViewText(info.lh3bJ.orEmpty())
-            val education = info.zgGtVHl9N2
+            val education = info.TEAVvgsvgqs
             if (mEducation.containsKey(education)) {
-                setBaseInfo(mBinding.bivEducation, mEducation[info.zgGtVHl9N2], info.zgGtVHl9N2)
+                setBaseInfo(mBinding.bivEducation, mEducation[info.TEAVvgsvgqs], info.TEAVvgsvgqs)
             }
-            val marriage = info.m7pyaSk
+            val marriage = info.oiwnusx
             if (mMarriage.containsKey(marriage)) {
                 setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+            }
+            val income = info.dGCAVvsgw23ds
+            if (mJobIncomeSource.containsKey(income)) {
+                setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
+            }
+            if (!info.uwahBHDbws.isNullOrEmpty() && !info.pwonBHSWASA.isNullOrEmpty()) {
+                mBinding.bivAddress.setViewText(info.uwahBHDbws.orEmpty() + "," + info.pwonBHSWASA)
             }
         }
     }
@@ -124,19 +129,25 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 
         mViewModel.mInfoLiveData.observerNonSticky(this) { rspInfo ->
             if (rspInfo !is RspPersonalInfo) return@observerNonSticky
-            rspInfo.MFL57Df?.let { info ->
-                mBinding.bivEmail.setViewText(info.OloW.orEmpty())
-                if (!info.tKgYzqB7yP.isNullOrEmpty() && !info.ZzBVPho.isNullOrEmpty()) {
-                    mBinding.bivAddress.setViewText(info.tKgYzqB7yP.orEmpty() + "," + info.ZzBVPho)
+            rspInfo.ovabhwbahsSBHs?.let { info ->
+                val jobType = info.tavwgVGSVnsdj
+                if (mJobType.containsKey(jobType)) {
+                    setBaseInfo(mBinding.bivType, mJobType[jobType], jobType)
                 }
-                mBinding.bivAddrDetail.setViewText(info.fomX9KPzpi.orEmpty())
-                val education = info.rtA8s2HSB
+                val education = info.BVbhbhaBHDas
                 if (mEducation.containsKey(education)) {
-                    setBaseInfo(mBinding.bivEducation, mEducation[info.rtA8s2HSB], info.rtA8s2HSB)
+                    setBaseInfo(mBinding.bivEducation, mEducation[info.BVbhbhaBHDas], info.BVbhbhaBHDas)
                 }
-                val marriage = info.wXlWnOHPzK
+                val marriage = info.twavgVGDEWE2HBS
                 if (mMarriage.containsKey(marriage)) {
                     setBaseInfo(mBinding.bivMarriage, mMarriage[marriage], marriage)
+                }
+                val income = info.vVGVAgxvsa
+                if (mJobIncomeSource.containsKey(income)) {
+                    setBaseInfo(mBinding.bivIncome, mJobIncomeSource[income], income)
+                }
+                if (!info.mbchaBHDE2DSsj.isNullOrEmpty() && !info.oiawasVSV.isNullOrEmpty()) {
+                    mBinding.bivAddress.setViewText(info.mbchaBHDE2DSsj.orEmpty() + "," + info.oiawasVSV)
                 }
             }
         }
@@ -148,13 +159,39 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         mAutoHelper.clearFocus()
         when (v.id) {
             R.id.biv_education -> {
-                showEducation()
+                showSelectorDialog(
+                    getString(R.string.education),
+                    mEducation,
+                    mBinding.bivEducation.tag?.toString().orEmpty(),
+                    mBinding.bivEducation
+                )
             }
             R.id.biv_address -> {
-                showAddr()
+                mViewModel.getAddrInfo()
             }
             R.id.biv_marriage -> {
-                showMarriage()
+                showSelectorDialog(
+                    getString(R.string.marriage),
+                    mMarriage,
+                    mBinding.bivMarriage.tag?.toString().orEmpty(),
+                    mBinding.bivMarriage
+                )
+            }
+            R.id.biv_type -> {
+                showSelectorDialog(
+                    getString(R.string.work_type),
+                    mJobType,
+                    mBinding.bivType.tag?.toString(),
+                    mBinding.bivType
+                )
+            }
+            R.id.biv_income -> {
+                showSelectorDialog(
+                    getString(R.string.work_month_income),
+                    mJobIncomeSource,
+                    mBinding.bivIncome.tag?.toString(),
+                    mBinding.bivIncome
+                )
             }
             R.id.tv_commit -> {
                 uploadInfo()
@@ -162,30 +199,19 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         }
     }
 
-    protected fun showMarriage() {
+    private fun showSelectorDialog(
+        title: String,
+        data: MutableMap<String, String>,
+        selectorTag: String? = null,
+        baseInfoView: BaseInfoView
+    ) {
         showProcessSelectorDialog(
-            getString(R.string.marriage),
-            mMarriage,
-            mBinding.bivMarriage.tag?.toString().orEmpty()
+            title,
+            data,
+            selectorTag
         ) {
-            mBinding.bivMarriage.setViewText(it.value)
-            mBinding.bivMarriage.tag = it.key
-            mAutoHelper.startCheckNext()
-        }
-    }
-
-    protected fun showAddr() {
-        mViewModel.getAddrInfo()
-    }
-
-    protected fun showEducation() {
-        showProcessSelectorDialog(
-            getString(R.string.education),
-            mEducation,
-            mBinding.bivEducation.tag?.toString().orEmpty()
-        ) {
-            mBinding.bivEducation.setViewText(it.value)
-            mBinding.bivEducation.tag = it.key
+            baseInfoView.setViewText(it.value)
+            baseInfoView.tag = it.key
             mAutoHelper.startCheckNext()
         }
     }
@@ -194,39 +220,26 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         val address = mBinding.bivAddress.getViewText()
         val addressArray = address.split(",")
         return ReqPersonalInfo().also {
-            it.unH4I2vHXG = mBinding.bivEmail.getViewText() // email
-            it.m7pyaSk = mBinding.bivMarriage.tag?.toString().orEmpty() // 婚姻
-            it.zgGtVHl9N2 = mBinding.bivEducation.tag?.toString().orEmpty() // 教育
+            it.kBHCAbhdwbh = mBinding.bivType.tag?.toString()
+            it.dGCAVvsgw23ds = mBinding.bivIncome.tag?.toString()
+            it.oiwnusx = mBinding.bivMarriage.tag?.toString().orEmpty() // 婚姻
+            it.TEAVvgsvgqs = mBinding.bivEducation.tag?.toString().orEmpty() // 教育
             if (addressArray.size > 1) {
-                it.QlCvCLnNx = addressArray[0] // 省份
-                it.woTVOe = addressArray[1]// 市区
+                it.uwahBHDbws = addressArray[0] // 省份
+                it.pwonBHSWASA = addressArray[1]// 市区
             }
-            it.lh3bJ = mBinding.bivAddrDetail.getViewText() // 详细地址
         }
     }
 
     override fun checkCommitInfo(): Boolean {
-        val checkEmail = checkEmailFormat(mBinding.bivEmail.getViewText())
-        if (!checkEmail) {
-            mBinding.bivEmail.setError(
-                getString(
-                    R.string.error_process_hint,
-                    mBinding.bivEmail.getTitle()
-                )
-            )
-        }
-        return checkEmail.and(checkAndSetErrorHint(mBinding.bivEducation))
+        return checkAndSetErrorHint(mBinding.bivType)
+            .and(checkAndSetErrorHint(mBinding.bivEducation))
+            .and(checkAndSetErrorHint(mBinding.bivMarriage))
+            .and(checkAndSetErrorHint(mBinding.bivIncome))
             .and(checkAndSetErrorHint(mBinding.bivAddress))
             .and(mBinding.bivAddress.getViewText().contains(","))
-            .and(
-                checkAndSetErrorHint(
-                    mBinding.bivAddrDetail,
-                    getString(R.string.address_detail_title)
-                )
-            )
-            .and(checkAndSetErrorHint(mBinding.bivMarriage))
     }
 
     override fun getViewModel(): BaseProcessViewModel = mViewModel
-    override fun getNextType(): Int = STEP2
+    override fun getNextType(): Int = STEP3
 }

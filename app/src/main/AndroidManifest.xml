@@ -96,9 +96,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible"/>
         <activity
-            android:name=".module.process.work.WorkInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".module.process.contact.ContactInfoActivity"
             android:screenOrientation="portrait" />
         <activity

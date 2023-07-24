@@ -6,33 +6,21 @@ interface IReqBaseInfo {
 }
 
 class ReqPersonalInfo : IReqBaseInfo {
-    var unH4I2vHXG: String? = null // email
-    var m7pyaSk: String? = null // 婚姻
-    var zgGtVHl9N2: String? = null // 教育
-    var QlCvCLnNx: String? = null // 省份
-    var woTVOe: String? = null // 市区
-    var lh3bJ: String? = null // 详细地址
-    var qoTp6AOTAZ: Long = 0 // 停留时长
-    var XVQOOWFrF: String = "02" // 页面来源
+    var kBHCAbhdwbh: String? = null // 工作类型
+    var TEAVvgsvgqs: String? = null // 教育
+    var oiwnusx: String? = null // 婚姻
+    var dGCAVvsgw23ds: String? = null // 月收入
+    var uwahBHDbws: String? = null // 省份
+    var pwonBHSWASA: String? = null // 市区
+    var reasVGGSagyd: Long = 0 // 停留时长
+    var teagVGSWGVSs: String = "02" // 页面来源
 
     override fun isEmpty(): Boolean {
-        return unH4I2vHXG.isNullOrEmpty() && m7pyaSk.isNullOrEmpty() && zgGtVHl9N2.isNullOrEmpty()
-                && QlCvCLnNx.isNullOrEmpty() && woTVOe.isNullOrEmpty() || lh3bJ.isNullOrEmpty()
+        return kBHCAbhdwbh.isNullOrEmpty() && oiwnusx.isNullOrEmpty() && TEAVvgsvgqs.isNullOrEmpty()
+                && uwahBHDbws.isNullOrEmpty() && pwonBHSWASA.isNullOrEmpty() || dGCAVvsgw23ds.isNullOrEmpty()
     }
 }
 
-class ReqWorkInfo : IReqBaseInfo {
-    var x6yR: String? = null // 工作时间
-    var xgJ5: String? = null // 月收入
-    var u0pn: String? = null // 工资支付频率
-    var AD8Jznx: String? = null // 工作类型
-    val HeWTdLp3 = 0L // 停留时长
-    val GdGN6viJS = "02" // 页面来源
-
-    override fun isEmpty(): Boolean {
-        return x6yR.isNullOrEmpty() && xgJ5.isNullOrEmpty() && u0pn.isNullOrEmpty() && AD8Jznx.isNullOrEmpty()
-    }
-}
 
 class ReqContactInfo : IReqBaseInfo {
     //    var vo9dza3yA: String? = null // 联系人id

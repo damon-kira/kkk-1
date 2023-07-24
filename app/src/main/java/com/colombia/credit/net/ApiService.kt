@@ -53,24 +53,14 @@ interface ApiService {
     fun uploadFaceImage(@Part body: MultipartBody.Part, @QueryMap map: MutableMap<String, String>): Flowable<BaseResponse<RspResult>>
 
     // 上传个人信息
-    @POST("/WY8x6gV/GWE9")
-    @Headers("kio8YGhwe6:Qb5rDc2PnE")
+    @POST("vgBHJE3Ssj/VOnj2njsans")
+    @Headers("kio8YGhwe6:yvgaVGDEswjsd")
     fun uploadPersonalInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
 
     // 获取个人信息
-    @POST("/yiuS/qLJ4i0Ay")
-    @Headers("kio8YGhwe6:Wu9mLq3KjP")
+    @POST("ryabehaHBHwbsh/pNJFN2SJNnxj")
+    @Headers("kio8YGhwe6:twavgsnja2nja")
     fun getPersonalInfo(): Flowable<BaseResponse<RspPersonalInfo>>
-
-    // 上传工作信息
-    @POST("zJWiAtubkn/PX9")
-    @Headers("kio8YGhwe6:Nf8xLg7JkY")
-    fun uploadWorkInfo(@Body body: RequestBody): Flowable<BaseResponse<RspResult>>
-
-    // 获取工作信息
-    @POST("wmWk3mXiL/VSWq5s")
-    @Headers("kio8YGhwe6:Eh4vRp5NcB")
-    fun getWorkInfo(): Flowable<BaseResponse<RspWorkInfo>>
 
     // 上传联系人信息
     @POST("fxqYSZI11H/aDGVjE")

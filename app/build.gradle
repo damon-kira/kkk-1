@@ -29,7 +29,7 @@ android {
 
         manifestPlaceholders = [pkgName: "${rootProject.ext.pkgName}"]
 
-//        setProperty("archivesBaseName", "FinanzasExtremas_v${versionName}_${time()}")
+        setProperty("archivesBaseName", "FinanzasExtremas_v${versionName}_${time()}")
 
 //        android.applicationVariants.all { variant ->
 //            variant.outputs.all {

@@ -5,7 +5,6 @@ import android.app.ActivityManager.MemoryInfo
 import android.content.Context
 import android.os.Environment
 import android.os.StatFs
-import com.bigdata.lib.net.BaseParamsManager
 
 
 /**
@@ -41,7 +40,7 @@ object AppMemoryManager {
      * 小数点后两位
      */
     private fun format(value: Long): String {
-        return BaseParamsManager.getFormatSize(value.toDouble())
+        return "${value}Byte"
     }
 
     fun getRamTotalMemory(context: Context): String {

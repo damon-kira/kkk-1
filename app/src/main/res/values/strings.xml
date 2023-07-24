@@ -102,13 +102,9 @@
     <string name="address_search_hint">Por favor buscar</string>
 
     <!-- 工作信息 -->
-    <string name="work_title">Información Laboral</string>
     <string name="work_type">Tipo de trabajo</string>
     <string name="work_selector">Por favor elige</string>
-    <string name="work_salary">Frecuencia de pago de salarios</string><!-- 发薪日 -->
     <string name="work_month_income">Ingreso Mensual</string>
-    <string name="work_life">Código Postal</string>
-    <string name="work_life_hint">¿Cuánto tiempo llevas en tu trabajo actual?</string>
 
     <!-- 联系人 -->
     <string name="contact_title">Información del contacto</string>

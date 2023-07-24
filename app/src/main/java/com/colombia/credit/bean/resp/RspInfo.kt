@@ -1,46 +1,27 @@
 package com.colombia.credit.bean.resp
 
 
-interface IRspBaseInfo {
-
-}
+interface IRspBaseInfo
 
 class RspPersonalInfo : IRspBaseInfo {
 
-    val MFL57Df: PersonalInfo? = null
+    val ovabhwbahsSBHs: PersonalInfo? = null
 
     class PersonalInfo {
-        var OloW: String? = null // email
-        var rtA8s2HSB: String? = null // 教育
-        var wXlWnOHPzK: String? = null // 婚姻
-        var tKgYzqB7yP: String? = null // 省份
-        var ZzBVPho: String? = null // 市区
-        var fomX9KPzpi: String? = null // 详细地址
+        var BVbhbhaBHDas: String? = null // 教育
+        var twavgVGDEWE2HBS: String? = null // 婚姻
+        var mbchaBHDE2DSsj: String? = null // 省份
+        var oiawasVSV: String? = null // 市区
+        var vVGVAgxvsa: String? = null // 月收入
+        var tavwgVGSVnsdj: String? = null // 工作类型
 
         fun isEmpty(): Boolean {
-            return OloW.isNullOrEmpty() && rtA8s2HSB.isNullOrEmpty() && wXlWnOHPzK.isNullOrEmpty() && tKgYzqB7yP.isNullOrEmpty() && ZzBVPho.isNullOrEmpty() &&
-                    fomX9KPzpi.isNullOrEmpty()
-        }
-    }
-
-    var Vi4Jtj: String = "0" // 是否允许编辑 1：允许 1：不允许
-}
-
-class RspWorkInfo : IRspBaseInfo {
-
-    val dbxhWe4XWA: WorkInfo? = null
-
-    class WorkInfo {
-        var iBwnjiNbTX: String? = null // 工作时间
-        var P2i72V: String? = null // 月收入
-        var RbNJgGj: String? = null // 工资支付频率
-        var V33vxNjkQf: String? = null // 工作类型
-
-        fun isEmpty(): Boolean {
-            return iBwnjiNbTX.isNullOrEmpty() && P2i72V.isNullOrEmpty() && RbNJgGj.isNullOrEmpty() && V33vxNjkQf.isNullOrEmpty()
+            return vVGVAgxvsa.isNullOrEmpty() && BVbhbhaBHDas.isNullOrEmpty() && this.twavgVGDEWE2HBS.isNullOrEmpty()
+                    && mbchaBHDE2DSsj.isNullOrEmpty() && oiawasVSV.isNullOrEmpty() && tavwgVGSVnsdj.isNullOrEmpty()
         }
     }
 }
+
 
 class RspContactInfo : IRspBaseInfo {
     //    var vo9dza3yA: String? = null // 联系人id
@@ -109,8 +90,3 @@ class RspKycInfo : IRspBaseInfo {
 }
 
 class RspFace : IRspBaseInfo
-
-// 展期
-class RspExtensionInfo : IRspBaseInfo {
-
-}

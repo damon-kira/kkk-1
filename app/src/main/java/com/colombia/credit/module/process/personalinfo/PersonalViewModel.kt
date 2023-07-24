@@ -1,9 +1,7 @@
 package com.colombia.credit.module.process.personalinfo
 
-import android.util.Log
 import com.colombia.credit.bean.AddressInfo
 import com.colombia.credit.bean.req.IReqBaseInfo
-import com.colombia.credit.bean.resp.RspPersonalInfo
 import com.colombia.credit.module.process.BaseProcessViewModel
 import com.colombia.credit.util.GPInfoUtils
 import com.google.gson.reflect.TypeToken
@@ -34,7 +32,7 @@ class PersonalViewModel @Inject constructor(private val repository: PersonalRepo
         mInfoLiveData.addSourceLiveData(repository.getInfo()) {
             if (it.isSuccess()) {
                 val data = it.getData() ?: return@addSourceLiveData
-                if (data.MFL57Df == null || data.MFL57Df.isEmpty()) return@addSourceLiveData
+                if (data.ovabhwbahsSBHs == null || data.ovabhwbahsSBHs.isEmpty()) return@addSourceLiveData
                 mInfoLiveData.postValue(data)
             }
         }

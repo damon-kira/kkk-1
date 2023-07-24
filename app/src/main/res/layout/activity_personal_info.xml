@@ -64,18 +64,17 @@
             android:orientation="vertical"
             android:paddingTop="12dp">
 
-            <!--email-->
-            <com.colombia.credit.view.baseinfo.EmailInfoView
-                android:id="@+id/biv_email"
+            <!--工作类型-->
+            <com.colombia.credit.view.baseinfo.BaseInfoView
+                android:id="@+id/biv_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:hint="@string/email_hint"
-                app:left_icon="@drawable/svg_email"
-                app:max_length="50"
-                app:rightIcon_visiblity="gone"
-                app:stringArray="@array/email_list"
-                app:title="@string/email" />
+                android:layout_marginTop="14dp"
+                app:hint="@string/work_selector"
+                app:if_can_edit="false"
+                app:left_icon="@drawable/svg_work_type"
+                app:rightIcon_visiblity="visible"
+                app:title="@string/work_type" />
 
             <!-- 教育 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
@@ -89,28 +88,6 @@
                 app:rightIcon_visiblity="visible"
                 app:title="@string/education" />
 
-            <!-- 家庭住址 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/biv_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:hint="@string/address_hint"
-                app:if_can_edit="false"
-                app:left_icon="@drawable/svg_location"
-                app:rightIcon_visiblity="visible"
-                app:title="@string/address" />
-
-            <!-- 详细信息 -->
-            <com.colombia.credit.view.baseinfo.BaseInfoView
-                android:id="@+id/biv_addr_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:hint="@string/address_detail"
-                app:max_length="100"
-                app:rightIcon_visiblity="gone"
-                app:title_visiblity="gone" />
             <!-- 婚姻 -->
             <com.colombia.credit.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_marriage"
@@ -122,6 +99,30 @@
                 app:left_icon="@drawable/svg_marriage"
                 app:rightIcon_visiblity="visible"
                 app:title="@string/marriage" />
+
+            <!-- 月收入 -->
+            <com.colombia.credit.view.baseinfo.BaseInfoView
+                android:id="@+id/biv_income"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:hint="@string/work_selector"
+                app:if_can_edit="false"
+                app:left_icon="@drawable/svg_work_income"
+                app:rightIcon_visiblity="visible"
+                app:title="@string/work_month_income" />
+
+            <!-- 家庭住址 -->
+            <com.colombia.credit.view.baseinfo.BaseInfoView
+                android:id="@+id/biv_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:hint="@string/address_hint"
+                app:if_can_edit="false"
+                app:left_icon="@drawable/svg_location"
+                app:rightIcon_visiblity="visible"
+                app:title="@string/address" />
 
             <Space
                 android:layout_width="0dp"

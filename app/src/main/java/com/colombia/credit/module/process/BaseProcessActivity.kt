@@ -11,7 +11,6 @@ import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
-import com.colombia.credit.module.process.work.WorkInfoActivity
 import com.colombia.credit.view.ToolbarLayout
 import com.colombia.credit.view.baseinfo.AbsBaseInfoView
 import com.colombia.credit.view.baseinfo.BaseInfoView
@@ -99,11 +98,8 @@ abstract class BaseProcessActivity : BaseActivity() {
             is PersonalInfoActivity -> {
                 Launch.skipMainActivity(this)
             }
-            is WorkInfoActivity -> {
-                Launch.skipPersonalInfoActivity(this)
-            }
             is ContactInfoActivity -> {
-                Launch.skipWorkInfoActivity(this)
+                Launch.skipPersonalInfoActivity(this)
             }
             is BankInfoActivity -> {
                 Launch.skipContactInfoActivity(this)

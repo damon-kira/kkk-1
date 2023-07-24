@@ -81,7 +81,7 @@ object DevicesAppHelper {
             val config = BigDataManager.get().getNetDataListener() ?: return list
             val appInfors = PackageUtil.getInstallApp(config.getContext())
             val packageManager = config.getContext().packageManager
-            val imei = SysUtils.getImei(context)
+            val imei = SysUtils.getDeviceId(context)
             var info: AppInfo
             appInfors.forEach {
                 info = AppInfo()

@@ -16,7 +16,6 @@ import com.colombia.credit.module.process.contact.ContactViewModel
 import com.colombia.credit.module.process.face.FaceViewModel
 import com.colombia.credit.module.process.kyc.KycViewModel
 import com.colombia.credit.module.process.personalinfo.PersonalViewModel
-import com.colombia.credit.module.process.work.WorkInfoViewModel
 import com.colombia.credit.module.repay.RepayCheckViewModel
 import com.colombia.credit.module.repay.RepayTabViewModel
 import com.colombia.credit.module.repaydetail.RepayDetailViewModel
@@ -93,11 +92,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PersonalViewModel::class)
     abstract fun bindPersonalViewModel(viewModel: PersonalViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(WorkInfoViewModel::class)
-    abstract fun bindWorkInfoViewModel(viewModel: WorkInfoViewModel): ViewModel
 
     @Binds
     @IntoMap
