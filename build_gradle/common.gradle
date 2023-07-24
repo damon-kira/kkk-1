@@ -72,7 +72,7 @@ rootProject.ext {
             messaging    : "com.google.firebase:firebase-messaging-ktx",
             analytics    : "com.google.firebase:firebase-analytics-ktx",
             crashlytics  : "com.google.firebase:firebase-crashlytics-ktx",
-            firebase_perf: "com.google.firebase:firebase-perf-ktx",
+//            firebase_perf: "com.google.firebase:firebase-perf-ktx",
             bom          : "com.google.firebase:firebase-bom:29.2.0"
     ]
 
@@ -94,10 +94,10 @@ rootProject.ext {
             exifinterface: "androidx.exifinterface:exifinterface:1.3.2"
     ]
 
-    room = [
-            room_runtime: "androidx.room:room-runtime:${version.room_version}",
-            room_compiler: "androidx.room:room-compiler:${version.room_version}"
-    ]
+//    room = [
+//            room_runtime: "androidx.room:room-runtime:${version.room_version}",
+//            room_compiler: "androidx.room:room-compiler:${version.room_version}"
+//    ]
 
     other =[
 //            util            : 'com.util.lib:util:1.0.4',
@@ -119,7 +119,7 @@ rootProject.ext {
     allDesList.addAll(firebase.values())
     allDesList.addAll(location.values())
 //    allDesList.addAll(appsflyer.values())
-    allDesList.addAll(room.values())
+//    allDesList.addAll(room.values())
     allDesList.addAll(other.values())
 
     allDependencies = [:]
