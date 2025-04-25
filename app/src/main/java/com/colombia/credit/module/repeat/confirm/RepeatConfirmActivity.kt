@@ -213,7 +213,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 val duration = mAdapter.itemCount * 120L
                 mBinding.aivArrow.animate().rotationBy(180f).setDuration(duration)
                     .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
+                        override fun onAnimationEnd(animation: Animator) {
                             mBinding.aivArrow.isEnabled = true
                         }
                     }).start()

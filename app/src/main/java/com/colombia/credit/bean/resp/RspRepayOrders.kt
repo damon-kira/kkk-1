@@ -8,28 +8,28 @@ class RspRepayOrders {
     var list: ArrayList<RepayOrderDetail>? = null
 
     class RepayOrderDetail {
-        val KER10faeq9: String? = null // 订单id
-        val bS6qpg4E: String? = null   //详情传这个
-        val W5KW6: String? = null      //计划id
-        val RA9GEePdNs: String? = null //产品log
-        val C2O8E6jjzd: String? = null //产品名字
-        val Eff0nA: String? = null     //待还金额
+        val KER10faeq9: String? = "123" // 订单id
+        val bS6qpg4E: String? = "null"   //详情传这个
+        val W5KW6: String? = "null"      //计划id
+        val RA9GEePdNs: String? = "null" //产品log
+        val C2O8E6jjzd: String? = "null" //产品名字
+        val Eff0nA: String? = "null"     //待还金额
             get() = field?.transform()
-        val zbRV6Lg8jO: String? = null //还款日期
+        val zbRV6Lg8jO: String? = "null" //还款日期
         val gzBTFx: Int = 0     //是否逾期
-        var QiZorG: String? = null     //1代表勾选中
-        val q48Wml8N: String? = null   //1代表可以展期
-        val X32HrYq4u: String? = null  //展期金额
+        var QiZorG: String? = "null"     //1代表勾选中
+        val q48Wml8N: String? = "null"   //1代表可以展期
+        val X32HrYq4u: String? = "null"  //展期金额
             get() = field?.transform()
-        val prr9Ie61: String? = null    //展期后时间
-        val GHMXDjtsUn: String? = null  //展期天数
-        val rCC18KSG: String? = null    //最初应还金额
+        val prr9Ie61: String? = "null"    //展期后时间
+        val GHMXDjtsUn: String? = "null"  //展期天数
+        val rCC18KSG: String? = "null"    //最初应还金额
             get() = field?.transform()
 
         //新增
-        val BPKD: String? = null // 产品id
-        val JKEAEEnOUZ: String? = null // 订单状态
-        val LvgWnBEX: String? = null //订单状态描述
+        val BPKD: String? = "null" // 产品id
+        val JKEAEEnOUZ: String? = "null" // 订单状态
+        val LvgWnBEX: String? = "null" //订单状态描述
 
         fun isCheck() = QiZorG == "1"
 

@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+//apply from: 'jitpack.gradle'
+
+android {
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions.unitTests.includeAndroidResources = true
+    testOptions.unitTests.all {
+        // unitTests.returnDefaultValues = true
+        // Always show the result of every unit test, even if it passes.
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+}
+
+dependencies {
+    implementation "io.reactivex.rxjava3:rxjava:3.0.4"
+
+    implementation("androidx.fragment:fragment:1.2.5")
+    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.appcompat:appcompat:1.1.0")
+
+//    testImplementation 'junit:junit:4.13'
+//    testImplementation rootProject.ext.mockito
+//    testImplementation rootProject.ext.robolectric
+//    testImplementation rootProject.ext.khronosOpenGLApi
+}
+
+// Commented to use JitPack instead of bintray
+//apply from: 'install.gradle'
+//apply from: 'bintray.gradle'

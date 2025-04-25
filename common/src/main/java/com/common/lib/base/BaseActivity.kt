@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import com.common.lib.BuildConfig
 import com.common.lib.dialog.*
 import com.util.lib.log.logger_i
-import me.jessyan.autosize.AutoSizeCompat
 
 
 open class BaseActivity : InjectorActivity(), ILoading, IDialogTask, Injectable {
@@ -82,18 +81,18 @@ open class BaseActivity : InjectorActivity(), ILoading, IDialogTask, Injectable 
     }
 
 
-    override fun getResources(): Resources {
-        if (needAutoSize()) {
-            try {
-                AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources())
-            } catch (e: Exception) {
-                if (BuildConfig.DEBUG) {
-                    throw e
-                }
-            }
-        }
-        return super.getResources()
-    }
+//    override fun getResources(): Resources {
+//        if (needAutoSize()) {
+//            try {
+//                AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources())
+//            } catch (e: Exception) {
+//                if (BuildConfig.DEBUG) {
+//                    throw e
+//                }
+//            }
+//        }
+//        return super.getResources()
+//    }
 
     open fun needAutoSize() = true
 }

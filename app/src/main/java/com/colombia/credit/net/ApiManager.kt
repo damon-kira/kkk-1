@@ -30,7 +30,7 @@ class ApiManager @Inject constructor() {
         private val INSTANCE = ApiManager()
         fun getInstance(): ApiManager = INSTANCE
         private const val CHECK_TIMEOUT = 4000L
-        private const val DEFAULT_TIMEOUT = 15000L
+        private const val DEFAULT_TIMEOUT = 5000L
         private const val UPLOAD_TIMEOUT = 45000L
 
     }

@@ -59,7 +59,7 @@ class RepayTabAdapter(
         holder.getView<LinearLayout>(R.id.ll_item).setBlockingOnClickListener {
             val position = recyclerView.getChildLayoutPosition(holder.itemView)
             getItemData<RspRepayOrders.RepayOrderDetail>(position)?.apply {
-                mOnItemClick?.invoke(this)
+                mOnItemClick?.invoke(this, position)
             }
         }
         return holder
@@ -123,5 +123,5 @@ class RepayTabAdapter(
 
     var mSelectListener: (() -> Unit)? = null
 
-    var mOnItemClick: ((RspRepayOrders.RepayOrderDetail) -> Unit)? = null
+    var mOnItemClick: ((RspRepayOrders.RepayOrderDetail, position: Int) -> Unit)? = null
 }

@@ -62,10 +62,10 @@ class BaseWebView : WebView {
         settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
         settings.textZoom = 100
         settings.cacheMode = WebSettings.LOAD_NO_CACHE
-        settings.setAppCacheEnabled(false)
+//        settings.setAppCacheEnabled(false)
         val cachePath = context.filesDir.absolutePath + "/webview"
-        settings.setAppCachePath(cachePath)
-        settings.setAppCacheMaxSize(50 * 1024 * 1024)//50MB
+//        settings.setAppCachePath(cachePath)
+//        settings.setAppCacheMaxSize(50 * 1024 * 1024)//50MB
         settings.loadWithOverviewMode = true
         settings.domStorageEnabled = true//设置webview支持dom storage API
         settings.allowFileAccess = true//在webView内部是否允许访问文件

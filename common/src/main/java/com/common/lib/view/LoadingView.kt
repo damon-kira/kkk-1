@@ -135,8 +135,13 @@ class LoadingView : View {
         mAnimatorSet.cancel()
         mAnimatorSet.playSequentially(animator1, animator2, animator3)
         mAnimatorSet.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 startAnimator()
+            }
+            override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+                if (!isReverse) {
+                    startAnimator()
+                }
             }
         })
     }

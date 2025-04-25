@@ -334,11 +334,11 @@ object PermissionHelper {
 
     /** 修复权限组，如果权限组中有一个同意了，在申请其它的权限时，不会出现权限申请弹窗，直接授权 */
     private fun fixGroupPermission(activity: Activity) {
-        checkGroupPermission(activity) { result ->
-            if (result != null && result.isNotEmpty()) {
-                activity.reqPermission({ _, _ -> }, *result.toTypedArray())
-            }
-        }
+//        checkGroupPermission(activity) { result ->
+//            if (result != null && result.isNotEmpty()) {
+//                activity.reqPermission({ _, _ -> }, *result.toTypedArray())
+//            }
+//        }
     }
 
     private fun checkGroupPermission(

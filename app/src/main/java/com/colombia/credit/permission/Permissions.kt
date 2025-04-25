@@ -14,14 +14,15 @@ import androidx.annotation.ColorRes
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
+import androidx.fragment.app.FragmentActivity
 import com.colombia.credit.R
+import com.colombia.credit.permission.PermissionHelper.reqPermission
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogManager
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
-import com.util.lib.log.isDebug
 import com.util.lib.log.logger_i
 
 /**
@@ -108,22 +109,23 @@ fun Activity.showCheckCameraPermissionDialog(
                     var array = Array<String>(deniedList.size) { i ->
                         deniedList[i].permissionName()
                     }
-                    reqPermission({ isNotAsk: Boolean, isAll: Boolean ->
-                        logger_i(TAG, "${Build.BRAND} isNotAsk:$isNotAsk , isAll:$isAll")
-                        if (!isAll && isNotAsk) {
-                            showNoPermissionListener.invoke()
-//                            showNoPermissionDialog(
-//                                context,
-//                                getNotGrantedCameraAndStoragePermissionList(context),
-//                                cancel = {
-//                                    onAllGranted(false)
-//                                })
-                        } else if (isAll) {
-                            onAllGranted(true)
-                        } else {
-                            onAllGranted(false)
-                        }
-                    }, *array)
+//                    reqPermission({ isNotAsk: Boolean, isAll: Boolean ->
+//                        logger_i(TAG, "${Build.BRAND} isNotAsk:$isNotAsk , isAll:$isAll")
+//                        if (!isAll && isNotAsk) {
+//                            showNoPermissionListener.invoke()
+////                            showNoPermissionDialog(
+////                                context,
+////                                getNotGrantedCameraAndStoragePermissionList(context),
+////                                cancel = {
+////                                    onAllGranted(false)
+////                                })
+//                        } else if (isAll) {
+//                            onAllGranted(true)
+//                        } else {
+//                            onAllGranted(false)
+//                        }
+//                    }, *array)
+                    onAllGranted(true)
                 }
             } else {
                 showNoPermissionListener.invoke()
@@ -174,7 +176,7 @@ fun Activity.getNotGrantedCameraAndStoragePermissionList(): ArrayList<AbsPermiss
 }
 
 @SuppressLint("CheckResult")
-fun Activity.reqPermission(
+fun FragmentActivity.reqPermission(
     body: (selectCheckbox: Boolean, isAll: Boolean) -> Unit,
     vararg permissions: String
 ) {
@@ -184,22 +186,23 @@ fun Activity.reqPermission(
         // 在228行 unrequestedPermissions.isEmpty() 会为true，所以不会请求权限
         removeRxPermissions(this)
         val rxPermissions = RxPermissions(this)
-        rxPermissions.setLogging(isDebug())
-        rxPermissions.requestEachCombined(*permissions)
-            .subscribe({ permission ->
-                var isNotAskChecked = false
-                if (!permission.granted) {
-                    for (p in permissions) {
-                        if (isNotAskChecked(p)) {
-                            isNotAskChecked = true
-                            break
-                        }
-                    }
-                }
-                body(isNotAskChecked, permission.granted)
-            }, {
-                body(false, false)
-            })
+//        rxPermissions.setLogging(isDebug())
+//        rxPermissions.requestEachCombined(*permissions)
+//            .subscribe({ permission ->
+//                var isNotAskChecked = false
+//                if (!permission.granted) {
+//                    for (p in permissions) {
+//                        if (isNotAskChecked(p)) {
+//                            isNotAskChecked = true
+//                            break
+//                        }
+//                    }
+//                }
+//                body(isNotAskChecked, permission.granted)
+//            }, {
+//                body(false, false)
+//            })
+        body(false, true)
     } else {
         body(false, true)
     }
@@ -319,14 +322,14 @@ fun getNotPermissionText2(
         val permission = deniedList[index]
         linkSet.add(context.getString(permission.getHintIfNoPermission().first))
     }
-/*
-    if (isXiaomi()) {
-        if (buffer.isEmpty()) {
-            buffer.append(context.getString(R.string.xiaomi_notify_sms))
-        } else {
-            buffer.append(connectorChar).append(context.getString(R.string.xiaomi_notify_sms))
-        }
-    }*/
+    /*
+        if (isXiaomi()) {
+            if (buffer.isEmpty()) {
+                buffer.append(context.getString(R.string.xiaomi_notify_sms))
+            } else {
+                buffer.append(connectorChar).append(context.getString(R.string.xiaomi_notify_sms))
+            }
+        }*/
 
     return linkSet.joinToString(connectorChar ?: "")
 }

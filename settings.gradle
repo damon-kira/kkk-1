@@ -41,3 +41,4 @@ if (isModule.toBoolean()) {
     include ':sdks:util'
     include ':sdks:cache'
 }
+include ':rxpermission'

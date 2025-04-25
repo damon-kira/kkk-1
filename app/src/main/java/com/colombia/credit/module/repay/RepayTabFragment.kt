@@ -44,11 +44,13 @@ class RepayTabFragment : BaseHomeLoanFragment() {
     override fun contentView(): View = mBinding.root
 
     override fun onPullToRefresh() {
-        if (inValidToken()) {
-            stopRefresh()
-            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
-            return
-        }
+        // check token
+//        if (inValidToken()) {
+//            stopRefresh()
+//            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+//            return
+//        }
+
         mViewModel.getRepayOrders()
     }
 
@@ -58,7 +60,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             intArrayOf(R.id.recyclerview, R.id.tv_repay, R.id.etv_repay_hint)
         setViewModelLoading(mViewModel)
         mBinding.emptyLayout.tvEmptyText.setText(R.string.repay_empty)
-
+        // init recyclerview
         mBinding.recyclerview.linearLayoutManager()
         mBinding.recyclerview.adapter = mAdapter
 
@@ -71,8 +73,12 @@ class RepayTabFragment : BaseHomeLoanFragment() {
             val amount = getUnitString(mAdapter.getTotalAmount().toString())
             mBinding.tvRepay.text = getString(R.string.tab_repay_btn, amount)
         }
-        mAdapter.mOnItemClick = {
-            Launch.skipRepayDetailActivity(getSupportContext(), it.bS6qpg4E.orEmpty())
+        mAdapter.mOnItemClick = { detail, position ->
+            if (position == 0) {
+                Launch.skipPhotographActivity(getSupportContext())
+            } else {
+                Launch.skipRepayDetailActivity(getSupportContext(), detail.bS6qpg4E.orEmpty())
+            }
         }
 
         initObserver()
@@ -81,11 +87,13 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.tvRepay.setBlockingOnClickListener {
-            checkOrder()
+            Launch.skipPhotographActivity(getSupportContext())
+//            checkOrder()
         }
-
+        // Click
         mBinding.emptyLayout.tvApply.setBlockingOnClickListener {
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+
         }
 
         LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(viewLifecycleOwner) {
@@ -130,7 +138,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
 
         mCheckViewModel.mCheckLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                if ( it.getData()?.oasdnjuxnjas == true) {
+                if (it.getData()?.oasdnjuxnjas == true) {
                     // 调起支付
                     Launch.skipWebViewActivity(
                         getSupportContext(),
@@ -141,20 +149,23 @@ class RepayTabFragment : BaseHomeLoanFragment() {
                         )
                     )
                 } else {
-                    val dialog = HintDialog(getSupportContext()).showTitle(HintDialog.TYPE_INVISIBLE)
-                        .setMessage(getString(R.string.repay_success3))
-                        .setBtnText(getString(R.string.confirm))
-                        .showClose(false)
-                        .setOnClickListener {
-                            onPullToRefresh()
-                        }
+                    val dialog =
+                        HintDialog(getSupportContext()).showTitle(HintDialog.TYPE_INVISIBLE)
+                            .setMessage(getString(R.string.repay_success3))
+                            .setBtnText(getString(R.string.confirm))
+                            .showClose(false)
+                            .setOnClickListener {
+                                onPullToRefresh()
+                            }
                     getBaseActivity()?.addDialog(dialog)
                 }
             } else it.ShowErrorMsg(::checkOrder)
         }
     }
 
-
+    /**
+     * page check
+     */
     private fun changePage(isShowList: Boolean) {
         mBinding.group.ifShow(isShowList)
         mBinding.emptyLayout.llEmpty.ifShow(!isShowList)

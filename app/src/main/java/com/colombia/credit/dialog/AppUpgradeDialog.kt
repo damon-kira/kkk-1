@@ -9,7 +9,6 @@ import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.ifShow
-import me.jessyan.autosize.DisplayMetricsInfo
 
 class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
 

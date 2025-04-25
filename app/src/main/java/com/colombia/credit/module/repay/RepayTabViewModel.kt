@@ -1,6 +1,7 @@
 package com.colombia.credit.module.repay
 
 import com.colombia.credit.bean.resp.RspRepayOrders
+import com.colombia.credit.bean.resp.RspRepayOrders.RepayOrderDetail
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
@@ -16,12 +17,14 @@ class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepo
 
     fun getRepayOrders() {
         _ordersLivedata.addSourceLiveData(repository.getRepayOrders()) {
-            if (it.isSuccess()) {
-                val list = it.getData()?.list
-                if (list != listLivedata.value) {
-                    listLivedata.postValue(list)
-                }
-            }
+//            if (it.isSuccess()) {
+//                val list = it.getData()?.list
+//                if (list != listLivedata.value) {
+//                    listLivedata.postValue(list)
+//                }
+//            }
+            var list: ArrayList<RepayOrderDetail>? = arrayListOf(RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),)
+            listLivedata.postValue(list)
             _ordersLivedata.postValue(it)
         }
     }
@@ -30,4 +33,5 @@ class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepo
         listLivedata.value = null
         _ordersLivedata.value = BaseResponse(ResponseCode.OTHER_ERROR_CODE, RspRepayOrders(), null)
     }
+
 }

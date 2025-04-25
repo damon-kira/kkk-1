@@ -3,7 +3,7 @@
     <string name="app_name">Finanzas extremas</string>
     <string name="home_loan">Hogar</string>
     <string name="home_account">Personal</string>
-    <string name="home_repay">Pagar</string>
+    <string name="home_repay">Demo</string>
     <string name="phone_hint">Número de teléfono</string>
     <string name="sms_hint">Ingrese 4 dígitos para la verificación</string>
     <string name="sms_otp">Enviar OTP</string>

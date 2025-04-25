@@ -2,6 +2,8 @@ package com.colombia.credit
 
 //import com.facebook.appevents.AppEventsLogger
 import android.content.Context
+import androidx.camera.camera2.Camera2Config
+import androidx.camera.core.CameraXConfig
 import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
 import com.colombia.credit.app.AppEnv
@@ -10,7 +12,7 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class LoanApplication: MultiDexApplication() {
+class LoanApplication: MultiDexApplication(), CameraXConfig.Provider  {
 
     companion object {
         private lateinit var mAppContext: Context
@@ -33,5 +35,9 @@ class LoanApplication: MultiDexApplication() {
         AesConstant.AES_SECRET = Constant.API_SECRET
         AesConstant.apiKey = Constant.API_KEY
         AesConstant.apiIv = Constant.API_IV
+    }
+
+    override fun getCameraXConfig(): CameraXConfig {
+        return Camera2Config.defaultConfig()
     }
 }

@@ -17,8 +17,8 @@ import com.colombia.credit.R
 import com.colombia.credit.bean.SearchInfo
 import com.util.lib.dip2px
 import com.util.lib.dp
-import me.jessyan.autosize.utils.AutoSizeUtils.dp2px
-import me.jessyan.autosize.utils.AutoSizeUtils.sp2px
+//import me.jessyan.autosize.utils.AutoSizeUtils.dp2px
+//import me.jessyan.autosize.utils.AutoSizeUtils.sp2px
 
 
 class BankItemDecoration(
@@ -44,10 +44,10 @@ class BankItemDecoration(
         mTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mTextPaint.color =
             ContextCompat.getColor(context, R.color.color_FF989898)
-        mTextPaint.textSize = sp2px(context, 12f).toFloat()
+        mTextPaint.textSize =  12f
 
-        mTitleHeight = dp2px(context, 28f)
-        mHotTitleHeigh = dp2px(context, 40f)
+        mTitleHeight = 28
+        mHotTitleHeigh = 40
 
     }
 
@@ -153,7 +153,7 @@ class BankItemDecoration(
                 drawText(
                     canvas = c,
                     text = text,
-                    x = dp2px(context, 16f).toFloat(),
+                    x =16f,
                     y = (child.top - (mTitleHeight / 2 - rect.height() / 2)).toFloat(),
                     paint = mTextPaint
                 )

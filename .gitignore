@@ -14,3 +14,90 @@
 .cxx
 local.properties
 /.idea
+
+
+# --- Android 构建文件 ---
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.hprof
+*.log
+*.keystore
+*.jks
+*.pub
+*.der
+*.pfx
+*.properties
+
+# --- Gradle 缓存 & 构建目录 ---
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# --- Android Studio 生成文件 ---
+.idea/
+*.iml
+*.ipr
+*.iws
+.navigation/
+.idea_modules/
+android/
+.DS_Store
+
+# --- 本地开发环境文件 ---
+*.swp
+*.swo
+*.bak
+*.kate-swp
+*~
+*.orig
+*.rej
+
+# --- 测试相关文件 ---
+​**​/test-results/
+​**​/reports/
+​**​/screenshots/
+​**​/coverage/
+
+# --- macOS 系统文件 ---
+.DS_Store
+._*
+
+# --- Windows 系统文件 ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Linux 临时文件 ---
+*~
+.fuse_hidden*
+
+# --- Node.js / npm (如果项目使用 React Native) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# --- Python / Flutter (如果项目混合开发) ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/

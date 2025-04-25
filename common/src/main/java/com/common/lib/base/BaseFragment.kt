@@ -110,14 +110,14 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
         return this.isAdded && !this.isHidden && this.view != null && this.view?.windowToken != null
     }
 
-    final override fun onViewDetachedFromWindow(v: View?) {
-        v?.removeOnAttachStateChangeListener(this)
-        checkVisibility(false)
-    }
-
-    final override fun onViewAttachedToWindow(v: View?) {
-        checkVisibility(true)
-    }
+//    final override fun onViewDetachedFromWindow(v: View?) {
+//        v?.removeOnAttachStateChangeListener(this)
+//        checkVisibility(false)
+//    }
+//
+//    final override fun onViewAttachedToWindow(v: View?) {
+//        checkVisibility(true)
+//    }
 
     @CallSuper
     override fun onFragmentVisibilityChanged(visible: Boolean) {
@@ -222,6 +222,15 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
 
     protected inline fun loge(message: String) {
         logger_e(TAG, message)
+    }
+
+    override fun onViewAttachedToWindow(v: View) {
+        checkVisibility(true)
+    }
+
+    override fun onViewDetachedFromWindow(v: View) {
+        v.removeOnAttachStateChangeListener(this)
+        checkVisibility(false)
     }
 
 

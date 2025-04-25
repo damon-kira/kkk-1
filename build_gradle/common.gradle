@@ -1,9 +1,9 @@
 rootProject.ext {
     version = [
-            compileSdk    : 32,
+            compileSdk    : 33,
             minSdk        : 21,
-            targetSdk     : 32,
-            kotlin        : "1.7.21",
+            targetSdk     : 33,
+            kotlin        : "1.8.10",
             retrofit      : "2.6.0",
             room_version  : "2.3.0",
             hilt_android  : '2.43.2',
@@ -51,11 +51,11 @@ rootProject.ext {
     ]
 
     permission = [
-            rxpermission: "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar"
+            rxpermission: "com.github.tbruyelle:rxpermissions:0.12"
     ]
 
     autosize = [
-            autosize: "me.jessyan:autosize:1.2.1"
+            autosize: "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
     ]
 
     appsflyer = [

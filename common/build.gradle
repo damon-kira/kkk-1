@@ -58,7 +58,7 @@ dependencies {
     api rootProject.ext.android.livedata_viewmodelKtx
 
     // 适配
-    api rootProject.ext.autosize.autosize
+//    api rootProject.ext.autosize.autosize
 
 //    implementation rootProject.ext.rxjava.rxandroid
 

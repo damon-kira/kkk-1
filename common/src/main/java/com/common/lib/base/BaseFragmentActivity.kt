@@ -55,7 +55,7 @@ abstract class BaseFragmentActivity : BaseActivity(), IFragmentSwitch {
 
     override fun onBackPressed() {
         val currFragment = FragmentHelper.getCurrFragment(supportFragmentManager, getFragmentViewId(), mCurrTag)
-        if (currFragment?.onFragmentBackPressed() == false) {
+        if (currFragment?.onFragmentBackPressed() == false || currFragment == null) {
             super.onBackPressed()
         }
     }

@@ -18,6 +18,8 @@
 
     <!-- 录像/照相 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera" />
     <!--通讯录-->
 <!--    <uses-permission android:name="android.permission.READ_CONTACTS" />-->
 
@@ -165,18 +167,37 @@
         <activity
             android:name=".module.setting.SettingActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.ocr.CutOutPhotoActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".module.ocr.PhotographActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.ocr.ShowCropperedActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.ocr.TakePhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TakePhoteActivity2"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".module.service.XjbgdfdfService"
             android:exported="false" />
 
         <!-- 适配 -->
-        <meta-data
-            android:name="design_width_in_dp"
-            android:value="400" />
-        <meta-data
-            android:name="design_height_in_dp"
-            android:value="740" />
+<!--        <meta-data-->
+<!--            android:name="design_width_in_dp"-->
+<!--            android:value="400" />-->
+<!--        <meta-data-->
+<!--            android:name="design_height_in_dp"-->
+<!--            android:value="740" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

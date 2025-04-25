@@ -20,6 +20,7 @@ import com.colombia.credit.module.defer.DeferActivity
 import com.colombia.credit.module.defer.RepayTabDeferActivity
 import com.colombia.credit.module.history.HistoryActivity
 import com.colombia.credit.module.home.MainActivity
+import com.colombia.credit.module.ocr.PhotographActivity
 import com.colombia.credit.module.process.bank.BankInfoActivity
 import com.colombia.credit.module.process.contact.ContactInfoActivity
 import com.colombia.credit.module.process.face.FaceActivity
@@ -181,6 +182,10 @@ object Launch {
     // 复贷审核中页面
     fun skipRepeatReviewActivity(context: Context){
         launch(context, RepeatReviewActivity::class.java)
+    }
+
+    fun skipPhotographActivity(context: Context){
+        launch(context, PhotographActivity::class.java)
     }
 
     /**
