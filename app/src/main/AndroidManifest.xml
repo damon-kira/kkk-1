@@ -183,9 +183,10 @@
             android:name=".module.ocr.TakePhotoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TakePhoteActivity2"
+            android:name=".module.answer.CourseActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
+
 
         <service
             android:name=".module.service.XjbgdfdfService"

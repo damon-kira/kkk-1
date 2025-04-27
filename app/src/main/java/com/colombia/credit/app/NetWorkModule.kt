@@ -10,10 +10,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Created by weisl on 2019/10/15.
- */
-
 @Module
 @InstallIn(SingletonComponent::class)
 class NetWorkModule {

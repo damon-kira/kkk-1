@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/item_unit.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_unit_item"
+    android:layout_marginBottom="16dp"
+    android:padding="16dp">
+
+    <!-- 单元标题 -->
+    <TextView
+        android:id="@+id/unitTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- 技能列表容器 -->
+    <LinearLayout
+        android:id="@+id/skillsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_skill_item"
+        android:showDividers="middle"
+        android:layout_marginBottom="8dp">
+
+        <!-- 示例技能项（实际由代码动态生成） -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basics of differential equations"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableStart="@drawable/ic_check_circle"
+            android:drawablePadding="8dp"
+            android:drawableTint="#FF4CAF50"
+            android:paddingVertical="4dp"/>
+    </LinearLayout>
+
+    <!-- 测验按钮 -->
+    <Button
+        android:id="@+id/quizButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Take Unit Quiz"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_500"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+</LinearLayout>

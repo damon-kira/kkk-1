@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.colombia.credit.LoanApplication.Companion.getAppContext
 import com.colombia.credit.R
 import com.colombia.credit.expand.*
+import com.colombia.credit.module.answer.CourseActivity
 import com.colombia.credit.module.applysuccess.ApplySuccessActivity
 import com.colombia.credit.module.banklist.BankInfoAddActivity
 import com.colombia.credit.module.banklist.ConfirmBankCardListActivity
@@ -186,6 +187,9 @@ object Launch {
 
     fun skipPhotographActivity(context: Context){
         launch(context, PhotographActivity::class.java)
+    }
+    fun skipCourseActivity(context: Context){
+        launch(context, CourseActivity::class.java)
     }
 
     /**

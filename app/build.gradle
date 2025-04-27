@@ -188,5 +188,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:$camerax_version"
 
+    implementation "androidx.activity:activity-ktx:1.7.0"
+
     implementation rootProject.ext.exifinterface.exifinterface
 }

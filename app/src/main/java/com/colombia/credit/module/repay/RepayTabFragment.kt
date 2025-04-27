@@ -87,7 +87,7 @@ class RepayTabFragment : BaseHomeLoanFragment() {
         }
 
         mBinding.tvRepay.setBlockingOnClickListener {
-            Launch.skipPhotographActivity(getSupportContext())
+            Launch.skipCourseActivity(getSupportContext())
 //            checkOrder()
         }
         // Click
@@ -141,19 +141,15 @@ class RepayTabFragment : BaseHomeLoanFragment() {
                 if (it.getData()?.oasdnjuxnjas == true) {
                     // 调起支付
                     Launch.skipWebViewActivity(
-                        getSupportContext(),
-                        H5UrlManager.getPayUrl(
-                            mAdapter.getSelectIds(),
-                            mAdapter.getTotalAmount().toString(),
-                            "2"
+                        getSupportContext(), H5UrlManager.getPayUrl(
+                            mAdapter.getSelectIds(), mAdapter.getTotalAmount().toString(), "2"
                         )
                     )
                 } else {
                     val dialog =
                         HintDialog(getSupportContext()).showTitle(HintDialog.TYPE_INVISIBLE)
                             .setMessage(getString(R.string.repay_success3))
-                            .setBtnText(getString(R.string.confirm))
-                            .showClose(false)
+                            .setBtnText(getString(R.string.confirm)).showClose(false)
                             .setOnClickListener {
                                 onPullToRefresh()
                             }
