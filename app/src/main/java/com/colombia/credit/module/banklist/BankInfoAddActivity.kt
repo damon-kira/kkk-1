@@ -127,10 +127,10 @@ class BankInfoAddActivity : BaseActivity() {
 
     private fun getCommitInfo(): IReqBaseInfo {
         return ReqBankInfo().also {
-            it.thXggvo = mBinding.layoutBank.bivName.getViewText()// 银行名称
-            it.Bkmaj97 = mBinding.layoutBank.bivBankno.getViewText()// 银行编码
-            it.SElc4 = mBankType.toString()// 银行类型
-            it.GiQ40BKKr = mBinding.layoutBank.bivName.tag?.toString().orEmpty() // 银行编码
+            it.thXggvo = mBinding.layoutBank.bivName.getViewText()
+            it.Bkmaj97 = mBinding.layoutBank.bivBankno.getViewText()
+            it.SElc4 = mBankType.toString()
+            it.GiQ40BKKr = mBinding.layoutBank.bivName.tag?.toString().orEmpty() 
             it.cOzMNSKThS = "09"
         }
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Finanzas extremas</string>
+    <string name="app_name">Kira learning</string>
     <string name="home_loan">Hogar</string>
     <string name="home_account">Personal</string>
     <string name="home_repay">Demo</string>
@@ -322,7 +322,7 @@
     <string name="clear_data_success">Datos borrados con éxito</string>
 
     <!-- 拉黑 -->
-    <string name="black_text1">Producto de préstamo Cantidad</string>
+    <string name="black_text1">测试拍照-图片识别</string>
     <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
     <string name="hosta_s">Hasta %s</string>
 

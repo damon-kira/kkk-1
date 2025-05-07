@@ -9,9 +9,6 @@ import com.colombia.credit.manager.SharedPrefKeyManager
 import com.common.lib.base.BaseActivity
 import java.lang.ref.WeakReference
 
-/**
- * Created by weisl on 2019/10/11.
- */
 object AppInjector {
     private var mCurrActivity: WeakReference<Activity>? = null
 

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.chaquo.python'// version '15.0.1'
 //    id 'com.google.gms.google-services'
 //    id 'com.google.firebase.crashlytics'
 }
@@ -37,6 +38,13 @@ android {
 //                outputFileName = "FinanzasExtremas_v${variant.versionName}_${variant.buildType.name}_${time()}.apk"
 //            }
 //        }
+        python {
+            buildPython "python3"  // 自动检测系统Python3
+            pip {
+                install "numpy"
+                install "colorama"
+            }
+        }
     }
 
     packagingOptions {
@@ -51,6 +59,10 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.version.compose
     }
     signingConfigs {
         release {
@@ -140,6 +152,7 @@ dependencies {
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
     implementation project(path: ':datepicker')
+    implementation project(path: ':stedit')
 
     implementation rootProject.ext.other.aes
     implementation rootProject.ext.other.cache
@@ -187,6 +200,12 @@ dependencies {
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:$camerax_version"
+    //compose
+    implementation rootProject.ext.compose.compose_ui
+    implementation rootProject.ext.compose.compose_material
+    implementation rootProject.ext.compose.compose_runtime
+    implementation rootProject.ext.compose.compose_activity
+    debugImplementation rootProject.ext.compose.compose_uitooling
 
     implementation "androidx.activity:activity-ktx:1.7.0"
 

@@ -30,7 +30,7 @@ class ApiManager @Inject constructor() {
         private val INSTANCE = ApiManager()
         fun getInstance(): ApiManager = INSTANCE
         private const val CHECK_TIMEOUT = 4000L
-        private const val DEFAULT_TIMEOUT = 5000L
+        private const val DEFAULT_TIMEOUT = 15000L
         private const val UPLOAD_TIMEOUT = 45000L
 
     }
@@ -185,15 +185,27 @@ class ApiManager @Inject constructor() {
 
     }
 
-    private val mHeaderInterceptor = Interceptor { chain ->
-        val original = chain.request()
-        val builder = original.newBuilder()
-        val headers = original.headers()
-        val type = headers.get("temp")
-        NetBaseParamsManager.addHeader(builder, type)
-        builder.method(original.method(), original.body())
-        chain.proceed(builder.build())
+//    private val mHeaderInterceptor = Interceptor { chain ->
+//        val original = chain.request()
+//        val builder = original.newBuilder()
+//        val headers = original.headers()
+//        val type = headers.get("temp")
+//        NetBaseParamsManager.addHeader(builder, type)
+//        builder.method(original.method(), original.body())
+//        chain.proceed(builder.build())
+//    }
+private val mHeaderInterceptor = Interceptor { chain ->
+    val originalRequest = chain.request()
+    val requestBuilder = originalRequest.newBuilder()
+
+    // 安全获取header并处理
+    originalRequest.header("temp")?.let { type ->
+        NetBaseParamsManager.addHeader(requestBuilder, type)
     }
+
+    // 构建新请求并继续执行
+    chain.proceed(requestBuilder.build())
+}
 
     private val logInterceptor =
         if (AppEnv.DEBUG) {
@@ -208,7 +220,7 @@ class ApiManager @Inject constructor() {
     //默认拦截器集合
     private val defaultInterceptor = ArrayList<Interceptor>().apply {
 //        add(BaseDataAddInterceptor())//必传参数拦截器
-        add(EncryptDecryptInterceptor())//加解密拦截器
+//        add(EncryptDecryptInterceptor())//加解密拦截器
         add(mHeaderInterceptor)
         if (logInterceptor != null) {
             add(logInterceptor)
@@ -238,7 +250,7 @@ class ApiManager @Inject constructor() {
             .build()
     }
 
-    private val BASEURL = Constant.BASE_URL
+    private val BASEURL = "http://192.168.5.222:8083/"
 
     private val BASE_H5_URL = Constant.BASE_H5_URL
 

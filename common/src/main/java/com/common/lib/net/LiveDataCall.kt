@@ -56,7 +56,7 @@ class LiveDataCall<T>(
 
     override fun onInactive() {
         super.onInactive()
-        mDispose?.dispose()
+//        mDispose?.dispose()
     }
 
     private fun getErrorReponse(throwable: Throwable): BaseResponse<T> {

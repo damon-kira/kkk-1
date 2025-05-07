@@ -30,7 +30,7 @@ class RspProductInfo {
     val v3ItXF: Int = 0 // 逾期天数
     val K1v0Pz: String? = null// 下一次申请时间
     val A04fSYQdHM: Int = 0// 最大勾选笔数
-    val yMiEwn3: String? = null // 银行卡号
+    val yMiEwn3: String? = null 
     // 弹框秒数
     val swOwF0KJ: Long = 0
         get() = if (GbiDSBdW == 0) 0 else field

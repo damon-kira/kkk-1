@@ -1,5 +1,6 @@
 package com.common.lib.net
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -59,6 +60,7 @@ class ServiceClient private constructor() {
             }
             .build()
         val baseUrl = options.baseUrl
+        Log.d(TAG, "provideRetrofit: url = $baseUrl")
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())

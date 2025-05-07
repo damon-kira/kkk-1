@@ -17,8 +17,8 @@ class RspBankNameInfo {
 //    }
 
     class BankNameInfo : SearchInfo() {
-        val Vu3XbBF: String? = null // 银行编码
-        val KoGUgumBVm: String? = null  // 银行名称
+        val Vu3XbBF: String? = null 
+        val KoGUgumBVm: String? = null  
         val xevtra: String? = null  // 是否常用
         override fun match(constraint: CharSequence?): Boolean {
             var result = false

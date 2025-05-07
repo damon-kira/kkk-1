@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.colombia.credit.R
 import com.colombia.credit.databinding.FragmentBlackBinding
 import com.colombia.credit.expand.getUnitString
+import com.colombia.credit.manager.Launch
 import com.colombia.credit.module.home.BaseHomeFragment
 import com.colombia.credit.module.home.HomeLoanViewModel
 import com.colombia.credit.module.home.MainEvent
@@ -42,22 +43,40 @@ class BlackFragment: BaseHomeFragment() {
             it.tvDays.text = "0"
             it.tvDesc.setText(R.string.black_desc)
         }
-
-        mBinding.inclueRepay.tvBtn.setBlockingOnClickListener{
-            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
+        mBinding.inclueDemoLayout1.let {
+            it.tvDemoName.setText("拍照识别")
+        }
+        mBinding.inclueDemoLayout2.let {
+            it.tvDemoName.setText("网络库配置")
+            it.tvBtn.setBlockingOnClickListener {
+            }
+        }
+        mBinding.inclueDemoLayout3.let {
+            it.tvDemoName.setText("python编辑-运行")
         }
 
+//        mBinding.inclueRepay.tvBtn.setBlockingOnClickListener{
+//            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
+//        }
+
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-            // 黑名单和拒绝用的一个布局，黑名单下面显示的是借款账期
             mBinding.includeBlack.tvAmount.text = getString(R.string.days, it.WTvE5G.toString())
 
             val data = it.gQ1J
             if (data == null || data.isEmpty()) return@observe
 
-            mBinding.inclueRepay.llContent.show()
-            mBinding.inclueRepay.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
-            mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
+//            mBinding.inclueRepay.llContent.show()
+//            mBinding.inclueRepay.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
+//            mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
             mOrderIds = data.QLPGXTNU
+        }
+
+        initOnClickListener()
+    }
+
+    private fun initOnClickListener() {
+        mBinding.inclueDemoLayout3.tvBtn.setOnClickListener {
+            Launch.skipCodingActivity(getSupportContext())
         }
     }
 

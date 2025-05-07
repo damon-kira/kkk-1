@@ -8,12 +8,12 @@ class RspPersonalInfo : IRspBaseInfo {
     val ovabhwbahsSBHs: PersonalInfo? = null
 
     class PersonalInfo {
-        var BVbhbhaBHDas: String? = null // 教育
-        var twavgVGDEWE2HBS: String? = null // 婚姻
-        var mbchaBHDE2DSsj: String? = null // 省份
-        var oiawasVSV: String? = null // 市区
-        var vVGVAgxvsa: String? = null // 月收入
-        var tavwgVGSVnsdj: String? = null // 工作类型
+        var BVbhbhaBHDas: String? = null 
+        var twavgVGDEWE2HBS: String? = null 
+        var mbchaBHDE2DSsj: String? = null
+        var oiawasVSV: String? = null 
+        var vVGVAgxvsa: String? = null 
+        var tavwgVGSVnsdj: String? = null 
 
         fun isEmpty(): Boolean {
             return vVGVAgxvsa.isNullOrEmpty() && BVbhbhaBHDas.isNullOrEmpty() && this.twavgVGDEWE2HBS.isNullOrEmpty()
@@ -24,20 +24,20 @@ class RspPersonalInfo : IRspBaseInfo {
 
 
 class RspContactInfo : IRspBaseInfo {
-    //    var vo9dza3yA: String? = null // 联系人id
+    //    var vo9dza3yA: String? = null 
 
     val Rwfbhdu1: ContactInfo? = null
 
     class ContactInfo {
 
-        var yYVUx: String? = null //第一联系人关系
-        var MGwL: String? = null // 第一联系人姓名
-        var fTvY4N5: String? = null // 第一联系人电话
+        var yYVUx: String? = null 
+        var MGwL: String? = null 
+        var fTvY4N5: String? = null 
 
-        //    var nJBqrhrxl: String? = null // 第二联系人id
-        var dZgCz3: String? = null // 第二联系人姓名
-        var fWvRFuMb: String? = null // 第二联系人电话
-        var Is8p43A: String = "4" // 第二联系人关系
+        //    var nJBqrhrxl: String? = null 
+        var dZgCz3: String? = null 
+        var fWvRFuMb: String? = null 
+        var Is8p43A: String = "4" 
 
         fun isEmpty(): Boolean {
             return yYVUx.isNullOrEmpty() && MGwL.isNullOrEmpty() && fTvY4N5.isNullOrEmpty() && dZgCz3.isNullOrEmpty() && fWvRFuMb.isNullOrEmpty()
@@ -50,10 +50,10 @@ class RspBankInfo : IRspBaseInfo {
     val hQYeCtjtJh: BankInfo? = null
 
     class BankInfo {
-        var N61kI40HaH: String? = null // 银行名称
-        var `87hVygkzSb`: String? = null // 银行类型
-        var TA2B58tdUU: String? = null // 银行编码
-        var owuNUS9vAj: String? = null // 银行卡号
+        var N61kI40HaH: String? = null 
+        var `87hVygkzSb`: String? = null 
+        var TA2B58tdUU: String? = null 
+        var owuNUS9vAj: String? = null 
 
         fun isEmpty(): Boolean {
             return N61kI40HaH.isNullOrEmpty() && TA2B58tdUU.isNullOrEmpty() && owuNUS9vAj.isNullOrEmpty() && `87hVygkzSb`.isNullOrEmpty()
@@ -70,10 +70,10 @@ class RspKycInfo : IRspBaseInfo {
         }
 
     class KycInfo {
-        var DrD60: String? = null // 性别
-        var Wa7f: String? = null // nuip
-        var W3YOu8: String? = null // 姓名
-        var YiWtoa1: String? = null // 生日
+        var DrD60: String? = null 
+        var Wa7f: String? = null 
+        var W3YOu8: String? = null 
+        var YiWtoa1: String? = null 
         var FStwV6Fge7: String? = null //姓
         var JSusdh7YE: String? = null //名
 

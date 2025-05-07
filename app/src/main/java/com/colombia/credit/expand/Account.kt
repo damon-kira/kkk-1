@@ -36,8 +36,8 @@ fun setUserId(id: String) {
 }
 
 fun inValidToken(): Boolean {
-        return false
-//    return getUserToken().isEmpty()
+//        return false
+    return getUserToken().isEmpty()
 }
 
 var isRepeat: Boolean

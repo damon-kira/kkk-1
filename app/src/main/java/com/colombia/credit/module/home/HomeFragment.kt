@@ -127,7 +127,7 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     private fun getCurrFragment(rspInfo: RspProductInfo): BaseFragment? {
-        val userStatus: String = rspInfo.EqyO
+        val userStatus: String = "2"//rspInfo.EqyO
         val orderStatus: String = rspInfo.xXkO
         return when (userStatus) {
             UserStatus.STATUS_FIRST -> {

@@ -42,7 +42,6 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
                 onPullToRefresh()
                 return@setBlockingOnClickListener
             }
-            // 跳转还款详情页面
             Launch.skipRepayDetailActivity(getSupportContext(), mIds.orEmpty())
         }
         mHomeLoanViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
@@ -50,7 +49,6 @@ class FirstRepayFragment : BaseHomeLoanFragment() {
                 text = getString(R.string.amount_unit, formatCommon(it.yqGhrjOF2.orEmpty()))
                 isSelected = it.v3ItXF > 0 // 是否逾期
             }
-            // vzXq3u 还款日期
             mBinding.tvRepaydate.text = it.vzXq3u
             mIds = it.ZXEUWfOy
             if (it.v3ItXF > 0) {

@@ -222,11 +222,11 @@ class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
         return ReqPersonalInfo().also {
             it.kBHCAbhdwbh = mBinding.bivType.tag?.toString()
             it.dGCAVvsgw23ds = mBinding.bivIncome.tag?.toString()
-            it.oiwnusx = mBinding.bivMarriage.tag?.toString().orEmpty() // 婚姻
-            it.TEAVvgsvgqs = mBinding.bivEducation.tag?.toString().orEmpty() // 教育
+            it.oiwnusx = mBinding.bivMarriage.tag?.toString().orEmpty() 
+            it.TEAVvgsvgqs = mBinding.bivEducation.tag?.toString().orEmpty() 
             if (addressArray.size > 1) {
-                it.uwahBHDbws = addressArray[0] // 省份
-                it.pwonBHSWASA = addressArray[1]// 市区
+                it.uwahBHDbws = addressArray[0]
+                it.pwonBHSWASA = addressArray[1]
             }
         }
     }

@@ -10,9 +10,9 @@ class KycOcrInfo {
 
     class Back {
         val yRNAHI: String? = null // 出身地
-        val OXOcXj: String? = null // 生日
+        val OXOcXj: String? = null 
         val voafF: String? = null  // 血型
-        val COXa: String? = null   // 性别
+        val COXa: String? = null   
         val D2qiMIs9G8: String? = null // 签发日期
         val ziNJy8mZX: String? = null //
         val ngUdqeJN: String? = null

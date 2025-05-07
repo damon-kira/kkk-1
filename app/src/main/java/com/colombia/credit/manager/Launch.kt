@@ -28,6 +28,7 @@ import com.colombia.credit.module.process.face.FaceActivity
 import com.colombia.credit.module.process.face.FaceFailedActivity
 import com.colombia.credit.module.process.kyc.KycInfoActivity
 import com.colombia.credit.module.process.personalinfo.PersonalInfoActivity
+import com.colombia.credit.module.python.CodingActivity
 import com.colombia.credit.module.repaydetail.RepayDetailActivity
 import com.colombia.credit.module.repaydetail.RepayDetailHisActivity
 import com.colombia.credit.module.repeat.confirm.RepeatConfirmActivity
@@ -190,6 +191,10 @@ object Launch {
     }
     fun skipCourseActivity(context: Context){
         launch(context, CourseActivity::class.java)
+    }
+
+    fun skipCodingActivity(context: Context){
+        launch(context, CodingActivity::class.java)
     }
 
     /**

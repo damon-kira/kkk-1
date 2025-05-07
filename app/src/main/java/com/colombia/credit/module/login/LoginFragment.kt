@@ -254,6 +254,7 @@ class LoginFragment : BaseLoginFragment() {
         }
         mViewModel.loginLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
+                toast("登录成功")
                 if (isNewUser) {
                     jumpProcess(getSupportContext(), STEP1)
                 }
@@ -313,7 +314,7 @@ class LoginFragment : BaseLoginFragment() {
     }
 
     private fun reqSmsCode(isAuto: Boolean, type: Int = LoginViewModel.TYPE_SMS) {
-        mViewModel.reqSmsCode(getMobile(), isAuto, type)
+//        mViewModel.reqSmsCode(getMobile(), isAuto, type)
     }
 
     private fun getMobile() = mBinding.loginEditPhone.getRealText()

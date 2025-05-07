@@ -14,6 +14,7 @@ import com.colombia.credit.expand.saveUserInfo
 import com.colombia.credit.util.GPInfoUtils
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
+import com.datepicker.lib.Log
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -102,6 +103,9 @@ class LoginViewModel @Inject constructor(
                 mCodeUUid.joinToString(",")
             )
         ) {
+//            Log.e("iiiit msg:   ",it.msg)
+//            Log.e("iiiit data:   ",it.data.toString())
+//            Log.e("iiiit code:   ",it.code.toString())
             hideLoading()
             if (it.isSuccess()) {
                 val ctx = getAppContext()

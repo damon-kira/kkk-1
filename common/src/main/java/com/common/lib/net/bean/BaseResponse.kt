@@ -1,6 +1,7 @@
 package com.common.lib.net.bean
 
 import com.common.lib.net.ResponseCode
+import com.util.lib.GsonUtil
 import java.lang.reflect.ParameterizedType
 
 
@@ -12,16 +13,16 @@ class BaseResponse<T> @JvmOverloads constructor(
 ) {
     var t: T? = null
 
-//    fun parseT(clazz: Class<T>): T? {
-//        if (t == null) {
-//            try {
-//                t = GsonUtil.fromJson(data!!, clazz) as? T
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
-//        return t
-//    }
+    fun parseT(clazz: Class<T>): T? {
+        if (t == null) {
+            try {
+                t = GsonUtil.fromJson(data!!.toString(), clazz) as? T
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        return t
+    }
 
     private fun <T> getType(): Class<out Any?> {
         val genericType = this.javaClass.genericSuperclass
