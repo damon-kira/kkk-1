@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/LLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_Color"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bar_shape"
+        android:orientation="horizontal"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/brain_clear"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:tint="@color/black_HW"
+            android:src="@drawable/reset"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="6dp"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/eng_learn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:tint="@color/black_HW"
+            android:src="@drawable/english"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="6dp"
+            />
+
+        <TextView
+            android:id="@+id/TextBar"
+            android:layout_width="260dp"
+            android:layout_height="54dp"
+
+            android:gravity="center_vertical|center"
+            android:text="Kira"
+            android:textSize="20sp"
+            android:textColor="@color/textColor"
+            tools:ignore="MissingConstraints,Suspicious0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/history_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/history"
+            android:tint="@color/black_HW"
+            android:padding="6dp"
+            />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/other_clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/other_settings"
+            android:tint="@color/black_HW"
+            android:padding="3dp"
+            />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="always"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/item_message"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/bottom_message_operator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/operator_bar"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/messageEditText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:hint="Type message"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:layout_margin="6dp"
+            android:textColor="@color/black_HW"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:background="@drawable/msg_shape"
+            tools:ignore="HardcodedText,RtlCompat,RtlSymmetry" />
+
+        <Button
+            android:id="@+id/userSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="6dp"
+            android:background="@drawable/send_button_select"
+            android:text="发送"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -29,7 +29,7 @@
             android:text="请横屏拍照\n题目文字尽量与参考线对齐"
             android:textColor="#ffffff" />
         <!--网格参考线-->
-<!--        <com.colombia.credit.module.ocr.ReferenceLine-->
+<!--        <com.kira.learning.module.ocr.ReferenceLine-->
 <!--            android:id="@+id/view_lines"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent" />-->

@@ -8,7 +8,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context="com.colombia.credit.module.ocr.PhotographActivity">
+    tools:context="com.kira.learning.module.ocr.PhotographActivity">
 
     <TextView
         android:id="@+id/btn_camera"

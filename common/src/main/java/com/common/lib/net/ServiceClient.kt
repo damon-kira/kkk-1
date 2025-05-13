@@ -1,6 +1,7 @@
 package com.common.lib.net
 
 import android.util.Log
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -43,6 +44,10 @@ class ServiceClient private constructor() {
 
 
     private fun provideRetrofit(options: NetOptions): Retrofit {
+        val certificatePinner = CertificatePinner.Builder()
+            .add("*.example.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAA=") // 伪造指纹
+            .build()
+
         val okHttpClient = OkHttpClient.Builder()
             .apply {
                 if (options.readTimeout > 0) {
@@ -57,6 +62,9 @@ class ServiceClient private constructor() {
                 options.interceptors.forEach {
                     addInterceptor(it)
                 }
+                this.sslSocketFactory(ProxymanSSLSocketFactory(), TrustAllCerts())
+                this.hostnameVerifier { _, _ -> true }
+                this.certificatePinner(certificatePinner)
             }
             .build()
         val baseUrl = options.baseUrl

@@ -5,11 +5,12 @@ rootProject.ext {
             targetSdk     : 33,
             kotlin        : "1.8.10",
             retrofit      : "2.6.0",
-            room_version  : "2.3.0",
+            room_version  : "2.5.2",
             hilt_android  : '2.43.2',
             lifecycle     : "2.5.0",
             play_service  : "18.0.0",
-            compose       : "1.4.3"
+            compose       : "1.4.3",
+            camerax_version : "1.3.0-alpha04"
     ]
 
     android = [
@@ -73,13 +74,13 @@ rootProject.ext {
             messaging    : "com.google.firebase:firebase-messaging-ktx",
             analytics    : "com.google.firebase:firebase-analytics-ktx",
             crashlytics  : "com.google.firebase:firebase-crashlytics-ktx",
-//            firebase_perf: "com.google.firebase:firebase-perf-ktx",
             bom          : "com.google.firebase:firebase-bom:29.2.0"
+//            firebase_perf: "com.google.firebase:firebase-perf-ktx",
     ]
 
     facebook = [
-//            fb: "com.facebook.android:facebook-login:14.0.0"
             fb: "com.facebook.android:facebook-android-sdk:[8,9)"
+//            fb: "com.facebook.android:facebook-login:14.0.0"
     ]
 
     glide = [
@@ -107,16 +108,30 @@ rootProject.ext {
             compose_activity: "androidx.activity:activity-compose:1.7.2"
     ]
 
-//    room = [
-//            room_runtime: "androidx.room:room-runtime:${version.room_version}",
-//            room_compiler: "androidx.room:room-compiler:${version.room_version}"
-//    ]
+    markwon = [
+            core: "io.noties.markwon:core:4.6.2",
+            image: "io.noties.markwon:image:4.6.2",
+            image_glide: "io.noties.markwon:image-glide:4.6.2"
+    ]
+
+    camera = [
+            core: "androidx.camera:camera-core:${version.camerax_version}",
+            camera2: "androidx.camera:camera-camera2:${version.camerax_version}",
+            lifecycle: "androidx.camera:camera-lifecycle:${version.camerax_version}",
+            view: "androidx.camera:camera-view:${version.camerax_version}"
+    ]
+
+    room = [
+            room_runtime: "androidx.room:room-runtime:${version.room_version}",
+            room_ktx: "androidx.room:room-ktx:${version.room_version}",
+            room_compiler: "androidx.room:room-compiler:${version.room_version}"
+    ]
 
     other =[
 //            util            : 'com.util.lib:util:1.0.4',
-            aes             : 'com.aes.lib:aes:1.0.0',
 //            userBehavior    : 'com.behavior.lib:userBehavior:1.0.2',
 //            bigdata         : 'com.bigdata.lib:bigdata:1.0.0',
+            aes             : 'com.aes.lib:aes:1.0.0',
             devoptions      : 'com.devoptions.lib:devoptions:1.0.1',
             cache           : 'com.cache.lib:cache:1.0.0'
     ]
@@ -131,12 +146,14 @@ rootProject.ext {
     allDesList.addAll(glide.values())
     allDesList.addAll(firebase.values())
     allDesList.addAll(location.values())
-//    allDesList.addAll(appsflyer.values())
-//    allDesList.addAll(room.values())
     allDesList.addAll(other.values())
     allDesList.addAll(chaquo.values())
     allDesList.addAll(exifinterface.values())
     allDesList.addAll(compose.values())
+    allDesList.addAll(markwon.values())
+    allDesList.addAll(camera.values())
+    allDesList.addAll(room.values())
+//    allDesList.addAll(appsflyer.values())
 
     allDependencies = [:]
     allDesList.each { des ->

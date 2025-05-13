@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.colombia.credit.view.ToolbarLayout
+    <com.kira.learning.view.ToolbarLayout
         android:id="@+id/repay_toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -85,7 +85,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- 逾期tag -->
-                <com.colombia.credit.view.textview.EasyTextView
+                <com.kira.learning.view.textview.EasyTextView
                     android:id="@+id/etv_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

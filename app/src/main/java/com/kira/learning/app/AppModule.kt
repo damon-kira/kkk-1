@@ -1,0 +1,76 @@
+package com.kira.learning.app
+
+import android.content.Context
+import androidx.room.Room
+import com.kira.learning.LoanApplication
+import com.kira.learning.module.ai.dao.AIResponseDao
+import com.kira.learning.module.ai.dao.ChatMessageDao
+import com.kira.learning.module.chat.database.ChatDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+/**
+ * Created by weisl on 2019/10/12.
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+class AppModule {
+
+    //    @Provides
+//    fun bindFloatingViewModel(floatingRepository: FloatingRepository): FloatingViewModel {
+//        return FloatingViewModel(floatingRepository)
+//    }
+//
+//    @Provides
+//    fun bindFloatingRepository(apiService: ApiService): FloatingRepository {
+//        return FloatingRepository(apiService)
+//    }
+
+//    @Provides
+//    @Singleton
+//    fun provideChatDao(appDatabase: AppDatabase): ChatDao {
+//        return appDatabase.chatDao()
+//    }
+
+//    @Provides
+//    @Singleton
+//    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+//        return Room.databaseBuilder(
+//            context,
+//            AppDatabase::class.java,
+//            "chat_database"
+//        ).build()
+//    }
+
+    // 提供数据库实例
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "ai_response_db.db"
+        ).build()
+    }
+
+    // 提供 DAO 实例（通过数据库实例获取）
+    @Provides
+    fun provideChatMessageDao(database: AppDatabase): ChatMessageDao {
+        return database.chatMessageDao()
+    }
+
+    @Provides
+    fun provideAIResponseDao(database: AppDatabase): AIResponseDao {
+        return database.aiResponseDao()
+    }
+    @Provides
+    fun provideChatDao(database: AppDatabase): ChatDao {
+        return database.chatDao()
+    }
+}
+
+internal fun getAppContext() = LoanApplication.getAppContext()

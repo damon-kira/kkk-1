@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.colombia.credit.view.ToolbarLayout
+    <com.kira.learning.view.ToolbarLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -90,7 +90,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_amount" />
 
         <!-- seekbar -->
-        <com.colombia.credit.view.textview.EasyTextView
+        <com.kira.learning.view.textview.EasyTextView
             android:id="@+id/etv_seekbar"
             android:layout_width="match_parent"
             android:layout_height="8dp"
@@ -99,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="@id/etv_icon"
             app:layout_constraintTop_toTopOf="@id/etv_icon" />
 
-        <com.colombia.credit.view.textview.EasyTextView
+        <com.kira.learning.view.textview.EasyTextView
             android:id="@+id/etv_icon"
             android:layout_width="14dp"
             android:layout_height="14dp"
@@ -158,7 +158,7 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tv_period_title">
 
-            <com.colombia.credit.view.PeriodLayout
+            <com.kira.learning.view.PeriodLayout
                 android:id="@+id/rl_period1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                 app:pl_lock_visiblity="false"
                 app:pl_text="7" />
 
-            <com.colombia.credit.view.PeriodLayout
+            <com.kira.learning.view.PeriodLayout
                 android:id="@+id/rl_period2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                 app:pl_lock_visiblity="true"
                 app:pl_text="14" />
 
-            <com.colombia.credit.view.PeriodLayout
+            <com.kira.learning.view.PeriodLayout
                 android:id="@+id/rl_period3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                 app:pl_lock_visiblity="true"
                 app:pl_text="60" />
 
-            <com.colombia.credit.view.PeriodLayout
+            <com.kira.learning.view.PeriodLayout
                 android:id="@+id/rl_period4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -341,7 +341,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.colombia.credit.view.TextViewDrawable
+    <com.kira.learning.view.TextViewDrawable
         android:id="@+id/tv_auto"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
@@ -372,7 +372,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_cancel" />
 
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="34dp"
@@ -391,7 +391,7 @@
         app:layout_constraintBottom_toBottomOf="@id/confirm_tv_apply"
         app:layout_constraintRight_toRightOf="@id/confirm_tv_apply" />
 
-    <com.colombia.credit.view.TextViewLine
+    <com.kira.learning.view.TextViewLine
         android:id="@+id/tv_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

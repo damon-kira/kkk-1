@@ -39,7 +39,7 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <com.colombia.credit.view.email.EmailHintTextView
+        <com.kira.learning.view.email.EmailHintTextView
             android:id="@+id/biv_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

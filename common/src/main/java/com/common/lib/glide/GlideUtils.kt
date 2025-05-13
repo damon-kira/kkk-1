@@ -21,9 +21,6 @@ import com.common.lib.base.BaseActivity
 import com.util.lib.MainHandler
 import com.util.lib.dp
 
-/**
- * Created by weisl on 2019/11/1.
- */
 object GlideUtils {
     fun loadImageNoCache(
         fragment: Fragment,

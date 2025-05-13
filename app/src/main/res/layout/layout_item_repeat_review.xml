@@ -110,7 +110,7 @@
     </LinearLayout>
 
     <!-- 按钮 -->
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:id="@+id/etv_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,7 +12,7 @@
         android:background="@drawable/image_home_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.colombia.credit.view.ToolbarLayout
+    <com.kira.learning.view.ToolbarLayout
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/process_toolbar"
         app:srcCompat="@drawable/image_process_bg" />
 
-    <com.colombia.credit.view.ProcessView
+    <com.kira.learning.view.ProcessView
         android:id="@+id/process_pv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -217,7 +217,7 @@
 }
 
 #bean
--keep class com.colombia.credit.bean.**{*;}
+-keep class com.kira.learning.bean.**{*;}
 
 # Gson
 -keep class com.google.gson.stream.** { *; }
@@ -244,8 +244,8 @@
 #-keep class androidx.viewpager2.** {*;}
 #-dontwarn androidx.recyclerview.widget.RecyclerView
 #-keep class androidx.recyclerview.widget.RecyclerView{*;}
-#-dontwarn com.finance.credit.banner.**
-#-keep class com.finance.credit.banner.** {*;}
+#-dontwarn com.finance.learning.banner.**
+#-keep class com.finance.learning.banner.** {*;}
 
 -optimizations !method/inlining/*
 

@@ -11,7 +11,7 @@
     android:paddingRight="12dp"
     android:paddingBottom="16dp">
 
-    <com.colombia.credit.view.TextViewDrawable
+    <com.kira.learning.view.TextViewDrawable
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -23,7 +23,7 @@
         app:isAlignCenter="false" />
 
     <!--银行类型-->
-    <com.colombia.credit.view.baseinfo.BaseInfoView
+    <com.kira.learning.view.baseinfo.BaseInfoView
         android:id="@+id/biv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
     </RadioGroup>
 
     <!-- 银行卡号 -->
-    <com.colombia.credit.view.baseinfo.BaseInfoView
+    <com.kira.learning.view.baseinfo.BaseInfoView
         android:id="@+id/biv_bankno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
 
     <!-- 首贷进件不显示，添加银行卡时显示 -->
     <!-- 再次确认银行卡号 -->
-    <com.colombia.credit.view.baseinfo.BaseInfoView
+    <com.kira.learning.view.baseinfo.BaseInfoView
         android:id="@+id/biv_bankno_tow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

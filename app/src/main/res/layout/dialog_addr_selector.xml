@@ -95,7 +95,7 @@
             tools:text="Andaman"
             tools:visibility="visible" />
 
-        <com.colombia.credit.view.SearchView
+        <com.kira.learning.view.SearchView
             android:id="@+id/searchview"
             style="@style/marginLeftAndRight16"
             android:layout_width="0dp"

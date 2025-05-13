@@ -62,7 +62,7 @@
             <action android:name="android.intent.action.MAIN" />
         </intent>
     </queries>
-
+    <!--Release版本删除android:networkSecurityConfig="@xml/network_security_config"-->
     <application
         android:name=".LoanApplication"
         android:allowBackup="true"
@@ -188,6 +188,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.python.CodingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.ai.AIChatActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.chat.ChatActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
 

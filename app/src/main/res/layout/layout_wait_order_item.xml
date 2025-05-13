@@ -32,7 +32,7 @@
         app:layout_constraintLeft_toLeftOf="@id/tv_amount"
         app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:id="@+id/etv_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

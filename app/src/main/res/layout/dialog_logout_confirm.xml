@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:id="@+id/tv_cancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         app:layout_constraintRight_toLeftOf="@id/tv_logout"
         app:layout_constraintTop_toBottomOf="@id/tv_hint" />
 
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:id="@+id/tv_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

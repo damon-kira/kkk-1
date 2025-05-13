@@ -12,7 +12,7 @@
         android:background="@drawable/image_home_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.colombia.credit.view.ToolbarLayout
+    <com.kira.learning.view.ToolbarLayout
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/process_toolbar"
         app:srcCompat="@drawable/image_process_bg" />
 
-    <com.colombia.credit.view.ProcessView
+    <com.kira.learning.view.ProcessView
         android:id="@+id/process_pv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:textStyle="bold" />
 
             <!-- 身份证拍照 -->
-            <com.colombia.credit.view.identity.IdentityLayout
+            <com.kira.learning.view.identity.IdentityLayout
                 android:id="@+id/il_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <com.colombia.credit.view.textview.EasyTextView
+                <com.kira.learning.view.textview.EasyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="22dp"
@@ -108,7 +108,7 @@
                     app:etv_solid="@color/color_F9F2FC" />
 
                 <!--身份证号-->
-                <com.colombia.credit.view.baseinfo.BaseInfoView
+                <com.kira.learning.view.baseinfo.BaseInfoView
                     android:id="@+id/kyc_biv_nuip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     app:title="@string/kyc_nuip" />
 
                 <!-- 名字 -->
-                <com.colombia.credit.view.baseinfo.BaseInfoView
+                <com.kira.learning.view.baseinfo.BaseInfoView
                     android:id="@+id/kyc_biv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     app:title="@string/kyc_name" />
 
                 <!-- 父姓 -->
-                <com.colombia.credit.view.baseinfo.BaseInfoView
+                <com.kira.learning.view.baseinfo.BaseInfoView
                     android:id="@+id/kyc_biv_surname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                     app:title="@string/kyc_surname" />
 
                 <!-- 生日 -->
-                <com.colombia.credit.view.baseinfo.BaseInfoView
+                <com.kira.learning.view.baseinfo.BaseInfoView
                     android:id="@+id/kyc_biv_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                     app:title="@string/kyc_birthday" />
 
                 <!-- 性别 -->
-                <com.colombia.credit.view.baseinfo.BaseInfoView
+                <com.kira.learning.view.baseinfo.BaseInfoView
                     android:id="@+id/kyc_biv_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

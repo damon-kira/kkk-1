@@ -42,7 +42,7 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <com.colombia.credit.view.SafeEditText
+        <com.kira.learning.view.SafeEditText
             android:id="@+id/biv_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

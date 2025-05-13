@@ -36,7 +36,7 @@
             android:textStyle="bold"
             tools:text="$ 8.000" />
 
-        <com.colombia.credit.view.textview.EasyTextView
+        <com.kira.learning.view.textview.EasyTextView
             android:id="@+id/etv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

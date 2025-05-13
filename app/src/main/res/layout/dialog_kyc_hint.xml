@@ -39,7 +39,7 @@
             android:layout_marginTop="16dp"
             app:srcCompat="@drawable/image_kyc_front" />
 
-        <com.colombia.credit.view.textview.EasyTextView
+        <com.kira.learning.view.textview.EasyTextView
             android:id="@+id/kyc_etv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

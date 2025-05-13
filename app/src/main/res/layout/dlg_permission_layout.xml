@@ -90,7 +90,7 @@
             android:textSize="11sp" />
     </LinearLayout>
 
-    <com.colombia.credit.view.textview.EasyTextView
+    <com.kira.learning.view.textview.EasyTextView
         android:id="@+id/ok_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
