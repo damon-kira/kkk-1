@@ -11,10 +11,11 @@ class AgentSupportFragment : androidx.fragment.app.Fragment(), AgentContainer {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val callback = callbacks.remove(requestCode) ?: return
+        if(null == data) return
         callback(requestCode, resultCode, data)
     }
 
-    override fun startActivityResult(intent: Intent, requestCode: Int, containerCallback: ContainerCallback?) {
+    override fun startActivityResult(intent: Intent, requestCode: Int, containerCallback: ContainerCallback) {
         callbacks[requestCode] = containerCallback
         startActivityForResult(intent, requestCode)
     }

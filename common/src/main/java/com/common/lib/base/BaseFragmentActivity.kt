@@ -4,9 +4,6 @@ import android.view.MotionEvent
 import androidx.annotation.IdRes
 import com.common.lib.helper.FragmentHelper
 
-/**
- * Created by weisl on 2019/10/29.
- */
 abstract class BaseFragmentActivity : BaseActivity(), IFragmentSwitch {
 
     protected var mCurrTag: String? = null

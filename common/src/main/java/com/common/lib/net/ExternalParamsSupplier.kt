@@ -3,11 +3,6 @@ package com.common.lib.net
 import android.content.Context
 
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/2 11:46 上午
- */
 interface ExternalParamsSupplier {
 
     fun getContext(): Context

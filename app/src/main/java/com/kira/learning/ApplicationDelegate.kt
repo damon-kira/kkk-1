@@ -17,9 +17,9 @@ import com.util.lib.ImageInfoUtil
 import com.util.lib.UtilInit
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
-import io.reactivex.exceptions.UndeliverableException
-import io.reactivex.functions.Consumer
-import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.rxjava3.exceptions.UndeliverableException
+import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.net.SocketException
@@ -66,7 +66,6 @@ object ApplicationDelegate {
                     "Bgp3rnTyWw",
                     ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
                 )
-
             }
         })
     }

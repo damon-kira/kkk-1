@@ -6,6 +6,7 @@ import com.kira.learning.util.image.annotations.CameraFace
 import com.kira.learning.util.image.annotations.ImageType
 import com.kira.learning.util.image.annotations.PickRange
 import com.kira.learning.util.image.builder.ImageCompressor
+//import com.kira.learning.util.image.builder.ImageCompressor
 import java.io.File
 
 data class PickPictureParams(@PickRange val pickRange: Int, @ImageType val fileType: Int, val checkPermission: Boolean, val needLocationInfo: Boolean)

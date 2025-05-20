@@ -1,9 +1,13 @@
-package com.kira.learning.module.answer
+package com.kira.learning.module.answer.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.module.answer.Course
+import com.kira.learning.module.answer.CourseRepository
+import com.kira.learning.module.answer.CourseService
+import com.kira.learning.module.answer.CourseUnit
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response

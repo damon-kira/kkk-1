@@ -124,7 +124,7 @@
     <string name="contact_error_name">Error de entrada, vuelva a introducir el nombre</string><!-- 提示姓名异常 -->
     <string name="contact_error_mobile">Error de entrada, vuelve a introducir el número de teléfono</string><!-- 提示手机号异常 -->
     <!-- 银行信息 -->
-    <string name="bank_title">Información del contacto</string>
+    <string name="bank_title">拍照识别</string>
     <string name="bank_name_title">Seleccione su banco</string>
     <string name="bank_no_title">El numero de cuenta bancaria</string>
     <string name="bank_no_title2">El numero de cuanta bancaria de nuevo</string>
@@ -370,4 +370,9 @@
     <string name="review_text3">El tiempo de consulta es de 1~5 minutos.</string>
     <string name="review_text4">Una vez que se aprueba la solicitud de préstamo,el préstamo se transferirá a su cuenta.</string>
     <string name="review_btn">Servicio al cliente</string>
+
+    <string name="expandable_card_view_image_content_description">Arrow to expand card</string>
+    <string name="expandable_card_view_icon_content_description">Card icon</string>
+
+    <string name="test_inter">国际化-默认</string>
 </resources>

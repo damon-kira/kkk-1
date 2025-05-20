@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONException
 import com.alibaba.fastjson.JSONObject
 import com.kira.learning.app.BaseRepository
-import com.kira.learning.module.ai.bean.AIResponseInfo
+import com.kira.learning.bean.AIResponseInfo
 import com.common.lib.net.ApiServiceLiveDataProxy
 import javax.inject.Inject
 

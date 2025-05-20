@@ -3,7 +3,10 @@ package com.kira.learning.util.image
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.provider.MediaStore
 import com.kira.learning.permission.PermissionHelper
 import java.io.File
 import java.io.IOException
@@ -48,4 +51,26 @@ object ImagePathUtil {
             createInternalTempFile(context)
         }
     }
+
+    fun getPathFromUri(context: Context, uri: Uri): String? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return null
+        }
+        if (uri.scheme != "content") {
+            return uri.path
+        }
+
+        return try {
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            context.contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                    cursor.getString(columnIndex)
+                } else null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
-        resConfigs 'id'
+//        resConfigs 'id' // 资源配置限制
         versionCode 8
         versionName "1.0.5"
 
@@ -163,24 +163,24 @@ dependencies {
     implementation project(path: ':rxpermission')
 //    implementation rootProject.ext.permission.rxpermission
 
-    // rxjava2.0
+    // rxjava3.0
     implementation rootProject.ext.rxjava.rxandroid
     implementation rootProject.ext.rxjava.rxjava
 
-    // CameraX
+    // CameraX 拍照识别图片
     implementation rootProject.ext.camera.core
     implementation rootProject.ext.camera.camera2
     implementation rootProject.ext.camera.lifecycle
     implementation rootProject.ext.camera.view
 
-    //compose
+    //compose 同时支持xml和compose 自定义需求高的用xml
     implementation rootProject.ext.compose.compose_ui
     implementation rootProject.ext.compose.compose_material
     implementation rootProject.ext.compose.compose_runtime
     implementation rootProject.ext.compose.compose_activity
     debugImplementation rootProject.ext.compose.compose_uitooling
 
-    //markwon
+    //markwon AI对话专用
     implementation rootProject.ext.markwon.core
     implementation rootProject.ext.markwon.image
     implementation rootProject.ext.markwon.image_glide

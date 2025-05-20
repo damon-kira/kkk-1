@@ -1,10 +1,10 @@
-package com.kira.learning.module.ai.dao
+package com.kira.learning.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import com.kira.learning.module.ai.bean.AIResponseInfo
+import com.kira.learning.bean.AIResponseInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

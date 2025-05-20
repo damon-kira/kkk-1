@@ -15,9 +15,9 @@ import com.kira.learning.util.image.operator.exception.NoDataException
 import com.kira.learning.util.image.operator.exception.OversizeException
 import com.kira.learning.util.image.operator.exception.QuantityOverflowException
 import com.util.lib.StorageUriUtils.getFileSize
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.FileNotFoundException
 
 object FileOperator {
@@ -40,7 +40,6 @@ object FileOperator {
     @JvmStatic
     fun of(fragment: androidx.fragment.app.Fragment): OperatorManager {
         return createForSupport(fragment.childFragmentManager, OPERATOR_TAG, FileOperator::create)
-
     }
 
     private fun create(agent: AgentContainer): OperatorManager {
@@ -48,9 +47,7 @@ object FileOperator {
     }
 }
 
-
 class OperatorManager(private val container: AgentContainer) {
-
     fun selector(): FileSelector {
         return FileSelector(container)
     }
@@ -62,15 +59,10 @@ class FileSelector(private val container: AgentContainer) {
     }
 
     private var mMimeType: Array<String> = arrayOf("*/*")
-
     private var mMinCount: Int = 1
-
     private var mMaxCount: Int = 1
-
     private var mSingleMaxSize: Long = Long.MAX_VALUE
-
     private var mTotalMaxSize: Long = Long.MAX_VALUE
-
 
     fun mineTypes(types: Array<String>): FileSelector {
         mMimeType = types
@@ -117,7 +109,7 @@ class FileSelector(private val container: AgentContainer) {
             container.startActivityResult(
                 intent,
                 REQ_SELECTOR_CODE
-            ) { _: Int, resultCode: Int, data: Intent? ->
+            ) { _: Int, resultCode: Int, data: Intent ->
                 if (resultCode == Activity.RESULT_CANCELED) {
                     callback.onCancel()
                     return@startActivityResult
@@ -134,52 +126,56 @@ class FileSelector(private val container: AgentContainer) {
     }
 
     @SuppressLint("CheckResult")
-    private fun handleMultiResult(intent: Intent?, callback: ResultCallback<SelectResult>) {
+    private fun handleMultiResult(intent: Intent, callback: ResultCallback<SelectResult>) {
         val activity = container.getActivity()!!
-        Observable.just(intent).map {
-            val clipData = intent?.clipData ?: throw NoDataException()
-            val resultList: MutableList<Uri> = mutableListOf()
-            val itemCount = clipData.itemCount
-            if (itemCount > mMaxCount) throw QuantityOverflowException()
-            var totalSize = 0L
-            (0..itemCount).forEach {
-                val uri = clipData.getItemAt(it).uri
-                val size = getFileSize(activity, uri) ?: throw FileNotFoundException()
-                totalSize += size
-                if (size > mSingleMaxSize || totalSize > mTotalMaxSize) throw OversizeException()
-                resultList.add(uri)
-            }
-            return@map SelectResult().apply { data = resultList }
+        Observable.just(intent)
+            .flatMap({ intent ->
+                val clipData = intent.clipData ?: throw NoDataException()
+                val itemCount = clipData.itemCount
+                if (itemCount > mMaxCount) throw QuantityOverflowException()
 
-        }.subscribeOn(Schedulers.io())
+                Observable.range(0, itemCount)
+                    .concatMap { index ->
+                        Observable.fromCallable {
+                            val uri = clipData.getItemAt(index).uri
+                            val size = getFileSize(activity, uri) ?: throw FileNotFoundException()
+                            uri to size
+                        }
+                            .subscribeOn(Schedulers.io())
+                    }
+                    .scan(mutableListOf<Uri>() to 0L) { (list, total), (uri, size) ->
+                        if (size > mSingleMaxSize) throw OversizeException()
+                        val newTotal = total + size
+                        if (newTotal > mTotalMaxSize) throw OversizeException()
+                        list.apply { add(uri) } to newTotal
+                    }
+                    .lastOrError()
+                    .map { (list, _) -> SelectResult().apply { data = list } }
+                    .toObservable()
+            }, true) // delayErrors = true to collect all errors before propagating
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                callback.onFailed(it)
-            })
-
+            .subscribe(
+                { result -> callback.onSuccess(result) },
+                { error -> callback.onFailed(error) }
+            )
     }
 
     @SuppressLint("CheckResult")
-    private fun handleSingleResult(intent: Intent?, callback: ResultCallback<SelectResult>) {
+    private fun handleSingleResult(intent: Intent, callback: ResultCallback<SelectResult>) {
         Observable.just(intent)
             .map {
-                val uri = intent?.data ?: throw NoDataException()
+                val uri = intent.data ?: throw NoDataException()
                 val size = getFileSize(container.getActivity()!!, uri)
                     ?: throw FileNotFoundException()
                 if (size > mSingleMaxSize) throw OversizeException()
-                return@map SelectResult().apply { data = listOf(uri) }
+                SelectResult().apply { data = listOf(uri) }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                callback.onSuccess(it)
-            }, {
-                callback.onFailed(it)
-            })
+            .subscribe(
+                { result -> callback.onSuccess(result) },
+                { error -> callback.onFailed(error) }
+            )
     }
 }
-
-
-

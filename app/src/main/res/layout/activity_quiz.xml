@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 进度条 -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <!-- 题目容器 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpage2_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- 控制按钮 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnPrevious"
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="上一题"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="下一题"/>
+    </LinearLayout>
+</LinearLayout>

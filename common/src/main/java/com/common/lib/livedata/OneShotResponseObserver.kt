@@ -5,9 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.common.lib.net.bean.BaseResponse
 
-/**
- * Created by weisl on 2019/10/23.
- */
 class OneShotResponseObserver<T>(
     private val data: LiveData<BaseResponse<T>>,
     private val changedFn: (BaseResponse<T>?) -> Unit

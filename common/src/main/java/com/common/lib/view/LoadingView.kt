@@ -15,9 +15,6 @@ import com.common.lib.R
 import com.util.lib.dp
 import com.util.lib.log.logger_i
 
-/**
- * created by wangjiazhen 2018/12/29
- */
 class LoadingView : View {
     companion object {
         const val TAG = "LoadingView"

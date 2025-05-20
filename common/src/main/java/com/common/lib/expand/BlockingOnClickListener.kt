@@ -2,10 +2,6 @@ package com.common.lib.expand
 
 import android.view.View
 
-/**
- * Created by weisl on 2019/10/17.
- */
-
 fun View.setBlockingOnClickListener(listener: View.OnClickListener) {
     setOnClickListener(object : BlockingOnClickListener() {
         override fun onValidClick(view: View?) {

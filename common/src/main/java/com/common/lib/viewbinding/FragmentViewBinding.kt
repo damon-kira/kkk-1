@@ -10,12 +10,6 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-/**
- * Created by weishl on 2023/3/24
- *
- */
-
-
 //反射
 inline fun <reified VB : ViewBinding> Fragment.bindView() = FragmentBindingDelegate(VB::class.java)
 

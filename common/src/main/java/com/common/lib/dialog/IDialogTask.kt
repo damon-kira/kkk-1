@@ -4,10 +4,6 @@ import androidx.annotation.IntRange
 import com.common.lib.dialog.DialogPriority.HIGH
 import com.common.lib.dialog.DialogPriority.LOW
 
-/**
- * Created by weishl on 2020/4/8
- *
- */
 interface IDialogTask {
 
     fun addDialog(dialog: IDialog, @IntRange(from = HIGH.toLong(),to = LOW.toLong()) priority: Int = DialogPriority.NORMAL, mode: DialogHandleMode = DialogHandleMode.SAME_PRIORITY_LAST)

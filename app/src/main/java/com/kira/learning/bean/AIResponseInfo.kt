@@ -1,4 +1,4 @@
-package com.kira.learning.module.ai.bean
+package com.kira.learning.bean
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

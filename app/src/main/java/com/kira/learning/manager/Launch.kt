@@ -38,6 +38,9 @@ import com.kira.learning.module.setting.SettingActivity
 import com.kira.learning.module.upload.UploadActivity
 import com.kira.learning.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
+import com.kira.learning.module.answer.AnswerActivity
+import com.kira.learning.module.answer.CourseActivity
+import com.kira.learning.module.quiz.QuizActivity
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
@@ -190,7 +193,7 @@ object Launch {
     fun skipPhotographActivity(context: Context){
         launch(context, PhotographActivity::class.java)
     }
-    fun skipCourseActivity(context: Context){
+    fun skipAIChatActivity(context: Context){
 //        launch(context, CourseActivity::class.java)
         launch(context, AIChatActivity::class.java)
     }
@@ -198,11 +201,20 @@ object Launch {
     fun skipCodingActivity(context: Context){
         launch(context, CodingActivity::class.java)
     }
+    fun skipCourseActivity(context: Context){
+        launch(context, CourseActivity::class.java)
+    }
     fun skipAIIMActivity(context: Context){
         launch(context, AIChatActivity::class.java)
     }
     fun skipChatActivity(context: Context){
         launch(context, ChatActivity::class.java)
+    }
+    fun skipAnswerActivity(context: Context){
+        launch(context, AnswerActivity::class.java)
+    }
+    fun skipQuizActivity(context: Context){
+        launch(context, QuizActivity::class.java)
     }
 
     /**

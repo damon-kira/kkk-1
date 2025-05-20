@@ -236,4 +236,13 @@
         <attr name="pv_dividerColor" format="color" />
         <attr name="pv_textSize" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="ExpandableCardView">
+        <attr name="title_expandableCardView" format="string"/>
+        <attr name="icon_expandableCardView" format="reference"/>
+        <attr name="inner_view" format="reference"/>
+        <attr name="expandOnClick" format="boolean"/>
+        <attr name="animationDuration" format="integer"/>
+        <attr name="startExpanded" format="boolean"/>
+    </declare-styleable>
 </resources>

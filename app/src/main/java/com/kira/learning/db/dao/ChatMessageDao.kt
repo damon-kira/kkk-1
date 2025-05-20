@@ -1,10 +1,10 @@
-package com.kira.learning.module.ai.dao
+package com.kira.learning.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.kira.learning.module.ai.bean.ChatMessage
+import com.kira.learning.bean.ChatMessage
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,8 +18,8 @@ interface ChatMessageDao {
     @Insert
     suspend fun insertMessages(messages: List<ChatMessage>)
 
-    // 根据会话ID查询所有消息（按时间倒序）
-    @Query("SELECT * FROM ai_chat_message WHERE conversationId = :conversationId ORDER BY timestamp DESC")
+    // 根据会话ID查询所有消息（按时间倒序DESC ,正序 ASC）
+    @Query("SELECT * FROM ai_chat_message WHERE conversationId = :conversationId ORDER BY timestamp ASC")
     fun getMessagesByConversation(conversationId: Long): Flow<List<ChatMessage>>
 
     // 更新消息内容

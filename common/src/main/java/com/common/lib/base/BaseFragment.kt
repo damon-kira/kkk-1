@@ -15,10 +15,6 @@ import com.common.lib.dialog.showLoadingDialog
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 
-/**
- * Created by weisl on 2019/9/24.
- * laotie#liuliuliu
- */
 open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListener,
     View.OnAttachStateChangeListener, ILoading, IFragmentSwitch, IFragmentTouch {
 

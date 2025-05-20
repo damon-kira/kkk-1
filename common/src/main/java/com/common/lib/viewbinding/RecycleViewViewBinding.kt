@@ -6,10 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-/**
- * Created by weishl on 2023/3/24
- *
- */
 inline fun <reified VB : ViewBinding> newBindingViewHolder(parent: ViewGroup): BindingViewHolder<VB> {
     val method = VB::class.java.getMethod(
         "inflate",

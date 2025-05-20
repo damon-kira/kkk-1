@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_answer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- 问题描述 -->
+    <TextView
+        android:id="@+id/tv_layout_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.2"
+        android:text="Find the long-term (steady-state) concentration of salt in the tank."
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/layout_answer"
+        app:layout_constraintTop_toTopOf="@id/layout_answer" />
+    <!-- 步骤容器 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/layout_question_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        android:overScrollMode="always"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tv_layout_question"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/item_message" />
+
+    <!-- 答案展示 -->
+    <TextView
+        android:id="@+id/tv_layout_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Answer: 10.0"
+        android:textColor="#28A745"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/layout_question_rv" />
+
+    <!-- 反馈区域 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/iv_layout_answer_like"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/kun" />
+
+        <ImageButton
+            android:id="@+id/iv_layout_answer_dislike"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/selector_me_head" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

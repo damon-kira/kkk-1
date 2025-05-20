@@ -3,6 +3,7 @@ package com.kira.learning.app
 import androidx.lifecycle.ViewModel
 import com.kira.learning.di.ViewModelKey
 import com.kira.learning.module.ai.AIChatViewModel
+import com.kira.learning.module.answer.vm.AnswerViewModel
 import com.kira.learning.module.appupdate.AppUpdateViewModel
 import com.kira.learning.module.banklist.BankCardViewModel
 import com.kira.learning.module.chat.ui.ChatViewModel
@@ -18,6 +19,7 @@ import com.kira.learning.module.process.contact.ContactViewModel
 import com.kira.learning.module.process.face.FaceViewModel
 import com.kira.learning.module.process.kyc.KycViewModel
 import com.kira.learning.module.process.personalinfo.PersonalViewModel
+import com.kira.learning.module.quiz.vm.QuizViewModel
 import com.kira.learning.module.repay.RepayCheckViewModel
 import com.kira.learning.module.repay.RepayTabViewModel
 import com.kira.learning.module.repaydetail.RepayDetailViewModel
@@ -144,4 +146,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChatViewModel::class)
     abstract fun bindChatViewModel(viewModel: ChatViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AnswerViewModel::class)
+    abstract fun bindAnswerViewModel(viewModel: AnswerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuizViewModel::class)
+    abstract fun bindQuizViewModel(viewModel: QuizViewModel): ViewModel
 }

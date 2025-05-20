@@ -7,9 +7,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.common.lib.base.BaseFragment
 import com.util.lib.log.logger_e
 
-/**
- * Created by weisl on 2018/12/28.
- */
 object FragmentHelper {
 
     /**

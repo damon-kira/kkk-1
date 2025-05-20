@@ -3,11 +3,6 @@ package com.common.lib.net
 import okhttp3.Interceptor
 import java.util.concurrent.TimeUnit
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/2 3:47 下午
- */
 class NetOptions {
 
 

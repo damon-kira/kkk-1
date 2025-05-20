@@ -33,7 +33,7 @@
             android:id="@+id/tv_demo_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Demo name"
+            android:text="@string/test_inter"
             android:layout_weight="1"
             android:layout_marginLeft="24dp"
             android:textColor="@color/color_fe4f4f"

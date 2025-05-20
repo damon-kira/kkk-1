@@ -16,9 +16,6 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.ifShow
 import com.util.lib.sp
 
-/**
- * Created by weisl on 2019/10/22.
- */
 class ToolbarLayout : RelativeLayout {
 
     private val GRAVITY_LEFT = 1

@@ -1,6 +1,7 @@
 package com.kira.learning.module.refused
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.kira.learning.module.home.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 class BlackFragment: BaseHomeFragment() {
@@ -43,8 +45,9 @@ class BlackFragment: BaseHomeFragment() {
             it.tvDemoName.setText("拍照识别")
         }
         mBinding.inclueDemoLayout2.let {
-            it.tvDemoName.setText("网络库配置")
+            it.tvDemoName.setText("题目")
             it.tvBtn.setBlockingOnClickListener {
+                Launch.skipAnswerActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout3.let {
@@ -58,6 +61,15 @@ class BlackFragment: BaseHomeFragment() {
         }
         mBinding.inclueDemoLayout6.let {
             it.tvDemoName.setText("视频")
+        }
+        mBinding.inclueDemoLayout7.let {
+            it.tvDemoName.setText("测验")
+            it.tvBtn.setOnClickListener {
+//                Log.d("Language", "当前语言: ${Locale.getDefault().language}")
+//                Log.d("Language", "完整地区: ${Locale.getDefault()}")
+//                activity?.recreate()
+                Launch.skipQuizActivity(getSupportContext())
+            }
         }
 
 //        mBinding.inclueRepay.tvBtn.setBlockingOnClickListener{

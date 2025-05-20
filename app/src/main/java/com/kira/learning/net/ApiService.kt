@@ -1,9 +1,11 @@
 package com.kira.learning.net
 
 import com.kira.learning.bean.resp.*
-import com.kira.learning.module.ai.bean.AIResponseInfo
+import com.kira.learning.bean.AIResponseInfo
 import com.common.lib.net.bean.BaseResponse
-import io.reactivex.Flowable
+import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.bean.QuizInfo
+import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -145,5 +147,13 @@ interface ApiService {
     @POST("/v1/chat/completions123456")
     @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     fun aiSendRequest(@Body body: RequestBody): Flowable<BaseResponse<AIResponseInfo>>
+
+    @POST("/v1/chat/searchQuestion")
+    @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
+    fun searchQuestion(@Body body: RequestBody): Flowable<BaseResponse<QuestionProcessInfo>>
+
+    @POST("/v1/chat/getQuizInfo")
+    @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
+    fun getQuizInfo(@Body body: RequestBody): Flowable<BaseResponse<QuizInfo>>
 
 }

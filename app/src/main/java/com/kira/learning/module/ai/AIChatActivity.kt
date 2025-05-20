@@ -12,19 +12,21 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityAiimBinding
 import com.kira.learning.manager.Launch
-import com.kira.learning.module.ai.bean.ChatMessage
-import com.kira.learning.module.ai.bean.Conversation
+import com.kira.learning.bean.ChatMessage
+import com.kira.learning.bean.Conversation
 import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import io.noties.markwon.image.glide.GlideImagesPlugin
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,7 +49,7 @@ class AIChatActivity : BaseActivity() {
     private var conversation: Conversation? = null
     private var messageUser: ChatMessage? = null
 
-    lateinit var mAdapter:AIChatAdapter
+    lateinit var mAdapter: AIChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,11 +67,12 @@ class AIChatActivity : BaseActivity() {
         val markwon = Markwon.builder(this)
             .usePlugin(GlideImagesPlugin.create(this))
             .build()
-        mAdapter = AIChatAdapter(chatMessages,markwon,"kunkun",mBinding.chatRecyclerView ).also {
+        mAdapter = AIChatAdapter(chatMessages, markwon, "kunkun", mBinding.chatRecyclerView).also {
             it.setHasStableIds(true)
         }
 
-        mBinding.chatRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mBinding.chatRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding.chatRecyclerView.adapter = mAdapter
 
         val sharedPreferences = getSharedPreferences("kimiChat", MODE_PRIVATE)
@@ -77,6 +80,7 @@ class AIChatActivity : BaseActivity() {
             "API_KEY",
             "sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU"
         )
+
 
 //        ChatDatabaseHelper(this).use { chatDatabaseHelper ->
 //            // 清空对话
@@ -120,6 +124,8 @@ class AIChatActivity : BaseActivity() {
         // 初始化AI
         initChat(sharedPreferences, "kunkun")
 
+        regionChat()
+
         // 当用户点击发送按钮时，创建消息并更新 UI
         userSend!!.setOnClickListener(object : View.OnClickListener {
             private var messageBot: ChatMessage? = null
@@ -131,10 +137,18 @@ class AIChatActivity : BaseActivity() {
 
                 val messageText = mBinding.messageEditText.text.toString().trim { it <= ' ' }
                 if (!messageText.isEmpty()) {
-                    messageUser = ChatMessage(content = messageText,isUser = "USER", conversationId = conversationId)
+                    messageUser = ChatMessage(
+                        content = messageText,
+                        isUser = "USER",
+                        conversationId = conversationId
+                    )
                     chatMessages.add(messageUser!!)
 
-                    messageBot = ChatMessage(content = "KunKun思考中...",isUser = "BOT", conversationId = conversationId)
+                    messageBot = ChatMessage(
+                        content = "KunKun思考中...",
+                        isUser = "BOT",
+                        conversationId = conversationId
+                    )
                     chatMessages.add(messageBot!!)
 
                     textBar.text = "60 S"
@@ -187,7 +201,7 @@ class AIChatActivity : BaseActivity() {
 //                                false,
 //                                conversationId
 //                            )
-                            Log.e(TAG, "onFinish: 倒计时结束", )
+                            Log.e(TAG, "onFinish: 倒计时结束")
                             userSend!!.setEnabled(true)
                             // 更新并保存消息
                             //AddAMsgToSQLite(messageBot, chatDatabaseHelper);
@@ -217,15 +231,35 @@ class AIChatActivity : BaseActivity() {
 //        });
     }
 
+    private fun regionChat() {
+        //20250513422088
+        mViewModel.setConversation(20250513422088)
+        conversationId = 20250513422088
+        lifecycleScope.launch {
+            mViewModel.messages.collect { messages ->
+                chatMessages.clear()
+                chatMessages.addAll(messages)
+                if (mAdapter.itemCount > 0) {
+                    mAdapter.notifyItemChanged(mAdapter.itemCount - 1)
+                    mBinding.chatRecyclerView.scrollToPosition(mAdapter.itemCount - 1)
+                }
+            }
+        }
+    }
+
     private fun initObserver() {
         mViewModel.aiimLiveData.observerNonSticky(this) {
             if (it.isSuccess()) {
                 it.getData()?.let { data ->
                     // Success
                     val responseMessage = data.choices[0].message.content
-                    Log.e(TAG, "initObserver: 请求成功 ${responseMessage}", )
+                    Log.e(TAG, "initObserver: 请求成功 ${responseMessage}")
                     chatMessages.removeAt(chatMessages.lastIndex)
-                    val messageBot = ChatMessage(content = responseMessage, isUser = "BOT", conversationId = conversationId)
+                    val messageBot = ChatMessage(
+                        content = responseMessage,
+                        isUser = "BOT",
+                        conversationId = conversationId
+                    )
                     chatMessages.add(messageBot)
 
                     //添加数据库

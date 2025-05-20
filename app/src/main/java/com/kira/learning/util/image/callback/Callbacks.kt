@@ -3,7 +3,7 @@ package com.kira.learning.util.image.callback
 import android.content.Intent
 
 
-typealias ContainerCallback = (requestCode: Int, resultCode: Int, data: Intent?) -> Unit
+typealias ContainerCallback = (requestCode: Int, resultCode: Int, data: Intent) -> Unit
 
 interface ResultCallback<R> {
     fun onSuccess(result: R)

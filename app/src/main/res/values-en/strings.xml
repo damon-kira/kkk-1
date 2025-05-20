@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Kira learning</string>
+    <string name="home_loan">Hogar</string>
+    <string name="home_account">Personal</string>
+    <string name="home_repay">Demo</string>
+    <string name="phone_hint">Número de teléfono</string>
+    <string name="sms_hint">Ingrese 4 dígitos para la verificación</string>
+    <string name="sms_otp">Enviar OTP</string>
+
+    <string name="normal_text">--</string>
+    <string name="days">%s días</string>
+    <string name="seconds">%ss</string>
+    <string name="day">días</string>
+    <string name="selector_s">Elección %s</string>
+    <string name="error_hint_blank">&#160;&#160;&#160;</string>
+    <string name="invalid_hint">Su cuenta ya ha iniciado sesión en otro dispositivo, inténtelo de nuevo</string>
+    <string name="amount_unit">$&#160;%s</string>
+
+    <string name="logout_no">No</string>
+    <string name="logout_yes">Sí</string>
+
+    <string name="repeat_error_title">Solicitud fallida</string>
+
+    <string name="webview_ssl_hint">Validación de certificado SSL fallido</string>
+    <string name="copy_success">Se copió el número de cuenta</string>
+
+    <string name="login_text">Continuar</string>
+    <string name="protocol_params"> Acuerdo de Privacidad</string>
+    <string name="login_protocol">Hacer clic en Continuar indica que ha leído y acepta el %s</string>
+    <string name="login_hint_title">Por qué nos elije ？</string>
+    <string name="login_hint1">Solicitar en línea un préstamo fácilmente</string>
+    <string name="login_hint2">Aprobación rápida y de alta eficiencia</string>
+    <string name="login_hint3">Límites elevado de crédito, sin aval</string>
+    <string name="login_sms_error">Código incorrecto. Intenta de nuevo</string>
+    <string name="login_phone_error">Por favor, introduzca el número de móvil correcto</string>
+    <string name="login_voice_params">Intenta recibirlo por mensaje de voz</string>
+    <string name="login_voice">¿No lo recibiste? %s</string>
+
+    <string name="home_banner_text">Préstamo confiable</string>
+    <string name="loan_apply">Obtener monto del prestamo</string>
+    <string name="login_amount_hint">Obtener de inmediato</string>
+    <string name="login_amount">$5.000.000</string>
+    <string name="login_mobile_hint">Utilice el número de móvil asociado a su ID para registrarse/iniciar sesión</string>
+    <string name="home_loan_amount_hint">Cantidad prestable hasta</string>
+    <string name="amount_50000">$50.000</string>
+    <string name="period_91_365">91～365</string>
+    <string name="loan_period_text">Ciclo</string>
+    <string name="loan_interest">0.05%</string>
+    <string name="loan_interest_text">Interés</string>
+    <string name="loan_apr">18.25%</string>
+    <string name="loan_apr_text">APR</string>
+    <string name="no_product">Actualmente no hay productos de préstamo</string>
+    <string name="no_wifi">Comprueba tu conexión a Internet</string>
+    <string name="review_hint">Nota: No transfiera dinero a ninguna cuenta personal</string>
+    <string name="hi_user">Hi,%s</string>
+    <string name="review_left">Aplicación exitosa</string>
+    <string name="review_right">Fondos acreditado</string>
+    <string name="review_mid">Auditoría aprobada</string>
+    <string name="review_bottom_hint">El préstamo se está procesando y se emitirá a la cuenta bancaria que completó después de que el procesamiento sea exitoso. Espere por favor</string>
+    <string name="repay_period">Número de plazos</string>
+    <string name="repay_date">Fecha de Pago</string>
+    <string name="repay_btn">Pagar ahora</string>
+    <string name="overdue_tag">%s días \nde retraso</string>
+    <string name="dialog_update">Actualizar</string>
+
+    <string name="refused_hint">Reseña rechazada</string>
+    <string name="refused_days">Periodo de préstamo</string>
+    <string name="refused_date">Fecha de rechazo</string>
+    <string name="refused_amount">Monto del préstamo</string>
+    <string name="refused_time">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente después del %s</string>
+
+    <!-- 复贷 -->
+    <string name="repeat_apply">Obtener dinero ahora</string>
+    <string name="interest_text">Tipo interés diario</string>
+    <string name="period_text">Plazo</string>
+    <string name="total_repay">Pago total</string>
+    <string name="total_orders">Número de orden</string>
+    <string name="total_order_hint">Pago pendiente</string>
+    <string name="orders">%s ordenes</string>
+    <string name="product_tag_risk">Monto alto</string>
+    <string name="product_tag_safety">100% Aprobado</string>
+
+    <!--  进件流程填写信息错误提示-->
+    <string name="error_process_hint">Ingrese el %s correcto</string>
+    <!--  个人信息-->
+    <string name="personal_info">Informacion personal</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Por favor ingrese su correo electrónico</string>
+    <string name="education">Educación</string>
+    <string name="education_hint">Por favor elige</string>
+    <string name="address">Provincia y ciudad</string>
+    <string name="address_hint">Por favor elige</string>
+    <string name="address_detail_title">dirección detallada</string>
+    <string name="address_detail">Por favor, introduzca la dirección de casa detallada</string>
+    <string name="marriage">Estado civil</string>
+    <string name="marriage_hint">Seleccione tu estado civil</string>
+    <string name="commit">Próximo paso</string>
+    <string name="process_safe">Cifrado SSL de 256 bits</string>
+    <string name="address_title">Seleccionar provincias y ciudades</string>
+    <!--Por favor ingrese el nombre de la provincia y ciudad a buscar-->
+    <string name="address_search_hint">Por favor buscar</string>
+
+    <!-- 工作信息 -->
+    <string name="work_type">Tipo de trabajo</string>
+    <string name="work_selector">Por favor elige</string>
+    <string name="work_month_income">Ingreso Mensual</string>
+
+    <!-- 联系人 -->
+    <string name="contact_title">Información del contacto</string>
+    <string name="contact_hint">Contacto de emergencia</string>
+    <string name="retationship">Relación</string>
+    <string name="contact_number">Nombre</string>
+    <string name="contact_mobile">Número de teléfono</string>
+    <string name="contact2_relationship">Amigo/colega</string>
+    <string name="contact_dialog_title">Elección de relación</string>
+    <string name="mobile_s">telefónico:%s</string>
+    <string name="error_contact_hint">Contacto</string>
+    <string name="error_mobile_same">El teléfono de contacto no puede ser el mismo</string><!-- 联系人手机号不能是一个 -->
+    <string name="error_mobile_same_login">El número de teléfono de contacto no puede ser su número de teléfono registrado</string><!-- 不能与登录的手机号是一个 -->
+    <string name="contact_no_hint">No se pueden obtener los datos, verifique</string>
+    <string name="contact_input_mobile">Por favor ingrese el número de contacto</string><!-- 提示输入手机号 -->
+    <string name="contact_input_name">Por favor ingrese un nombre de contacto</string><!-- 提示输入姓名 -->
+    <string name="contact_error_name">Error de entrada, vuelva a introducir el nombre</string><!-- 提示姓名异常 -->
+    <string name="contact_error_mobile">Error de entrada, vuelve a introducir el número de teléfono</string><!-- 提示手机号异常 -->
+    <!-- 银行信息 -->
+    <string name="bank_title">拍照识别</string>
+    <string name="bank_name_title">Seleccione su banco</string>
+    <string name="bank_no_title">El numero de cuenta bancaria</string>
+    <string name="bank_no_title2">El numero de cuanta bancaria de nuevo</string>
+    <string name="bank_no_hint">Por favor ingrese su propia cuenta bancaria</string>
+    <string name="bank_no_hint2">Por favor, introduzca la cuenta bancaria de nuevo</string>
+    <string name="bank_card_type">Tipo de Cuenta Bancaria</string>
+    <string name="bank_card_ahorros">AHORROS</string>
+    <string name="bank_card_corriente">CORRIENTE</string>
+    <string name="bank_no_desc">*Use la cuenta bancaria vinculada a su tarjeta de identificación y no use las tarjetas bancarias de otras personas para evitar la falla del préstamo</string>
+    <string name="error_bank_no">Información bancaria incorrecta, intenta de nuevo</string>
+    <string name="bank_hint">¡Atención! Cuando seleccione el Banco Nequi para realizar un pago, por favor, compruebe que tiene suficiente saldo para recibir el pago, de lo contrario el pago fallará.</string>
+
+    <!-- 身份证信息 -->
+    <string name="kyc_title">Verificar identidad</string>
+    <string name="kyc_front_text">Frente (retrato)</string>
+    <string name="kyc_back_text">Foto trasera</string>
+    <string name="kyc_nuip_hint">Por favor complete su número NUIP</string>
+    <string name="kyc_name_hint">Por favor, introduzca el nombre correcto</string>
+    <string name="kyc_surname_hint">Por favor, introduzca el apellido correcto</string>
+    <string name="kyc_gender_hint">Por favor seleccione sexo</string>
+    <string name="kyc_birthday_hint">Por favor seleccione su fecha de nacimiento</string>
+    <string name="kyc_birthday">Fecha de nacimiento</string>
+    <string name="kyc_gender">Genero</string>
+    <string name="kyc_surname">Apellidos</string>
+    <string name="kyc_name">Nombres</string>
+    <string name="kyc_nuip">Número NUIP</string>
+    <string name="kyc_nuip_error">Ingrese el número NUIP correcto</string>
+    <string name="kyc_warning">Consejo: asegúrese de que toda la información sea su  información verdadera, de lo contrario, afectará el préstamo</string>
+    <string name="kyc_top_hint">Fotografía cedula de ciudadania frente</string>
+    <string name="camera">Disparar con cámara</string>
+    <string name="album">Seleccionar del álbum</string>
+    <string name="net_error_title">Datos móviles</string>
+    <string name="net_error_hint">Comprueba si tienes conexión de datos o Wi-Fi e inténtalo de nuevo</string>
+    <string name="net_refresh">Refrescar</string>
+    <string name="net_data">Datos móviles</string>
+    <string name="net_wifi">WIFI</string>
+    <string name="retention_hint">Su cuenta ya ha iniciado sesión en otro dispositivo, inténtelo de nuevo</string>
+    <string name="confirm">Confirmar</string>
+    <string name="amount_text">Monto del préstamo</string>
+    <string name="order_text">Número de orden</string>
+    <string name="total_amount_text">Pago total</string>
+    <string name="first_hint_text">Usted ha cumplido los requisitos para ser  cliente de alta calidad. Rellene informaciones  para recibir premios con crédito efectivo.  Le recomendamos que complete datos  reales para solicitar préstamo más elevado</string>
+    <string name="first_btn">Seguir llenando</string>
+    <string name="first_title">¡Felicidades!</string>
+    <string name="first_top_hint">Límites recibido</string>
+    <string name="process_top_hint">Si te vas ahora, perderás mucho dinero,\n ¿estás seguro de que quieres irte?</string>
+    <string name="kyc_dialog_hint">Ejemplo de tiro</string>
+    <string name="kyc_dialog_hint2">Fotos de ejemplo de referencia del frente de cédula de  ciudadania tomadas correctamente</string>
+    <string name="kyc_dialog_front">Retrato cara</string>
+    <string name="kyc_dialog_back">Revés</string>
+    <string name="kyc_dialog_hint4">Ejemplo incorrecto</string>
+    <string name="kyc_dialog_btn">Comprendido</string>
+    <string name="kyc_dialog_left">incompleto</string>
+    <string name="kyc_dialog_mid">imagen borrosa</string>
+    <string name="kyc_dialog_right">reflexivo</string>
+
+    <string name="dialog_permission_hint1">Acceso a permisos</string>
+    <string name="permission_setting">Verificar</string>
+
+    <!-- 银行账户列表 -->
+    <string name="bank_card_hint">Seleccione una cuenta bancaria para recibir fondos</string>
+    <string name="bank_card_btn_text">Confirmar préstamo %s</string>
+    <string name="bank_add_btn">Añadir cuenta bancaria</string>
+    <string name="dialog_bank_title">nombre del banco</string>
+    <string name="bank_name_search_hint">Introducir el nombre del banco a buscar</string>
+    <string name="bank_card_up_hint">Puede agregar hasta 5 cuentas bancarias. Si la cuenta bancaria agregada no se puede usar y necesita ser reemplazada,  comuníquese con el servicio al cliente</string>
+
+    <!-- 活体 -->
+    <string name="face_failed_title">Reconocimiento facial</string>
+    <string name="face_failed_hint">Reconocimiento facial fallido. Intenta de nuevo</string>
+    <string name="face_failed_btn">Intentar otra vez</string>
+
+    <string name="capture_id_tips">Después de que el reconocimiento de disparo frontal sea exitoso,  ingresará automáticamente al reconocimiento de disparo posterior</string>
+    <string name="capture_front_hint">Ejemplo de un plano frontal</string>
+    <string name="capture_back_hint">Ejemplo de disparo inverso</string>
+    <string name="face_take_hint">Después de colocar la cara completamente en el marco del retrato.Haga clic en Capturar</string>
+
+    <string name="uploading">Revisión de datos de préstamo, tenga paciencia...</string>
+    <string name="uploading_text">Su límite de crédito se evalúa utilizando nuestro  propio algoritmo patentado. La evaluación se basa en el  análisis de la información recopilada de usted. Espere  pacientemente los resultados</string>
+
+    <!--  确认借款页面 -->
+    <string name="auto_confirm_hint">%s | Si no cancela la solicitud de pago después de que finalice la cuenta regresiva, automáticamente solicitará el préstamo por usted</string>
+    <string name="confirm_btn">Obtener dinero ahora</string>
+    <string name="confirm_cancel">No necesito dinero</string>
+    <string name="confirm_apply_hint">El 99% de los usuarios lo eligen</string>
+    <string name="confirm_amount_text">La cantidad que puede pedir prestada</string>
+    <string name="confirm_period">Periódo del Préstamo</string>
+    <string name="toast_level_hint">Por el momento no puedes cambiar tu puntuaje crediticio,éste se incrementa cada vez que pagas a tiempo.</string>
+    <string name="toast_max_amount">Pague a tiempo para obtener una cantidad mayor</string><!-- 当前已是最高金额 -->
+    <string name="toast_mix_amount">Este es el monto mínimo.</string><!-- 当前是最低金额 -->
+    <string name="confirm_title">Confirmar Solicitud</string>
+
+    <string name="tab_repay_overdue">Pago Vencido</string>
+    <string name="tab_repay_normal">@string/history_status_review</string>
+    <string name="tab_repay_btn_hint">Puede pagar varios pedidos al mismo tiempo</string>
+    <string name="repay_empty">Actualmente no hay una orden de préstamo,  vaya y solicite</string>
+
+    <string name="loan_amount_text">Importe real recibido</string>
+    <string name="repay_amount">Monto Pagado</string>
+    <string name="loan_bank">Cuenta bancaria receptora</string>
+    <string name="loan_stage">Número de plazos</string>
+    <string name="laon_detail_text">Plan de pago esperado</string>
+    <string name="repeat_confirm_hint">Si el dinero no se abandona después de las %s, se confirmará automáticamente</string>
+    <string name="repeat_confir_title">Cantidad total del préstamo</string>
+    <string name="repeat_confirm">Confirmación de préstamo</string>
+    <string name="total_amount">Cantidad total realmente recibida</string>
+    <string name="repeat_confirm_btn">Necesito dinero</string>
+    <string name="loan_success_data">%s Préstamo exitoso</string>
+    <string name="total_loan_amount">Cantidad total del préstamo</string>
+    <string name="total_interest_text">Cargo de interés total</string>
+    <string name="loan_list_hint">Productos préstamos</string>
+    <string name="product_name">YaPrésta</string>
+    <string name="product_interest">Interés: %s</string>
+    <string name="repeat_confirm_bottom_hint">*Cuantos más productos solicite, mayor será la tasa de éxito del préstamo</string>
+    <string name="apply_success_title">Aplicación exitosa</string>
+    <string name="apply_success_hint">Congratulations!</string>
+    <string name="apply_success_hint2">Hemos recibido su solicitud de préstamo y  estamos revisando su elegibilidad, espere</string>
+    <string name="defer_title">Detalles de prórroga</string>
+    <string name="defer_top_warning">Nota: No transfiera dinero a ninguna cuenta personal</string>
+    <string name="defer_amount_hint">Tarifas totales de Prórroga</string>
+    <string name="defer_hint_text">La solicitud original se modificará automáticamente después de que la solicitud de prórroga se haya aprobado. Posteriormente, tienes que hacer el pago de acuerdo con la nueva orden</string>
+    <string name="defer_detail_hint">Detalles de la extensión</string>
+    <string name="defer_days">Período de la prórroga</string>
+    <string name="repay_amount_value">Pagar ahora %s</string>
+    <string name="defer_confirm1">Consejos amables</string>
+    <string name="defer_confirm2">Una vez que la solicitud de extensión de pago  sea exitosa, el pedido original se liquidará  automáticamente. Solo debe pagar de  acuerdo con el tiempo de pago del nuevo  pedido, confirme si desea pagar  la tarifa por demora por el pago por demora</string>
+    <string name="defer_apply">Confirmar extensión</string>
+    <string name="defer_amount">pagadero a su vencimiento</string>
+    <string name="account_not_login">Registro/Acceso</string>
+
+    <!-- 个人中心 -->
+    <string name="me_history">Historial</string>
+    <string name="me_bank">Tarjeta bancaria</string>
+    <string name="me_about">Acerca de nosotros</string>
+    <string name="me_protocol">Acuerdo de privacidad</string>
+    <string name="me_feedback">Retroalimentación</string>
+    <string name="me_setting">Sistema</string>
+
+    <string name="me_repay_text1">El monto a paga</string>
+    <string name="me_repay_text2">Pago Vencido</string>
+    <string name="me_repayment">Repayment</string>
+
+    <string name="me_loan_amount_hint">Monto del préstamo</string>
+    <string name="me_loan">Toma dinero ahora</string>
+
+    <string name="me_refused_hint">Lo sentimos, actualmente no es elegible para un préstamoVuelva a intentarlo después del %s</string>
+    <string name="me_hi">Hi,%s</string>
+    <string name="me_custom">contact us</string>
+    <!-- 客服 -->
+    <string name="custom_whatsapp">WhatsApp</string>
+    <string name="custom_telephone">Teléfono</string>
+    <string name="custom_email">ahsjkadkakdl@gmail.com</string>
+    <string name="email_error_hint">未找到邮箱APP</string>
+
+    <string name="setting_title">Sistema</string>
+    <string name="delete_data">Borrar datos</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="delete_hint_title">Consejos amables</string>
+    <string name="delete_hint">Vaciaremos todos tus datos, ¿estás seguro?</string>
+    <string name="delete_btn">Confirmar extensión</string>
+
+    <!-- 历史订单 -->
+    <string name="history_title">Historial</string>
+    <string name="history_not_orders">Sin registro, consigue tu primer préstamo</string>
+    <string name="history_btn">Obtener dinero ahora</string>
+    <string name="history_status_review">Pago en Proceso</string><!-- 审核中 -->
+    <string name="history_status_settle">Fin de orden</string><!-- 结清 -->
+    <string name="history_status_repay">Préstamo Activo</string><!-- 还款中 -->
+    <string name="history_status_refused">Rechazar</string><!-- 拒绝 -->
+    <string name="history_status_failed">Fallar</string><!-- 失效 -->
+
+    <string name="btn_review">Controlar</string> <!--审核中-->
+    <string name="history_btn_failure">Solicitar</string><!-- 订单失效 -->
+    <string name="history_repay_date">Fecha de Pago</string>
+    <string name="history_refused_text">Su pedido ha sido rechazado, intente nuevamente después del %s</string>
+    <string name="history_failure">Su pedido ha caducado, solicite un nuevo préstamo</string>
+    <string name="history_review_date">Fecha de llegada estimada</string>
+    <string name="history_loan">Cantidad prestada</string>
+    <string name="tab_repay_btn">Pago con un clic %s</string>
+    <string name="permission_hint2">Información personal del usuario \nNuestra aplicación recopila datos de la cuenta del usuario, que incluyen la dirección de correo electrónico y la información del perfil público del usuario, como el nombre, el sexo, la foto, el ASID, según la red social o la plataforma de red que utilice, como Google o Facebook, para iniciar sesión en la aplicación. Esta información es necesaria como parte del proceso de registro para acceder a nuestro servicio y también se utiliza para completar automáticamente los campos relevantes en el curso de la interfaz de nuestra aplicación. Nuestra aplicación también recopila el número de teléfono móvil para verificar el estado activo de la SIM en el dispositivo, identificarlo de manera única y evitar fraudes y accesos no autorizados.</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="update_btn">Actualizar ahora</string>
+    <!-- 还款详情 -->
+    <string name="repay_detail_title">Detalles de reembolso</string>
+    <string name="repay_detail_hint">monto de reembolso</string>
+    <string name="detail_repay_date">fecha de vencimiento</string>
+    <string name="repay_status">Pago en Proceso</string>
+    <string name="detail_title">Detalles de la cantidad de reembolso</string>
+    <string name="dialog_loan_amount_text">Monto Recibido</string>
+    <string name="overdue_text">Comisión por Pago Tardío</string>
+    <string name="bank_add_title">Préstamo exitoso</string>
+    <string name="bank_card_save">Guardar</string>
+    <string name="logout_hint">Seguro que deseas Cerrar Sesión？</string>
+    <string name="clear_data_success">Datos borrados con éxito</string>
+
+    <!-- 拉黑 -->
+    <string name="black_text1">测试拍照-图片识别</string>
+    <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
+    <string name="hosta_s">Hasta %s</string>
+
+    <!--最多只能同时申请六个贷款产品-->
+    <string name="toast_product_up">Solo puede solicitar hasta %s productos de préstamo al mismo tiempo</string>
+    <!--您已经申请很多个应用了，达到了申请上限，请明天再来尝试-->
+    <string name="toast_product_app">Ha solicitado muchos productos y ha alcanzado el límite de aplicaciones, vuelva a intentarlo mañana</string>
+    <string name="toast_min_product">El límite mínimo de endeudamiento es un 1</string>
+    <string name="gp_btn">ve a dar una buena reseña</string>
+    <string name="gp_title">¡Haz una buena reseña!</string>
+    <!-- 最少勾选一个产品 -->
+    <string name="gp_msg">Oportunidad de mejorar la tasa de éxito de su  préstamo y aumentar el monto de su  próximo préstamo</string>
+    <string name="extension_btn">Prórroga</string>
+    <string name="apply_status">Estatus de la solicitud</string>
+    <string name="amount_88888">$ 88.888</string>
+
+    <string name="cancel_auto_hint">Considere cuidadosamente, después de  cancelar la solicitud de confirmación  automática, la nueva solicitud puede ser  rechazada, opere con precaución.  ¿Estás seguro de que no quieres el dinero?</string>
+    <string name="consider">Necesito dinero</string>
+    <string name="dialog_confirm_cancel">Confirmar cancelar</string>
+    <string name="wait_confirm">Tomar el dinero</string>
+
+    <string name="recommend_text1">Solicite ahora y obtenga dinero en su cuenta en 3 minutos</string>
+    <string name="recommend_text2">Cuanto más rápida sea la solicitud, mayor será el monto del préstamo y más largo el período del préstamo</string>
+    <string name="recommend_text3">El 99% de los usuarios eligió este producto y la tasa de aprobación es muy alta</string>
+    <string name="recommend_hint">100% Aprobado</string>
+    <string name="recomm_amount_hint">Créditos hasta de</string>
+
+    <!--当前订单已结清，请勿重复操作 。。。详情页面调用还款使用-->
+    <string name="repay_success1">El pedido actual ha sido liquidado, por favor no repita la operación</string>
+    <!--您的订单已结清，无需延期还款。。。展期还款使用-->
+    <string name="repay_success2">Su pedido se ha liquidado, no es necesario extender el reembolso</string>
+    <!--部分订单已经结清，请重新发起。。-->
+    <string name="repay_success3">Parte de pedidos se ha liquidado, por favor envíe de nuevo</string>
+
+    <!-- 复贷审核中 -->
+    <string name="review_item_text1">Pedidos solicitados</string>
+    <string name="review_item_text2">Fecha de solicitud</string>
+    <string name="review_item_orders">Pedidos en revisión</string>
+    <string name="review_item_total">Importe total</string>
+    <string name="review_item_btn">Ver los pedidos</string>
+    <string name="review_item_order_s">%s órdenes</string>
+    <string name="review_title">Revisando</string>
+    <string name="review_text1">Congratulations!</string>
+    <string name="review_text2">Hemos recibido su solicitud de préstamo y estamos revisando la elegibilidad del préstamo.por favor espere pacientemente.</string>
+    <string name="review_text3">El tiempo de consulta es de 1~5 minutos.</string>
+    <string name="review_text4">Una vez que se aprueba la solicitud de préstamo,el préstamo se transferirá a su cuenta.</string>
+    <string name="review_btn">Servicio al cliente</string>
+
+    <string name="expandable_card_view_image_content_description">Arrow to expand card</string>
+    <string name="expandable_card_view_icon_content_description">Card icon</string>
+
+    <string name="test_inter">国际化-English</string>
+</resources>

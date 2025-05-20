@@ -2,7 +2,6 @@ package com.common.lib.net
 
 import android.util.Log
 import com.aes.lib.SignatureManager
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.project.util.AESNormalUtil
 import com.util.lib.GsonUtil
@@ -18,11 +17,6 @@ import java.net.URLEncoder
 import java.nio.charset.Charset
 import java.util.*
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/1 10:13 上午
- */
 class EncryptDecryptInterceptor : Interceptor {
 
     companion object {

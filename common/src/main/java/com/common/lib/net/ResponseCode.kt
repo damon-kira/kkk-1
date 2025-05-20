@@ -1,8 +1,5 @@
 package com.common.lib.net
 
-/**
- * Created by weisl on 2019/8/13.
- */
 object ResponseCode {
 
     const val TAG = "okhttp"

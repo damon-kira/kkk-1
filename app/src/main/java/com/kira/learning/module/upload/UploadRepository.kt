@@ -14,7 +14,7 @@ import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
-import io.reactivex.Flowable
+import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
 class UploadRepository @Inject constructor(private val dataApiService: DataApiService) :

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_answer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/question_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Question 1"
+        android:layout_marginEnd="50dp"
+        android:textColor="#007BFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/item_answer"
+        app:layout_constraintTop_toTopOf="@id/item_answer" />
+
+    <Button
+        android:id="@+id/btn_answer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Swtich"
+        app:layout_constraintEnd_toEndOf="@id/item_answer"
+        app:layout_constraintTop_toTopOf="@id/question_order"
+        app:layout_constraintBottom_toBottomOf="@id/question_order"/>
+
+    <!-- Group 只是逻辑分组，不需要约束 -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/expandable_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="included_view" />
+
+    <include
+        android:id="@+id/included_view"
+        layout="@layout/layout_question"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@id/question_order"
+        app:layout_constraintTop_toBottomOf="@id/question_order" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

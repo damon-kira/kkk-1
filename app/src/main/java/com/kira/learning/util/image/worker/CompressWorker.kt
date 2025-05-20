@@ -13,16 +13,15 @@ import com.kira.learning.util.image.data.CompressParams
 import com.kira.learning.util.image.data.CompressResult
 import com.kira.learning.util.image.data.ResultData
 import com.kira.learning.util.image.exception.BaseException
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.*
-
 
 class CompressWorker(container: AgentContainer, params: CompressParams) :
     BaseWorker<CompressParams, CompressResult>(container, params), ImageCompressor {
-    override fun start(flowData: ResultData?, callback: ResultCallback<CompressResult>) {
 
+    override fun start(flowData: ResultData?, callback: ResultCallback<CompressResult>) {
         val sourceUri = flowData?.uri ?: params.source
         if (sourceUri == null) {
             callback.onFailed(Exception("sourcePath error"))
@@ -40,37 +39,40 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
             callback.onFailed(BaseException("activity is null"))
             return
         }
+
         val outputFile = params.fileToSave ?: ImagePathUtil.createInternalTempFile(activity)
-        val dis = Observable.just(params)
-            .map {
-                val compressor = it.customCompressor ?: this@CompressWorker
-                val compressResult = compressor.compress(
-                    source,
-                    outputFile,
-                    it.bitmapConfig,
-                    it.compressFormat,
-                    it.quality,
-                    it.targetWidth,
-                    it.targetHeight
-                )
-                compressResult
+
+        Observable.just(params)
+            .flatMap { params ->
+                Observable.fromCallable {
+                    val compressor = params.customCompressor ?: this@CompressWorker
+                    compressor.compress(
+                        source,
+                        outputFile,
+                        params.bitmapConfig,
+                        params.compressFormat,
+                        params.quality,
+                        params.targetWidth,
+                        params.targetHeight
+                    )
+                }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if (it) {
-                    val compressData = CompressResult()
-                    compressData.sourceUri = source
-                    compressData.uri = Uri.fromFile(outputFile)
+            .subscribe({ success ->
+                if (success) {
+                    val compressData = CompressResult().apply {
+                        sourceUri = source
+                        uri = Uri.fromFile(outputFile)
+                    }
                     callback.onSuccess(compressData)
                 } else {
                     callback.onFailed(BaseException("compress failed"))
                 }
-            }, {
-                callback.onFailed(it)
+            }, { error ->
+                callback.onFailed(error)
             })
     }
-
 
     override fun compress(
         source: Uri,
@@ -82,84 +84,90 @@ class CompressWorker(container: AgentContainer, params: CompressParams) :
         targetHeight: Int
     ): Boolean {
         val activity = container.getActivity()!!
-        val fd: FileDescriptor =
-            activity.contentResolver.openFileDescriptor(source, "r")?.fileDescriptor!!
-        var bitmap = BitmapFactory.Options().run {
-            inJustDecodeBounds = true
-            BitmapFactory.decodeFileDescriptor(fd, null, this)
-            inSampleSize = calculateInSampleSize(this, params.targetWidth, params.targetHeight)
-            inJustDecodeBounds = false
-            inPreferredConfig = bitmapConfig
-            inTempStorage = ByteArray(16 * 1024)
-            if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.KITKAT) {
-                inPurgeable = true
-                inInputShareable = true
+        return try {
+            // First pass - get image dimensions
+            val options = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+                activity.contentResolver.openFileDescriptor(source, "r")?.use { fd ->
+                    BitmapFactory.decodeFileDescriptor(fd.fileDescriptor, null, this)
+                }
+                inSampleSize = calculateInSampleSize(this, targetWidth, targetHeight)
             }
-            BitmapFactory.decodeFileDescriptor(fd, null, this)
-        }
 
-        val ins: InputStream = activity.contentResolver.openInputStream(source)!!
-        val angle: Int = getRotateDegree(ExifInterface(ins))
-        bitmap = rotateImage(bitmap, angle)
-        var fos: FileOutputStream? = null
-        try {
-            fos = FileOutputStream(outputFile)
-            bitmap.compress(compressFormat, quality, fos)
-        } finally {
-            fos?.close()
+            // Second pass - load compressed bitmap
+            val bitmap = BitmapFactory.Options().apply {
+                inJustDecodeBounds = false
+                inPreferredConfig = bitmapConfig
+                inTempStorage = ByteArray(16 * 1024)
+                if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.KITKAT) {
+                    inPurgeable = true
+                    inInputShareable = true
+                }
+                inSampleSize = options.inSampleSize
+            }.let {
+                activity.contentResolver.openFileDescriptor(source, "r")?.use { fd ->
+                    BitmapFactory.decodeFileDescriptor(fd.fileDescriptor, null, it)
+                }
+            } ?: return false
+
+            // Handle rotation
+            activity.contentResolver.openInputStream(source)?.use { inputStream ->
+                val rotatedBitmap = rotateImage(bitmap, getRotateDegree(ExifInterface(inputStream)))
+                FileOutputStream(outputFile).use { fos ->
+                    rotatedBitmap.compress(compressFormat, quality, fos)
+                }
+                true
+            } ?: false
+        } catch (e: Exception) {
+            false
         }
-        return true
     }
 
-
-    /**
-     * 获取图片的旋转角度
-     * 只能通过原始文件获取，如果已经进行过 bitmap 操作无法获取。
-     */
     private fun getRotateDegree(exif: ExifInterface): Int {
-        var result = 0
-        try {
-            val orientation: Int = exif.getAttributeInt(
+        return try {
+            when (exif.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_NORMAL
-            )
-            when (orientation) {
-                ExifInterface.ORIENTATION_ROTATE_90 -> result = 90
-                ExifInterface.ORIENTATION_ROTATE_180 -> result = 180
-                ExifInterface.ORIENTATION_ROTATE_270 -> result = 270
+            )) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> 90
+                ExifInterface.ORIENTATION_ROTATE_180 -> 180
+                ExifInterface.ORIENTATION_ROTATE_270 -> 270
+                else -> 0
             }
-        } catch (ignore: IOException) {
-            return 0
+        } catch (e: IOException) {
+            0
         }
-        return result
     }
 
     private fun rotateImage(bitmap: Bitmap, angle: Int): Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(angle.toFloat())
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        if (angle == 0) return bitmap
+        return Bitmap.createBitmap(
+            bitmap,
+            0,
+            0,
+            bitmap.width,
+            bitmap.height,
+            Matrix().apply { postRotate(angle.toFloat()) },
+            true
+        )
     }
 
-    /**
-     *
-     * 根据图片原始尺寸和需求尺寸计算压缩比例 -> https://developer.android.google.cn/reference/android/graphics/BitmapFactory.Options#inSampleSize
-     */
     private fun calculateInSampleSize(
         options: BitmapFactory.Options,
         targetWidth: Int,
         targetHeight: Int
     ): Int {
         if (targetWidth <= 0 || targetHeight <= 0) return 1
-        val (height: Int, width: Int) = options.run { outHeight to outWidth }
+        val (height, width) = options.run { outHeight to outWidth }
         var inSampleSize = 1
 
         if (height > targetHeight || width > targetWidth) {
             val halfHeight = height / 2
             val halfWidth = width / 2
-            while (halfHeight / inSampleSize >= targetHeight && halfWidth / inSampleSize >= targetWidth) inSampleSize *= 2
+            while (halfHeight / inSampleSize >= targetHeight && halfWidth / inSampleSize >= targetWidth) {
+                inSampleSize *= 2
+            }
         }
         return inSampleSize
     }
-
-
 }

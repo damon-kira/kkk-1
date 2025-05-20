@@ -3,43 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- 内存卡读写 -->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
-
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 内存卡读写 -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
     <!-- 定位相关 -->
-<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- wifi -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- wifi -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <!-- 录像/照相 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 录像/照相 -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera" />
-    <!--通讯录-->
-<!--    <uses-permission android:name="android.permission.READ_CONTACTS" />-->
-
+    <uses-feature android:name="android.hardware.camera" /> <!-- 通讯录 -->
+    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <!-- 日历权限 -->
-<!--    <uses-permission android:name="android.permission.READ_CALENDAR" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_CALENDAR" />-->
-
-    <!--    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"-->
-    <!--        tools:ignore="ProtectedPermissions" />-->
-
-    <!--读取短信-->
+    <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_CALENDAR" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" -->
+    <!-- tools:ignore="ProtectedPermissions" /> -->
+    <!-- 读取短信 -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 闪光灯 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-
-<!--    <uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -52,17 +38,19 @@
         </intent>
         <intent>
             <action android:name="android.intent.action.PICK" />
+
             <data android:mimeType="*/*" />
         </intent>
         <intent>
             <action android:name="android.intent.action.GET_CONTENT" />
+
             <data android:mimeType="*/*" />
         </intent>
         <intent>
             <action android:name="android.intent.action.MAIN" />
         </intent>
     </queries>
-    <!--Release版本删除android:networkSecurityConfig="@xml/network_security_config"-->
+
     <application
         android:name=".LoanApplication"
         android:allowBackup="true"
@@ -72,6 +60,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="true" />
@@ -86,16 +75,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".module.home.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
-
         <activity
             android:name=".module.process.personalinfo.PersonalInfoActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.process.contact.ContactInfoActivity"
             android:screenOrientation="portrait" />
@@ -147,7 +134,6 @@
         <activity
             android:name=".module.review.RepeatReviewActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".module.applysuccess.ApplySuccessActivity"
             android:screenOrientation="portrait" />
@@ -198,20 +184,25 @@
             android:name=".module.chat.ChatActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.answer.AnswerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.quiz.QuizActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
 
 
         <service
             android:name=".module.service.XjbgdfdfService"
-            android:exported="false" />
-
-        <!-- 适配 -->
-<!--        <meta-data-->
-<!--            android:name="design_width_in_dp"-->
-<!--            android:value="400" />-->
-<!--        <meta-data-->
-<!--            android:name="design_height_in_dp"-->
-<!--            android:value="740" />-->
-
+            android:exported="false" /> <!-- 适配 -->
+        <!-- <meta-data -->
+        <!-- android:name="design_width_in_dp" -->
+        <!-- android:value="400" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="design_height_in_dp" -->
+        <!-- android:value="740" /> -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${pkgName}.provider"
@@ -221,10 +212,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-<!--        <meta-data android:name="com.facebook.sdk.ApplicationId"-->
-<!--            android:value="@string/facebook_app_id"/>-->
-
     </application>
 
 </manifest>

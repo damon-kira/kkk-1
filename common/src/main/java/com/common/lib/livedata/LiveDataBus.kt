@@ -8,9 +8,6 @@ import androidx.lifecycle.Observer
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicBoolean
 
-/**
- * Created by weisl on 2019/10/15.
- */
 object LiveDataBus {
 
     private val bus: ConcurrentHashMap<Class<*>, MutableLiveData<*>> by lazy(LazyThreadSafetyMode.NONE) {

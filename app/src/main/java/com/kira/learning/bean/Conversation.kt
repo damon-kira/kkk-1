@@ -1,4 +1,4 @@
-package com.kira.learning.module.ai.bean
+package com.kira.learning.bean
 
 class Conversation //this.conversationId = conversationId;
     (// 设置一个随机数

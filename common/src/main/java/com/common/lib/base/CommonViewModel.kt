@@ -5,10 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-/**
- * Create by weishl
- * 2022/9/16
- */
 abstract class CommonViewModel: ViewModel() {
 
     protected val TAG = "debug_${this.javaClass.simpleName}"

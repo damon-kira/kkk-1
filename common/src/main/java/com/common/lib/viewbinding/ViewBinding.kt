@@ -1,12 +1,9 @@
 package com.common.lib.viewbinding
 
 import android.app.Dialog
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.ComponentActivity
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-
 
 inline fun <reified VB : ViewBinding> ComponentActivity.binding() =
     lazy {

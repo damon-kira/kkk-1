@@ -7,11 +7,6 @@ import androidx.lifecycle.Lifecycle
 import com.common.lib.base.BaseDialogFragment
 import java.lang.ref.WeakReference
 
-
-/**
- * Created by weishl on 2022/6/7
- *
- */
 interface IDialog {
 
     fun isShowing(): Boolean

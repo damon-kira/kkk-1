@@ -14,8 +14,6 @@ import com.util.lib.dp
 import com.util.lib.log.logger_d
 
 /**
- * author: weishl
- * data: 2019/11/30
  *
  * fragment 软键盘适配
  **/

@@ -1,12 +1,11 @@
 package com.kira.learning
 
 import android.os.Bundle
-import com.kira.learning.databinding.ActivitySplashBinding
-import com.kira.learning.manager.Launch
-import com.kira.learning.module.service.SerManager
-import com.kira.learning.permission.PermissionHelper
 import com.common.lib.base.BaseActivity
 import com.common.lib.viewbinding.binding
+import com.kira.learning.databinding.ActivitySplashBinding
+import com.kira.learning.manager.Launch
+import com.kira.learning.permission.PermissionHelper
 import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +22,10 @@ class SplashActivity : BaseActivity() {
         setContentView(mBinding.root)
         setStatusBar(true, R.color.white, true)
 
-        SerManager.getCustom()
+//        SerManager.getCustom() // 数据上传
 
+//        LanguageUtils.applyLanguage(this, Locale.CHINESE.language)
+//        recreate()
         MainHandler.postDelay({
             reqPermission()
         }, 1500)

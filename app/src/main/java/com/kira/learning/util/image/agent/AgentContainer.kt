@@ -8,7 +8,7 @@ interface AgentContainer {
 
     fun getActivity(): Activity?
 
-    fun startActivityResult(intent: Intent, requestCode: Int, containerCallback: ContainerCallback?)
+    fun startActivityResult(intent: Intent, requestCode: Int, containerCallback: ContainerCallback)
 
 }
 

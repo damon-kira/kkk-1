@@ -10,7 +10,6 @@ import com.common.lib.R
 import com.common.lib.expand.getActivityFromContext
 import com.util.lib.log.logger_e
 
-
 open class DefaultDialog : Dialog, IDialog {
 
     protected val WRAP = 10f

@@ -6,9 +6,6 @@ import android.content.DialogInterface
 import android.view.View
 import com.common.lib.R
 
-/**
- * Created by sunsg on 2018/3/3.
- */
 class DialogManager {
     private var dTitle: String = ""
     private var messageContent: String? = ""

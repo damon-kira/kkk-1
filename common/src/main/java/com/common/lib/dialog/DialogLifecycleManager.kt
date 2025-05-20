@@ -6,10 +6,6 @@ import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import java.util.*
 
-/**
- * Created by weishl on 2020/4/6
- *
- */
 class DialogLifecycleManager constructor(private val host: AppCompatActivity) :
     LifecycleObserver,
     DefaultDialog.OnDialogDismissListener, IDialogTask {

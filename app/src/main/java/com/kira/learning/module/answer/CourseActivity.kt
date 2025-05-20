@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kira.learning.databinding.ActivityCourseBinding
+import com.kira.learning.module.answer.vm.CourseViewModel
 
 class CourseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCourseBinding

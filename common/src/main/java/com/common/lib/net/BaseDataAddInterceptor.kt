@@ -15,11 +15,6 @@ import java.net.URLEncoder
 import java.nio.charset.Charset
 import java.util.*
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/1 10:13 上午
- */
 class BaseDataAddInterceptor : Interceptor {
 
     companion object {

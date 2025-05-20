@@ -35,7 +35,7 @@ class MsgListPopWindow(private val context: Context) : PopAdapter.onItemClickLis
         )
         mPopWindow.isOutsideTouchable = true
         mPopWindow.isTouchable = true
-        popRecycler = view?.findViewById(R.id.pop_recycleview) as RecyclerView
+        popRecycler = view?.findViewById<RecyclerView>(R.id.pop_recycleview)!!
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         popRecycler?.layoutManager = linearLayoutManager

@@ -73,7 +73,7 @@ dependencies {
     //retrofit2.0
     api rootProject.ext.retrofit.retrofit
     api rootProject.ext.retrofit.converter_gson
-    api rootProject.ext.retrofit.adapter_rxjava2
+    api rootProject.ext.retrofit.adapter_rxjava3
     api rootProject.ext.retrofit.gson
     api rootProject.ext.retrofit.logging_interceptor
     api rootProject.ext.retrofit.okhttp

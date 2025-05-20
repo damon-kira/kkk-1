@@ -14,10 +14,10 @@ import com.kira.learning.expand.saveUserInfo
 import com.kira.learning.util.GPInfoUtils
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Flowable // Changed to RxJava3
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers // Changed to RxJava3
+import io.reactivex.rxjava3.disposables.Disposable // Changed to RxJava3
+import io.reactivex.rxjava3.schedulers.Schedulers // Changed to RxJava3
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -102,9 +102,6 @@ class LoginViewModel @Inject constructor(
                 mCodeUUid.joinToString(",")
             )
         ) {
-//            Log.e("iiiit msg:   ",it.msg)
-//            Log.e("iiiit data:   ",it.data.toString())
-//            Log.e("iiiit code:   ",it.code.toString())
             hideLoading()
             if (it.isSuccess()) {
                 val ctx = getAppContext()
@@ -148,7 +145,6 @@ class LoginViewModel @Inject constructor(
             mCountDownHelper.stopCountdown()
             mDown30Mill?.dispose()
             source.lifecycle.removeObserver(this)
-
         }
     }
 

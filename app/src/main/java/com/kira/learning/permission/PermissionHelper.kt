@@ -83,10 +83,10 @@ object PermissionHelper {
     }
 
     /**
-     * 检查并获取权限，此方法目前只是首贷在身份拍照和活体页面调用
+     * 检查并获取权限
      * @param permissions 需要申请的权限
      * @param result 返回的是 $permissions 未给予的权限
-     * @param isNeedShowDialog 是否需要弹权限声明弹窗 true:非复贷会弹  false:不弹
+     * @param isNeedShowDialog 是否需要弹权限声明弹窗
      * */
     fun showDialogIfNeed(
         activity: BaseActivity,

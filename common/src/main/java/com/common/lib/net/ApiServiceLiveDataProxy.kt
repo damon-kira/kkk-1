@@ -2,7 +2,7 @@ package com.common.lib.net
 
 import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
-import io.reactivex.Flowable
+import io.reactivex.rxjava3.core.Flowable
 
 
 object ApiServiceLiveDataProxy {
@@ -24,5 +24,5 @@ object ApiServiceLiveDataProxy {
     fun <T> requestIgnoreLogin(
         flowable: () -> Flowable<BaseResponse<T>>
     ): LiveData<BaseResponse<T>> =
-        LiveDataCall(null,false, flowable)
+        LiveDataCall(null, false, flowable)
 }

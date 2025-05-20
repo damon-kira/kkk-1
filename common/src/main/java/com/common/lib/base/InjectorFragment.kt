@@ -6,10 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.common.lib.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
-/**
- * Create by weishl
- * 2022/9/1
- */
 abstract class InjectorFragment : Fragment() {
 
 //    constructor(layoutId: Int):super(layoutId)

@@ -3,7 +3,7 @@ package com.kira.learning.net
 import com.kira.learning.bean.resp.RspCheckData
 import com.kira.learning.bean.resp.RspResult
 import com.common.lib.net.bean.BaseResponse
-import io.reactivex.Flowable
+import io.reactivex.rxjava3.core.Flowable
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.Headers

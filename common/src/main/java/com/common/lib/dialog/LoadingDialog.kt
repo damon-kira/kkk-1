@@ -6,11 +6,6 @@ import android.view.View
 import com.common.lib.BuildConfig
 import com.common.lib.R
 
-/**
- * Create by weishl
- * 2022/8/31
- */
-
 /** 显示loading框*/
 internal fun Activity.showLoadingDialog(cancelable: Boolean = false): DefaultDialog? {
     val dialog = DefaultDialog(this)

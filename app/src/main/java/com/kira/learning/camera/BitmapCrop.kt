@@ -14,9 +14,9 @@ import com.util.lib.image.getPhotoOrientation
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Flowable // Changed to RxJava3
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers // Changed to RxJava3
+import io.reactivex.rxjava3.schedulers.Schedulers // Changed to RxJava3
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.max
@@ -42,7 +42,6 @@ object BitmapCrop {
             result.invoke(null)
         })
     }
-
 
     fun cropAndCompress(
         activity: BaseActivity,
@@ -70,9 +69,6 @@ object BitmapCrop {
             })
     }
 
-    /**
-     * @param isFront true:前置  false:后置
-     */
     private fun crop(
         activity: BaseActivity,
         originFile: File,
@@ -154,9 +150,8 @@ object BitmapCrop {
                     }
                 }
                 logger_d(TAG,"bitmapwidth=$bitmapWidth, right=${rect.right}  height=$bitmapHeight,,bottom=${rect.bottom} scale=$scale  screen width=$screenW,$screenH")
-//                if (bitmapWidth < rect.right || bitmapHeight < rect.bottom || (bitmapWidth > screenW && bitmapHeight > screenH)) {
+
                 matrix.postScale(scale, scale)
-//                }
 
                 bitmap =
                     Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
@@ -201,7 +196,6 @@ object BitmapCrop {
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-
 
     private fun isScaleCanUsed(
         scale: Float,
@@ -255,5 +249,4 @@ object BitmapCrop {
         }
         return true
     }
-
 }

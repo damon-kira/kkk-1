@@ -7,10 +7,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.util.lib.MainHandler
 import com.util.lib.log.logger_d
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Flowable // Changed to RxJava3
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers // Changed to RxJava3
+import io.reactivex.rxjava3.disposables.Disposable // Changed to RxJava3
+import io.reactivex.rxjava3.schedulers.Schedulers // Changed to RxJava3
 import java.util.concurrent.TimeUnit
 
 // 推荐弹窗帮助类
@@ -38,7 +38,7 @@ class RecommHelper : LifecycleEventObserver {
             .subscribe({
                 callback()
             }, {
-
+                // Error handling remains the same
             })
     }
 

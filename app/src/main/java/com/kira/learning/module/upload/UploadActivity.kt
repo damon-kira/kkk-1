@@ -20,10 +20,10 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -88,7 +88,7 @@ class UploadActivity : BaseProcessActivity() {
         mDisposable = Flowable.just(2).delay(400, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe {  // RxJava3 的 subscribe 方法参数可能有变化
                 mUploadDialog.dismiss()
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
                 Launch.skipMainActivity(this)
@@ -97,7 +97,7 @@ class UploadActivity : BaseProcessActivity() {
     }
 
     override fun onDestroy() {
-        mDisposable?.dispose()
+        mDisposable?.dispose()  // RxJava3 的 dispose() 方法行为与 RxJava2 一致
         mDisposable = null
         super.onDestroy()
     }

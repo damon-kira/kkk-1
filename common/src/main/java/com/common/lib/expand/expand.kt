@@ -6,11 +6,6 @@ import android.app.Service
 import android.content.Context
 import android.content.ContextWrapper
 
-/**
- *@author zhujun
- *@description:
- *@date : 2022/9/15 5:39 下午
- */
 fun getActivityFromContext( context: Context?): Activity? {
     if (context == null) {
         return null

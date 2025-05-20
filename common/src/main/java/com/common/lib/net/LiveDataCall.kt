@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.net.ssl.SSLHandshakeException
-
 
 class LiveDataCall<T>(
     private val clazz: Class<T>?,
@@ -18,6 +17,7 @@ class LiveDataCall<T>(
     private val flowable: () -> Flowable<BaseResponse<T>>
 ) : LiveData<BaseResponse<T>>() {
 
+    // 保存RxJava订阅
     private var mDispose: Disposable? = null
 
     @SuppressLint("CheckResult")
@@ -26,56 +26,53 @@ class LiveDataCall<T>(
             .flatMap {
                 flowable()
             }
-            /*.doOnNext {
-                if (!it.isSuccess()) {
-                    throw HttpResponseException(it.code, it.msg, it.e)
-                }*//* else {
-                    it.parseT(clazz)
-                }*//*
-            }*/
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                logger_d("debug_LiveDataCall", "onActive success = $it")
-                if (!it.isSuccess()) {
-                    val exception = HttpResponseException(it.code, it.msg, it.e)
-                    postValue(getErrorReponse(exception))
+            .subscribe({ response ->
+                logger_d("debug_LiveDataCall", "onActive success = $response")
+                if (!response.isSuccess()) {
+                    // 服务端返回错误码
+                    val exception = HttpResponseException(response.code, response.msg, response.e)
+                    postValue(getErrorResponse(exception))
                     ServiceClient.getInstance().getGlobalFailedListener()
-                        ?.onFailed(getErrorReponse(exception), skipLogin)
+                        ?.onFailed(getErrorResponse(exception), skipLogin)
                 } else {
-                    postValue(it)
+                    postValue(response)
                 }
             }, { throwable ->
-                logger_e("debug_LiveDataCall", "onActive error ===  $throwable")
-                postValue(getErrorReponse(throwable))
+                // 失败回调（网络异常）
+                logger_e("debug_LiveDataCall", "onActive error === $throwable")
+                postValue(getErrorResponse(throwable))
                 ServiceClient.getInstance().getGlobalFailedListener()
-                    ?.onFailed(getErrorReponse(throwable), skipLogin)
+                    ?.onFailed(getErrorResponse(throwable), skipLogin)
             })
     }
 
-
     override fun onInactive() {
         super.onInactive()
-//        mDispose?.dispose()
+        mDispose?.dispose()
     }
 
-    private fun getErrorReponse(throwable: Throwable): BaseResponse<T> {
+    private fun getErrorResponse(throwable: Throwable): BaseResponse<T> {
         var msg: String = ""
         var code: Int = ResponseCode.OTHER_ERROR_CODE
-        if (throwable is HttpResponseException) {
-            code = throwable.code
-            msg = throwable.message.orEmpty()
-        } else if (throwable is SSLHandshakeException) {
-            code = ResponseCode.SSL_ERROR_CODE
+        when (throwable) {
+            is HttpResponseException -> {
+                code = throwable.code
+                msg = throwable.message.orEmpty()
+            }
+            is SSLHandshakeException -> {
+                code = ResponseCode.SSL_ERROR_CODE
+            }
         }
         return BaseResponse(code, null, msg, throwable)
     }
 
     private fun getErrorCode(throwable: Throwable): Int {
-        var code: Int = ResponseCode.OTHER_ERROR_CODE
-        if (throwable is HttpResponseException) {
-            code = throwable.code
+        return if (throwable is HttpResponseException) {
+            throwable.code
+        } else {
+            ResponseCode.OTHER_ERROR_CODE
         }
-        return code
     }
 }

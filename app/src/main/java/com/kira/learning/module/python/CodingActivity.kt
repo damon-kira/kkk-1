@@ -4,17 +4,27 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.chaquo.python.PyException
 import com.chaquo.python.Python
@@ -56,52 +66,65 @@ print(add_multiple_numbers(1.5, 2.5, 4))   # 输出: 8.0
 
     @Composable
     fun Main() {
+        var resultPy by remember{mutableStateOf("")}
         Column {
             stedit.Compose(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.8f),
+                    .fillMaxHeight(0.7f),
                 highlighter = PythonHighlighter
             )
             Space(16)
-            Button({
+            Row (
+                modifier = Modifier
+                    .background(color = Color.White)
+//                    .padding(vertical = 5.dp)
+            ){
+                Button({
 
-                val code = stedit.text
+                    val code = stedit.text
 
-                val result = PythonExecutor.execute(code)
+                    val result = PythonExecutor.execute(code)
 
-                val endResult = buildString {
-                    append("=== 执行结果 ===\n")
-                    when (result) {
-                        is PythonExecutor.ExecutionResult.Success -> {
-                            append("输出:\n${result.output}\n")
-                            if (result.result != null) {
-                                append("返回值: ${result.result}")
+                    val endResult = buildString {
+                        append("=== 执行结果 ===\n")
+                        when (result) {
+                            is PythonExecutor.ExecutionResult.Success -> {
+                                append("输出:\n${result.output}\n")
+                                if (result.result != null) {
+                                    append("返回值: ${result.result}")
+                                }
+                            }
+
+                            is PythonExecutor.ExecutionResult.Error -> {
+                                append("错误: ${result.message}")
                             }
                         }
-
-                        is PythonExecutor.ExecutionResult.Error -> {
-                            append("错误: ${result.message}")
-                        }
                     }
+                    resultPy = "结果：${endResult}"
+                    Log.e("PythonLog", "结果：${endResult}")
+                }) {
+                    Text("测试1")
                 }
-                Log.e("PythonLog", "结果：${endResult}")
-            }) {
-                Text("测试!")
+                Box (modifier = Modifier
+                    .width(10.dp)){}
+                Button({
+                    val result = executePythonCode(stedit.text)
+                    if (result is ExecutionResult.Success) {
+                        resultPy = "结果：${result.output.toString()}"
+                        Log.e("PythonLog", "结果：${result.result.toString()}")
+                        Log.e("PythonLog", "结果：${result.output.toString()}")
+                    }
+                    if (result is ExecutionResult.Error) {
+                        Log.e("PythonLog", "错误：${result.message.toString()}")
+                    }
+                }) {
+                    Text("测试2")
+                }
             }
-            Button({
-                val result = executePythonCode(stedit.text)
-                if (result is ExecutionResult.Success) {
-                    Log.e("PythonLog", "结果：${result.result.toString()}")
-                    Log.e("PythonLog", "结果：${result.output.toString()}")
-                }
-                if (result is ExecutionResult.Error) {
-                    Log.e("PythonLog", "错误：${result.message.toString()}")
-                }
-            }) {
-                Text("测试222")
-            }
+            Text(resultPy)
         }
+
 
     }
 
