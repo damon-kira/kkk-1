@@ -133,7 +133,7 @@ class BaseInfo {
     var operators: String? = null//    手机运营商
 
     @SerializedName("ZfKe")
-    var loanPageStayTime: Long = 0//    贷款页面停留时间
+    var loanPageStayTime: Long = 0//
 
     @SerializedName("Upl3cV1kNO")
     var wifiList: String? = null//    wifi列表json格式：[{ “name”:”ddd”, ”ip”:”163.195.6.6” }]

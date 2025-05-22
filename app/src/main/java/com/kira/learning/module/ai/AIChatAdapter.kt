@@ -59,7 +59,7 @@ class AIChatAdapter(
             holder.setImageResource(R.id.bot_icon, R.drawable.teacher)
             holder.setText(R.id.bot_name, "kira-english")
         } else {
-            holder.setImageResource(R.id.bot_icon, R.drawable.kunkun)
+            holder.setImageResource(R.id.bot_icon, R.drawable.ic_kira_logo)
             holder.setText(R.id.bot_name, "kira-teacher")
         }
         holder.setVisibility(R.id.user_icon, "USER" == item.isUser)
@@ -67,9 +67,16 @@ class AIChatAdapter(
         holder.setVisibility(R.id.messageSend, "USER" == item.isUser)
         holder.setVisibility(R.id.bot_icon, "USER" != item.isUser)
         holder.setVisibility(R.id.bot_name, "USER" != item.isUser)
-        holder.setVisibility(R.id.messageReceive, "USER" != item.isUser)
+        holder.setVisibility(
+            R.id.messageReceive,
+            "USER" != item.isUser && spannable.toString().isNotEmpty()
+        )
         holder.setText(R.id.messageSend, spannable.toString())
         holder.setText(R.id.messageReceive, spannable.toString())
+        holder.setVisibility(
+            R.id.loading_wait,
+            "USER" != item.isUser && spannable.toString().isEmpty()
+        )
 
     }
 

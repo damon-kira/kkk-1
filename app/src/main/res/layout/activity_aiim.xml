@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/LLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_Color"
     android:animateLayoutChanges="true"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bar_shape"
         android:orientation="horizontal"
-        >
+        android:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/brain_clear"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:tint="@color/black_HW"
-            android:src="@drawable/reset"
+            android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:padding="6dp"
-            />
+            android:src="@drawable/reset"
+            android:tint="@color/black_HW" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/eng_learn"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:tint="@color/black_HW"
-            android:src="@drawable/english"
+            android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:padding="6dp"
-            />
+            android:src="@drawable/english"
+            android:tint="@color/black_HW" />
 
         <TextView
             android:id="@+id/TextBar"
@@ -47,8 +44,8 @@
 
             android:gravity="center_vertical|center"
             android:text="Kira"
-            android:textSize="20sp"
             android:textColor="@color/textColor"
+            android:textSize="20sp"
             tools:ignore="MissingConstraints,Suspicious0dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -57,22 +54,32 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/history"
-            android:tint="@color/black_HW"
             android:padding="6dp"
-            />
+            android:src="@drawable/history"
+            android:tint="@color/black_HW" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/other_clear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/other_settings"
-            android:tint="@color/black_HW"
             android:padding="3dp"
-            />
+            android:src="@drawable/other_settings"
+            android:tint="@color/black_HW" />
 
     </LinearLayout>
+    <com.kira.learning.view.ToolbarLayout
+        android:id="@+id/process_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingEnd="10dp"
+        app:tl_back_text_color="@color/white"
+        app:tl_show_custom_icon="true"
+        app:tl_text_gravity="center"
+        app:tl_textsize="18sp"
+        android:background="@color/colorPrimary"
+        app:tl_title="@string/app_name" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -85,9 +92,7 @@
         android:paddingRight="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:ignore="MissingConstraints"
-        tools:listitem="@layout/item_message"
-        />
-
+        tools:listitem="@layout/item_message" />
 
     <LinearLayout
         android:id="@+id/bottom_message_operator"
@@ -104,17 +109,17 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
+            android:layout_margin="6dp"
             android:layout_weight="1"
+            android:background="@drawable/msg_shape"
             android:hint="Type message"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="text"
             android:paddingStart="16dp"
-            android:layout_margin="6dp"
+            android:textAlignment="center"
             android:textColor="@color/black_HW"
             android:textSize="18sp"
-            android:textAlignment="center"
-            android:background="@drawable/msg_shape"
             tools:ignore="HardcodedText,RtlCompat,RtlSymmetry" />
 
         <Button
@@ -124,9 +129,9 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="6dp"
             android:background="@drawable/send_button_select"
-            android:text="发送"
+            android:text="Send"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textColor="@color/textColor"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

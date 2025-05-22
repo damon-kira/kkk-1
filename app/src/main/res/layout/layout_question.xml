@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_answer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
     <!-- 问题描述 -->
     <TextView
         android:id="@+id/tv_layout_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingMultiplier="1.2"
-        android:text="Find the long-term (steady-state) concentration of salt in the tank."
+        android:text="tv_layout_question"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/layout_answer"
         app:layout_constraintTop_toTopOf="@id/layout_answer" />
@@ -27,9 +27,9 @@
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/tv_layout_question"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_layout_question"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/item_message" />
 
@@ -53,19 +53,20 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
             android:id="@+id/iv_layout_answer_like"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/kun" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/alive_ic_mouth" />
 
         <ImageButton
             android:id="@+id/iv_layout_answer_dislike"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/selector_me_head" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginHorizontal="10dp"
+            android:src="@drawable/alive_ic_blink" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

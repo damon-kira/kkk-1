@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <!-- 主容器 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 机器人图标 -->
         <ImageView
             android:id="@+id/bot_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentStart="true"
             android:layout_marginStart="2dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
-            android:src="@drawable/kunkun"
-            android:importantForAccessibility="no" />
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_kira_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- 机器人名称 -->
         <TextView
             android:id="@+id/bot_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="kira—teacher"
-            android:textSize="12sp"
-            android:textColor="@color/black_HW"
-            android:textStyle="bold"
             android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/bot_icon"
+            android:text="kira—teacher"
+            android:textColor="@color/black_HW"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/bot_icon"
+            app:layout_constraintTop_toTopOf="@id/bot_icon"
             tools:ignore="HardcodedText" />
+
+        <!-- 接收消息 -->
         <TextView
             android:id="@+id/messageReceive"
             android:layout_width="wrap_content"
@@ -40,96 +48,116 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="2dp"
-            android:layout_marginBottom="0dp"
-            android:maxWidth="300dp"
-            android:layout_below="@+id/bot_name"
             android:background="@drawable/receiver_message_bubble"
+            android:maxWidth="300dp"
             android:padding="6dp"
             android:text="Bot Message"
             android:textColor="@color/textColor"
-            android:textSize="16sp"
-            android:layout_toEndOf="@+id/bot_icon"
             android:textIsSelectable="true"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/bot_icon"
+            app:layout_constraintTop_toBottomOf="@id/bot_name"
             tools:ignore="HardcodedText" />
 
+        <!-- 加载动画 -->
+        <com.kira.learning.view.LoadingDotsView
+            android:id="@+id/loading_wait"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            app:dotColor="@color/colorPrimary"
+            app:dotSize="30dp"
+            app:layout_constraintStart_toEndOf="@id/bot_icon"
+            app:layout_constraintTop_toBottomOf="@id/bot_name" />
+
+        <!-- 用户图标 -->
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 用户名称 -->
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="User"
-            android:textSize="12sp"
             android:textColor="@color/black_HW"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_toStartOf="@+id/user_icon"
+            app:layout_constraintEnd_toStartOf="@id/user_icon"
+            app:layout_constraintTop_toTopOf="@id/user_icon"
             tools:ignore="HardcodedText" />
 
+        <!-- 发送消息 -->
         <TextView
             android:id="@+id/messageSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/user_name"
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
-            android:layout_toStartOf="@+id/user_icon"
-            android:maxWidth="300dp"
             android:background="@drawable/user_message_bubble"
+            android:maxWidth="300dp"
             android:padding="6dp"
             android:text="User Message"
             android:textColor="@color/textColor"
-            android:textSize="16sp"
             android:textIsSelectable="true"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/user_icon"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
             tools:ignore="HardcodedText" />
 
-        <ImageView
-            android:id="@+id/user_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
-            android:src="@drawable/user"
-            android:importantForAccessibility="no" />
-    </RelativeLayout>
-
+    <!-- 时间显示 -->
     <LinearLayout
         android:id="@+id/msgTime_L"
         android:layout_width="180dp"
         android:layout_height="24dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/time_shape"
         android:gravity="center"
-        android:layout_gravity="center"
+        android:orientation="horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="5dp"
-        android:background="@drawable/time_shape"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/rLayout"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rLayout">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textAlignment="center"
             android:text="时间:"
+            android:textAlignment="center"
             android:textColor="@color/grey_HW"
             tools:ignore="HardcodedText" />
+
         <TextView
             android:id="@+id/testText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textAlignment="center"
             android:text="MM月dd日 HH:mm"
+            android:textAlignment="center"
             android:textColor="@color/grey_HW"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

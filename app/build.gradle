@@ -53,8 +53,10 @@ android {
         exclude("META-INF/LICENSE")
         exclude("META-INF/LICENSE.txt")
         exclude("META-INF/NOTICE.txt")
+        exclude("META-INF/*.version")
     }
-
+    // 显示资源冲突
+    aaptOptions.cruncherEnabled = false
 
     buildFeatures {
         viewBinding = true

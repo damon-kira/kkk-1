@@ -95,7 +95,6 @@
         app:rightIcon_visiblity="gone"
         app:title="@string/bank_no_title" />
 
-    <!-- 首贷进件不显示，添加银行卡时显示 -->
     <!-- 再次确认银行卡号 -->
     <com.kira.learning.view.baseinfo.BaseInfoView
         android:id="@+id/biv_bankno_tow"

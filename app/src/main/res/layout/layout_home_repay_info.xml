@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:paddingBottom="16dp">
 
-    <!-- 有在贷订单 -->
     <TextView
         android:id="@+id/tv_top_hint"
         android:layout_width="match_parent"

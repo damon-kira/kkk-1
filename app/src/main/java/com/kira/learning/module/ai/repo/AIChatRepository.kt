@@ -1,11 +1,11 @@
-package com.kira.learning.module.ai
+package com.kira.learning.module.ai.repo
 
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONException
 import com.alibaba.fastjson.JSONObject
+import com.common.lib.net.ApiServiceLiveDataProxy
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.AIResponseInfo
-import com.common.lib.net.ApiServiceLiveDataProxy
 import javax.inject.Inject
 
 class AIChatRepository @Inject constructor() : BaseRepository() {

@@ -3,7 +3,6 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven {
             url "${rootProject.projectDir.path}/repo"
         }
@@ -19,7 +18,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven {
             url "${rootProject.projectDir.path}/repo"
         }

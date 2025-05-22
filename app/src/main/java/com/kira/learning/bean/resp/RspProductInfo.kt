@@ -35,13 +35,13 @@ class RspProductInfo {
     val swOwF0KJ: Long = 0
         get() = if (GbiDSBdW == 0) 0 else field
     val GqGV3L: Int = 1// 倒计时开关 1 开 0 关
-    val fyEV: ArrayList<FirstConfirmInfo>? = null // 新客户确定额度首页
+    val fyEV: ArrayList<FirstConfirmInfo>? = null
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
     val gQ1J: RepeatRepayInfo? = null // 老客户待还
     val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
 
-    val GbiDSBdW: Int = 0// 剩余申请可贷笔数
+    val GbiDSBdW: Int = 0//
 
     var ocvxDc2fd: String? = null // 审核订单数
     var kfFVSGG2s: String? = null // 审核订单总金额
@@ -62,28 +62,24 @@ class RspProductInfo {
     fun isEmpty(value: String?) = value.isNullOrEmpty() || value == "0"
 }
 
-// 首贷产品信息
 class FirstConfirmInfo {
-    //到手金额
+
     val u5kCNqk: String? = null
         get() = field?.transform()
 
-    //贷款金额,
     val RIoDBuyjO: String? = null
         get() = field?.transform()
     val y5MbVG: String? = null//期数
 
-    // 应还金额
     val b6O2Joc: String? = null
         get() = field?.transform()
 
-    //利息
     val ihm3G2: String? = null
         get() = field?.transform()
-    val WTvE5G: String? = null//贷款周期  "7,14,90,108"
-    val vzXq3u: String? = null // 还款时间"2023-05-01"
-    val ZXEUWfOy: String? = null// 产品id
-    val XbCqhjDV: String? = null// 产品code
+    val WTvE5G: String? = null
+    val vzXq3u: String? = null
+    val ZXEUWfOy: String? = null
+    val XbCqhjDV: String? = null
 }
 
 //"rangeMaxAt":20000,//范围金额最大值
@@ -97,7 +93,6 @@ class FirstConfirmInfo {
 //"isCheck": 1// 是否选中 1：选中 0：未选中,
 ////新增
 //"prTag":"1,2,3"
-// 复贷产品信息
 class RepeatProductInfo {
     //范围金额最大值
     val g7tzi: String? = null

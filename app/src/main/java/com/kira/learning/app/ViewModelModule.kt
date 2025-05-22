@@ -2,7 +2,7 @@ package com.kira.learning.app
 
 import androidx.lifecycle.ViewModel
 import com.kira.learning.di.ViewModelKey
-import com.kira.learning.module.ai.AIChatViewModel
+import com.kira.learning.module.ai.vm.AIChatViewModel
 import com.kira.learning.module.answer.vm.AnswerViewModel
 import com.kira.learning.module.appupdate.AppUpdateViewModel
 import com.kira.learning.module.banklist.BankCardViewModel

@@ -78,8 +78,8 @@
     <color name="color_FDEED4">#FDEED4</color>
     <color name="color_ff9b00">#ff9b00</color>
 
-    <color name="receiveMsg">#FFFFFF</color>
-    <color name="sendMsg">#D5E6DF</color>
+    <color name="receiveMsg">#EBF7FF</color>
+    <color name="sendMsg">#F1F1F1</color>
     <color name="textColor">#191919</color>
     <color name="sendBtnTrue">#14C254</color>
     <color name="sendBtnTrue_eng">#f7abc9</color>

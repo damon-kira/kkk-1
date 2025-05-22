@@ -245,4 +245,10 @@
         <attr name="animationDuration" format="integer"/>
         <attr name="startExpanded" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="LoadingDotsView">
+        <attr name="dotColor" format="color"/>
+        <attr name="dotSize" format="dimension"/>
+        <attr name="animationSpeed" format="integer"/>
+    </declare-styleable>
 </resources>

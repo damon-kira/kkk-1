@@ -1,4 +1,4 @@
-package com.kira.learning.module.ai
+package com.kira.learning.module.ai.vm
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -6,12 +6,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.common.lib.base.BaseViewModel
+import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.bean.AIResponseInfo
 import com.kira.learning.bean.ChatMessage
 import com.kira.learning.db.dao.AIResponseDao
 import com.kira.learning.db.dao.ChatMessageDao
-import com.common.lib.base.BaseViewModel
-import com.common.lib.net.bean.BaseResponse
+import com.kira.learning.module.ai.repo.AIChatRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -29,8 +31,9 @@ class AIChatViewModel @Inject constructor(
 
     val aiimLiveData = generatorLiveData<BaseResponse<AIResponseInfo>>()
 
-    fun sendMessage(sendMessage: String) {
-        showloading()
+    suspend fun sendMessage(sendMessage: String) {
+//        showloading()
+        delay(2000)
         aiimLiveData.addSourceLiveData(
             repository.aiSendRequest(
                 sendMessage, ""
@@ -99,7 +102,7 @@ class AIChatViewModel @Inject constructor(
         }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000), // 5秒无订阅停止流
+            started = SharingStarted.Companion.WhileSubscribed(5000), // 5秒无订阅停止流
             initialValue = emptyList() // 初始值
         )
 

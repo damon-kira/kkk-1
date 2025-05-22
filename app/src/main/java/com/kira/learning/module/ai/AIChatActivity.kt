@@ -9,8 +9,6 @@ import android.view.View
 import android.view.View.OnLongClickListener
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +21,15 @@ import com.kira.learning.bean.Conversation
 import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.kira.learning.expand.RandomCID
+import com.kira.learning.expand.showCustomDialog
+import com.kira.learning.module.ai.vm.AIChatViewModel
+import com.kira.learning.view.ToolbarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import io.noties.markwon.image.glide.GlideImagesPlugin
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -38,9 +39,6 @@ class AIChatActivity : BaseActivity() {
 
     private val mViewModel by lazyViewModel<AIChatViewModel>()
 
-    private var chatRecyclerView: RecyclerView? = null
-    private var messageEditText: EditText? = null
-    private var userSend: Button? = null
     private var chatMessages: ArrayList<ChatMessage> = ArrayList<ChatMessage>()
     private var isFinish = false
     private var countDownTimer: CountDownTimer? = null
@@ -55,14 +53,8 @@ class AIChatActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         setViewModelLoading(mViewModel)
+        initView()
         initObserver()
-
-        chatRecyclerView = findViewById<RecyclerView>(R.id.chatRecyclerView)
-        messageEditText = findViewById<EditText>(R.id.messageEditText)
-        userSend = findViewById<Button>(R.id.userSend)
-        val otherClear = findViewById<ImageView>(R.id.other_clear)
-        val brainClear = findViewById<ImageView>(R.id.brain_clear)
-        val textBar = findViewById<TextView>(R.id.TextBar)
 
         val markwon = Markwon.builder(this)
             .usePlugin(GlideImagesPlugin.create(this))
@@ -81,28 +73,12 @@ class AIChatActivity : BaseActivity() {
             "sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU"
         )
 
+        setOnClickListener(sharedPreferences)
 
 //        ChatDatabaseHelper(this).use { chatDatabaseHelper ->
 //            // 清空对话
 //        }
-        // 清空对话
-        brainClear.setOnClickListener(View.OnClickListener { v: View? ->
-            // 保存之前的聊天记录
-//            saveConversation(chatDatabaseHelper)
-            //dialogClear();
-            // 开启新对话
-            initChat(sharedPreferences, "kunkun")
-            //dialogClear();
-            val tipStr = "KunKun已重新启动！你可以向我提出任何问题。"
-//            val tipInfo = ChatMessage(tipStr, false, conversationId)
 
-//            chatMessages.add(tipInfo)
-            mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1)
-            chatRecyclerView!!.smoothScrollToPosition(mAdapter.getItemCount() - 1)
-
-            //改变UI
-            userSend!!.setBackground(getDrawable(R.drawable.send_button_select))
-        })
         // 英语学习模式
 //        eng_learn.setOnClickListener(View.OnClickListener { v: View? ->
 //            saveConversation(chatDatabaseHelper)
@@ -126,8 +102,35 @@ class AIChatActivity : BaseActivity() {
 
         regionChat()
 
+        // 历史对话
+//        history_chat.setOnClickListener(v->{
+//            Intent intent = new Intent(AIIMActivity.this, HistoryActivity.class);
+//            startActivity(intent);
+//        });
+    }
+
+    private fun setOnClickListener(sharedPreferences: SharedPreferences) {
+        // 清空对话
+        mBinding.brainClear.setOnClickListener(View.OnClickListener { v: View? ->
+            // 保存之前的聊天记录
+//            saveConversation(chatDatabaseHelper)
+            //dialogClear();
+            // 开启新对话
+            initChat(sharedPreferences, "kunkun")
+            //dialogClear();
+            val tipStr = "KunKun已重新启动！你可以向我提出任何问题。"
+//            val tipInfo = ChatMessage(tipStr, false, conversationId)
+
+//            chatMessages.add(tipInfo)
+
+            refreshRecyclerView()
+
+            //改变UI
+            mBinding.userSend.background = getDrawable(R.drawable.send_button_select)
+        })
+
         // 当用户点击发送按钮时，创建消息并更新 UI
-        userSend!!.setOnClickListener(object : View.OnClickListener {
+        mBinding.userSend.setOnClickListener(object : View.OnClickListener {
             private var messageBot: ChatMessage? = null
             private var kimiResponse: String? = null
 
@@ -145,27 +148,30 @@ class AIChatActivity : BaseActivity() {
                     chatMessages.add(messageUser!!)
 
                     messageBot = ChatMessage(
-                        content = "KunKun思考中...",
+                        content = "",
                         isUser = "BOT",
                         conversationId = conversationId
                     )
                     chatMessages.add(messageBot!!)
 
-                    textBar.text = "60 S"
+//                    textBar.text = "60 S"
                     // 初始化isSkip为false,代表是否完成倒计时或kimiResponse已经接收到了解析结果
                     isFinish = false
                     // 设置每1秒更新一次textBar的40秒倒计时，当isFinish为true时，停止倒计时
                     startCountdownTimer()
 
                     // 等待回复途中,禁止发送消息
-                    messageEditText!!.setText("")
+                    mBinding.messageEditText.setText("")
                     mBinding.userSend.isEnabled = false
-//                    logger_e("debug_","已添加 ${mAdapter.getItemCount()}")
+//                    logger_e("debug_","已添加 ${.getItemCount()}")
+                    //添加数据库
+//                    mViewModel.insertMessage(messageUser!!)
 
-                    mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1)
-                    mBinding.chatRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1)
+                    refreshRecyclerView()
 
-                    mViewModel.sendMessage(messageText)
+                    lifecycleScope.launch {
+                        mViewModel.sendMessage(messageText)
+                    }
 
                     // 保存当前对话到历史记录
                 } else {
@@ -181,19 +187,20 @@ class AIChatActivity : BaseActivity() {
                 }
                 countDownTimer = object : CountDownTimer(60000, 1000) {
                     override fun onTick(millisUntilFinished: Long) {
-                        if (!isFinish) {
-                            // Update textBar every second
-                            textBar.setText(
-                                String.format(
-                                    Locale.getDefault(),
-                                    "%d S",
-                                    millisUntilFinished / 1000
-                                )
-                            )
-                        }
+//                        if (!isFinish) {
+//                            // Update textBar every second
+//                            textBar.setText(
+//                                String.format(
+//                                    Locale.getDefault(),
+//                                    "%d S",
+//                                    millisUntilFinished / 1000
+//                                )
+//                            )
+//                        }
                     }
 
                     override fun onFinish() {
+                        // 倒计时结束
                         if (!isFinish) {
                             // 未收到响应时处理超时
 //                            messageBot = ChatMessage(
@@ -202,7 +209,7 @@ class AIChatActivity : BaseActivity() {
 //                                conversationId
 //                            )
                             Log.e(TAG, "onFinish: 倒计时结束")
-                            userSend!!.setEnabled(true)
+                            mBinding.userSend.setEnabled(true)
                             // 更新并保存消息
                             //AddAMsgToSQLite(messageBot, chatDatabaseHelper);
                         }
@@ -218,17 +225,15 @@ class AIChatActivity : BaseActivity() {
 //            startActivity(intent);
 //        });
         //清除页面
-        otherClear.setOnLongClickListener(OnLongClickListener { v: View? ->
+        mBinding.otherClear.setOnLongClickListener(OnLongClickListener { v: View? ->
             dialogClear()
             Toast.makeText(this@AIChatActivity, "对话内容清除成功", Toast.LENGTH_SHORT).show()
             true
         })
+    }
 
-        // 历史对话
-//        history_chat.setOnClickListener(v->{
-//            Intent intent = new Intent(AIIMActivity.this, HistoryActivity.class);
-//            startActivity(intent);
-//        });
+    private fun initView() {
+        setToolbarListener(mBinding.processToolbar)
     }
 
     private fun regionChat() {
@@ -262,16 +267,14 @@ class AIChatActivity : BaseActivity() {
                     )
                     chatMessages.add(messageBot)
 
-                    //添加数据库
                     mViewModel.insertMessage(messageUser!!)
                     mViewModel.insertMessage(messageBot)
                     //tempMessageList.add(messageBot);
 //                            textBar.setText("Kira")
-                    userSend?.isEnabled = true
+                    mBinding.userSend.isEnabled = true
 
                     // mAdapter.no tifyDataSetChanged();
-                    mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1)
-                    mBinding.chatRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1)
+                    refreshRecyclerView()
                 }
             }
         }
@@ -281,6 +284,13 @@ class AIChatActivity : BaseActivity() {
             // 更新 UI（例如显示在 RecyclerView）
         }
     }
+
+    fun refreshRecyclerView() = lifecycleScope.launch {
+        mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1)
+        delay(200)
+        mBinding.chatRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1)
+    }
+
 
     open fun checkOrderResult() {
         Launch.skipMainActivity(this)
@@ -345,16 +355,16 @@ class AIChatActivity : BaseActivity() {
     private fun dialogClear() {
         chatMessages.clear() // 清除所有消息
         mAdapter.notifyDataSetChanged()
-        chatRecyclerView!!.smoothScrollToPosition(mAdapter.getItemCount())
+        mBinding.chatRecyclerView.smoothScrollToPosition(mAdapter.getItemCount())
     }
 
-    companion object {
-        private fun RandomCID(tempStartTimeStamp: Long): Long {
-            val randomNumber = (Math.random() * 1000000L).toLong()
-            val formatter = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
-            val date = Date(tempStartTimeStamp) // 将long时间戳转换为Date对象
-            val formattedDateString = formatter.format(date) // 将Date对象格式化为字符串
-            return formattedDateString.toLong() * 1000000L + randomNumber
+    fun setToolbarListener(toolbarLayout: ToolbarLayout) {
+        toolbarLayout.setOnbackListener {
+            onBackPressed()
+        }
+        toolbarLayout.setCustomClickListener {
+            showCustomDialog()
         }
     }
+
 }
