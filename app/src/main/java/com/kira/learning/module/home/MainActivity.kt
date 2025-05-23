@@ -1,5 +1,6 @@
 package com.kira.learning.module.home
 
+import android.content.Intent
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import com.kira.learning.R
@@ -48,7 +49,50 @@ class MainActivity : BaseFragmentActivity() {
                 mBinding.rbHomeRepay.isChecked = true
             }
         }
+
+        // 设置导航菜单点击监听
+        setupDrawer()
     }
+
+    private fun setupDrawer() {
+        mBinding.navView.setNavigationItemSelectedListener { menuItem ->
+            // 处理菜单项点击事件
+            when (menuItem.itemId) {
+                R.id.nav_home -> showHomeFragment()
+                R.id.nav_profile -> showProfileFragment()
+                R.id.nav_settings -> openSettings()
+            }
+            // 关闭抽屉菜单
+            mBinding.drawerLayout.closeDrawer(mBinding.navView)
+            true  // 表示已处理点击事件
+        }
+    }
+    // 示例Fragment切换方法
+    private fun showHomeFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_main_container, FirstLoanFragment())
+            .commit()
+    }
+
+    private fun showProfileFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_main_container, NoProductFragment())
+            .commit()
+    }
+
+    // 示例设置页面跳转
+    private fun openSettings() {
+//        startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
+    // 处理返回键（关闭抽屉优先于退出）
+//    override fun onBackPressed() {
+//        if (mBinding.drawerLayout.isDrawerOpen(mBinding.navView)) {
+//            mBinding.drawerLayout.closeDrawer(mBinding.navView)
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
 
     private fun initRadioButton() {
