@@ -16,5 +16,9 @@
         android:layout_height="170dp"
         android:layout_centerInParent="true"
         android:clickable="true"
-        android:text="Photograph" />
+        android:gravity="center"
+        android:text="Play"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 </RelativeLayout>

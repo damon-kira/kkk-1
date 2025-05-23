@@ -15,8 +15,8 @@ import com.kira.learning.module.appupdate.AppUpdateViewModel
 import com.kira.learning.module.firstconfirm.FirstConfirmFragment
 import com.kira.learning.module.homerepay.FirstRepayFragment
 import com.kira.learning.module.login.LoginFragment
-import com.kira.learning.module.refused.BlackFragment
-import com.kira.learning.module.refused.RefusedFragment
+import com.kira.learning.module.navigation.NavigationFragment
+import com.kira.learning.module.navigation.RefusedFragment
 import com.kira.learning.module.repeat.RepeatFragment
 import com.kira.learning.module.review.ReviewFragment
 import com.common.lib.base.BaseFragment
@@ -174,7 +174,7 @@ class HomeFragment : BaseHomeFragment() {
 //                }
             }
             UserStatus.STATUS_BLACK -> {
-                getInstance(getSupportContext(), BlackFragment::class.java, null)
+                getInstance(getSupportContext(), NavigationFragment::class.java, null)
             }
             else -> null
         }

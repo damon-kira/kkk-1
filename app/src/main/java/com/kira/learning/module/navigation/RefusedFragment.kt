@@ -1,4 +1,4 @@
-package com.kira.learning.module.refused
+package com.kira.learning.module.navigation
 
 import android.os.Bundle
 import android.view.View
