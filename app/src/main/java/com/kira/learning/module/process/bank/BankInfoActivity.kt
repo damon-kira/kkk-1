@@ -9,7 +9,7 @@ import com.kira.learning.bean.resp.RspBankInfo
 import com.kira.learning.databinding.ActivityBankInfoBinding
 import com.kira.learning.dialog.BankSearchDialog
 import com.kira.learning.expand.STEP5
-import com.kira.learning.module.banklist.BankCardViewModel
+import com.kira.learning.module.banklist.vm.BankCardViewModel
 import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.common.lib.expand.setBlockingOnClickListener

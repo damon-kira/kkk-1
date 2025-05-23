@@ -1,8 +1,8 @@
-package com.kira.learning.module.repay
+package com.kira.learning.module.repay.repo
 
+import com.common.lib.net.ApiServiceLiveDataProxy
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.resp.RspRepayOrders
-import com.common.lib.net.ApiServiceLiveDataProxy
 import javax.inject.Inject
 
 class RepayTabRepository @Inject constructor(): BaseRepository() {

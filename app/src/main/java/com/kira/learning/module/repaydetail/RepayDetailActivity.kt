@@ -9,7 +9,7 @@ import com.kira.learning.expand.*
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.defer.PayEvent
-import com.kira.learning.module.repay.RepayCheckViewModel
+import com.kira.learning.module.repay.vm.RepayCheckViewModel
 import com.kira.learning.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener

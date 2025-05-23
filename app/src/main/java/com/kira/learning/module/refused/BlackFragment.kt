@@ -9,7 +9,7 @@ import com.kira.learning.R
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.home.BaseHomeFragment
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint

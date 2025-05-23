@@ -1,4 +1,5 @@
 package com.kira.learning.module.python
+
 import android.content.Context
 import com.chaquo.python.Python
 import com.chaquo.python.PyException
@@ -31,13 +32,15 @@ object PythonExecutor {
             val module = python.getModule("safe_exec")
 
             // 显式类型转换
-            val resultObj: Map<String, Any> = module.callAttr("safe_exec", code).asMap() as Map<String, Any>
+            val resultObj: Map<String, Any> =
+                module.callAttr("safe_exec", code).asMap() as Map<String, Any>
 
             when (val error = resultObj["error"]?.toString()) {
                 null, "" -> ExecutionResult.Success(
                     output = resultObj["output"].toString(),
                     result = resultObj["result"]?.toString()
                 )
+
                 else -> ExecutionResult.Error(error)
             }
         } catch (e: PyException) {

@@ -1,11 +1,20 @@
-package com.kira.learning.module.home
+package com.kira.learning.module.home.vm
 
-import com.kira.learning.bean.resp.*
-import com.kira.learning.expand.*
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
+import com.kira.learning.bean.resp.RepeatProductInfo
+import com.kira.learning.bean.resp.RepeatRepayInfo
+import com.kira.learning.bean.resp.RepeatWaitConfirmInfo
+import com.kira.learning.bean.resp.RspCertProcessInfo
+import com.kira.learning.bean.resp.RspProductInfo
+import com.kira.learning.expand.isGpAccount
+import com.kira.learning.expand.isRepeat
+import com.kira.learning.expand.mUserName
+import com.kira.learning.expand.orderStatus
+import com.kira.learning.expand.saveMobile
+import com.kira.learning.module.home.repo.HomeLoanRepository
 import javax.inject.Inject
 
 class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepository) :

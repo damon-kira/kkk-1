@@ -20,6 +20,8 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.kira.learning.module.repay.vm.RepayCheckViewModel
+import com.kira.learning.module.repay.vm.RepayTabViewModel
 import com.util.lib.GsonUtil
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp

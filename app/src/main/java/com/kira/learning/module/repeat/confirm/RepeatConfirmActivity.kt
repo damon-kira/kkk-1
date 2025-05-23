@@ -20,8 +20,8 @@ import com.kira.learning.manager.Launch
 import com.kira.learning.manager.Launch.jumpToAppSettingPage
 import com.kira.learning.module.adapter.SpaceItemDecoration
 import com.kira.learning.module.adapter.linearLayoutManager
-import com.kira.learning.module.firstconfirm.AutoConfirmViewModel
-import com.kira.learning.module.firstconfirm.FirstConfirmViewModel
+import com.kira.learning.module.firstconfirm.vm.AutoConfirmViewModel
+import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper

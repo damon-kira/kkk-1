@@ -1,4 +1,4 @@
-package com.kira.learning.module.login
+package com.kira.learning.module.login.vm
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -6,18 +6,20 @@ import androidx.lifecycle.LifecycleOwner
 import com.bigdata.lib.WifiHelper
 import com.bigdata.lib.registIP
 import com.bigdata.lib.registWifi
+import com.common.lib.base.BaseViewModel
+import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.app.getAppContext
 import com.kira.learning.bean.resp.RspLoginInfo
 import com.kira.learning.bean.resp.RspSmsCode
 import com.kira.learning.expand.saveMobile
 import com.kira.learning.expand.saveUserInfo
+import com.kira.learning.module.login.CountDownHelper
+import com.kira.learning.module.login.repo.LoginRepository
 import com.kira.learning.util.GPInfoUtils
-import com.common.lib.base.BaseViewModel
-import com.common.lib.net.bean.BaseResponse
-import io.reactivex.rxjava3.core.Flowable // Changed to RxJava3
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers // Changed to RxJava3
-import io.reactivex.rxjava3.disposables.Disposable // Changed to RxJava3
-import io.reactivex.rxjava3.schedulers.Schedulers // Changed to RxJava3
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -30,8 +32,8 @@ class LoginViewModel @Inject constructor(
         private const val SMS_TYPE_NORMAL = "phone"
         private const val SMS_TYPE_VOICE = "phonesounds"
 
-        const val TYPE_SMS = CountDownHelper.TYPE_SMS
-        const val TYPE_VOICE = CountDownHelper.TYPE_VOICE
+        const val TYPE_SMS = CountDownHelper.Companion.TYPE_SMS
+        const val TYPE_VOICE = CountDownHelper.Companion.TYPE_VOICE
 
         fun type2ReqType(type: Int): String {
             return if (type == TYPE_SMS) SMS_TYPE_NORMAL else SMS_TYPE_VOICE
@@ -39,7 +41,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private val mCountDownHelper by lazy(LazyThreadSafetyMode.NONE) {
-        CountDownHelper.get()
+        CountDownHelper.Companion.get()
     }
 
     val downTimerLiveData = mCountDownHelper.mCountDownLiveData // 验证码倒计时
@@ -148,7 +150,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun startCountdown(type: Int = CountDownHelper.TYPE_SMS, mobile: String) {
+    fun startCountdown(type: Int = CountDownHelper.Companion.TYPE_SMS, mobile: String) {
         if (isDown30Auto) return
         mCountDownHelper.stopCountdown()
         mCountDownHelper.startCountDown(type = type, mobile = mobile)

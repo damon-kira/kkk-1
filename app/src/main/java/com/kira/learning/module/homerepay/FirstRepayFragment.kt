@@ -10,7 +10,7 @@ import com.kira.learning.manager.Launch
 import com.kira.learning.module.defer.PayEvent
 import com.kira.learning.module.home.BaseHomeLoanFragment
 import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky

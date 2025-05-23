@@ -5,7 +5,7 @@ import com.kira.learning.R
 import com.kira.learning.expand.ShowErrorMsg
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.module.firstconfirm.ConfirmEvent
-import com.kira.learning.module.firstconfirm.FirstConfirmViewModel
+import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.repeat.confirm.BankEvent
 import com.common.lib.expand.setBlockingOnClickListener

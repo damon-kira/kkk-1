@@ -16,7 +16,7 @@ import com.kira.learning.manager.Launch
 import com.kira.learning.manager.Launch.jumpToAppSettingPage
 import com.kira.learning.module.home.BaseHomeLoanFragment
 import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
@@ -25,6 +25,8 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.kira.learning.module.firstconfirm.vm.AutoConfirmViewModel
+import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.util.lib.MainHandler
 import com.util.lib.hide
 import com.util.lib.log.logger_d

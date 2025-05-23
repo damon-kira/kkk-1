@@ -1,10 +1,10 @@
-package com.kira.learning.module.repay
+package com.kira.learning.module.repay.vm
 
-import com.kira.learning.bean.resp.RspRepayOrders
-import com.kira.learning.bean.resp.RspRepayOrders.RepayOrderDetail
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
+import com.kira.learning.bean.resp.RspRepayOrders
+import com.kira.learning.module.repay.repo.RepayTabRepository
 import javax.inject.Inject
 
 class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepository) :
@@ -23,7 +23,17 @@ class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepo
 //                    listLivedata.postValue(list)
 //                }
 //            }
-            var list: ArrayList<RepayOrderDetail>? = arrayListOf(RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),RepayOrderDetail(),)
+            var list: ArrayList<RspRepayOrders.RepayOrderDetail>? = arrayListOf(
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),
+                RspRepayOrders.RepayOrderDetail(),)
             listLivedata.postValue(list)
             _ordersLivedata.postValue(it)
         }

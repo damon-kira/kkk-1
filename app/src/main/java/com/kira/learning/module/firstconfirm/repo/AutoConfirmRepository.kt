@@ -1,4 +1,4 @@
-package com.kira.learning.module.firstconfirm
+package com.kira.learning.module.firstconfirm.repo
 
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.resp.RspResult

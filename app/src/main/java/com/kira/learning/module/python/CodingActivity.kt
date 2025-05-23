@@ -66,7 +66,7 @@ print(add_multiple_numbers(1.5, 2.5, 4))   # 输出: 8.0
 
     @Composable
     fun Main() {
-        var resultPy by remember{mutableStateOf("")}
+        var resultPy by remember { mutableStateOf("") }
         Column {
             stedit.Compose(
                 modifier = Modifier
@@ -75,11 +75,11 @@ print(add_multiple_numbers(1.5, 2.5, 4))   # 输出: 8.0
                 highlighter = PythonHighlighter
             )
             Space(16)
-            Row (
+            Row(
                 modifier = Modifier
                     .background(color = Color.White)
 //                    .padding(vertical = 5.dp)
-            ){
+            ) {
                 Button({
 
                     val code = stedit.text
@@ -106,8 +106,10 @@ print(add_multiple_numbers(1.5, 2.5, 4))   # 输出: 8.0
                 }) {
                     Text("测试1")
                 }
-                Box (modifier = Modifier
-                    .width(10.dp)){}
+                Box(
+                    modifier = Modifier
+                        .width(10.dp)
+                ) {}
                 Button({
                     val result = executePythonCode(stedit.text)
                     if (result is ExecutionResult.Success) {

@@ -10,7 +10,7 @@ import com.kira.learning.databinding.FragmentAccountBinding
 import com.kira.learning.expand.*
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.home.OrderStatus
 import com.common.lib.base.BaseFragment

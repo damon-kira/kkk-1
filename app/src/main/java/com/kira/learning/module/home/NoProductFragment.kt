@@ -8,6 +8,7 @@ import com.kira.learning.expand.getUnitString
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.common.lib.expand.setBlockingOnClickListener
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.util.lib.hide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint

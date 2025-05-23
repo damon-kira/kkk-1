@@ -1,14 +1,15 @@
-package com.kira.learning.module.banklist
+package com.kira.learning.module.banklist.vm
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.kira.learning.bean.resp.RspBankAccount
-import com.kira.learning.bean.resp.RspBankNameInfo
-import com.kira.learning.bean.resp.RspResult
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
+import com.kira.learning.bean.resp.RspBankAccount
+import com.kira.learning.bean.resp.RspBankNameInfo
+import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.module.banklist.repo.BankCardRepository
 import javax.inject.Inject
 
 class BankCardViewModel @Inject constructor(private val repository: BankCardRepository) :

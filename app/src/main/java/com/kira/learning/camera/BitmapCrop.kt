@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Rect
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import com.util.lib.ImageInfoUtil
 import com.common.lib.base.BaseActivity
 import com.util.lib.image.ExifInterfaceImpl
@@ -124,7 +124,7 @@ object BitmapCrop {
                 val scale = if (rotation / 90 % 2 == 0f) {
                     val widthScale = screenW / bitmapWidth
                     val heightScale = screenH / bitmapHeight
-                    logger_d(TAG,"bitmapwidth=widthScale=$widthScale, heightScale=$heightScale")
+                    logger_d(TAG, "bitmapwidth=widthScale=$widthScale, heightScale=$heightScale")
                     val tempScale = if (screenW < bitmapWidth) {
                         min(widthScale, heightScale)
                     } else {
@@ -149,7 +149,10 @@ object BitmapCrop {
                         if (tempScale == widthScale) heightScale else widthScale
                     }
                 }
-                logger_d(TAG,"bitmapwidth=$bitmapWidth, right=${rect.right}  height=$bitmapHeight,,bottom=${rect.bottom} scale=$scale  screen width=$screenW,$screenH")
+                logger_d(
+                    TAG,
+                    "bitmapwidth=$bitmapWidth, right=${rect.right}  height=$bitmapHeight,,bottom=${rect.bottom} scale=$scale  screen width=$screenW,$screenH"
+                )
 
                 matrix.postScale(scale, scale)
 
@@ -157,7 +160,10 @@ object BitmapCrop {
                     Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
                 val leftOffset = if (bitmap.width > screenW) (bitmap.width - screenW) / 2 else 0
                 val topOffset = if (bitmap.height > screenH) (bitmap.height - screenH) / 2 else 0
-                logger_d(TAG,"bitmapwidth new width=${bitmap.width}  height=${bitmap.height} leftoffset=$leftOffset,,topOffset=$topOffset")
+                logger_d(
+                    TAG,
+                    "bitmapwidth new width=${bitmap.width}  height=${bitmap.height} leftoffset=$leftOffset,,topOffset=$topOffset"
+                )
                 // 前置
                 if (isFront) {
                     left = if (bitmap.width - rect.width() > 0) {

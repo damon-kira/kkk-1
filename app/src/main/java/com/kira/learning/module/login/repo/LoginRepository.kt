@@ -1,20 +1,21 @@
-package com.kira.learning.module.login
+package com.kira.learning.module.login.repo
 
 import android.content.Context
-import com.util.lib.net.WifiInfoUtil
+import com.common.lib.net.ApiServiceLiveDataProxy
+import com.google.gson.JsonObject
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.resp.RspLoginInfo
 import com.kira.learning.bean.resp.RspSmsCode
 import com.kira.learning.util.GPInfoUtils
-import com.common.lib.net.ApiServiceLiveDataProxy
-import com.google.gson.JsonObject
+import com.util.lib.net.WifiInfoUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.RequestBody
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(@ApplicationContext private val context: Context) : BaseRepository() {
 
-    fun loginSms(mobile: String, code: String, uuid: String) = ApiServiceLiveDataProxy.request(RspLoginInfo::class.java) {
+    fun loginSms(mobile: String, code: String, uuid: String) = ApiServiceLiveDataProxy.request(
+        RspLoginInfo::class.java) {
         val jobj = JsonObject()
         jobj.addProperty("ska3nXMv1K", "phone")
         jobj.addProperty("LuOZz", "0")

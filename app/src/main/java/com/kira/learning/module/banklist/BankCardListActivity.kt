@@ -24,6 +24,7 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.kira.learning.module.banklist.vm.BankCardViewModel
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp
 import com.util.lib.hide

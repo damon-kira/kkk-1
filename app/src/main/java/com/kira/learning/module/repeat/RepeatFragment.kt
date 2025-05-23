@@ -14,7 +14,7 @@ import com.kira.learning.manager.Launch
 import com.kira.learning.manager.Launch.jumpToAppSettingPage
 import com.kira.learning.module.adapter.SpaceItemDecoration
 import com.kira.learning.module.home.BaseHomeLoanFragment
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.HintDialog

@@ -11,7 +11,6 @@ import android.webkit.WebView;
 import com.kira.learning.BuildConfig;
 import java.lang.reflect.Field;
 
-
 public class UtilUI {
     private int barHeight = -1;
 

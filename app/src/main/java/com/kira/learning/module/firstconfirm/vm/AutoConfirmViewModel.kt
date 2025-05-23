@@ -1,4 +1,4 @@
-package com.kira.learning.module.firstconfirm
+package com.kira.learning.module.firstconfirm.vm
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -8,6 +8,7 @@ import com.kira.learning.expand.getMobile
 import com.kira.learning.module.login.CountDownHelper
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
+import com.kira.learning.module.firstconfirm.repo.AutoConfirmRepository
 import javax.inject.Inject
 
 // 自动确认额度

@@ -7,7 +7,7 @@ import com.kira.learning.databinding.FragmentRefusedBinding
 import com.kira.learning.expand.formatCommon
 import com.kira.learning.module.home.BaseHomeLoanFragment
 import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.HomeLoanViewModel
+import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint

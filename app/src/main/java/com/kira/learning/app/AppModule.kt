@@ -13,9 +13,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Created by weisl on 2019/10/12.
- */
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
