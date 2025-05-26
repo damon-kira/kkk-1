@@ -5,7 +5,6 @@ import android.util.Log
 import com.cache.lib.impl.SpCacheImpl
 
 /**
- * Created by weisl on 2019/10/14.
  * 系统缓存的一下数据，退出登录无需清除
  */
 object SharedPrefGlobal{

@@ -5,10 +5,6 @@ import android.content.res.Resources
 import android.util.TypedValue
 
 /**
- * Created by weisl on 2019/10/15.
- */
-
-/**
  * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
  */
 fun Float.dp(): Int {
@@ -18,6 +14,7 @@ fun Float.dp(): Int {
         Resources.getSystem().displayMetrics
     ).toInt()
 }
+
 fun Int.dp(): Float {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,

@@ -4,10 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 
-/**
- * Created by weishl on 2022/7/13
- *
- */
 abstract class AbsSpCacheImpl : IAppCache {
 
     lateinit var mSP: SharedPreferences

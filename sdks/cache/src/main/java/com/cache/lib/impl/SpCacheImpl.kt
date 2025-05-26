@@ -6,10 +6,6 @@ import android.util.Log
 import com.cache.lib.IAppCache
 import com.cache.lib.SharedPrefGlobal
 
-/**
- * Created by weishl on 2022/7/13
- *
- */
 abstract class SpCacheImpl : IAppCache {
 
     lateinit var mSP: SharedPreferences

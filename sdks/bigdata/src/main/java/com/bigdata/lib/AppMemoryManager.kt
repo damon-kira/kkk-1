@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Environment
 import android.os.StatFs
 
-
 /**
  * 手机可用内存
  */

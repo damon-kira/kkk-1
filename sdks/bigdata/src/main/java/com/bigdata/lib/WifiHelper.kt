@@ -1,8 +1,10 @@
 package com.bigdata.lib
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.wifi.WifiManager
+import androidx.annotation.RequiresPermission
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
@@ -13,6 +15,7 @@ import java.net.NetworkInterface
 
 object WifiHelper {
 
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_WIFI_STATE])
     fun getWifiInfo(context: Context): String {
         val wm = getWifiManager(context)
 //        val connectionInfo = wm.connectionInfo

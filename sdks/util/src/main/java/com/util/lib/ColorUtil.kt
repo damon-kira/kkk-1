@@ -2,13 +2,6 @@ package com.util.lib
 
 import android.graphics.Color
 
-/*
- *
- * Author: jinguang
- * Create: 2020/11/20 14:28
- * Description:
- */
-
 object ColorUtil {
     /** 不透明度 0% --100%*/
     val alphaValue = arrayListOf(

@@ -1,5 +1,6 @@
 package com.util.lib.shape
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.view.View
@@ -10,6 +11,7 @@ class ShapeImpl(private val context: Context) : IShape {
         GradientDrawable()
     }
 
+    @SuppressLint("WrongConstant")
     override fun setStyle(@ShapeStyle shape: Int): IShape {
         mDrawable.shape = shape
         return this

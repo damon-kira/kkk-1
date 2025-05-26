@@ -12,10 +12,6 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-/**
- * Created by weishl on 2022/1/17
- *
- */
 class DevicesStorage {
 
     private val TAG = "debug_DevicesStorage"
@@ -24,7 +20,6 @@ class DevicesStorage {
     private val DEFAULT_FILE_NAME = ".system_device_id1"
 
     private var mCtx: Context? = null
-
 
     fun init(context: Context) {
         mCtx = context
@@ -74,11 +69,18 @@ class DevicesStorage {
         }
     }
 
-    private fun checkPermission():Boolean {
+    private fun checkPermission(): Boolean {
         val ctx = mCtx ?: return true
-        if (PermissionChecker.checkSelfPermission(ctx, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED
-            && PermissionChecker.checkSelfPermission(ctx, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
-               return true
+        if (PermissionChecker.checkSelfPermission(
+                ctx,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PermissionChecker.PERMISSION_GRANTED
+            && PermissionChecker.checkSelfPermission(
+                ctx,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PermissionChecker.PERMISSION_GRANTED
+        ) {
+            return true
         }
         return false
     }

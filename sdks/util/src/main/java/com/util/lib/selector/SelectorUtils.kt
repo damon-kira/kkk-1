@@ -4,10 +4,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.view.View
 
-/**
- * Created by weishl on 2022/1/11
- *
- */
 class SelectorUtils {
 
     private val drawable by lazy(LazyThreadSafetyMode.NONE) {

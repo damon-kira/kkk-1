@@ -13,10 +13,6 @@ import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import java.util.*
 
-/**
- * Created by weishl on 2022/1/17
- *
- */
 class UUIDHelper {
 
     companion object {
@@ -137,7 +133,7 @@ class UUIDHelper {
     fun saveUUid(uuid: String) {
         val encrypt = uuid.encrypt()
         save2Sp(encrypt)
-        mCtx?.let {ctx ->
+        mCtx?.let { ctx ->
             UUidFile.writeCashDeviceIdFile(ctx, uuid, true)
         }
         // 权限允许后
@@ -147,7 +143,7 @@ class UUIDHelper {
         }
     }
 
-    private fun String.encrypt(): String{
+    private fun String.encrypt(): String {
         if (this.isNullOrEmpty()) return ""
         return FileUtils.DES_encrypt(this, PWD)
     }
@@ -183,11 +179,18 @@ class UUIDHelper {
         return createCashUUID(context)
     }
 
-    private fun checkPermission():Boolean {
+    private fun checkPermission(): Boolean {
         val ctx = mCtx ?: return true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (PermissionChecker.checkSelfPermission(ctx, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED
-                && PermissionChecker.checkSelfPermission(ctx, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
+            if (PermissionChecker.checkSelfPermission(
+                    ctx,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PermissionChecker.PERMISSION_GRANTED
+                && PermissionChecker.checkSelfPermission(
+                    ctx,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PermissionChecker.PERMISSION_GRANTED
+            ) {
                 return true
             }
         } else {

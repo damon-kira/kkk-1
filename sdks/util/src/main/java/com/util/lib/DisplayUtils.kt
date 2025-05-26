@@ -8,11 +8,12 @@ import android.util.DisplayMetrics
 import android.view.WindowManager
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
-import java.io.*
-import java.text.SimpleDateFormat
-import java.util.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileFilter
+import java.io.FileReader
+import java.io.IOException
 import java.util.regex.Pattern
-
 
 object DisplayUtils {
 
@@ -20,7 +21,6 @@ object DisplayUtils {
     fun getCurrentSdk(): Int {
         return Build.VERSION.SDK_INT
     }
-
 
     @JvmStatic
     fun getScreenWH(context: Context): IntArray {
@@ -76,7 +76,8 @@ object DisplayUtils {
                 localBufferedReader = BufferedReader(fr)
                 val str = localBufferedReader.readLine()
                 val regex = "^[0-9]*$"
-                val split = str.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val split =
+                    str.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 for (i in split.indices) {
                     if (split[i].matches(regex.toRegex())) {
                         totalMomey = split[i].toLong()

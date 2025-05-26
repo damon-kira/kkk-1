@@ -5,9 +5,6 @@ import java.io.ByteArrayOutputStream
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
 
-/**
- * Created by weisl on 2018/6/6.
- */
 class GzipUtils {
     companion object {
         fun zip(str: String): ByteArray {

@@ -5,10 +5,6 @@ import com.util.lib.log.isDebug
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
 
-/**
- * Created by sunsg on 2017/11/17.
- */
-
 class ThreadPoolUtil {
     companion object {
         const val TAG = "ThreadPoolUtil"

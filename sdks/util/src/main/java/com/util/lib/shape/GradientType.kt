@@ -8,10 +8,6 @@ import com.util.lib.shape.GradientType.Companion.SWEEP_GRADIENT
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
-/**
- * Created by weishl on 2022/1/11
- *
- */
 @IntDef(LINEAR_GRADIENT, RADIAL_GRADIENT, SWEEP_GRADIENT)
 @Retention(RetentionPolicy.RUNTIME)
 annotation class GradientType {

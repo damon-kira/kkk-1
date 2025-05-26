@@ -4,11 +4,6 @@ import java.math.BigDecimal
 import java.util.*
 
 /**
- * author: weishl
- * data: 2020/3/6
- **/
-
-/**
  * 格式化单位
  * @param size
  * @return

@@ -3,10 +3,6 @@ package com.util.lib.shape
 import android.graphics.drawable.GradientDrawable
 import androidx.annotation.ColorInt
 
-/**
- * Created by weishl on 2022/1/10
- *
- */
 class ShapeGradient(iShape: IShape): BaseParams(iShape) {
 
     fun angle(orientation: GradientDrawable.Orientation): ShapeGradient {

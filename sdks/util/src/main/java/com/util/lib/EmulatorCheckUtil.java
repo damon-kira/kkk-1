@@ -6,13 +6,6 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.text.TextUtils;
 
-/**
- * Created by jiaokang on 2019-11-06.
- * <p>
- * source at
- * <a href="https://github.com/lamster2018/EasyProtector/blob/master/library/src/main/java/com/lahm/library/EmulatorCheckUtil.java">EmulatorCheckUtil</a>
- * <p>
- */
 public class EmulatorCheckUtil {
 
     /**

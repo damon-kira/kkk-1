@@ -5,10 +5,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
-/**
- * Created by weishl on 2022/1/10
- *
- */
 class ShapeStroke(private val ctx: Context, iShape: IShape): BaseParams(iShape) {
 
     fun setStroke(dimens: Int, @ColorInt strokeColor: Int): ShapeStroke {

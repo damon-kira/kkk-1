@@ -1,9 +1,5 @@
 package com.util.lib.uuid
 
-/**
- * Created by weishl on 2022/6/15
- *
- */
 object AesInfo {
 
     //621996ED661990CC56D890FA11843BB5

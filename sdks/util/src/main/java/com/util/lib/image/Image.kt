@@ -3,7 +3,6 @@ package com.util.lib.image
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder.ImageInfo
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
@@ -149,18 +148,25 @@ fun commonCompressPic(
         // 压缩完之后需要设置相关exif信息
         isSuccess = rotateBitmap!!.compress(Bitmap.CompressFormat.JPEG, quality, fos)//85压缩 85％
 
-        if(isDebug()){
+        if (isDebug()) {
             val outFile = File(targetPath)
-            Log.i(COMPRESS_TAG,"压缩后图片大小 width:${rotateBitmap.width},height:${rotateBitmap.height}" +
-                    ",size:${if(outFile.exists()) outFile.length() else 0}")
+            Log.i(
+                COMPRESS_TAG,
+                "压缩后图片大小 width:${rotateBitmap.width},height:${rotateBitmap.height}" +
+                        ",size:${if (outFile.exists()) outFile.length() else 0}"
+            )
         }
 
         fos.flush()
-        if(file.exists() && file.length() >= TARGET_FILE_SIZE_LIMIT
-            && Bitmap.Config.ARGB_8888 == bitmapConfig && quality >= 85){
+        if (file.exists() && file.length() >= TARGET_FILE_SIZE_LIMIT
+            && Bitmap.Config.ARGB_8888 == bitmapConfig && quality >= 85
+        ) {
 
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"配置ARGB_8888&压缩质量>=85,压缩完之后图片大小仍然大于2M，需要降低质量继续压缩")
+            if (isDebug()) {
+                Log.i(
+                    COMPRESS_TAG,
+                    "配置ARGB_8888&压缩质量>=85,压缩完之后图片大小仍然大于2M，需要降低质量继续压缩"
+                )
             }
 
             targetFileExceedsLimit = true
@@ -168,21 +174,22 @@ fun commonCompressPic(
         // 压缩后新生成的图片exif信息中经纬度没有了
     } catch (e: Exception) {
 
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"e: Exception = $e")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "e: Exception = $e")
         }
     } catch (e: OutOfMemoryError) {
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"e: OutOfMemoryError = $e")
-            Log.i(COMPRESS_TAG,"当前decode格式：$bitmapConfig")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "e: OutOfMemoryError = $e")
+            Log.i(COMPRESS_TAG, "当前decode格式：$bitmapConfig")
         }
-        if(bitmapConfig == Bitmap.Config.ARGB_8888){
+        if (bitmapConfig == Bitmap.Config.ARGB_8888) {
             isNeedRepeadCompress = true
-        }else if(bitmapConfig == Bitmap.Config.RGB_565){
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"两次压缩都失败，直接拷贝文件")
+        } else if (bitmapConfig == Bitmap.Config.RGB_565) {
+            if (isDebug()) {
+                Log.i(COMPRESS_TAG, "两次压缩都失败，直接拷贝文件")
             }
-            isSuccess = copyFileIfNeed(sourcePath,targetPath,opt.outWidth,opt.outHeight, rotation)
+            isSuccess =
+                copyFileIfNeed(sourcePath, targetPath, opt.outWidth, opt.outHeight, rotation)
         }
     } finally {
         if (bitmap != null && !bitmap.isRecycled) {
@@ -193,29 +200,41 @@ fun commonCompressPic(
         }
         try {
             fos?.close()
-        }catch (e: Exception){
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"关闭输出流失败:$e")
+        } catch (e: Exception) {
+            if (isDebug()) {
+                Log.i(COMPRESS_TAG, "关闭输出流失败:$e")
             }
         }
     }
-    if(isNeedRepeadCompress || targetFileExceedsLimit){
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"isNeedRepeadCompress = $isNeedRepeadCompress")
+    if (isNeedRepeadCompress || targetFileExceedsLimit) {
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "isNeedRepeadCompress = $isNeedRepeadCompress")
         }
-        val compressQuality = if(targetFileExceedsLimit){
+        val compressQuality = if (targetFileExceedsLimit) {
             80
-        }else{
+        } else {
             85
         }
-        return commonCompressPic_565(sourcePath,targetPath,targetWidth,targetHeight,compressQuality)
+        return commonCompressPic_565(
+            sourcePath,
+            targetPath,
+            targetWidth,
+            targetHeight,
+            compressQuality
+        )
     }
     // 设置exif信息
     ImageInfoUtil.saveExifInfo(targetPath, exifInfo)
     return isSuccess
 }
 
-fun copyFileIfNeed(sourcePath: String, targetPath: String, width: Int, height: Int, rotation: Float): Boolean {
+fun copyFileIfNeed(
+    sourcePath: String,
+    targetPath: String,
+    width: Int,
+    height: Int,
+    rotation: Float
+): Boolean {
     /**** 开始：判断图片是否满足不压缩条件,如果满足的话，则不进行压缩直接拷贝文件 ***/
     val sourceFile = File(sourcePath)
     // 旋转角度是0
@@ -225,12 +244,12 @@ fun copyFileIfNeed(sourcePath: String, targetPath: String, width: Int, height: I
     // 图片在磁盘的尺寸满足要求
     val fileSizeCorrect = sourceFile.exists() && sourceFile.length() < DONT_NEED_COMPRESS_LIMIT
 
-    if(rotationCorrect && sizeCorrect && fileSizeCorrect){
-        val copySuccess = copyFile(sourcePath,targetPath)
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"满足图片不需要压缩条件，直接拷贝文件，拷贝成功?$copySuccess")
+    if (rotationCorrect && sizeCorrect && fileSizeCorrect) {
+        val copySuccess = copyFile(sourcePath, targetPath)
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "满足图片不需要压缩条件，直接拷贝文件，拷贝成功?$copySuccess")
         }
-        if(copySuccess){
+        if (copySuccess) {
             return true
         }
     }
@@ -238,7 +257,14 @@ fun copyFileIfNeed(sourcePath: String, targetPath: String, width: Int, height: I
     return false
 }
 
-fun copyFileIfNeed( context: Context, source: Uri, targetPath: String, width: Int, height: Int, rotation: Float): Boolean {
+fun copyFileIfNeed(
+    context: Context,
+    source: Uri,
+    targetPath: String,
+    width: Int,
+    height: Int,
+    rotation: Float
+): Boolean {
     /**** 开始：判断图片是否满足不压缩条件,如果满足的话，则不进行压缩直接拷贝文件 ***/
     if (rotation != 0f || width >= IMAGE_MAX_SIZE || height >= IMAGE_MAX_SIZE) return false
     val sourceFileSize = StorageUriUtils.getFileSize(context, source) ?: return false
@@ -261,23 +287,23 @@ fun copyFile(inputStream: InputStream, targetPath: String): Boolean {
                 val buffer = ByteArray(8 * 1024)
                 var len = inputStream.read(buffer)
                 while (len != -1) {
-                    fos.write(buffer,0,len)
+                    fos.write(buffer, 0, len)
                     len = inputStream.read(buffer)
                 }
                 return true
             }
         }
-    }finally {
+    } finally {
         inputStream.close()
         outputStream?.close()
     }
 }
 
 
-
-
-fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetWidth: Int, targetHeight: Int,
-                      bitmapConfig:Bitmap.Config = Bitmap.Config.ARGB_8888, quality: Int = 85): Boolean {
+fun commonCompressPic(
+    context: Context, source: Uri, targetPath: String, targetWidth: Int, targetHeight: Int,
+    bitmapConfig: Bitmap.Config = Bitmap.Config.ARGB_8888, quality: Int = 85
+): Boolean {
     var width = targetWidth
     var height = targetHeight
     var isSuccess = false
@@ -291,25 +317,28 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
     }
     var fos: FileOutputStream? = null
     var isNeedRepeatCompress = false
-    if(isDebug()) {
+    if (isDebug()) {
         Log.i(COMPRESS_TAG, "bitmapConfig = $bitmapConfig")
     }
     var rotation = 0f
     var targetFileExceedsLimit = false
     var imageExifInfo: HashMap<String, String?>? = null
     try {
-        val fd: FileDescriptor = context.contentResolver.openFileDescriptor(source, "r")?.fileDescriptor!!
+        val fd: FileDescriptor =
+            context.contentResolver.openFileDescriptor(source, "r")?.fileDescriptor!!
         imageExifInfo = ImageInfoUtil.getImageExifInfo(fd)
-        val orientation = imageExifInfo[androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION]?.toIntOrNull() ?: androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL
+        val orientation =
+            imageExifInfo[androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION]?.toIntOrNull()
+                ?: androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL
         rotation = getPhotoOrientation(orientation).toFloat()
-        if(isDebug()) {
+        if (isDebug()) {
             Log.i(COMPRESS_TAG, "压缩旋转前图片旋转角度 $rotation")
         }
         // 旋转
         matrix.postRotate(rotation)
 
         opt.inJustDecodeBounds = true//只取大小，不放在内存
-        BitmapFactory.decodeStream(context.contentResolver.openInputStream(source)!!,null, opt)
+        BitmapFactory.decodeStream(context.contentResolver.openInputStream(source)!!, null, opt)
 
         opt.inSampleSize = calculateInSampleSize(opt, width, height)
         opt.inJustDecodeBounds = false
@@ -317,7 +346,8 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         opt.inPurgeable = true
         opt.inInputShareable = true
         opt.inTempStorage = ByteArray(16 * 1024)
-        bitmap = BitmapFactory.decodeStream(context.contentResolver.openInputStream(source)!!,null, opt)
+        bitmap =
+            BitmapFactory.decodeStream(context.contentResolver.openInputStream(source)!!, null, opt)
 
         val tempBitmapH = bitmap!!.height.toFloat()
         val tempBitmapW = bitmap.width.toFloat()
@@ -345,10 +375,10 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         //如果原文件和目标文件相同路径 删除原文件
         val file = File(targetPath)
         val scheme = source.scheme
-        if("file".equals(scheme,false) || scheme == null){
+        if ("file".equals(scheme, false) || scheme == null) {
             val sourceFile = File(source.encodedPath)
-            if(sourceFile == file){
-                if(sourceFile.exists()){
+            if (sourceFile == file) {
+                if (sourceFile.exists()) {
                     sourceFile.delete()
                 }
             }
@@ -359,18 +389,25 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         // 压缩完之后需要设置相关exif信息
         isSuccess = rotateBitmap!!.compress(Bitmap.CompressFormat.JPEG, quality, fos)//85压缩 85％
 
-        if(isDebug()){
+        if (isDebug()) {
             val outFile = File(targetPath)
-            Log.i(COMPRESS_TAG,"压缩后图片大小 width:${rotateBitmap.width},height:${rotateBitmap.height}" +
-                    ",size:${if(outFile.exists()) outFile.length() else 0}")
+            Log.i(
+                COMPRESS_TAG,
+                "压缩后图片大小 width:${rotateBitmap.width},height:${rotateBitmap.height}" +
+                        ",size:${if (outFile.exists()) outFile.length() else 0}"
+            )
         }
 
         fos.flush()
-        if(file.exists() && file.length() >= TARGET_FILE_SIZE_LIMIT
-            && Bitmap.Config.ARGB_8888 == bitmapConfig && quality >= 85){
+        if (file.exists() && file.length() >= TARGET_FILE_SIZE_LIMIT
+            && Bitmap.Config.ARGB_8888 == bitmapConfig && quality >= 85
+        ) {
 
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"配置ARGB_8888&压缩质量>=85,压缩完之后图片大小仍然大于2M，需要降低质量继续压缩")
+            if (isDebug()) {
+                Log.i(
+                    COMPRESS_TAG,
+                    "配置ARGB_8888&压缩质量>=85,压缩完之后图片大小仍然大于2M，需要降低质量继续压缩"
+                )
             }
 
             targetFileExceedsLimit = true
@@ -378,22 +415,23 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         // 压缩后新生成的图片exif信息中经纬度没有了
     } catch (e: Exception) {
         e.printStackTrace()
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"e: Exception = $e")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "e: Exception = $e")
         }
     } catch (e: OutOfMemoryError) {
         e.printStackTrace()
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"e: OutOfMemoryError = $e")
-            Log.i(COMPRESS_TAG,"当前decode格式：$bitmapConfig")
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "e: OutOfMemoryError = $e")
+            Log.i(COMPRESS_TAG, "当前decode格式：$bitmapConfig")
         }
-        if(bitmapConfig == Bitmap.Config.ARGB_8888){
+        if (bitmapConfig == Bitmap.Config.ARGB_8888) {
             isNeedRepeatCompress = true
-        }else if(bitmapConfig == Bitmap.Config.RGB_565){
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"两次压缩都失败，直接拷贝文件")
+        } else if (bitmapConfig == Bitmap.Config.RGB_565) {
+            if (isDebug()) {
+                Log.i(COMPRESS_TAG, "两次压缩都失败，直接拷贝文件")
             }
-            isSuccess = copyFileIfNeed(context,source,targetPath,opt.outWidth,opt.outHeight, rotation)
+            isSuccess =
+                copyFileIfNeed(context, source, targetPath, opt.outWidth, opt.outHeight, rotation)
         }
     } finally {
         if (bitmap != null && !bitmap.isRecycled) {
@@ -404,24 +442,32 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
         }
         try {
             fos?.close()
-        }catch (e: Exception){
-            if(isDebug()){
-                Log.i(COMPRESS_TAG,"关闭输出流失败:$e")
+        } catch (e: Exception) {
+            if (isDebug()) {
+                Log.i(COMPRESS_TAG, "关闭输出流失败:$e")
             }
         }
     }
-    if(isNeedRepeatCompress || targetFileExceedsLimit){
-        if(isDebug()){
-            Log.i(COMPRESS_TAG,"isNeedRepeatCompress = $isNeedRepeatCompress")
+    if (isNeedRepeatCompress || targetFileExceedsLimit) {
+        if (isDebug()) {
+            Log.i(COMPRESS_TAG, "isNeedRepeatCompress = $isNeedRepeatCompress")
         }
-        val compressQuality = if(targetFileExceedsLimit){
+        val compressQuality = if (targetFileExceedsLimit) {
             80
-        }else{
+        } else {
             85
         }
-        commonCompressPic(context,source,targetPath,targetWidth,targetHeight,Bitmap.Config.RGB_565,compressQuality)
+        commonCompressPic(
+            context,
+            source,
+            targetPath,
+            targetWidth,
+            targetHeight,
+            Bitmap.Config.RGB_565,
+            compressQuality
+        )
     }
-    imageExifInfo?.let {imageInfo ->
+    imageExifInfo?.let { imageInfo ->
         ImageInfoUtil.saveExifInfo(targetPath, imageInfo)
     }
     return isSuccess
@@ -430,20 +476,44 @@ fun commonCompressPic(context: Context, source: Uri, targetPath: String, targetW
 /**
  * ARGB_8888压缩图片
  */
-fun commonCompressPic(sourcePath: String, targetPath: String, targetWidth: Int, targetHeight: Int):Boolean{
-    return commonCompressPic(sourcePath,targetPath,targetWidth,targetHeight,Bitmap.Config.ARGB_8888)
+fun commonCompressPic(
+    sourcePath: String,
+    targetPath: String,
+    targetWidth: Int,
+    targetHeight: Int
+): Boolean {
+    return commonCompressPic(
+        sourcePath,
+        targetPath,
+        targetWidth,
+        targetHeight,
+        Bitmap.Config.ARGB_8888
+    )
 }
 
 /**
  * RGB_565压缩图片
  */
-fun commonCompressPic_565(sourcePath: String, targetPath: String, targetWidth: Int, targetHeight: Int,quality: Int = 85):Boolean{
-    return commonCompressPic(sourcePath,targetPath,targetWidth,targetHeight,Bitmap.Config.RGB_565,quality)
+fun commonCompressPic_565(
+    sourcePath: String,
+    targetPath: String,
+    targetWidth: Int,
+    targetHeight: Int,
+    quality: Int = 85
+): Boolean {
+    return commonCompressPic(
+        sourcePath,
+        targetPath,
+        targetWidth,
+        targetHeight,
+        Bitmap.Config.RGB_565,
+        quality
+    )
 }
 
 
-fun commonCompressPic(sourcePath: String, targetPath: String):Boolean{
-    return commonCompressPic(sourcePath,targetPath,0,0)
+fun commonCompressPic(sourcePath: String, targetPath: String): Boolean {
+    return commonCompressPic(sourcePath, targetPath, 0, 0)
 }
 
 /** 在io线程压缩图片
@@ -453,7 +523,7 @@ fun commonCompressPic(sourcePath: String, targetPath: String):Boolean{
  * @param success 压缩成功回调
  * */
 fun commonCompressPicIO(sourcePath: String, targetPath: String, success: (path: String?) -> Unit) {
-    ThreadPoolUtil.executor("commonCompressPicIO"){
+    ThreadPoolUtil.executor("commonCompressPicIO") {
         val result = commonCompressPic(sourcePath, targetPath)
         MainHandler.post {
             success(if (result) targetPath else null)
@@ -570,7 +640,10 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
         }
 
         if (isDebug()) {
-            Log.i(COMPRESS_TAG, "获取inSampleSize:第四次计算(根据256计算出来的最终结果) - $inSampleSize")
+            Log.i(
+                COMPRESS_TAG,
+                "获取inSampleSize:第四次计算(根据256计算出来的最终结果) - $inSampleSize"
+            )
         }
     }
     return inSampleSize
@@ -579,19 +652,17 @@ fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeig
 /**
  * 获取照片的方向
  *
- * @param orientation 方向
- * @return
- * @author sunsg
- * @since 2015-10-17
  */
 fun getPhotoOrientation(orientation: Int): Int {
     var degree = 0
     when (orientation) {
         ExifInterface.ORIENTATION_TRANSPOSE,
         ExifInterface.ORIENTATION_ROTATE_90 -> degree = 90
+
         ExifInterface.ORIENTATION_ROTATE_180 -> degree = 180
         ExifInterface.ORIENTATION_TRANSVERSE,
         ExifInterface.ORIENTATION_ROTATE_270 -> degree = 270
+
         else -> degree = 0
     }
     return degree

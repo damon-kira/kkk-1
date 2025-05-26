@@ -15,8 +15,8 @@ import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 
 /**
-* android Q+版本访问文件中指纹专用
-**/
+ * android Q+版本访问文件中指纹专用
+ **/
 object MediaStoreUtil {
 
     private val TAG = "debug_MediaStoreUtil"
@@ -120,7 +120,7 @@ object MediaStoreUtil {
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                             cursor.getLong(cursor.getColumnIndex(BaseColumns._ID))
                         )
-                        if (size == null){
+                        if (size == null) {
                             continue
                         }
 
@@ -287,7 +287,8 @@ object MediaStoreUtil {
         //在主要外部存储设备上查找所有视频文件 (API <= 28 使用 VOLUME_EXTERNAL 代替)
         var videoCollection = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-            videoCollection = MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            videoCollection =
+                MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         }
 
         //开始插入视频

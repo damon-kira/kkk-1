@@ -9,10 +9,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.RandomAccessFile
 
-/**
- * Created by weishl on 2022/1/24
- *
- */
 object UUidFile {
 
     private const val DEVICE_ID_FILENAME_NEW = "DEV2"

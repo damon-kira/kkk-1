@@ -3,7 +3,6 @@ package com.util.lib.log
 import android.util.Log
 import com.util.lib.UtilInit
 
-
 fun isDebug(): Boolean = UtilInit.get().isDebug()
 
 inline fun debug(run: () -> Unit) {

@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by sunsg on 2018/2/2.
- */
 class TimerUtil {
     companion object {
         const val ONE_DAY_MILLISECONDS = (24 * 3600 * 1000).toLong()//一天的毫秒

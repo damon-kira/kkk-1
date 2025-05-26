@@ -2,10 +2,7 @@ package com.util.lib
 
 import android.view.View
 
-/**
- * author: weishl
- * data: 2020/12/8
- **/
+
 fun View.show() {
     visibility = View.VISIBLE
 }

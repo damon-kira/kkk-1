@@ -11,10 +11,6 @@ import com.util.lib.log.logger_d
 import java.io.File
 
 /**
- * Created by weisl on 2019/10/16.
- */
-
-/**
  * 获取文件uri
  */
 fun getUriFile(context: Context, file: File): Uri? {
@@ -100,7 +96,8 @@ fun getCameraCache(context: Context): File {
  * @param fileName 文件名
  * @return 返回路径
  */
-fun getPicCacheFilePath(context: Context, fileName: String): String = File(getCameraCache(context), fileName).absolutePath
+fun getPicCacheFilePath(context: Context, fileName: String): String =
+    File(getCameraCache(context), fileName).absolutePath
 
 
 /**
@@ -122,7 +119,7 @@ fun deleteCameraAppCache(context: Context) {
 }
 
 
-fun getTempPhotoSavePath(context: Context, fileName: String): String{
+fun getTempPhotoSavePath(context: Context, fileName: String): String {
     val file = File(getCameraCacheTemp(context), fileName)
     return file.absolutePath
 }
@@ -157,7 +154,7 @@ fun deleteFiles(file: File?) {
 
 fun deleteFiles(filePath: String?) {
     try {
-        logger_d("debug_File","deleteFiles =$filePath")
+        logger_d("debug_File", "deleteFiles =$filePath")
         val file = File(filePath)
         deleteFiles(file)
     } catch (e: Exception) {

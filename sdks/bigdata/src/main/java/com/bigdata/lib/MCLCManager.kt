@@ -12,7 +12,6 @@ import com.util.lib.log.logger_i
 import org.json.JSONObject
 import kotlin.math.abs
 
-
 typealias Result = ((result: UploadResult) -> Unit)?
 
 class MCLCManager {

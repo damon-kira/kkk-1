@@ -6,11 +6,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 /**
- * Created by weishl on 2022/11/24
- *
- */
-
-/**
  * 隐藏软键盘
  */
 fun hideSoftInput(activity: Activity) {

@@ -15,16 +15,15 @@
  */
 package com.util.lib
 
-
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 
-
 class GsonUtil {
     companion object {
         const val TAG = "GsonUtil"
+
         /**
          *
          * 描述：将对象转化为json.
@@ -152,12 +151,12 @@ class GsonUtil {
                 val gson = gsonb.create()
                 obj = gson.fromJson(json, clazz)
             } catch (e: Exception) {
-                if (isDebug()){
+                if (isDebug()) {
 //                    MainHandler.post {
 //                        toast(R.string.json_read_error)
 //                    }
                 }
-                logger_e(TAG,"$e")
+                logger_e(TAG, "$e")
                 e.printStackTrace()
             }
 
@@ -178,7 +177,7 @@ class GsonUtil {
                 val gson = gsonb.create()
                 obj = gson.fromJson(json, clazz)
             } catch (e: Exception) {
-                logger_e(TAG,"$e")
+                logger_e(TAG, "$e")
                 e.printStackTrace()
             }
 
@@ -198,7 +197,7 @@ class GsonUtil {
                 val gson = gsonb.create()
                 return gson.fromJson(json, T::class.java)
             } catch (e: Exception) {
-                logger_e(TAG,"$e")
+                logger_e(TAG, "$e")
                 e.printStackTrace()
             }
 

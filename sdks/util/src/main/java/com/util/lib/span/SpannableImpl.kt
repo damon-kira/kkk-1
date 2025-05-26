@@ -32,7 +32,11 @@ class SpannableImpl : ISpannable {
         return this
     }
 
-    override fun init(@NonNull context: Context, textRes: Int,@NonNull vararg text: String): ISpannable {
+    override fun init(
+        @NonNull context: Context,
+        textRes: Int,
+        @NonNull vararg text: String
+    ): ISpannable {
         val str = context.getString(textRes, *text)
         mStr = str
         mSpannable = SpannableString(str)
@@ -54,7 +58,7 @@ class SpannableImpl : ISpannable {
         return this
     }
 
-    override fun size(textSize: Int,@NonNull vararg params: String): ISpannable {
+    override fun size(textSize: Int, @NonNull vararg params: String): ISpannable {
         try {
             var str = mStr
             var originIndex = 0
@@ -136,7 +140,7 @@ class SpannableImpl : ISpannable {
         return this
     }
 
-    override fun color(color: Int,@NonNull vararg params: String): ISpannable {
+    override fun color(color: Int, @NonNull vararg params: String): ISpannable {
         try {
             var str = mStr
             var originIndex = 0

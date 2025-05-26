@@ -17,9 +17,6 @@ import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import java.util.*
 
-/**
- * Created by weisl on 2019/10/15.
- */
 object SysUtils {
 
     private val DEBUG = isDebug()

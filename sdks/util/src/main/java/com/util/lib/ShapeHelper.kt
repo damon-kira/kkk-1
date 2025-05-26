@@ -6,10 +6,6 @@ import android.graphics.drawable.GradientDrawable
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
-/**
- * Created by weishl on 2020/11/6
- *
- */
 object ShapeHelper {
 
     /**

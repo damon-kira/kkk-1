@@ -3,9 +3,6 @@ package com.cache.lib
 import android.util.Log
 import com.cache.lib.impl.SpCacheImpl
 
-/**
- * Created by weisl on 2019/10/14.
- */
 object SharedPrefUser {
     const val TAG = "SharedPref"
 

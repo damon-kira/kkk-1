@@ -12,14 +12,6 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import kotlin.math.max
 
-
-/*
- *
- * Author: jinguang
- * Create: 2020/7/1 10:51
- * Description:
- */
-
 object StatusBarUtil {
     private val FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view
     private val FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view

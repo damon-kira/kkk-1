@@ -3,10 +3,6 @@ package com.util.lib.shape
 import android.graphics.drawable.GradientDrawable
 import androidx.annotation.IntDef
 
-/**
- * Created by weishl on 2022/01/10
- *
- */
 @Retention(AnnotationRetention.RUNTIME)
 @IntDef(ShapeStyle.RECTANGLE,ShapeStyle.OVAL,ShapeStyle.LINE,ShapeStyle.RING)
 @Target(AnnotationTarget.VALUE_PARAMETER)

@@ -7,10 +7,6 @@ import android.util.Log
 import com.cache.lib.SharedPrefGlobal
 import java.io.DataInputStream
 
-/**
- * Created by weishl on 2020/10/27
- *
- */
 object AppUtil {
 
     private val TAG = "debug_AppUtil"

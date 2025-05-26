@@ -1,9 +1,5 @@
 package com.util.lib
 
-/**
- * author: weishl
- * data: 2019/12/6
- **/
 object StrMatchUtil {
 
     /**

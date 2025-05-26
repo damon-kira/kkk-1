@@ -14,10 +14,6 @@ import com.util.lib.time2Str
 import com.util.lib.utcTimeToStr
 import java.util.*
 
-/**
- * Created by weishl on 2020/12/31
- *
- */
 object DevicesAppHelper {
 
     private const val TAG = "debug_DevicesAppHelper"

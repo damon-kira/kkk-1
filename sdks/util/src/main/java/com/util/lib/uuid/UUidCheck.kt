@@ -12,10 +12,6 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.regex.Pattern
 
-/**
- * Created by weishl on 2022/1/25
- *
- */
 object UUidCheck {
 
     private const val INVALID_IMEI_FILENAME = "non_imei"
@@ -80,7 +76,8 @@ object UUidCheck {
         var iso: InputStream? = null
         var br: BufferedReader? = null
         try {
-            iso = FileUtils.openLatestInputFile(context,
+            iso = FileUtils.openLatestInputFile(
+                context,
                 INVALID_IMEI_FILENAME
             )
             if (iso != null) {
@@ -111,7 +108,7 @@ object UUidCheck {
                 try {
                     br.close()
                 } catch (e: IOException) {
-                    if(DEBUG) {
+                    if (DEBUG) {
                         Log.e(TAG, e.toString())
                     }
                 }

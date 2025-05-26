@@ -1,9 +1,5 @@
 package com.util.lib.shape
 
-/**
- * Created by weishl on 2022/1/10
- *
- */
 class ShapeCorners(iShape: IShape): BaseParams(iShape) {
 
     fun radius(radius: Float): ShapeCorners {

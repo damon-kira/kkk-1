@@ -9,10 +9,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-
 internal object NetWorkManager {
     val TAG = "debug_bigData_NetWorkManager"
-
 
     @JvmStatic
     @Synchronized
@@ -38,7 +36,11 @@ internal object NetWorkManager {
         return okHttpClient.newCall(request)
     }
 
-    fun asynUplaodMsg(bigDataInfo: String, remoteUrl: String, listener: ((result: Boolean) -> Unit)? = null) {
+    fun asynUplaodMsg(
+        bigDataInfo: String,
+        remoteUrl: String,
+        listener: ((result: Boolean) -> Unit)? = null
+    ) {
         createRequest(bigDataInfo, remoteUrl).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 listener?.invoke(false)
@@ -54,10 +56,13 @@ internal object NetWorkManager {
     private val mHeaderInterceptor = Interceptor { chain ->
         val original = chain.request()
         val builder = original.newBuilder()
-        BigDataManager.get().getNetDataListener()?.also {listener ->
+        BigDataManager.get().getNetDataListener()?.also { listener ->
             // app版本
             val ctx = listener.getContext()
-            builder.addHeader("vMRdV0dUmj",AppUtil.getVersionCode(ctx, ctx.packageName).toString())// app 版本
+            builder.addHeader(
+                "vMRdV0dUmj",
+                AppUtil.getVersionCode(ctx, ctx.packageName).toString()
+            )// app 版本
             // 设备id
             builder.addHeader("NbBH4GIwmz", SysUtils.getImei(ctx))
             // 客户端类型
@@ -66,7 +71,7 @@ internal object NetWorkManager {
             builder.addHeader("pg77Foy4PL", listener.getGaid())
             builder.addHeader("wCxyJuAwkK", listener.getAppToken())// token
             builder.addHeader("kio8YGhwe6", "Xs8jKf5LmN")// 固定值
-            builder.addHeader("Content-type","application/json;charset=utf-8")
+            builder.addHeader("Content-type", "application/json;charset=utf-8")
         }
         builder.method(original.method(), original.body())
         chain.proceed(builder.build())

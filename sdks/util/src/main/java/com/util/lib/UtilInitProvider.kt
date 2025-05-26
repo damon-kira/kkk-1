@@ -5,10 +5,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 
-/**
- * Create by weishl
- * 2022/9/8
- */
+
 class UtilInitProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         UtilInit.get().setContext(context!!)

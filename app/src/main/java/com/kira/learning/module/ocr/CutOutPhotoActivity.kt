@@ -21,8 +21,9 @@ class CutOutPhotoActivity : BaseFragmentActivity() {
     protected override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        mBinding
+
 //        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cutout_phote);
-        val path = getIntent().getStringExtra("path")
+        val path = intent.getStringExtra("path")
         val bitmap = BitmapFactory.decodeFile(path)
 
         mBinding.cropImageView.setImageBitmap(bitmap)

@@ -3,7 +3,6 @@ package com.bigdata.lib.net
 import android.content.Context
 import com.google.gson.JsonObject
 
-
 interface NetConfigDataInterface {
 
     //Context

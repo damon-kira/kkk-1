@@ -7,10 +7,6 @@ import com.aes.lib.MD5Utils
 import java.io.*
 import java.util.*
 
-/**
- * Created by weishl on 2020/10/28
- *
- */
 object FileUtils {
     private val TAG = "Utils"
     private val DEBUG: Boolean = BuildConfig.DEBUG
