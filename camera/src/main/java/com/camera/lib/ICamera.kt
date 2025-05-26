@@ -2,7 +2,6 @@ package com.camera.lib
 
 import java.io.File
 
-
 interface ICamera {
 
     /**
@@ -14,7 +13,10 @@ interface ICamera {
     /**
      * 开始拍照
      */
-    fun takePicture(file: File, callback: (success: Boolean, filePath: File) -> Unit = { success: Boolean, filePath: File -> })
+    fun takePicture(
+        file: File,
+        callback: (success: Boolean, filePath: File) -> Unit = { success: Boolean, filePath: File -> }
+    )
 
     /**
      * 关闭相机 释放资源
@@ -46,6 +48,7 @@ interface ICamera {
      * curCameraId:切换后的摄像头  前 or 后
      */
     fun switchCamera(callback: (curCameraId: Int) -> Unit = { curCameraId -> })
+
     /**
      * 是否有后置摄像头
      */

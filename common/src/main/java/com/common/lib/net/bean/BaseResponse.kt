@@ -4,7 +4,6 @@ import com.common.lib.net.ResponseCode
 import com.util.lib.GsonUtil
 import java.lang.reflect.ParameterizedType
 
-
 class BaseResponse<T> @JvmOverloads constructor(
     var code: Int,
     var data: T?,

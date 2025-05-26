@@ -2,7 +2,6 @@ package com.common.lib.net
 
 import android.content.Context
 
-
 interface ExternalParamsSupplier {
 
     fun getContext(): Context

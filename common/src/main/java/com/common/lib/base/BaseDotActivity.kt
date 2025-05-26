@@ -1,12 +1,5 @@
 package com.common.lib.base
 
-//import com.behavior.lib.EventAgent
-import com.common.lib.base.BaseActivity
-
-/**
- * Created by weisl on 2019/10/15.
- * tuyaqifei*fjdkjfdk
- */
 abstract class BaseDotActivity : BaseActivity() {
 
     abstract fun getPageNumber(): String //页面编号

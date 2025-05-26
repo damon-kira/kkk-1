@@ -53,7 +53,8 @@ class HttpLogger {
             val sb = StringBuilder()
             logs.forEach {
                 val msg = if (it.startsWith("{") && it.endsWith("}")
-                    || it.startsWith("[") && it.endsWith("]")) {
+                    || it.startsWith("[") && it.endsWith("]")
+                ) {
                     HttpLogHelper.formatJson(HttpLogHelper.decodeUnicode(it))
                 } else it
                 sb.append(msg).append("\n")

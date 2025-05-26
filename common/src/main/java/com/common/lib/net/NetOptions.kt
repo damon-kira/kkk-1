@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit
 
 class NetOptions {
 
-
     var readTimeout = 0L
     var writeTimeout = 0L
     var connectTimeout = 0L

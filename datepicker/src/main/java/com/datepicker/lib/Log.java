@@ -1,9 +1,5 @@
 package com.datepicker.lib;
 
-/**
- * Powered by jzman.
- * Created on 2021/4/27 23:02.
- */
 public class Log {
     private static final String TAG = "MDatePicker";
     private static final boolean debug = false;

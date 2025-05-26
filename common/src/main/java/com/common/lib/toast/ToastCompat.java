@@ -14,9 +14,6 @@ import androidx.annotation.StringRes;
 
 import java.lang.reflect.Field;
 
-/**
- * @author drakeet
- */
 public final class ToastCompat extends Toast {
 
   private final @NonNull

@@ -16,7 +16,6 @@ import com.util.lib.log.logger_i
 import java.io.File
 import java.io.FileOutputStream
 
-
 class CameraOneManager(
     activity: AppCompatActivity,
     cameraView: TextureView,
@@ -142,6 +141,7 @@ class CameraOneManager(
                         lastHeight = (screenWidth / previewRatio).toInt()
 
                     }
+
                     else -> {
                         lastHeight = screenHeight
                         lastWidth = screenWidth

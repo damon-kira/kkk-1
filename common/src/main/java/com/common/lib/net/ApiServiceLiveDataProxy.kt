@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import com.common.lib.net.bean.BaseResponse
 import io.reactivex.rxjava3.core.Flowable
 
-
 object ApiServiceLiveDataProxy {
 
     @JvmStatic

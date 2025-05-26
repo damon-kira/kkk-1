@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.camera.view.PreviewView
 
-
 class CameraView : FrameLayout {
 
     private var cameraType = CameraType.CameraX
 
-     var curView: View = PreviewView(context)
+    var curView: View = PreviewView(context)
 
     val params = LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -35,17 +34,18 @@ class CameraView : FrameLayout {
         addView(curView)
     }
 
-    fun setCameraType(cameraType: CameraType){
-        if (cameraType == this.cameraType){
+    fun setCameraType(cameraType: CameraType) {
+        if (cameraType == this.cameraType) {
             return
         }
-        when(cameraType){
+        when (cameraType) {
             CameraType.CameraOne -> {
                 removeAllViews()
                 curView = TextureView(context)
                 curView.layoutParams = params
                 addView(curView)
             }
+
             CameraType.CameraX -> {
                 removeAllViews()
                 curView = PreviewView(context)

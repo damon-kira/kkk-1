@@ -12,9 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-/**
- * @author drakeet
- */
 final class SafeToastContext extends ContextWrapper {
 
   private @NonNull

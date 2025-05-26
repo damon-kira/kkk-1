@@ -8,9 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.common.lib.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
-/**
- * Created by weisl on 2019/9/24.
- */
 open class InjectorActivity : AppCompatActivity() {
 
     lateinit var viewModelFactory: ViewModelProvider.Factory

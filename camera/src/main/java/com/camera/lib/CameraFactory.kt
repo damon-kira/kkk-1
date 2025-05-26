@@ -4,7 +4,6 @@ import android.view.TextureView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.view.PreviewView
 
-
 object CameraFactory {
 
     /**

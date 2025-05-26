@@ -6,7 +6,6 @@ import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
 import okhttp3.*
 
-
 class DecryptInterceptor : Interceptor {
 
     companion object {

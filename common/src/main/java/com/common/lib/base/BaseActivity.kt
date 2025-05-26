@@ -1,10 +1,16 @@
 package com.common.lib.base
 
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.common.lib.BuildConfig
-import com.common.lib.dialog.*
+import com.common.lib.dialog.DefaultDialog
+import com.common.lib.dialog.DialogHandleMode
+import com.common.lib.dialog.DialogLifecycleManager
+import com.common.lib.dialog.IDialog
+import com.common.lib.dialog.IDialogTask
+import com.common.lib.dialog.hideLoadingDialog
+import com.common.lib.dialog.showDialoga
+import com.common.lib.dialog.showLoadingDialog
 import com.util.lib.log.logger_i
 
 

@@ -18,8 +18,6 @@ import java.io.FileInputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-
-
 class CameraXHelper(val activity: AppCompatActivity) {
 
     private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
@@ -86,15 +84,19 @@ class CameraXHelper(val activity: AppCompatActivity) {
                     CameraState.Type.PENDING_OPEN -> {
                         logger_i(BaseCameraManager.TAG, "CameraState: Pending Open")
                     }
+
                     CameraState.Type.OPENING -> {
                         logger_i(BaseCameraManager.TAG, "CameraState: Opening")
                     }
+
                     CameraState.Type.OPEN -> {
                         logger_i(BaseCameraManager.TAG, "CameraState: Open")
                     }
+
                     CameraState.Type.CLOSING -> {
                         logger_i(BaseCameraManager.TAG, "CameraState: Closing")
                     }
+
                     CameraState.Type.CLOSED -> {
                         logger_i(BaseCameraManager.TAG, "CameraState: Closed")
                     }
@@ -111,9 +113,11 @@ class CameraXHelper(val activity: AppCompatActivity) {
                     CameraState.ERROR_CAMERA_IN_USE -> {
                         logger_e(BaseCameraManager.TAG, "Camera in use")
                     }
+
                     CameraState.ERROR_MAX_CAMERAS_IN_USE -> {
                         logger_e(BaseCameraManager.TAG, "Max cameras in use")
                     }
+
                     CameraState.ERROR_OTHER_RECOVERABLE_ERROR -> {
                         logger_e(BaseCameraManager.TAG, "Other recoverable error")
                     }
@@ -121,6 +125,7 @@ class CameraXHelper(val activity: AppCompatActivity) {
                     CameraState.ERROR_CAMERA_DISABLED -> {
                         logger_e(BaseCameraManager.TAG, "Camera disabled")
                     }
+
                     CameraState.ERROR_CAMERA_FATAL_ERROR -> {
                         // 重启设备以恢复摄像头功能
                         logger_e(BaseCameraManager.TAG, "Fatal error")
@@ -192,7 +197,10 @@ class CameraXHelper(val activity: AppCompatActivity) {
                                 }
                                 fileInputStream.close()
                                 outputStream?.close()
-                                logger_i(BaseCameraManager.TAG,"拍摄成功 path:${file.absolutePath}")
+                                logger_i(
+                                    BaseCameraManager.TAG,
+                                    "拍摄成功 path:${file.absolutePath}"
+                                )
                             } catch (e: Exception) {
 
                             }
@@ -202,7 +210,10 @@ class CameraXHelper(val activity: AppCompatActivity) {
                                 arrayOf(file.absolutePath),
                                 arrayOf("image/jpeg")
                             ) { path: String?, uri: Uri? ->
-                                logger_i(BaseCameraManager.TAG,"拍摄成功 path:${file.absolutePath}")
+                                logger_i(
+                                    BaseCameraManager.TAG,
+                                    "拍摄成功 path:${file.absolutePath}"
+                                )
                             }
                         }
                         callback(true, file)

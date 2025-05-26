@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.common.lib.net.ServiceClient
 
-/**
- * Created by mingfeng on 2020-03-27.
- */
 @SuppressLint("CheckLogUsageConditional")
 object HttpLogHelper {
 

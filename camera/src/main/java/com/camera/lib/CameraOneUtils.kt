@@ -8,7 +8,6 @@ import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 import java.util.*
 
-
 class CameraOneUtils {
 
     companion object {
@@ -23,37 +22,37 @@ class CameraOneUtils {
         }
     }
 
-    private var mCamera: Camera?= null
+    private var mCamera: Camera? = null
     private var mInPreview: Boolean = false
     private var mPreviewCallback: Camera.PreviewCallback? = null
 
     fun open(openCameraId: Int): Int {
-        if(openCameraId != CAMERA_BACK && openCameraId != CAMERA_FRONT){
+        if (openCameraId != CAMERA_BACK && openCameraId != CAMERA_FRONT) {
             return CAMERA_NULL
         }
-        var result = if(openCameraId == CAMERA_BACK){
+        var result = if (openCameraId == CAMERA_BACK) {
             Camera.CameraInfo.CAMERA_FACING_BACK
-        }else{
+        } else {
             Camera.CameraInfo.CAMERA_FACING_FRONT
         }
 
         var camera = openCameraInternal(result)
-        if(camera == null){
-            result = if(result == CAMERA_BACK){
+        if (camera == null) {
+            result = if (result == CAMERA_BACK) {
                 Camera.CameraInfo.CAMERA_FACING_FRONT
-            }else{
+            } else {
                 Camera.CameraInfo.CAMERA_FACING_BACK
             }
             camera = openCameraInternal(result)
         }
 
-        if(camera == null){
+        if (camera == null) {
             result = CAMERA_NULL
         }
 
-        logger_i(TAG,"打开摄像头是否成功:${camera != null},cameraId:$result")
+        logger_i(TAG, "打开摄像头是否成功:${camera != null},cameraId:$result")
 
-        if(camera == null){
+        if (camera == null) {
             mCamera = null
             return result
         }
@@ -66,8 +65,8 @@ class CameraOneUtils {
                 mPreviewCallback?.onPreviewFrame(data, camera)
 
             }
-        }catch (e: Exception){
-            logger_i(TAG,"open camera failed,setPreviewCallback Exception:$e")
+        } catch (e: Exception) {
+            logger_i(TAG, "open camera failed,setPreviewCallback Exception:$e")
             result = CAMERA_NULL
         }
 
@@ -75,96 +74,96 @@ class CameraOneUtils {
     }
 
     fun getParameters(): Camera.Parameters? {
-        try{
+        try {
             return mCamera?.parameters
-        }catch (e: Exception){
-            logger_e(TAG,"获取相机参数失败:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "获取相机参数失败:$e")
         }
 
         return null
     }
 
     fun setParameters(parameters: Camera.Parameters?): Boolean {
-        if(parameters == null){
+        if (parameters == null) {
             return false
         }
-        try{
+        try {
             mCamera?.parameters = parameters
             return true
-        }catch (e: Exception){
-            logger_e(TAG,"获取相机参数失败:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "获取相机参数失败:$e")
         }
         return false
     }
 
-    fun take(callback: (success: Boolean,data: ByteArray?) -> Unit) {
-        if(!isInPreview()){
-            callback(false,null)
+    fun take(callback: (success: Boolean, data: ByteArray?) -> Unit) {
+        if (!isInPreview()) {
+            callback(false, null)
             return
         }
         try {
-            mCamera?.takePicture(null,null,null) { data, camera ->
+            mCamera?.takePicture(null, null, null) { data, camera ->
                 stopPreview()
-                callback(true,data)
+                callback(true, data)
                 startPreview()
             }
-        }catch (e:Exception){
-            logger_i(TAG,"take picture error e = $e")
-            callback(false,null)
+        } catch (e: Exception) {
+            logger_i(TAG, "take picture error e = $e")
+            callback(false, null)
 //            EventAgent.onEvent(ConstantDot.PAGE_CAMERA,ConstantDot.EVENT_TAKE_PHOTO_CRASH)
         }
     }
 
-    fun close(){
+    fun close() {
         mInPreview = false
         try {
             mCamera?.setPreviewCallback(null)
             mCamera?.stopPreview()
             mCamera?.release()
-        }catch (e: Exception){
-            logger_e(TAG,"close 相机出错:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "close 相机出错:$e")
 
         }
         mCamera = null
     }
 
 
-    fun setPreviewDisplay(holder: SurfaceHolder): Boolean{
+    fun setPreviewDisplay(holder: SurfaceHolder): Boolean {
         try {
             mCamera?.setPreviewDisplay(holder)
             return true
-        }catch (e: Exception){
-            logger_e(TAG,"setPreviewTexture出错:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "setPreviewTexture出错:$e")
         }
         return false
     }
 
-    fun setPreviewTexture(texture: SurfaceTexture?): Boolean{
+    fun setPreviewTexture(texture: SurfaceTexture?): Boolean {
         try {
             mCamera?.setPreviewTexture(texture)
             return true
-        }catch (e: Exception){
-            logger_e(TAG,"setPreviewTexture出错:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "setPreviewTexture出错:$e")
         }
         return false
     }
 
-    fun startPreview(): Boolean{
+    fun startPreview(): Boolean {
         try {
             mCamera?.startPreview()
             return true
-        }catch (e: Exception){
-            logger_e(TAG,"startPreview出错:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "startPreview出错:$e")
         }
         return false
     }
 
-    fun stopPreview(): Boolean{
+    fun stopPreview(): Boolean {
         try {
             mCamera?.stopPreview()
             return true
-        }catch (e: Exception){
-            logger_e(TAG,"stopPreview出错:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "stopPreview出错:$e")
         }
         return false
     }
@@ -186,7 +185,7 @@ class CameraOneUtils {
                 camera.autoFocus(null)
             }
         } catch (e: Exception) {
-            logger_e(TAG,"自动对焦失败:$e")
+            logger_e(TAG, "自动对焦失败:$e")
         }
     }
 
@@ -210,11 +209,11 @@ class CameraOneUtils {
         return flag
     }
 
-    fun setDisplayOrientation(degrees: Int){
+    fun setDisplayOrientation(degrees: Int) {
         try {
             mCamera?.setDisplayOrientation(degrees)
-        }catch (e: Exception){
-            logger_e(TAG,"setDisplayOrientation失败:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "setDisplayOrientation失败:$e")
         }
     }
 
@@ -239,24 +238,26 @@ class CameraOneUtils {
                     logger_i(TAG, "打开前置摄像头")
                 }
             }
-        }catch (e: Exception){
-            logger_i(TAG,"打开相机失败，可能是因为其他应用锁定了camera:$e")
+        } catch (e: Exception) {
+            logger_i(TAG, "打开相机失败，可能是因为其他应用锁定了camera:$e")
         }
 
         return camera
     }
 
-    fun getNearestRatioSize(para: Camera.Parameters,
-                            screenWidth: Int, screenHeight: Int): Camera.Size? {
+    fun getNearestRatioSize(
+        para: Camera.Parameters,
+        screenWidth: Int, screenHeight: Int
+    ): Camera.Size? {
         val supportedSize = para.supportedPreviewSizes ?: return null
 
         val buffer = StringBuffer()
-        for(size in supportedSize){
+        for (size in supportedSize) {
             buffer.append("${size.width},${size.height}\n")
         }
-        logger_i(TAG,"supported size :$buffer")
+        logger_i(TAG, "supported size :$buffer")
         for (tmp in supportedSize) {
-            if(tmp.width == screenWidth && tmp.height == screenHeight){
+            if (tmp.width == screenWidth && tmp.height == screenHeight) {
                 return tmp
             }
             if (tmp.width == 1920 && tmp.height == 1080) {
@@ -267,8 +268,10 @@ class CameraOneUtils {
             }
         }
         supportedSize.sortWith(Comparator { lhs, rhs ->
-            val diff1 = ((1000 * Math.abs(lhs.width / lhs.height.toFloat() - screenWidth / screenHeight.toFloat())).toInt() shl 16) - lhs.width
-            val diff2 = ((1000 * Math.abs(rhs.width / rhs.height.toFloat() - screenWidth / screenHeight.toFloat())).toInt() shl 16) - rhs.width
+            val diff1 =
+                ((1000 * Math.abs(lhs.width / lhs.height.toFloat() - screenWidth / screenHeight.toFloat())).toInt() shl 16) - lhs.width
+            val diff2 =
+                ((1000 * Math.abs(rhs.width / rhs.height.toFloat() - screenWidth / screenHeight.toFloat())).toInt() shl 16) - rhs.width
 
             diff1 - diff2
         })
@@ -352,15 +355,15 @@ class CameraOneUtils {
             val previewSize = parameters.previewSize ?: return null
 
             val ratio = previewSize.width * 1.0f / previewSize.height
-            for(size in list){
-                if(ratio == size.width * 1.0f / size.height){
+            for (size in list) {
+                if (ratio == size.width * 1.0f / size.height) {
                     return size
                 }
             }
 
             return list[0]
-        }catch (e: Exception){
-            logger_e(TAG,"获取支持的图片大小失败:$e")
+        } catch (e: Exception) {
+            logger_e(TAG, "获取支持的图片大小失败:$e")
         }
         return null
     }

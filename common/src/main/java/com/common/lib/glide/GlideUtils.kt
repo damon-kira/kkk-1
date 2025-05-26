@@ -54,11 +54,18 @@ object GlideUtils {
             .into(imageView)
     }
 
-    fun loadCornerImageFromUrl(context: Context, url: String, imageView: ImageView, corner: Float,@DrawableRes normalDrawableRes: Int) {
+    fun loadCornerImageFromUrl(
+        context: Context,
+        url: String,
+        imageView: ImageView,
+        corner: Float,
+        @DrawableRes normalDrawableRes: Int
+    ) {
         Glide.with(context)
             .asBitmap()
             .apply(
-                createCornerRequestOptions(context,
+                createCornerRequestOptions(
+                    context,
                     imageView.width,
                     imageView.height,
                     false,

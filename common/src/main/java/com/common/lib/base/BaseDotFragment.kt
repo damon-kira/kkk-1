@@ -1,12 +1,7 @@
 package com.common.lib.base
 
 import androidx.annotation.CallSuper
-//import com.behavior.lib.EventAgent
 
-/**
- * Created by weisl on 2019/10/15.
- * tuyaqifei*fjdkjfdk
- */
 abstract class BaseDotFragment : BaseFragment() {
 
 

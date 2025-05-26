@@ -3,7 +3,6 @@ package com.common.lib.net
 import com.util.lib.SysUtils
 import okhttp3.Request
 
-
 class NetBaseParamsManager {
     companion object {
 
