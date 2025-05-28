@@ -1,6 +1,7 @@
 package com.kira.learning.module.upload
 
 import android.os.Bundle
+import android.util.Log
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqKycInfo
 import com.kira.learning.databinding.ActivityUploadBinding
@@ -62,8 +63,16 @@ class UploadActivity : BaseProcessActivity() {
 
     private fun reqPermission() {
         PermissionHelper.reqPermission(this, appPermissions.toList(), true, isFixGroup = true, {
-            showDialog()
-            mViewModel.checkAndUpload()
+            Log.e(TAG, "reqPermission: ====${it}")
+            if (it) {
+                showDialog()
+                mViewModel.checkAndUpload()
+            } else {
+                mUploadDialog.dismiss()
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_REFRESH))
+                Launch.skipMainActivity(this)
+                finish()
+            }
         }, {
             jumpToAppSettingPage()
         })

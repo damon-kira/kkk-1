@@ -27,10 +27,13 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityTakePhotoBinding
 import com.kira.learning.module.ocr.utils.UriUtils
-import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.guava.await
+import kotlinx.coroutines.launch
 import java.io.File
 
 /**
@@ -50,7 +53,8 @@ class TakePhotoActivity : AppCompatActivity() {
         // 设置全屏
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         val decorView = window.decorView
-        decorView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        decorView.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 decorView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 windowSetting()
@@ -75,7 +79,8 @@ class TakePhotoActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.windowInsetsController?.let { controller ->
                 controller.hide(WindowInsets.Type.systemBars())
-                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                controller.systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
         } else {
             @Suppress("DEPRECATION")
@@ -118,37 +123,46 @@ class TakePhotoActivity : AppCompatActivity() {
      * 开始预览
      */
     private fun startCamera() {
-        // 将Camera的生命周期和Activity绑定在一起（设定生命周期所有者），这样就不用手动控制相机的启动和关闭。
-        val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
-            ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener(Runnable {
+        // 使用生命周期作用域管理协程，自动匹配Activity生命周期
+        lifecycleScope.launch(Dispatchers.Main) {
             try {
-                // 将你的相机和当前生命周期的所有者绑定所需的对象
-                val processCameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+                // 1. 将ListenableFuture转换为协程挂起函数（需要kotlinx-coroutines-guava依赖）
+                val processCameraProvider: ProcessCameraProvider =
+                    ProcessCameraProvider.getInstance(this@TakePhotoActivity).await()
 
-                // 创建一个Preview 实例，并设置该实例的 surface 提供者（provider）。
-                val preview = Preview.Builder().setTargetRotation(Surface.ROTATION_90)
-                    .setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
-                preview.setSurfaceProvider(mBinding.preview.getSurfaceProvider())
+                // 2. 创建Preview实例（保持原有配置）
+                val preview = Preview.Builder()
+                    .setTargetRotation(Surface.ROTATION_90)
+                    .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+                    .build()
+                    .apply {
+                        setSurfaceProvider(mBinding.preview.getSurfaceProvider())
+                    }
 
-                // 选择后置摄像头作为默认摄像头
+                // 3. 选择后置摄像头（与原逻辑一致）
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-                // 创建拍照所需的实例
-                imageCapture = ImageCapture.Builder().setTargetRotation(Surface.ROTATION_90)
-                    .setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
+                // 4. 创建ImageCapture实例（保持原有配置）
+                imageCapture = ImageCapture.Builder()
+                    .setTargetRotation(Surface.ROTATION_90)
+                    .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+                    .build()
 
-                // 重新绑定用例前先解绑
+                // 5. 解绑之前的用例（避免重复绑定）
                 processCameraProvider.unbindAll()
 
-                // 绑定用例至相机
+                // 6. 绑定用例到生命周期（与原逻辑一致）
                 processCameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture
+                    this@TakePhotoActivity,
+                    cameraSelector,
+                    preview,
+                    imageCapture
                 )
             } catch (e: Exception) {
+                // 保持原异常处理逻辑（可根据需要添加日志）
+                e.printStackTrace()
             }
-        }, ContextCompat.getMainExecutor(this))
+        }
     }
 
     private fun takePhoto() {

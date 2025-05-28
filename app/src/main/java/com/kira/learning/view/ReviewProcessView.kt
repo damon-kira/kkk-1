@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.kira.learning.R
 import com.util.lib.dp
+import androidx.core.graphics.withSave
 
 class ReviewProcessView : View {
 
@@ -57,7 +58,7 @@ class ReviewProcessView : View {
     }
 
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         canvas ?: return
 
         mPaint.color = mInnerColor
@@ -67,21 +68,21 @@ class ReviewProcessView : View {
         mPaint.color = mInnerColor
         canvas.drawCircle(mCircleRadius, halfHeight, mCircleRadius / 2f, mPaint)
 
-        canvas.save()
-        mPaint.color = mLastInnerColor
-        canvas.translate(halfWidth + mCircleRadius, 0f)
-        canvas.drawLine(mCircleRadius, halfHeight, halfWidth, halfHeight, mPaint)
-        mPaint.color = mOutCircleColor
-        canvas.drawCircle(0f, halfHeight, mCircleRadius, mPaint)
-        mPaint.color = mInnerColor
-        canvas.drawCircle(0f, halfHeight, mCircleRadius / 2, mPaint)
+        canvas.withSave() {
+            mPaint.color = mLastInnerColor
+            translate(halfWidth + mCircleRadius, 0f)
+            drawLine(mCircleRadius, halfHeight, halfWidth, halfHeight, mPaint)
+            mPaint.color = mOutCircleColor
+            drawCircle(0f, halfHeight, mCircleRadius, mPaint)
+            mPaint.color = mInnerColor
+            drawCircle(0f, halfHeight, mCircleRadius / 2, mPaint)
 
-        canvas.translate(halfWidth, 0f)
-        mPaint.color = mLastOutColor
-        canvas.drawCircle(0f, halfHeight, mCircleRadius, mPaint)
-        mPaint.color = mLastInnerColor
-        canvas.drawCircle(0f, halfHeight, mCircleRadius / 2f, mPaint)
-        canvas.restore()
+            translate(halfWidth, 0f)
+            mPaint.color = mLastOutColor
+            drawCircle(0f, halfHeight, mCircleRadius, mPaint)
+            mPaint.color = mLastInnerColor
+            drawCircle(0f, halfHeight, mCircleRadius / 2f, mPaint)
+        }
 
 
     }

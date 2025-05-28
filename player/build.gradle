@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.arezoonazer.player'
+    compileSdk rootProject.ext.version.compileSdk
+    buildFeatures.viewBinding true
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+
+    implementation rootProject.ext.android.kotlin_stdlib
+    implementation rootProject.ext.android.core_ktx
+    implementation rootProject.ext.android.appcompat
+    implementation rootProject.ext.view.constraintlayout
+    implementation rootProject.ext.view.material
+    implementation rootProject.ext.android.multidex
+    implementation rootProject.ext.view.swiperefreshlayout
+    implementation rootProject.ext.android.activity_ktx
+    // livedata
+    implementation rootProject.ext.android.lifecycle_runtime
+    implementation rootProject.ext.android.lifecycle_livedataKtx
+    implementation rootProject.ext.android.livedata_viewmodelKtx
+
+    implementation rootProject.ext.media3.exoplayer
+    implementation rootProject.ext.media3.ui
+    implementation rootProject.ext.media3.exoplayer_hls
+    implementation rootProject.ext.media3.exoplayer_dash
+
+    // hilt
+    implementation rootProject.ext.hilt.hilt_android
+    kapt rootProject.ext.hilt.hilt_compiler_android
+
+}

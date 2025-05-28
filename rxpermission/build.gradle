@@ -2,15 +2,19 @@ apply plugin: 'com.android.library'
 //apply from: 'jitpack.gradle'
 
 android {
-    compileSdkVersion 33
+    namespace 'com.kira.learning.rxpermission'
+    compileSdkVersion rootProject.ext.version.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.version.minSdk
+        targetSdkVersion rootProject.ext.version.targetSdk
+
+        consumerProguardFiles "proguard-rules.pro"
+    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 33
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     buildTypes {
         release {
@@ -29,17 +33,21 @@ android {
 }
 
 dependencies {
-    implementation "io.reactivex.rxjava3:rxjava:3.1.10"
 
     implementation("androidx.fragment:fragment:1.2.5")
     implementation("androidx.annotation:annotation:1.1.0")
-    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation rootProject.ext.android.appcompat
+
+    implementation rootProject.ext.rxjava.rxandroid
+    implementation rootProject.ext.rxjava.rxjava
+}
+
 
 //    testImplementation 'junit:junit:4.13'
 //    testImplementation rootProject.ext.mockito
 //    testImplementation rootProject.ext.robolectric
 //    testImplementation rootProject.ext.khronosOpenGLApi
-}
+//}
 
 // Commented to use JitPack instead of bintray
 //apply from: 'install.gradle'

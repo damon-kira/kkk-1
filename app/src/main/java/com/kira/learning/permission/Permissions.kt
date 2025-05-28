@@ -24,19 +24,15 @@ import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.logger_i
 
-/**
- * Created by weisl on 2019/10/18.
- */
-
 val TAG = "debug_Permissions"
 
 //需要新权限只需在此数组添加即可
 val appPermissions = arrayOf(
     SmsPermission(),
-    ReceivePermission(),
+//    ReceivePermission(),
 //    ContactPermission(),
-    ReadPhonePermission(),
-    LocationPermission(),
+//    ReadPhonePermission(),
+//    LocationPermission(),
 //    AccountPermission(),
     CameraPermission(),
 //    PhotoAlbumPermission(),
@@ -236,12 +232,12 @@ inline fun Activity.isNotAskChecked(permission: String): Boolean {
  */
 fun BaseActivity.showNoPermissionDialog(
     deniedList: List<AbsPermissionEntity>,
-    cancel: () -> Unit = {},
+    cancel: (isAllGranted: Boolean) -> Unit = {},
     rightListener: () -> Unit = {}
 ): DefaultDialog? {
 
     if (deniedList.isEmpty()) {
-        cancel.invoke()
+        cancel.invoke(true)
         return null
     }
 
@@ -253,9 +249,10 @@ fun BaseActivity.showNoPermissionDialog(
     val message = this.getString(R.string.permission_dialog_message, notPermissiontText)
 
     val dialog = HintDialog(this)
-        .showClose(false)
+        .showClose(true)
         .setMessage(message)
         .setOnClickListener { rightListener.invoke() }
+        .setOnCloseListener { cancel.invoke(false) }
     addDialog(dialog)
     return dialog
 }

@@ -9,6 +9,8 @@ import com.kira.learning.R
 import com.util.lib.dp
 import com.util.lib.sp
 import kotlin.math.min
+import androidx.core.graphics.withTranslation
+import androidx.core.graphics.withSave
 
 class ProcessView : View {
     constructor(context: Context?) : this(context, null)
@@ -109,50 +111,56 @@ class ProcessView : View {
         mHeight = h
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas ?: return
+    override fun onDraw(canvas: Canvas) {
         val processWidth = mProcessWidth * 1f
         drawText(canvas, mLineMoveX)
         val moveY = mHeight - mProcessHeight * 1f
-        canvas.save()
-        canvas.translate(mLineMoveX, moveY)
-        val rectRadius = mProcessHeight / 0.75f
-        mPaint.color = mCurrColor
-        for (index in 1..mStepCount) {
-            if (index > mCurrStep) {
-                mPaint.color = mNormalColor
-            }
-            canvas.drawRoundRect(mRectLine, rectRadius, rectRadius, mPaint)
-            if (index < mStepCount) {
-                canvas.translate(processWidth + mProcessSpace, 0f)
+        canvas.withTranslation(mLineMoveX, moveY) {
+            val rectRadius = mProcessHeight / 0.75f
+            mPaint.color = mCurrColor
+            for (index in 1..mStepCount) {
+                if (index > mCurrStep) {
+                    mPaint.color = mNormalColor
+                }
+                drawRoundRect(mRectLine, rectRadius, rectRadius, mPaint)
+                if (index < mStepCount) {
+                    translate(processWidth + mProcessSpace, 0f)
+                }
             }
         }
-        canvas.restore()
     }
 
     private fun drawText(canvas: Canvas, normalMoveX: Float) {
-        canvas.save()
-        val bgWidth = mTextBg?.intrinsicWidth ?: 0
-        val bgHeight = mTextBg?.intrinsicHeight ?: 0
-        val moveX = ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth).coerceAtLeast(0f)
-        val text = "${(mCurrStep * 25)}%"
-        mTextPaint.getTextBounds(text, 0, text.length, mRect)
-        val measureWidth = mRect.width() + TEXT_PADDING_LEFT * 2
-        val measureHeight = mRect.height() + TEXT_PADDING_TOP * 2
-        canvas.translate(moveX, 0f)
-        val offsetLeft = if (measureWidth > bgWidth) {
-            (measureWidth - bgWidth) / 2
-        } else 0
-        val offsetTop = if (measureHeight > bgHeight) {
-            (measureHeight - bgHeight) / 2
-        } else 0
+        canvas.withSave() {
+            val bgWidth = mTextBg?.intrinsicWidth ?: 0
+            val bgHeight = mTextBg?.intrinsicHeight ?: 0
+            val moveX =
+                ((mProcessWidth + mProcessSpace) * mCurrStep - mProcessSpace * 1f - mProcessWidth).coerceAtLeast(
+                    0f
+                )
+            val text = "${(mCurrStep * 25)}%"
+            mTextPaint.getTextBounds(text, 0, text.length, mRect)
+            val measureWidth = mRect.width() + TEXT_PADDING_LEFT * 2
+            val measureHeight = mRect.height() + TEXT_PADDING_TOP * 2
+            translate(moveX, 0f)
+            val offsetLeft = if (measureWidth > bgWidth) {
+                (measureWidth - bgWidth) / 2
+            } else 0
+            val offsetTop = if (measureHeight > bgHeight) {
+                (measureHeight - bgHeight) / 2
+            } else 0
 
-        mTextBg?.setBounds(0 - offsetLeft.toInt(), 0 - offsetTop.toInt(), bgWidth + offsetLeft.toInt(), bgHeight + offsetTop.toInt())
-        mTextBg?.draw(canvas)
-        val bound = Rect()
-        mTextPaint.getTextBounds(text, 0, text.length, bound)
-        canvas.drawText(text, bgWidth / 2f, bgHeight - bound.height() + 4.dp(), mTextPaint)
-        canvas.restore()
+            mTextBg?.setBounds(
+                0 - offsetLeft.toInt(),
+                0 - offsetTop.toInt(),
+                bgWidth + offsetLeft.toInt(),
+                bgHeight + offsetTop.toInt()
+            )
+            mTextBg?.draw(this)
+            val bound = Rect()
+            mTextPaint.getTextBounds(text, 0, text.length, bound)
+            drawText(text, bgWidth / 2f, bgHeight - bound.height() + 4.dp(), mTextPaint)
+        }
     }
 
     fun setCurrStep(step: Int) {

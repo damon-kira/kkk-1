@@ -1,19 +1,19 @@
 package com.kira.learning.module.home
 
-import android.content.Intent
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
-import com.kira.learning.R
-import com.kira.learning.databinding.ActivityMainBinding
-import com.kira.learning.module.account.MineFragment
-import com.kira.learning.module.repay.RepayTabFragment
+import androidx.core.view.GravityCompat
 import com.common.lib.base.BaseFragment
 import com.common.lib.base.BaseFragmentActivity
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.LiveDataBusObserve
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.viewbinding.binding
+import com.kira.learning.R
+import com.kira.learning.databinding.ActivityMainBinding
+import com.kira.learning.module.account.MineFragment
 import com.kira.learning.module.home.vm.HomeLoanViewModel
+import com.kira.learning.module.repay.RepayTabFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +42,6 @@ class MainActivity : BaseFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRadioButton()
-
         mMainEventObserve = LiveDataBus.getLiveData(MainEvent::class.java).observerNonStickyForever {
             if (it.event == MainEvent.EVENT_SHOW_HOME) {
                 mBinding.rbHomeLoan.isChecked = true
@@ -66,6 +65,14 @@ class MainActivity : BaseFragmentActivity() {
             // 关闭抽屉菜单
             mBinding.drawerLayout.closeDrawer(mBinding.navView)
             true  // 表示已处理点击事件
+        }
+    }
+
+    fun drawerToggle(){
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            mBinding.drawerLayout.openDrawer(GravityCompat.START);
         }
     }
     // 示例Fragment切换方法

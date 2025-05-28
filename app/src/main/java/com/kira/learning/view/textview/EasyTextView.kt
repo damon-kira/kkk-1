@@ -15,6 +15,7 @@ import com.kira.learning.R
 import com.util.lib.shape.ShapeImpl
 import com.util.lib.shape.ShapeStyle
 import com.util.lib.span.SpannableImpl
+import androidx.core.graphics.withTranslation
 
 /**
  * Create by weishl
@@ -118,11 +119,10 @@ class EasyTextView : AppCompatTextView {
                     setCompoundDrawables(null, null, null, null)
                 }
 
-                override fun onDraw(canvas: Canvas?) {
-                    canvas?.save()
-                    canvas?.translate(mLeftDrawableWidth, mTopDrawableWidth)
-                    super.onDraw(canvas)
-                    canvas?.restore()
+                override fun onDraw(canvas: Canvas) {
+                    canvas.withTranslation(mLeftDrawableWidth, mTopDrawableWidth) {
+                        super.onDraw(this)
+                    }
                 }
 
 
@@ -192,156 +192,200 @@ class EasyTextView : AppCompatTextView {
                             setStrokeCorner(corner)
                         }
                     }
+
                     R.styleable.EasyTextView_etv_left_top_corner -> {
                         if (mCornerArray[0] == 0f) {
                             val leftTop = it.getDimension(attr, 0f)
                             setLeftTopCorner(leftTop)
                         }
                     }
+
                     R.styleable.EasyTextView_etv_right_top_corner -> {
                         if (mCornerArray[2] == 0f) {
                             val rightTop = it.getDimension(attr, 0f)
                             setRightTopCorner(rightTop)
                         }
                     }
+
                     R.styleable.EasyTextView_etv_right_bottom_corner -> {
                         if (mCornerArray[4] == 0f) {
                             val rightBottom = it.getDimension(attr, 0f)
                             setRightBottomCorner(rightBottom)
                         }
                     }
+
                     R.styleable.EasyTextView_etv_left_bottom_corner -> {
                         if (mCornerArray[6] == 0f) {
                             val leftBottom = it.getDimension(attr, 0f)
                             setLeftBottomCorner(leftBottom)
                         }
                     }
+
                     R.styleable.EasyTextView_etv_solid -> {
                         mSolidColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_stroke_width -> {
                         mStrokeWidth = it.getDimension(attr, 0f)
                     }
+
                     R.styleable.EasyTextView_etv_stroke_color -> {
                         mStrokeColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_corner_type -> {
                         mShapeBgType = ShapeBgType.valueOf(it.getInt(attr, ShapeBgType.NORMAL.code))
                     }
+
                     R.styleable.EasyTextView_etv_text_stroke_width -> {
                         mTextStrokeWidth = it.getDimension(attr, 0f)
                     }
+
                     R.styleable.EasyTextView_etv_text_stroke_color -> {
                         mTextStrokeColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_stroke -> {
                         mTextStrokeEnable = it.getBoolean(attr, false)
                     }
+
                     R.styleable.EasyTextView_etv_left_drawable_mode -> {
                         mDrawableLeftMode =
                             DrawableMode.valueOf(it.getInt(attr, DrawableMode.NORMAL.code))
                     }
+
                     R.styleable.EasyTextView_etv_top_drawable_mode -> {
                         mDrawableTopMode =
                             DrawableMode.valueOf(it.getInt(attr, DrawableMode.NORMAL.code))
                     }
+
                     R.styleable.EasyTextView_etv_right_drawable_mode -> {
                         mDrawableRightMode =
                             DrawableMode.valueOf(it.getInt(attr, DrawableMode.NORMAL.code))
                     }
+
                     R.styleable.EasyTextView_etv_bottom_drawable_mode -> {
                         mDrawableBottomMode =
                             DrawableMode.valueOf(it.getInt(attr, DrawableMode.NORMAL.code))
                     }
+
                     R.styleable.EasyTextView_etv_left_drawable_width -> {
                         mDrawableLeftWidth = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_left_drawable_height -> {
                         mDrawableLeftHeight = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_top_drawable_width -> {
                         mDrawableTopWidth = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_top_drawable_height -> {
                         mDrawableTopHeight = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_right_drawable_width -> {
                         mDrawableRightWidth = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_right_drawable_height -> {
                         mDrawableRightHeight = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_bottom_drawable_width -> {
                         mDrawableBottomWidth = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_bottom_drawable_height -> {
                         mDrawableBottomHeight = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_shader_enable -> {
                         mShaderEnable = it.getBoolean(attr, false)
                     }
+
                     R.styleable.EasyTextView_etv_shader_start_color -> {
                         mShaderColorArrays[0] = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_shader_center_color -> {
                         mShaderColorArrays[1] = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_shader_end_color -> {
                         mShaderColorArrays[2] = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_shader_mode -> {
                         mShaderAngle =
                             ShaderMode.valueOf(it.getInt(attr, ShaderMode.LEFT_TO_RIGHT.code))
                     }
+
                     R.styleable.EasyTextView_etv_text_shader_enable -> {
                         mTextShaderEnable = it.getBoolean(attr, false)
                     }
+
                     R.styleable.EasyTextView_etv_text_shader_start_color -> {
                         mTextShaderStartColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_shader_end_color -> {
                         mTextShaderEndColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_shader_mode -> {
                         mTextShaderMode =
                             ShaderMode.valueOf(it.getInt(attr, ShaderMode.TOP_TO_BOTTOM.code))
                     }
+
                     R.styleable.EasyTextView_etv_bold_width -> {
                         mTextBoldWidth = it.getDimension(attr, 0f)
                     }
+
                     R.styleable.EasyTextView_etv_bg_enabled_color -> {
                         mBgEnabledColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_bg_selected_color -> {
                         mBgSelectedColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_bg_pressed_color -> {
                         mBgPressedColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_enabled_color -> {
                         mTextEnabledColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_selected_color -> {
                         mTextSelectedColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_text_pressed_color -> {
                         mTextPressedColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_span_style -> {
                         mSpanStyle = it.getInt(attr, Typeface.NORMAL)
                     }
+
                     R.styleable.EasyTextView_etv_span_text -> {
                         val spanText = it.getString(attr).orEmpty()
                         if (spanText.isNotEmpty()) {
                             mSpanText = spanText.split(",").toTypedArray()
                         }
                     }
+
                     R.styleable.EasyTextView_etv_span_text_size -> {
                         mSpanTextSize = it.getDimensionPixelOffset(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_span_color -> {
                         mSpanTextColor = it.getColor(attr, 0)
                     }
+
                     R.styleable.EasyTextView_etv_line_style -> {
                         mLineMode = LineMode.valueOf(it.getInt(attr, LineMode.NORMAL.code))
                     }
@@ -396,8 +440,7 @@ class EasyTextView : AppCompatTextView {
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas ?: return
+    override fun onDraw(canvas: Canvas) {
         val needScroll = scrollX != 0 || scrollY != 0
         if (needScroll) {
             canvas.translate(scrollX.toFloat(), scrollY.toFloat())
@@ -432,9 +475,11 @@ class EasyTextView : AppCompatTextView {
             LineMode.CENTER -> {
                 paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
             }
+
             LineMode.BOTTOM -> {
                 paint.flags = Paint.UNDERLINE_TEXT_FLAG
             }
+
             else -> paint.flags = Paint.ANTI_ALIAS_FLAG
         }
     }
@@ -498,11 +543,13 @@ class EasyTextView : AppCompatTextView {
             ShaderMode.TOP_TO_BOTTOM.code -> {
                 tempX1 = x0
             }
+
             ShaderMode.BOTTOM_TO_TOP.code -> {
                 tempX1 = x0
                 tempStart = endColor
                 tempEnd = startColor
             }
+
             ShaderMode.LEFT_TO_RIGHT.code -> tempY1 = y0
             ShaderMode.RIGHT_TO_LEFT.code -> {
                 tempY1 = y0
@@ -510,6 +557,7 @@ class EasyTextView : AppCompatTextView {
                 tempEnd = startColor
 
             }
+
             else -> tempX1 = x0
         }
         return LinearGradient(x0, y0, tempX1, tempY1, tempStart, tempEnd, Shader.TileMode.CLAMP)
@@ -946,15 +994,19 @@ class EasyTextView : AppCompatTextView {
                     TOP_TO_BOTTOM.code -> {
                         GradientDrawable.Orientation.TOP_BOTTOM
                     }
+
                     BOTTOM_TO_TOP.code -> {
                         GradientDrawable.Orientation.BOTTOM_TOP
                     }
+
                     LEFT_TO_RIGHT.code -> {
                         GradientDrawable.Orientation.LEFT_RIGHT
                     }
+
                     RIGHT_TO_LEFT.code -> {
                         GradientDrawable.Orientation.RIGHT_LEFT
                     }
+
                     else -> GradientDrawable.Orientation.TOP_BOTTOM
                 }
             }

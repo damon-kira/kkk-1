@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kira.learning.R
+import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.viewbinding.binding
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.home.BaseHomeFragment
+import com.kira.learning.module.home.MainActivity
 import com.kira.learning.module.home.vm.HomeLoanViewModel
-import com.common.lib.expand.setBlockingOnClickListener
-import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -59,8 +59,16 @@ class NavigationFragment : BaseHomeFragment() {
 //            mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
             mOrderIds = data.QLPGXTNU
         }
-
+        onBackListener()
         initViewSetting()
+    }
+
+    private fun getMainActivity() = activity as MainActivity?
+
+    fun onBackListener() {
+        mBinding.toolbar.setOnClickListener {
+            getMainActivity()?.drawerToggle()
+        }
     }
 
     private fun initViewSetting() {
@@ -97,7 +105,7 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout6.let {
             it.tvDemoName.text = "视频"
             it.tvBtn.setOnClickListener {
-
+                Launch.skipPlayerManageActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout7.let {
@@ -107,6 +115,12 @@ class NavigationFragment : BaseHomeFragment() {
 //                Log.d("Language", "完整地区: ${Locale.getDefault()}")
 //                activity?.recreate()
                 Launch.skipQuizActivity(getSupportContext())
+            }
+        }
+        mBinding.inclueDemoLayout8.let {
+            it.tvDemoName.text = "上传"
+            it.tvBtn.setOnClickListener {
+                Launch.skipUploadActivity(getSupportContext())
             }
         }
     }

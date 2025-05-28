@@ -49,6 +49,7 @@
     <string name="permission_hint_text2">Tenga en cuenta que cierta información que se requiere obligatoriamente para realizar su evaluación de riesgo crediticio se comparte de forma segura con nuestro proveedor de servicios externo registrado. Para obtener más información sobre sus permisos, consulte la Política de privacidad.</string>
     <string name="permission_connector_char" translatable="false">&#38;</string>
 
-    <string name="permission_dialog_message">Debes permitir el acceso de la Aplicación a "%s" para su correcto fucionamiento y la evaluación de tu préstamo. Ve a Configuración, en tu celular,luego a Permisos, y selecciona [Finanzas extremas]</string>
+    <!--权限-->
+    <string name="permission_dialog_message">你没有开通 "%s" 权限该功能无法正常使用，请移步到设置中开启</string>
     <string name="permission_acepter">Aceptar</string>
 </resources>

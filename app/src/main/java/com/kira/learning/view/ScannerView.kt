@@ -78,13 +78,13 @@ class ScannerView @JvmOverloads constructor(
 
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
 
         allRegion.set(0, 0, mWidth, mHeight)
 
         scanPath.addRoundRect(scanRectf, 32f, 32f, Path.Direction.CW)
 
-        canvas?.drawPath(scanPath, pathPaint)
+        canvas.drawPath(scanPath, pathPaint)
 //        canvas?.drawPath(linePath, pathPaint)
 
         scanRegion.setPath(scanPath, allRegion)

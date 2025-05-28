@@ -157,8 +157,8 @@ class LoadingView : View {
         mRectSize = Math.min(widthSpecSize, heightSpecSize)
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas?.apply {
+    override fun onDraw(canvas: Canvas) {
+        canvas.apply {
             mPaint.shader = mBackgroundGradient
             drawCircle(mRectSize / 2F, mRectSize / 2F, (mRectSize / 2.0F) - mLineWidth, mPaint)
             mPaint.shader = null

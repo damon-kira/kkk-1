@@ -12,10 +12,11 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import com.common.lib.glide.GlideUtils
 import com.kira.learning.R
 import com.kira.learning.bean.QuizInfo
 import com.kira.learning.expand.dpToPx
+import com.util.lib.dp
 
 class QuizFragment : Fragment() {
     private var position: Int = 0
@@ -46,18 +47,24 @@ class QuizFragment : Fragment() {
         val quizInfo = (activity as QuizActivity).viewModel.questions[position]
 
         quizInfo.also {
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.content}", )
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.imageUrl}", )
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.type}", )
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.id}", )
+            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.content}")
+            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.imageUrl}")
+            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.type}")
+            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.id}")
         }
 
-        // 公共内容渲染
-        view.findViewById<TextView>(R.id.tvContent).text = quizInfo.content
+        // 题目标题
+        view.findViewById<TextView>(R.id.tv_quiz_title).text = quizInfo.content
 
-        // 图片加载（使用Glide等库）
+        // 图片加载
         quizInfo.imageUrl?.let { url ->
-            Glide.with(this).load(url).into(view.findViewById(R.id.ivQuestion))
+            GlideUtils.loadCornerImageFromUrl(
+                view.context,
+                url,
+                view.findViewById(R.id.iv_quiz_content),
+                4.dp(),
+                R.drawable.ic_normal_image
+            )
         }
 
         // 根据题型初始化选项
@@ -68,6 +75,7 @@ class QuizFragment : Fragment() {
         }
     }
 
+    // 单选题 选项设置
     private fun setupSingleChoice(view: View, QuizInfo: QuizInfo.SingleChoice) {
         val container = view.findViewById<RadioGroup>(R.id.optionsContainer)
         QuizInfo.options.forEachIndexed { index, text ->
@@ -79,6 +87,7 @@ class QuizFragment : Fragment() {
         }
     }
 
+    // 多选题 选项设置
     private fun setupMultipleChoice(view: View, question: QuizInfo.MultipleChoice) {
         val container = view.findViewById<LinearLayout>(R.id.llMultiOptions)
         container.removeAllViews()
@@ -119,7 +128,7 @@ class QuizFragment : Fragment() {
 
         // 初始化开关样式
         switch.text = "判断结果"
-        switch.showText = true
+        switch.showText = false
         switch.thumbTextPadding = 16.dpToPx()
 
         // 设置监听

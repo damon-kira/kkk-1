@@ -43,3 +43,4 @@ if (isModule.toBoolean()) {
 }
 include ':rxpermission'
 include ':stedit'
+include ':player'

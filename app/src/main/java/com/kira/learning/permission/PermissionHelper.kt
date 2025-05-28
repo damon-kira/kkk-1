@@ -245,11 +245,12 @@ object PermissionHelper {
                         "result = ${(!isAll && isNotAsk && forceSettingDialog || forceSettingDialog)}"
                     )
                     if (!isAll && isNotAsk && forceSettingDialog || forceSettingDialog) {
-                        mCheckPermissionDialog = activity.showNoPermissionDialog(deniedList.filter {
-                            !it.hasThisPermission(activity)
-                        }, cancel = {
-                            result.invoke(true)
-                        }, rightListener = skipSettingListener
+                        mCheckPermissionDialog = activity.showNoPermissionDialog(
+                            deniedList.filter {
+                                !it.hasThisPermission(activity)
+                            }, cancel = {
+                                result.invoke(it)
+                            }, rightListener = skipSettingListener
                         )
                     } else {
                         result.invoke(isAll)
@@ -276,7 +277,7 @@ object PermissionHelper {
                 activity,
                 arrayListOf,
                 true,
-                isFixGroup =  true,
+                isFixGroup = true,
                 function,
                 skipSettingListener = skipSettingListener
             )
@@ -364,7 +365,7 @@ object PermissionHelper {
         checkGroup(activity, storagePermissions)?.let {
             deniedList.addAll(it)
         }
-        checkGroup(activity, readPhonePermission)?.let{
+        checkGroup(activity, readPhonePermission)?.let {
             deniedList.addAll(it)
         }
         result.invoke(deniedList)

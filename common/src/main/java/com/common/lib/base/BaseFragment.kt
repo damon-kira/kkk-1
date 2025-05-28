@@ -23,7 +23,11 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
     protected val isDebug = BuildConfig.DEBUG
 
     companion object {
-        inline fun <reified T : BaseFragment> getInstance(context: Context, clazz: Class<T>, bundle: Bundle? = null): T {
+        inline fun <reified T : BaseFragment> getInstance(
+            context: Context,
+            clazz: Class<T>,
+            bundle: Bundle? = null
+        ): T {
             val cla = FragmentFactory.loadFragmentClass(context.classLoader, clazz.name)
             val fragment = cla.newInstance()
             bundle?.let {
@@ -139,7 +143,6 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
         }
     }
 
-
     fun isFinish(): Boolean {
         return (activity?.isFinishing == true || isDetached || isDestroyView)
     }
@@ -228,7 +231,6 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
         v.removeOnAttachStateChangeListener(this)
         checkVisibility(false)
     }
-
 
 }
 

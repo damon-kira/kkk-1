@@ -40,6 +40,7 @@ import com.kira.learning.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
 import com.kira.learning.module.answer.AnswerActivity
 import com.kira.learning.module.answer.CourseActivity
+import com.kira.learning.module.player.PlayerManageActivity
 import com.kira.learning.module.quiz.QuizActivity
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
@@ -65,7 +66,6 @@ object Launch {
         launch(context, BankInfoActivity::class.java)
     }
 
-    // 其它流程添加银行卡信息页面
     fun skipBankInfoAddActivity(context: Context) {
         launch(context, BankInfoAddActivity::class.java)
     }
@@ -215,6 +215,9 @@ object Launch {
     }
     fun skipQuizActivity(context: Context){
         launch(context, QuizActivity::class.java)
+    }
+    fun skipPlayerManageActivity(context: Context){
+        launch(context, PlayerManageActivity::class.java)
     }
 
     /**

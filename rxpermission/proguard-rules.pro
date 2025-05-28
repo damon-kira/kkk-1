@@ -15,3 +15,5 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keep class com.tbruyelle.rxpermissions3.** { *; }
+-keepclassmembers class com.tbruyelle.rxpermissions3.** { *; }

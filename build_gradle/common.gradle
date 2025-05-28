@@ -1,136 +1,147 @@
 rootProject.ext {
     version = [
-            compileSdk     : 33,
-            minSdk         : 21,
-            targetSdk      : 33,
-            kotlin         : "1.8.10",
-            retrofit       : "2.9.0",
-            room_version   : "2.5.2",
-            hilt_android   : '2.43.2',
-            lifecycle      : "2.5.0",
-            play_service   : "18.0.0",
-            compose        : "1.4.3",
-            camerax_version: "1.3.0-alpha04"
+            compileSdk     : 34,          // 编译目标SDK版本
+            minSdk         : 21,             // 最低支持Android版本
+            targetSdk      : 34,          // 目标适配SDK版本
+            kotlin         : "1.8.10",       // Kotlin语言版本
+            retrofit       : "2.9.0",      // 网络请求框架Retrofit版本
+            room_version   : "2.5.2",   // 数据库框架Room版本
+            hilt_android   : '2.43.2',  // 依赖注入框架Hilt版本
+            lifecycle      : "2.5.0",     // 生命周期组件版本
+            play_service   : "18.0.0", // Google Play服务版本
+            compose        : "1.4.3",       // Jetpack Compose版本
+            camerax_version: "1.3.0-alpha04", // CameraX版本
+            media3         : "1.2.0"         // Media3多媒体库版本
     ]
 
     android = [
-            kotlin_stdlib        : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlin}",
-            core_ktx             : "androidx.core:core-ktx:1.7.0",
-            appcompat            : "androidx.appcompat:appcompat:1.4.1",
-            multidex             : "androidx.multidex:multidex:2.0.1",
-            lifecycle_runtime    : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}",
-            lifecycle_livedataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}",
-            livedata_viewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}",
-            coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+            kotlin_stdlib        : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlin}", // Kotlin标准库
+            core_ktx             : "androidx.core:core-ktx:1.7.0", // Android核心库的Kotlin扩展
+            appcompat            : "androidx.appcompat:appcompat:1.4.1", // 兼容库
+            multidex             : "androidx.multidex:multidex:2.0.1", // 突破64K方法数限制
+            lifecycle_runtime    : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}", // 生命周期管理
+            lifecycle_livedataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}", // LiveData扩展
+            livedata_viewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}", // ViewModel扩展
+            coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0', // 协程支持
+            activity_ktx         : 'androidx.activity:activity-ktx:1.7.0' // Activity的Kotlin扩展
+    ]
 
+    guava = [
+            guava           : "com.google.guava:guava:32.1.3-android", // Google核心工具库
+            coroutines_guava: "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3" // 协程与Guava互操作
     ]
 
     view = [
-            viewpager2        : "androidx.viewpager2:viewpager2:1.0.0",
-            constraintlayout  : "androidx.constraintlayout:constraintlayout:2.1.2",
-            material          : "com.google.android.material:material:1.5.0",
-            recyclerview      : "androidx.recyclerview:recyclerview:1.1.0",
-            swiperefreshlayout: "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+            viewpager2        : "androidx.viewpager2:viewpager2:1.0.0", // 新版ViewPager
+            constraintlayout  : "androidx.constraintlayout:constraintlayout:2.1.2", // 约束布局
+            material          : "com.google.android.material:material:1.5.0", // Material Design组件
+            recyclerview      : "androidx.recyclerview:recyclerview:1.1.0", // 列表控件
+            swiperefreshlayout: "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0" // 下拉刷新
     ]
 
     hilt = [
-            hilt_android         : "com.google.dagger:hilt-android:${version.hilt_android}",
-            hilt_compiler_android: "com.google.dagger:hilt-android-compiler:${version.hilt_android}"
+            hilt_android         : "com.google.dagger:hilt-android:${version.hilt_android}", // Hilt核心库
+            hilt_compiler_android: "com.google.dagger:hilt-android-compiler:${version.hilt_android}" // 注解处理器
     ]
 
     rxjava = [
-            rxjava   : "io.reactivex.rxjava3:rxjava:3.1.10",
-            rxandroid: "io.reactivex.rxjava3:rxandroid:3.0.0"
+            rxjava   : "io.reactivex.rxjava3:rxjava:3.1.10",    // RxJava核心
+            rxandroid: "io.reactivex.rxjava3:rxandroid:3.0.0" // Android线程调度
     ]
 
     retrofit = [
-            retrofit           : "com.squareup.retrofit2:retrofit:${version.retrofit}",
-            adapter_rxjava3    : "com.squareup.retrofit2:adapter-rxjava3:${version.retrofit}",
-            converter_gson     : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
-            gson               : "com.google.code.gson:gson:2.8.6",
-            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:3.12.0",
-            okhttp             : "com.squareup.okhttp3:okhttp:3.12.6"
+            retrofit           : "com.squareup.retrofit2:retrofit:${version.retrofit}", // 网络请求框架
+            adapter_rxjava3    : "com.squareup.retrofit2:adapter-rxjava3:${version.retrofit}", // RxJava适配器
+            converter_gson     : "com.squareup.retrofit2:converter-gson:${version.retrofit}", // Gson转换器
+            gson               : "com.google.code.gson:gson:2.8.6", // JSON序列化
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:3.12.0", // 网络日志
+            okhttp             : "com.squareup.okhttp3:okhttp:3.12.6" // 底层网络库
     ]
 
     permission = [
-            rxpermission: "com.github.tbruyelle:rxpermissions:0.12"
+            rxpermission: "com.github.tbruyelle:rxpermissions:0.12" // Rx风格权限管理
     ]
 
     autosize = [
-            autosize: "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
+            autosize: "com.github.JessYanCoding:AndroidAutoSize:v1.2.1" // Android屏幕适配库
     ]
 
     appsflyer = [
-            adjust         : "com.adjust.sdk:adjust-android:4.33.0",
-            installreferrer: "com.android.installreferrer:installreferrer:2.2",
+            adjust         : "com.adjust.sdk:adjust-android:4.33.0", // 广告跟踪
+            installreferrer: "com.android.installreferrer:installreferrer:2.2", // 安装来源跟踪
     ]
 
     google = [
-            play_services_gcm     : "com.google.android.gms:play-services-gcm:17.0.0",
-            play_services_location: "com.google.android.gms:play-services-location:${version.play_service}"
+            play_services_gcm     : "com.google.android.gms:play-services-gcm:17.0.0", // 推送服务
+            play_services_location: "com.google.android.gms:play-services-location:${version.play_service}" // 定位服务
     ]
 
     firebase = [
-            messaging  : "com.google.firebase:firebase-messaging-ktx",
-            analytics  : "com.google.firebase:firebase-analytics-ktx",
-            crashlytics: "com.google.firebase:firebase-crashlytics-ktx",
-            bom        : "com.google.firebase:firebase-bom:29.2.0"
-//            firebase_perf: "com.google.firebase:firebase-perf-ktx",
+            messaging  : "com.google.firebase:firebase-messaging-ktx", // 推送
+            analytics  : "com.google.firebase:firebase-analytics-ktx", // 分析
+            crashlytics: "com.google.firebase:firebase-crashlytics-ktx", // 崩溃报告
+            bom        : "com.google.firebase:firebase-bom:29.2.0" // 统一管理Firebase版本
     ]
 
     facebook = [
-            fb: "com.facebook.android:facebook-android-sdk:[8,9)"
-//            fb: "com.facebook.android:facebook-login:14.0.0"
+            fb: "com.facebook.android:facebook-android-sdk:[8,9)" // Facebook登录分享
     ]
 
     glide = [
-            glide: "com.github.bumptech.glide:glide:4.9.0"
+            glide: "com.github.bumptech.glide:glide:4.9.0" // 图片加载库
     ]
 
     location = [
-            location: "com.location.lib:location:1.0.1"
+            location: "com.location.lib:location:1.0.1" // 定位服务
     ]
 
 
     exifinterface = [
-            exifinterface: "androidx.exifinterface:exifinterface:1.3.2"
+            exifinterface: "androidx.exifinterface:exifinterface:1.3.2" // 图片元数据处理
     ]
 
     chaquo = [
-            chaquo: "com.chaquo.python:gradle:15.0.1"
+            chaquo: "com.chaquo.python:gradle:15.0.1" // Chaquopy Python支持
     ]
 
     compose = [
-            compose_runtime  : "androidx.compose.runtime:runtime:${version.compose}",
-            compose_ui       : "androidx.compose.ui:ui:${version.compose}",
-            compose_material : "androidx.compose.material:material:${version.compose}",
-            compose_uitooling: "androidx.compose.ui:ui-tooling:${version.compose}",
-            compose_activity : "androidx.activity:activity-compose:1.7.2"
+            compose_runtime  : "androidx.compose.runtime:runtime:${version.compose}",  // 核心运行时
+            compose_ui       : "androidx.compose.ui:ui:${version.compose}",                // 基础UI组件
+            compose_material : "androidx.compose.material:material:${version.compose}", // Material设计组件
+            compose_uitooling: "androidx.compose.ui:ui-tooling:${version.compose}", // 预览工具支持
+            compose_activity : "androidx.activity:activity-compose:1.7.2"          // Activity集成支持
     ]
 
     markwon = [
-            core       : "io.noties.markwon:core:4.6.2",
-            image      : "io.noties.markwon:image:4.6.2",
-            image_glide: "io.noties.markwon:image-glide:4.6.2"
+            core       : "io.noties.markwon:core:4.6.2",              // Markdown解析核心
+            image      : "io.noties.markwon:image:4.6.2",            // 图片加载支持
+            image_glide: "io.noties.markwon:image-glide:4.6.2" // Glide图片加载集成
     ]
 
     camera = [
-            core     : "androidx.camera:camera-core:${version.camerax_version}",
-            camera2  : "androidx.camera:camera-camera2:${version.camerax_version}",
-            lifecycle: "androidx.camera:camera-lifecycle:${version.camerax_version}",
-            view     : "androidx.camera:camera-view:${version.camerax_version}"
+            core     : "androidx.camera:camera-core:${version.camerax_version}",     // 核心API
+            camera2  : "androidx.camera:camera-camera2:${version.camerax_version}", // Camera2实现
+            lifecycle: "androidx.camera:camera-lifecycle:${version.camerax_version}", // 生命周期管理
+            view     : "androidx.camera:camera-view:${version.camerax_version}"      // 预览视图
     ]
 
     room = [
-            room_runtime : "androidx.room:room-runtime:${version.room_version}",
-            room_ktx     : "androidx.room:room-ktx:${version.room_version}",
-            room_compiler: "androidx.room:room-compiler:${version.room_version}"
+            room_runtime : "androidx.room:room-runtime:${version.room_version}", // 核心库
+            room_ktx     : "androidx.room:room-ktx:${version.room_version}",        // Kotlin扩展（协程支持）
+            room_compiler: "androidx.room:room-compiler:${version.room_version}" // 注解处理器
+    ]
+
+    media3 = [
+            exoplayer     : "androidx.media3:media3-exoplayer:${version.media3}", // 播放器核心
+            ui            : "androidx.media3:media3-ui:${version.media3}", // 播放器UI
+            exoplayer_hls : "androidx.media3:media3-exoplayer-hls:${version.media3}", // HLS支持
+            exoplayer_dash: "androidx.media3:media3-exoplayer-dash:${version.media3}" // DASH支持
     ]
 
     other = [
-            aes       : 'com.aes.lib:aes:1.0.0',
-            devoptions: 'com.devoptions.lib:devoptions:1.0.1',
-            cache     : 'com.cache.lib:cache:1.0.0'
+            aes       : 'com.aes.lib:aes:1.0.0',    // AES加密
+            devoptions: 'com.devoptions.lib:devoptions:1.0.1', // 开发者选项
+            cache     : 'com.cache.lib:cache:1.0.0' // 缓存库
 //            util            : 'com.util.lib:util:1.0.4',
 //            userBehavior    : 'com.behavior.lib:userBehavior:1.0.2',
 //            bigdata         : 'com.bigdata.lib:bigdata:1.0.0',
@@ -154,6 +165,7 @@ rootProject.ext {
     allDesList.addAll(markwon.values())
     allDesList.addAll(camera.values())
     allDesList.addAll(room.values())
+    allDesList.addAll(media3.values())
 //    allDesList.addAll(appsflyer.values())
 
     allDependencies = [:]

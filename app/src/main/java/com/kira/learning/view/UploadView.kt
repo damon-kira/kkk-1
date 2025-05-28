@@ -84,8 +84,7 @@ class UploadView : View {
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas ?: return
+    override fun onDraw(canvas: Canvas) {
         val centerX = width / 2f
         val centerY = height / 2f
 
@@ -131,7 +130,7 @@ class UploadView : View {
         mAnim.cancel()
     }
 
-    fun end(){
+    fun end() {
         cancel()
         mCurrProcess = MAX_PROCESS
     }

@@ -3,18 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 内存卡读写 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 内存卡读写 -->
     <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
     <!-- 定位相关 -->
     <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- wifi -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- wifi -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 录像/照相 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 录像/照相 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera" /> <!-- 通讯录 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <!-- 通讯录 -->
     <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <!-- 日历权限 -->
     <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
@@ -24,8 +28,10 @@
     <!-- 读取短信 -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 闪光灯 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -192,6 +198,9 @@
             android:name=".module.quiz.QuizActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.player.PlayerManageActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
 
 
         <service
@@ -213,6 +222,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <!--        <meta-data android:name="com.facebook.sdk.ApplicationId"-->
+        <!--            android:value="@string/facebook_app_id"/>-->
+
     </application>
 
 </manifest>
