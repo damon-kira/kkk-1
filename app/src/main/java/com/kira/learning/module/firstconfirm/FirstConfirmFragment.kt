@@ -36,7 +36,7 @@ import com.util.lib.timeToTimeStr
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
-// 首贷确认额度页面
+// 首盘确认额度页面
 @AndroidEntryPoint
 class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
 
@@ -61,7 +61,7 @@ class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
         }
     private var mProductId: String? = null
     private var mProductCode: String? = null
-    private var mLoanAmount: String? = null// 借款金额
+    private var mLoanAmount: String? = null// 仪表金额
 
     private val mProcessDialog by lazy {
         UploadDialog(getSupportContext())

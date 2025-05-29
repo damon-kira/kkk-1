@@ -4,7 +4,7 @@ plugins {
 }
 android {
     namespace 'com.bigdata.lib'
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdk rootProject.ext.version.compileSdk
 
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
@@ -36,12 +36,11 @@ android {
 dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ":sdks:util")
     implementation rootProject.ext.android.kotlin_stdlib
     implementation rootProject.ext.android.core_ktx
     implementation rootProject.ext.android.appcompat
 
-    implementation project(path: ":sdks:util")
-//    implementation project(path: ":sdks:cache")
     implementation rootProject.ext.other.aes
     implementation rootProject.ext.other.cache
 
@@ -50,7 +49,7 @@ dependencies {
     implementation rootProject.ext.retrofit.okhttp
 
     //定位sdk
-    api (rootProject.ext.location.location) {
+    api(rootProject.ext.location.location) {
         changing = true
         transitive = true
     }

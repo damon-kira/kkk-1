@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.common.lib'
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdk rootProject.ext.version.compileSdk
 
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
@@ -40,6 +40,8 @@ android {
 
 dependencies {
 
+    api project(path: ':sdks:util')
+
     api rootProject.ext.android.kotlin_stdlib
     api rootProject.ext.android.core_ktx
     api rootProject.ext.android.appcompat
@@ -59,19 +61,6 @@ dependencies {
     api rootProject.ext.android.lifecycle_livedataKtx
     api rootProject.ext.android.livedata_viewmodelKtx
 
-    // 适配
-//    api rootProject.ext.autosize.autosize
-
-//    implementation rootProject.ext.rxjava.rxandroid
-
-//    implementation rootProject.ext.other.util
-//    implementation rootProject.ext.other.userBehavior
-      implementation rootProject.ext.other.aes
-      implementation rootProject.ext.other.cache
-
-    api project(path: ':sdks:util')
-//    implementation project(path: ':sdks:userBehavior')
-
     //retrofit2.0
     api rootProject.ext.retrofit.retrofit
     api rootProject.ext.retrofit.converter_gson
@@ -82,4 +71,12 @@ dependencies {
 
     //glide
     api rootProject.ext.glide.glide
+
+    // 适配
+//    api rootProject.ext.autosize.autosize
+//    implementation rootProject.ext.rxjava.rxandroid
+//    implementation rootProject.ext.other.util
+//    implementation rootProject.ext.other.userBehavior
+    implementation rootProject.ext.other.aes
+    implementation rootProject.ext.other.cache
 }

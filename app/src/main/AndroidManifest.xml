@@ -132,10 +132,10 @@
             android:name=".module.repeat.confirm.RepeatConfirmActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.repaydetail.RepayDetailActivity"
+            android:name=".module.dashboardDetail.RepayDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.repaydetail.RepayDetailHisActivity"
+            android:name=".module.dashboardDetail.RepayDetailHisActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.review.RepeatReviewActivity"

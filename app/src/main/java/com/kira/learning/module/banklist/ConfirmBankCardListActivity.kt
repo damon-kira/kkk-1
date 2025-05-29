@@ -13,7 +13,7 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import dagger.hilt.android.AndroidEntryPoint
 
-// 首付贷确认额度页面进入，需要携带产品id&贷款金额
+// 首付盘确认额度页面进入，需要携带产品id&盘款金额
 @AndroidEntryPoint
 class ConfirmBankCardListActivity : BankCardListActivity() {
 

@@ -41,7 +41,7 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <!-- 借款信息 -->
+            <!-- 仪表信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/loan_cl_product"
                 android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                     app:layout_constraintRight_toRightOf="@id/loan_aiv_seekbar"
                     app:layout_constraintTop_toBottomOf="@id/loan_tv_hint"
                     tools:text="@string/amount_50000" />
-                <!-- 借款周期、利率、APR -->
+                <!-- 仪表周期、利率、APR -->
                 <LinearLayout
                     android:id="@+id/loan_ll_info"
                     android:layout_width="match_parent"

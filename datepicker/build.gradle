@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
     namespace 'com.manu.mdatepicker'
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdk rootProject.ext.version.compileSdk
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk

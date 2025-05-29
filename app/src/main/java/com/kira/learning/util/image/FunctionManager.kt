@@ -37,7 +37,7 @@ class FunctionManager(val container: AgentContainer) {
     }
 
     /**
-     * 还款凭证拍照
+     * 仪表凭证拍照
      */
     fun voucherPicture(): VoucherPictureBuilder {
         return VoucherPictureBuilder(this)

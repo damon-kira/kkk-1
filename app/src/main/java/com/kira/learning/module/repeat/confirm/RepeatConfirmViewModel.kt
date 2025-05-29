@@ -6,11 +6,11 @@ import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
 
 
-// 复贷确认额度
+// 复盘确认额度
 class RepeatConfirmViewModel @Inject constructor(private val repository: RepeatConfirmRepository) :
     BaseViewModel() {
 
-    // 复贷产品首页 勾选产品进入
+    // 复盘产品首页 勾选产品进入
     val mConfirmInfoLiveData = generatorLiveData<BaseResponse<RspRepeatCalcul>>()
 
     val mProListLiveData = generatorLiveData<ArrayList<RspRepeatCalcul.CalculDetail>>()

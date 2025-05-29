@@ -11,7 +11,7 @@ import com.kira.learning.expand.getUnitString
 import com.kira.learning.expand.showCustomDialog
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
-import com.kira.learning.module.repay.vm.RepayCheckViewModel
+import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
 import com.kira.learning.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener

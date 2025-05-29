@@ -15,7 +15,7 @@ class RspRepayOrders {
         val C2O8E6jjzd: String? = "null" //产品名字
         val Eff0nA: String? = "null"     //待还金额
             get() = field?.transform()
-        val zbRV6Lg8jO: String? = "null" //还款日期
+        val zbRV6Lg8jO: String? = "null" //仪表日期
         val gzBTFx: Int = 0     //是否逾期
         var QiZorG: String? = "null"     //1代表勾选中
         val q48Wml8N: String? = "null"   //1代表可以展期

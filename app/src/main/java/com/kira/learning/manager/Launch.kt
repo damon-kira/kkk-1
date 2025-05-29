@@ -30,8 +30,8 @@ import com.kira.learning.module.process.face.FaceFailedActivity
 import com.kira.learning.module.process.kyc.KycInfoActivity
 import com.kira.learning.module.process.personalinfo.PersonalInfoActivity
 import com.kira.learning.module.python.CodingActivity
-import com.kira.learning.module.repaydetail.RepayDetailActivity
-import com.kira.learning.module.repaydetail.RepayDetailHisActivity
+import com.kira.learning.module.dashboardDetail.RepayDetailActivity
+import com.kira.learning.module.dashboardDetail.RepayDetailHisActivity
 import com.kira.learning.module.repeat.confirm.RepeatConfirmActivity
 import com.kira.learning.module.review.RepeatReviewActivity
 import com.kira.learning.module.setting.SettingActivity
@@ -123,7 +123,7 @@ object Launch {
 
     /**
      * @param ids 产品id
-     * @param orderIds 只有复贷 待确认订单点击时使用，其它情况下为空
+     * @param orderIds 只有复盘 待确认订单点击时使用，其它情况下为空
      */
     fun skipRepeatConfirmActivity(context: Context, ids: String, orderIds: String? = null) {
         val intent = Intent(context, RepeatConfirmActivity::class.java)
@@ -185,7 +185,7 @@ object Launch {
         launch(context, SettingActivity::class.java)
     }
 
-    // 复贷审核中页面
+    // 复盘审核中页面
     fun skipRepeatReviewActivity(context: Context){
         launch(context, RepeatReviewActivity::class.java)
     }

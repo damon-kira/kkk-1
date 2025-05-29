@@ -56,7 +56,7 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <!-- 借款信息 -->
+            <!-- 仪表信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/loan_cl_product"
                 android:layout_width="match_parent"

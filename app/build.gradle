@@ -19,7 +19,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
-//        resConfigs 'id' // 资源配置限制
+//        resConfigs 'en' // 资源配置限制
         versionCode 8
         versionName "1.0.5"
 
@@ -174,12 +174,6 @@ dependencies {
     implementation rootProject.ext.rxjava.rxandroid
     implementation rootProject.ext.rxjava.rxjava
 
-    // CameraX 拍照识别图片
-    implementation rootProject.ext.camera.core
-    implementation rootProject.ext.camera.camera2
-    implementation rootProject.ext.camera.lifecycle
-    implementation rootProject.ext.camera.view
-
     //compose 同时支持xml和compose 自定义需求高的用xml
     implementation rootProject.ext.compose.compose_ui
     implementation rootProject.ext.compose.compose_material
@@ -199,15 +193,15 @@ dependencies {
 
     implementation rootProject.ext.exifinterface.exifinterface
     // 图像裁剪
-    implementation 'com.edmodo:cropper:1.0.1'
+    implementation rootProject.ext.other.cropper
     // 文字识别
-    implementation 'cz.adaptech.tesseract4android:tesseract4android:4.4.0'
+    implementation rootProject.ext.other.tesseract
+    implementation rootProject.ext.other.fastjson
 
     // google分析
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics'
 
-    implementation "com.alibaba:fastjson:1.2.76"
     //firebase core
 //    implementation project(path: ":analysis")
 //    implementation platform(rootProject.ext.firebase.bom)

@@ -20,7 +20,7 @@ class RspRepayDetail {
 
     class RepayDetail {
         val KER10faeq9: String? = null // 订单id
-        val PJpH0: String? = null//生成还款码传这个id
+        val PJpH0: String? = null//生成仪表码传这个id
         val RKGqbRy: String? = null // 产品id
 
         //        val qh1yC1M: String? = null
@@ -28,13 +28,13 @@ class RspRepayDetail {
 //        val vR7HkDeZP: String? = null //当前期数
 //        val CI6jcXNI: String? = null
 //        val PmuEMR5ESD: String? = null //RPS
-        // 2018000//还款金额
+        // 2018000//仪表金额
         val VJJxo2: String? = null
             get() = field?.transform()
 
 //        val RPKfna: String? = null //760000
 //        val uALonXNeY: String? = null //0
-        val ch4x: String? = null //11-02-2023//还款时间
+        val ch4x: String? = null //11-02-2023//仪表时间
         val rm7fqlDid: String? = null //- 2//剩余时间
 
 //        val vzcAyk: String? = null //0

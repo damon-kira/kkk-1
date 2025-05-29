@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.min
 
 
-//复贷首页
+//复盘首页
 @AndroidEntryPoint
 class RepeatFragment : BaseHomeLoanFragment() {
 

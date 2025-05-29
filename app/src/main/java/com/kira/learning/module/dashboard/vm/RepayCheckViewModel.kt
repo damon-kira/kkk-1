@@ -1,9 +1,9 @@
-package com.kira.learning.module.repay.vm
+package com.kira.learning.module.dashboard.vm
 
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.bean.resp.RspCheckOrder
-import com.kira.learning.module.repay.repo.RepayCheckRepository
+import com.kira.learning.module.dashboard.repo.RepayCheckRepository
 import javax.inject.Inject
 
 // 查询订单是否已还

@@ -64,7 +64,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private var mPrdIds = "" // 上一个页面带过来的产品id
-    private var mOrderId = "" // 复贷有待确认订单时传过来
+    private var mOrderId = "" // 复盘有待确认订单时传过来
     private var mBankNo = ""
 
     private val mProcessDialog by lazy {
@@ -279,7 +279,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         )
         mBinding.recyclerview.setOnItemClickListener(object : SimpleOnItemClickListener() {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
-                // 计算还款信息
+                // 计算仪表信息
                 val data = mAdapter.getItemData<RspRepeatCalcul.CalculDetail>(position)
                 if (data?.isCheck == 1 && mAdapter.getSelectorList().size <= 1){
                     toast(R.string.toast_min_product)

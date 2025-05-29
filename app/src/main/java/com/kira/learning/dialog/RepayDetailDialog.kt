@@ -7,7 +7,7 @@ import com.common.lib.dialog.DefaultDialog
 import com.common.lib.viewbinding.binding
 import com.util.lib.ifShow
 
-// 还款详情
+// 仪表详情
 class RepayDetailDialog constructor(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogRepayDetailBinding>()

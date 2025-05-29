@@ -1,4 +1,4 @@
-package com.kira.learning.module.repaydetail
+package com.kira.learning.module.dashboardDetail
 
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.resp.RspRepayDetail

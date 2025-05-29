@@ -10,7 +10,7 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
-// 复贷审核中
+// 复盘审核中
 @AndroidEntryPoint
 class RepeatReviewActivity: BaseActivity() {
 

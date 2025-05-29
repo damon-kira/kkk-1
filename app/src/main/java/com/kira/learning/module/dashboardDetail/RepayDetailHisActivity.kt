@@ -1,4 +1,4 @@
-package com.kira.learning.module.repaydetail
+package com.kira.learning.module.dashboardDetail
 
 import com.kira.learning.manager.Launch
 import dagger.hilt.android.AndroidEntryPoint

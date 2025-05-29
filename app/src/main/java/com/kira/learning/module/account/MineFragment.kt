@@ -30,7 +30,7 @@ class MineFragment : BaseFragment(), View.OnClickListener {
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
 
-    private var mStatus: Int = 0 // 大于0，跳转还款页面
+    private var mStatus: Int = 0 // 大于0，跳转仪表页面
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -150,8 +150,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipMeBankCardListActivity(getSupportContext())
             }
             R.id.etv_btn -> {
-                // 需要区分状态，还款状态--还款页面
-                // 没有在贷，跳转首页
+                // 需要区分状态，仪表状态--仪表页面
+                // 没有在盘，跳转首页
                 if (mStatus > 0) {
                     LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
                 } else {

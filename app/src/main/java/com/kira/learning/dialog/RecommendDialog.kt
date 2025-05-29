@@ -15,7 +15,7 @@ import com.util.lib.dp
 
 typealias ClickRecommend = ((RepeatProductInfo) -> Unit)
 
-// 复贷推荐弹窗
+// 复盘推荐弹窗
 class RecommendDialog constructor(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogRecommenBinding>()

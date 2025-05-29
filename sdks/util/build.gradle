@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.util.lib'
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdk rootProject.ext.version.compileSdk
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk

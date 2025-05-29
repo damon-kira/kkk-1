@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.kira.learning.stedit'
-    compileSdkVersion rootProject.ext.version.compileSdk
+    compileSdk rootProject.ext.version.compileSdk
 
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk

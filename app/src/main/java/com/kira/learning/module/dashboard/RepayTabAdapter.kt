@@ -1,4 +1,4 @@
-package com.kira.learning.module.repay
+package com.kira.learning.module.dashboard
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -13,7 +13,6 @@ import com.kira.learning.module.adapter.BaseViewHolder
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils
 
-// 还款tab adapter
 class RepayTabAdapter(
     items: ArrayList<RspRepayOrders.RepayOrderDetail>,
     private val recyclerView: RecyclerView
@@ -28,7 +27,7 @@ class RepayTabAdapter(
 //    var RA9GEePdNs: String? = null //产品log
 //    var C2O8E6jjzd: String? = null //产品名字
 //    var Eff0nA: Int = 0     //待还金额
-//    var zbRV6Lg8jO: String? = null //还款日期
+//    var zbRV6Lg8jO: String? = null //仪表日期
 //    var gzBTFx: String? = null     //是否逾期
 //    var q48Wml8N: String? = null   //1代表可以展期
 //    var X32HrYq4u: String? = null  //展期金额

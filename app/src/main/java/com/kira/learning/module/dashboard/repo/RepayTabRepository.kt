@@ -1,4 +1,4 @@
-package com.kira.learning.module.repay.repo
+package com.kira.learning.module.dashboard.repo
 
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.kira.learning.app.BaseRepository

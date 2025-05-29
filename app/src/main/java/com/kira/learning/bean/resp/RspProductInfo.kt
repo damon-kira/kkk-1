@@ -3,18 +3,18 @@ package com.kira.learning.bean.resp
 import com.kira.learning.expand.transform
 
 class RspProductInfo {
-    val yqGhrjOF2: String? = null // 最高可借金额，实际还款金额，借款金额
+    val yqGhrjOF2: String? = null // 最高可借金额，实际仪表金额，仪表金额
         get() = field?.transform()
     val HyulExS1ei: String? = null //客户名字
     val cusTell: String? = null //客户号码
-    val WTvE5G: Int = 0// 借款天数
+    val WTvE5G: Int = 0// 仪表天数
     val ZXEUWfOy: String? = null//订单id
     val EqyO: String = "1"// 客户类型 1 :新客户 0 老客户 2 被拉黑客户
     val Wg5u: String? = null //客户类型 A :正常用户 G:谷歌审查用户
 
     // 状态 00：新用户确定额度,
     // 01：订单审核中
-    // 02：待还款,
+    // 02：待仪表,
     // 03:逾期,
     // 04:拒单，
     // 05：认证未通过，新用户起始页，
@@ -24,7 +24,7 @@ class RspProductInfo {
     // 09：复借客户没有待还订单，有待确定订单
     // 10：复借客户既有待还订单也有待确定订单
     var xXkO: String = "05"
-    val vzXq3u: String? = null// 还款日期
+    val vzXq3u: String? = null// 仪表日期
     val y5MbVG: Int = 0// 总期数
     val y7GxqEUf: Int = 0// 当前期数
     val v3ItXF: Int = 0 // 逾期天数
@@ -154,7 +154,7 @@ class RepeatProductInfo {
 //"notRepay":1000, //未还金额
 //"maxAmount":52000,// 待还借金额
 //"applyIds":[11111, 222]// 申请id
-// 复贷还款信息
+// 复盘仪表信息
 class RepeatRepayInfo {
     val AMGH9kXswv: String? = null //未还订单数
     val RPBJ47rhC: String? = null //未还金额
@@ -173,7 +173,7 @@ class RepeatRepayInfo {
 //    "prUrl":"xxxx" //logo
 //}
 //]
-// 复贷待确认订单
+// 复盘待确认订单
 class RepeatWaitConfirmInfo {
     //范围金额最大值
     val yqGhrjOF2: String? = null

@@ -13,7 +13,7 @@ import com.kira.learning.R
 import com.kira.learning.databinding.ActivityMainBinding
 import com.kira.learning.module.account.MineFragment
 import com.kira.learning.module.home.vm.HomeLoanViewModel
-import com.kira.learning.module.repay.RepayTabFragment
+import com.kira.learning.module.dashboard.RepayTabFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

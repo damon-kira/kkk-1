@@ -84,7 +84,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
-                <!-- 借款金额 包含利息、费率-->
+                <!-- 仪表金额 包含利息、费率-->
                 <com.kira.learning.view.ItemInfoLayout
                     android:id="@+id/iil_amount"
                     android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                     app:etv_right_top_corner="10dp"
                     app:etv_solid="@color/color_f1dfff"
                     app:layout_constraintTop_toTopOf="parent" />
-                <!-- 总借款金额 -->
+                <!-- 总仪表金额 -->
                 <com.kira.learning.view.ItemInfoLayout
                     android:id="@+id/iil_total_amount"
                     style="@style/marginLeftAndRight12"
@@ -202,7 +202,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iil_total_amount" />
 
-                <!-- 还款日期 -->
+                <!-- 仪表日期 -->
                 <com.kira.learning.view.ItemInfoLayout
                     android:id="@+id/iil_repay_date"
                     style="@style/marginLeftAndRight12"

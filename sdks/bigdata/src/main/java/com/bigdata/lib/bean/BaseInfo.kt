@@ -20,10 +20,10 @@ class BaseInfo {
     var registIp: String? = null//    注册时ip
 
     @SerializedName("rBL3Mb")
-    var faceCheckWifi: String? = null//    借款人脸时使用的wifi
+    var faceCheckWifi: String? = null//    仪表人脸时使用的wifi
 
     @SerializedName("m6gXmsp")
-    var loanRequestWifi: String? = null//    借款时使用的wifi
+    var loanRequestWifi: String? = null//    仪表时使用的wifi
 
     @SerializedName("mULOYA4TP")
     var internetType: String? = null //网络类型wifi4G3g

@@ -1,4 +1,4 @@
-package com.kira.learning.module.repaydetail
+package com.kira.learning.module.dashboardDetail
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.kira.learning.expand.*
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.defer.PayEvent
-import com.kira.learning.module.repay.vm.RepayCheckViewModel
+import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
 import com.kira.learning.permission.HintDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -21,7 +21,6 @@ import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
-// 首贷还款详情
 @AndroidEntryPoint
 open class RepayDetailActivity : BaseActivity() {
 
@@ -93,7 +92,7 @@ open class RepayDetailActivity : BaseActivity() {
                             mBinding.tvExtension.show()
                         }
 
-                        // 还款明细弹窗
+                        // 仪表明细弹窗
                         detailDialog.setDetail(
                             order.pHSUCa43.orEmpty(),
                             order.Dmj7UQm.orEmpty(),

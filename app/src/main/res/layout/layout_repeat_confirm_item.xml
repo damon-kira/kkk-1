@@ -40,7 +40,7 @@
         app:layout_constraintLeft_toRightOf="@id/aiv_product_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 产品借款金额 -->
+    <!-- 产品仪表金额 -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_amount"
         android:layout_width="wrap_content"

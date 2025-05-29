@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- 还款页面 -->
+<?xml version="1.0" encoding="utf-8"?><!-- 仪表页面 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -56,7 +56,7 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <!-- 借款信息 -->
+            <!-- 仪表信息 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/loan_cl_product"
                 android:layout_width="match_parent"

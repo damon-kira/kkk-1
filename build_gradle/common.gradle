@@ -23,7 +23,9 @@ rootProject.ext {
             lifecycle_livedataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}", // LiveData扩展
             livedata_viewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}", // ViewModel扩展
             coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0', // 协程支持
-            activity_ktx         : 'androidx.activity:activity-ktx:1.7.0' // Activity的Kotlin扩展
+            activity_ktx         : 'androidx.activity:activity-ktx:1.7.0', // Activity的Kotlin扩展
+            fragment             : 'androidx.fragment:fragment:1.2.5',
+            annotation           : 'androidx.annotation:annotation:1.1.0'
     ]
 
     guava = [
@@ -119,10 +121,11 @@ rootProject.ext {
     ]
 
     camera = [
-            core     : "androidx.camera:camera-core:${version.camerax_version}",     // 核心API
-            camera2  : "androidx.camera:camera-camera2:${version.camerax_version}", // Camera2实现
-            lifecycle: "androidx.camera:camera-lifecycle:${version.camerax_version}", // 生命周期管理
-            view     : "androidx.camera:camera-view:${version.camerax_version}"      // 预览视图
+            core      : "androidx.camera:camera-core:${version.camerax_version}",     // 核心API
+            camera2   : "androidx.camera:camera-camera2:${version.camerax_version}", // Camera2实现
+            lifecycle : "androidx.camera:camera-lifecycle:${version.camerax_version}", // 生命周期管理
+            view      : "androidx.camera:camera-view:${version.camerax_version}",      // 预览视图
+            extensions: "androidx.camera:camera-extensions:${version.camerax_version}"
     ]
 
     room = [
@@ -141,7 +144,11 @@ rootProject.ext {
     other = [
             aes       : 'com.aes.lib:aes:1.0.0',    // AES加密
             devoptions: 'com.devoptions.lib:devoptions:1.0.1', // 开发者选项
-            cache     : 'com.cache.lib:cache:1.0.0' // 缓存库
+            cache     : 'com.cache.lib:cache:1.0.0', // 缓存库
+            cropper   : 'com.edmodo:cropper:1.0.1', // 图像裁剪
+            tesseract : 'cz.adaptech.tesseract4android:tesseract4android:4.4.0', // 文字识别
+            fastjson  : 'com.alibaba:fastjson:1.2.76', // json
+
 //            util            : 'com.util.lib:util:1.0.4',
 //            userBehavior    : 'com.behavior.lib:userBehavior:1.0.2',
 //            bigdata         : 'com.bigdata.lib:bigdata:1.0.0',

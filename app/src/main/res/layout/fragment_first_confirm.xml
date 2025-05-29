@@ -63,7 +63,7 @@
             app:layout_constraintRight_toLeftOf="@id/tv_amount"
             app:layout_constraintTop_toTopOf="@id/tv_amount" />
 
-        <!-- 借款金额 -->
+        <!-- 仪表金额 -->
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
@@ -233,7 +233,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_loan"
             tools:text="$34.700" />
-        <!-- 还款金额 -->
+        <!-- 仪表金额 -->
         <TextView
             android:id="@+id/tv_repay"
             android:layout_width="wrap_content"
@@ -277,7 +277,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_interest"
             tools:text="1" />
-        <!-- 还款日期 -->
+        <!-- 仪表日期 -->
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"

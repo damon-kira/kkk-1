@@ -23,9 +23,9 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
     private val _homeLiveData = generatorLiveData<BaseResponse<RspProductInfo>>()
     val mHomeLiveData = _homeLiveData
 
-    val repeatProductLiveData = generatorLiveData<ArrayList<RepeatProductInfo>>() // 复贷产品列表
-    val repeatRepayLiveData = generatorLiveData<RepeatRepayInfo>() // 复贷还款列表
-    val waitConfirmLiveData = generatorLiveData<ArrayList<RepeatWaitConfirmInfo>?>() // 复贷待确认产品列表
+    val repeatProductLiveData = generatorLiveData<ArrayList<RepeatProductInfo>>() // 复盘产品列表
+    val repeatRepayLiveData = generatorLiveData<RepeatRepayInfo>() // 复盘仪表列表
+    val waitConfirmLiveData = generatorLiveData<ArrayList<RepeatWaitConfirmInfo>?>() // 复盘待确认产品列表
 
     val mRspInfoLiveData = generatorLiveData<RspProductInfo>()
 
@@ -45,9 +45,9 @@ class HomeLoanViewModel @Inject constructor(private val repository: HomeLoanRepo
                     if (repeatProductLiveData.value != info.jBRR || repeatProductLiveData.value == null) {
                         repeatProductLiveData.postValue(info.jBRR)
                     }
-                    // 复贷还款信息
+                    // 复盘仪表信息
                     repeatRepayLiveData.postValue(info.gQ1J)
-                    // 复贷待确认订单
+                    // 复盘待确认订单
                     waitConfirmLiveData.postValue(info.Jg4g2)
 
                 }

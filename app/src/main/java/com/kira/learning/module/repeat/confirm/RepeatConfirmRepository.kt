@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class RepeatConfirmRepository @Inject constructor() : BaseRepository() {
 
-    // 复贷产品首页选择产品后使用
+    // 复盘产品首页选择产品后使用
     fun getConfirmInfo(productIds: String, orderId: String) =
         ApiServiceLiveDataProxy.request(RspRepeatCalcul::class.java) {
             val jobj = JsonObject()

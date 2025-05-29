@@ -30,17 +30,17 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
     ) {
 //        var KxX0GIRzo: String? = null   // 订单id
 //        var hlDgN: String? = null       // 订单状态
-//        var pnFU: String? = null        // 待还款金额
-//        var eeiu2lKWI: String? = null   // 借款金额
+//        var pnFU: String? = null        // 待仪表金额
+//        var eeiu2lKWI: String? = null   // 仪表金额
 //        var tAnV: String? = null        // 待还期数
 //        var mjMt2dTqSd: String? = null  // 订单期数
 //        var lK97: String? = null        // 剩余天数
 //        var npGPjAP: String? = null     // 产品名称
 //        var PQw5: String? = null        // 产品logo
-//        var znxlON0: String? = null     // 还款日期
+//        var znxlON0: String? = null     // 仪表日期
 //        var H0WVJP: String? = null      // 拒绝日期
 //        var IIIn: String? = null        // 申请日期
-//        var YlWUshbDy: String? = null   // 实际还款金额
+//        var YlWUshbDy: String? = null   // 实际仪表金额
 
 
         setItemStatus(holder, item)
@@ -51,13 +51,13 @@ class HistoryAdapter(items: ArrayList<RspHistoryInfo.HistoryOrderInfo>) :
                 holder.setVisibility(R.id.ll_normal, true)
                 holder.setVisibility(R.id.ll_failure, false)
                 if (STATUS_REVIEW == item.hlDgN || item.hlDgN == STATUS_VERIFI) {
-                    holder.setText(R.id.tv_amount, getUnitString(item.eeiu2lKWI.orEmpty())) // 借款金额
+                    holder.setText(R.id.tv_amount, getUnitString(item.eeiu2lKWI.orEmpty())) // 仪表金额
                     holder.setText(R.id.history_tv_date_text, R.string.history_review_date)
                     holder.setText(R.id.tv_date, item.IIIn.orEmpty()) // 到账日期
                 } else {
-                    holder.setText(R.id.tv_amount, getUnitString(item.pnFU.orEmpty())) // 还款金额
+                    holder.setText(R.id.tv_amount, getUnitString(item.pnFU.orEmpty())) // 仪表金额
                     holder.setText(R.id.history_tv_date_text, R.string.history_repay_date)
-                    holder.setText(R.id.tv_date, item.znxlON0.orEmpty()) // 还款日期
+                    holder.setText(R.id.tv_date, item.znxlON0.orEmpty()) // 仪表日期
                 }
             }
             else -> {

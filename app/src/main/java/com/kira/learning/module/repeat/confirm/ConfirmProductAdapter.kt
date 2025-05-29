@@ -10,7 +10,7 @@ import com.kira.learning.module.adapter.BaseViewHolder
 import com.common.lib.glide.GlideUtils
 import com.util.lib.dp
 
-// 复贷确认额度 底部adapter
+// 复盘确认额度 底部adapter
 class ConfirmProductAdapter(items: ArrayList<RspRepeatCalcul.CalculDetail>) :
     BaseRecyclerViewAdapter<RspRepeatCalcul.CalculDetail>(
         items,

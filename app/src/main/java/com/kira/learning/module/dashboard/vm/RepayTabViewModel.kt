@@ -1,10 +1,10 @@
-package com.kira.learning.module.repay.vm
+package com.kira.learning.module.dashboard.vm
 
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.bean.resp.RspRepayOrders
-import com.kira.learning.module.repay.repo.RepayTabRepository
+import com.kira.learning.module.dashboard.repo.RepayTabRepository
 import javax.inject.Inject
 
 class RepayTabViewModel @Inject constructor(private val repository: RepayTabRepository) :
