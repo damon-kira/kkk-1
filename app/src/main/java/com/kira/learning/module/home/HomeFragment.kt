@@ -56,22 +56,24 @@ class HomeFragment : BaseHomeFragment() {
 
     override fun onRefresh() {
         mAppUpdateViewModel.getAppUpdate()
-        if(inValidToken()) {
+        if (inValidToken()) {
             stopRefresh()
             return
         }
         mHomeViewModel.getHomeInfo()
     }
 
-    private val mHomeEventObserver = {event: HomeEvent ->
+    private val mHomeEventObserver = { event: HomeEvent ->
         when (event.event) {
             HomeEvent.EVENT_REFRESH -> {
                 onRefresh()
             }
+
             HomeEvent.EVENT_LOGIN -> {
                 onRefresh()
                 replaceChildFragment(getFragment())
             }
+
             HomeEvent.EVENT_LOGOUT -> {
                 mHomeViewModel.clearData()
                 replaceChildFragment(getFragment())
@@ -83,7 +85,8 @@ class HomeFragment : BaseHomeFragment() {
         super.onViewCreated(view, savedInstanceState)
         replaceChildFragment(getFragment())
 
-        LiveDataBus.getLiveData(HomeEvent::class.java).observerNonSticky(viewLifecycleOwner, mHomeEventObserver)
+        LiveDataBus.getLiveData(HomeEvent::class.java)
+            .observerNonSticky(viewLifecycleOwner, mHomeEventObserver)
 
         mAppUpdateViewModel.updateLiveData.observerNonSticky(viewLifecycleOwner) {
             getBaseActivity()?.showAppUpgradeDialog(it)
@@ -141,30 +144,37 @@ class HomeFragment : BaseHomeFragment() {
                             getInstance(getSupportContext(), FirstLoanFragment::class.java, null)
                         }
                     }
+
                     OrderStatus.STATUS_REJECT -> {
                         getInstance(getSupportContext(), RefusedFragment::class.java, null)
                     }
+
                     OrderStatus.STATUS_REVIEW -> {
                         getInstance(getSupportContext(), ReviewFragment::class.java, null)
                     }
+
                     OrderStatus.STATUS_FIRST_CONFIRM -> {
                         getInstance(getSupportContext(), FirstConfirmFragment::class.java, null)
                     }
+
                     OrderStatus.STATUS_REPAY,
                     OrderStatus.STATUS_OVERDUE -> {
                         getInstance(getSupportContext(), FirstRepayFragment::class.java, null)
                     }
+
                     OrderStatus.STATUS_REPEAT1,
                     OrderStatus.STATUS_REPEAT2,
                     OrderStatus.STATUS_REPEAT3,
                     OrderStatus.STATUS_REPEAT4 -> {
                         getInstance(getSupportContext(), RepeatFragment::class.java, null)
                     }
+
                     else -> {
                         getInstance(getSupportContext(), NoProductFragment::class.java, null)
                     }
                 }
             }
+
             UserStatus.STATUS_REPEAT -> {
 //                val empty = rspInfo.jBRR?.isEmpty() ?: true
 //                if (empty){
@@ -173,9 +183,11 @@ class HomeFragment : BaseHomeFragment() {
                 getInstance(getSupportContext(), RepeatFragment::class.java, null)
 //                }
             }
-            UserStatus.STATUS_BLACK -> {
+
+            UserStatus.STATUS_NAVIGATION -> {
                 getInstance(getSupportContext(), NavigationFragment::class.java, null)
             }
+
             else -> null
         }
     }
@@ -186,14 +198,14 @@ class HomeFragment : BaseHomeFragment() {
             R.id.fl_home_content,
             mCurrTag
         )
-        if (fragment is BaseHomeLoanFragment) {
+        if (fragment is BaseHomeRefreshFragment) {
             fragment.stopRefresh()
         }
     }
 
     override fun onFragmentVisibilityChanged(visible: Boolean) {
         super.onFragmentVisibilityChanged(visible)
-        if(visible) {
+        if (visible) {
             if (inValidToken()) {
                 replaceChildFragment(getFragment())
             }

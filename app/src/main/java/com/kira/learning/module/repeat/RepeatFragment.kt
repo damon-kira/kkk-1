@@ -13,7 +13,7 @@ import com.kira.learning.expand.*
 import com.kira.learning.manager.Launch
 import com.kira.learning.manager.Launch.jumpToAppSettingPage
 import com.kira.learning.module.adapter.SpaceItemDecoration
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.upload.UploadViewModel
@@ -33,7 +33,7 @@ import kotlin.math.min
 
 //复盘首页
 @AndroidEntryPoint
-class RepeatFragment : BaseHomeLoanFragment() {
+class RepeatFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentRepeatBinding::inflate)
 

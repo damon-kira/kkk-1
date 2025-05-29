@@ -12,7 +12,7 @@ import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.adapter.linearLayoutManager
 import com.kira.learning.module.defer.PayEvent
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.permission.HintDialog
@@ -29,7 +29,7 @@ import com.util.lib.ifShow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RepayTabFragment : BaseHomeLoanFragment() {
+class RepayTabFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentTabRepayBinding::inflate)
 

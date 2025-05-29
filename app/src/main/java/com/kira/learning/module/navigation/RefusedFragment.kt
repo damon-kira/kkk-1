@@ -5,7 +5,7 @@ import android.view.View
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentRefusedBinding
 import com.kira.learning.expand.formatCommon
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.livedata.LiveDataBus
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 //拒绝页面
 @AndroidEntryPoint
-class RefusedFragment : BaseHomeLoanFragment() {
+class RefusedFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentRefusedBinding::inflate)
 

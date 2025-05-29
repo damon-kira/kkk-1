@@ -163,7 +163,7 @@ object FragmentHelper {
 
     fun getTopFragment(fragmentManger: FragmentManager): Fragment? {
         val fragments = fragmentManger.fragments
-        if (fragments.size > 0) {
+        if (fragments.isNotEmpty()) {
             return fragments.last()
         }
         return null

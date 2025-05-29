@@ -12,7 +12,7 @@ import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.dp
 
-abstract class BaseHomeLoanFragment: BaseHomeFragment() {
+abstract class BaseHomeRefreshFragment: BaseHomeFragment() {
 
     private val mBinding by binding(FragmentBaseLoanBinding::inflate)
 

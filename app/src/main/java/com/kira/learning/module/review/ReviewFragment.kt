@@ -6,7 +6,7 @@ import com.kira.learning.R
 import com.kira.learning.databinding.FragmentReviewBinding
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.expand.mUserName
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.livedata.LiveDataBus
@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 // 待审核
 @AndroidEntryPoint
-class ReviewFragment : BaseHomeLoanFragment() {
+class ReviewFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentReviewBinding::inflate)
 

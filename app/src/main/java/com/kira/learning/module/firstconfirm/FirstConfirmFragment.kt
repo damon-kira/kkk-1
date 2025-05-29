@@ -14,7 +14,7 @@ import com.kira.learning.expand.maskBank
 import com.kira.learning.expand.toast
 import com.kira.learning.manager.Launch
 import com.kira.learning.manager.Launch.jumpToAppSettingPage
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.upload.UploadViewModel
@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit
 
 // 首盘确认额度页面
 @AndroidEntryPoint
-class FirstConfirmFragment : BaseHomeLoanFragment(), View.OnClickListener {
+class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
 
     private val mBinding by binding(FragmentFirstConfirmBinding::inflate)
 

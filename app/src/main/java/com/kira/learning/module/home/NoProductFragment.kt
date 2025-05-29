@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 // 无产品
 @AndroidEntryPoint
-class NoProductFragment : BaseHomeLoanFragment() {
+class NoProductFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentNoProductBinding::inflate)
 

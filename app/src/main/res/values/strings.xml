@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Kira learning</string>
-    <string name="home_loan">Hogar</string>
-    <string name="home_account">Personal</string>
+    <string name="home_loan">Kira</string>
+    <string name="home_account">Profile</string>
     <string name="home_repay">Demo</string>
     <string name="phone_hint">Número de teléfono</string>
     <string name="sms_hint">Ingrese 4 dígitos para la verificación</string>
@@ -123,7 +123,7 @@
     <string name="contact_input_name">Por favor ingrese un nombre de contacto</string><!-- 提示输入姓名 -->
     <string name="contact_error_name">Error de entrada, vuelva a introducir el nombre</string><!-- 提示姓名异常 -->
     <string name="contact_error_mobile">Error de entrada, vuelve a introducir el número de teléfono</string><!-- 提示手机号异常 -->
-    <!-- 银行信息 -->
+
     <string name="bank_title">拍照识别</string>
     <string name="bank_name_title">Seleccione su banco</string>
     <string name="bank_no_title">El numero de cuenta bancaria</string>
@@ -290,14 +290,14 @@
     <string name="history_title">Historial</string>
     <string name="history_not_orders">Sin registro, consigue tu primer préstamo</string>
     <string name="history_btn">Obtener dinero ahora</string>
-    <string name="history_status_review">Pago en Proceso</string><!-- 审核中 -->
-    <string name="history_status_settle">Fin de orden</string><!-- 结清 -->
-    <string name="history_status_repay">Préstamo Activo</string><!-- 仪表中 -->
-    <string name="history_status_refused">Rechazar</string><!-- 拒绝 -->
-    <string name="history_status_failed">Fallar</string><!-- 失效 -->
+    <string name="history_status_review">Pago en Proceso</string>
+    <string name="history_status_settle">Fin de orden</string>
+    <string name="history_status_repay">Préstamo Activo</string>
+    <string name="history_status_refused">Rechazar</string>
+    <string name="history_status_failed">Fallar</string>
 
-    <string name="btn_review">Controlar</string> <!--审核中-->
-    <string name="history_btn_failure">Solicitar</string><!-- 订单失效 -->
+    <string name="btn_review">Controlar</string>
+    <string name="history_btn_failure">Solicitar</string>
     <string name="history_repay_date">Fecha de Pago</string>
     <string name="history_refused_text">Su pedido ha sido rechazado, intente nuevamente después del %s</string>
     <string name="history_failure">Su pedido ha caducado, solicite un nuevo préstamo</string>
@@ -326,7 +326,7 @@
     <string name="black_desc">Mantenga un buen historial de crédito de pago e  intente pedir prestado nuevamente más tarde</string>
     <string name="hosta_s">Hasta %s</string>
 
-    <!--最多只能同时申请六个盘款产品-->
+
     <string name="toast_product_up">Solo puede solicitar hasta %s productos de préstamo al mismo tiempo</string>
     <!--您已经申请很多个应用了，达到了申请上限，请明天再来尝试-->
     <string name="toast_product_app">Ha solicitado muchos productos y ha alcanzado el límite de aplicaciones, vuelva a intentarlo mañana</string>
@@ -350,14 +350,14 @@
     <string name="recommend_hint">100% Aprobado</string>
     <string name="recomm_amount_hint">Créditos hasta de</string>
 
-    <!--当前订单已结清，请勿重复操作 。。。详情页面调用仪表使用-->
+
     <string name="repay_success1">El pedido actual ha sido liquidado, por favor no repita la operación</string>
-    <!--您的订单已结清，无需延期仪表。。。展期仪表使用-->
+
     <string name="repay_success2">Su pedido se ha liquidado, no es necesario extender el reembolso</string>
-    <!--部分订单已经结清，请重新发起。。-->
+
     <string name="repay_success3">Parte de pedidos se ha liquidado, por favor envíe de nuevo</string>
 
-    <!-- 复盘审核中 -->
+
     <string name="review_item_text1">Pedidos solicitados</string>
     <string name="review_item_text2">Fecha de solicitud</string>
     <string name="review_item_orders">Pedidos en revisión</string>

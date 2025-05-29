@@ -8,7 +8,7 @@ import com.kira.learning.expand.formatCommon
 import com.kira.learning.expand.mUserName
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.defer.PayEvent
-import com.kira.learning.module.home.BaseHomeLoanFragment
+import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.common.lib.expand.setBlockingOnClickListener
@@ -19,7 +19,7 @@ import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FirstRepayFragment : BaseHomeLoanFragment() {
+class FirstRepayFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentHomeRepayBinding::inflate)
 

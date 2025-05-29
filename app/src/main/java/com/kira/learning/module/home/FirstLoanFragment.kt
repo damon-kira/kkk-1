@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class FirstLoanFragment : BaseHomeLoanFragment() {
+class FirstLoanFragment : BaseHomeRefreshFragment() {
 
     private val mBinding by binding(FragmentHomeLoanBinding::inflate)
 
