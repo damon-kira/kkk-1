@@ -135,7 +135,7 @@ class MainActivity : BaseFragmentActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         LiveDataBus.removeObserve(MainEvent::class.java, mMainEventObserve)
+        super.onDestroy()
     }
 }

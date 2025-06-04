@@ -17,9 +17,11 @@ abstract class BaseHomeFragment : BaseFragment() {
     private var mCustomDialog: CustomDialog? = null
 
     fun setCustomListener(toolbarLayout: ToolbarLayout) {
-        toolbarLayout.setCustomClickListener {
-            if (mCustomDialog?.isShowing == true) return@setCustomClickListener
-            mCustomDialog = getBaseActivity()?.showCustomDialog()
+        if(this.isAdded) {
+            toolbarLayout.setCustomClickListener {
+                if (mCustomDialog?.isShowing == true) return@setCustomClickListener
+                mCustomDialog = getBaseActivity()?.showCustomDialog()
+            }
         }
     }
 
@@ -36,7 +38,7 @@ abstract class BaseHomeFragment : BaseFragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mCustomDialog = null
+        super.onDestroy()
     }
 }

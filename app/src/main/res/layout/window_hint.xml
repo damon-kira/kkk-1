@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="100dp"
+    android:background="@drawable/shape_ecd1fa_10"
+    android:gravity="center"
+    android:minWidth="120dp"
+    android:minHeight="120dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/win_iv_icon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/svg_me_pre"
+        tools:src="@drawable/svg_me_pre" />
+
+    <TextView
+        android:id="@+id/win_tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="14dp"
+        android:maxLines="3"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:text="点击关闭"
+        tools:text="提示语" />
+
+</LinearLayout>

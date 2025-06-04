@@ -1,6 +1,7 @@
 package com.kira.learning.module.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -26,6 +27,7 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
 class HomeFragment : BaseHomeFragment() {
@@ -41,10 +43,16 @@ class HomeFragment : BaseHomeFragment() {
     private val mLoginFragment
         get() = getInstance(getSupportContext(), LoginFragment::class.java, null)
 
-    private val mNoProductFragment by lazy {
-        getInstance(getSupportContext(), NoProductFragment::class.java, null)
-    }
+    private var noProductFragmentRef: WeakReference<NoProductFragment>? = null
 
+    val mNoProductFragment: NoProductFragment
+        get() = noProductFragmentRef?.get() ?: run {
+            getInstance(
+                getSupportContext(),
+                NoProductFragment::class.java,
+                null
+            ).also { noProductFragmentRef = WeakReference(it) }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +90,9 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.e(TAG, "onViewCreated: 调用了", )
         super.onViewCreated(view, savedInstanceState)
+        //首次创建
         replaceChildFragment(getFragment())
 
         LiveDataBus.getLiveData(HomeEvent::class.java)
@@ -210,6 +220,12 @@ class HomeFragment : BaseHomeFragment() {
                 replaceChildFragment(getFragment())
             }
         }
+    }
+
+    override fun onDestroyView() {
+        noProductFragmentRef?.clear()
+        noProductFragmentRef = null
+        super.onDestroyView()
     }
 
     override fun onDestroy() {

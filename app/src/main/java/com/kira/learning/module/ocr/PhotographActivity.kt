@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.kira.learning.R
 import com.kira.learning.camera.CaptureActivity
 import com.kira.learning.databinding.ActivityPhotographBinding
 import com.common.lib.base.BaseFragmentActivity
 import com.common.lib.viewbinding.binding
 import com.google.firebase.analytics.FirebaseAnalytics
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -26,11 +29,9 @@ class PhotographActivity : BaseFragmentActivity() {
 
         setOnClick()
 
-        Thread(object : Runnable {
-            override fun run() {
-                deepFile("tessdata")
-            }
-        }).start()
+        lifecycleScope.launch(Dispatchers.IO) {
+            deepFile("tessdata")
+        }
     }
 
     private fun setOnClick() {

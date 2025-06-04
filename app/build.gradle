@@ -143,6 +143,7 @@ dependencies {
     implementation project(path: ':datepicker')
     implementation project(path: ':stedit')
     implementation project(path: ':player')
+    implementation project(path: ':window')
 
     // base
     implementation rootProject.ext.android.kotlin_stdlib
@@ -201,6 +202,9 @@ dependencies {
     // google分析
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics'
+
+    // 核心库（仅用于 Debug 构建）
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
 
     //firebase core
 //    implementation project(path: ":analysis")

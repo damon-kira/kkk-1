@@ -26,6 +26,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
         mAppContext = this
         CacheInit.get().setContext(this).setDebug(AppEnv.DEBUG)
         initAes()
+//        initLeakCanary()
         ApplicationDelegate.init(this)
 //        AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id))
 //        PushManagerFactory.init(this)
@@ -34,6 +35,13 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 
         PythonExecutor.initialize(this)
     }
+
+//    private fun initLeakCanary() {
+//        LeakCanary.config = LeakCanary.config.copy(
+//            dumpHeapWhenDebugging = false,  // 调试时不转储堆
+//            retainedVisibleThreshold = 5    // 内存泄漏对象阈值
+//        )
+//    }
 
     private fun initAes() {
         AesConstant.AES_SECRET = Constant.API_SECRET

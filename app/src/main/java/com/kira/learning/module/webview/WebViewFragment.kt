@@ -74,9 +74,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         try {
             return mBinding.root
@@ -107,10 +105,8 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
             mWebView = WebViewPool.INSTANCE.acquire(getSupportContext())
 //            mWebView = BaseWebView(getSupportContext())
             mBinding.flWebview.addView(
-                mWebView,
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
+                mWebView, LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
                 )
             )
         } catch (e: Exception) {
@@ -258,9 +254,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         }
 
         override fun onReceivedError(
-            view: WebView?,
-            request: WebResourceRequest?,
-            error: WebResourceError?
+            view: WebView?, request: WebResourceRequest?, error: WebResourceError?
         ) {
             super.onReceivedError(view, request, error)
             logger_e(TAG, "onReceivedError = $error")
@@ -278,9 +272,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         }
 
         override fun onReceivedHttpError(
-            view: WebView?,
-            request: WebResourceRequest?,
-            errorResponse: WebResourceResponse?
+            view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse?
         ) {
             super.onReceivedHttpError(view, request, errorResponse)
             logger_e(TAG, "onReceivedHttpError = ${errorResponse.toString()}")
@@ -288,8 +280,7 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
                 val statusCode = errorResponse?.statusCode
                 if (!isResourceUrl(
-                        view?.url,
-                        request?.url?.toString()
+                        view?.url, request?.url?.toString()
                     ) && (statusCode == 404 || statusCode == 500)
                 ) {
                     // 显示异常页面
@@ -302,27 +293,25 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         }
 
         override fun onReceivedSslError(
-            view: WebView?,
-            handler: SslErrorHandler?,
-            error: SslError?
+            view: WebView?, handler: SslErrorHandler?, error: SslError?
         ) {
             super.onReceivedSslError(view, handler, error)
 
             getBaseActivity()?.let { activy ->
-                val builder = AlertDialog.Builder(activy)
-                    .setMessage(getString(R.string.webview_ssl_hint))
-                    .setPositiveButton(
-                        getString(R.string.confirm)
-                    ) { _, _ -> handler?.proceed() }
-                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
-                        handler?.cancel()
-                    }.setOnKeyListener { dialog, keyCode, event ->
-                        return@setOnKeyListener if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                val builder =
+                    AlertDialog.Builder(activy).setMessage(getString(R.string.webview_ssl_hint))
+                        .setPositiveButton(
+                            getString(R.string.confirm)
+                        ) { _, _ -> handler?.proceed() }
+                        .setNegativeButton(getString(R.string.cancel)) { _, _ ->
                             handler?.cancel()
-                            dialog.dismiss()
-                            true
-                        } else false
-                    }
+                        }.setOnKeyListener { dialog, keyCode, event ->
+                            return@setOnKeyListener if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                                handler?.cancel()
+                                dialog.dismiss()
+                                true
+                            } else false
+                        }
                 try {
                     builder.create().show()
                 } catch (e: Exception) {

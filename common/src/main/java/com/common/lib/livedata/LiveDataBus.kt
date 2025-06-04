@@ -5,13 +5,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import java.lang.ref.WeakReference
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicBoolean
 
 object LiveDataBus {
 
-    private val bus: ConcurrentHashMap<Class<*>, MutableLiveData<*>> by lazy(LazyThreadSafetyMode.NONE) {
-        ConcurrentHashMap<Class<*>, MutableLiveData<*>>()
+    private val bus: ConcurrentHashMap<Class<*>, WeakReference<MutableLiveData<*>>> by lazy(
+        LazyThreadSafetyMode.NONE
+    ) {
+        ConcurrentHashMap<Class<*>, WeakReference<MutableLiveData<*>>>()
     }
 
     @JvmStatic
@@ -27,10 +30,9 @@ object LiveDataBus {
 
     @JvmStatic
     fun <T> getLiveData(clazz: Class<T>): MutableLiveData<T> {
-        if (!bus.containsKey(clazz)) {
-            bus[clazz] = MutableLiveData<T>()
-        }
-        return bus[clazz] as MutableLiveData<T>
+        return bus.getOrPut(clazz) { WeakReference(MutableLiveData<T>()) }
+            .get() as? MutableLiveData<T>
+            ?: throw IllegalStateException("LiveData not initialized")
     }
 
     @JvmStatic
@@ -82,6 +84,7 @@ class LiveDataBusObserve<T>(
     Observer<T> {
     var mLastVersion: Int = LiveDataBus.getLiveDataVersion(liveData)
     private val mIsFirstVersion = AtomicBoolean(true)
+    private val weakOnChange = WeakReference(onChange)
     override fun onChanged(t: T) {
         if (mIsFirstVersion.compareAndSet(true, false)) {
             //只走一次之后 后面的就正常了 走正常回调
@@ -90,9 +93,9 @@ class LiveDataBusObserve<T>(
                 return
             }
             mLastVersion = currentLiveDataVersion
-            onChange?.invoke(t)
+            weakOnChange.get()?.invoke(t)
         } else {
-            onChange?.invoke(t)
+            weakOnChange.get()?.invoke(t)
         }
     }
 }
