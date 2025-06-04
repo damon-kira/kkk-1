@@ -1,9 +1,11 @@
 package com.arezoonazer.player.widget
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import com.arezoonazer.player.R
 import com.arezoonazer.player.extension.dpToPx
@@ -23,9 +25,12 @@ class PlayPauseControlButton : FrameLayout {
 
     private fun initComponents() {
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        initButton()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+            initButton()
+        }
     }
 
+    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     private fun initButton() {
         val buttonSize = context.dpToPx(resources.getDimension(R.dimen.player_play_icon_size))
         val params = LayoutParams(buttonSize, buttonSize)

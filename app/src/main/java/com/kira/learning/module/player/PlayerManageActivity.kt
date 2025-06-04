@@ -87,4 +87,8 @@ class PlayerManageActivity : BaseActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, LENGTH_SHORT).show()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

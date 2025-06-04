@@ -39,8 +39,8 @@ class PlayerViewModel @Inject constructor(
     private val playerParams = savedStateHandle.get<PlayerParams>(PLAYER_PARAMS_EXTRA)
 
     override fun onCleared() {
-        super.onCleared()
         release()
+        super.onCleared()
     }
 
     fun onActivityCreate(context: Context) {

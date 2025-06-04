@@ -41,7 +41,7 @@ class PlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel.onActivityCreate(this)
+        viewModel.onActivityCreate(application)
         qualityViewModel.onActivityCreated()
         subtitleViewModel.onActivityCrated()
         resolveSystemGestureConflict()
@@ -84,8 +84,8 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         releasePlayerView()
+        super.onDestroy()
     }
 
     private fun initClickListeners() {
@@ -107,14 +107,14 @@ class PlayerActivity : AppCompatActivity() {
             when (playbackState) {
                 CustomPlaybackState.PLAYING,
                 CustomPlaybackState.PAUSED,
-                -> {
+                    -> {
                     root.visible()
                     replayButton.gone()
                 }
 
                 CustomPlaybackState.ERROR,
                 CustomPlaybackState.ENDED,
-                -> {
+                    -> {
                     replayButton.visible()
                 }
 
@@ -159,10 +159,17 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun releasePlayerView() {
-        with(binding.exoPlayerView) {
-            removeAllViews()
-            player = null
+        binding.exoPlayerView.player?.let { player ->
+            player.release() // 关键调用
+            player.clearVideoSurface()
+//            player.removeListener(viewModel.playerEventListener)
         }
+        binding.exoPlayerView.player = null
+        binding.exoPlayerView.removeAllViews()
+//        with(binding.exoPlayerView) {
+//            removeAllViews()
+//            player = null
+//        }
     }
 
     companion object {

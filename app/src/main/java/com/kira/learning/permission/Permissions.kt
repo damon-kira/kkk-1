@@ -22,6 +22,7 @@ import com.common.lib.dialog.DialogManager
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
+import com.util.lib.log.isDebug
 import com.util.lib.log.logger_i
 
 val TAG = "debug_Permissions"
@@ -181,6 +182,7 @@ fun FragmentActivity.reqPermission(
         // 在228行 unrequestedPermissions.isEmpty() 会为true，所以不会请求权限
         removeRxPermissions(this)
         val rxPermissions = RxPermissions(this)
+        //与现有方案冲突
 //        rxPermissions.setLogging(isDebug())
 //        rxPermissions.requestEachCombined(*permissions)
 //            .subscribe({ permission ->
