@@ -22,7 +22,6 @@ import com.common.lib.dialog.DialogManager
 import com.tbruyelle.rxpermissions3.RxPermissions
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
-import com.util.lib.log.isDebug
 import com.util.lib.log.logger_i
 
 val TAG = "debug_Permissions"
@@ -247,8 +246,8 @@ fun BaseActivity.showNoPermissionDialog(
 
     val connectorChar = this.getString(R.string.permission_connector_char)
 
-    val notPermissiontText = getNotPermissionText(deniedList, this, connectorChar)
-    val message = this.getString(R.string.permission_dialog_message, notPermissiontText)
+    val notPermissionText = getNotPermissionText(deniedList, this, connectorChar)
+    val message = this.getString(R.string.permission_dialog_message, notPermissionText)
 
     val dialog = HintDialog(this)
         .showClose(true)

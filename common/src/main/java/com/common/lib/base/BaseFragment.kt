@@ -29,11 +29,12 @@ open class BaseFragment : InjectorFragment(), OnFragmentVisibilityChangedListene
             bundle: Bundle? = null
         ): T {
             val cla = FragmentFactory.loadFragmentClass(context.classLoader, clazz.name)
-            val fragment = cla.newInstance()
+            val fragment = cla.getDeclaredConstructor().newInstance()
             bundle?.let {
                 bundle.classLoader = cla.classLoader
                 fragment.arguments = bundle
             }
+
             return fragment as T
         }
     }

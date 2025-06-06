@@ -17,13 +17,13 @@ rootProject.ext {
     android = [
             kotlin_stdlib        : "org.jetbrains.kotlin:kotlin-stdlib:${version.kotlin}", // Kotlin标准库
             core_ktx             : "androidx.core:core-ktx:1.7.0", // Android核心库的Kotlin扩展
+            activity_ktx         : 'androidx.activity:activity-ktx:1.7.0', // Activity的Kotlin扩展
             appcompat            : "androidx.appcompat:appcompat:1.4.1", // 兼容库
             multidex             : "androidx.multidex:multidex:2.0.1", // 突破64K方法数限制
             lifecycle_runtime    : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}", // 生命周期管理
             lifecycle_livedataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}", // LiveData扩展
             livedata_viewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}", // ViewModel扩展
             coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0', // 协程支持
-            activity_ktx         : 'androidx.activity:activity-ktx:1.7.0', // Activity的Kotlin扩展
             fragment             : 'androidx.fragment:fragment:1.2.5',
             annotation           : 'androidx.annotation:annotation:1.1.0'
     ]
@@ -61,7 +61,7 @@ rootProject.ext {
     ]
 
     permission = [
-            rxpermission: "com.github.tbruyelle:rxpermissions:0.12" // Rx风格权限管理
+            rxpermission: "com.github.tbruyelle:rxpermissions:0.12" // Rx风格权限管理（暂时没用）
     ]
 
     autosize = [
@@ -147,11 +147,6 @@ rootProject.ext {
             cache     : 'com.cache.lib:cache:1.0.0', // 缓存库
             cropper   : 'com.edmodo:cropper:1.0.1', // 图像裁剪
             tesseract : 'cz.adaptech.tesseract4android:tesseract4android:4.4.0', // 文字识别
-            fastjson  : 'com.alibaba:fastjson:1.2.76', // json
-
-//            util            : 'com.util.lib:util:1.0.4',
-//            userBehavior    : 'com.behavior.lib:userBehavior:1.0.2',
-//            bigdata         : 'com.bigdata.lib:bigdata:1.0.0',
 
     ]
 

@@ -1,24 +1,34 @@
 package com.kira.learning.module.navigation
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.PopupMenu
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.helper.FragmentHelper
+import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.hjq.window.EasyWindow
 import com.hjq.window.OnWindowViewClickListener
 import com.hjq.window.draggable.MovingWindowDraggableRule
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentBlackBinding
+import com.kira.learning.expand.setLogout
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.home.BaseHomeFragment
+import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.MainActivity
+import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.jvm.java
 
 
 /**
@@ -33,7 +43,7 @@ class NavigationFragment : BaseHomeFragment() {
 
     private var mOrderIds: ArrayList<String>? = null
 
-    private var mWindow: EasyWindow<*>? = null
+    private var mRemovableWindow: EasyWindow<*>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,14 +79,16 @@ class NavigationFragment : BaseHomeFragment() {
 //            mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
             mOrderIds = data.QLPGXTNU
         }
-        onBackListener()
+        initToolbar()
         initViewSetting()
 
         initWindow()
     }
 
     private fun initWindow() {
-        mWindow = EasyWindow.with(getBaseActivity()!!)
+        getBaseActivity() ?: return
+
+        mRemovableWindow = EasyWindow.with(getBaseActivity()!!)
             .setContentView(R.layout.window_hint)
 //                    .setAnimStyle(R.style.IOSAnimStyle)
 //                    .setImageDrawableByImageView(R.id.icon, R.drawable.ic_dialog_tip_finish)
@@ -90,7 +102,6 @@ class NavigationFragment : BaseHomeFragment() {
                         view: TextView
                     ) {
 
-//                                cancelAndRecycleEasyWindow(easyWindow)
                         FragmentHelper.getCurrFragment(
                             getMainActivity()?.supportFragmentManager ?: parentFragmentManager,
                             R.id.fl_main_container
@@ -104,10 +115,88 @@ class NavigationFragment : BaseHomeFragment() {
                 })
     }
 
+    private fun showCustomMenu(anchor: View) {
+        val popup = PopupMenu(getBaseActivity()!!, anchor, Gravity.END)
+        popup.menuInflater.inflate(R.menu.main_menu, popup.menu)
+
+        // 强制显示图标
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popup.setForceShowIcon(true)
+        }
+        // 对于较旧版本的回退方案
+        else {
+            try {
+                val fields = popup.javaClass.declaredFields
+                for (field in fields) {
+                    if ("mPopup" == field.name) {
+                        field.isAccessible = true
+                        val menuPopup = field.get(popup)
+                        val classPopup = Class.forName(menuPopup.javaClass.name)
+
+                        // 尝试调用 setForceShowIcon 方法
+                        try {
+                            val setForceShowIcon = classPopup.getMethod(
+                                "setForceShowIcon",
+                                Boolean::class.javaPrimitiveType
+                            )
+                            setForceShowIcon.invoke(menuPopup, true)
+                        }
+                        // 如果方法不存在，尝试旧版方法
+                        catch (e: NoSuchMethodException) {
+                            val method = classPopup.getMethod(
+                                "setForceShowIcon",
+                                Boolean::class.javaPrimitiveType
+                            )
+                            method.invoke(menuPopup, true)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        // 设置菜单项点击监听
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_settings -> {
+//                    startActivity(Intent(this, SettingsActivity::class.java))
+                    Log.e(TAG, "showCustomMenu: 点击了 action_settings")
+                    true
+                }
+
+                R.id.action_help -> {
+//                    shareContent()
+                    Log.e(TAG, "showCustomMenu: 点击了 action_help")
+                    true
+                }
+
+                R.id.action_logout -> {
+//                    logout()
+                    Log.e(TAG, "showCustomMenu: 点击了 action_logout")
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        // 显示菜单
+        popup.show()
+    }
+
     private fun getMainActivity() = activity as MainActivity?
 
-    fun onBackListener() {
-        mBinding.toolbar.setOnClickListener {
+    fun initToolbar() {
+        mBinding.toolbar.setRightImage(R.drawable.svg_me_nor)
+        mBinding.toolbar.setCustomImage(R.drawable.alive_anim_blink)
+//        mBinding.toolbar.showCustomIcon(true)
+        mBinding.toolbar.setOnRightClickListener {
+//            mToolbarWindow?.showAsDropDown(it, Gravity.BOTTOM)
+            showCustomMenu(it)
+        }
+
+        mBinding.toolbar.setOnbackListener {
             getMainActivity()?.drawerToggle()
         }
     }
@@ -167,19 +256,19 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout9.let {
             it.tvDemoName.text = "总线通信"
             it.tvBtn.setOnClickListener {
-//                setLogout()
-//                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
-//                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
+                setLogout()
+                LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
+                LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
 //                finish()
             }
         }
         mBinding.inclueDemoLayout10.let {
             it.tvDemoName.text = "悬浮按钮"
             it.tvBtn.setOnClickListener {
-                if (mWindow?.isShowing == true) {
-                    cancelAndRecycleEasyWindow(mWindow)
+                if (mRemovableWindow?.isShowing == true) {
+                    cancelAndRecycleEasyWindow(mRemovableWindow)
                 } else {
-                    mWindow?.show()
+                    mRemovableWindow?.show()
                 }
             }
         }
@@ -194,8 +283,9 @@ class NavigationFragment : BaseHomeFragment() {
         easyWindow?.cancel()
     }
 
+
     override fun onDestroyView() {
-        mWindow?.recycle()
+        mRemovableWindow?.recycle()
         super.onDestroyView()
     }
 

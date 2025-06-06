@@ -51,10 +51,12 @@ class ToolbarLayout : RelativeLayout {
                         val text = ta.getString(attr).orEmpty()
                         setText(text)
                     }
+
                     R.styleable.ToolbarLayout_tl_back_text_color -> {
                         val color = ta.getColor(attr, 0)
                         mBinding.toolbarTvTitle.setTextColor(color)
                     }
+
                     R.styleable.ToolbarLayout_tl_text_gravity -> {
                         val textGravity = ta.getInt(attr, GRAVITY_LEFT)
                         when (textGravity) {
@@ -62,38 +64,46 @@ class ToolbarLayout : RelativeLayout {
                             GRAVITY_CENTER -> titleGravity(true)
                         }
                     }
+
                     R.styleable.ToolbarLayout_tl_back_visibility -> {
                         val backVisible = ta.getInt(attr, BACK_VISIBLE)
                         mBinding.toolbarAivBack.ifShow(backVisible == BACK_VISIBLE)
                     }
+
                     R.styleable.ToolbarLayout_tl_right_icon -> {
                         val rightImageRes = ta.getResourceId(attr, 0)
                         if (rightImageRes != 0) {
                             setRightImage(rightImageRes)
                         }
                     }
+
                     R.styleable.ToolbarLayout_tl_right_icon_show -> {
                         val isRightIconShow = ta.getBoolean(attr, false)
                         mBinding.toolbarAivRight.ifShow(isRightIconShow)
                     }
+
                     R.styleable.ToolbarLayout_tl_right_point_bg -> {
                         val drawable = ta.getDrawable(attr)
                         mBinding.toolbarAivPoint.background = drawable
                     }
-                    R.styleable.ToolbarLayout_tl_left_icon-> {
+
+                    R.styleable.ToolbarLayout_tl_left_icon -> {
                         val drawable = ta.getDrawable(attr)
                         mBinding.toolbarAivBack.setImageDrawable(drawable)
                     }
+
                     R.styleable.ToolbarLayout_tl_show_custom_icon -> {
                         val showCustom = ta.getBoolean(attr, false)
                         showCustomIcon(showCustom)
                     }
+
                     R.styleable.ToolbarLayout_tl_custom_icon -> {
                         val customRes = ta.getResourceId(attr, 0)
                         if (customRes != 0) {
                             setCustomImage(customRes)
                         }
                     }
+
                     R.styleable.ToolbarLayout_tl_textsize -> {
                         val textsize = ta.getDimension(attr, 14f.sp())
                         setTextSize(textsize)
@@ -128,14 +138,8 @@ class ToolbarLayout : RelativeLayout {
 
     fun getTitleText(): String? = mBinding.toolbarTvTitle.text.toString()
 
-    fun setTextSize(@Px textsize: Float){
+    fun setTextSize(@Px textsize: Float) {
         mBinding.toolbarTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textsize)
-    }
-
-    fun setOnbackListener(onClick: () -> Unit) {
-        mBinding.toolbarAivBack.setBlockingOnClickListener {
-            onClick()
-        }
     }
 
     fun setTextColor(color: Int) {
@@ -191,6 +195,24 @@ class ToolbarLayout : RelativeLayout {
 //                it.rightMargin = 54f.dp()
 //            }
 //        }
+    }
+
+    fun setOnTitleClickListener(onClick: () -> Unit) {
+        mBinding.toolbarTvTitle.setBlockingOnClickListener {
+            onClick()
+        }
+    }
+
+    fun setOnRightClickListener(onClick: (view: View) -> Unit) {
+        mBinding.toolbarAivRight.setBlockingOnClickListener {
+            onClick(it)
+        }
+    }
+
+    fun setOnbackListener(onClick: () -> Unit) {
+        mBinding.toolbarAivBack.setBlockingOnClickListener {
+            onClick()
+        }
     }
 
     fun setCustomClickListener(listener: () -> Unit) {

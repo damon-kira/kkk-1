@@ -258,4 +258,9 @@
 -keep interface me.jessyan.autosize.** { *; }
 
 #-keep class com.common.lib.net.bean.BaseResponse {*;}
+# Guava
+-keep class com.google.common.** { *; }
+
+-keep class com.steve28.stedit.** { *; }
+-keep class com.steve28.stedit.highlighter.** { *; }
 

@@ -7,22 +7,19 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.View.OnLongClickListener
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.kira.learning.R
-import com.kira.learning.databinding.ActivityAiimBinding
-import com.kira.learning.manager.Launch
-import com.kira.learning.bean.ChatMessage
-import com.kira.learning.bean.Conversation
 import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
+import com.kira.learning.R
+import com.kira.learning.bean.ChatMessage
+import com.kira.learning.bean.Conversation
+import com.kira.learning.databinding.ActivityAiimBinding
 import com.kira.learning.expand.RandomCID
 import com.kira.learning.expand.showCustomDialog
+import com.kira.learning.manager.Launch
 import com.kira.learning.module.ai.vm.AIChatViewModel
 import com.kira.learning.view.ToolbarLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +27,6 @@ import io.noties.markwon.Markwon
 import io.noties.markwon.image.glide.GlideImagesPlugin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 @AndroidEntryPoint
 class AIChatActivity : BaseActivity() {
@@ -320,6 +316,8 @@ class AIChatActivity : BaseActivity() {
 
     override fun onDestroy() {
 //        LiveDataBus.removeObserve(PayEvent::class.java, mObserver)
+        countDownTimer?.cancel()  // 关键修复！
+        countDownTimer = null
         super.onDestroy()
     }
 

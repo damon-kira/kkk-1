@@ -20,8 +20,8 @@ android {
         multiDexEnabled true
 
 //        resConfigs 'en' // 资源配置限制
-        versionCode 8
-        versionName "1.0.5"
+        versionCode 1
+        versionName "1.0.0"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
@@ -29,7 +29,7 @@ android {
 
         manifestPlaceholders = [pkgName: "${rootProject.ext.pkgName}"]
 
-        setProperty("archivesBaseName", "FinanzasExtremas_v${versionName}_${time()}")
+        setProperty("archivesBaseName", "Kira learning_v${versionName}_${time()}")
 
 //        android.applicationVariants.all { variant ->
 //            variant.outputs.all {
@@ -67,11 +67,17 @@ android {
         kotlinCompilerExtensionVersion rootProject.ext.version.compose
     }
     signingConfigs {
+//        release {
+//            storeFile file("keystore/finanzans.jks")
+//            storePassword "finanzas2023"
+//            keyAlias "finanzas"
+//            keyPassword "finanzas2023"
+//        }
         release {
-            storeFile file("keystore/finanzans.jks")
-            storePassword "finanzas2023"
-            keyAlias "finanzas"
-            keyPassword "finanzas2023"
+            storeFile file("keystore/kiraapac.jks")
+            storePassword "kiraapac2025"
+            keyAlias "kiraapac"
+            keyPassword "kiraapac2025"
         }
         debug {
             storeFile file("keystore/debug.keystore")
@@ -197,7 +203,6 @@ dependencies {
     implementation rootProject.ext.other.cropper
     // 文字识别
     implementation rootProject.ext.other.tesseract
-    implementation rootProject.ext.other.fastjson
 
     // google分析
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
