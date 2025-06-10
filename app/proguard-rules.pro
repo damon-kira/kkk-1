@@ -264,3 +264,5 @@
 -keep class com.steve28.stedit.** { *; }
 -keep class com.steve28.stedit.highlighter.** { *; }
 
+-keep class com.google.firebase.crashlytics.** { *; }
+

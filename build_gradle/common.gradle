@@ -82,7 +82,7 @@ rootProject.ext {
             messaging  : "com.google.firebase:firebase-messaging-ktx", // 推送
             analytics  : "com.google.firebase:firebase-analytics-ktx", // 分析
             crashlytics: "com.google.firebase:firebase-crashlytics-ktx", // 崩溃报告
-            bom        : "com.google.firebase:firebase-bom:29.2.0" // 统一管理Firebase版本
+            bom        : "com.google.firebase:firebase-bom:32.8.0" // 统一管理Firebase版本
     ]
 
     facebook = [

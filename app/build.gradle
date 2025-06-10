@@ -4,8 +4,8 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.chaquo.python'// version '15.0.1'
-//    id 'com.google.gms.google-services'
-//    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 android {
     namespace 'com.kira.learning'
@@ -67,12 +67,6 @@ android {
         kotlinCompilerExtensionVersion rootProject.ext.version.compose
     }
     signingConfigs {
-//        release {
-//            storeFile file("keystore/finanzans.jks")
-//            storePassword "finanzas2023"
-//            keyAlias "finanzas"
-//            keyPassword "finanzas2023"
-//        }
         release {
             storeFile file("keystore/kiraapac.jks")
             storePassword "kiraapac2025"
@@ -134,7 +128,7 @@ android {
 }
 
 def time() {
-    return new Date().format("yyyyMMddHHmm")
+    return new Date().format("MMddyyyyHHmm")
 }
 
 dependencies {
@@ -212,11 +206,11 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
 
     //firebase core
+    implementation platform(rootProject.ext.firebase.bom)
+    implementation rootProject.ext.firebase.analytics
+    implementation rootProject.ext.firebase.crashlytics
 //    implementation project(path: ":analysis")
-//    implementation platform(rootProject.ext.firebase.bom)
 //    implementation rootProject.ext.firebase.messaging
-//    implementation rootProject.ext.firebase.analytics
-//    api rootProject.ext.firebase.crashlytics
 //    implementation rootProject.ext.firebase.firebase_perf
 //    implementation rootProject.ext.google.play_services_gcm
 

@@ -6,6 +6,8 @@ import androidx.camera.core.CameraXConfig
 import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
 import com.chaquo.python.PyObject
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.kira.learning.app.AppEnv
 import com.kira.learning.module.python.PythonExecutor
 import com.project.util.AesConstant
@@ -32,6 +34,8 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 //        PushManagerFactory.init(this)
 //        PushManagerFactory.getGaid(this)
 //        AdjustManager.init(this, AppEnv.DEBUG)
+        FirebaseApp.initializeApp(this)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
         PythonExecutor.initialize(this)
     }

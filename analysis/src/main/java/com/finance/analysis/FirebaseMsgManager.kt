@@ -3,10 +3,6 @@ package com.finance.analysis
 import android.content.Context
 import androidx.lifecycle.LiveData
 
-/**
- * Created by weishl on 2022/11/24
- *
- */
 object FirebaseMsgManager {
 
     private val mServiceList = arrayListOf<IFirebaseMsgService>()

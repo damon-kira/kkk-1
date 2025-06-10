@@ -272,6 +272,12 @@ class NavigationFragment : BaseHomeFragment() {
                 }
             }
         }
+        mBinding.inclueDemoLayout11.let {
+            it.tvDemoName.text = "崩溃"
+            it.tvBtn.setOnClickListener {
+                throw RuntimeException("Test Crash") // Force a crash
+            }
+        }
     }
 
     private fun cancelAndRecycleEasyWindow(easyWindow: EasyWindow<*>?) {

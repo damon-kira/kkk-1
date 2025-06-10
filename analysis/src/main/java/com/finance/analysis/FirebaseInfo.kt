@@ -5,10 +5,6 @@ import android.text.TextUtils.isEmpty
 import com.cache.lib.SharedPrefGlobal
 import com.finance.analysis.push.PushManagerFactory
 
-/**
- * Created by weishl on 2022/11/24
- *
- */
 object FirebaseInfo {
 
     fun getFcmToken(context: Context): String {

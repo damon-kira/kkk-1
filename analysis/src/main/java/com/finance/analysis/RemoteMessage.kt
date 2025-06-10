@@ -2,10 +2,6 @@ package com.finance.analysis
 
 import android.net.Uri
 
-/**
- * Created by weishl on 2022/11/23
- *
- */
 class RemoteMessage {
 
     companion object {
