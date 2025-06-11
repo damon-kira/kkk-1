@@ -26,7 +26,7 @@ class EncryptDecryptInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-        val method = request.method().toUpperCase(Locale.ROOT).trim()
+        val method = request.method.uppercase(Locale.ROOT).trim()
         //post 请求加密处理
         if (method == "POST") {
             request = buildEncryptRequest(request)
@@ -46,7 +46,7 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun buildEncryptRequestGet(req: Request): Request {
         var request = req
-        val url = request.url().toString()
+        val url = request.url.toString()
         logger_d(BaseDataAddInterceptor.TAG, "43:buildEncryptRequestGet: reqeust url = $url")
         if (url.contains("data=")) {
             var reqDataNew: String? = ""
@@ -70,7 +70,7 @@ class EncryptDecryptInterceptor : Interceptor {
     private fun buildEncryptRequest(req: Request): Request {
         var request = req
         var charset = Charset.forName("UTF-8")
-        val requestBody = request.body()
+        val requestBody = request.body
 
         var requestData = ""
         var contentType: MediaType? = null
@@ -107,7 +107,7 @@ class EncryptDecryptInterceptor : Interceptor {
             //根据请求方式构建相应的请求
             request = newRequestBuilder.post(newRequestBody).build()
         } catch (e: Exception) {
-            logger_e(TAG, "${request.url()} buildEncryptRequest error：${e.message}")
+            logger_e(TAG, "${request.url} buildEncryptRequest error：${e.message}")
         }
 
         return request
@@ -115,12 +115,12 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun buildDecryptResponse(request: Request, res: Response): Response {
         var response = res
-        response.body()?.use {
+        response.body?.use {
             val contentType = it.contentType()
             val charset = contentType?.charset(utf8) ?: utf8
             val source = it.source().apply { request(Long.MAX_VALUE) }
             val body = source.buffer().clone().readString(charset)
-            logger_i(TAG, "${request.url()}  解密前 body = $body")
+            logger_i(TAG, "${request.url}  解密前 body = $body")
             var newResponseBody: ResponseBody = it
             try {
 //                val jsonObject = JSONObject(body)

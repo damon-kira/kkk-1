@@ -21,7 +21,7 @@ android {
 
 //        resConfigs 'en' // 资源配置限制
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.0.1"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
@@ -90,7 +90,7 @@ android {
             buildConfigField "String", "APP_SECRET", "${rootProject.ext.release.apiSecret}"
             buildConfigField "boolean", "APP_DEBUG", "false"
             minifyEnabled true
-            shrinkResources false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -140,7 +140,6 @@ dependencies {
     implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
     implementation project(path: ':sdks:util')
-    implementation project(path: ':datepicker')
     implementation project(path: ':stedit')
     implementation project(path: ':player')
     implementation project(path: ':window')
@@ -175,13 +174,6 @@ dependencies {
     implementation rootProject.ext.rxjava.rxandroid
     implementation rootProject.ext.rxjava.rxjava
 
-    //compose 同时支持xml和compose 自定义需求高的用xml
-    implementation rootProject.ext.compose.compose_ui
-    implementation rootProject.ext.compose.compose_material
-    implementation rootProject.ext.compose.compose_runtime
-    implementation rootProject.ext.compose.compose_activity
-    debugImplementation rootProject.ext.compose.compose_uitooling
-
     //markwon AI对话专用
     implementation rootProject.ext.markwon.core
     implementation rootProject.ext.markwon.image
@@ -198,17 +190,14 @@ dependencies {
     // 文字识别
     implementation rootProject.ext.other.tesseract
 
-    // google分析
-    implementation platform('com.google.firebase:firebase-bom:31.5.0')
-    implementation 'com.google.firebase:firebase-analytics'
-
-    // 核心库（仅用于 Debug 构建）
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
-
     //firebase core
     implementation platform(rootProject.ext.firebase.bom)
     implementation rootProject.ext.firebase.analytics
     implementation rootProject.ext.firebase.crashlytics
+
+    // 核心库（仅用于 Debug 构建）
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
+
 //    implementation project(path: ":analysis")
 //    implementation rootProject.ext.firebase.messaging
 //    implementation rootProject.ext.firebase.firebase_perf

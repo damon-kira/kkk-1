@@ -26,8 +26,8 @@ import com.common.lib.glide.GlideUtils
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
-import com.datepicker.lib.FontType
-import com.datepicker.lib.MDatePicker
+//import com.datepicker.lib.FontType
+//import com.datepicker.lib.MDatePicker
 import com.util.lib.*
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -58,20 +58,20 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
     }
 
     private val mPickerDialogBuilder by lazy {
-        MDatePicker.create(this)
-            .setCanceledTouchOutside(true)
-            .setGravity(Gravity.BOTTOM)
-            .setOnlyYearMonth(false)
-            .setFontType(FontType.LARGE)
-            .setLeftText(R.string.cancel)
-            .setRightText(R.string.confirm)
-            .setDateSelectTextColor(ContextCompat.getColor(this, R.color.color_333333))
-            .setDateNormalTextColor(ContextCompat.getColor(this, R.color.color_999999))
-            .setTitle(getString(R.string.kyc_birthday))
-            .setOnDateResultListener {
-                val date = time2Str(it, TimerUtil.REGEX_DDMMYYYY)
-                mBinding.kycBivBirthday.setViewText(date)
-            }
+//        MDatePicker.create(this)
+//            .setCanceledTouchOutside(true)
+//            .setGravity(Gravity.BOTTOM)
+//            .setOnlyYearMonth(false)
+//            .setFontType(FontType.LARGE)
+//            .setLeftText(R.string.cancel)
+//            .setRightText(R.string.confirm)
+//            .setDateSelectTextColor(ContextCompat.getColor(this, R.color.color_333333))
+//            .setDateNormalTextColor(ContextCompat.getColor(this, R.color.color_999999))
+//            .setTitle(getString(R.string.kyc_birthday))
+//            .setOnDateResultListener {
+//                val date = time2Str(it, TimerUtil.REGEX_DDMMYYYY)
+//                mBinding.kycBivBirthday.setViewText(date)
+//            }
     }
 
 
@@ -297,9 +297,9 @@ class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
                     val year = calendar.get(Calendar.YEAR)
                     val month = calendar.get(Calendar.MONTH) + 1
                     val day = calendar.get(Calendar.DAY_OF_MONTH) + 1
-                    mPickerDialogBuilder.setCurrYear(year).setCurrMonth(month).setCurrDay(day)
+//                    mPickerDialogBuilder.setCurrYear(year).setCurrMonth(month).setCurrDay(day)
                 }
-                mPickerDialogBuilder.build().show()
+//                mPickerDialogBuilder.build().show()
             }
             R.id.tv_commit -> {
                 uploadInfo()

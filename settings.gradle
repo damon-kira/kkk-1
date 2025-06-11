@@ -33,7 +33,7 @@ rootProject.name = "A1"
 include ':app'
 include ':common'
 include ':camera'
-include ':datepicker'
+//include ':datepicker'
 //include ':analysis'
 
 if (isModule.toBoolean()) {

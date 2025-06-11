@@ -63,7 +63,7 @@ data class NavItem(
     fun newInstance(args: Bundle? = null): Fragment? {
         return fragmentClass?.run {
             try {
-                newInstance().apply {
+                getDeclaredConstructor().newInstance().apply {
                     args?.let { arguments = it }
                 }
             } catch (e: Exception) {

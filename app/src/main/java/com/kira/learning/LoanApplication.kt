@@ -12,6 +12,8 @@ import com.kira.learning.app.AppEnv
 import com.kira.learning.module.python.PythonExecutor
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
+import org.conscrypt.Conscrypt
+import java.security.Security
 
 
 @HiltAndroidApp
@@ -38,6 +40,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
         PythonExecutor.initialize(this)
+        Security.insertProviderAt(Conscrypt.newProvider(), 1)
     }
 
 //    private fun initLeakCanary() {

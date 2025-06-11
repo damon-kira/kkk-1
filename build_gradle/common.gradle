@@ -23,8 +23,8 @@ rootProject.ext {
             lifecycle_runtime    : "androidx.lifecycle:lifecycle-runtime-ktx:${version.lifecycle}", // 生命周期管理
             lifecycle_livedataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${version.lifecycle}", // LiveData扩展
             livedata_viewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${version.lifecycle}", // ViewModel扩展
-            coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0', // 协程支持
-            fragment             : 'androidx.fragment:fragment:1.2.5',
+            coroutines_android   : 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3', // 协程支持
+            fragment             : 'androidx.fragment:fragment:1.6.2',
             annotation           : 'androidx.annotation:annotation:1.1.0'
     ]
 
@@ -55,9 +55,10 @@ rootProject.ext {
             retrofit           : "com.squareup.retrofit2:retrofit:${version.retrofit}", // 网络请求框架
             adapter_rxjava3    : "com.squareup.retrofit2:adapter-rxjava3:${version.retrofit}", // RxJava适配器
             converter_gson     : "com.squareup.retrofit2:converter-gson:${version.retrofit}", // Gson转换器
-            gson               : "com.google.code.gson:gson:2.8.6", // JSON序列化
-            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:3.12.0", // 网络日志
-            okhttp             : "com.squareup.okhttp3:okhttp:3.12.6" // 底层网络库
+            gson               : "com.google.code.gson:gson:2.10.1", // JSON序列化
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:4.10.0", // 网络日志
+            okhttp             : "com.squareup.okhttp3:okhttp:4.10.0", // 底层网络库
+            conscrypt          : "org.conscrypt:conscrypt-android:2.5.2" // 安全提供者
     ]
 
     permission = [
@@ -82,7 +83,7 @@ rootProject.ext {
             messaging  : "com.google.firebase:firebase-messaging-ktx", // 推送
             analytics  : "com.google.firebase:firebase-analytics-ktx", // 分析
             crashlytics: "com.google.firebase:firebase-crashlytics-ktx", // 崩溃报告
-            bom        : "com.google.firebase:firebase-bom:32.8.0" // 统一管理Firebase版本
+            bom        : "com.google.firebase:firebase-bom:31.5.0" // 统一管理Firebase版本
     ]
 
     facebook = [

@@ -177,7 +177,7 @@ class MCLCManager {
 
                 isUploadComplete = true
                 if (response?.isSuccessful == true) {
-                    response.body()?.string()?.let { body ->
+                    response.body?.string()?.let { body ->
                         var code = -111
                         try {
                             val desBody = AESNormalUtil.mexicoDecrypt(body, false)

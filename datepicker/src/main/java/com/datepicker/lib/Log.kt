@@ -1,22 +1,26 @@
-package com.datepicker.lib;
+package com.datepicker.lib
 
-public class Log {
-    private static final String TAG = "MDatePicker";
-    private static final boolean debug = false;
+import android.util.Log
 
-    public static void i(String tag, String msg) {
+object Log {
+    private const val TAG = "MDatePicker"
+    private const val debug = false
+
+    @JvmStatic
+    fun i(tag: String?, msg: String?) {
         if (debug) {
-            android.util.Log.i(TAG, tag + " > " + msg);
+            Log.i(TAG, "$tag > $msg")
         }
     }
 
-    public static void e(String tag, String msg) {
-        android.util.Log.e(TAG, tag + " > " + msg);
+    fun e(tag: String?, msg: String?) {
+        Log.e(TAG, "$tag > $msg")
     }
 
-    public static void w(String tag, String msg) {
+    @JvmStatic
+    fun w(tag: String?, msg: String?) {
         if (debug) {
-            android.util.Log.w(TAG, tag + " > " + msg);
+            Log.w(TAG, "$tag > $msg")
         }
     }
 }

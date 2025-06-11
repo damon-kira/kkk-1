@@ -8,7 +8,4 @@
     android:orientation="vertical"
     android:paddingBottom="8dp">
 
-    <com.steve28.stedit.SteditField>
-
-    </com.steve28.stedit.SteditField>
 </LinearLayout>

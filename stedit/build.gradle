@@ -40,10 +40,6 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.compose.compose_ui
-    implementation rootProject.ext.compose.compose_material
-    implementation rootProject.ext.compose.compose_runtime
-    debugImplementation rootProject.ext.compose.compose_uitooling
 
     implementation project(':common')
 }

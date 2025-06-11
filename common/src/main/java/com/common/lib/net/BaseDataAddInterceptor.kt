@@ -23,7 +23,7 @@ class BaseDataAddInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
-        val method = request.method().toUpperCase(Locale.ROOT).trim()
+        val method = request.method.uppercase(Locale.ROOT).trim()
         //post 请求加密处理
         if (method == "POST") {
             request = buildBaseDataRequest(request)
@@ -35,7 +35,7 @@ class BaseDataAddInterceptor : Interceptor {
 
     private fun buildBaseDataRequestGet(req: Request) : Request {
         var request = req
-        val url = request.url().toString()
+        val url = request.url.toString()
         logger_d(TAG, "43:buildBaseDataRequestGet: reqeust url = $url")
         if (url.contains("data=")) {
             var reqDataNew: String? = ""
@@ -79,7 +79,7 @@ class BaseDataAddInterceptor : Interceptor {
     private fun buildBaseDataRequest(req: Request): Request {
         var request = req
         var charset = Charset.forName("UTF-8")
-        val requestBody = request.body()
+        val requestBody = request.body
 
         var requestData = ""
         var contentType: MediaType? = null
@@ -88,7 +88,7 @@ class BaseDataAddInterceptor : Interceptor {
             logger_i(TAG,"contentType $contentType ")
             contentType?.let {
                 charset = it.charset(charset)
-                if (it.type().toLowerCase() == "multipart") {
+                if (it.type.lowercase() == "multipart") {
                     return request
                 }
             }
@@ -126,7 +126,7 @@ class BaseDataAddInterceptor : Interceptor {
             //根据请求方式构建相应的请求
             request = newRequestBuilder.post(newRequestBody).build()
         } catch (e: Exception) {
-            logger_e(TAG, "${request.url()} buildBaseDataRequest error：${e.message}")
+            logger_e(TAG, "${request.url} buildBaseDataRequest error：${e.message}")
         }
 
         return request

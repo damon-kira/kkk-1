@@ -5,6 +5,8 @@ import com.util.lib.AppUtil
 import com.util.lib.SysUtils
 import com.util.lib.log.isDebug
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -20,9 +22,8 @@ internal object NetWorkManager {
     }
 
     private fun createRequest(bigDataInfo: String, remoteUrl: String): Call {
-        val body = RequestBody.create(
-            MediaType.parse("application/json; charset=utf-8"),
-            bigDataInfo
+        val body = bigDataInfo.toRequestBody(
+            "application/json; charset=utf-8".toMediaType()
         )
         val okHttpClient = OkHttpClient.Builder().connectTimeout(45, TimeUnit.SECONDS)
             .readTimeout(45, TimeUnit.SECONDS)
@@ -73,7 +74,7 @@ internal object NetWorkManager {
             builder.addHeader("kio8YGhwe6", "Xs8jKf5LmN")// 固定值
             builder.addHeader("Content-type", "application/json;charset=utf-8")
         }
-        builder.method(original.method(), original.body())
+        builder.method(original.method, original.body)
         chain.proceed(builder.build())
     }
 

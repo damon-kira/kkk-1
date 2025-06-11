@@ -1,18 +1,21 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
 android {
     namespace 'com.manu.mdatepicker'
     compileSdk rootProject.ext.version.compileSdk
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk
-        versionCode 1
-        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     buildFeatures {
@@ -28,7 +31,5 @@ android {
 }
 
 dependencies {
-    implementation rootProject.ext.android.kotlin_stdlib
-    implementation rootProject.ext.android.core_ktx
-    implementation rootProject.ext.android.appcompat
+    implementation project(':common')
 }

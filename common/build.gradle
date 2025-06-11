@@ -68,6 +68,7 @@ dependencies {
     api rootProject.ext.retrofit.gson
     api rootProject.ext.retrofit.logging_interceptor
     api rootProject.ext.retrofit.okhttp
+    api rootProject.ext.retrofit.conscrypt
 
     //glide
     api rootProject.ext.glide.glide
@@ -79,4 +80,11 @@ dependencies {
 //    implementation rootProject.ext.other.userBehavior
     implementation rootProject.ext.other.aes
     implementation rootProject.ext.other.cache
+
+    //compose 同时支持xml和compose 自定义需求高的用xml
+    api rootProject.ext.compose.compose_ui
+    api rootProject.ext.compose.compose_material
+    api rootProject.ext.compose.compose_runtime
+    api rootProject.ext.compose.compose_activity
+    debugApi rootProject.ext.compose.compose_uitooling
 }

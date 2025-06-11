@@ -25,12 +25,12 @@ class DecryptInterceptor : Interceptor {
 
     private fun buildDecryptResponse(request: Request, res: Response): Response {
         var response = res
-        response.body()?.use {
+        response.body?.use {
             val contentType = it.contentType()
             val charset = contentType?.charset(utf8) ?: utf8
             val source = it.source().apply { request(Long.MAX_VALUE) }
-            val body = source.buffer().clone().readString(charset)
-            logger_i(TAG, "${request.url()}  body = $body")
+            val body = source.buffer.clone().readString(charset)
+            logger_i(TAG, "${request.url}  body = $body")
             var newResponseBody: ResponseBody = it
             try {
 //                val jsonObject = JSONObject(body)
@@ -47,8 +47,8 @@ class DecryptInterceptor : Interceptor {
 //                    newResponseBody = ResponseBody.create(contentType, obj.toString())
 //                }
                 val decrypt = AESNormalUtil.mexicoDecrypt(body, false)
-                logger_d(TAG,"解密后 decrypt = $decrypt")
-                newResponseBody = ResponseBody.create(contentType, decrypt)
+                logger_d(TAG, "解密后 decrypt = $decrypt")
+                newResponseBody = ResponseBody.create(contentType, decrypt ?: "")
                 response = response.newBuilder().body(newResponseBody).build()
 
             } catch (e: Exception) {

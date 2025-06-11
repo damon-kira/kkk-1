@@ -3,6 +3,7 @@ package com.kira.learning.module.navigation
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -28,7 +29,6 @@ import com.kira.learning.module.home.MainActivity
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.jvm.java
 
 
 /**
@@ -275,7 +275,10 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout11.let {
             it.tvDemoName.text = "崩溃"
             it.tvBtn.setOnClickListener {
-                throw RuntimeException("Test Crash") // Force a crash
+//                throw RuntimeException("Test Crash") // Force a crash
+                val testNum = 100
+//                val result = 100 / 0 // 这行代码会导致崩溃
+                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
             }
         }
     }

@@ -9,9 +9,9 @@ class OneShotResponseObserver<T>(
     private val data: LiveData<BaseResponse<T>>,
     private val changedFn: (BaseResponse<T>?) -> Unit
 ) : Observer<BaseResponse<T>> {
-    override fun onChanged(response: BaseResponse<T>?) {
+    override fun onChanged(value: BaseResponse<T>) {
         data.removeObserver(this)
-        changedFn(response)
+        changedFn(value)
     }
 }
 
@@ -19,9 +19,9 @@ class OneShotObserver<T>(
     private val data: LiveData<T>,
     private val changedFn: (T?) -> Unit
 ) : Observer<T> {
-    override fun onChanged(response: T?) {
+    override fun onChanged(value: T) {
         data.removeObserver(this)
-        changedFn(response)
+        changedFn(value)
     }
 }
 

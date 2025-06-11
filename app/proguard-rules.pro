@@ -34,6 +34,9 @@
 -dontwarn android.support.v7.**
 -dontwarn de.greenrobot.event.**
 
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+
 -keepclassmembers public class * extends android.view.View {*;}
 
 -keepclasseswithmembernames class * {
@@ -141,6 +144,23 @@
 #}
 # for appsflyer sdk end
 
+# 保留序列化相关的类
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+# 保留注解
+-keep @interface *
+
+# 保留通过反射调用的类
+-keep class **.R$* { *; }
+-keep class **.R$*$* { *; }
+
 -dontwarn com.google.android.gms.**
 
 #viewbinding
@@ -193,11 +213,44 @@
 -dontnote retrofit2.Platform$IOS$MainThreadExecutor
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Exceptions
+-keep class retrofit2.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
 
 # OkHttp3
 -dontwarn okhttp3.logging.**
--keep class okhttp3.internal.**{*;}
 -dontwarn okio.**
+-keep class okhttp3.** { *; }
+-keep class okhttp3.internal.**{*;}
+-keep interface okhttp3.** { *; }
+-keep class okhttp3.internal.platform.* { *; }
+-keepclassmembers class okhttp3.internal.platform.* { *; }
+-keepclassmembers class okhttp3.internal.platform.* {
+    *;
+}
+# ======= Conscrypt 保留规则 =======
+-keep class org.conscrypt.** { *; }
+-keep class com.android.org.conscrypt.** { *; }
+-keep interface org.conscrypt.** { *; }
+-dontwarn org.conscrypt.**
+
+# ======= BouncyCastle 保留规则 =======
+-keep class org.bouncycastle.** { *; }
+-keep interface org.bouncycastle.** { *; }
+-dontwarn org.bouncycastle.**
+
+# ======= OpenJSSE 保留规则 =======
+-keep class org.openjsse.** { *; }
+-dontwarn org.openjsse.**
+
+# ======= 系统级 SSL 实现 =======
+-keep class org.apache.harmony.xnet.provider.jsse.** { *; }
+-dontwarn org.apache.harmony.xnet.provider.jsse.**
+
+# Gson
+-keep class com.google.gson.** { *; }
+-keep class com.google.gson.stream.** { *; }
 
 # RxJava RxAndroid
 -dontwarn sun.misc.**
