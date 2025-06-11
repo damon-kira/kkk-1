@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.kira.learning.bean.ChatMessage
+import com.kira.learning.bean.db.ChatMessage
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,5 +1,7 @@
 package com.kira.learning.bean
 
+import com.kira.learning.bean.db.ChatMessage
+
 class Conversation //this.conversationId = conversationId;
     (// 设置一个随机数
     var conversationId: Long, // 设置为当前时间

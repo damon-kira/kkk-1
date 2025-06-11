@@ -31,7 +31,7 @@ class RspCertProcessInfo {
         } else STEP_OK
     }
 
-    fun isAllSuccess():Boolean {
+    fun isAllSuccess(): Boolean {
         return getProcessType() == STEP_OK
     }
 }

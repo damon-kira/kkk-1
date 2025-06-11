@@ -1,7 +1,7 @@
 package com.kira.learning.net
 
 import com.kira.learning.bean.resp.*
-import com.kira.learning.bean.AIResponseInfo
+import com.kira.learning.bean.db.AIResponseInfo
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.bean.QuestionProcessInfo
 import com.kira.learning.bean.QuizInfo

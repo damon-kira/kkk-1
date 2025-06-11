@@ -4,7 +4,7 @@ import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.AIResponseInfo
+import com.kira.learning.bean.db.AIResponseInfo
 import javax.inject.Inject
 
 class AIChatRepository @Inject constructor() : BaseRepository() {

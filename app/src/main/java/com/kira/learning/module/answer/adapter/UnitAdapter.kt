@@ -1,4 +1,4 @@
-package com.kira.learning.module.answer
+package com.kira.learning.module.answer.adapter
 
 import android.graphics.Color
 import android.util.TypedValue
@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
+import com.kira.learning.module.answer.CourseUnit
 
 class UnitAdapter(private val items: List<CourseUnit>) :
     RecyclerView.Adapter<UnitAdapter.UnitViewHolder>() {
@@ -35,7 +36,7 @@ class UnitAdapter(private val items: List<CourseUnit>) :
 
         fun bind(unit: CourseUnit) {
             titleText.text = unit.title
-            
+
             // 动态生成技能条目
             skillsContainer.removeAllViews()
             unit.skills.forEach { skill ->
@@ -58,8 +59,8 @@ class UnitAdapter(private val items: List<CourseUnit>) :
         }
 
         private fun Int.dpToPx() = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, 
-            this.toFloat(), 
+            TypedValue.COMPLEX_UNIT_DIP,
+            this.toFloat(),
             itemView.context.resources.displayMetrics
         ).toInt()
     }

@@ -12,7 +12,6 @@ import com.kira.learning.app.getAppContext
 import com.kira.learning.bean.PhoneAndName
 import com.kira.learning.manager.ObtainContactAgent.Companion.REQ_CONTACT_CODE
 
-
 private typealias ContactCallback = (resultCode: Int, data: PhoneAndName?) -> Unit
 
 object ContactObtainHelper {

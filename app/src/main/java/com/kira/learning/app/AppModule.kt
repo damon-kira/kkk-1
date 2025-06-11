@@ -17,32 +17,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    //    @Provides
-//    fun bindFloatingViewModel(floatingRepository: FloatingRepository): FloatingViewModel {
-//        return FloatingViewModel(floatingRepository)
-//    }
-//
-//    @Provides
-//    fun bindFloatingRepository(apiService: ApiService): FloatingRepository {
-//        return FloatingRepository(apiService)
-//    }
-
-//    @Provides
-//    @Singleton
-//    fun provideChatDao(appDatabase: AppDatabase): ChatDao {
-//        return appDatabase.chatDao()
-//    }
-
-//    @Provides
-//    @Singleton
-//    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-//        return Room.databaseBuilder(
-//            context,
-//            AppDatabase::class.java,
-//            "chat_database"
-//        ).build()
-//    }
-
     // 提供数据库实例
     @Provides
     @Singleton
@@ -64,6 +38,7 @@ class AppModule {
     fun provideAIResponseDao(database: AppDatabase): AIResponseDao {
         return database.aiResponseDao()
     }
+
     @Provides
     fun provideChatDao(database: AppDatabase): ChatDao {
         return database.chatDao()

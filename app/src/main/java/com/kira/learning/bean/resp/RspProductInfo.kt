@@ -3,7 +3,7 @@ package com.kira.learning.bean.resp
 import com.kira.learning.expand.transform
 
 class RspProductInfo {
-    val yqGhrjOF2: String? = null // 最高可借金额，实际仪表金额，仪表金额
+    val yqGhrjOF2: String? = null
         get() = field?.transform()
     val HyulExS1ei: String? = null //客户名字
     val cusTell: String? = null //客户号码
@@ -12,22 +12,11 @@ class RspProductInfo {
     val EqyO: String = "1"// 客户类型 1 :新客户 0 老客户 2 被拉黑客户
     val Wg5u: String? = null //客户类型 A :正常用户 G:谷歌审查用户
 
-    // 状态 00：新用户确定额度,
-    // 01：订单审核中
-    // 02：待仪表,
-    // 03:逾期,
-    // 04:拒单，
-    // 05：认证未通过，新用户起始页，
-    // 06:被拒到期
-    // 07:复借客户没有待还订单、未确定订单
-    // 08：复借客户有待还订单，没有待确定订单
-    // 09：复借客户没有待还订单，有待确定订单
-    // 10：复借客户既有待还订单也有待确定订单
     var xXkO: String = "05"
     val vzXq3u: String? = null// 仪表日期
     val y5MbVG: Int = 0// 总期数
-    val y7GxqEUf: Int = 0// 当前期数
-    val v3ItXF: Int = 0 // 逾期天数
+    val y7GxqEUf: Int = 0
+    val v3ItXF: Int = 0
     val K1v0Pz: String? = null// 下一次申请时间
     val A04fSYQdHM: Int = 0// 最大勾选笔数
     val yMiEwn3: String? = null 
@@ -37,7 +26,7 @@ class RspProductInfo {
     val GqGV3L: Int = 1// 倒计时开关 1 开 0 关
     val fyEV: ArrayList<FirstConfirmInfo>? = null
     val jBRR: ArrayList<RepeatProductInfo>? = null // 老客户首页
-    val gQ1J: RepeatRepayInfo? = null // 老客户待还
+    val gQ1J: RepeatRepayInfo? = null
     val Jg4g2: ArrayList<RepeatWaitConfirmInfo>? = null // 老客户待确认列表
     val RdJ7nJ: String? = null // y3 新增字段
 

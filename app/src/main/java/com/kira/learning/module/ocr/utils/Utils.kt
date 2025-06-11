@@ -3,9 +3,6 @@ package com.kira.learning.module.ocr.utils
 import android.content.Context
 import android.util.DisplayMetrics
 
-/**
- * Created by Administrator on 2016/12/8.
- */
 object Utils {
     fun getScreenWH(context: Context): DisplayMetrics? {
         var dMetrics: DisplayMetrics? = DisplayMetrics()

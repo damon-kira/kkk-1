@@ -15,7 +15,7 @@ abstract class SearchAdapter<T>(@NotNull private val items: ArrayList<T>, layout
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint.toString()
                 val list: ArrayList<T> = arrayListOf()
-                if (charString.isNullOrEmpty()) {
+                if (charString.isEmpty()) {
                     list.addAll(items)
                 } else {
                     for (str in items) {

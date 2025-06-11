@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.AIResponseInfo
+import com.kira.learning.bean.db.AIResponseInfo
 import com.kira.learning.bean.QuestionProcessInfo
 import javax.inject.Inject
 

@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
+
 import com.kira.learning.BuildConfig;
+
 import java.lang.reflect.Field;
 
 public class UtilUI {
@@ -21,10 +23,6 @@ public class UtilUI {
      * @return 状态栏高度
      */
     public int getBarHeight(Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            barHeight = 0;
-        }
-
         if (barHeight == -1) {
             Class<?> c = null;
             Object obj = null;
@@ -104,15 +102,16 @@ public class UtilUI {
 
     /**
      * 检查webview是否可用
+     *
      * @return
      */
     public static boolean isWebviewValid(Context context) {
-        if(context == null)
+        if (context == null)
             throw new IllegalArgumentException("context can't be null !!");
         try {
             WebView webView = new WebView(context);
         } catch (Exception e) {
-            if(BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG) {
                 throw e;
             }
 //            CrashManager.reportException(e);

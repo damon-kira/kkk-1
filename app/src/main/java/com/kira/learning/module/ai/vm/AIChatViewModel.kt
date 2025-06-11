@@ -8,8 +8,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.AIResponseInfo
-import com.kira.learning.bean.ChatMessage
+import com.kira.learning.bean.db.AIResponseInfo
+import com.kira.learning.bean.db.ChatMessage
 import com.kira.learning.db.dao.AIResponseDao
 import com.kira.learning.db.dao.ChatMessageDao
 import com.kira.learning.module.ai.repo.AIChatRepository

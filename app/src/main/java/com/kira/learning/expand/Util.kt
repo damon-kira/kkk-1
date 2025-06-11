@@ -12,7 +12,7 @@ import com.kira.learning.LoanApplication.Companion.getAppContext
  * 是否是小米手机
  */
 inline fun isXiaomi(): Boolean {
-    return Build.BRAND.toUpperCase() == "XIAOMI"
+    return Build.BRAND.uppercase() == "XIAOMI"
 }
 
 fun copyClick(copyText: String) {

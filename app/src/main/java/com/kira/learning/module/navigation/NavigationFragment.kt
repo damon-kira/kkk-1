@@ -1,16 +1,13 @@
 package com.kira.learning.module.navigation
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.appcompat.widget.PopupMenu
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.helper.FragmentHelper
@@ -278,7 +275,8 @@ class NavigationFragment : BaseHomeFragment() {
 //                throw RuntimeException("Test Crash") // Force a crash
                 val testNum = 100
 //                val result = 100 / 0 // 这行代码会导致崩溃
-                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
+//                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
+                Launch.skipKycInfoActivity(getSupportContext())
             }
         }
     }

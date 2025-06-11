@@ -1,6 +1,5 @@
 package com.kira.learning.camera;
 
-
 public class UtilBox {
 
     /**

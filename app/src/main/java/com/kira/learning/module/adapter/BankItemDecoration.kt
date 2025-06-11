@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
 import com.kira.learning.bean.SearchInfo
 import com.util.lib.dp
+
 //import me.jessyan.autosize.utils.AutoSizeUtils.dp2px
 //import me.jessyan.autosize.utils.AutoSizeUtils.sp2px
 
@@ -39,7 +40,7 @@ class BankItemDecoration(
         mTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mTextPaint.color =
             ContextCompat.getColor(context, R.color.color_FF989898)
-        mTextPaint.textSize =  12f
+        mTextPaint.textSize = 12f
 
         mTitleHeight = 28
         mHotTitleHeigh = 40
@@ -148,7 +149,7 @@ class BankItemDecoration(
                 drawText(
                     canvas = c,
                     text = text,
-                    x =16f,
+                    x = 16f,
                     y = (child.top - (mTitleHeight / 2 - rect.height() / 2)).toFloat(),
                     paint = mTextPaint
                 )

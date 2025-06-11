@@ -14,7 +14,7 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
-import com.kira.learning.bean.ChatMessage
+import com.kira.learning.bean.db.ChatMessage
 import com.kira.learning.bean.Conversation
 import com.kira.learning.databinding.ActivityAiimBinding
 import com.kira.learning.expand.RandomCID

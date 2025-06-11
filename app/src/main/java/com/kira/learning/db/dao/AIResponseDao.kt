@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import com.kira.learning.bean.AIResponseInfo
+import com.kira.learning.bean.db.AIResponseInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

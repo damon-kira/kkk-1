@@ -35,7 +35,11 @@ object ContactHelper {
      * @param isFormat true:返回手机号不包含 +52  name：最长不能超过30位
      */
     @JvmStatic
-    fun queryContactInfo(context: Context, mobile: String, isFormat: Boolean = false): PhoneAndName {
+    fun queryContactInfo(
+        context: Context,
+        mobile: String,
+        isFormat: Boolean = false
+    ): PhoneAndName {
         val uri = Uri.parse("content://com.android.contacts/data/phones/filter/$mobile")
         var contact = queryContact(context, uri)
         if (isFormat) {
@@ -82,7 +86,6 @@ object ContactHelper {
         contact.name = name.orEmpty()
         return contact
     }
-
 
     private fun parsingName(name: String): String {
         if (name.length < NAME_LENGTH) {
