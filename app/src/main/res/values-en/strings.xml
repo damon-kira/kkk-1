@@ -280,8 +280,8 @@
     <string name="email_error_hint">未找到邮箱APP</string>
 
     <string name="setting_title">Sistema</string>
-    <string name="delete_data">Borrar datos</string>
-    <string name="logout">Cerrar Sesión</string>
+    <string name="delete_data">Clean Data</string>
+    <string name="logout">Log Out</string>
     <string name="delete_hint_title">Consejos amables</string>
     <string name="delete_hint">Vaciaremos todos tus datos, ¿estás seguro?</string>
     <string name="delete_btn">Confirmar extensión</string>
@@ -375,4 +375,5 @@
     <string name="expandable_card_view_icon_content_description">Card icon</string>
 
     <string name="test_inter">国际化-English</string>
+    <string name="test">Test</string>
 </resources>

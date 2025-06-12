@@ -35,7 +35,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import com.kira.learning.R
 
-
+/**
+ * 身份信息
+ */
 @AndroidEntryPoint
 class KycInfoActivity : BaseProcessActivity(), View.OnClickListener {
 

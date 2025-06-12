@@ -18,6 +18,9 @@ import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 银行信息录入（第三部）
+ */
 @AndroidEntryPoint
 class BankInfoActivity : BaseProcessActivity() {
 

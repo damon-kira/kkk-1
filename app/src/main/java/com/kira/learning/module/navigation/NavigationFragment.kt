@@ -275,8 +275,7 @@ class NavigationFragment : BaseHomeFragment() {
 //                throw RuntimeException("Test Crash") // Force a crash
                 val testNum = 100
 //                val result = 100 / 0 // 这行代码会导致崩溃
-//                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
-                Launch.skipKycInfoActivity(getSupportContext())
+                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
             }
         }
     }

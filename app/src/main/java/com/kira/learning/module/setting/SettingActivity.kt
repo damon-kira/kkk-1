@@ -2,20 +2,21 @@ package com.kira.learning.module.setting
 
 import android.graphics.Color
 import android.os.Bundle
+import com.common.lib.base.BaseActivity
+import com.common.lib.expand.setBlockingOnClickListener
+import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
+import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivitySettingBinding
 import com.kira.learning.dialog.LogoutDialog
+import com.kira.learning.dialog.RetentionDialog
 import com.kira.learning.expand.ShowErrorMsg
 import com.kira.learning.expand.setLogout
 import com.kira.learning.expand.toast
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.permission.HintDialog
-import com.common.lib.base.BaseActivity
-import com.common.lib.expand.setBlockingOnClickListener
-import com.common.lib.livedata.LiveDataBus
-import com.common.lib.livedata.observerNonSticky
-import com.common.lib.viewbinding.binding
 import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,10 @@ class SettingActivity : BaseActivity() {
             LogoutDialog(this).setLogoutListener {
                 mViewModel.logout()
             }.show()
+        }
+
+        mBinding.tvTest.setOnClickListener {
+            RetentionDialog(this).show()
         }
 
         mViewModel.mLogoutLivedata.observerNonSticky(this) {

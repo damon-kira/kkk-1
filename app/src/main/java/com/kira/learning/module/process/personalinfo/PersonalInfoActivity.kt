@@ -20,6 +20,9 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 信息录入（第一步，底部Dialog）
+ */
 @AndroidEntryPoint
 class PersonalInfoActivity : BaseProcessActivity(), View.OnClickListener {
 

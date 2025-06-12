@@ -26,6 +26,9 @@ import com.util.lib.isHide
 import com.util.lib.show
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 联系人选择（第二部）
+ */
 @AndroidEntryPoint
 class ContactInfoActivity : BaseProcessActivity(), View.OnClickListener {
 

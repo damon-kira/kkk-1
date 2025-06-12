@@ -50,4 +50,20 @@
         android:textSize="14sp"
         app:drawableRightCompat="@drawable/svg_arrow_right" />
 
+    <TextView
+        android:id="@+id/tv_test"
+        style="@style/marginLeftAndRight16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_10dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="22dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="22dp"
+        android:text="@string/test"
+        android:textColor="#FF666666"
+        android:textSize="14sp"
+        app:drawableRightCompat="@drawable/svg_arrow_right" />
+
 </LinearLayout>
