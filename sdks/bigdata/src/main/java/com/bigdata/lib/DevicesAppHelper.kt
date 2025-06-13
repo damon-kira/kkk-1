@@ -34,7 +34,8 @@ object DevicesAppHelper {
                     jsonObject.addProperty("pkgname", it.packageName)//应用包名
                     jsonObject.addProperty(
                         "appname",
-                        packageManager.getApplicationLabel(it.applicationInfo).toString()
+                        it.applicationInfo?.let { info -> packageManager.getApplicationLabel(info) }
+                            .toString()
                     )//app名
                     jsonObject.addProperty(
                         "installtime",
@@ -83,7 +84,7 @@ object DevicesAppHelper {
                 info = AppInfo()
                 info.KkXYU = it.packageName
                 info.nY9jdxtbN =
-                    packageManager.getApplicationLabel(it.applicationInfo).toString() //app名
+                    it.applicationInfo?.let { it1 -> packageManager.getApplicationLabel(it1) }.toString() //app名
 //                info.kT2wAsVN =
 //                    time2Str(it.firstInstallTime, locale = Locale.getDefault()) //本地安装时间
 //                info.installtime_utc = utcTimeToStr(it.firstInstallTime) //utc 安装时间

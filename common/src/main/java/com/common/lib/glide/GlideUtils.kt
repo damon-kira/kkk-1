@@ -172,7 +172,7 @@ object GlideUtils {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: Target<Bitmap>?,
+                    target: Target<Bitmap?>,
                     isFirstResource: Boolean
                 ): Boolean {
                     MainHandler.post {
@@ -182,17 +182,16 @@ object GlideUtils {
                 }
 
                 override fun onResourceReady(
-                    resource: Bitmap?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    dataSource: DataSource?,
+                    resource: Bitmap,
+                    model: Any,
+                    target: Target<Bitmap?>?,
+                    dataSource: DataSource,
                     isFirstResource: Boolean
                 ): Boolean {
                     MainHandler.post {
                         resultSuccess(resource)
                     }
                     return true
-
                 }
             }).submit()
     }

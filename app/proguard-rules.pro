@@ -37,7 +37,11 @@
 -keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
 
+-keepclassmembers class android.view.View { *; }
+-keepclassmembers class android.widget.TextView { *; }
 -keepclassmembers public class * extends android.view.View {*;}
+-keepclassmembers public class * extends android.view.ViewGroup {*;}
+-keep class androidx.appcompat.widget.** { *; }
 
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -127,6 +131,13 @@
     public static int d(...);
     public static int e(...);
 }
+# ======== 解决 AppCompatTextView 冲突 ========
+
+# 保留 AppCompatTextView 类及其所有成员
+-keep class androidx.appcompat.widget.AppCompatTextView { *; }
+# 防止相关的继承链优化问题
+-dontoptimize
+-dontshrink
 -keepattributes JavascriptInterface
 -keepattributes EnclosingMethod
 #-dontobfuscate
@@ -263,6 +274,20 @@
 }
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# SVG 支持
+-keep class com.caverock.androidsvg.** { *; }
+-dontwarn com.caverock.androidsvg.**
+
+# GIF 支持
+-keep class pl.droidsonroids.gif.** { *; }
+-dontwarn pl.droidsonroids.gif.**
+
+# Markwon 核心保留
+-keep class io.noties.markwon.** { *; }
+-keepclasseswithmembers class * {
+    @io.noties.markwon.core.SpanFactory <methods>;
 }
 # RxPermission
 -keep class com.tbruyelle.rxpermissions2.* {

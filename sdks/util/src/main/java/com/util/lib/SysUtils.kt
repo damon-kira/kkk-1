@@ -10,8 +10,10 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
+import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
+import com.aes.lib.BuildConfig
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -23,6 +25,7 @@ object SysUtils {
     private const val TAG = "debug_SysUtils"
     private var sDeviceId: String? = null
 
+    @RequiresPermission("android.permission.READ_PRIVILEGED_PHONE_STATE")
     fun getAllImei(context: Context): List<String> {
         if (Build.VERSION.SDK_INT >= 29) { // 无论是否有权限，都会报SecurityException
             return arrayListOf()
@@ -38,7 +41,11 @@ object SysUtils {
                     val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
                     val phoneCount = tm.phoneCount
                     for (index in 0 until phoneCount) {
-                        val imei = tm.getImei(index)
+                        val imei = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            tm.getImei(index)
+                        } else {
+                            ""
+                        }
                         if (imei.isNullOrEmpty()) {
                             continue
                         }
@@ -106,7 +113,7 @@ object SysUtils {
                 val sm =
                     context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
                 val list = sm.activeSubscriptionInfoList
-                list.take(2).forEachIndexed { index, item ->
+                list?.take(2)?.forEachIndexed { index, item ->
                     val number = getRealMobile(item.number)
                     if (number.isNotEmpty()) {
                         arrays.add(number)

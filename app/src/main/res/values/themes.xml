@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
@@ -12,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
+        <!-- 禁用系统保留区域 -->
+        <item name="android:fitsSystemWindows">false</item>
+        <!-- 确保内容延伸到导航栏后方 -->
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

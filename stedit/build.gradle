@@ -31,7 +31,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion rootProject.ext.version.compose
+        kotlinCompilerExtensionVersion = rootProject.ext.version.compose
     }
 
     kotlinOptions {

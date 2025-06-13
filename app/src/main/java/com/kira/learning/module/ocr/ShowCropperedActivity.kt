@@ -18,6 +18,7 @@ import com.googlecode.tesseract.android.TessBaseAPI
 import com.kira.learning.R
 import com.kira.learning.module.ocr.utils.Utils
 import com.common.lib.base.BaseActivity
+import androidx.core.net.toUri
 
 /**
  * 显示截图结果
@@ -71,16 +72,16 @@ class ShowCropperedActivity : BaseActivity() {
         if (width != 0 && height != 0) {
             val screenWidth: Int = Utils.getWidthInPx(this)
             val scale = screenWidth.toFloat() / width.toFloat()
-            val lp = imageView!!.getLayoutParams()
+            val lp = imageView!!.layoutParams
             val imgHeight = (scale * height).toInt()
             lp.height = imgHeight
             imageView!!.setLayoutParams(lp)
             Log.e(
                 ShowCropperedActivity.Companion.TAG,
-                "imageView.getLayoutParams().width:" + imageView!!.getLayoutParams().width
+                "imageView.getLayoutParams().width:" + imageView!!.layoutParams.width
             )
         }
-        imageView!!.setImageURI(Uri.parse(path))
+        imageView!!.setImageURI(path?.toUri())
     }
 
     private fun initTess() {

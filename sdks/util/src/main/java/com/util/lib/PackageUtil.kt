@@ -99,11 +99,11 @@ object PackageUtil {
     }
 
     private fun isSystemApp(pInfo: PackageInfo): Boolean {
-        return pInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
+        return pInfo.applicationInfo?.flags?.and(ApplicationInfo.FLAG_SYSTEM) != 0
     }
 
     private fun isSystemUpdateApp(pInfo: PackageInfo): Boolean {
-        return pInfo.applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0
+        return pInfo.applicationInfo?.flags?.and(ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
     }
 
     /**

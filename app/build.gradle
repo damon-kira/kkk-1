@@ -64,7 +64,7 @@ android {
         buildConfig true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion rootProject.ext.version.compose
+        kotlinCompilerExtensionVersion = rootProject.ext.version.compose
     }
     signingConfigs {
         release {
@@ -173,11 +173,6 @@ dependencies {
     // rxjava3.0
     implementation rootProject.ext.rxjava.rxandroid
     implementation rootProject.ext.rxjava.rxjava
-
-    //markwon AI对话专用
-    implementation rootProject.ext.markwon.core
-    implementation rootProject.ext.markwon.image
-    implementation rootProject.ext.markwon.image_glide
 
     // room
     implementation rootProject.ext.room.room_runtime

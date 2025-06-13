@@ -3,7 +3,9 @@ package com.util.lib
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
+import com.aes.lib.BuildConfig
 import com.cache.lib.SharedPrefGlobal
 import java.io.DataInputStream
 
@@ -24,11 +26,15 @@ object AppUtil {
         return null
     }
 
-    fun getVersionCode(context: Context, pkgName: String): Int {
-        var versionCode = 1
+    fun getVersionCode(context: Context, pkgName: String): Long {
+        var versionCode = 1L
         val pkgInfo = getAppPackageInfo(context, pkgName)
         if (pkgInfo != null) {
-            versionCode = pkgInfo.versionCode
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                pkgInfo.longVersionCode  // API 28+ 推荐方式
+            } else {
+                pkgInfo.versionCode.toLong()  // 旧API保持兼容
+            }
         }
         return versionCode
     }
@@ -37,7 +43,7 @@ object AppUtil {
         var versionName = ""
         val pkgInfo = getAppPackageInfo(context, pkgName)
         if (pkgInfo != null) {
-            versionName = pkgInfo.versionName
+            versionName = pkgInfo.versionName.toString()
         }
         return versionName
     }

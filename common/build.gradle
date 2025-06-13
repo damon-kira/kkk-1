@@ -36,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = rootProject.ext.version.compose
+    }
 }
 
 dependencies {
@@ -47,6 +51,9 @@ dependencies {
     api rootProject.ext.android.appcompat
     api rootProject.ext.view.constraintlayout
     api rootProject.ext.android.coroutines_android
+
+    api rootProject.ext.view.svg
+    api rootProject.ext.view.gif
 
     implementation rootProject.ext.view.recyclerview
 
@@ -82,9 +89,15 @@ dependencies {
     implementation rootProject.ext.other.cache
 
     //compose 同时支持xml和compose 自定义需求高的用xml
+    api platform(rootProject.ext.compose.bom)
     api rootProject.ext.compose.compose_ui
     api rootProject.ext.compose.compose_material
     api rootProject.ext.compose.compose_runtime
     api rootProject.ext.compose.compose_activity
     debugApi rootProject.ext.compose.compose_uitooling
+
+    //markwon AI对话专用
+    api rootProject.ext.markwon.core
+    api rootProject.ext.markwon.image
+    api rootProject.ext.markwon.image_glide
 }

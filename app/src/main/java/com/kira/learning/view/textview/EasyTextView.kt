@@ -17,10 +17,6 @@ import com.util.lib.shape.ShapeStyle
 import com.util.lib.span.SpannableImpl
 import androidx.core.graphics.withTranslation
 
-/**
- * Create by weishl
- * 2022/11/3
- */
 class EasyTextView : AppCompatTextView {
 
     private val TAG = "debug_EasyTextView"
@@ -173,10 +169,26 @@ class EasyTextView : AppCompatTextView {
 //        super.setBackgroundColor(color)
         mSolidColor = color
     }
-
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
         super.setLayoutParams(params)
-        mBorderText?.layoutParams = params
+//        mBorderText?.layoutParams = params
+        // 安全类型转换 + 参数复制
+        // 通过 post 延迟处理，减少布局计算次数
+        post {
+            mBorderText?.layoutParams = params?.javaClass?.getConstructor(Int::class.java, Int::class.java)
+                ?.newInstance(params.width, params.height)
+                ?.also { newParams ->
+                    if (params is ViewGroup.MarginLayoutParams && newParams is ViewGroup.MarginLayoutParams) {
+                        // 复制Margin参数
+                        newParams.setMargins(
+                            params.leftMargin,
+                            params.topMargin,
+                            params.rightMargin,
+                            params.bottomMargin
+                        )
+                    }
+                }
+        }
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
