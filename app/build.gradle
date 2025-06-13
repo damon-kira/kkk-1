@@ -135,7 +135,7 @@ dependencies {
     // 本地库依赖
     //    implementation project(path: ':sdks:cache')
     // 权限
-    implementation project(path: ':rxpermission')
+    //    implementation project(path: ':rxpermission')
     implementation project(path: ":common")
     implementation project(path: ":camera")
     implementation project(path: ':sdks:bigdata')
@@ -144,51 +144,26 @@ dependencies {
     implementation project(path: ':player')
     implementation project(path: ':window')
 
-    // base
-    implementation rootProject.ext.android.kotlin_stdlib
-    implementation rootProject.ext.android.core_ktx
-    implementation rootProject.ext.android.appcompat
-    implementation rootProject.ext.view.constraintlayout
-    implementation rootProject.ext.view.material
-    implementation rootProject.ext.android.multidex
-    implementation rootProject.ext.view.swiperefreshlayout
-    implementation rootProject.ext.android.activity_ktx
-    // livedata
-    implementation rootProject.ext.android.lifecycle_runtime
-    implementation rootProject.ext.android.lifecycle_livedataKtx
-    implementation rootProject.ext.android.livedata_viewmodelKtx
-    // guava
-    implementation rootProject.ext.guava.guava
-    implementation rootProject.ext.guava.coroutines_guava
-
     // hilt
     implementation rootProject.ext.hilt.hilt_android
     kapt rootProject.ext.hilt.hilt_compiler_android
 
-    // 本地maven
-    implementation rootProject.ext.other.aes
-    implementation rootProject.ext.other.cache
-    debugImplementation rootProject.ext.other.devoptions
-
-    // rxjava3.0
-    implementation rootProject.ext.rxjava.rxandroid
-    implementation rootProject.ext.rxjava.rxjava
+    //firebase core
+    implementation platform(rootProject.ext.firebase.bom)
+    implementation rootProject.ext.firebase.analytics
+    implementation rootProject.ext.firebase.crashlytics
 
     // room
     implementation rootProject.ext.room.room_runtime
     implementation rootProject.ext.room.room_ktx
     kapt rootProject.ext.room.room_compiler
 
+    // 图片元数据处理
     implementation rootProject.ext.exifinterface.exifinterface
     // 图像裁剪
     implementation rootProject.ext.other.cropper
     // 文字识别
     implementation rootProject.ext.other.tesseract
-
-    //firebase core
-    implementation platform(rootProject.ext.firebase.bom)
-    implementation rootProject.ext.firebase.analytics
-    implementation rootProject.ext.firebase.crashlytics
 
     // 核心库（仅用于 Debug 构建）
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'

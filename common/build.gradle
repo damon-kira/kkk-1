@@ -46,27 +46,40 @@ dependencies {
 
     api project(path: ':sdks:util')
 
+    // Android Base
     api rootProject.ext.android.kotlin_stdlib
     api rootProject.ext.android.core_ktx
+    api rootProject.ext.android.activity_ktx
     api rootProject.ext.android.appcompat
-    api rootProject.ext.view.constraintlayout
+    api rootProject.ext.android.multidex
     api rootProject.ext.android.coroutines_android
-
+    api rootProject.ext.android.fragment
+    api rootProject.ext.android.annotation
+    // View
+    api rootProject.ext.view.viewpager2
+    api rootProject.ext.view.constraintlayout
+    api rootProject.ext.view.material
+    api rootProject.ext.view.recyclerview
+    api rootProject.ext.view.swiperefreshlayout
     api rootProject.ext.view.svg
     api rootProject.ext.view.gif
 
-    implementation rootProject.ext.view.recyclerview
+    // lifecycle
+    api rootProject.ext.lifecycle.runtime
+    api rootProject.ext.lifecycle.livedataKtx
+    api rootProject.ext.lifecycle.viewmodelKtx
+
+    // guava
+    api rootProject.ext.guava.guava
+    api rootProject.ext.guava.coroutines_guava
 
     // hilt
     api rootProject.ext.hilt.hilt_android
     kapt rootProject.ext.hilt.hilt_compiler_android
 
-    //rxjava3.0
-    implementation rootProject.ext.rxjava.rxandroid
-
-    api rootProject.ext.android.lifecycle_runtime
-    api rootProject.ext.android.lifecycle_livedataKtx
-    api rootProject.ext.android.livedata_viewmodelKtx
+    // rxjava3.0
+    api rootProject.ext.rxjava.rxandroid
+    api rootProject.ext.rxjava.rxjava
 
     //retrofit2.0
     api rootProject.ext.retrofit.retrofit
@@ -81,12 +94,7 @@ dependencies {
     api rootProject.ext.glide.glide
 
     // 适配
-//    api rootProject.ext.autosize.autosize
-//    implementation rootProject.ext.rxjava.rxandroid
-//    implementation rootProject.ext.other.util
-//    implementation rootProject.ext.other.userBehavior
-    implementation rootProject.ext.other.aes
-    implementation rootProject.ext.other.cache
+    api rootProject.ext.autosize.autosize
 
     //compose 同时支持xml和compose 自定义需求高的用xml
     api platform(rootProject.ext.compose.bom)
@@ -100,4 +108,9 @@ dependencies {
     api rootProject.ext.markwon.core
     api rootProject.ext.markwon.image
     api rootProject.ext.markwon.image_glide
+
+    // 本地maven
+    api rootProject.ext.other.aes
+    api rootProject.ext.other.cache
+    debugApi rootProject.ext.other.devoptions
 }

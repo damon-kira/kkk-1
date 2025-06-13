@@ -41,7 +41,7 @@ if (isModule.toBoolean()) {
     include ':sdks:util'
     include ':sdks:cache'
 }
-include ':rxpermission'
+//include ':rxpermission'
 include ':stedit'
 include ':player'
 include ':window'

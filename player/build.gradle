@@ -25,15 +25,15 @@ dependencies {
     implementation rootProject.ext.android.kotlin_stdlib
     implementation rootProject.ext.android.core_ktx
     implementation rootProject.ext.android.appcompat
-    implementation rootProject.ext.view.constraintlayout
-    implementation rootProject.ext.view.material
     implementation rootProject.ext.android.multidex
-    implementation rootProject.ext.view.swiperefreshlayout
     implementation rootProject.ext.android.activity_ktx
-    // livedata
-    implementation rootProject.ext.android.lifecycle_runtime
-    implementation rootProject.ext.android.lifecycle_livedataKtx
-    implementation rootProject.ext.android.livedata_viewmodelKtx
+    implementation rootProject.ext.view.material
+    implementation rootProject.ext.view.constraintlayout
+    implementation rootProject.ext.view.swiperefreshlayout
+    // lifecycle
+    implementation rootProject.ext.lifecycle.runtime
+    implementation rootProject.ext.lifecycle.livedataKtx
+    implementation rootProject.ext.lifecycle.viewmodelKtx
 
     implementation rootProject.ext.media3.exoplayer
     implementation rootProject.ext.media3.ui

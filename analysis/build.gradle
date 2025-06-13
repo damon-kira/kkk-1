@@ -41,7 +41,6 @@ dependencies {
     compileOnly rootProject.ext.firebase.messaging
     compileOnly rootProject.ext.firebase.analytics
     compileOnly rootProject.ext.firebase.crashlytics
-    compileOnly rootProject.ext.google.play_services_gcm
     implementation project(path:":sdks:util")
     implementation project(path:":sdks:cache")
 //    compileOnly rootProject.ext.other.util

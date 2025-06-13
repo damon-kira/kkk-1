@@ -19,7 +19,6 @@ import com.kira.learning.R
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.dialog.DialogManager
-import com.tbruyelle.rxpermissions3.RxPermissions
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
 import com.util.lib.log.logger_i
@@ -180,7 +179,7 @@ fun FragmentActivity.reqPermission(
         // RxPermissions 227行 mRxPermissionsFragment.getSubjectByPermission(permission) 会获取到有PublishSubject，
         // 在228行 unrequestedPermissions.isEmpty() 会为true，所以不会请求权限
         removeRxPermissions(this)
-        val rxPermissions = RxPermissions(this)
+//        val rxPermissions = RxPermissions(this)
         //与现有方案冲突
 //        rxPermissions.setLogging(isDebug())
 //        rxPermissions.requestEachCombined(*permissions)
