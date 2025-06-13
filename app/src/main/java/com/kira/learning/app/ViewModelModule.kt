@@ -23,6 +23,7 @@ import com.kira.learning.module.quiz.vm.QuizViewModel
 import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
 import com.kira.learning.module.dashboard.vm.RepayTabViewModel
 import com.kira.learning.module.dashboardDetail.RepayDetailViewModel
+import com.kira.learning.module.ocr.vm.OcrViewModel
 import com.kira.learning.module.repeat.confirm.RepeatConfirmViewModel
 import com.kira.learning.module.setting.SettingViewModel
 import com.kira.learning.module.upload.UploadViewModel
@@ -156,4 +157,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(QuizViewModel::class)
     abstract fun bindQuizViewModel(viewModel: QuizViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OcrViewModel::class)
+    abstract fun bindOcrViewModel(viewModel: OcrViewModel): ViewModel
 }

@@ -2,11 +2,11 @@ package com.kira.learning.module.ocr
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import com.kira.learning.module.ocr.utils.Utils
+import androidx.core.graphics.toColorInt
 
 /**
  * 网格参考线
@@ -32,15 +32,15 @@ class ReferenceLine : View {
 
     private fun init() {
         mLinePaint = Paint()
-        mLinePaint!!.setAntiAlias(true)
-        mLinePaint!!.setColor(Color.parseColor("#ffffffff"))
-        mLinePaint!!.setStrokeWidth(1f)
+        mLinePaint!!.isAntiAlias = true
+        mLinePaint!!.setColor("#ffffffff".toColorInt())
+        mLinePaint!!.strokeWidth = 1f
     }
 
 
     override fun onDraw(canvas: Canvas) {
-        val screenWidth = Utils.getScreenWH(getContext())?.widthPixels ?: 0
-        val screenHeight = Utils.getScreenWH(getContext())?.heightPixels ?: 0
+        val screenWidth = Utils.getScreenWH(context)?.widthPixels ?: 0
+        val screenHeight = Utils.getScreenWH(context)?.heightPixels ?: 0
 
         val width = screenWidth / 3
         val height = screenHeight / 3

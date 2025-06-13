@@ -138,7 +138,8 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
             }
             R.id.ail_setting -> {
-                throw RuntimeException("新包又崩了")
+                Launch.skipPhotographActivity(getSupportContext())
+//                throw RuntimeException("新包又崩了")
                 if (!checkLogin()) return
                 Launch.skipSettingActivity(getSupportContext())
             }
