@@ -169,7 +169,7 @@ dependencies {
     // 图片元数据处理
     implementation rootProject.ext.exifinterface.exifinterface
     // 图像裁剪
-    implementation rootProject.ext.other.cropper
+    implementation rootProject.ext.image.cropper
     //OCR
     implementation rootProject.ext.ocr.mlkit_text_recognition
     implementation rootProject.ext.ocr.play_services_vision

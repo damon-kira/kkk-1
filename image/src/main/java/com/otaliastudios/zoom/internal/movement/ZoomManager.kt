@@ -5,7 +5,6 @@ import com.otaliastudios.zoom.ZoomApi
 import com.otaliastudios.zoom.ZoomEngine
 import com.otaliastudios.zoom.ZoomLogger
 import com.otaliastudios.zoom.internal.matrix.MatrixController
-import java.lang.IllegalStateException
 
 /**
  * Contains:

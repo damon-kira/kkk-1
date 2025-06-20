@@ -5,7 +5,6 @@ import android.graphics.PointF
 import android.os.Build
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.*
 import com.otaliastudios.zoom.ZoomApi.AbsolutePan
 import com.otaliastudios.zoom.internal.matrix.MatrixController
@@ -21,7 +20,6 @@ import com.otaliastudios.zoom.internal.movement.ZoomManager
  * - Checks zoom using [zoomManager]
  * - Applies updates using the [matrixController]
  */
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 internal class PinchDetector(
         context: Context,
         private val zoomManager: ZoomManager,

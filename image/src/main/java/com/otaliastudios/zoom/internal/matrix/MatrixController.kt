@@ -1,13 +1,19 @@
 package com.otaliastudios.zoom.internal.matrix
 
-import android.animation.*
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.Matrix
 import android.graphics.RectF
-import android.os.Build
 import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.annotation.RequiresApi
-import com.otaliastudios.zoom.*
+import com.otaliastudios.zoom.AbsolutePoint
+import com.otaliastudios.zoom.ScaledPoint
+import com.otaliastudios.zoom.ZoomApi
+import com.otaliastudios.zoom.ZoomEngine
+import com.otaliastudios.zoom.ZoomLogger
 import com.otaliastudios.zoom.internal.StateController
 import com.otaliastudios.zoom.internal.movement.PanManager
 import com.otaliastudios.zoom.internal.movement.ZoomManager
@@ -18,7 +24,6 @@ import com.otaliastudios.zoom.internal.movement.ZoomManager
  *
  * It also uses [StateController] because it can start (and end) animations.
  */
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 internal class MatrixController(
         private val zoomManager: ZoomManager,
         private val panManager: PanManager,

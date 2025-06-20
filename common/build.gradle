@@ -90,8 +90,9 @@ dependencies {
     api rootProject.ext.retrofit.okhttp
     api rootProject.ext.retrofit.conscrypt
 
-    //glide
-    api rootProject.ext.glide.glide
+    //image
+    api rootProject.ext.image.glide
+    api rootProject.ext.image.egloo
 
     // 适配
     api rootProject.ext.autosize.autosize

@@ -86,8 +86,10 @@ rootProject.ext {
             bom        : "com.google.firebase:firebase-bom:31.5.0" // 统一管理Firebase版本
     ]
 
-    glide = [
-            glide: "com.github.bumptech.glide:glide:4.16.0" // 图片加载库
+    image = [
+            glide  : "com.github.bumptech.glide:glide:4.16.0", // 图片加载库
+            cropper: "com.edmodo:cropper:1.0.1", // 图像裁剪
+            egloo  : "com.otaliastudios.opengl:egloo:0.6.1" //openGL ES支持
     ]
 
     exifinterface = [
@@ -135,8 +137,6 @@ rootProject.ext {
             aes       : 'com.aes.lib:aes:1.0.0',    // AES加密
             devoptions: 'com.devoptions.lib:devoptions:1.0.1', // 开发者选项
             cache     : 'com.cache.lib:cache:1.0.0', // 缓存库
-            cropper   : 'com.edmodo:cropper:1.0.1', // 图像裁剪
-            egloo     : 'com.otaliastudios.opengl:egloo:0.6.1'
     ]
 
     location = [
@@ -172,7 +172,7 @@ rootProject.ext {
     allDesList.addAll(retrofit.values())
     allDesList.addAll(autosize.values())
     allDesList.addAll(firebase.values())
-    allDesList.addAll(glide.values())
+    allDesList.addAll(image.values())
     allDesList.addAll(location.values())
     allDesList.addAll(other.values())
     allDesList.addAll(chaquo.values())

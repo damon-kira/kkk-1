@@ -1,11 +1,16 @@
 package com.otaliastudios.zoom.internal
 
-import android.os.Build
 import android.view.MotionEvent
 import androidx.annotation.IntDef
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.ZoomLogger
-import com.otaliastudios.zoom.internal.StateController.Callback
+import com.otaliastudios.zoom.internal.StateController.Companion.ANIMATING
+import com.otaliastudios.zoom.internal.StateController.Companion.FLINGING
+import com.otaliastudios.zoom.internal.StateController.Companion.IDLE
+import com.otaliastudios.zoom.internal.StateController.Companion.PINCHING
+import com.otaliastudios.zoom.internal.StateController.Companion.SCROLLING
+import com.otaliastudios.zoom.internal.StateController.Companion.TOUCH_LISTEN
+import com.otaliastudios.zoom.internal.StateController.Companion.TOUCH_NO
+import com.otaliastudios.zoom.internal.StateController.Companion.TOUCH_STEAL
 
 /**
  * Deals with touch input, holds the internal [state] integer,
@@ -16,7 +21,6 @@ import com.otaliastudios.zoom.internal.StateController.Callback
  * the gesture in the callbacks. Whenever needed, [setState] must be called to keep
  * this class in sync with what's happening.
  */
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 internal class StateController(private val callback: Callback) {
 
     /**

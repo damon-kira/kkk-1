@@ -8,6 +8,10 @@ android {
     namespace 'com.otaliastudios.zoom'
     compileSdk rootProject.ext.version.compileSdk
     buildFeatures.viewBinding true
+    defaultConfig {
+        minSdk rootProject.ext.version.minSdk
+        targetSdk rootProject.ext.version.targetSdk
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -21,5 +25,4 @@ android {
 
 dependencies {
     implementation project(':common')
-    api rootProject.ext.other.egloo
 }

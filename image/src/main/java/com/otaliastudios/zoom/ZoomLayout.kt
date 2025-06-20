@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import com.otaliastudios.zoom.ZoomApi.ZoomType
+import androidx.core.view.isNotEmpty
 
 
 /**
@@ -130,7 +131,7 @@ open class ZoomLayout private constructor(
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
-        if (childCount > 0) {
+        if (isNotEmpty()) {
             throw RuntimeException("$TAG accepts only a single child.")
         }
         super.addView(child, index, params)
@@ -147,7 +148,7 @@ open class ZoomLayout private constructor(
 
     private fun onUpdate() {
         if (hasClickableChildren) {
-            if (childCount > 0) {
+            if (isNotEmpty()) {
                 val child = getChildAt(0)
                 child.pivotX = 0f
                 child.pivotY = 0f
@@ -173,7 +174,7 @@ open class ZoomLayout private constructor(
     override fun computeVerticalScrollRange(): Int = engine.computeVerticalScrollRange()
 
     override fun drawChild(canvas: Canvas, child: View, drawingTime: Long): Boolean {
-        val result: Boolean
+        var result: Boolean
 
         if (!hasClickableChildren) {
             val save = canvas.save()
@@ -203,7 +204,7 @@ open class ZoomLayout private constructor(
         LOG.i("setHasClickableChildren:", "old:", this.hasClickableChildren, "new:", hasClickableChildren)
         if (this.hasClickableChildren && !hasClickableChildren) {
             // Revert any transformation that was applied to our child.
-            if (childCount > 0) {
+            if (isNotEmpty()) {
                 val child = getChildAt(0)
                 child.scaleX = 1f
                 child.scaleY = 1f

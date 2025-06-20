@@ -347,3 +347,5 @@
 # 私有库image
 -keep class com.otaliastudios.zoom.** { *; }
 
+-keep class com.otaliastudios.opengl.** { *; }
+

@@ -8,12 +8,10 @@ import android.util.AttributeSet
 import android.util.Log
 import android.webkit.WebView
 import androidx.annotation.ColorRes
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.mathview.Helpers.isDarkMode
 import androidx.core.content.withStyledAttributes
 import com.otaliastudios.zoom.R
 
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 class MathView : WebView {
 
     private var mContext: Context? = null

@@ -1,11 +1,9 @@
 package com.otaliastudios.zoom.internal.gestures
 
 import android.content.Context
-import android.os.Build
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.OverScroller
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.ScaledPoint
 import com.otaliastudios.zoom.ZoomApi
 import com.otaliastudios.zoom.ZoomLogger
@@ -23,7 +21,6 @@ import kotlin.math.pow
  * - Checks pan using [panManager]
  * - Applies updates using the [matrixController]
  */
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 internal class ScrollFlingDetector(
     context: Context,
     private val panManager: PanManager,

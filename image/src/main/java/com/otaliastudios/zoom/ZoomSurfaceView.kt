@@ -2,15 +2,16 @@ package com.otaliastudios.zoom
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.RectF
+import android.graphics.SurfaceTexture
 import android.opengl.GLSurfaceView
-import android.os.Build
 import android.util.AttributeSet
-import android.view.*
-import androidx.annotation.RequiresApi
+import android.view.MotionEvent
+import android.view.Surface
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import com.otaliastudios.zoom.ZoomApi.ZoomType
 import com.otaliastudios.opengl.core.EglConfigChooser
 import com.otaliastudios.opengl.core.EglContextFactory
 import com.otaliastudios.opengl.draw.GlRect
@@ -20,6 +21,7 @@ import com.otaliastudios.opengl.extensions.translate
 import com.otaliastudios.opengl.program.GlFlatProgram
 import com.otaliastudios.opengl.program.GlTextureProgram
 import com.otaliastudios.opengl.texture.GlTexture
+import com.otaliastudios.zoom.ZoomApi.ZoomType
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -28,7 +30,6 @@ import javax.microedition.khronos.opengles.GL10
  * Uses [ZoomEngine] to allow zooming and pan events onto a GL rendered surface.
  */
 @Suppress("LeakingThis")
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 open class ZoomSurfaceView private constructor(
         context: Context,
         attrs: AttributeSet?,

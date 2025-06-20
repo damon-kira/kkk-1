@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Matrix
 import android.graphics.RectF
-import android.os.Build
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.ZoomApi.*
 import com.otaliastudios.zoom.internal.StateController
 import com.otaliastudios.zoom.internal.UpdatesDispatcher
@@ -19,6 +17,16 @@ import com.otaliastudios.zoom.internal.matrix.MatrixController
 import com.otaliastudios.zoom.internal.matrix.MatrixUpdate
 import com.otaliastudios.zoom.internal.movement.PanManager
 import com.otaliastudios.zoom.internal.movement.ZoomManager
+import kotlin.Boolean
+import kotlin.Deprecated
+import kotlin.Float
+import kotlin.FloatArray
+import kotlin.Int
+import kotlin.Long
+import kotlin.ReplaceWith
+import kotlin.Suppress
+import kotlin.error
+import kotlin.isInitialized
 import kotlin.math.max
 import kotlin.math.min
 
@@ -34,7 +42,6 @@ import kotlin.math.min
  * - Pass touch events to [onInterceptTouchEvent] and [onTouchEvent]
  *
  */
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 open class ZoomEngine
 /**
  * Constructs an helper instance.

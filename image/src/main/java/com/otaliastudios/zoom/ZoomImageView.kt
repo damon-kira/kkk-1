@@ -5,12 +5,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.annotation.AttrRes
-import androidx.annotation.RequiresApi
 import com.otaliastudios.zoom.ZoomApi.ZoomType
 
 
@@ -19,7 +17,6 @@ import com.otaliastudios.zoom.ZoomApi.ZoomType
  */
 @Suppress("LeakingThis")
 @SuppressLint("AppCompatCustomView")
-@RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
 open class ZoomImageView private constructor(
         context: Context,
         attrs: AttributeSet?,
