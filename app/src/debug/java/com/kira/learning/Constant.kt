@@ -1,6 +1,6 @@
 package com.kira.learning
 
-import com.devoption.finance.DebugModeConfig
+import com.devoption.module.DebugModeConfig
 
 object Constant {
 

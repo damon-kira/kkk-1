@@ -135,7 +135,7 @@ rootProject.ext {
 
     other = [
             aes       : 'com.aes.lib:aes:1.0.0',    // AES加密
-            devoptions: 'com.devoptions.lib:devoptions:1.0.1', // 开发者选项
+            devoptions: 'com.devoptions.lib:devoptions:1.0.4', // 开发者选项
             cache     : 'com.cache.lib:cache:1.0.0', // 缓存库
     ]
 

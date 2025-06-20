@@ -250,7 +250,8 @@ private val mHeaderInterceptor = Interceptor { chain ->
             .build()
     }
 
-    private val BASEURL = "https://api.moonshot.cn/"//"http://192.168.5.222:8083/" //Constant.BASE_URL
+//    private val BASEURL = "https://api.moonshot.cn/"//"http://192.168.5.222:8083/" //Constant.BASE_URL
+    private val BASEURL = Constant.BASE_URL
 
     private val BASE_H5_URL = Constant.BASE_H5_URL
 
