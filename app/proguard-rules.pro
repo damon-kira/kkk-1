@@ -344,3 +344,6 @@
 
 -keep class com.google.firebase.crashlytics.** { *; }
 
+# 私有库image
+-keep class com.otaliastudios.zoom.** { *; }
+

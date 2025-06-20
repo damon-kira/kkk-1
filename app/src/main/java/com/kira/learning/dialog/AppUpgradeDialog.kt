@@ -9,7 +9,7 @@ import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
 import com.util.lib.ifShow
 
-class AppUpgradeDialog constructor(context: Context) : DefaultDialog(context) {
+class AppUpgradeDialog(context: Context) : DefaultDialog(context) {
 
     private val mBinding by binding<DialogAppUpgradeBinding>()
 

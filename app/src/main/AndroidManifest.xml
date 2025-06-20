@@ -201,6 +201,9 @@
         <activity
             android:name=".module.player.PlayerManageActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.mathview.ZoomImageActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
 
 
         <service

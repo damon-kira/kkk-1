@@ -45,6 +45,8 @@ import com.kira.learning.module.quiz.QuizActivity
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
+import androidx.core.net.toUri
+import com.kira.learning.module.mathview.ZoomImageActivity
 
 object Launch {
 
@@ -219,6 +221,9 @@ object Launch {
     fun skipPlayerManageActivity(context: Context){
         launch(context, PlayerManageActivity::class.java)
     }
+    fun skipZoomImageActivity(context: Context){
+        launch(context, ZoomImageActivity::class.java)
+    }
 
     /**
      * 跳转到应用商店，并退出app
@@ -231,12 +236,12 @@ object Launch {
         try {
             var intent: Intent
             if (isNotEmpty(jumpAddress)) {
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse(jumpAddress))
+                intent = Intent(Intent.ACTION_VIEW, jumpAddress?.toUri())
             } else {
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+                intent = Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri())
                 intent.setPackage("com.android.vending")
                 if (intent.resolveActivity(ctx.packageManager) == null) {
-                    intent = Intent(Intent.ACTION_VIEW, Uri.parse(appAddress))
+                    intent = Intent(Intent.ACTION_VIEW, appAddress.toUri())
                 }
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -263,7 +268,7 @@ object Launch {
 
     @SuppressLint("IntentReset")
     fun skipToEmail(context: Context) {
-        val uri = Uri.parse("mailto:${getEmail()}")
+        val uri = "mailto:${getEmail()}".toUri()
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "message/rfc822"
         intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getEmail()))
@@ -297,7 +302,7 @@ object Launch {
         val mobile = getServiceTel()
         try {
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$mobile")
+            intent.data = "tel:$mobile".toUri()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
         } catch (e: Exception) {
@@ -332,7 +337,7 @@ object Launch {
             //检测是否有能接受该Intent的Activity存在
             val resolveInfos =
                 packageManager.queryIntentActivities(miuiIntent, PackageManager.MATCH_DEFAULT_ONLY)
-            if (resolveInfos.size > 0) {
+            if (resolveInfos.isNotEmpty()) {
                 startActivity(miuiIntent)
                 return
             }

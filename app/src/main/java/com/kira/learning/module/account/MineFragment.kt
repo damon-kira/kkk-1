@@ -138,8 +138,9 @@ class MineFragment : BaseFragment(), View.OnClickListener {
                 Launch.skipWebViewActivity(getSupportContext(), H5UrlManager.URL_PRIVACY)
             }
             R.id.ail_setting -> {
-                Launch.skipPhotographActivity(getSupportContext())
-//                throw RuntimeException("新包又崩了")
+//                Launch.skipZoomImageActivity(getSupportContext())
+//                Launch.skipPhotographActivity(getSupportContext())
+                throw RuntimeException("无Mapping包的崩溃测试！！！！！！")
                 if (!checkLogin()) return
                 Launch.skipSettingActivity(getSupportContext())
             }

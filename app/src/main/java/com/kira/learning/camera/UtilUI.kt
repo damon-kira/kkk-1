@@ -1,20 +1,17 @@
-package com.kira.learning.camera;
+package com.kira.learning.camera
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Build;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.webkit.WebView;
+import android.R
+import android.app.Activity
+import android.content.Context
+import android.graphics.Bitmap
+import android.view.View
+import android.view.ViewGroup
+import android.webkit.WebView
+import com.kira.learning.BuildConfig
+import java.lang.reflect.Field
 
-import com.kira.learning.BuildConfig;
-
-import java.lang.reflect.Field;
-
-public class UtilUI {
-    private int barHeight = -1;
+class UtilUI {
+    private var barHeight = -1
 
     /**
      * 获取状态栏高度
@@ -22,26 +19,25 @@ public class UtilUI {
      * @param context
      * @return 状态栏高度
      */
-    public int getBarHeight(Context context) {
+    fun getBarHeight(context: Context): Int {
         if (barHeight == -1) {
-            Class<?> c = null;
-            Object obj = null;
-            Field field = null;
-            int x = 0;
+            var c: Class<*>? = null
+            var obj: Any? = null
+            var field: Field? = null
+            var x = 0
 
             try {
-                c = Class.forName("com.android.internal.R$dimen");
-                obj = c.newInstance();
-                field = c.getField("status_bar_height");
-                x = Integer.parseInt(field.get(obj).toString());
-                barHeight = context.getResources().getDimensionPixelSize(x);
-
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                return 0;
+                c = Class.forName("com.android.internal.R\$dimen")
+                obj = c.newInstance()
+                field = c.getField("status_bar_height")
+                x = field.get(obj).toString().toInt()
+                barHeight = context.resources.getDimensionPixelSize(x)
+            } catch (e1: Exception) {
+                e1.printStackTrace()
+                return 0
             }
         }
-        return barHeight;
+        return barHeight
     }
 
     /**
@@ -51,21 +47,22 @@ public class UtilUI {
      * @param containTopBar 是否包含状态栏
      * @return
      */
-    public Bitmap getScreenshot(Activity activity, boolean containTopBar) {
+    fun getScreenshot(activity: Activity, containTopBar: Boolean): Bitmap? {
         try {
-            Window window = activity.getWindow();
-            View view = window.getDecorView();
-            view.setDrawingCacheEnabled(true);
-            view.buildDrawingCache(true);
-            Bitmap bmp1 = view.getDrawingCache();
+            val window = activity.window
+            val view = window.decorView
+            view.setDrawingCacheEnabled(true)
+            view.buildDrawingCache(true)
+            val bmp1 = view.drawingCache
+
             /**
              * 除去状态栏和标题栏
-             **/
-            int height = containTopBar ? 0 : getBarHeight(activity);
-            return Bitmap.createBitmap(bmp1, 0, height, bmp1.getWidth(), bmp1.getHeight() - height);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+             */
+            val height = if (containTopBar) 0 else getBarHeight(activity)
+            return Bitmap.createBitmap(bmp1, 0, height, bmp1.getWidth(), bmp1.getHeight() - height)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
         }
     }
 
@@ -75,9 +72,9 @@ public class UtilUI {
      * @param activity
      * @return bitmap 截图
      */
-    public Bitmap getDrawing(Activity activity) {
-        View view = ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        return getDrawing(view);
+    fun getDrawing(activity: Activity): Bitmap? {
+        val view = (activity.findViewById<View?>(R.id.content) as ViewGroup).getChildAt(0)
+        return getDrawing(view)
     }
 
     /**
@@ -86,37 +83,38 @@ public class UtilUI {
      * @param view
      * @return 截图
      */
-    public Bitmap getDrawing(View view) {
+    fun getDrawing(view: View): Bitmap? {
         try {
-            view.setDrawingCacheEnabled(true);
-            Bitmap tBitmap = view.getDrawingCache();
+            view.setDrawingCacheEnabled(true)
+            var tBitmap = view.getDrawingCache()
             // 拷贝图片，否则在setDrawingCacheEnabled(false)以后该图片会被释放掉
-            tBitmap = tBitmap.createBitmap(tBitmap);
-            view.setDrawingCacheEnabled(false);
-            return tBitmap;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            tBitmap = Bitmap.createBitmap(tBitmap)
+            view.setDrawingCacheEnabled(false)
+            return tBitmap
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
         }
     }
 
-    /**
-     * 检查webview是否可用
-     *
-     * @return
-     */
-    public static boolean isWebviewValid(Context context) {
-        if (context == null)
-            throw new IllegalArgumentException("context can't be null !!");
-        try {
-            WebView webView = new WebView(context);
-        } catch (Exception e) {
-            if (BuildConfig.DEBUG) {
-                throw e;
+    companion object {
+        /**
+         * 检查webview是否可用
+         *
+         * @return
+         */
+        fun isWebviewValid(context: Context): Boolean {
+            requireNotNull(context) { "context can't be null !!" }
+            try {
+                val webView = WebView(context)
+            } catch (e: Exception) {
+                if (BuildConfig.DEBUG) {
+                    throw e
+                }
+                //            CrashManager.reportException(e);
+                return false
             }
-//            CrashManager.reportException(e);
-            return false;
+            return true
         }
-        return true;
     }
 }

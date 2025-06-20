@@ -19,6 +19,7 @@ import com.hjq.window.draggable.MovingWindowDraggableRule
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.expand.setLogout
+import com.kira.learning.expand.showAppUpgradeDialog
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.home.BaseHomeFragment
 import com.kira.learning.module.home.HomeEvent
@@ -200,43 +201,43 @@ class NavigationFragment : BaseHomeFragment() {
 
     private fun initViewSetting() {
         mBinding.inclueDemoLayout1.let {
-            it.tvDemoName.text = "拍照识别"
+            it.tvDemoName.text = "Photo scanner"
             it.tvBtn.setOnClickListener {
                 Launch.skipPhotographActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout2.let {
-            it.tvDemoName.text = "题目"
+            it.tvDemoName.text = "Question"
             it.tvBtn.setBlockingOnClickListener {
                 Launch.skipAnswerActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout3.let {
-            it.tvDemoName.text = "python编辑-运行"
+            it.tvDemoName.text = "Python-run"
             it.tvBtn.setOnClickListener {
                 Launch.skipCodingActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout4.let {
-            it.tvDemoName.text = "AI对话"
+            it.tvDemoName.text = "Ai-chat"
             it.tvBtn.setOnClickListener {
                 Launch.skipAIIMActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout5.let {
-            it.tvDemoName.text = "数据库"
+            it.tvDemoName.text = "Datebase"
             it.tvBtn.setOnClickListener {
                 Launch.skipChatActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout6.let {
-            it.tvDemoName.text = "视频"
+            it.tvDemoName.text = "Vedio-player"
             it.tvBtn.setOnClickListener {
                 Launch.skipPlayerManageActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout7.let {
-            it.tvDemoName.text = "测验"
+            it.tvDemoName.text = "Question-2"
             it.tvBtn.setOnClickListener {
 //                Log.d("Language", "当前语言: ${Locale.getDefault().language}")
 //                Log.d("Language", "完整地区: ${Locale.getDefault()}")
@@ -245,13 +246,13 @@ class NavigationFragment : BaseHomeFragment() {
             }
         }
         mBinding.inclueDemoLayout8.let {
-            it.tvDemoName.text = "上传"
+            it.tvDemoName.text = "Upload"
             it.tvBtn.setOnClickListener {
                 Launch.skipUploadActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout9.let {
-            it.tvDemoName.text = "总线通信"
+            it.tvDemoName.text = "Bus"
             it.tvBtn.setOnClickListener {
                 setLogout()
                 LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
@@ -260,7 +261,7 @@ class NavigationFragment : BaseHomeFragment() {
             }
         }
         mBinding.inclueDemoLayout10.let {
-            it.tvDemoName.text = "悬浮按钮"
+            it.tvDemoName.text = "Floating Window"
             it.tvBtn.setOnClickListener {
                 if (mRemovableWindow?.isShowing == true) {
                     cancelAndRecycleEasyWindow(mRemovableWindow)
@@ -270,12 +271,19 @@ class NavigationFragment : BaseHomeFragment() {
             }
         }
         mBinding.inclueDemoLayout11.let {
-            it.tvDemoName.text = "崩溃"
+            it.tvDemoName.text = "Crash"
             it.tvBtn.setOnClickListener {
 //                throw RuntimeException("Test Crash") // Force a crash
                 val testNum = 100
 //                val result = 100 / 0 // 这行代码会导致崩溃
-                throw RuntimeException("${System.currentTimeMillis().toString()} Find a new Crash From KTX")
+                throw RuntimeException("${System.currentTimeMillis().toString()} 测试崩溃")
+//                getBaseActivity()?.showAppUpgradeDialog(it)
+            }
+        }
+        mBinding.inclueDemoLayout12.let {
+            it.tvDemoName.text = "MathView"
+            it.tvBtn.setOnClickListener {
+                Launch.skipZoomImageActivity(getSupportContext())
             }
         }
     }

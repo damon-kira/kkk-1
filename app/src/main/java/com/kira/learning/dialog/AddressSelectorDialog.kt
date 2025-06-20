@@ -47,7 +47,7 @@ class AddressSelectorDialog(context: Context) : DefaultDialog(context) {
 
         mBinding.searchview.setOnSearchListener(object : SearchView.OnSearchViewListener {
             override fun onSearchTextChanged(searchText: String) {
-                if (searchText.isNullOrEmpty()) {
+                if (searchText.isEmpty()) {
                     if (currType == TYPE_CITY) {
                         mCityAdapter.setItems(mItemsCity)
                     } else {

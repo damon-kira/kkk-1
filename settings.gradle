@@ -45,3 +45,4 @@ if (isModule.toBoolean()) {
 include ':stedit'
 include ':player'
 include ':window'
+include ':image'

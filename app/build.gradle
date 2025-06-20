@@ -125,6 +125,13 @@ android {
             jniLibs.srcDirs += ['libs']
         }
     }
+    gradle.taskGraph.whenReady {
+        tasks.each { task ->
+            if (task.name.contains("uploadCrashlyticsMappingFileRelease")) {
+                task.enabled = false
+            }
+        }
+    }
 }
 
 def time() {
@@ -143,6 +150,7 @@ dependencies {
     implementation project(path: ':stedit')
     implementation project(path: ':player')
     implementation project(path: ':window')
+    implementation project(path: ':image')
 
     // hilt
     implementation rootProject.ext.hilt.hilt_android

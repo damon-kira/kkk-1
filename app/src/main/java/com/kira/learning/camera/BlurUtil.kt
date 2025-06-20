@@ -23,25 +23,25 @@ class BlurUtil {
      */
     constructor(activity: Activity) {
         this.mActivity = activity
-        utils = UtilBox.getBox()
+        utils = UtilBox.instance
     }
 
     /**
      * 模糊图片
      *
-     * @param iv_head_portrait 需要模糊的ImageView
+     * @param iv 需要模糊的ImageView
      */
-    fun clickBlurImg(iv_head_portrait: ImageView) {
+    fun clickBlurImg(iv: ImageView) {
         // 将图片进行高斯模糊，
         // 最后一个参数是模糊等级，值为 0~25
-        utils?.bitmap?.blurImageView(mActivity, iv_head_portrait, 10f)
+        utils?.bitmap?.blurImageView(mActivity, iv, 10f)
     }
 
     fun clickBlurImg(iv: ImageView, captureView: View) {
         try {
             val drawingBitmap = if (captureView is TextureView) {
                 var bitmap = captureView.bitmap
-                if (captureView.rotation % 360 != 0f) {
+                if (captureView.rotation % 360 != 0f && null != bitmap) {
                     bitmap = utils?.bitmap?.rotate(bitmap, captureView.rotation.toInt())
                 }
                 bitmap
