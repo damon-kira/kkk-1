@@ -58,19 +58,15 @@ class OcrViewModel @Inject constructor(
                 if (isCancelled) return@withContext null
 
                 // 1. 确保语言包存在
-                val language = "chi_sim+eng"
-//                val dataFile = File("$languagePath$language.traineddata")
-//                if (!dataFile.exists()) {
-//                    throw IllegalStateException("语言包不存在: ${dataFile.absolutePath}")
-//                }
+                val language = "chi_sim" // 英文：eng
 
                 // 2. 初始化Tesseract
 //                val tessApi = TessBaseAPI().apply {
 //                    if (!init(languagePath, language)) {
 //                        throw IllegalStateException("Tesseract初始化失败")
 //                    }
-//                    // 性能参数
-//                    setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO_OSD)
+                    // 性能参数
+//                    setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO)
 //                    setVariable(
 //                        TessBaseAPI.VAR_CHAR_WHITELIST,
 //                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?':;\"-()[]{}"
@@ -105,6 +101,7 @@ class OcrViewModel @Inject constructor(
                 // Google mlkit处理
                 var text = processImageWithCoroutine(processed)
 
+
                 return@withContext Pair(text, processed)
             }
 
@@ -125,9 +122,9 @@ class OcrViewModel @Inject constructor(
             suspendCancellableCoroutine { continuation ->
                 try {
                     val image = InputImage.fromBitmap(photoBitmap, 0)
+
                     val recognizer =
                         TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-
                     recognizer.process(image)
                         .addOnSuccessListener { scannedText ->
                             continuation.resume(scannedText.text) { cause -> }

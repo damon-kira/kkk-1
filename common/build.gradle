@@ -45,6 +45,7 @@ android {
 dependencies {
 
     api project(path: ':sdks:util')
+    api project(path: ':sdks:cache')
 
     // Android Base
     api rootProject.ext.android.kotlin_stdlib
@@ -112,6 +113,5 @@ dependencies {
 
     // 本地maven
     api rootProject.ext.other.aes
-    api rootProject.ext.other.cache
     debugApi rootProject.ext.other.devoptions
 }

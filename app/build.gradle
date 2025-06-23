@@ -172,7 +172,10 @@ dependencies {
     implementation rootProject.ext.image.cropper
     //OCR
     implementation rootProject.ext.ocr.mlkit_text_recognition
-    implementation rootProject.ext.ocr.play_services_vision
+//    implementation rootProject.ext.ocr.tesseract
+//    implementation rootProject.ext.ocr.play_services_vision
+//    implementation rootProject.ext.ocr.chinese
+
     // 文字识别
 //    implementation rootProject.ext.other.tesseract
     // 核心库（仅用于 Debug 构建）

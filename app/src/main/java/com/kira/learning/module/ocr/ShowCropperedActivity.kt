@@ -136,7 +136,7 @@ class ShowCropperedActivity : BaseActivity() {
         currentBitmap?.let { bitmap ->
             lifecycleScope.launch {
                 // 获取语言包路径
-                val languagePath = "${getExternalFilesDir(null)?.absolutePath ?: filesDir.absolutePath}/"
+                val languagePath = "${getExternalFilesDir("")}/"
                 viewModel.recognizeText(bitmap, languagePath)
             }
         }
