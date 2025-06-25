@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.kria.richtext'
+    compileSdk rootProject.ext.version.compileSdk
+    buildFeatures.viewBinding true
+    defaultConfig {
+        minSdk rootProject.ext.version.minSdk
+        targetSdk rootProject.ext.version.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation project(':codeview')
+
+}

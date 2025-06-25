@@ -348,4 +348,7 @@
 -keep class com.otaliastudios.zoom.** { *; }
 
 -keep class com.otaliastudios.opengl.** { *; }
+-keep class io.github.kbiakov.codeview.** { *; }
+-keep class com.kira.richtext.** { *; }
+-keep class org.scilab.forge.jlatexmath.** { *; }
 

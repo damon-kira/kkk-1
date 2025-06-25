@@ -1,6 +1,5 @@
-package com.kira.learning.module.mathview
+package com.kira.learning.module.richview
 
-import android.media.JetPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -8,10 +7,15 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityZoomImageBinding
+import com.kira.richtext.Attachment
+import com.kira.richtext.Tokenizer
 import com.otaliastudios.zoom.ZoomLogger
 import com.otaliastudios.zoom.ZoomLogger.Companion.setLogLevel
 import com.otaliastudios.zoom.mathview.MathView
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.kbiakov.codeview.classifier.CodeProcessor
+import org.scilab.forge.jlatexmath.core.AjLatexMath
+
 
 @AndroidEntryPoint
 class ZoomImageActivity : BaseActivity() {
@@ -22,6 +26,8 @@ class ZoomImageActivity : BaseActivity() {
         setLogLevel(ZoomLogger.LEVEL_VERBOSE)
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
+
+        initRichText()
         with(mBinding) {
             mathView2.setMathViewEngine(MathView.MathViewEngine.MATH_JAX)
             zoomImage.setImageDrawable(
@@ -30,26 +36,26 @@ class ZoomImageActivity : BaseActivity() {
                     R.drawable.image_splash_bg
                 )
             )
+            rtButton.setOnClickListener {
+                zoomImage.visibility = View.GONE
+                zoomSurface.visibility = View.GONE
+                ftFrameLayout.visibility = View.VISIBLE
 
-            showZsv.setOnClickListener {
-                zoomLayout.visibility = View.GONE
+            }
+
+            mathButton.setOnClickListener {
+                mathView2.formula = "2a+4b\\sqrt{\\frac{4x-2^{6}}{ax^2+57}}+\\frac{3}{2}"
+                zoomImage.visibility = View.GONE
+                ftFrameLayout.visibility = View.GONE
+                zoomSurface.visibility = View.VISIBLE
+            }
+            zoomButton.setOnClickListener {
+                ftFrameLayout.visibility = View.GONE
                 zoomSurface.visibility = View.GONE
                 zoomImage.visibility = View.VISIBLE
             }
 
-            showZl.setOnClickListener {
-                zoomImage.visibility = View.GONE
-                zoomSurface.visibility = View.GONE
-                zoomLayout.visibility = View.VISIBLE
 
-            }
-
-            showZiv.setOnClickListener {
-                mathView2.formula = "2a+4b\\sqrt{\\frac{4x-2^{6}}{ax^2+57}}+\\frac{3}{2}"
-                zoomImage.visibility = View.GONE
-                zoomLayout.visibility = View.GONE
-                zoomSurface.visibility = View.VISIBLE
-            }
         }
 
         //        setContentView(R.layout.activity_main);
@@ -110,7 +116,118 @@ class ZoomImageActivity : BaseActivity() {
 //        buttonZoomLayout.performClick();
     }
 
-    protected override fun onStop() {
+    private fun initRichText() {
+        CodeProcessor.init(this)
+        AjLatexMath.init(this) // init library: load fonts, create paint, etc.
+
+        val attachments: MutableList<Attachment?> = ArrayList<Attachment?>()
+        attachments.add(
+            ExampleAttachment(
+                "Android Image",
+                "53ce1",
+                true,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhoQ-oy5EaaEzwwhWXbh0DbggZeHTqEWM7sQ&s"
+            )
+        )
+        attachments.add(
+            ExampleAttachment(
+                "Here is a link",
+                "bc41a",
+                false,
+                "https://www.baidu.com"
+            )
+        )
+
+        Tokenizer.setCenterStartLabels("<center>")
+        Tokenizer.setCenterEndLabels("</center>")
+        Tokenizer.setTitleStartLabels("<h>")
+        Tokenizer.setTitleEndLabels("</h>")
+
+        mBinding.ftText.setText(
+            "<h><center>hi!</center></h>" +
+                    "[quote]This is quote\n" +
+                    "second line\n" +
+                    "third line\n" +
+                    "One\n" +
+                    "Two\n" +
+                    "Three\n" +
+                    "fourth line[/quote]" +
+                    "Here is an attachment:[attachment:53ce1]" +
+                    "[code]" +
+                    getCodeString() +
+                    "[/code]" +
+                    "Hello FlexibleRichTextView!\n" +
+                    "This is LaTeX:\n" +
+                    "\$e^{\\pi i} + 1 = 0$\n" +
+                    "$$ x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} $$ \n" +
+                    "This is table:\n" +
+                    "| First Header  | Second Header |\n" +
+                    "| --- | --- |\n" +
+                    "| Content Cell  | Content Cell  |\n" +
+                    "| Content Cell  | Content Cell  |\n" +
+                    "An attachment is shown at the bottom: \n",
+            attachments
+        )
+
+        mBinding.ftText.setText(
+
+            "<h><center>hi!</center></h>" +
+                    "[quote]This is quote\n" +
+                    "second line\n" +
+                    "third line\n" +
+                    "One\n" +
+                    "Two\n" +
+                    "Three\n" +
+                    "fourth line[/quote]" , attachments
+        )
+
+    }
+
+    fun getCodeString(): String {
+        return """
+        package io.github.kbiakov.codeviewexample;
+
+        import android.os.Bundle;
+        import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AppCompatActivity;
+        import android.util.Log;
+
+        import org.jetbrains.annotations.NotNull;
+
+        import io.github.kbiakov.codeview.CodeView;
+        import io.github.kbiakov.codeview.OnCodeLineClickListener;
+        import io.github.kbiakov.codeview.adapters.CodeWithDiffsAdapter;
+        import io.github.kbiakov.codeview.adapters.Options;
+        import io.github.kbiakov.codeview.highlight.ColorTheme;
+        import io.github.kbiakov.codeview.highlight.ColorThemeData;
+        import io.github.kbiakov.codeview.highlight.Font;
+        import io.github.kbiakov.codeview.highlight.FontCache;
+        import io.github.kbiakov.codeview.views.DiffModel;
+
+        public class ListingsActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(@Nullable Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_listings);
+
+                final CodeView codeView = (CodeView) findViewById(R.id.code_view);
+
+                /*
+                 * 1: set code content
+                 */
+
+                // auto language recognition
+                codeView.setCode(getString(R.string.listing_js));
+
+                // specify language for code listing
+                codeView.setCode(getString(R.string.listing_py), "py");
+            }
+        }
+    """.trimIndent()
+    }
+
+    override fun onStop() {
         super.onStop()
         //        ZoomSurfaceView surface = findViewById(R.id.surface_view);
 //        surface.onPause();

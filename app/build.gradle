@@ -151,6 +151,8 @@ dependencies {
     implementation project(path: ':player')
     implementation project(path: ':window')
     implementation project(path: ':image')
+    implementation project(path: ':richtext')
+    implementation project(path: ':codeview')
 
     // hilt
     implementation rootProject.ext.hilt.hilt_android
