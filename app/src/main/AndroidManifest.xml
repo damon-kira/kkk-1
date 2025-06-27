@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 录像/照相 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 通知权限 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 通知权限（Android 7.1 及以下的兼容处理） -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera" />
@@ -215,6 +219,22 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="740" />
+        <!--        推送       -->
+        <service
+            android:name=".messaging.KiraFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--        推送图标&颜色信息-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+        <!--            android:resource="@drawable/ic_logo" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.firebase.messaging.default_notification_color"-->
+        <!--            android:resource="@color/primary_color" />-->
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

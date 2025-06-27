@@ -162,6 +162,7 @@ dependencies {
     implementation platform(rootProject.ext.firebase.bom)
     implementation rootProject.ext.firebase.analytics
     implementation rootProject.ext.firebase.crashlytics
+    implementation rootProject.ext.firebase.messaging
 
     // room
     implementation rootProject.ext.room.room_runtime

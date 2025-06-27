@@ -5,7 +5,6 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import com.kira.learning.expand.isValidChar
 
-
 object InputHelper {
 
     open class TextWatchAdapter : TextWatcher {
@@ -22,7 +21,6 @@ object InputHelper {
         }
     }
 
-
     /**
      * 初始化输入框过滤器
      */
@@ -34,7 +32,6 @@ object InputHelper {
         }
         return filters.toTypedArray()
     }
-
 
     val idFilter = InputFilter { source, start, end, dest, dstart, dend ->
         if (isValidChar(source.toString().replace(" ".toRegex(), ""))) {

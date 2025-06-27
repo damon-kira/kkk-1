@@ -168,18 +168,24 @@ class ZoomImageActivity : BaseActivity() {
                     "An attachment is shown at the bottom: \n",
             attachments
         )
-
-        mBinding.ftText.setText(
-
-            "<h><center>hi!</center></h>" +
-                    "[quote]This is quote\n" +
-                    "second line\n" +
-                    "third line\n" +
-                    "One\n" +
-                    "Two\n" +
-                    "Three\n" +
-                    "fourth line[/quote]" , attachments
-        )
+//        mBinding.ftText.setText(
+//
+//            "<h><center>hi!</center></h>\n" +
+//                    "This is LaTeX:\n" +
+//                    "\$e^{\\pi i} + 1 = 0$\n" +
+//                    "$$ x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} $$ \n", attachments
+//        )
+//        mBinding.ftText.setText(
+//            """
+//            <h><center>hi!</center></h>[quote]This is quote
+//                    second line
+//                    third line
+//                    One
+//                    Two
+//                    Three
+//                    fourth line[/quote]
+//                     """.trimIndent(), attachments
+//        )
 
     }
 

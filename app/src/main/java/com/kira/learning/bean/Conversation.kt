@@ -10,5 +10,5 @@ class Conversation //this.conversationId = conversationId;
     var conPayerName: String?
 ) {
     val lastMsg: ChatMessage
-        get() = chatMessages.get(chatMessages.size - 1)
+        get() = chatMessages[chatMessages.size - 1]
 }

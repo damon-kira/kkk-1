@@ -286,6 +286,13 @@ class NavigationFragment : BaseHomeFragment() {
                 Launch.skipZoomImageActivity(getSupportContext())
             }
         }
+
+        mBinding.inclueDemoLayout13.let {
+            it.tvDemoName.text = "Capture"
+            it.tvBtn.setOnClickListener {
+                Launch.skipCaptureActivity(getSupportContext())
+            }
+        }
     }
 
     private fun cancelAndRecycleEasyWindow(easyWindow: EasyWindow<*>?) {

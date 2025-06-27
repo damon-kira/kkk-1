@@ -2,6 +2,7 @@ package com.kira.learning.permission
 
 import android.Manifest
 import android.content.Context
+import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.kira.learning.R
@@ -21,8 +22,7 @@ abstract class AbsPermissionEntity() {
         return if (isSDK_INT_UP_23()) {
             //6.0以上系统
             ContextCompat.checkSelfPermission(
-                context,
-                permissionName()
+                context, permissionName()
             ) == PermissionChecker.PERMISSION_GRANTED
         } else {
             if (isDefaultOpenPermission()) {
@@ -70,8 +70,7 @@ class LocationPermission : AbsPermissionEntity() {
         return Manifest.permission.ACCESS_COARSE_LOCATION
     }
 
-    override fun hasPermissionUnder6(context: Context): Boolean {
-        /*      var locationHas = false
+    override fun hasPermissionUnder6(context: Context): Boolean {/*      var locationHas = false
               val location = LocationHelp.getLocationInfo()
               if (location != null) {
                   if (location.longitude.toInt() != -1) {
@@ -131,8 +130,7 @@ class CameraPermission : AbsPermissionEntity() {
         return if (isSDK_INT_UP_23()) {
             //6.0以上系统
             ContextCompat.checkSelfPermission(
-                context,
-                permissionName()
+                context, permissionName()
             ) == PermissionChecker.PERMISSION_GRANTED
         } else {
             true
@@ -151,8 +149,7 @@ class PhotoAlbumPermission : AbsPermissionEntity() {
         return if (isSDK_INT_UP_23()) {
             //6.0以上系统
             ContextCompat.checkSelfPermission(
-                context,
-                permissionName()
+                context, permissionName()
             ) == PermissionChecker.PERMISSION_GRANTED
         } else {
             true
@@ -281,3 +278,24 @@ class AppListPermission : AbsPermissionEntity() {
         return true
     }
 }
+
+class AppNotificationsPermission : AbsPermissionEntity() {
+    override fun permissionName(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.POST_NOTIFICATIONS
+        } else {
+            ""
+        }
+    }
+
+    override fun hasPermissionUnder6(context: Context): Boolean = true
+
+    override fun getHintIfNoPermission(): Pair<Int, Int> {
+        return Pair(R.string.permission_notification, R.string.permission_dlg_text_notification)
+    }
+
+    override fun hasThisPermission(context: Context): Boolean {
+        return true
+    }
+}
+

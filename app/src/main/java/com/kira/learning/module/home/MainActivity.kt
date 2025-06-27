@@ -1,6 +1,9 @@
 package com.kira.learning.module.home
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.core.view.GravityCompat
 import com.common.lib.base.BaseFragment
@@ -42,16 +45,48 @@ class MainActivity : BaseFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRadioButton()
-        mMainEventObserve = LiveDataBus.getLiveData(MainEvent::class.java).observerNonStickyForever {
-            if (it.event == MainEvent.EVENT_SHOW_HOME) {
-                mBinding.rbHomeLoan.isChecked = true
-            } else if (it.event == MainEvent.EVENT_SHOW_REPAY) {
-                mBinding.rbHomeRepay.isChecked = true
+        mMainEventObserve =
+            LiveDataBus.getLiveData(MainEvent::class.java).observerNonStickyForever {
+                if (it.event == MainEvent.EVENT_SHOW_HOME) {
+                    mBinding.rbHomeLoan.isChecked = true
+                } else if (it.event == MainEvent.EVENT_SHOW_REPAY) {
+                    mBinding.rbHomeRepay.isChecked = true
+                }
             }
-        }
 
         // 设置导航菜单点击监听
         setupDrawer()
+        // Notification Channel 初始化
+        initNotificationChannel()
+    }
+
+    private fun initNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // 主通知渠道
+            val mainChannel = NotificationChannel(
+                "channel_id",
+                "重要通知",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "用于关键消息提醒"
+                enableVibration(true) // 启用震动
+                vibrationPattern = longArrayOf(0, 500, 200, 500) // 震动模式
+            }
+
+            // 静默渠道（后台消息）
+            val silentChannel = NotificationChannel(
+                "silent_channel",
+                "后台更新",
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                setShowBadge(false) // 不显示角标
+            }
+
+            // 注册所有渠道
+            val manager = getSystemService(NotificationManager::class.java)
+            manager.createNotificationChannel(mainChannel)
+            manager.createNotificationChannel(silentChannel)
+        }
     }
 
     private fun setupDrawer() {
@@ -68,13 +103,14 @@ class MainActivity : BaseFragmentActivity() {
         }
     }
 
-    fun drawerToggle(){
+    fun drawerToggle() {
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             mBinding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             mBinding.drawerLayout.openDrawer(GravityCompat.START);
         }
     }
+
     // 示例Fragment切换方法
     private fun showHomeFragment() {
         supportFragmentManager.beginTransaction()
@@ -113,6 +149,7 @@ class MainActivity : BaseFragmentActivity() {
                 R.id.rb_home_loan -> {
                     switchFragment(mHomeFragment)
                 }
+
                 R.id.rb_home_repay -> {
                     switchFragment(mRepayFragment)
                     try {
@@ -121,6 +158,7 @@ class MainActivity : BaseFragmentActivity() {
 
                     }
                 }
+
                 R.id.rb_account -> {
                     switchFragment(mMineFragment)
                     try {

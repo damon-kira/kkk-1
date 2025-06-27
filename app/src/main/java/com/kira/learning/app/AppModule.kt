@@ -13,6 +13,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Dao - 数据库的提供者模块
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {

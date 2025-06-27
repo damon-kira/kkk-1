@@ -46,6 +46,7 @@ import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import androidx.core.net.toUri
+import com.kira.learning.camera.CaptureActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 
 object Launch {
@@ -223,6 +224,9 @@ object Launch {
     }
     fun skipZoomImageActivity(context: Context){
         launch(context, ZoomImageActivity::class.java)
+    }
+    fun skipCaptureActivity(context: Context){
+        launch(context, CaptureActivity::class.java)
     }
 
     /**

@@ -18,15 +18,34 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/aiv_banner"
-        style="@style/marginLeftAndRight16"
+    <FrameLayout
+        android:id="@+id/fl_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:srcCompat="@drawable/image_apply_success" />
+        app:srcCompat="@drawable/bg_banner"
+
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/aiv_banner"
+            style="@style/marginLeftAndRight16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/bg_banner" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            style="@style/marginLeftAndRight16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_logo" />
+    </FrameLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +56,7 @@
         android:layout_marginTop="12dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aiv_banner" />
+        app:layout_constraintTop_toBottomOf="@id/fl_banner" />
 
     <TextView
         android:id="@+id/tv_repay"
@@ -85,7 +104,7 @@
         android:layout_marginTop="12dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aiv_banner" />
+        app:layout_constraintTop_toBottomOf="@id/fl_banner" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"

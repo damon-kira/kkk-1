@@ -25,6 +25,7 @@ import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -156,7 +157,7 @@ public class FlexibleRichTextView extends LinearLayout {
 
     public void setText(String text, List<Attachment> attachmentList) {
         text = text.replaceAll("\u00AD", "");
-
+        Log.e(TAG, "结果:"+text);
         mAttachmentList = attachmentList;
         mTokenList = tokenizer(text, mAttachmentList);
 

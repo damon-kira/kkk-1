@@ -9,6 +9,7 @@ import com.chaquo.python.PyObject
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.kira.learning.app.AppEnv
+import com.kira.learning.messaging.KiraFirebaseMessagingService
 import com.kira.learning.module.python.PythonExecutor
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
@@ -36,11 +37,15 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 //        PushManagerFactory.init(this)
 //        PushManagerFactory.getGaid(this)
 //        AdjustManager.init(this, AppEnv.DEBUG)
+
+        // Firebase 初始化
         FirebaseApp.initializeApp(this)
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
-
+        // 本地Python初始化
         PythonExecutor.initialize(this)
         Security.insertProviderAt(Conscrypt.newProvider(), 1)
+        // Notification Channel 初始化
+        KiraFirebaseMessagingService.getDeviceToken()
     }
 
 //    private fun initLeakCanary() {

@@ -8,11 +8,12 @@ import android.os.Build
 import android.provider.ContactsContract
 import com.kira.learning.bean.PhoneAndName
 import com.kira.learning.permission.PermissionHelper
+import androidx.core.net.toUri
 
 
 object ContactHelper {
 
-    private val NAME_LENGTH = 30 //姓名最大长度
+    private const val NAME_LENGTH = 30 //姓名最大长度
 
     /**
      * 根据URI查询联系人信息
@@ -40,7 +41,7 @@ object ContactHelper {
         mobile: String,
         isFormat: Boolean = false
     ): PhoneAndName {
-        val uri = Uri.parse("content://com.android.contacts/data/phones/filter/$mobile")
+        val uri = "content://com.android.contacts/data/phones/filter/$mobile".toUri()
         var contact = queryContact(context, uri)
         if (isFormat) {
             contact.name = parsingName(contact.name)

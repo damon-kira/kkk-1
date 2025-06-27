@@ -37,6 +37,7 @@ val appPermissions = arrayOf(
 //    PhotoAlbumPermission(),
 //    CalendarReadPermission(),
 //    CalendarWritePermission()
+//    AppNotificationsPermission(),
 )
 //是否是6.0以及以上系统
 

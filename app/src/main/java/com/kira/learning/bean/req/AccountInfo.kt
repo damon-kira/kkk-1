@@ -1,6 +1,6 @@
 package com.kira.learning.bean.req
 
-
+// Base on this interface to define common behavior for request info classes
 interface IReqBaseInfo {
     fun isEmpty(): Boolean
 }

@@ -11,6 +11,7 @@ import com.kira.learning.R
 import com.kira.learning.app.getAppContext
 import com.kira.learning.bean.PhoneAndName
 import com.kira.learning.manager.ObtainContactAgent.Companion.REQ_CONTACT_CODE
+import androidx.core.net.toUri
 
 private typealias ContactCallback = (resultCode: Int, data: PhoneAndName?) -> Unit
 
@@ -84,7 +85,7 @@ class AgentXFragment : Fragment(), IContactContainer {
         val intent = Intent()
         intent.action = Intent.ACTION_PICK
         intent.addCategory(Intent.CATEGORY_DEFAULT)
-        intent.data = Uri.parse("content://contacts/people")
+        intent.data = "content://contacts/people".toUri()
         intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
 //        if (intent.resolveActivity(getAppContext().packageManager) != null) {
         //fix No Activity found to handle Intent
