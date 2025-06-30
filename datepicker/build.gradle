@@ -5,6 +5,7 @@ plugins {
 android {
     namespace 'com.manu.mdatepicker'
     compileSdk rootProject.ext.version.compileSdk
+
     defaultConfig {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk
