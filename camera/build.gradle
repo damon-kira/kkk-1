@@ -10,6 +10,7 @@ android {
         minSdkVersion rootProject.ext.version.minSdk
         targetSdkVersion rootProject.ext.version.targetSdk
     }
+
     buildTypes {
         release {
             minifyEnabled false
