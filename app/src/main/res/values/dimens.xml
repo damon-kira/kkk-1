@@ -2,4 +2,10 @@
 <resources>
     <dimen name="default_card_height">50dp</dimen>
     <dimen name="default_vertical_padding">10dp</dimen>
+
+    <dimen name="default_thumb_size">20dp</dimen>
+    <dimen name="default_track_cross_axis_size">6dp</dimen>
+    <dimen name="stageStepBarSmallDimension">100dp</dimen>
+    <dimen name="stageStepBarLargeDimension">300dp</dimen>
+    <dimen name="mainSeparatorSize">1.5dp</dimen>
 </resources>

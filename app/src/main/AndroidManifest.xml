@@ -208,6 +208,9 @@
         <activity
             android:name=".module.richview.ZoomImageActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.stepbar.StepBarViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
 
 
         <service

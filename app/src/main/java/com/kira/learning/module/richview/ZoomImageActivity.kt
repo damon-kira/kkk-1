@@ -126,7 +126,7 @@ class ZoomImageActivity : BaseActivity() {
                 "Android Image",
                 "53ce1",
                 true,
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhoQ-oy5EaaEzwwhWXbh0DbggZeHTqEWM7sQ&s"
+                "https://framerusercontent.com/images/jKhc6WcpixtwqG54Jy46cv0RShQ.png"
             )
         )
         attachments.add(
@@ -191,8 +191,6 @@ class ZoomImageActivity : BaseActivity() {
 
     fun getCodeString(): String {
         return """
-        package io.github.kbiakov.codeviewexample;
-
         import android.os.Bundle;
         import androidx.annotation.Nullable;
         import androidx.appcompat.app.AppCompatActivity;

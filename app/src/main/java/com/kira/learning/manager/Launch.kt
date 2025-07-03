@@ -48,6 +48,7 @@ import com.util.lib.log.logger_e
 import androidx.core.net.toUri
 import com.kira.learning.camera.CaptureActivity
 import com.kira.learning.module.richview.ZoomImageActivity
+import com.kira.learning.module.stepbar.StepBarViewActivity
 
 object Launch {
 
@@ -227,6 +228,9 @@ object Launch {
     }
     fun skipCaptureActivity(context: Context){
         launch(context, CaptureActivity::class.java)
+    }
+    fun skipStepBarViewActivity(context: Context){
+        launch(context, StepBarViewActivity::class.java)
     }
 
     /**

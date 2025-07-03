@@ -288,9 +288,9 @@ class NavigationFragment : BaseHomeFragment() {
         }
 
         mBinding.inclueDemoLayout13.let {
-            it.tvDemoName.text = "Capture"
+            it.tvDemoName.text = "StepBar"
             it.tvBtn.setOnClickListener {
-                Launch.skipCaptureActivity(getSupportContext())
+                Launch.skipStepBarViewActivity(getSupportContext())
             }
         }
     }

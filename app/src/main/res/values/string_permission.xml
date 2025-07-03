@@ -6,47 +6,46 @@
     <string name="permission_protocol">Marque de acuerdo y haga clic en continuar para indicar que ha leído y aceptado nuestro acuerdo de %s</string>
 
     <!-- 短信 -->
-    <string name="permission_sms">SMS(Mensaje)</string>
-    <string name="permission_dlg_text_sms">Monitoreo y recopilación del contenido de SMS: todos los datos de SMS se cifrarán y cargarán en el servidor a través de la aplicación, pero filtramos y eliminamos los datos de SMS personales en el servidor. Solo recopilamos y monitoreamos su SMS financiero enviado desde la bandeja de entrada. Esto incluye el número y nombre del remitente, así como el contenido del SMS y su información histórica. Propósito: esto nos ayuda a identificar las diversas cuentas bancarias que los usuarios pueden tener, sus patrones de flujo de efectivo, descripciones y determinar la cantidad de transacciones que pueden asistirle. Realizamos evaluaciones de riesgo crediticio para poder determinar el perfil de riesgo del usuario y brindarle un análisis crediticio adecuado. Este proceso le permite obtener un financiamiento de las entidades financieras reguladas disponibles en la plataforma.Almacenamiento de datos SMS: los datos SMS se cifrarán y cargarán en nuestro servidor miembro <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]> a través del protocolo HTTPS. En ningún momento compartiremos estos datos con terceros.</string>
+    <string name="permission_sms">短信权限</string>
+    <string name="permission_dlg_text_sms">短信内容监控与采集：所有短信数据将通过应用加密上传至服务器，但我们会在服务器端过滤删除个人短信内容。仅采集监控您收件箱中金融机构发送的短信，包括发送方号码、名称、短信内容及历史信息。\n目的：这有助于我们识别您可能持有的各类银行账户、资金流动模式、交易描述并判定可授信额度。我们通过信用风险评估，为用户提供精准的信用分析服务，使您能获得平台合作金融机构的融资支持。\n短信数据存储：短信数据将通过HTTPS协议加密上传至我们的会员服务器<![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>，我们承诺绝不向第三方共享这些数据。</string>
 
     <!-- 联系人 -->
-<!--    <string name="permission_contact">Lista de contactos</string>-->
-<!--    <string name="permission_dlg_text_contacts">Nuestra aplicación requiere este permiso para detectar referencias y completar automáticamente los datos durante el proceso de solicitud de préstamo para un viaje de usuario sin problemas. Además, la aplicación recopila y supervisa la información de sus contactos, incluidos el nombre, los números de teléfono, el tipo de cuenta, la última modificación del contacto, favoritos y otras opciones. que incluye relación, dirección estructural, si está disponible para enriquecer su perfil financiero y nos ayuda a determinar el.Recopilamos información de contactos solo después de obtener su consentimiento explícito adicional. La información de contactos se cargará en <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Eliminaremos la información de los contactos una vez que hayamos determinado su perfil de riesgo.</string>-->
+    <string name="permission_contact">通讯录权限</string>
+    <string name="permission_dlg_text_contacts">我们的应用需要此权限来检测联系人关系，并在贷款申请过程中自动填充数据以提供流畅的用户体验。此外，应用会收集并监控您的联系人信息，包括姓名、电话号码、账户类型、最后修改时间、收藏状态等选项。这些信息有助于完善您的财务画像，帮助我们确定信用风险。我们仅在获得您额外明确同意后收集联系人信息。联系人信息将上传至<![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>。一旦完成风险评估，我们将立即删除联系人信息。</string>
 
-    <!-- read phone state -->
-    <string name="permission_read_phone_state">Teléfono</string>
-    <string name="permission_dlg_text_readphone">Nuestra aplicación recopila y monitorea información específica sobre su dispositivo, incluido su modelo de hardware, modelo de construcción, RAM, almacenamiento; identificadores únicos de dispositivos como IMEI, número de serie, SSAID; La información SIM incluye el operador de red, el estado de roaming, los códigos MNC y MCC, la información WIFI incluye la dirección MAC y la información de la red móvil para identificar de manera única los dispositivos y garantizar que ningún dispositivo no autorizado actúe en su nombre para evitar fraudes. Esto también nos ayuda a evaluar la solvencia crediticia para el enriquecimiento del perfil crediticio.</string>
+    <!-- 电话状态 -->
+    <string name="permission_read_phone_state">设备信息权限</string>
+    <string name="permission_dlg_text_readphone">我们的应用会收集并监控您设备的特定信息，包括硬件型号、构建型号、RAM、存储空间；设备唯一标识符如IMEI、序列号、SSAID；SIM卡信息包括运营商、漫游状态、MNC和MCC代码；WIFI信息包括MAC地址和移动网络信息。这些信息用于唯一识别设备，确保没有未经授权的设备冒充您进行操作，防止欺诈行为。同时帮助我们评估信用状况，完善信用画像。</string>
 
-    <!-- APP list -->
-    <string name="app_list">Aplicaciones instaladas</string>
-    <string name="app_list_content">Recopilamos la información de metadatos de cada aplicación instalada que incluye el nombre de la aplicación, el nombre del paquete, la hora de instalación, la hora de actualización, el nombre de la versión y el código de la versión de cada aplicación instalada en su dispositivo para evaluar su solvencia crediticia y brindarle ofertas de préstamo personalizadas preaprobadas.</string>
+    <!-- 应用列表 -->
+    <string name="app_list">已安装应用权限</string>
+    <string name="app_list_content">我们会收集每个已安装应用的元数据信息，包括应用名称、包名、安装时间、更新时间、版本名称和版本代码。这些信息用于评估您的信用状况，并为您提供预核准的个性化贷款方案。</string>
 
     <!-- 定位 -->
-    <string name="permission_location">Ubicación</string>
-    <string name="permission_dlg_text_location">Recopilamos y monitoreamos la información sobre la ubicación de su dispositivo para proporcionar la capacidad de servicio de su solicitud de préstamo, para reducir el riesgo asociado con su solicitud de préstamo y para proporcionar ofertas de préstamo personalizadas preaprobadas. Esto también nos ayuda a verificar la dirección, tomar una mejor decisión sobre el riesgo crediticio y agilizar su proceso KYC.</string>
+    <string name="permission_location">位置权限</string>
+    <string name="permission_dlg_text_location">我们收集并监控设备位置信息，用于：\n1. 提供贷款申请服务能力\n2. 降低贷款申请风险\n3. 提供预核准的个性化贷款方案\n同时帮助我们验证地址信息、优化信用决策并加速KYC流程。</string>
 
-    <!-- account -->
-    <string name="permission_account">Cuentas de terceros</string>
-    <string name="permission_dlg_text_account">Recopilamos y supervisamos la lista de cuentas configuradas en el dispositivo para verificar la información, como su dirección de correo electrónico y los detalles básicos del perfil, que usted proporciona. Esto también nos ayuda a enriquecer la información de su perfil y brindarle ofertas de préstamos personalizadas preaprobadas.</string>
+    <!-- 账户 -->
+    <string name="permission_account">第三方账户权限</string>
+    <string name="permission_dlg_text_account">我们收集设备配置的账户列表，用于验证您提供的邮箱地址等基本信息。这有助于完善您的信用画像，并提供预核准的个性化贷款方案。</string>
 
     <!-- 相机 -->
-    <string name="permission_camera">Cámara</string>
-    <string name="permission_dlg_text_camera">Requerimos acceso a la cámara para que pueda escanear o capturar fácilmente los documentos KYC requeridos y ahorrar tiempo al permitirnos completar automáticamente los datos relevantes. Esto garantiza que se le brinde una experiencia perfecta mientras usa la aplicación.</string>
+    <string name="permission_camera">相机权限</string>
+    <string name="permission_dlg_text_camera">需要相机权限以便您扫描或拍摄KYC所需证件，通过自动填充相关信息节省时间。这将确保您获得流畅的使用体验。</string>
 
     <!-- 存储 -->
-    <string name="permission_storage">Almacenamiento</string>
-    <string name="permission_dlg_text_storage">Requerimos permiso de almacenamiento para que su KYC y otros documentos relevantes puedan descargarse y guardarse de manera segura en su teléfono. Luego, puede cargar fácilmente los documentos relacionados con KYC correctos para acelerar el proceso de llenado y desembolso de los detalles de la solicitud de préstamo. Esto garantiza que se le brinde una experiencia perfecta mientras usa la aplicación.</string>
+    <string name="permission_storage">存储权限</string>
+    <string name="permission_dlg_text_storage">需要存储权限以便安全下载保存KYC等文件到手机。您可快速上传相关证件，加速贷款申请和放款流程。</string>
 
     <!-- 相册 -->
-    <string name="permission_album">MEDIOS Y FOTOS Y ARCHIVOS</string>
-    <string name="permission_dlg_text_album">Requerimos el permiso de medios, fotos y archivos que permite que la aplicación le permita cargar fotos o documentos para completar el formulario de solicitud durante su viaje de solicitud de préstamo.</string>
+    <string name="permission_album">媒体/照片/文件权限</string>
+    <string name="permission_dlg_text_album">需要该权限以便在贷款申请过程中上传照片或文件资料。</string>
 
     <!-- 日历 -->
-    <string name="permission_calendar">INFORMACIÓN DEL CALENDARIO</string>
-    <string name="permission_dlg_text_calendar">Requerimos información del calendario para que pueda configurar una nota de fecha de vencimiento del préstamo en la aplicación después del préstamo, que le recordará que debe pagar su préstamo a tiempo.La información del calendario se subirá a <![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>. Eliminaremos la información del calendario una vez que hayamos determinado su perfil de riesgo.</string>
+    <string name="permission_calendar">日历信息权限</string>
+    <string name="permission_dlg_text_calendar">需要日历权限以便设置还款日提醒。日历信息将上传至<![CDATA[<font color=\'#8F30D8\'>https://anzafs.resmoaq.com/</font>]]>，完成风险评估后将立即删除。</string>
 
-
-    <string name="permission_hint_text2">Tenga en cuenta que cierta información que se requiere obligatoriamente para realizar su evaluación de riesgo crediticio se comparte de forma segura con nuestro proveedor de servicios externo registrado. Para obtener más información sobre sus permisos, consulte la Política de privacidad.</string>
+    <string name="permission_hint_text2">请注意：信用风险评估必需的部分信息将安全共享给我们的注册外部服务提供商。更多权限详情请参阅《隐私政策》。</string>
     <string name="permission_connector_char" translatable="false">&#38;</string>
 
     <string name="permission_notification">通知权限</string>
