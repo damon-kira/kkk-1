@@ -237,7 +237,7 @@ class NavigationFragment : BaseHomeFragment() {
             }
         }
         mBinding.inclueDemoLayout7.let {
-            it.tvDemoName.text = "Question-2"
+            it.tvDemoName.text = "Activities"
             it.tvBtn.setOnClickListener {
 //                Log.d("Language", "当前语言: ${Locale.getDefault().language}")
 //                Log.d("Language", "完整地区: ${Locale.getDefault()}")

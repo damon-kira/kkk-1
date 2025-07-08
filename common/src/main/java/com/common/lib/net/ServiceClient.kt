@@ -1,11 +1,18 @@
 package com.common.lib.net
 
 import android.util.Log
+import com.common.lib.net.bean.Activity
+import com.common.lib.net.bean.ActivityAdapter
+import com.common.lib.net.bean.ColumnContent
+import com.common.lib.net.bean.ColumnContentAdapter
+import com.common.lib.net.bean.ContentItem
+import com.common.lib.net.bean.ContentItemAdapter
+import com.google.gson.GsonBuilder
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
@@ -74,6 +81,52 @@ class ServiceClient private constructor() {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .baseUrl(baseUrl)
             .build()
+    }
+
+    fun <T> createActivitiesService(options: NetOptions, api: Class<T>): T {
+        return provideActivitiesRetrofit(options).create(api)
+    }
+
+    private fun provideActivitiesRetrofit(options: NetOptions): Retrofit {
+        val certificatePinner = CertificatePinner.Builder()
+            .add("*.example.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAA=") // 伪造指纹
+            .build()
+
+        val okHttpClient = OkHttpClient.Builder()
+            .apply {
+                if (options.readTimeout > 0) {
+                    readTimeout(options.readTimeout, options.timeUnit)
+                }
+                if (options.writeTimeout > 0) {
+                    writeTimeout(options.writeTimeout, options.timeUnit)
+                }
+                if (options.connectTimeout > 0) {
+                    connectTimeout(options.connectTimeout, options.timeUnit)
+                }
+                options.interceptors.forEach {
+                    addInterceptor(it)
+                }
+                this.sslSocketFactory(ProxymanSSLSocketFactory(), TrustAllCerts())
+                this.hostnameVerifier { _, _ -> true }
+                this.certificatePinner(certificatePinner)
+            }
+            .build()
+        // 创建多态适配器
+        val gson = GsonBuilder()
+            .registerTypeAdapter(ContentItem::class.java, ContentItemAdapter())
+            .registerTypeAdapter(ColumnContent::class.java, ColumnContentAdapter())
+            .registerTypeAdapter(Activity::class.java, ActivityAdapter())
+            .create()
+        val baseUrl = options.baseUrl
+        Log.d(TAG, "provideRetrofit: url = $baseUrl")
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            // 如果需要 RxJava 支持
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .baseUrl(baseUrl)
+            .build()
+
     }
 
     object SSLSocketClient {

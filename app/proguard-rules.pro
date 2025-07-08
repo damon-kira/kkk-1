@@ -352,3 +352,19 @@
 -keep class com.kira.richtext.** { *; }
 -keep class org.scilab.forge.jlatexmath.** { *; }
 
+# 保留 Kotlin 元数据和反射相关资源
+#-keep class kotlin.** { *; }
+#-keep class kotlin.Metadata { *; }
+#-dontwarn kotlin.**
+#-keepclassmembers class **.kotlin.** { *; }
+
+# 特别保留内置资源
+#-keepnames class kotlin.kotlin_builtins
+#-keep class kotlin.kotlin_builtins { *; }
+
+# 保留 Moshi 相关类
+#-keepclassmembers class * {
+#    @com.squareup.moshi.* <methods>;
+#}
+#-keep @com.squareup.moshi.JsonClass class *
+

@@ -72,7 +72,13 @@ rootProject.ext {
             gson               : "com.google.code.gson:gson:2.10.1", // JSON序列化
             logging_interceptor: "com.squareup.okhttp3:logging-interceptor:4.12.0", // 网络日志
             okhttp             : "com.squareup.okhttp3:okhttp:4.12.0", // 底层网络库
-            conscrypt          : "org.conscrypt:conscrypt-android:2.5.3" // 安全提供者
+            conscrypt          : "org.conscrypt:conscrypt-android:2.5.3", // 安全提供者
+            // Moshi转换器
+//            onverter_moshi     : "com.squareup.retrofit2:converter-moshi:${version.retrofit}",
+//            moshi              : "com.squareup.moshi:moshi:1.15.0",
+//            moshi_kotlin       : "com.squareup.moshi:moshi-kotlin:1.15.0",
+//            moshi_adapter      : "com.squareup.moshi:moshi-adapters:1.15.0",
+//            kapt_moshi         : "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"
     ]
 
     autosize = [

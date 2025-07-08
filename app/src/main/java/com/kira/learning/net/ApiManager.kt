@@ -132,6 +132,16 @@ class ApiManager @Inject constructor() {
         ServiceClient.getInstance().createService(options, ApiService::class.java)
     }
 
+    private val mApiActivitiesService by lazy {
+        val options = NetOptions()
+            .setReadTimeout(DEFAULT_TIMEOUT)
+            .setConnectTimeout(DEFAULT_TIMEOUT)
+            .setTimeUnit(TimeUnit.MILLISECONDS)
+            .setInterceptors(defaultInterceptor)
+            .setBaseUrl(BASEURL)
+        ServiceClient.getInstance().createActivitiesService(options, ApiService::class.java)
+    }
+
     private val mDataApiService by lazy {
         val options = NetOptions()
             .setReadTimeout(UPLOAD_TIMEOUT)
@@ -258,6 +268,8 @@ private val mHeaderInterceptor = Interceptor { chain ->
     fun createApiService(): ApiService = mApiService
 
     fun createUploadService() = mApiUploadService
+
+    fun createApiActivitiesService(): ApiService = mApiActivitiesService
 
     // 大数据相关接口
     fun getDataApiService(): DataApiService = mDataApiService

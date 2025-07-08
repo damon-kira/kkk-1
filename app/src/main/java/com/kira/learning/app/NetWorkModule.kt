@@ -1,5 +1,6 @@
 package com.kira.learning.app
 
+import com.kira.learning.di.ApiActivitiesService
 import com.kira.learning.di.UploadApiService
 import com.kira.learning.net.ApiManager
 import com.kira.learning.net.ApiService
@@ -31,6 +32,13 @@ class NetWorkModule {
     @Provides
     fun provideApiUploadService(): ApiService {
         return ApiManager.getInstance().createUploadService()
+    }
+
+    @ApiActivitiesService
+    @Singleton
+    @Provides
+    fun provideApiActivitiesService(): ApiService {
+        return ApiManager.getInstance().createApiActivitiesService()
     }
 
 //    @CheckApiService

@@ -168,6 +168,8 @@ dependencies {
     implementation rootProject.ext.room.room_runtime
     implementation rootProject.ext.room.room_ktx
     kapt rootProject.ext.room.room_compiler
+    // moshi
+//    kapt rootProject.ext.retrofit.kapt_moshi
 
     // 图片元数据处理
     implementation rootProject.ext.exifinterface.exifinterface

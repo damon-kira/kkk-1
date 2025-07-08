@@ -1,14 +1,39 @@
 package com.kira.learning.net
 
-import com.kira.learning.bean.resp.*
-import com.kira.learning.bean.db.AIResponseInfo
+import com.common.lib.net.bean.Document
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.bean.QuestionProcessInfo
-import com.kira.learning.bean.QuizInfo
+import com.kira.learning.bean.db.AIResponseInfo
+import com.kira.learning.bean.resp.AppUpgradeInfo
+import com.kira.learning.bean.resp.KycOcrInfo
+import com.kira.learning.bean.resp.RspBankAccount
+import com.kira.learning.bean.resp.RspBankInfo
+import com.kira.learning.bean.resp.RspBankNameInfo
+import com.kira.learning.bean.resp.RspCertProcessInfo
+import com.kira.learning.bean.resp.RspCheckOrder
+import com.kira.learning.bean.resp.RspConfig
+import com.kira.learning.bean.resp.RspContactInfo
+import com.kira.learning.bean.resp.RspCustom
+import com.kira.learning.bean.resp.RspHistoryInfo
+import com.kira.learning.bean.resp.RspKycInfo
+import com.kira.learning.bean.resp.RspLoginInfo
+import com.kira.learning.bean.resp.RspPersonalInfo
+import com.kira.learning.bean.resp.RspProductInfo
+import com.kira.learning.bean.resp.RspRepayDetail
+import com.kira.learning.bean.resp.RspRepayOrders
+import com.kira.learning.bean.resp.RspRepeatCalcul
+import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.resp.RspSmsCode
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 
 interface ApiService {
@@ -152,8 +177,8 @@ interface ApiService {
     @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     fun searchQuestion(@Body body: RequestBody): Flowable<BaseResponse<QuestionProcessInfo>>
 
-    @POST("/v1/chat/getQuizInfo")
+    @POST("/v1/kira/activities")
     @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
-    fun getQuizInfo(@Body body: RequestBody): Flowable<BaseResponse<QuizInfo>>
+    fun getQuizInfo(@Body body: RequestBody): Flowable<BaseResponse<Document>>
 
 }

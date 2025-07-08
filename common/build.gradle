@@ -90,6 +90,12 @@ dependencies {
     api rootProject.ext.retrofit.logging_interceptor
     api rootProject.ext.retrofit.okhttp
     api rootProject.ext.retrofit.conscrypt
+    // moshi
+//    api rootProject.ext.retrofit.onverter_moshi
+//    api rootProject.ext.retrofit.moshi
+//    api rootProject.ext.retrofit.moshi_kotlin
+//    api rootProject.ext.retrofit.moshi_adapter
+//    kapt rootProject.ext.retrofit.kapt_moshi
 
     //image
     api rootProject.ext.image.glide

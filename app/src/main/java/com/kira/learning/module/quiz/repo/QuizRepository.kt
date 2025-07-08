@@ -2,22 +2,25 @@ package com.kira.learning.module.quiz.repo
 
 import androidx.lifecycle.LiveData
 import com.common.lib.net.ApiServiceLiveDataProxy
+import com.common.lib.net.bean.Document
 import com.common.lib.net.bean.BaseResponse
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.kira.learning.app.BaseRepository
 import com.kira.learning.bean.db.AIResponseInfo
-import com.kira.learning.bean.QuizInfo
+import com.kira.learning.di.ApiActivitiesService
 import com.kira.learning.module.answer.repo.AnswerRepository
+import com.kira.learning.net.ApiService
 import javax.inject.Inject
 
-class QuizRepository @Inject constructor() : BaseRepository() {
+class QuizRepository @Inject constructor(@ApiActivitiesService private val apiActivitiesService: ApiService) :
+    BaseRepository() {
 
     private val questionRequestJson: JsonObject = JsonObject()
-    fun searchQuestion(questionContent: String): LiveData<BaseResponse<QuizInfo>> {
+    fun searchQuestion(questionContent: String): LiveData<BaseResponse<Document>> {
         questionRequestJson.addProperty("question", questionContent)
-        return ApiServiceLiveDataProxy.request(QuizInfo::class.java) {
-            apiService.getQuizInfo(createRequestBody(questionContent))
+        return ApiServiceLiveDataProxy.request(Document::class.java) {
+            apiActivitiesService.getQuizInfo(createRequestBody(questionContent))
         }
     }
 

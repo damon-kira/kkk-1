@@ -12,67 +12,68 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import com.common.lib.base.BaseFragment
 import com.common.lib.glide.GlideUtils
 import com.kira.learning.R
 import com.kira.learning.bean.QuizInfo
 import com.kira.learning.expand.dpToPx
 import com.util.lib.dp
 
-class QuizFragment : Fragment() {
+class QuizFragment : BaseFragment() {
     private var position: Int = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        position = arguments?.getInt("position") ?: 0
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+//    ): View? {
+//        position = arguments?.getInt("position") ?: 0
         // 根据题目类型加载不同布局
-        val quizInfo = (activity as QuizActivity).viewModel.questions[position]
-        return when (quizInfo) {
-            is QuizInfo.SingleChoice -> inflater.inflate(
-                R.layout.item_single_choice, container, false
-            )
-
-            is QuizInfo.MultipleChoice -> inflater.inflate(
-                R.layout.item_multiple_choice, container, false
-            )
-
-            is QuizInfo.TrueFalse -> inflater.inflate(R.layout.item_true_false, container, false)
-        }
-    }
+//        val quizInfo = (activity as QuizActivity).viewModel.questions[position]
+//        return when (quizInfo) {
+//            is QuizInfo.SingleChoice -> inflater.inflate(
+//                R.layout.item_single_choice, container, false
+//            )
+//
+//            is QuizInfo.MultipleChoice -> inflater.inflate(
+//                R.layout.item_multiple_choice, container, false
+//            )
+//
+//            is QuizInfo.TrueFalse -> inflater.inflate(R.layout.item_true_false, container, false)
+//        }
+//    }
 
     // 这里注意根据不同的题型，设置不同的UI
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val quizInfo = (activity as QuizActivity).viewModel.questions[position]
-
-        quizInfo.also {
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.content}")
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.imageUrl}")
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.type}")
-            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.id}")
-        }
+//        val quizInfo = (activity as QuizActivity).viewModel.questions[position]
+//
+//        quizInfo.also {
+//            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.content}")
+//            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.imageUrl}")
+//            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.type}")
+//            Log.e(this.javaClass.simpleName, "onViewCreated: ${it.id}")
+//        }
 
         // 题目标题
-        view.findViewById<TextView>(R.id.tv_quiz_title).text = quizInfo.content
+//        view.findViewById<TextView>(R.id.tv_quiz_title).text = quizInfo.content
 
         // 图片加载
-        quizInfo.imageUrl?.let { url ->
-            GlideUtils.loadCornerImageFromUrl(
-                view.context,
-                url,
-                view.findViewById(R.id.iv_quiz_content),
-                4.dp(),
-                R.drawable.ic_normal_image
-            )
-        }
+//        quizInfo.imageUrl?.let { url ->
+//            GlideUtils.loadCornerImageFromUrl(
+//                view.context,
+//                url,
+//                view.findViewById(R.id.iv_quiz_content),
+//                4.dp(),
+//                R.drawable.ic_normal_image
+//            )
+//        }
 
         // 根据题型初始化选项
-        when (quizInfo) {
-            is QuizInfo.SingleChoice -> setupSingleChoice(view, quizInfo)
-            is QuizInfo.MultipleChoice -> setupMultipleChoice(view, quizInfo)
-            is QuizInfo.TrueFalse -> setupTrueFalse(view, quizInfo)
-        }
+//        when (quizInfo) {
+//            is QuizInfo.SingleChoice -> setupSingleChoice(view, quizInfo)
+//            is QuizInfo.MultipleChoice -> setupMultipleChoice(view, quizInfo)
+//            is QuizInfo.TrueFalse -> setupTrueFalse(view, quizInfo)
+//        }
     }
 
     // 单选题 选项设置
