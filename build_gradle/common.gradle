@@ -143,9 +143,11 @@ rootProject.ext {
     ]
 
     other = [
-            aes       : 'com.aes.lib:aes:1.0.0',    // AES加密
-            devoptions: 'com.devoptions.lib:devoptions:1.0.4', // 开发者选项
+            aes             : 'com.aes.lib:aes:1.0.0',    // AES加密
+            devoptions      : 'com.devoptions.lib:devoptions:1.0.4', // 开发者选项
 //            cache     : 'com.cache.lib:cache:1.0.0', // 缓存库
+            rx_flow         : "io.github.reactivecircus.flowbinding:flowbinding-android:1.2.0",
+            code_highlighter: "com.github.markusressel.KodeHighlighter:core:v3.0.0"
     ]
 
     location = [

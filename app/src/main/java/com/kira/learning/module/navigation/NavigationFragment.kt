@@ -293,6 +293,20 @@ class NavigationFragment : BaseHomeFragment() {
                 Launch.skipStepBarViewActivity(getSupportContext())
             }
         }
+        mBinding.inclueDemoLayout14.let {
+            it.tvDemoName.text = "WebView"
+            it.tvBtn.setOnClickListener {
+                Launch.skipWebViewActivity(getSupportContext(),"https://onecompiler.com/embed?language=python"
+                )
+            }
+        }
+        mBinding.inclueDemoLayout15.let {
+            it.tvDemoName.text = "Coding"
+            it.tvBtn.setOnClickListener {
+                Launch.skipCodePlaygroundActivity(getSupportContext())
+//                Launch.skipKCodingEditorActivity(getSupportContext())
+            }
+        }
     }
 
     private fun cancelAndRecycleEasyWindow(easyWindow: EasyWindow<*>?) {

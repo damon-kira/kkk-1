@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.chaquo.python'// version '15.0.1'
+//    id 'com.chaquo.python'// version '15.0.1'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
@@ -37,13 +37,14 @@ android {
 //                outputFileName = "FinanzasExtremas_v${variant.versionName}_${variant.buildType.name}_${time()}.apk"
 //            }
 //        }
-        python {
-            buildPython "python3"  // 自动检测系统Python3
-            pip {
-                install "numpy"
-                install "colorama"
-            }
-        }
+//        python {
+//            version "3.10"
+//            buildPython "python3"  // 自动检测系统Python3
+//            pip {
+//                install "numpy"
+//                install "colorama"
+//            }
+//        }
     }
 
     packagingOptions {
@@ -185,6 +186,16 @@ dependencies {
 //    implementation rootProject.ext.other.tesseract
     // 核心库（仅用于 Debug 构建）
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
+
+
+    implementation rootProject.ext.other.code_highlighter
+
+    // 可视化输出
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation "com.github.markusressel.KodeHighlighter:python:v3.0.0"
+    implementation "com.github.markusressel.KodeHighlighter:markdown:v3.0.0"
+    // Java 执行
+//    implementation 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6'
 
 //    implementation project(path: ":analysis")
 //    implementation rootProject.ext.firebase.messaging

@@ -167,6 +167,24 @@
             android:layout_marginTop="12dp"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@id/inclue_demo_layout_12" />
+        <include
+            android:id="@+id/inclue_demo_layout_14"
+            style="@style/marginLeftAndRight16"
+            layout="@layout/layout_demo_entrance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/inclue_demo_layout_13" />
+        <include
+            android:id="@+id/inclue_demo_layout_15"
+            style="@style/marginLeftAndRight16"
+            layout="@layout/layout_demo_entrance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/inclue_demo_layout_14" />
 
         <!--        <include-->
         <!--            android:id="@+id/include_black"-->

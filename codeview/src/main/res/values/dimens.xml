@@ -7,4 +7,8 @@
     <dimen name="line_text_size">12sp</dimen>
     <dimen name="shadow_width">24dp</dimen>
     <dimen name="shadow_height">16dp</dimen>
+
+    <dimen name="cev_linenumber_width">36dp</dimen>
+    <dimen name="cev_editor_text_margin">4dp</dimen>
+    <dimen name="cev_editor_text_size">12sp</dimen>
 </resources>

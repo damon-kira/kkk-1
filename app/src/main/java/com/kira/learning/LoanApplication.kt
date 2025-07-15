@@ -5,12 +5,12 @@ import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
 import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
-import com.chaquo.python.PyObject
+//import com.chaquo.python.PyObject
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.kira.learning.app.AppEnv
 import com.kira.learning.messaging.KiraFirebaseMessagingService
-import com.kira.learning.module.python.PythonExecutor
+//import com.kira.learning.module.python.PythonExecutor
 import com.project.util.AesConstant
 import dagger.hilt.android.HiltAndroidApp
 import org.conscrypt.Conscrypt
@@ -23,7 +23,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
     companion object {
         private lateinit var mAppContext: Context
         fun getAppContext(): Context = mAppContext
-        lateinit var module: PyObject
+//        lateinit var module: PyObject
     }
 
     override fun onCreate() {
@@ -42,7 +42,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
         FirebaseApp.initializeApp(this)
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         // 本地Python初始化
-        PythonExecutor.initialize(this)
+//        PythonExecutor.initialize(this)
         Security.insertProviderAt(Conscrypt.newProvider(), 1)
         // Notification Channel 初始化
         KiraFirebaseMessagingService.getDeviceToken()

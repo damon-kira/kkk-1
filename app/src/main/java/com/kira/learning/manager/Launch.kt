@@ -47,9 +47,10 @@ import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import androidx.core.net.toUri
 import com.kira.learning.camera.CaptureActivity
-import com.kira.learning.module.quiz.ActivitiesFragment
+import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
+import com.kira.learning.module.coding.KCodingEditorActivity
 
 object Launch {
 
@@ -233,8 +234,11 @@ object Launch {
     fun skipStepBarViewActivity(context: Context){
         launch(context, StepBarViewActivity::class.java)
     }
-    fun skipActivitiesActivity(context: Context){
-        launch(context, ActivitiesFragment::class.java)
+    fun skipCodePlaygroundActivity(context: Context){
+        launch(context, CodePlaygroundActivity::class.java)
+    }
+    fun skipKCodingEditorActivity(context: Context){
+        launch(context, KCodingEditorActivity::class.java)
     }
 
     /**

@@ -13,6 +13,7 @@ import com.common.lib.net.bean.Activity
 import com.common.lib.net.bean.ActivityGroup
 import com.common.lib.net.bean.ColumnBlock
 import com.common.lib.net.bean.ColumnContent
+import com.common.lib.net.bean.ContentItem
 import com.common.lib.net.bean.Document
 import com.common.lib.net.bean.EssayActivity
 import com.common.lib.net.bean.FitBActivity
@@ -59,7 +60,7 @@ class QuizActivity : BaseActivity() {
             if (it.isSuccess()) {
                 logger_d(TAG, "onCreate: 获取题目成功: ${it.data}")
                 logger_d(TAG, "onCreate: 共: ${it.data?.lesson?.steps?.size} Steps")
-                processDocument(it.data)
+//                processDocument(it.data)
 //                logger_d(TAG, "onCreate: Step 1 共计 : ${it.data?.lesson?.steps[0]?.content[0]?.type } 个模块")
 //                logger_d(TAG, "onCreate: Step 1 : ${it.data?.lesson?.steps[0]?.content[0]?.content[0]?.content[3].} Steps")
 
@@ -96,6 +97,7 @@ class QuizActivity : BaseActivity() {
     }
     // Step解析
     fun processDocument(document: Document?) {
+
         var index = 1
         document?.lesson?.steps?.forEach { step ->
             logger_d("Activities    "," ")
@@ -187,16 +189,20 @@ class QuizActivity : BaseActivity() {
 
     // 更新进度条
     private fun updateProgress(position: Int) {
-        val progress = (position + 1) * 100 / 6//viewModel.questions.size
+        val progress = viewModel.data?.lesson?.steps?.size?.toInt()?.let { (position + 1) * 100 / it }
+            ?: 1
         findViewById<ProgressBar>(R.id.progressBar).progress = progress
     }
 
     // ViewPager适配器
     private inner class QuestionPagerAdapter(context: Context) :
         FragmentStateAdapter(context as FragmentActivity) {
-        override fun getItemCount(): Int = 6//viewModel.questions.size
+        override fun getItemCount(): Int = viewModel.data?.lesson?.steps?.size ?: 0
 
         override fun createFragment(position: Int): Fragment {
+//            val data :ContentItem = viewModel.data?.lesson?.steps?.get(position)?.content?.firstOrNull()
+//                ?: throw IllegalArgumentException("No content found for position $position")
+
             return ActivitiesFragment.newInstance(position)
         }
     }

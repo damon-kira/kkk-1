@@ -6,8 +6,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.common.lib.base.BaseViewModel
+import com.common.lib.net.bean.Activity
 import com.common.lib.net.bean.Document
 import com.common.lib.net.bean.BaseResponse
+import com.common.lib.net.bean.ColumnContent
 import com.kira.learning.module.quiz.repo.QuizRepository
 import javax.inject.Inject
 
@@ -19,15 +21,19 @@ class QuizViewModel @Inject constructor(
     val datas = generatorLiveData<BaseResponse<Document>>()
     private val _currentPosition = MutableLiveData(0)
     val currentPosition: LiveData<Int> = _currentPosition
+    val data get() = datas.value?.data
+    val mapColumnContents: MutableMap<String, ColumnContent> = mutableMapOf()
+    val mapActivity: MutableMap<String, Activity> = mutableMapOf()
 
     fun getQuizInfo() {
         showloading()
         datas.addSourceLiveData(
             repository.searchQuestion("")
         ) {
-
             hideLoading()
             datas.postValue(it)
+            mapColumnContents.clear()
+            mapActivity.clear()
         }
     }
 

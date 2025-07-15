@@ -211,6 +211,12 @@
         <activity
             android:name=".module.stepbar.StepBarViewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.codeeditor.CodePlaygroundActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.coding.KCodingEditorActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
 
 
         <service

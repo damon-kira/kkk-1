@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#1E1E1E">
+
+    <!-- 标题和标签区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:background="#2D2D2D"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/file_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Untitled.py"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            tools:text="Untitled.py"/>
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Reset"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#424242"/>
+
+        <Button
+            android:id="@+id/run_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Run"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50"/>
+    </LinearLayout>
+
+    <!-- 代码标签切换 -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/code_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#252526"
+        app:tabTextColor="#BBBBBB"
+        app:tabSelectedTextColor="#FFFFFF">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Starter code"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solution code"/>
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- 代码编辑区域 -->
+<!--    <io.github.rosemoe.sora.widget.CodeEditor-->
+<!--        android:id="@+id/code_editor"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scrollbarSize="6dp"/>-->
+
+</LinearLayout>

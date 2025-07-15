@@ -18,7 +18,9 @@ import com.kira.learning.R
 import com.kira.learning.bean.QuizInfo
 import com.kira.learning.expand.dpToPx
 import com.util.lib.dp
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class QuizFragment : BaseFragment() {
     private var position: Int = 0
 

@@ -5,28 +5,53 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.TextView
+import com.common.lib.glide.GlideUtils
+import com.common.lib.net.bean.KiraImage
+import com.common.lib.viewbinding.binding
 import com.kira.learning.R
-import java.util.UUID
+import com.kira.learning.databinding.FragmentActivitiesImageBinding
+import com.kira.learning.module.quiz.vm.QuizViewModel
+import com.util.lib.dp
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ImageProcessingFragment : BaseFunctionFragment() {
-    override val moduleId: String = UUID.randomUUID().toString()
+    override val moduleId: String by lazy {
+        arguments?.getString("moduleId", "-1") ?: "-1"
+    }
     override val moduleName: String = "image_processing"
 
-    private lateinit var imageView: ImageView
     private var processedImage: Bitmap? = null
+    private val mBinding by binding(FragmentActivitiesImageBinding::inflate)
+    internal val activityViewModel by lazyActivityViewModel<QuizViewModel>()
+    private var mData: KiraImage? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_activities_image, container, false).apply {
-            imageView = findViewById(R.id.image_view)
-            findViewById<Button>(R.id.process_button).setOnClickListener {
-                processImage()
-            }
+        if (activityViewModel.mapColumnContents[moduleId] is KiraImage) {
+            mData = activityViewModel.mapColumnContents[moduleId] as KiraImage
+        }
+        if (null == mData) return TextView(context).apply {
+            text = "非图片类型Fragment"
+        }
+        return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        GlideUtils.loadCornerImageFromUrl(
+            view.context,
+            mData?.attrs?.src ?: "",
+            mBinding.imageView,
+            4.dp(),
+            R.drawable.ic_normal_image
+        )
+        mBinding.processButton.setOnClickListener {
+            processImage()
         }
     }
 
@@ -55,6 +80,16 @@ class ImageProcessingFragment : BaseFunctionFragment() {
             "update_image" -> {
                 val imageUri = message.getString("image_uri")
 //                loadImage(imageUri)
+            }
+        }
+    }
+
+    companion object {
+        fun newInstance(id: String): ImageProcessingFragment {
+            return ImageProcessingFragment().apply {
+                arguments = Bundle().apply {
+                    putString("moduleId", id)
+                }
             }
         }
     }

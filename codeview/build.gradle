@@ -25,4 +25,8 @@ android {
 
 dependencies {
     implementation project(':common')
+    implementation project(':image')
+
+    implementation rootProject.ext.other.rx_flow
+    implementation rootProject.ext.other.code_highlighter
 }

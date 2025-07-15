@@ -206,4 +206,47 @@ object FragmentHelper {
         return false
     }
 
+    /**
+     * 添加新的 Fragment 到容器
+     *
+     * @param fragmentManager Fragment 管理器
+     * @param viewId 容器视图 ID
+     * @param fragment 要添加的 Fragment
+     * @param tag 自定义标签（可选，默认使用类名）
+     * @param addToBackStack 是否添加到回退栈
+     * @return 添加的 Fragment 标签
+     */
+    fun addFragment(
+        fragmentManager: FragmentManager,
+        @IdRes viewId: Int,
+        fragment: Fragment,
+        tag: String? = null,
+        addToBackStack: Boolean = true
+    ): String {
+        val fragmentTag = tag ?: getTag(fragment)
+
+        // 检查是否已存在相同标签的 Fragment
+        val existingFragment = fragmentManager.findFragmentByTag(fragmentTag)
+        if (existingFragment != null) {
+            // 已存在，直接返回标签
+            return fragmentTag
+        }
+
+        // 使用传统方式创建事务
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        // 添加 Fragment
+        transaction.add(viewId, fragment, fragmentTag)
+
+        // 添加到回退栈
+        if (addToBackStack) {
+            transaction.addToBackStack(fragmentTag)
+        }
+
+        // 提交事务（允许状态丢失）
+        transaction.commitAllowingStateLoss()
+
+        return fragmentTag
+    }
+
 }

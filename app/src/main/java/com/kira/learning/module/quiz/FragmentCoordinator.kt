@@ -70,4 +70,14 @@ class FragmentCoordinator(
     }
 
     var onAllResultsReady: (Map<String, Bundle>) -> Unit = {}
+
+    fun clear() {
+        fragments.clear()
+//        results.clear()
+        fragments.forEach {
+            fragmentManager.beginTransaction()
+                .remove(it.value)
+                .commit()
+        }
+    }
 }

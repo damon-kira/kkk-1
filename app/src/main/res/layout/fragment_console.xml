@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="0dp">
+
+    <!-- 控制台输出区域 -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/console_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/input_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1">
+
+        <TextView
+            android:id="@+id/console_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textColor="#D4D4D4"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            tools:text="请输入第一个数字：1\n请输入第二个数字：2\n计算结果：1.0 + 2.0 = 3.0"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 输入区域 -->
+    <LinearLayout
+        android:id="@+id/input_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#1E1E1E"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/input_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="> "
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/console_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:fontFamily="monospace"/>
+
+        <Button
+            android:id="@+id/console_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textAllCaps="false"
+            android:textColor="#4CAF50"
+            android:background="@null"
+            android:minWidth="0dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"/>
+    </LinearLayout>
+
+    <!-- 分隔线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        app:layout_constraintBottom_toTopOf="@id/input_container"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

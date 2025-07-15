@@ -11,6 +11,8 @@ pluginManagement {
         }
         maven { url "https://chaquo.com/maven" }
         maven { url 'https://jitpack.io' }
+        maven { url "https://maven.aliyun.com/repository/public" }
+
     }
 }
 dependencyResolutionManagement {
@@ -26,6 +28,7 @@ dependencyResolutionManagement {
         }
         maven { url "https://chaquo.com/maven" }
         maven { url 'https://jitpack.io' }
+        maven { url "https://maven.aliyun.com/repository/public" }
     }
 }
 
