@@ -1,0 +1,233 @@
+package com.kira.ui.filesystem.local.utils
+
+import com.kira.ui.filesystem.base.Filesystem
+import com.kira.ui.filesystem.base.exception.*
+import com.kira.ui.filesystem.base.model.*
+import com.kira.ui.filesystem.base.utils.endsWith
+import com.kira.ui.filesystem.base.utils.plusFlag
+import com.ibm.icu.text.CharsetDetector
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import net.lingala.zip4j.ZipFile
+import net.lingala.zip4j.exception.ZipException
+import java.io.File
+
+class LocalFilesystem(private val defaultLocation: File) : Filesystem {
+
+    /** zip4j only supports these formats */
+    private val supportedArchives = arrayOf(".zip", ".jar")
+
+    override fun defaultLocation(): FileModel {
+        val fileModel = toFileModel(defaultLocation)
+        if (!defaultLocation.isDirectory) {
+            throw DirectoryExpectedException()
+        }
+        return fileModel
+    }
+
+    override fun provideDirectory(parent: FileModel): FileTree {
+        val file = toFileObject(parent)
+        if (!file.isDirectory) {
+            throw DirectoryExpectedException()
+        }
+        return FileTree(
+            parent = parent,
+            children = file.listFiles().orEmpty()
+                .map(::toFileModel).toList(),
+        )
+    }
+
+    override fun exists(fileModel: FileModel): Boolean {
+        return File(fileModel.path).exists()
+    }
+
+    override fun createFile(fileModel: FileModel) {
+        val file = toFileObject(fileModel)
+        if (file.exists()) {
+            throw FileAlreadyExistsException(fileModel.path)
+        }
+        if (fileModel.directory) {
+            file.mkdirs()
+        } else {
+            val parentFile = file.parentFile!!
+            if (!parentFile.exists()) {
+                parentFile.mkdirs()
+            }
+            file.createNewFile()
+        }
+    }
+
+    override fun renameFile(source: FileModel, dest: FileModel) {
+        val originalFile = toFileObject(source)
+        val renamedFile = toFileObject(dest)
+        if (!originalFile.exists()) {
+            throw FileNotFoundException(source.path)
+        }
+        if (renamedFile.exists()) {
+            throw FileAlreadyExistsException(renamedFile.absolutePath)
+        }
+        originalFile.renameTo(renamedFile)
+    }
+
+    override fun deleteFile(fileModel: FileModel) {
+        val file = toFileObject(fileModel)
+        if (!file.exists()) {
+            throw FileNotFoundException(fileModel.path)
+        }
+        file.deleteRecursively()
+    }
+
+    override fun copyFile(source: FileModel, dest: FileModel) {
+        val directory = toFileObject(dest)
+        val sourceFile = toFileObject(source)
+        val destFile = File(directory, sourceFile.name)
+        if (!sourceFile.exists()) {
+            throw FileNotFoundException(source.path)
+        }
+        if (destFile.exists()) {
+            throw FileAlreadyExistsException(dest.path)
+        }
+        sourceFile.copyRecursively(destFile, overwrite = false)
+    }
+
+    // TODO: Use ProgressMonitor
+    override fun compressFiles(source: List<FileModel>, dest: FileModel): Flow<FileModel> {
+        return callbackFlow {
+            val destFile = toFileObject(dest)
+            val archiveFile = ZipFile(destFile)
+            invokeOnClose {
+                archiveFile.progressMonitor.isCancelAllTasks = true
+            }
+            if (!destFile.exists()) {
+                for (fileModel in source) {
+                    val sourceFile = toFileObject(fileModel)
+                    if (sourceFile.exists()) {
+                        try {
+                            if (sourceFile.isDirectory) {
+                                archiveFile.addFolder(sourceFile)
+                            } else {
+                                archiveFile.addFile(sourceFile)
+                            }
+                        } catch (e: ZipException) {
+                            if (e.type == ZipException.Type.TASK_CANCELLED_EXCEPTION) {
+                                throw CancellationException()
+                            } else {
+                                throw e
+                            }
+                        }
+                        send(fileModel)
+                    } else {
+                        throw FileNotFoundException(fileModel.path)
+                    }
+                }
+                close()
+            } else {
+                throw FileAlreadyExistsException(destFile.absolutePath)
+            }
+        }
+    }
+
+    // TODO: Use ProgressMonitor
+    override fun extractFiles(source: FileModel, dest: FileModel): Flow<FileModel> {
+        return callbackFlow {
+            val sourceFile = toFileObject(source)
+            val archiveFile = ZipFile(sourceFile)
+            invokeOnClose {
+                archiveFile.progressMonitor.isCancelAllTasks = true
+            }
+            if (sourceFile.exists()) {
+                if (sourceFile.name.endsWith(supportedArchives)) {
+                    when {
+                        archiveFile.isValidZipFile -> {
+                            try {
+                                archiveFile.extractAll(dest.path)
+                            } catch (e: ZipException) {
+                                if (e.type == ZipException.Type.TASK_CANCELLED_EXCEPTION) {
+                                    throw CancellationException()
+                                } else {
+                                    throw e
+                                }
+                            }
+                            send(source)
+                            close() // FIXME send() вызывается только 1 раз
+                        }
+
+                        archiveFile.isEncrypted -> throw EncryptedArchiveException(source.path)
+                        archiveFile.isSplitArchive -> throw SplitArchiveException(source.path)
+                        else -> throw InvalidArchiveException(source.path)
+                    }
+                } else {
+                    throw UnsupportedArchiveException(source.path)
+                }
+            } else {
+                throw FileNotFoundException(source.path)
+            }
+        }
+    }
+
+    override fun loadFile(fileModel: FileModel, fileParams: FileParams): String {
+        val file = File(fileModel.path)
+        if (!file.exists()) {
+            throw FileNotFoundException(fileModel.path)
+        }
+        val charset = if (fileParams.chardet) {
+            try {
+                val charsetMatch = CharsetDetector()
+                    .setText(file.readBytes())
+                    .detect()
+                charset(charsetMatch.name)
+            } catch (e: Exception) {
+                Charsets.UTF_8
+            }
+        } else {
+            fileParams.charset
+        }
+        return file.readText(charset)
+    }
+
+    override fun saveFile(fileModel: FileModel, text: String, fileParams: FileParams) {
+        val file = File(fileModel.path)
+        if (!file.exists()) {
+            val parentFile = file.parentFile!!
+            if (!parentFile.exists()) {
+                parentFile.mkdirs()
+            }
+            file.createNewFile()
+        }
+        file.writeText(fileParams.linebreak.replace(text), fileParams.charset)
+    }
+
+    companion object : Filesystem.Mapper<File> {
+
+        const val LOCAL_UUID = "local"
+        const val LOCAL_SCHEME = "file://"
+
+        override fun toFileModel(fileObject: File): FileModel {
+            return FileModel(
+                fileUri = LOCAL_SCHEME + fileObject.path,
+                filesystemUuid = LOCAL_UUID,
+                size = fileObject.length(),
+                lastModified = fileObject.lastModified(),
+                directory = fileObject.isDirectory,
+                permission = with(fileObject) {
+                    var permission = Permission.EMPTY
+                    if (fileObject.canRead()) {
+                        permission = permission plusFlag Permission.OWNER_READ
+                    }
+                    if (fileObject.canWrite()) {
+                        permission = permission plusFlag Permission.OWNER_WRITE
+                    }
+                    if (fileObject.canExecute()) {
+                        permission = permission plusFlag Permission.OWNER_EXECUTE
+                    }
+                    permission
+                },
+            )
+        }
+
+        override fun toFileObject(fileModel: FileModel): File {
+            return File(fileModel.path)
+        }
+    }
+}

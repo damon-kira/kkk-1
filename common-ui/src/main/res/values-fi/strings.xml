@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="common_error_occurred">Tapahtui virhe</string>
+    <string name="common_no_result">Ei tuloksia</string>
+    <string name="common_save">Tallenna</string>
+    <string name="common_delete">Poista</string>
+    <string name="common_continue">Jatkaa</string>
+</resources>

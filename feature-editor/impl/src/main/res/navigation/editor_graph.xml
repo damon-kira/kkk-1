@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editor_graph"
+    app:startDestination="@id/forceSyntaxDialog">
+
+    <dialog
+        android:id="@+id/forceSyntaxDialog"
+        android:name="com.kira.ui.feature.editor.ui.dialog.ForceSyntaxDialog"
+        android:label="ForceSyntaxDialog">
+        <deepLink app:uri="blacksquircle://editor/syntax?languageName={languageName}" />
+        <argument
+            android:name="languageName"
+            app:argType="string" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/closeModifiedDialog"
+        android:name="com.kira.ui.feature.editor.ui.dialog.CloseModifiedDialog"
+        android:label="CloseModifiedDialog">
+        <deepLink app:uri="blacksquircle://editor/close?position={position}&amp;fileName={fileName}" />
+        <argument
+            android:name="fileName"
+            app:argType="string" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/gotoLineDialog"
+        android:name="com.kira.ui.feature.editor.ui.dialog.GotoLineDialog"
+        android:label="GotoLineDialog"
+        tools:layout="@layout/dialog_goto_line">
+        <deepLink app:uri="blacksquircle://editor/goto" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/insertColorDialog"
+        android:name="com.kira.ui.feature.editor.ui.dialog.InsertColorDialog"
+        android:label="InsertColorDialog">
+        <deepLink app:uri="blacksquircle://editor/insertcolor" />
+    </dialog>
+
+</navigation>

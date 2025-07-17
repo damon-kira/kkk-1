@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="common_error_occurred">Произошла ошибка</string>
+    <string name="common_no_result">Нет результатов</string>
+    <string name="common_save">Сохранить</string>
+    <string name="common_delete">Удалить</string>
+    <string name="common_continue">Продолжить</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/changelog_graph"
+    app:startDestination="@id/changeLogFragment">
+
+    <fragment
+        android:id="@+id/changeLogFragment"
+        android:name="com.kira.ui.feature.changelog.ui.fragment.ChangeLogFragment"
+        android:label="@string/label_changelog"
+        tools:layout="@layout/fragment_changelog">
+        <deepLink app:uri="blacksquircle://settings/about/changelog" />
+    </fragment>
+
+</navigation>

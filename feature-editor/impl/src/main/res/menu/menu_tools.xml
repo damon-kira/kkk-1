@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_force_syntax"
+        android:title="@string/action_force_syntax"
+        android:icon="@drawable/ic_marker"
+        app:iconTint="?colorOnSurfaceVariant" />
+    <item
+        android:id="@+id/action_insert_color"
+        android:title="@string/action_insert_color"
+        android:icon="@drawable/ic_palette"
+        app:iconTint="?colorOnSurfaceVariant" />
+</menu>

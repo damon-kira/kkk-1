@@ -1,0 +1,233 @@
+package com.kira.ui.filesystem.ftp
+
+import com.kira.ui.filesystem.base.Filesystem
+import com.kira.ui.filesystem.base.exception.AuthenticationException
+import com.kira.ui.filesystem.base.exception.ConnectionException
+import com.kira.ui.filesystem.base.exception.FileNotFoundException
+import com.kira.ui.filesystem.base.model.*
+import com.kira.ui.filesystem.base.utils.isValidFileName
+import com.kira.ui.filesystem.base.utils.plusFlag
+import kotlinx.coroutines.flow.Flow
+import org.apache.commons.net.ftp.*
+import java.io.*
+import java.util.*
+
+class FTPFilesystem(
+    private val serverConfig: ServerConfig,
+    private val cacheLocation: File,
+) : Filesystem {
+
+    private val ftpClient = FTPClient()
+    private val ftpMapper = FTPMapper()
+
+    init {
+        ftpClient.connectTimeout = 10000
+    }
+
+    override fun defaultLocation(): FileModel {
+        return FileModel(FTP_SCHEME + serverConfig.initialDir, serverConfig.uuid)
+    }
+
+    override fun provideDirectory(parent: FileModel): FileTree {
+        try {
+            connect()
+            ftpClient.changeWorkingDirectory(parent.path)
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(parent.path)
+            }
+            return FileTree(
+                parent = ftpMapper.parent(parent),
+                children = ftpClient.listFiles(parent.path)
+                    .filter { it.name.isValidFileName() }
+                    .map(ftpMapper::toFileModel),
+            )
+        } finally {
+            disconnect()
+        }
+    }
+
+    override fun exists(fileModel: FileModel): Boolean {
+        throw UnsupportedOperationException()
+    }
+
+    override fun createFile(fileModel: FileModel) {
+        try {
+            connect()
+            if (fileModel.directory) {
+                ftpClient.makeDirectory(fileModel.path)
+            } else {
+                ftpClient.storeFile(fileModel.path, "".byteInputStream())
+            }
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(fileModel.path)
+            }
+        } finally {
+            disconnect()
+        }
+    }
+
+    override fun renameFile(source: FileModel, dest: FileModel) {
+        try {
+            connect()
+            ftpClient.rename(source.path, dest.path)
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(source.path)
+            }
+        } finally {
+            disconnect()
+        }
+    }
+
+    override fun deleteFile(fileModel: FileModel) {
+        try {
+            connect()
+            if (fileModel.directory) {
+                ftpClient.removeDirectory(fileModel.path)
+            } else {
+                ftpClient.deleteFile(fileModel.path)
+            }
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(fileModel.path)
+            }
+        } finally {
+            disconnect()
+        }
+    }
+
+    override fun copyFile(source: FileModel, dest: FileModel) {
+        throw UnsupportedOperationException()
+    }
+
+    override fun compressFiles(source: List<FileModel>, dest: FileModel): Flow<FileModel> {
+        throw UnsupportedOperationException()
+    }
+
+    override fun extractFiles(source: FileModel, dest: FileModel): Flow<FileModel> {
+        throw UnsupportedOperationException()
+    }
+
+    override fun loadFile(fileModel: FileModel, fileParams: FileParams): String {
+        val tempFile = File(cacheLocation, UUID.randomUUID().toString())
+        try {
+            connect()
+
+            tempFile.createNewFile()
+            tempFile.outputStream().use {
+                ftpClient.retrieveFile(fileModel.path, it)
+            }
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(fileModel.path)
+            }
+            return tempFile.readText(fileParams.charset)
+        } finally {
+            tempFile.deleteRecursively()
+            disconnect()
+        }
+    }
+
+    override fun saveFile(fileModel: FileModel, text: String, fileParams: FileParams) {
+        val tempFile = File(cacheLocation, UUID.randomUUID().toString())
+        try {
+            connect()
+
+            tempFile.createNewFile()
+            tempFile.writeText(text, fileParams.charset)
+            tempFile.inputStream().use {
+                ftpClient.storeFile(fileModel.path, it)
+            }
+            if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+                throw FileNotFoundException(fileModel.path)
+            }
+        } finally {
+            tempFile.deleteRecursively()
+            disconnect()
+        }
+    }
+
+    private fun connect() {
+        if (serverConfig.password == null) {
+            throw AuthenticationException(AuthMethod.PASSWORD, false)
+        }
+        if (ftpClient.isConnected) {
+            return
+        }
+        ftpClient.connect(serverConfig.address, serverConfig.port)
+        if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+            throw ConnectionException()
+        }
+        if (serverConfig.authMethod != AuthMethod.PASSWORD) {
+            throw UnsupportedOperationException()
+        }
+        ftpClient.enterLocalPassiveMode()
+        ftpClient.login(serverConfig.username, serverConfig.password)
+        if (!FTPReply.isPositiveCompletion(ftpClient.replyCode)) {
+            throw AuthenticationException(AuthMethod.PASSWORD, true)
+        }
+    }
+
+    private fun disconnect() {
+        if (ftpClient.isConnected) {
+            ftpClient.logout()
+            ftpClient.disconnect()
+        }
+    }
+
+    inner class FTPMapper : Filesystem.Mapper<FTPFile> {
+
+        private var parent: FileModel? = null
+
+        override fun toFileModel(fileObject: FTPFile): FileModel {
+            return FileModel(
+                fileUri = parent?.fileUri + "/" + fileObject.name,
+                filesystemUuid = serverConfig.uuid,
+                size = fileObject.size,
+                lastModified = fileObject.timestamp.timeInMillis,
+                directory = fileObject.isDirectory,
+                permission = with(fileObject) {
+                    var permission = Permission.EMPTY
+                    if (hasPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION)) {
+                        permission = permission plusFlag Permission.OWNER_READ
+                    }
+                    if (hasPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION)) {
+                        permission = permission plusFlag Permission.OWNER_WRITE
+                    }
+                    if (hasPermission(FTPFile.USER_ACCESS, FTPFile.EXECUTE_PERMISSION)) {
+                        permission = permission plusFlag Permission.OWNER_EXECUTE
+                    }
+                    if (hasPermission(FTPFile.GROUP_ACCESS, FTPFile.READ_PERMISSION)) {
+                        permission = permission plusFlag Permission.GROUP_READ
+                    }
+                    if (hasPermission(FTPFile.GROUP_ACCESS, FTPFile.WRITE_PERMISSION)) {
+                        permission = permission plusFlag Permission.GROUP_WRITE
+                    }
+                    if (hasPermission(FTPFile.GROUP_ACCESS, FTPFile.EXECUTE_PERMISSION)) {
+                        permission = permission plusFlag Permission.GROUP_EXECUTE
+                    }
+                    if (hasPermission(FTPFile.WORLD_ACCESS, FTPFile.READ_PERMISSION)) {
+                        permission = permission plusFlag Permission.OTHERS_READ
+                    }
+                    if (hasPermission(FTPFile.WORLD_ACCESS, FTPFile.WRITE_PERMISSION)) {
+                        permission = permission plusFlag Permission.OTHERS_WRITE
+                    }
+                    if (hasPermission(FTPFile.WORLD_ACCESS, FTPFile.EXECUTE_PERMISSION)) {
+                        permission = permission plusFlag Permission.OTHERS_EXECUTE
+                    }
+                    permission
+                },
+            )
+        }
+
+        override fun toFileObject(fileModel: FileModel): FTPFile {
+            throw UnsupportedOperationException()
+        }
+
+        fun parent(parent: FileModel): FileModel {
+            this.parent = parent
+            return parent
+        }
+    }
+
+    companion object {
+        const val FTP_SCHEME = "ftp://"
+    }
+}

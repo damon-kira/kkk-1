@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+  <!-- 章鱼头部 (紫色圆形) -->
+  <path
+      android:fillColor="#8F30D8"
+      android:pathData="M60,30 a30,30 0 1 1 0,60 a30,30 0 1 1 0,-60z"/>
+
+  <!-- 眼睛 (黑色"M"形) -->
+  <path
+      android:fillColor="#000000"
+      android:pathData="M50,45 Q55,50 60,45 Q65,50 70,45"/>
+
+  <!-- 嘴巴 (白色弧形+牙齿) -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M50,60 Q60,70 70,60"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M55,60 L55,65 L65,65 L65,60 Z"/>
+
+  <!-- 触手 (三条弯曲触须) -->
+  <path
+      android:fillColor="#8F30D8"
+      android:pathData="M45,80 Q40,90 45,95 Q50,90 45,80z"/>
+  <path
+      android:fillColor="#8F30D8"
+      android:pathData="M60,80 Q60,95 60,95 Q60,90 60,80z"/>
+  <path
+      android:fillColor="#8F30D8"
+      android:pathData="M75,80 Q80,90 75,95 Q70,90 75,80z"/>
+</vector>

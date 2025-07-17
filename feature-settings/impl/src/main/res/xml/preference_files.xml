@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/pref_category_encoding">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="ENCODING_AUTO_DETECT"
+            android:summary="@string/pref_encoding_auto_detect_summary"
+            android:title="@string/pref_encoding_auto_detect_title" />
+
+        <ListPreference
+            android:defaultValue="UTF-8"
+            android:dependency="ENCODING_AUTO_DETECT"
+            android:key="ENCODING_FOR_OPENING"
+            android:summary="@string/pref_encoding_for_opening_summary"
+            android:title="@string/pref_encoding_for_opening_title" />
+
+        <ListPreference
+            android:defaultValue="UTF-8"
+            android:dependency="ENCODING_AUTO_DETECT"
+            android:key="ENCODING_FOR_SAVING"
+            android:summary="@string/pref_encoding_for_saving_summary"
+            android:title="@string/pref_encoding_for_saving_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_linebreaks">
+
+        <ListPreference
+            android:defaultValue="2"
+            android:key="LINEBREAK_FOR_SAVING"
+            android:summary="@string/pref_linebreaks_for_saving_files_summary"
+            android:title="@string/pref_linebreaks_for_saving_files_title"
+            app:entries="@array/linebreak_entries"
+            app:entryValues="@array/linebreak_values" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_file_manager">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="SHOW_HIDDEN_FILES"
+            android:summary="@string/pref_show_hidden_files_summary"
+            android:title="@string/pref_show_hidden_files_title" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="FOLDERS_ON_TOP"
+            android:summary="@string/pref_folders_on_top_summary"
+            android:title="@string/pref_folders_on_top_title" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:key="VIEW_MODE"
+            android:title="@string/pref_view_mode_title"
+            app:entries="@array/view_mode_entries"
+            app:entryValues="@array/view_mode_values"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:key="SORT_MODE"
+            android:title="@string/pref_sort_mode_title"
+            app:entries="@array/sort_mode_entries"
+            app:entryValues="@array/sort_mode_values"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

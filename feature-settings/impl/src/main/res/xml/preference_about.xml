@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_category_about">
+
+        <Preference
+            android:icon="@mipmap/ic_launcher_round"
+            android:summary="@string/pref_about_summary"
+            android:key="ABOUT" />
+
+        <Preference
+            android:title="@string/pref_privacy_policy_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/massivemadness/Squircle-CE/blob/master/PRIVACY-POLICY.md" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_contribute">
+
+        <Preference
+            android:title="@string/pref_translation_title"
+            android:summary="@string/pref_translation_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://crowdin.com/project/squircle-ce" />
+        </Preference>
+
+        <Preference
+            android:title="@string/pref_contribute_title"
+            android:summary="@string/pref_contribute_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/massivemadness/Squircle-CE" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="common_error_occurred">Wystąpił błąd</string>
+    <string name="common_no_result">Brak wyników</string>
+    <string name="common_save">Zapisz</string>
+    <string name="common_delete">Usuń</string>
+    <string name="common_continue">Kontynuuj</string>
+</resources>

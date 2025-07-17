@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shortcuts_graph"
+    app:startDestination="@id/shortcutsFragment">
+
+    <fragment
+        android:id="@+id/shortcutsFragment"
+        android:name="com.kira.ui.feature.shortcuts.ui.fragment.ShortcutsFragment"
+        android:label="@string/pref_header_keybindings_title"
+        tools:layout="@layout/layout_preference">
+        <deepLink app:uri="blacksquircle://settings/keybindings" />
+        <action
+            android:id="@+id/to_shortcutDialog"
+            app:destination="@id/shortcutDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/shortcutDialog"
+        android:name="com.kira.ui.feature.shortcuts.ui.dialog.ShortcutDialog"
+        android:label="@string/pref_header_keybindings_title"
+        tools:layout="@layout/dialog_shortcut">
+        <deepLink app:uri="blacksquircle://settings/keybindings/edit?key={key}" />
+        <argument
+            android:name="key"
+            app:argType="string" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/conflictKeyDialog"
+        android:name="com.kira.ui.feature.shortcuts.ui.dialog.ConflictKeyDialog"
+        android:label="@string/pref_header_keybindings_title">
+        <deepLink app:uri="blacksquircle://settings/keybindings/conflict" />
+    </dialog>
+
+</navigation>

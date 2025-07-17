@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <declare-styleable name="TextScroller">
+        <attr name="thumbNormal" format="reference"/>
+        <attr name="thumbDragging" format="reference"/>
+        <attr name="thumbTint" format="color"/>
+    </declare-styleable>
+</resources>

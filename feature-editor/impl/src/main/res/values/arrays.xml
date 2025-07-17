@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+
+    <string-array name="language_title">
+        <item>ActionScript</item>
+        <item>C</item>
+        <item>C++</item>
+        <item>C#</item>
+        <item>CSS</item>
+        <item>Fortran</item>
+        <item>Go</item>
+        <item>Groovy</item>
+        <item>HTML</item>
+        <item>Ini</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>Json</item>
+        <item>Julia</item>
+        <item>Kotlin</item>
+        <item>LaTeX</item>
+        <item>Lisp</item>
+        <item>Lua</item>
+        <item>Markdown</item>
+        <item>PHP</item>
+        <item>Plain Text</item>
+        <item>Python</item>
+        <item>Ruby</item>
+        <item>Rust</item>
+        <item>Shell</item>
+        <item>Smali</item>
+        <item>SQL</item>
+        <item>TOML</item>
+        <item>TypeScript</item>
+        <item>Visual Basic</item>
+        <item>XML</item>
+        <item>YAML</item>
+    </string-array>
+
+    <string-array name="language_name">
+        <item>actionscript</item>
+        <item>c</item>
+        <item>cplusplus</item>
+        <item>csharp</item>
+        <item>css</item>
+        <item>fortran</item>
+        <item>go</item>
+        <item>groovy</item>
+        <item>html</item>
+        <item>ini</item>
+        <item>java</item>
+        <item>javascript</item>
+        <item>json</item>
+        <item>julia</item>
+        <item>kotlin</item>
+        <item>latex</item>
+        <item>lisp</item>
+        <item>lua</item>
+        <item>markdown</item>
+        <item>php</item>
+        <item>plaintext</item>
+        <item>python</item>
+        <item>ruby</item>
+        <item>rust</item>
+        <item>shell</item>
+        <item>smali</item>
+        <item>sql</item>
+        <item>toml</item>
+        <item>typescript</item>
+        <item>visualbasic</item>
+        <item>xml</item>
+        <item>yaml</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_copy"
+        android:title="@android:string/copy"
+        android:icon="@drawable/ic_copy"
+        app:iconTint="?colorOnSurface"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="@string/common_delete"
+        android:icon="@drawable/ic_delete"
+        app:iconTint="?colorOnSurface"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_cut"
+        android:title="@android:string/cut"
+        android:icon="@drawable/ic_cut"
+        app:iconTint="?colorOnSurface"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_select_all"
+        android:title="@android:string/selectAll"
+        android:icon="@drawable/ic_select_all"
+        app:iconTint="?colorOnSurface"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_open_with"
+        android:title="@string/action_open_with"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rename"
+        android:title="@string/action_rename"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_properties"
+        android:title="@string/action_properties"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_copy_path"
+        android:title="@string/action_copy_path"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_create_zip"
+        android:title="@string/action_compress"
+        app:showAsAction="never" />
+
+</menu>
