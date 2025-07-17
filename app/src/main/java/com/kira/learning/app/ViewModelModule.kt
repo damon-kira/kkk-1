@@ -26,6 +26,7 @@ import com.kira.learning.module.dashboardDetail.RepayDetailViewModel
 import com.kira.learning.module.ocr.vm.OcrViewModel
 import com.kira.learning.module.repeat.confirm.RepeatConfirmViewModel
 import com.kira.learning.module.setting.SettingViewModel
+import com.kira.learning.module.supereditor.application.viewmodel.SuperEditorViewModel
 import com.kira.learning.module.upload.UploadViewModel
 import dagger.Binds
 import dagger.Module
@@ -162,4 +163,8 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OcrViewModel::class)
     abstract fun bindOcrViewModel(viewModel: OcrViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(SuperEditorViewModel::class)
+    abstract fun bindSuperEditorViewModel(viewModel: SuperEditorViewModel): ViewModel
 }

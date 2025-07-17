@@ -1,0 +1,27 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    dependencies {
+//        classpath("com.google.dagger:hilt-android-gradle-plugin:2.43.2")
+        classpath("com.google.gms:google-services:4.4.3")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.4")
+        classpath("com.android.tools.build:gradle:8.5.0")
+        // 确保其他插件也兼容（如Kotlin插件）
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
+    }
+}
+
+plugins {
+    id("com.android.application") version "8.5.0" apply false
+    id("com.android.library") version "8.5.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.23" apply false
+    id("com.google.dagger.hilt.android") version "2.51.1" apply false
+    id("com.chaquo.python") version "15.0.1" apply false
+    id("com.google.firebase.crashlytics") version "3.0.4" apply false
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20" apply false
+    id("com.google.gms.google-services") version "4.4.3" apply false
+    alias(libs.plugins.navigation) apply false
+}
+
+apply(from = "./build_gradle/app.gradle")
+apply(from = "./build_gradle/common.gradle")

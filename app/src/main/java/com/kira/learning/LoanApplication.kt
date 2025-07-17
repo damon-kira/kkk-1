@@ -12,6 +12,8 @@ import com.kira.learning.app.AppEnv
 import com.kira.learning.messaging.KiraFirebaseMessagingService
 //import com.kira.learning.module.python.PythonExecutor
 import com.project.util.AesConstant
+import com.util.lib.log.logger_d
+import com.util.lib.log.logger_e
 import dagger.hilt.android.HiltAndroidApp
 import org.conscrypt.Conscrypt
 import java.security.Security
@@ -39,12 +41,29 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 //        AdjustManager.init(this, AppEnv.DEBUG)
 
         // Firebase 初始化
-        FirebaseApp.initializeApp(this)
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+        initFirebase()
+
         // 本地Python初始化
 //        PythonExecutor.initialize(this)
         Security.insertProviderAt(Conscrypt.newProvider(), 1)
-        // Notification Channel 初始化
+    }
+
+    private fun initFirebase() {
+        try {
+            if (FirebaseApp.getApps(mAppContext).isEmpty()) {
+                logger_e("Firebase", "FirebaseApp not initialized!")
+                FirebaseApp.initializeApp(mAppContext)
+            }
+
+            val crashlytics = FirebaseCrashlytics.getInstance()
+            crashlytics.setCrashlyticsCollectionEnabled(true)
+        } catch (e: Exception) {
+            logger_e("Firebase", "Failed to enable Crashlytics ${e.message}")
+        }
+//        FirebaseApp.initializeApp(this)
+//        logger_d("Firebase", "Initialized: ${FirebaseApp.getInstance().name}")
+//        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+//         Notification Channel 初始化
         KiraFirebaseMessagingService.getDeviceToken()
     }
 

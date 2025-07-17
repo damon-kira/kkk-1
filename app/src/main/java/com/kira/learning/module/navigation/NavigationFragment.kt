@@ -307,6 +307,12 @@ class NavigationFragment : BaseHomeFragment() {
 //                Launch.skipKCodingEditorActivity(getSupportContext())
             }
         }
+        mBinding.inclueDemoLayout16.let {
+            it.tvDemoName.text = "SuperEditor"
+            it.tvBtn.setOnClickListener {
+                Launch.skipSuperEditorActivity(getSupportContext())
+            }
+        }
     }
 
     private fun cancelAndRecycleEasyWindow(easyWindow: EasyWindow<*>?) {

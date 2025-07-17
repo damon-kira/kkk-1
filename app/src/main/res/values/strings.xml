@@ -38,7 +38,7 @@
     <string name="login_voice">未收到？%s</string>
 
     <string name="home_banner_text">可靠</string>
-    <string name="loan_apply">获取金额</string>
+    <string name="loan_apply">登录</string>
     <string name="login_amount_hint">立即获取</string>
     <string name="login_amount">$5,000,000</string>
     <string name="login_mobile_hint">使用与身份证关联的手机号注册/登录</string>
@@ -374,4 +374,13 @@
     <string name="test_inter">国际化-默认</string>
     <string name="test">测试</string>
     <string name="messaging">消息推送</string>
+    <string name="action_restart">Restart</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+
+    <string name="dialog_title_exit">Exit</string>
+    <string name="dialog_message_exit">Are you sure you want to exit? All changes will be saved into a cache</string>
+
+    <string name="message_in_app_update_ready">App is ready to update</string>
+    <string name="message_in_app_update_failed">Update installation failed</string>
 </resources>

@@ -154,6 +154,7 @@ rootProject.ext {
             location: "com.location.lib:location:1.0.1" // 定位服务
     ]
 
+
     google = [
             play_services_location: "com.google.android.gms:play-services-location:${version.play_service}" // 定位服务
     ]

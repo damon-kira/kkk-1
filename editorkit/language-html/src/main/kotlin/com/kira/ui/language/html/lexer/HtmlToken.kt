@@ -1,0 +1,35 @@
+
+
+package com.kira.ui.language.html.lexer
+
+enum class HtmlToken {
+    XML_TAG_NAME,
+    XML_ATTR_NAME,
+
+    XML_DOCTYPE_PUBLIC,
+    XML_DOCTYPE_START,
+    XML_DOCTYPE_END,
+
+    XML_PI_START,
+    XML_PI_END,
+    XML_PI_TARGET,
+
+    XML_DATA_CHARACTERS,
+    XML_TAG_CHARACTERS,
+    XML_COMMENT_CHARACTERS,
+
+    XML_EMPTY_ELEMENT_END,
+    XML_TAG_END,
+
+    XML_START_TAG_START,
+    XML_END_TAG_START,
+
+    XML_ATTRIBUTE_VALUE,
+
+    XML_CHAR_ENTITY_REF,
+    XML_ENTITY_REF_TOKEN,
+
+    WHITESPACE,
+    BAD_CHARACTER,
+    EOF
+}

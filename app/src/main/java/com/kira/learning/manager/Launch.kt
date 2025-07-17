@@ -51,6 +51,7 @@ import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
 import com.kira.learning.module.coding.KCodingEditorActivity
+import com.kira.learning.module.supereditor.application.activity.SuperEditorActivity
 
 object Launch {
 
@@ -239,6 +240,9 @@ object Launch {
     }
     fun skipKCodingEditorActivity(context: Context){
         launch(context, KCodingEditorActivity::class.java)
+    }
+    fun skipSuperEditorActivity(context: Context){
+        launch(context, SuperEditorActivity::class.java)
     }
 
     /**
