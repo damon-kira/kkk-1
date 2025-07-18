@@ -3,8 +3,8 @@ package com.kira.learning.app
 import android.content.Context
 import com.kira.ui.core.provider.coroutine.DispatcherProvider
 import com.kira.ui.core.provider.resources.StringProvider
-import com.kira.learning.module.supereditor.internal.provider.coroutine.DispatcherProviderImpl
-import com.kira.learning.module.supereditor.internal.provider.resources.StringProviderImpl
+import com.kira.learning.module.supereditor.provider.coroutine.DispatcherProviderImpl
+import com.kira.learning.module.supereditor.provider.resources.StringProviderImpl
 import com.kira.learning.di.ApiActivitiesService
 import com.kira.learning.di.UploadApiService
 import com.kira.learning.net.ApiManager

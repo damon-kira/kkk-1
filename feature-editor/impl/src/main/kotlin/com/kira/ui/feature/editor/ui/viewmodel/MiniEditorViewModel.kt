@@ -1,5 +1,7 @@
 package com.kira.ui.feature.editor.ui.viewmodel
 
+
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kira.ui.core.extensions.*
@@ -15,8 +17,8 @@ import com.kira.ui.feature.editor.domain.model.DocumentContent
 import com.kira.ui.feature.editor.domain.model.DocumentModel
 import com.kira.ui.feature.editor.domain.model.DocumentParams
 import com.kira.ui.feature.editor.domain.repository.DocumentRepository
-import com.kira.ui.feature.editor.ui.manager.KeyboardManager
-import com.kira.ui.feature.editor.ui.manager.ToolbarManager
+import com.kira.ui.feature.editor.ui.manager.MiniCodingKeyboardManager
+import com.kira.ui.feature.editor.ui.manager.MiniCodingToolbarManager
 import com.kira.ui.feature.editor.ui.mvi.*
 import com.kira.ui.feature.editor.ui.navigation.EditorScreen
 import com.kira.ui.feature.fonts.domain.repository.FontsRepository
@@ -33,7 +35,7 @@ import javax.inject.Inject
 import com.kira.ui.uikit.R as UiR
 
 @HiltViewModel
-class EditorViewModel @Inject constructor(
+class MiniEditorViewModel @Inject constructor(
     private val stringProvider: StringProvider,
     private val settingsManager: SettingsManager,
     private val documentRepository: DocumentRepository,
@@ -43,14 +45,15 @@ class EditorViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    private val _toolbarViewState = MutableStateFlow<ToolbarViewState>(ToolbarViewState.ActionBar())
-    val toolbarViewState: StateFlow<ToolbarViewState> = _toolbarViewState.asStateFlow()
+    private val _toolbarViewState =
+        MutableStateFlow<MiniCodingToolbarViewState>(MiniCodingToolbarViewState.ActionBar())
+    val toolbarViewState: StateFlow<MiniCodingToolbarViewState> = _toolbarViewState.asStateFlow()
 
     private val _editorViewState = MutableStateFlow<EditorViewState>(EditorViewState.Loading)
     val editorViewState: StateFlow<EditorViewState> = _editorViewState.asStateFlow()
 
-    private val _keyboardViewState = MutableStateFlow(KeyboardManager.Mode.NONE)
-    val keyboardViewState: StateFlow<KeyboardManager.Mode> = _keyboardViewState.asStateFlow()
+    private val _keyboardViewState = MutableStateFlow(MiniCodingKeyboardManager.Mode.NONE)
+    val keyboardViewState: StateFlow<MiniCodingKeyboardManager.Mode> = _keyboardViewState.asStateFlow()
 
     private val _viewEvent = Channel<ViewEvent>(Channel.BUFFERED)
     val viewEvent: Flow<ViewEvent> = _viewEvent.receiveAsFlow()
@@ -60,8 +63,8 @@ class EditorViewModel @Inject constructor(
 
     private val documents = mutableListOf<DocumentModel>()
     private var selectedPosition = -1
-    private var toolbarMode = ToolbarManager.Mode.DEFAULT
-    private var keyboardMode = KeyboardManager.Mode.KEYBOARD
+    private var toolbarMode = MiniCodingToolbarManager.Mode.DEFAULT
+    private var keyboardMode = MiniCodingKeyboardManager.Mode.KEYBOARD
     private var findParams = FindParams()
     private var currentJob: Job? = null
 
@@ -190,7 +193,7 @@ class EditorViewModel @Inject constructor(
         currentJob = viewModelScope.launch {
             try {
                 _editorViewState.value = EditorViewState.Loading
-                _keyboardViewState.value = KeyboardManager.Mode.NONE
+                _keyboardViewState.value = MiniCodingKeyboardManager.Mode.NONE
 
                 val document = documents[event.position]
                 settingsManager.selectedUuid = document.uuid
@@ -202,7 +205,7 @@ class EditorViewModel @Inject constructor(
                 _keyboardViewState.value = if (settingsManager.extendedKeyboard) {
                     keyboardMode
                 } else {
-                    KeyboardManager.Mode.NONE
+                    MiniCodingKeyboardManager.Mode.NONE
                 }
             } catch (e: Throwable) {
                 Timber.e(e, e.message)
@@ -441,6 +444,9 @@ class EditorViewModel @Inject constructor(
                 if (selectedPosition > -1) {
                     val document = documents[selectedPosition]
                     val screen = EditorScreen.ForceSyntaxDialog(document.language.languageName)
+//                    logger_d("codingcoding", "forceSyntax: ${document.language.languageName}")
+//                    logger_d("codingcoding", "screen: ${screen.toString()}")
+
                     _viewEvent.send(ViewEvent.Navigation(screen))
                 }
             } catch (e: Exception) {
@@ -459,6 +465,7 @@ class EditorViewModel @Inject constructor(
                         language = LanguageFactory.fromName(event.languageName)
                     )
                     documentRepository.updateDocument(document)
+                    Log.e("codingcoding", "选择语言${event.languageName}", )
                     refreshActionBar()
                 }
             } catch (e: Exception) {
@@ -481,9 +488,9 @@ class EditorViewModel @Inject constructor(
     private fun swapKeyboard() {
         _keyboardViewState.update {
             when (keyboardMode) {
-                KeyboardManager.Mode.KEYBOARD -> KeyboardManager.Mode.TOOLS
-                KeyboardManager.Mode.TOOLS -> KeyboardManager.Mode.KEYBOARD
-                KeyboardManager.Mode.NONE -> KeyboardManager.Mode.NONE
+                MiniCodingKeyboardManager.Mode.KEYBOARD -> MiniCodingKeyboardManager.Mode.TOOLS
+                MiniCodingKeyboardManager.Mode.TOOLS -> MiniCodingKeyboardManager.Mode.KEYBOARD
+                MiniCodingKeyboardManager.Mode.NONE -> MiniCodingKeyboardManager.Mode.NONE
             }.also { mode ->
                 keyboardMode = mode
             }
@@ -491,17 +498,17 @@ class EditorViewModel @Inject constructor(
     }
 
     private fun panelDefault() {
-        toolbarMode = ToolbarManager.Mode.DEFAULT
+        toolbarMode = MiniCodingToolbarManager.Mode.DEFAULT
         refreshActionBar()
     }
 
     private fun panelFind() {
-        toolbarMode = ToolbarManager.Mode.FIND
+        toolbarMode = MiniCodingToolbarManager.Mode.FIND
         refreshActionBar()
     }
 
     private fun panelFindReplace() {
-        toolbarMode = ToolbarManager.Mode.FIND_REPLACE
+        toolbarMode = MiniCodingToolbarManager.Mode.FIND_REPLACE
         refreshActionBar()
     }
 
@@ -582,7 +589,7 @@ class EditorViewModel @Inject constructor(
     }
 
     private fun refreshActionBar(position: Int = selectedPosition) {
-        _toolbarViewState.value = ToolbarViewState.ActionBar(
+        _toolbarViewState.value = MiniCodingToolbarViewState.ActionBar(
             documents = documents.toList(),
             position = position.also {
                 selectedPosition = it
@@ -600,7 +607,7 @@ class EditorViewModel @Inject constructor(
                 subtitle = "",
                 action = EditorErrorAction.Undefined,
             )
-            _keyboardViewState.value = KeyboardManager.Mode.NONE
+            _keyboardViewState.value = MiniCodingKeyboardManager.Mode.NONE
         }
     }
 
@@ -608,7 +615,7 @@ class EditorViewModel @Inject constructor(
         when (e) {
             is CancellationException -> {
                 _editorViewState.value = EditorViewState.Loading
-                _keyboardViewState.value = KeyboardManager.Mode.NONE
+                _keyboardViewState.value = MiniCodingKeyboardManager.Mode.NONE
             }
 
             else -> {
@@ -618,7 +625,7 @@ class EditorViewModel @Inject constructor(
                     subtitle = e.message.orEmpty(),
                     action = EditorErrorAction.CloseDocument,
                 )
-                _keyboardViewState.value = KeyboardManager.Mode.NONE
+                _keyboardViewState.value = MiniCodingKeyboardManager.Mode.NONE
             }
         }
     }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:orientation="vertical">
 
     <!-- 顶部操作栏 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#222"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="#222">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/file_name"
@@ -21,35 +21,38 @@
             android:layout_weight="1"
             android:text="Untitled"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/reset_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重置"
-            android:backgroundTint="#444"/>
+            android:backgroundTint="#444"
+            android:text="重置" />
 
         <Button
             android:id="@+id/run_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="运行"
-            android:backgroundTint="#4CAF50"/>
+            android:backgroundTint="#4CAF50"
+            android:text="运行" />
     </LinearLayout>
 
     <!-- 代码编辑器 -->
-    <FrameLayout
-        android:id="@+id/editor_container"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_nav_graph_mini_coding" />
 
     <!-- 输出区域 -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#333"/>
+        android:background="#333" />
 
     <!-- 输出标签 -->
     <com.google.android.material.tabs.TabLayout
@@ -57,13 +60,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#222"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/sendBtnTrue"/>
+        app:tabSelectedTextColor="@color/sendBtnTrue"
+        app:tabTextColor="@color/white" />
 
     <!-- 输出内容 -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/output_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="0.4" />
 </LinearLayout>

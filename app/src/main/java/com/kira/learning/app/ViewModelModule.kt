@@ -9,24 +9,24 @@ import com.kira.learning.module.banklist.vm.BankCardViewModel
 import com.kira.learning.module.chat.ui.ChatViewModel
 import com.kira.learning.module.config.ConfigViewModel
 import com.kira.learning.module.custom.CustomViewModel
+import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
+import com.kira.learning.module.dashboard.vm.RepayTabViewModel
+import com.kira.learning.module.dashboardDetail.RepayDetailViewModel
 import com.kira.learning.module.firstconfirm.vm.AutoConfirmViewModel
 import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.module.history.HistoryViewModel
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.login.vm.LoginViewModel
+import com.kira.learning.module.ocr.vm.OcrViewModel
 import com.kira.learning.module.process.bank.BankInfoViewModel
 import com.kira.learning.module.process.contact.ContactViewModel
 import com.kira.learning.module.process.face.FaceViewModel
 import com.kira.learning.module.process.kyc.KycViewModel
 import com.kira.learning.module.process.personalinfo.PersonalViewModel
 import com.kira.learning.module.quiz.vm.QuizViewModel
-import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
-import com.kira.learning.module.dashboard.vm.RepayTabViewModel
-import com.kira.learning.module.dashboardDetail.RepayDetailViewModel
-import com.kira.learning.module.ocr.vm.OcrViewModel
 import com.kira.learning.module.repeat.confirm.RepeatConfirmViewModel
 import com.kira.learning.module.setting.SettingViewModel
-import com.kira.learning.module.supereditor.application.viewmodel.SuperEditorViewModel
+import com.kira.learning.module.supereditor.viewmodel.SuperEditorViewModel
 import com.kira.learning.module.upload.UploadViewModel
 import dagger.Binds
 import dagger.Module
@@ -163,8 +163,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OcrViewModel::class)
     abstract fun bindOcrViewModel(viewModel: OcrViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(SuperEditorViewModel::class)
     abstract fun bindSuperEditorViewModel(viewModel: SuperEditorViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(MiniEditorViewModel::class)
+//    abstract fun bindMiniEditorViewModel(viewModel: MiniEditorViewModel): ViewModel
+
 }

@@ -221,7 +221,7 @@
             android:name=".module.coding.KCodingEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
-            android:name=".module.supereditor.application.activity.SuperEditorActivity"
+            android:name=".module.supereditor.SuperEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

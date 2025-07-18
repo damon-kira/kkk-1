@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.application.fragment
+package com.kira.learning.module.supereditor
 
 import android.os.Bundle
 import android.view.View
@@ -7,16 +7,23 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
-import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.kira.learning.module.supereditor.application.navigation.AppScreen
-import com.kira.learning.module.supereditor.application.viewmodel.SuperEditorViewModel
+import com.kira.learning.R
+import com.kira.learning.databinding.FragmentTwoPaneBinding
+import com.kira.learning.module.supereditor.navigation.AppScreen
+import com.kira.learning.module.supereditor.viewmodel.SuperEditorViewModel
 import com.kira.ui.core.delegate.viewBinding
-import com.kira.ui.core.extensions.*
+import com.kira.ui.core.extensions.fragment
+import com.kira.ui.core.extensions.getColorAttr
+import com.kira.ui.core.extensions.navigate
+import com.kira.ui.core.extensions.postponeEnterTransition
+import com.kira.ui.core.extensions.setFadeTransition
+import com.kira.ui.core.extensions.showToast
 import com.kira.ui.core.mvi.ViewEvent
 import com.kira.ui.core.navigation.BackPressedHandler
 import com.kira.ui.core.navigation.DrawerHandler
@@ -27,8 +34,6 @@ import com.kira.ui.feature.explorer.data.utils.openFileWith
 import com.kira.ui.feature.explorer.ui.fragment.ExplorerFragment
 import com.kira.ui.feature.explorer.ui.mvi.ExplorerViewEvent
 import com.kira.ui.feature.explorer.ui.viewmodel.ExplorerViewModel
-import com.kira.learning.R
-import com.kira.learning.databinding.FragmentTwoPaneBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -42,14 +47,16 @@ class TwoPaneFragment : Fragment(R.layout.fragment_two_pane), DrawerHandler {
     private val navController by lazy { findNavController() }
     private val binding by viewBinding(FragmentTwoPaneBinding::bind)
 
-    private val drawerListener = object : DrawerListener {
+    private val drawerListener = object : DrawerLayout.DrawerListener {
         override fun onDrawerStateChanged(newState: Int) = Unit
         override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
             binding.fragmentEditor.translationX = slideOffset * drawerView.width
         }
+
         override fun onDrawerOpened(drawerView: View) {
             binding.fragmentEditor.translationX = drawerView.width.toFloat()
         }
+
         override fun onDrawerClosed(drawerView: View) {
             binding.fragmentEditor.translationX = 0f
         }
@@ -74,10 +81,10 @@ class TwoPaneFragment : Fragment(R.layout.fragment_two_pane), DrawerHandler {
             requireContext().getColorAttr(android.R.attr.colorBackground),
             alphaFiftyPercent,
         )
-        binding.drawerLayout?.setScrimColor(scrimColor)
-        binding.drawerLayout?.addDrawerListener(drawerListener)
-        binding.drawerLayout?.doOnLayout {
-            if (binding.drawerLayout?.isOpen == true) {
+        binding.drawerLayout.setScrimColor(scrimColor)
+        binding.drawerLayout.addDrawerListener(drawerListener)
+        binding.drawerLayout.doOnLayout {
+            if (binding.drawerLayout.isOpen == true) {
                 drawerListener.onDrawerOpened(binding.fragmentExplorer)
             } else {
                 drawerListener.onDrawerClosed(binding.fragmentExplorer)
@@ -88,7 +95,7 @@ class TwoPaneFragment : Fragment(R.layout.fragment_two_pane), DrawerHandler {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    if (binding.drawerLayout?.isOpen == true) {
+                    if (binding.drawerLayout.isOpen == true) {
                         if (explorerBackPressedHandler?.handleOnBackPressed() == false) {
                             closeDrawer()
                         }
@@ -135,10 +142,12 @@ class TwoPaneFragment : Fragment(R.layout.fragment_two_pane), DrawerHandler {
                         editorViewModel.obtainEvent(EditorIntent.OpenFile(event.fileModel))
                         closeDrawer()
                     }
+
                     is ExplorerViewEvent.OpenFileWith -> {
                         context?.openFileWith(event.fileModel)
                         closeDrawer()
                     }
+
                     else -> Unit
                 }
             }

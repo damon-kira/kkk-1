@@ -1,5 +1,3 @@
-import com.kira.ui.BuildConst
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -9,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = BuildConst.COMPILE_SDK
+    compileSdk = libs.versions.compileSdk.get().toInt()
     namespace = "com.kira.ui.core"
 
     defaultConfig {
-        minSdk = BuildConst.MIN_SDK
+        minSdk = libs.versions.minSdk.get().toInt()
 
         consumerProguardFiles("consumer-rules.pro")
 

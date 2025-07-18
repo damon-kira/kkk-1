@@ -6,14 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.common.lib.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kira.learning.R
+import dagger.hilt.android.AndroidEntryPoint
 
-class CodePlaygroundActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class CodePlaygroundActivity : BaseActivity() {
+
+//    private val mViewModel by lazyViewModel<MiniEditorViewModel>()
 
     private lateinit var codeExecutor: CodeExecutor
-    private lateinit var editorFragment: CodeEditorFragment
+
+    //    private lateinit var editorFragment: EditorFragment
     private lateinit var consoleFragment: ConsoleFragment
     private lateinit var visualFragment: VisualOutputFragment
     private lateinit var viewPager: ViewPager2
@@ -30,10 +36,10 @@ class CodePlaygroundActivity : AppCompatActivity() {
         codeExecutor = CodeExecutor(this)
 
         // 设置编辑器
-        editorFragment = CodeEditorFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.editor_container, editorFragment)
-            .commit()
+//        editorFragment = MiniCodingEditorFragment()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.editor_container, editorFragment)
+//            .commit()
 
         // 设置输出区域
         consoleFragment = ConsoleFragment()
@@ -44,8 +50,8 @@ class CodePlaygroundActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.output_tabs)
 
         val adapter = ViewPagerAdapter(this)
-        adapter.addFragment(consoleFragment, "控制台")
-        adapter.addFragment(visualFragment, "可视化输出")
+        adapter.addFragment(consoleFragment, "Console")
+        adapter.addFragment(visualFragment, "VisualOutput")
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -65,7 +71,7 @@ class CodePlaygroundActivity : AppCompatActivity() {
 
         // 设置按钮
         findViewById<Button>(R.id.reset_button).setOnClickListener {
-            editorFragment.resetCode()
+//            editorFragment.resetCode()
             consoleFragment.clearConsole()
             visualFragment.clearVisualization()
             codeExecutor.stopExecution()
@@ -82,7 +88,7 @@ class CodePlaygroundActivity : AppCompatActivity() {
         codeExecutor.stopExecution()
 
         // 获取代码并执行
-        val code = editorFragment.getCode()
+        val code = ""//editorFragment.getCode()
         if (code.isNotEmpty()) {
             consoleFragment.addConsoleOutput("执行中...\n")
             codeExecutor.execute(code, "python")

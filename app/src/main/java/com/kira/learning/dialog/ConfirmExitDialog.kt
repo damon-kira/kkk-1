@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.application.dialog
+package com.kira.learning.dialog
 
 import android.app.Dialog
 import android.os.Bundle

@@ -11,12 +11,14 @@ import com.kira.ui.feature.editor.R
 import com.kira.ui.feature.editor.databinding.DialogGotoLineBinding
 import com.kira.ui.feature.editor.ui.mvi.EditorIntent
 import com.kira.ui.feature.editor.ui.viewmodel.EditorViewModel
+import com.kira.ui.feature.editor.ui.viewmodel.MiniEditorViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GotoLineDialog : DialogFragment() {
 
     private val viewModel by activityViewModels<EditorViewModel>()
+    private val miniEditorViewModel by activityViewModels<MiniEditorViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogGotoLineBinding.inflate(layoutInflater)

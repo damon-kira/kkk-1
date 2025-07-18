@@ -9,8 +9,8 @@
 
     <fragment
         android:id="@+id/twoPaneFragment"
-        android:name="com.kira.learning.module.supereditor.TwoPaneFragment"
-        tools:layout="@layout/fragment_two_pane" >
+        android:name="com.kira.ui.feature.editor.ui.fragment.MiniCodingEditorFragment"
+        tools:layout="@layout/fragment_mini_editor" >
         <action
             android:id="@+id/to_confirmExitDialog"
             app:destination="@id/confirmExitDialog" />

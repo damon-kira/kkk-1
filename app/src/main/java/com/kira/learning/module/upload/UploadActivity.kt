@@ -1,7 +1,9 @@
 package com.kira.learning.module.upload
 
 import android.os.Bundle
-import android.util.Log
+import com.common.lib.livedata.LiveDataBus
+import com.common.lib.livedata.observerNonSticky
+import com.common.lib.viewbinding.binding
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqKycInfo
 import com.kira.learning.databinding.ActivityUploadBinding
@@ -16,13 +18,11 @@ import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
 import com.kira.learning.util.GPInfoUtils
-import com.common.lib.livedata.LiveDataBus
-import com.common.lib.livedata.observerNonSticky
-import com.common.lib.viewbinding.binding
 import com.util.lib.StatusBarUtil.setStatusBarColor
+import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -63,7 +63,7 @@ class UploadActivity : BaseProcessActivity() {
 
     private fun reqPermission() {
         PermissionHelper.reqPermission(this, appPermissions.toList(), true, isFixGroup = true, {
-            Log.e(TAG, "reqPermission: ====${it}")
+            logger_e(TAG, "reqPermission: ====${it}")
             if (it) {
                 showDialog()
                 mViewModel.checkAndUpload()

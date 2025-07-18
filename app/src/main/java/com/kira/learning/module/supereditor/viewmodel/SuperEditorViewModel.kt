@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.application.viewmodel
+package com.kira.learning.module.supereditor.viewmodel
 
 import android.content.Intent
 import androidx.lifecycle.viewModelScope

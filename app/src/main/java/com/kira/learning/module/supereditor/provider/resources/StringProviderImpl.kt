@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.internal.provider.resources
+package com.kira.learning.module.supereditor.provider.resources
 
 import android.content.Context
 import com.kira.ui.core.provider.resources.StringProvider

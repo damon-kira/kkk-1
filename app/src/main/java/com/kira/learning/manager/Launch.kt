@@ -51,7 +51,7 @@ import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
 import com.kira.learning.module.coding.KCodingEditorActivity
-import com.kira.learning.module.supereditor.application.activity.SuperEditorActivity
+import com.kira.learning.module.supereditor.SuperEditorActivity
 
 object Launch {
 

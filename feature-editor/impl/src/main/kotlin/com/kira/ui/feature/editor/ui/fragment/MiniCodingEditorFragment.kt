@@ -2,7 +2,9 @@ package com.kira.ui.feature.editor.ui.fragment
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -17,12 +19,27 @@ import com.kira.ui.core.contract.ContractResult
 import com.kira.ui.core.contract.CreateFileContract
 import com.kira.ui.core.contract.OpenFileContract
 import com.kira.ui.core.delegate.viewBinding
-import com.kira.ui.core.extensions.*
+import com.kira.ui.core.extensions.applySystemWindowInsets
+import com.kira.ui.core.extensions.createTypefaceFromPath
+import com.kira.ui.core.extensions.focusedTextField
+import com.kira.ui.core.extensions.keyCodeToChar
+import com.kira.ui.core.extensions.navigate
+import com.kira.ui.core.extensions.showToast
 import com.kira.ui.core.mvi.ViewEvent
 import com.kira.ui.core.navigation.BackPressedHandler
-import com.kira.ui.core.navigation.DrawerHandler
 import com.kira.ui.core.navigation.Screen
-import com.kira.ui.editorkit.*
+import com.kira.ui.editorkit.copy
+import com.kira.ui.editorkit.cut
+import com.kira.ui.editorkit.deleteLine
+import com.kira.ui.editorkit.duplicateLine
+import com.kira.ui.editorkit.gotoLine
+import com.kira.ui.editorkit.hasPrimaryClip
+import com.kira.ui.editorkit.insert
+import com.kira.ui.editorkit.moveCaretToEndOfLine
+import com.kira.ui.editorkit.moveCaretToNextWord
+import com.kira.ui.editorkit.moveCaretToPrevWord
+import com.kira.ui.editorkit.moveCaretToStartOfLine
+import com.kira.ui.editorkit.paste
 import com.kira.ui.editorkit.plugin.autocomplete.codeCompletion
 import com.kira.ui.editorkit.plugin.autoindent.autoIndentation
 import com.kira.ui.editorkit.plugin.base.PluginSupplier
@@ -34,35 +51,42 @@ import com.kira.ui.editorkit.plugin.pinchzoom.pinchZoom
 import com.kira.ui.editorkit.plugin.shortcuts.OnShortcutListener
 import com.kira.ui.editorkit.plugin.shortcuts.shortcuts
 import com.kira.ui.editorkit.plugin.textscroller.textScroller
+import com.kira.ui.editorkit.selectLine
+import com.kira.ui.editorkit.setSelectionRange
+import com.kira.ui.editorkit.toggleCase
 import com.kira.ui.editorkit.widget.TextScroller
 import com.kira.ui.editorkit.widget.internal.UndoRedoEditText
-import com.kira.ui.feature.editor.R
 import com.kira.ui.feature.editor.data.utils.SettingsEvent
-import com.kira.ui.feature.editor.databinding.FragmentEditorBinding
+import com.kira.ui.feature.editor.databinding.FragmentMiniEditorBinding
 import com.kira.ui.feature.editor.ui.adapter.AutoCompleteAdapter
 import com.kira.ui.feature.editor.ui.adapter.DocumentAdapter
 import com.kira.ui.feature.editor.ui.adapter.TabController
-import com.kira.ui.feature.editor.ui.manager.KeyboardManager
-import com.kira.ui.feature.editor.ui.manager.ToolbarManager
-import com.kira.ui.feature.editor.ui.mvi.*
-import com.kira.ui.feature.editor.ui.viewmodel.EditorViewModel
+import com.kira.ui.feature.editor.ui.manager.MiniCodingKeyboardManager
+import com.kira.ui.feature.editor.ui.manager.MiniCodingToolbarManager
+import com.kira.ui.feature.editor.ui.mvi.EditorErrorAction
+import com.kira.ui.feature.editor.ui.mvi.EditorIntent
+import com.kira.ui.feature.editor.ui.mvi.EditorViewEvent
+import com.kira.ui.feature.editor.ui.mvi.EditorViewState
+import com.kira.ui.feature.editor.ui.mvi.MiniCodingToolbarViewState
+import com.kira.ui.feature.editor.ui.viewmodel.MiniEditorViewModel
 import com.kira.ui.feature.shortcuts.domain.model.Keybinding
 import com.kira.ui.feature.shortcuts.domain.model.Shortcut
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import com.kira.ui.feature.editor.R
 import com.kira.ui.uikit.R as UiR
 
 @AndroidEntryPoint
-class EditorFragment : Fragment(R.layout.fragment_editor),
-    BackPressedHandler, ToolbarManager.Listener, KeyboardManager.Listener {
+class MiniCodingEditorFragment : Fragment(R.layout.fragment_mini_editor),
+    BackPressedHandler, MiniCodingToolbarManager.Listener, MiniCodingKeyboardManager.Listener {
 
-    private val viewModel by activityViewModels<EditorViewModel>()
-    private val binding by viewBinding(FragmentEditorBinding::bind)
+    private val viewModel by activityViewModels<MiniEditorViewModel>()
+    private val binding by viewBinding(FragmentMiniEditorBinding::bind)
 
-    private val drawerHandler by lazy { parentFragment as DrawerHandler }
-    private val toolbarManager by lazy { ToolbarManager(this) }
-    private val keyboardManager by lazy { KeyboardManager(this) }
+    //    private val drawerHandler by lazy { parentFragment as DrawerHandler }
+    private val toolbarManager by lazy { MiniCodingToolbarManager(this) }
+    private val keyboardManager by lazy { MiniCodingKeyboardManager(this) }
     private val tabController by lazy { TabController() }
     private val navController by lazy { findNavController() }
     private val newFileContract = CreateFileContract(this) { result ->
@@ -101,7 +125,6 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
-
         view.applySystemWindowInsets(true) { _, top, _, bottom ->
             binding.toolbar.updatePadding(top = top)
             binding.root.updatePadding(bottom = bottom)
@@ -157,7 +180,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
     }
 
     override fun handleOnBackPressed(): Boolean {
-        if (toolbarManager.mode != ToolbarManager.Mode.DEFAULT) {
+        if (toolbarManager.mode != MiniCodingToolbarManager.Mode.DEFAULT) {
             onCloseFindButton()
             return true
         }
@@ -168,7 +191,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
         viewModel.toolbarViewState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { state ->
                 when (state) {
-                    is ToolbarViewState.ActionBar -> {
+                    is MiniCodingToolbarViewState.ActionBar -> {
                         tabAdapter.removeOnTabSelectedListener()
                         tabAdapter.removeOnTabMovedListener()
                         tabAdapter.submitList(state.documents, state.position)
@@ -176,12 +199,14 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
                         tabAdapter.setOnTabMovedListener(onTabMovedListener)
                         toolbarManager.mode = state.mode
                         toolbarManager.params = state.findParams
-                        if (state.mode == ToolbarManager.Mode.DEFAULT) {
+                        if (state.mode == MiniCodingToolbarManager.Mode.DEFAULT) {
                             binding.editor.clearFindResultSpans()
                         }
                         if (state.documents.getOrNull(state.position) != null) {
                             val document = state.documents[state.position]
                             binding.editor.language = document.language
+                            binding.actionLanguage.text =
+                                document.language.languageName
                         }
                     }
                 }
@@ -211,6 +236,10 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
                             state.content.documentModel.selectionEnd,
                         )
                         binding.editor.doOnPreDraw(View::requestFocus)
+
+                        binding.actionLanguage.text =
+                            state.content.documentModel.language.languageName
+//                        logger_d("codingcoding", "还原: ${state.content.documentModel.language.languageName}")
                     }
 
                     is EditorViewState.Error -> {
@@ -277,16 +306,19 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
     // region TOOLBAR
 
     override fun onDrawerButton() {
-        drawerHandler.openDrawer()
+//        drawerHandler.openDrawer()
     }
 
     override fun onNewButton(): Boolean {
-        newFileContract.launch(getString(UiR.string.common_untitled), CreateFileContract.TEXT)
+        newFileContract.launch(
+            getString(UiR.string.common_untitled),
+            CreateFileContract.Companion.TEXT
+        )
         return true
     }
 
     override fun onOpenButton(): Boolean {
-        openFileContract.launch(OpenFileContract.ANY)
+        openFileContract.launch(OpenFileContract.Companion.ANY)
         return true
     }
 
@@ -493,7 +525,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor),
     }
 
     private fun applySettings(settings: List<SettingsEvent<*>>) {
-        val pluginSupplier = PluginSupplier.create {
+        val pluginSupplier = PluginSupplier.Companion.create {
             settings.forEach { event ->
                 when (event) {
                     is SettingsEvent.ColorScheme ->

@@ -3,11 +3,11 @@ package com.kira.ui.feature.editor.ui.manager
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.kira.ui.feature.editor.databinding.FragmentEditorBinding
+import com.kira.ui.feature.editor.databinding.FragmentMiniEditorBinding
 import com.kira.ui.feature.editor.ui.adapter.KeyAdapter
 import com.kira.ui.feature.settings.domain.model.KeyModel
 
-class KeyboardManager(private val listener: Listener) {
+class MiniCodingKeyboardManager(private val listener: Listener) {
 
     var mode: Mode = Mode.NONE
         set(value) {
@@ -15,11 +15,11 @@ class KeyboardManager(private val listener: Listener) {
             updateKeyboard()
         }
 
-    private lateinit var binding: FragmentEditorBinding
+    private lateinit var binding: FragmentMiniEditorBinding
 
     private var keyAdapter: KeyAdapter? = null
 
-    fun bind(binding: FragmentEditorBinding) {
+    fun bind(binding: FragmentMiniEditorBinding) {
         this.binding = binding
         updateKeyboard()
 

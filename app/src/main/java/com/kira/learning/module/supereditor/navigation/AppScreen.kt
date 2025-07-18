@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.application.navigation
+package com.kira.learning.module.supereditor.navigation
 
 import com.kira.ui.core.navigation.Screen
 

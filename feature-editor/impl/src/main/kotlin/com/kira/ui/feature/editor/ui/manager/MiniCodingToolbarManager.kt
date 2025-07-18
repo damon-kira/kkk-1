@@ -10,9 +10,9 @@ import androidx.core.widget.doAfterTextChanged
 import com.kira.ui.core.view.MaterialPopupMenu
 import com.kira.ui.editorkit.model.FindParams
 import com.kira.ui.feature.editor.R
-import com.kira.ui.feature.editor.databinding.FragmentEditorBinding
+import com.kira.ui.feature.editor.databinding.FragmentMiniEditorBinding
 
-class ToolbarManager(
+class MiniCodingToolbarManager(
     private val listener: Listener,
 ) : PopupMenu.OnMenuItemClickListener {
 
@@ -33,7 +33,7 @@ class ToolbarManager(
             }
         }
 
-    private lateinit var binding: FragmentEditorBinding
+    private lateinit var binding: FragmentMiniEditorBinding
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -83,15 +83,17 @@ class ToolbarManager(
         return false
     }
 
-    fun bind(binding: FragmentEditorBinding) {
+    fun bind(binding: FragmentMiniEditorBinding) {
         this.binding = binding
         orientation = binding.root.resources?.configuration
             ?.orientation ?: Configuration.ORIENTATION_PORTRAIT
         updateToolbar()
 
-        binding.actionDrawer.setOnClickListener { listener.onDrawerButton() }
+//        binding.actionDrawer.setOnClickListener { listener.onDrawerButton() }
         binding.actionSave.setOnClickListener { listener.onSaveButton() }
         binding.actionFind.setOnClickListener { listener.onOpenFindButton() }
+
+//        setMenuClickListener(binding.actionDrawer, R.menu.menu_mini_syntax)
 
         setMenuClickListener(binding.actionFile, R.menu.menu_file)
         setMenuClickListener(binding.actionEdit, R.menu.menu_edit)
@@ -111,6 +113,10 @@ class ToolbarManager(
         binding.actionUp.setOnClickListener { listener.onPreviousResultButton() }
         binding.inputFind.doAfterTextChanged {
             listener.onFindQueryChanged(it.toString())
+        }
+
+        binding.actionLanguage.setOnClickListener {
+            listener.onForceSyntaxButton()
         }
     }
 

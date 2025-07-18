@@ -1,4 +1,4 @@
-package com.kira.learning.module.supereditor.internal.provider.coroutine
+package com.kira.learning.module.supereditor.provider.coroutine
 
 import com.kira.ui.core.provider.coroutine.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
