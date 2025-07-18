@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.changelog.ui.fragment.ChangeLogFragment"
         android:label="@string/label_changelog"
         tools:layout="@layout/fragment_changelog">
-        <deepLink app:uri="blacksquircle://settings/about/changelog" />
+        <deepLink app:uri="kiralearning://settings/about/changelog" />
     </fragment>
 
 </navigation>

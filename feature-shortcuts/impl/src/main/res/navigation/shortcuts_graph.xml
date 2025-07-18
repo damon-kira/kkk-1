@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.shortcuts.ui.fragment.ShortcutsFragment"
         android:label="@string/pref_header_keybindings_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/keybindings" />
+        <deepLink app:uri="kiralearning://settings/keybindings" />
         <action
             android:id="@+id/to_shortcutDialog"
             app:destination="@id/shortcutDialog" />
@@ -23,7 +23,7 @@
         android:name="com.kira.ui.feature.shortcuts.ui.dialog.ShortcutDialog"
         android:label="@string/pref_header_keybindings_title"
         tools:layout="@layout/dialog_shortcut">
-        <deepLink app:uri="blacksquircle://settings/keybindings/edit?key={key}" />
+        <deepLink app:uri="kiralearning://settings/keybindings/edit?key={key}" />
         <argument
             android:name="key"
             app:argType="string" />
@@ -33,7 +33,7 @@
         android:id="@+id/conflictKeyDialog"
         android:name="com.kira.ui.feature.shortcuts.ui.dialog.ConflictKeyDialog"
         android:label="@string/pref_header_keybindings_title">
-        <deepLink app:uri="blacksquircle://settings/keybindings/conflict" />
+        <deepLink app:uri="kiralearning://settings/keybindings/conflict" />
     </dialog>
 
 </navigation>

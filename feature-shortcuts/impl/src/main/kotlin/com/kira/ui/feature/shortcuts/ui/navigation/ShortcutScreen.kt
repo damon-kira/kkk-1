@@ -6,6 +6,6 @@ import com.kira.ui.core.navigation.Screen
 
 sealed class ShortcutScreen(route: String) : Screen<String>(route) {
 
-    class Edit(key: String) : ShortcutScreen("blacksquircle://settings/keybindings/edit?key=$key")
-    class Conflict : ShortcutScreen("blacksquircle://settings/keybindings/conflict")
+    class Edit(key: String) : ShortcutScreen("kiralearning://settings/keybindings/edit?key=$key")
+    class Conflict : ShortcutScreen("kiralearning://settings/keybindings/conflict")
 }

@@ -11,14 +11,14 @@
         android:id="@+id/storageDeniedDialog"
         android:name="com.kira.ui.feature.explorer.ui.dialog.StorageDeniedDialog"
         android:label="StorageDeniedDialog">
-        <deepLink app:uri="blacksquircle://explorer/storage_denied_forever" />
+        <deepLink app:uri="kiralearning://explorer/storage_denied_forever" />
     </dialog>
 
     <dialog
         android:id="@+id/notificationDeniedDialog"
         android:name="com.kira.ui.feature.explorer.ui.dialog.NotificationDeniedDialog"
         android:label="NotificationDeniedDialog">
-        <deepLink app:uri="blacksquircle://explorer/notification_denied_forever" />
+        <deepLink app:uri="kiralearning://explorer/notification_denied_forever" />
     </dialog>
 
     <dialog
@@ -26,7 +26,7 @@
         android:name="com.kira.ui.feature.explorer.ui.dialog.CreateDialog"
         android:label="CreateDialog"
         tools:layout="@layout/dialog_create">
-        <deepLink app:uri="blacksquircle://explorer/create" />
+        <deepLink app:uri="kiralearning://explorer/create" />
     </dialog>
 
     <dialog
@@ -34,7 +34,7 @@
         android:name="com.kira.ui.feature.explorer.ui.dialog.RenameDialog"
         android:label="RenameDialog"
         tools:layout="@layout/dialog_rename">
-        <deepLink app:uri="blacksquircle://explorer/rename?fileName={fileName}" />
+        <deepLink app:uri="kiralearning://explorer/rename?fileName={fileName}" />
         <argument
             android:name="fileName"
             app:argType="string" />
@@ -44,7 +44,7 @@
         android:id="@+id/deleteDialog"
         android:name="com.kira.ui.feature.explorer.ui.dialog.DeleteDialog"
         android:label="DeleteDialog">
-        <deepLink app:uri="blacksquircle://explorer/delete?fileName={fileName}&amp;fileCount={fileCount}" />
+        <deepLink app:uri="kiralearning://explorer/delete?fileName={fileName}&amp;fileCount={fileCount}" />
         <argument
             android:name="fileName"
             app:argType="string" />
@@ -58,7 +58,7 @@
         android:name="com.kira.ui.feature.explorer.ui.dialog.CompressDialog"
         android:label="CompressDialog"
         tools:layout="@layout/dialog_compress">
-        <deepLink app:uri="blacksquircle://explorer/compress" />
+        <deepLink app:uri="kiralearning://explorer/compress" />
     </dialog>
 
     <dialog
@@ -66,7 +66,7 @@
         android:name="com.kira.ui.feature.explorer.ui.dialog.ProgressDialog"
         android:label="ProgressDialog"
         tools:layout="@layout/dialog_progress">
-        <deepLink app:uri="blacksquircle://explorer/progress?totalCount={totalCount}&amp;operation={operation}" />
+        <deepLink app:uri="kiralearning://explorer/progress?totalCount={totalCount}&amp;operation={operation}" />
         <argument
             android:name="totalCount"
             app:argType="integer" />
@@ -80,7 +80,7 @@
         android:name="com.kira.ui.feature.explorer.ui.dialog.PropertiesDialog"
         android:label="PropertiesDialog"
         tools:layout="@layout/dialog_properties">
-        <deepLink app:uri="blacksquircle://explorer/properties?data={data}" />
+        <deepLink app:uri="kiralearning://explorer/properties?data={data}" />
         <argument
             android:name="data"
             app:argType="string" />
@@ -90,7 +90,7 @@
         android:id="@+id/authDialog"
         android:name="com.kira.ui.feature.explorer.ui.dialog.AuthDialog"
         android:label="AuthDialog">
-        <deepLink app:uri="blacksquircle://explorer/authenticate?authMethod={authMethod}" />
+        <deepLink app:uri="kiralearning://explorer/authenticate?authMethod={authMethod}" />
         <argument
             android:name="authMethod"
             app:argType="integer" />

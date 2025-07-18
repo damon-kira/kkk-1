@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.HeaderListFragment"
         android:label="@string/label_settings"
         tools:layout="@layout/fragment_header_list">
-        <deepLink app:uri="blacksquircle://settings" />
+        <deepLink app:uri="kiralearning://settings" />
         <action
             android:id="@+id/to_applicationFragment"
             app:destination="@id/applicationFragment" />
@@ -35,7 +35,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.ApplicationFragment"
         android:label="@string/pref_header_application_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/application" />
+        <deepLink app:uri="kiralearning://settings/application" />
     </fragment>
 
     <fragment
@@ -43,7 +43,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.EditorFragment"
         android:label="@string/pref_header_editor_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/editor" />
+        <deepLink app:uri="kiralearning://settings/editor" />
     </fragment>
 
     <fragment
@@ -51,7 +51,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.CodeStyleFragment"
         android:label="@string/pref_header_codeStyle_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/codestyle" />
+        <deepLink app:uri="kiralearning://settings/codestyle" />
     </fragment>
 
     <fragment
@@ -59,7 +59,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.FilesFragment"
         android:label="@string/pref_header_files_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/files" />
+        <deepLink app:uri="kiralearning://settings/files" />
     </fragment>
 
     <fragment
@@ -67,7 +67,7 @@
         android:name="com.kira.ui.feature.settings.ui.fragment.AboutFragment"
         android:label="@string/pref_header_about_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/about" />
+        <deepLink app:uri="kiralearning://settings/about" />
     </fragment>
 
 </navigation>

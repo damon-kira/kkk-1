@@ -10,6 +10,6 @@ import com.google.gson.Gson
 sealed class ServersScreen(route: String) : Screen<String>(route) {
 
     class EditServer(serverConfig: ServerConfig) : ServersScreen(
-        route = "blacksquircle://settings/cloud/edit?data=${Gson().toJsonEncoded(serverConfig)}",
+        route = "kiralearning://settings/cloud/edit?data=${Gson().toJsonEncoded(serverConfig)}",
     )
 }

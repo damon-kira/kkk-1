@@ -7,11 +7,11 @@ import com.kira.ui.core.navigation.Screen
 
 sealed class ThemesScreen(route: String) : Screen<String>(route) {
 
-    data object Create : ThemesScreen("blacksquircle://themes/create")
+    data object Create : ThemesScreen("kiralearning://themes/create")
 
-    class Update(uuid: String?) : ThemesScreen("blacksquircle://themes/update?uuid=$uuid")
+    class Update(uuid: String?) : ThemesScreen("kiralearning://themes/update?uuid=$uuid")
 
     class ChooseColor(key: String, value: String) : ThemesScreen(
-        route = "blacksquircle://themes/choosecolor?key=$key&value=${value.encodeUrl()}"
+        route = "kiralearning://themes/choosecolor?key=$key&value=${value.encodeUrl()}"
     )
 }

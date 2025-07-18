@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.servers.ui.fragment.CloudFragment"
         android:label="@string/pref_header_cloud_title"
         tools:layout="@layout/layout_preference">
-        <deepLink app:uri="blacksquircle://settings/cloud" />
+        <deepLink app:uri="kiralearning://settings/cloud" />
         <action
             android:id="@+id/to_serverDialog"
             app:destination="@id/serverDialog" />
@@ -23,8 +23,8 @@
         android:name="com.kira.ui.feature.servers.ui.dialog.ServerDialog"
         android:label="@string/pref_add_server_title"
         tools:layout="@layout/dialog_server">
-        <deepLink app:uri="blacksquircle://settings/cloud/add" />
-        <deepLink app:uri="blacksquircle://settings/cloud/edit?data={data}" />
+        <deepLink app:uri="kiralearning://settings/cloud/add" />
+        <deepLink app:uri="kiralearning://settings/cloud/edit?data={data}" />
         <argument
             android:name="data"
             android:defaultValue="@null"

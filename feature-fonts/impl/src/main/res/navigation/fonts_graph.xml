@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.fonts.ui.fragment.FontsFragment"
         android:label="@string/label_fonts"
         tools:layout="@layout/fragment_fonts">
-        <deepLink app:uri="blacksquircle://fonts" />
+        <deepLink app:uri="kiralearning://fonts" />
     </fragment>
 
 </navigation>

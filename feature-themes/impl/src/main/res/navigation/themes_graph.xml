@@ -12,7 +12,7 @@
         android:name="com.kira.ui.feature.themes.ui.fragment.ThemesFragment"
         android:label="@string/label_themes"
         tools:layout="@layout/fragment_themes">
-        <deepLink app:uri="blacksquircle://themes" />
+        <deepLink app:uri="kiralearning://themes" />
         <action
             android:id="@+id/to_newThemeFragment"
             app:destination="@id/newThemeFragment" />
@@ -23,8 +23,8 @@
         android:name="com.kira.ui.feature.themes.ui.fragment.NewThemeFragment"
         android:label="@string/label_new_theme"
         tools:layout="@layout/fragment_new_theme">
-        <deepLink app:uri="blacksquircle://themes/create" />
-        <deepLink app:uri="blacksquircle://themes/update?uuid={uuid}" />
+        <deepLink app:uri="kiralearning://themes/create" />
+        <deepLink app:uri="kiralearning://themes/update?uuid={uuid}" />
         <argument
             android:name="uuid"
             android:defaultValue="@null"
@@ -36,7 +36,7 @@
         android:id="@+id/chooseColorDialog"
         android:name="com.kira.ui.feature.themes.ui.dialog.ChooseColorDialog"
         android:label="ChooseColorDialog">
-        <deepLink app:uri="blacksquircle://themes/choosecolor?key={key}&amp;value={value}" />
+        <deepLink app:uri="kiralearning://themes/choosecolor?key={key}&amp;value={value}" />
         <argument android:name="key" app:argType="string" />
         <argument android:name="value" app:argType="string" />
     </dialog>

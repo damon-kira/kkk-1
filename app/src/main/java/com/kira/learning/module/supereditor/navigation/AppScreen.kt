@@ -4,5 +4,5 @@ import com.kira.ui.core.navigation.Screen
 
 sealed class AppScreen(route: String) : Screen<String>(route) {
 
-    data object ConfirmExit : AppScreen("blacksquircle://exit")
+    data object ConfirmExit : AppScreen("kiralearning://exit")
 }
