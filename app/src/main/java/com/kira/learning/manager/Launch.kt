@@ -52,6 +52,7 @@ import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
 import com.kira.learning.module.coding.KCodingEditorActivity
 import com.kira.learning.module.supereditor.SuperEditorActivity
+import com.kira.learning.module.upload.real.QuickUploadActivity
 
 object Launch {
 
@@ -243,6 +244,9 @@ object Launch {
     }
     fun skipSuperEditorActivity(context: Context){
         launch(context, SuperEditorActivity::class.java)
+    }
+    fun skipQuickUploadActivity(context: Context){
+        launch(context, QuickUploadActivity::class.java)
     }
 
     /**

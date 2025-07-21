@@ -22,6 +22,11 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- 通知权限（Android 7.1 及以下的兼容处理） -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 唤醒 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 前台服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera" />
@@ -221,6 +226,18 @@
             android:name=".module.coding.KCodingEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
+            android:name=".module.upload.real.QuickUploadActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.upload.real.QuickUploadSingleActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.upload.real.QuickUploadMultipleSingleFileActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".module.upload.real.QuickUploadMultipleFilesSimultaneouslyActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
             android:name=".module.supereditor.SuperEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:exported="true"
@@ -335,6 +352,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <!--        上传       -->
+        <service
+            android:name="com.kira.quickupload.UploadService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
         <!--        推送图标&颜色信息-->
         <!--        <meta-data-->
         <!--            android:name="com.google.firebase.messaging.default_notification_icon"-->

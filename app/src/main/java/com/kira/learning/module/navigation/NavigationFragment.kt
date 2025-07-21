@@ -248,7 +248,8 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout8.let {
             it.tvDemoName.text = "Upload"
             it.tvBtn.setOnClickListener {
-                Launch.skipUploadActivity(getSupportContext())
+//                Launch.skipUploadActivity(getSupportContext())
+                Launch.skipQuickUploadActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout9.let {

@@ -129,3 +129,4 @@ include(
     ":editorkit:language-xml",
     ":editorkit:language-yaml",
 )
+include(":upload")

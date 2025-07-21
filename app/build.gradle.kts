@@ -170,6 +170,7 @@ dependencies {
     implementation(project(":image"))
     implementation(project(":richtext"))
     implementation(project(":codeview"))
+    implementation(project(":upload"))
 
     // Hilt
     implementation(libs.hilt)
