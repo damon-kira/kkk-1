@@ -1,5 +1,3 @@
-
-
 package com.kira.ui.feature.editor.ui.adapter
 
 import android.view.LayoutInflater
@@ -22,9 +20,13 @@ class DocumentAdapter(
             override fun areItemsTheSame(oldItem: DocumentModel, newItem: DocumentModel): Boolean {
                 return oldItem.uuid == newItem.uuid
             }
-            override fun areContentsTheSame(oldItem: DocumentModel, newItem: DocumentModel): Boolean {
+
+            override fun areContentsTheSame(
+                oldItem: DocumentModel,
+                newItem: DocumentModel
+            ): Boolean {
                 return oldItem.modified == newItem.modified &&
-                    oldItem.position == newItem.position
+                        oldItem.position == newItem.position
             }
         }
     }
@@ -37,6 +39,10 @@ class DocumentAdapter(
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
         holder.bind(currentList[position])
+    }
+
+    fun getSelectedItem(): DocumentModel {
+        return super.getItem(selectedPosition)
     }
 
     inner class DocumentViewHolder(

@@ -1,9 +1,8 @@
-
-
 package com.kira.ui.feature.editor.data.repository
 
 import android.content.Context
 import android.net.Uri
+import androidx.core.net.toUri
 import com.kira.ui.core.extensions.extractFilePath
 import com.kira.ui.core.provider.coroutine.DispatcherProvider
 import com.kira.ui.core.storage.Directories
@@ -14,6 +13,7 @@ import com.kira.ui.editorkit.model.FindResult
 import com.kira.ui.editorkit.model.UndoStack
 import com.kira.ui.feature.editor.data.converter.DocumentConverter
 import com.kira.ui.feature.editor.data.utils.charsetFor
+import com.kira.ui.feature.editor.data.utils.checkFileSizeBeforeOpen
 import com.kira.ui.feature.editor.data.utils.decode
 import com.kira.ui.feature.editor.data.utils.encode
 import com.kira.ui.feature.editor.domain.model.DocumentContent
@@ -87,30 +87,51 @@ class DocumentRepositoryImpl(
 
     override suspend fun loadFile(documentModel: DocumentModel): DocumentContent {
         return withContext(dispatcherProvider.io()) {
-            val textCacheFile = cacheFile(documentModel, postfix = "text.txt")
-            if (cacheFilesystem.exists(textCacheFile)) {
+            try {
+                checkFileSizeBeforeOpen(context, documentModel.fileUri.toUri()).also {
+                    if (!it.first) {
+                        return@withContext DocumentContent(
+                            documentModel = documentModel,
+                            undoStack = loadUndoStack(documentModel),
+                            redoStack = loadRedoStack(documentModel),
+                            text = "",
+                        )
+                    }
+                }
+                val textCacheFile = cacheFile(documentModel, postfix = "text.txt")
+                if (cacheFilesystem.exists(textCacheFile)) {
+                    DocumentContent(
+                        documentModel = documentModel,
+                        undoStack = loadUndoStack(documentModel),
+                        redoStack = loadRedoStack(documentModel),
+                        text = cacheFilesystem.loadFile(textCacheFile, FileParams()),
+                    )
+                } else {
+                    val filesystem = filesystemFactory.create(documentModel.filesystemUuid)
+                    val fileModel = DocumentConverter.toModel(documentModel)
+                    val fileParams = FileParams(
+                        chardet = settingsManager.encodingAutoDetect,
+                        charset = charsetFor(settingsManager.encodingForOpening),
+                    )
+                    DocumentContent(
+                        documentModel = documentModel,
+                        undoStack = UndoStack(),
+                        redoStack = UndoStack(),
+                        text = filesystem.loadFile(fileModel, fileParams),
+                    ).also { content ->
+                        saveFile(content, DocumentParams(local = false, cache = true))
+                    }
+                }
+
+            } catch (e: Exception) {
                 DocumentContent(
                     documentModel = documentModel,
                     undoStack = loadUndoStack(documentModel),
                     redoStack = loadRedoStack(documentModel),
-                    text = cacheFilesystem.loadFile(textCacheFile, FileParams()),
+                    text = "",
                 )
-            } else {
-                val filesystem = filesystemFactory.create(documentModel.filesystemUuid)
-                val fileModel = DocumentConverter.toModel(documentModel)
-                val fileParams = FileParams(
-                    chardet = settingsManager.encodingAutoDetect,
-                    charset = charsetFor(settingsManager.encodingForOpening),
-                )
-                DocumentContent(
-                    documentModel = documentModel,
-                    undoStack = UndoStack(),
-                    redoStack = UndoStack(),
-                    text = filesystem.loadFile(fileModel, fileParams),
-                ).also { content ->
-                    saveFile(content, DocumentParams(local = false, cache = true))
-                }
             }
+
         }
     }
 
@@ -163,11 +184,13 @@ class DocumentRepositoryImpl(
                 params.regex && !params.matchCase -> Pattern.compile(
                     params.query, Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE,
                 )
+
                 params.wordsOnly && params.matchCase -> Pattern.compile("\\s${params.query}\\s")
                 params.wordsOnly && !params.matchCase -> Pattern.compile(
                     "\\s" + Pattern.quote(params.query) + "\\s",
                     Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE,
                 )
+
                 params.matchCase -> Pattern.compile(Pattern.quote(params.query))
                 else -> Pattern.compile(
                     Pattern.quote(params.query),

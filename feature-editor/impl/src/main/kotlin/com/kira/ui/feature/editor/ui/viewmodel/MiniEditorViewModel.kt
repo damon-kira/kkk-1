@@ -1,7 +1,6 @@
 package com.kira.ui.feature.editor.ui.viewmodel
 
-
-import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kira.ui.core.extensions.*
@@ -13,6 +12,7 @@ import com.kira.ui.editorkit.model.FindParams
 import com.kira.ui.feature.editor.R
 import com.kira.ui.feature.editor.data.converter.DocumentConverter
 import com.kira.ui.feature.editor.data.utils.SettingsEvent
+import com.kira.ui.feature.editor.data.utils.createFile
 import com.kira.ui.feature.editor.domain.model.DocumentContent
 import com.kira.ui.feature.editor.domain.model.DocumentModel
 import com.kira.ui.feature.editor.domain.model.DocumentParams
@@ -53,7 +53,8 @@ class MiniEditorViewModel @Inject constructor(
     val editorViewState: StateFlow<EditorViewState> = _editorViewState.asStateFlow()
 
     private val _keyboardViewState = MutableStateFlow(MiniCodingKeyboardManager.Mode.NONE)
-    val keyboardViewState: StateFlow<MiniCodingKeyboardManager.Mode> = _keyboardViewState.asStateFlow()
+    val keyboardViewState: StateFlow<MiniCodingKeyboardManager.Mode> =
+        _keyboardViewState.asStateFlow()
 
     private val _viewEvent = Channel<ViewEvent>(Channel.BUFFERED)
     val viewEvent: Flow<ViewEvent> = _viewEvent.receiveAsFlow()
@@ -131,6 +132,9 @@ class MiniEditorViewModel @Inject constructor(
                 } else {
                     emptyState()
                 }
+                if (documentList.isEmpty()) {
+                    newFile(EditorIntent.NewFile("".toUri()))
+                }
             } catch (e: Throwable) {
                 Timber.e(e, e.message)
                 errorState(e)
@@ -141,7 +145,11 @@ class MiniEditorViewModel @Inject constructor(
     private fun newFile(event: EditorIntent.NewFile) {
         viewModelScope.launch {
             try {
-                openFileUri(EditorIntent.OpenFileUri(event.fileUri))
+                if (!event.fileUri.path.isNullOrEmpty()) {
+                    openFileUri(EditorIntent.OpenFileUri(event.fileUri))
+                } else {
+                    openFile(EditorIntent.OpenFile(createFile(stringProvider.getString(UiR.string.common_untitled))))
+                }
             } catch (e: Throwable) {
                 Timber.e(e, e.message)
                 errorState(e)
@@ -465,7 +473,6 @@ class MiniEditorViewModel @Inject constructor(
                         language = LanguageFactory.fromName(event.languageName)
                     )
                     documentRepository.updateDocument(document)
-                    Log.e("codingcoding", "选择语言${event.languageName}", )
                     refreshActionBar()
                 }
             } catch (e: Exception) {
