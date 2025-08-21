@@ -1,5 +1,3 @@
-
-
 package com.kira.ui
 
 import org.gradle.api.Plugin

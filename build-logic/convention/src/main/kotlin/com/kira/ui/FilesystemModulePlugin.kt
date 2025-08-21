@@ -1,5 +1,3 @@
-
-
 package com.kira.ui
 
 import com.android.build.api.dsl.LibraryExtension
@@ -36,12 +34,12 @@ class FilesystemModulePlugin : Plugin<Project> {
                         consumerProguardFiles("consumer-rules.pro")
                     }
                     compileOptions {
-                        sourceCompatibility = JavaVersion.VERSION_17
-                        targetCompatibility = JavaVersion.VERSION_17
+                        sourceCompatibility = JavaVersion.VERSION_21
+                        targetCompatibility = JavaVersion.VERSION_21
                     }
                     tasks.withType<KotlinCompile>().configureEach {
                         kotlinOptions {
-                            jvmTarget = "17"
+                            jvmTarget = "21"
                         }
                     }
                     sourceSets {
@@ -55,8 +53,8 @@ class FilesystemModulePlugin : Plugin<Project> {
                 }
             } else {
                 configure<JavaPluginExtension> {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
+                    sourceCompatibility = JavaVersion.VERSION_21
+                    targetCompatibility = JavaVersion.VERSION_21
                 }
                 configure<SourceSetContainer> {
                     named("main") {

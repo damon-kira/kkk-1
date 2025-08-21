@@ -57,12 +57,12 @@ fun isDefaultOpenPermission(): Boolean {
 
 //是否是小米手机
 private fun isXiaomi(): Boolean {
-    return Build.BRAND.toUpperCase() == "XIAOMI"
+    return Build.BRAND.uppercase() == "XIAOMI"
 }
 
 // 是否是联想手机
 private fun isLenovo(): Boolean {
-    return Build.BRAND.toUpperCase() == "LENOVO"
+    return Build.BRAND.uppercase() == "LENOVO"
 }
 
 /**

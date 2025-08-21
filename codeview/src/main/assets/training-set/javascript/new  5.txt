@@ -67,7 +67,7 @@ function frequency(content) {
       words = [];
 
   // Add the current content.
-  content = content.toLowerCase();
+  content = content.lowercase();
   tfidf.addDocument(content);
 
   tokenizer.tokenize(content).forEach(function wordFrequency(word) {

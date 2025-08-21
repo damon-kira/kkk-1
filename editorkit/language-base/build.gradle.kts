@@ -1,5 +1,3 @@
-
-
 plugins {
     id("com.kira.language")
     id("com.kira.publish")

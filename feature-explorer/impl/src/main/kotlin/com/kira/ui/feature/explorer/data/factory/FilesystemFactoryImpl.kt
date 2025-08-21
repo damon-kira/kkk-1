@@ -8,7 +8,6 @@ import com.kira.ui.filesystem.ftp.FTPFilesystem
 import com.kira.ui.filesystem.ftpes.FTPESFilesystem
 import com.kira.ui.filesystem.ftps.FTPSFilesystem
 import com.kira.ui.filesystem.local.utils.LocalFilesystem
-import com.kira.ui.filesystem.root.RootFilesystem
 import com.kira.ui.filesystem.sftp.SFTPFilesystem
 import java.io.File
 
@@ -20,7 +19,7 @@ class FilesystemFactoryImpl(
     override suspend fun create(uuid: String): Filesystem {
         return when (uuid) {
             LocalFilesystem.LOCAL_UUID -> LocalFilesystem(Environment.getExternalStorageDirectory())
-            RootFilesystem.ROOT_UUID -> RootFilesystem()
+//            RootFilesystem.ROOT_UUID -> RootFilesystem()
             else -> {
                 val serverConfig = serversRepository.loadServer(uuid)
                 return when (serverConfig.scheme) {

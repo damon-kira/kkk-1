@@ -9,10 +9,15 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-//        versionCode = 1
-//        versionName = "1.0"
 
         consumerProguardFiles("proguard-rules.pro")
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 
     buildTypes {
@@ -26,12 +31,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     buildFeatures {
@@ -44,19 +49,12 @@ dependencies {
     implementation(project(":sdks:util"))
     implementation(project(":sdks:cache"))
 
-//    implementation(rootProject.extra["android.kotlin_stdlib"] as String)
-//    implementation(rootProject.extra["android.core_ktx"] as String)
-//    implementation(rootProject.extra["android.appcompat"] as String)
     api(libs.kotlin.stdlib)
     api(libs.androidx.core)
     api(libs.androidx.appcompat)
 
-//    implementation(rootProject.extra["other.aes"] as String)
     api(libs.other.aes)
 
-//    implementation(rootProject.extra["retrofit.gson"] as String)
-//    implementation(rootProject.extra["retrofit.logging_interceptor"] as String)
-//    implementation(rootProject.extra["retrofit.okhttp"] as String)
     api(libs.retrofit.gson)
     api(libs.retrofit.logging.interceptor)
     api(libs.retrofit.okhttp)

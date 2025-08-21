@@ -63,7 +63,7 @@ abstract class AbstractCodeAdapter<T> : RecyclerView.Adapter<AbstractCodeAdapter
             if (!options.shortcut || size <= options.maxLines) // limit is not reached, show full
                 lines = this
             else slice(options.maxLines).let { (linesToShow, dropped) ->
-                lines = linesToShow + options.shortcutNote.toUpperCase()
+                lines = linesToShow + options.shortcutNote.uppercase()
                 droppedLines = dropped
             }
         }

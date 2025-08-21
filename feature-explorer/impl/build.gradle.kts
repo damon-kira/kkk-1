@@ -8,6 +8,15 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
+    }
 }
 
 dependencies {
@@ -54,7 +63,7 @@ dependencies {
     implementation(project(":common-ui"))
 
     implementation(project(":filesystems:filesystem-local"))
-    implementation(project(":filesystems:filesystem-root"))
+//    implementation(project(":filesystems:filesystem-root"))
     implementation(project(":filesystems:filesystem-ftp"))
     implementation(project(":filesystems:filesystem-ftps"))
     implementation(project(":filesystems:filesystem-ftpes"))

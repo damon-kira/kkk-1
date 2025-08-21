@@ -53,6 +53,7 @@ import com.kira.learning.module.stepbar.StepBarViewActivity
 import com.kira.learning.module.coding.KCodingEditorActivity
 import com.kira.learning.module.supereditor.SuperEditorActivity
 import com.kira.learning.module.upload.real.QuickUploadActivity
+import kira.learning.chat.AiChatActivity
 
 object Launch {
 
@@ -247,6 +248,9 @@ object Launch {
     }
     fun skipQuickUploadActivity(context: Context){
         launch(context, QuickUploadActivity::class.java)
+    }
+    fun skipAiChatActivity(context: Context){
+        launch(context, AiChatActivity::class.java)
     }
 
     /**

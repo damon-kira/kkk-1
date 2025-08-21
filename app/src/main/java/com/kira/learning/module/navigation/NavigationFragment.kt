@@ -314,6 +314,12 @@ class NavigationFragment : BaseHomeFragment() {
                 Launch.skipSuperEditorActivity(getSupportContext())
             }
         }
+        mBinding.inclueDemoLayout17.let {
+            it.tvDemoName.text = "Ai-Chat"
+            it.tvBtn.setOnClickListener {
+                Launch.skipAiChatActivity(getSupportContext())
+            }
+        }
     }
 
     private fun cancelAndRecycleEasyWindow(easyWindow: EasyWindow<*>?) {

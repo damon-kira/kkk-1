@@ -178,7 +178,7 @@ function parseHeader(str) {
   for (var i = 0, len = lines.length; i < len; ++i) {
     line = lines[i];
     index = line.indexOf(':');
-    field = line.slice(0, index).toLowerCase();
+    field = line.slice(0, index).lowercase();
     val = trim(line.slice(index + 1));
     fields[field] = val;
   }
@@ -475,7 +475,7 @@ Request.prototype.set = function(field, val){
     }
     return this;
   }
-  this.header[field.toLowerCase()] = val;
+  this.header[field.lowercase()] = val;
   return this;
 };
 

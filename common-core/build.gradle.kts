@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
     sourceSets {
         named("main") {
@@ -70,9 +70,14 @@ dependencies {
     implementation(project(":filesystems:filesystem-base"))
 
     implementation(project(":editorkit:language-base"))
+    implementation(project(":editorkit:language-cpp"))
+    implementation(project(":editorkit:language-java"))
+    implementation(project(":editorkit:language-javascript"))
+    implementation(project(":editorkit:language-kotlin"))
+    implementation(project(":editorkit:language-python"))
+    implementation(project(":editorkit:language-php"))
     implementation(project(":editorkit:language-actionscript"))
     implementation(project(":editorkit:language-c"))
-    implementation(project(":editorkit:language-cpp"))
     implementation(project(":editorkit:language-csharp"))
     implementation(project(":editorkit:language-css"))
     implementation(project(":editorkit:language-fortran"))
@@ -80,18 +85,13 @@ dependencies {
     implementation(project(":editorkit:language-groovy"))
     implementation(project(":editorkit:language-html"))
     implementation(project(":editorkit:language-ini"))
-    implementation(project(":editorkit:language-java"))
-    implementation(project(":editorkit:language-javascript"))
     implementation(project(":editorkit:language-json"))
     implementation(project(":editorkit:language-julia"))
-    implementation(project(":editorkit:language-kotlin"))
     implementation(project(":editorkit:language-latex"))
     implementation(project(":editorkit:language-lisp"))
     implementation(project(":editorkit:language-lua"))
     implementation(project(":editorkit:language-markdown"))
-    implementation(project(":editorkit:language-php"))
     implementation(project(":editorkit:language-plaintext"))
-    implementation(project(":editorkit:language-python"))
     implementation(project(":editorkit:language-ruby"))
     implementation(project(":editorkit:language-rust"))
     implementation(project(":editorkit:language-shell"))

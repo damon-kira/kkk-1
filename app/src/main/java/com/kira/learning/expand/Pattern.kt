@@ -128,7 +128,7 @@ fun checkVowelChar(str: String):Boolean{
     if (str.isEmpty())return false
 
     val compile = Pattern.compile(p)
-    val matcher = compile.matcher(str.toLowerCase())
+    val matcher = compile.matcher(str.lowercase())
 
     return matcher.find()
 }
@@ -138,7 +138,7 @@ fun checkVowelChar(str: String):Boolean{
  */
 fun getFirstVowel(str: String): String {
     var firstVowel = ""
-    for (char in str.toLowerCase()) {
+    for (char in str.lowercase()) {
         if ("aeiou".contains(char)) {
             firstVowel = char.toString()
             break
@@ -158,7 +158,7 @@ fun checkCurpStr(curp: String?):String{
 //    if (!checkCurpBirth(curp)){
 //        return getAppContext().getString(R.string.fill_in_correct_birch)
 //    }
-//    val sex = curp.substring(10,11).toLowerCase()
+//    val sex = curp.substring(10,11).lowercase()
 //    if (sex != "m" && sex != "h"){
 //        return getAppContext().getString(R.string.fill_in_correct_sex)
 //    }
@@ -174,7 +174,7 @@ fun convertSpanish(str: String):String{
     val stringBuilder = StringBuilder()
     str.forEach {
 //     Áá Éé Íí Óó Úú Ññ üï
-        var char = it.toString().toUpperCase()
+        var char = it.toString().uppercase()
         char = when (char) {
             "Á" -> "A"
             "É" -> "E"
@@ -208,7 +208,7 @@ fun checkCurp(curp:String?):Boolean{
 
     if (curp == null || curp.length < 18)return false
     val rx = "^[A-Za-z]{4}[0-9]{6}(h|m)[A-Za-z0-9]{7}"
-    return Pattern.matches(rx, curp.toLowerCase())
+    return Pattern.matches(rx, curp.lowercase())
 }
 
 

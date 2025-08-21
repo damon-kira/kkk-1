@@ -20,8 +20,8 @@ class AddressInfo : SearchInfo() {
             trophful?.let { nameStr ->
                 constraint?.let { it ->
                     result =
-                        nameStr.toLowerCase(Locale.US)
-                            .startsWith(it.toString().toLowerCase(Locale.US))
+                        nameStr.lowercase(Locale.US)
+                            .startsWith(it.toString().lowercase(Locale.US))
                 }
             }
             return result
@@ -41,7 +41,7 @@ class AddressInfo : SearchInfo() {
         cingorium?.let { nameStr ->
             constraint?.let { it ->
                 result =
-                    nameStr.toLowerCase(Locale.US).startsWith(it.toString().toLowerCase(Locale.US))
+                    nameStr.lowercase(Locale.US).startsWith(it.toString().lowercase(Locale.US))
             }
         }
         return result

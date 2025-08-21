@@ -1,8 +1,6 @@
 plugins {
-//    alias(libs.plugins.android.library)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-//    id("kotlin-kapt")
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
 }
@@ -32,12 +30,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     composeOptions {
@@ -51,14 +49,6 @@ dependencies {
     api(project(":sdks:cache"))
 
     // Android Base
-//    api(rootProject.extra["android.kotlin_stdlib"] as String)
-//    api(rootProject.extra["android.core_ktx"] as String)
-//    api(rootProject.extra["android.activity_ktx"] as String)
-//    api(rootProject.extra["android.appcompat"] as String)
-//    api(rootProject.extra["android.multidex"] as String)
-//    api(rootProject.extra["android.coroutines_android"] as String)
-//    api(rootProject.extra["android.fragment"] as String)
-//    api(rootProject.extra["android.annotation"] as String)
     api(libs.kotlin.stdlib)
     api(libs.androidx.core)
     api(libs.androidx.activity)
@@ -69,13 +59,6 @@ dependencies {
     api(libs.androidx.annotation)
 
     // View
-//    api(rootProject.extra["view.viewpager2"] as String)
-//    api(rootProject.extra["view.constraintlayout"] as String)
-//    api(rootProject.extra["view.material"] as String)
-//    api(rootProject.extra["view.recyclerview"] as String)
-//    api(rootProject.extra["view.swiperefreshlayout"] as String)
-//    api(rootProject.extra["view.svg"] as String)
-//    api(rootProject.extra["view.gif"] as String)
     api(libs.view.viewpager2)
     api(libs.view.constraintlayout)
     api(libs.view.material)
@@ -85,9 +68,6 @@ dependencies {
     api(libs.view.gif)
 
     // Lifecycle
-//    api(rootProject.extra["lifecycle.runtime"] as String)
-//    api(rootProject.extra["lifecycle.livedataKtx"] as String)
-//    api(rootProject.extra["lifecycle.viewmodelKtx"] as String)
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.lifecycle.livedata)
     api(libs.androidx.lifecycle.runtime)
@@ -125,17 +105,13 @@ dependencies {
     api(libs.autosize)
 
     // Compose
-//    api(platform(rootProject.extra["compose.bom"] as String))
-//    api(rootProject.extra["compose.compose_ui"] as String)
-//    api(rootProject.extra["compose.compose_material"] as String)
-//    api(rootProject.extra["compose.compose_runtime"] as String)
-//    api(rootProject.extra["compose.compose_activity"] as String)
-//    debugApi(rootProject.extra["compose.compose_uitooling"] as String)
     api(platform(libs.compose.bom))
     api(libs.compose.ui)
     api(libs.compose.material)
     api(libs.compose.runtime)
     api(libs.compose.activity)
+    api(libs.compose.material3)
+    api(libs.compose.material.icons.extended)
     debugApi(libs.compose.uitooling)
 
     // Markwon

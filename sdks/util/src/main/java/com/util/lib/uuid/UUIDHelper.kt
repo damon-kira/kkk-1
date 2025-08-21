@@ -209,7 +209,7 @@ class UUIDHelper {
         var id: String = ""
         try {
             id = UUID.randomUUID().toString()
-            id = id.replace("-".toRegex(), "").replace(":", "").toLowerCase()
+            id = id.replace("-".toRegex(), "").replace(":", "").lowercase()
         } catch (ex: Exception) {
             if (DEBUG) {
                 Log.e(TAG, ex.toString())

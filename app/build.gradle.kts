@@ -1,3 +1,4 @@
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.composeCompiler)
     id("com.google.gms.google-services") version "4.4.3"
     id("com.google.firebase.crashlytics") version "3.0.4"
 }
@@ -92,10 +94,8 @@ android {
             buildConfigField("boolean", "APP_DEBUG", "false")
             isMinifyEnabled = true
             isShrinkResources = true
-            firebaseCrashlytics {
+            configure<CrashlyticsExtension> {
                 mappingFileUploadEnabled = true
-//                nativeSymbolUpload.enabled.set(true)
-//                setProperty("nativeSymbolUpload.enabled", true)
             }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
@@ -121,12 +121,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     lint {
@@ -139,13 +139,6 @@ android {
         }
     }
 
-//    gradle.taskGraph.whenReady {
-//        allTasks.forEach { task ->
-//            if (task.name.contains("uploadCrashlyticsMappingFileRelease")) {
-//                task.enabled = false
-//            }
-//        }
-//    }
     tasks.whenTaskAdded {
         if (name.contains("uploadCrashlyticsMappingFileRelease")) {
             enabled = false
@@ -169,13 +162,12 @@ dependencies {
     implementation(project(":window"))
     implementation(project(":image"))
     implementation(project(":richtext"))
-    implementation(project(":codeview"))
+//    implementation(project(":codeview"))
     implementation(project(":upload"))
 
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
-
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -204,7 +196,6 @@ dependencies {
     implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
     implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
 
-
     // SuperEditor
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.profileinstaller)
@@ -231,5 +222,6 @@ dependencies {
     implementation(project(":common-core"))
     implementation(project(":common-ui"))
     implementation(project(":filesystems:filesystem-base"))
+    implementation(project(":ai-chat"))
 
 }

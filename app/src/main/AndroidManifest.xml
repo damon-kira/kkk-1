@@ -238,6 +238,9 @@
             android:name=".module.upload.real.QuickUploadMultipleFilesSimultaneouslyActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
+            android:name="kira.learning.chat.AiChatActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
             android:name=".module.supereditor.SuperEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:exported="true"

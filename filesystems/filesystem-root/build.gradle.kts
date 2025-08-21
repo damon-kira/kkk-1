@@ -1,5 +1,3 @@
-
-
 plugins {
     alias(libs.plugins.android.library)
     id("com.kira.filesystem")

@@ -1,5 +1,3 @@
-
-
 package com.kira.ui.feature.explorer.data.repository
 
 import android.content.Context
@@ -16,7 +14,6 @@ import com.kira.ui.filesystem.base.exception.PermissionException
 import com.kira.ui.filesystem.base.model.FileModel
 import com.kira.ui.filesystem.base.model.FileTree
 import com.kira.ui.filesystem.local.utils.LocalFilesystem
-import com.kira.ui.filesystem.root.RootFilesystem
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -38,10 +35,10 @@ class ExplorerRepositoryImpl(
                     uuid = LocalFilesystem.LOCAL_UUID,
                     title = context.getString(R.string.storage_local),
                 ),
-                FilesystemModel(
-                    uuid = RootFilesystem.ROOT_UUID,
-                    title = context.getString(R.string.storage_root),
-                ),
+//                FilesystemModel(
+//                    uuid = RootFilesystem.ROOT_UUID,
+//                    title = context.getString(R.string.storage_root),
+//                ),
             )
         }
     }

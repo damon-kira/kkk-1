@@ -1,7 +1,10 @@
 [versions]
+compileSdk = "36"
+minSdk = "24"
+targetSdk = "34"
 agp = "8.5.0"
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.20"
+kotlin = "2.1.20"
+ksp = "2.1.20-1.0.31"
 kover = "0.7.4"
 core = "1.13.0"
 activity = "1.8.0"
@@ -20,14 +23,14 @@ recyclerview-selection = "1.1.0"
 vectordrawable = "1.1.0"
 lifecycle = "2.6.2"
 navigation = "2.7.5"
-room = "2.6.0"
+room = "2.7.2"
 workmanager = "2.8.1"
 gson = "2.10.1"
 ftpclient = "3.9.0"
 jsch = "0.2.9"
 coroutines = "1.8.0"
-hilt = "2.51.1"
-hilt-android = "1.1.0"
+hilt = "2.56.2"
+hilt-android = "1.2.0"
 zip4j = "2.11.5"
 icu4j = "73.2"
 superuser = "5.0.4"
@@ -44,9 +47,6 @@ mlkit = "16.0.1"
 kodeHighlighter = "v3.0.0"
 multidex = "2.0.1"
 annotation = "1.1.0"
-compileSdk = "34"
-minSdk = "21"
-targetSdk = "34"
 viewpager2 = "1.1.0"
 recyclerview = "1.3.2"
 androidsvg = "1.4"
@@ -64,6 +64,7 @@ autosize = "v1.2.1"
 compose-compiler = "1.5.12"
 compose-activity = "1.8.2"
 compose-bom = "2025.02.00"
+compose-plugin = "1.7.1"
 firebase = "31.5.0"
 markwon = "4.6.2"
 other-aes = "1.0.0"
@@ -73,6 +74,10 @@ media3 = "1.3.1"
 location = "1.0.1"
 services = "4.4.3"
 crashlytics = "3.0.4"
+buildkonfig = "0.15.1"
+calf = "0.3.0"
+generativeai = "0.9.0-1.1.0"
+chaquoPython = "15.0.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -84,8 +89,12 @@ kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
-services = { id = "com.google.gms.google-services" }
-crashlytics = { id = "com.google.firebase.crashlytics" }
+services = { id = "com.google.gms.google-services", version.ref = "services" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
 
 [libraries]
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -117,8 +126,6 @@ androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.re
 androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profile-installer" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
-#androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-#androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerview-selection" }
 androidx-vectordrawable = { module = "androidx.vectordrawable:vectordrawable", version.ref = "vectordrawable" }
 androidx-preferences = { module = "androidx.preference:preference-ktx", version.ref = "preferences" }
@@ -189,6 +196,8 @@ compose-runtime = { module = "androidx.compose.runtime:runtime" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-material = { module = "androidx.compose.material:material" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 
 markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }
@@ -210,6 +219,5 @@ media3-exoplayer-hls = { module = "androidx.media3:media3-exoplayer-hls", versio
 media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3" }
 
 location = { module = "com.location.lib:location", version.ref = "location" }
-
-
-
+calf-filepicker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "calf" }
+generativeai-google = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
