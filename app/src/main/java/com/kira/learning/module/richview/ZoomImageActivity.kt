@@ -13,7 +13,7 @@ import com.otaliastudios.zoom.ZoomLogger
 import com.otaliastudios.zoom.ZoomLogger.Companion.setLogLevel
 import com.otaliastudios.zoom.mathview.MathView
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.kbiakov.codeview.classifier.CodeProcessor
+//import io.github.kbiakov.codeview.classifier.CodeProcessor
 import org.scilab.forge.jlatexmath.core.AjLatexMath
 
 
@@ -117,7 +117,7 @@ class ZoomImageActivity : BaseActivity() {
     }
 
     private fun initRichText() {
-        CodeProcessor.init(this)
+//        CodeProcessor.init(this)
         AjLatexMath.init(this) // init library: load fonts, create paint, etc.
 
         val attachments: MutableList<Attachment?> = ArrayList<Attachment?>()

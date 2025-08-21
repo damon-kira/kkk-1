@@ -57,7 +57,7 @@ include(":image")
 //include(":sdks:devoptions")
 //include(":sdks:aes")
 include(":richtext")
-include(":codeview")
+//include(":codeview")
 
 
 include(

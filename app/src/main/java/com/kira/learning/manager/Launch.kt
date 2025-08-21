@@ -50,7 +50,6 @@ import com.kira.learning.camera.CaptureActivity
 import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
-import com.kira.learning.module.coding.KCodingEditorActivity
 import com.kira.learning.module.supereditor.SuperEditorActivity
 import com.kira.learning.module.upload.real.QuickUploadActivity
 import kira.learning.chat.AiChatActivity
@@ -240,9 +239,9 @@ object Launch {
     fun skipCodePlaygroundActivity(context: Context){
         launch(context, CodePlaygroundActivity::class.java)
     }
-    fun skipKCodingEditorActivity(context: Context){
-        launch(context, KCodingEditorActivity::class.java)
-    }
+//    fun skipKCodingEditorActivity(context: Context){
+//        launch(context, KCodingEditorActivity::class.java)
+//    }
     fun skipSuperEditorActivity(context: Context){
         launch(context, SuperEditorActivity::class.java)
     }

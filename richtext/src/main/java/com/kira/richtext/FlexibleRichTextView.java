@@ -56,7 +56,7 @@ import static com.kira.richtext.Tokenizer.*;
 
 import androidx.annotation.Nullable;
 
-import io.github.kbiakov.codeview.CodeView;
+//import io.github.kbiakov.codeview.CodeView;
 
 public class FlexibleRichTextView extends LinearLayout {
     private final static String TAG = "FlexibleRichTextView";
@@ -139,8 +139,8 @@ public class FlexibleRichTextView extends LinearLayout {
 
                 textView.setMovementMethod(LinkMovementMethod.getInstance());
                 myAddView(textView);
-            } else if (o instanceof CodeView) {
-                myAddView((CodeView) o);
+//            } else if (o instanceof CodeView) {
+//                myAddView((CodeView) o);
             } else if (o instanceof ImageView) {
                 myAddView((ImageView) o);
             } else if (o instanceof HorizontalScrollView) {
@@ -294,14 +294,14 @@ public class FlexibleRichTextView extends LinearLayout {
                     }
 
                     if (i == 0) {
-                        final CodeView codeView = (CodeView) LayoutInflater.from(mContext).inflate(R.layout.code_view, this, false);
-                        codeView.setCode(string.toString(), "java");
-                        ret.add(codeView);
+//                        final CodeView codeView = (CodeView) LayoutInflater.from(mContext).inflate(R.layout.code_view, this, false);
+//                        codeView.setCode(string.toString(), "java");
+//                        ret.add(codeView);
                     } else if (!TextUtils.isEmpty(string)) {
-                        setTokenIndex(tmp);
-                        final CodeView codeView = (CodeView) LayoutInflater.from(mContext).inflate(R.layout.code_view, this, false);
-                        codeView.setCode(string.toString(), "java");
-                        ret.add(codeView);
+//                        setTokenIndex(tmp);
+//                        final CodeView codeView = (CodeView) LayoutInflater.from(mContext).inflate(R.layout.code_view, this, false);
+//                        codeView.setCode(string.toString(), "java");
+//                        ret.add(codeView);
                     } else {
                         setTokenIndex(tmp);
                         append(ret, new TextWithFormula(thisToken().value));
