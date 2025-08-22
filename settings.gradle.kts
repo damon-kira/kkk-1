@@ -36,7 +36,7 @@ dependencyResolutionManagement {
 rootProject.name = "A1"
 include(":app")
 include(":common")
-include(":camera")
+include(":feature-camera")
 //include(":datepicker")
 //include(":analysis")
 
@@ -50,13 +50,13 @@ include(":sdks:util")
 include(":sdks:cache")
 
 //include(":rxpermission")
-include(":stedit")
-include(":player")
-include(":window")
-include(":image")
+include(":view-stedit")
+include(":module-player")
+include(":view-window")
+include(":view-image")
 //include(":sdks:devoptions")
 //include(":sdks:aes")
-include(":richtext")
+include(":view-richtext")
 //include(":codeview")
 
 
@@ -129,5 +129,5 @@ include(
     ":editorkit:language-xml",
     ":editorkit:language-yaml",
 )
-include(":upload")
+include(":feature-upload")
 include(":ai-chat")

@@ -154,16 +154,16 @@ fun time(): String {
 dependencies {
     // 本地库依赖
     implementation(project(":common"))
-    implementation(project(":camera"))
+    implementation(project(":feature-camera"))
     implementation(project(":sdks:bigdata"))
     implementation(project(":sdks:util"))
-    implementation(project(":stedit"))
-    implementation(project(":player"))
-    implementation(project(":window"))
-    implementation(project(":image"))
-    implementation(project(":richtext"))
-//    implementation(project(":codeview"))
-    implementation(project(":upload"))
+    implementation(project(":view-stedit"))
+    implementation(project(":module-player"))
+    implementation(project(":view-window"))
+    implementation(project(":view-image"))
+    implementation(project(":view-richtext"))
+    implementation(project(":feature-upload"))
+    //    implementation(project(":codeview"))
 
     // Hilt
     implementation(libs.hilt)
