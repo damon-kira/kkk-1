@@ -1,4 +1,4 @@
-package com.kira.ui.uikit.extensions.ui.uikit.extensions
+package com.common.kira.ui
 
 import android.content.res.Resources
 import android.graphics.Color

@@ -15,7 +15,7 @@ import com.kira.ui.core.view.MaterialPopupMenu
 import com.kira.ui.feature.themes.R
 import com.kira.ui.feature.themes.databinding.ItemThemeBinding
 import com.kira.ui.feature.themes.domain.model.ThemeModel
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.isColorDark
+import com.common.kira.ui.isColorDark
 
 class ThemeAdapter(
     private val actions: Actions,

@@ -7,8 +7,8 @@ import androidx.navigation.fragment.navArgs
 import com.kira.ui.feature.themes.R
 import com.kira.ui.feature.themes.ui.mvi.ThemeIntent
 import com.kira.ui.feature.themes.ui.viewmodel.ThemesViewModel
-import com.kira.ui.uikit.extensions.ui.uikit.ColorPickerDialog
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
+import com.common.kira.ui.ColorPickerDialog
+import com.common.kira.ui.toHexString
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

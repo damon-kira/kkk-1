@@ -2,7 +2,7 @@
 compileSdk = "36"
 minSdk = "24"
 targetSdk = "34"
-agp = "8.5.0"
+agp = "8.6.0"
 kotlin = "2.1.20"
 ksp = "2.1.20-1.0.31"
 kover = "0.7.4"
@@ -62,9 +62,9 @@ image-glide = "4.16.0"
 image-egloo = "0.6.1"
 autosize = "v1.2.1"
 compose-compiler = "1.5.12"
-compose-activity = "1.8.2"
-compose-bom = "2025.02.00"
-compose-plugin = "1.7.1"
+compose-activity = "1.10.1"
+compose-bom = "2025.08.00"
+compose-plugin = "1.8.2"
 firebase = "31.5.0"
 markwon = "4.6.2"
 other-aes = "1.0.0"
@@ -167,11 +167,8 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 
 exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
 cropper = { module = "com.edmodo:cropper", version.ref = "cropper" }
-
 mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkit" }
-
 kodeHighlighter = { module = "com.github.markusressel.KodeHighlighter:core", version.ref = "kodeHighlighter" }
-
 guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" }
 guava-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "guava-coroutines" }
 
@@ -194,10 +191,13 @@ autosize = { module = "com.github.JessYanCoding:AndroidAutoSize", version.ref = 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-runtime = { module = "androidx.compose.runtime:runtime" }
 compose-ui = { module = "androidx.compose.ui:ui" }
-compose-material = { module = "androidx.compose.material:material" }
-compose-uitooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-uitooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-uitooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
 compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 
 markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }

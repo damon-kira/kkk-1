@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.ui.feature.editor.databinding.ItemKeyboardKeyBinding
 import com.kira.ui.feature.settings.domain.model.KeyModel
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.dpToPx
+import com.common.kira.ui.dpToPx
 
 class KeyAdapter(
     private val onKey: (KeyModel) -> Unit,

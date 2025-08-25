@@ -5,8 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import kira.learning.chat.ui.screen.ChatMessage
-import kira.learning.chat.ui.screen.ModelChatMessage
 
 /**
  * UI state model for Chat listing screen
@@ -41,7 +39,7 @@ class MutableChatUiState : ChatUiState {
         val lastMessage = messages.lastOrNull() as? ModelChatMessage
         lastMessage?.let {
             val newMessage = block(it)
-            messages.removeLast()
+            messages.removeAt(messages.lastIndex)
             messages.add(newMessage)
         }
     }

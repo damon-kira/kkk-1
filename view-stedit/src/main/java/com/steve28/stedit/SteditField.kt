@@ -1,7 +1,7 @@
 package com.steve28.stedit
 
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,8 +24,16 @@ class SteditField {
             visualTransformation = highlighter,
             modifier = modifier,
             maxLines = maxLines,
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color(0xFF002240)
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFF003566),
+                unfocusedContainerColor = Color(0xFF002240),
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White.copy(alpha = 0.8f),
+                cursorColor = Color.White,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedLeadingIconColor = Color.White,
+                unfocusedLeadingIconColor = Color.White.copy(alpha = 0.6f),
             )
         )
     }

@@ -1,4 +1,4 @@
-package com.kira.ui.uikit.extensions.ui.uikit
+package com.common.kira.ui
 
 import android.app.Dialog
 import android.graphics.Color
@@ -9,7 +9,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import com.kira.ui.uikit.databinding.DialogColorPickerBinding
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
 import com.skydoves.colorpickerview.listeners.ColorListener
 
 abstract class ColorPickerDialog : DialogFragment() {

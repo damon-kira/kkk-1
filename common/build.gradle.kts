@@ -105,14 +105,15 @@ dependencies {
     api(libs.autosize)
 
     // Compose
-    api(platform(libs.compose.bom))
-    api(libs.compose.ui)
-    api(libs.compose.material)
-    api(libs.compose.runtime)
-    api(libs.compose.activity)
-    api(libs.compose.material3)
-    api(libs.compose.material.icons.extended)
-    debugApi(libs.compose.uitooling)
+//    api(platform(libs.compose.bom))
+//    api(libs.compose.runtime)
+//    api(libs.compose.ui)
+//    api(libs.compose.foundation)
+//    api(libs.compose.material3)
+//    api(libs.compose.activity)
+//    api(libs.compose.uitooling.preview)
+//    api(libs.compose.material.icons.extended)
+//    debugApi(libs.compose.uitooling)
 
     // Markwon
     api(libs.markwon.core)

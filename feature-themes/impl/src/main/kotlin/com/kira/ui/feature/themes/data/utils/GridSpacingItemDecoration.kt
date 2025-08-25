@@ -5,7 +5,7 @@ package com.kira.ui.feature.themes.data.utils
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.dpToPx
+import com.common.kira.ui.dpToPx
 
 class GridSpacingItemDecoration(
     marginDp: Int,

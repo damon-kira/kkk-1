@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import kira.learning.chat.service.GenerativeAiService
 import kira.learning.chat.ui.component.ChatBubbleItem
 import kira.learning.chat.ui.component.MessageInput
-import kira.learning.chat.ui.screen.ChatMessage
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

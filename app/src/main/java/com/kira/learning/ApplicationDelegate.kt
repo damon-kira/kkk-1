@@ -78,7 +78,7 @@ object ApplicationDelegate {
             if (it is UndeliverableException) {
                 e = it.cause
             }
-            if ((e is IOException) || (e is SocketException) || e is InterruptedException) {
+            if (e is IOException || e is InterruptedException) {
                 return@Consumer
             }
             if ((e is NullPointerException) || (e is IllegalArgumentException)) {
@@ -90,7 +90,7 @@ object ApplicationDelegate {
             if (e is IllegalStateException) {
                 // that's a bug in RxJava or in a custom operator
                 Thread.currentThread().uncaughtExceptionHandler
-                    .uncaughtException(Thread.currentThread(), e)
+                    ?.uncaughtException(Thread.currentThread(), e)
             }
             logger_d("debug_TheApplication", e.toString())
         })

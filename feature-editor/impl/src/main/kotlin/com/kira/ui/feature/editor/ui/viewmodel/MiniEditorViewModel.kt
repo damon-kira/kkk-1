@@ -25,7 +25,7 @@ import com.kira.ui.feature.fonts.domain.repository.FontsRepository
 import com.kira.ui.feature.settings.domain.repository.SettingsRepository
 import com.kira.ui.feature.shortcuts.domain.repository.ShortcutsRepository
 import com.kira.ui.feature.themes.domain.repository.ThemesRepository
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
+import com.common.kira.ui.toHexString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel

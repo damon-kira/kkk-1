@@ -8,7 +8,7 @@ import com.kira.ui.editorkit.model.ColorScheme
 import com.kira.ui.feature.themes.data.model.ExternalScheme
 import com.kira.ui.feature.themes.data.model.ExternalTheme
 import com.kira.ui.feature.themes.domain.model.ThemeModel
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
+import com.common.kira.ui.toHexString
 import java.util.*
 
 object ThemeConverter {

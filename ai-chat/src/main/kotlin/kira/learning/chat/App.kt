@@ -1,4 +1,4 @@
-package dev.shreyaspatil.chat
+package kira.learning.chat
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background

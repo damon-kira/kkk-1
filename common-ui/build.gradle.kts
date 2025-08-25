@@ -32,4 +32,14 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.view.material)
     implementation(libs.colorpicker)
+
+    api(platform(libs.compose.bom))
+    api(libs.compose.runtime)
+    api(libs.compose.ui)
+    api(libs.compose.foundation)
+    api(libs.compose.material3)
+    api(libs.compose.activity)
+    api(libs.compose.uitooling.preview)
+    api(libs.compose.material.icons.extended)
+    debugApi(libs.compose.uitooling)
 }

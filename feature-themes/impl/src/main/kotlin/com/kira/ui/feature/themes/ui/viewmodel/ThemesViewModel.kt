@@ -17,7 +17,7 @@ import com.kira.ui.feature.themes.ui.mvi.NewThemeViewState
 import com.kira.ui.feature.themes.ui.mvi.ThemeIntent
 import com.kira.ui.feature.themes.ui.mvi.ThemesViewState
 import com.kira.ui.feature.themes.ui.navigation.ThemesScreen
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
+import com.common.kira.ui.toHexString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

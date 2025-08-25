@@ -44,4 +44,5 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":common-ui"))
 }

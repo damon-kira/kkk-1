@@ -7,8 +7,8 @@ import androidx.fragment.app.activityViewModels
 import com.kira.ui.feature.editor.R
 import com.kira.ui.feature.editor.ui.mvi.EditorIntent
 import com.kira.ui.feature.editor.ui.viewmodel.EditorViewModel
-import com.kira.ui.uikit.extensions.ui.uikit.ColorPickerDialog
-import com.kira.ui.uikit.extensions.ui.uikit.extensions.toHexString
+import com.common.kira.ui.ColorPickerDialog
+import com.common.kira.ui.toHexString
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
