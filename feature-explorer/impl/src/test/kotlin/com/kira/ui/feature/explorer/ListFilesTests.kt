@@ -22,7 +22,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 class ListFilesTests {
 

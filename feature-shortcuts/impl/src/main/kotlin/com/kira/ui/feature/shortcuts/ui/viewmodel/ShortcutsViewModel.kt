@@ -10,7 +10,7 @@ import com.kira.ui.feature.shortcuts.domain.model.Keybinding
 import com.kira.ui.feature.shortcuts.domain.repository.ShortcutsRepository
 import com.kira.ui.feature.shortcuts.ui.mvi.ShortcutIntent
 import com.kira.ui.feature.shortcuts.ui.navigation.ShortcutScreen
-import com.kira.ui.uikit.R
+import com.common.kira.ui.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

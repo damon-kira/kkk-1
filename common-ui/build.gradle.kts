@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.composeCompiler)
     id("com.kira.stub")
 }
 
 android {
     compileSdk = libs.versions.compileSdk.get().toInt()
-    namespace = "com.kira.ui.uikit"
+    namespace = "com.common.kira.ui"
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -32,6 +33,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.view.material)
     implementation(libs.colorpicker)
+    implementation(libs.skydoves.colorpicker.compose)
 
     api(platform(libs.compose.bom))
     api(libs.compose.runtime)

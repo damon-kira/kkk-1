@@ -28,7 +28,7 @@ import com.kira.ui.filesystem.sftp.SFTPFilesystem
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class ServerDialog : DialogFragment() {

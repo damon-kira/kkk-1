@@ -21,9 +21,9 @@ import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.ui.core.theme.Theme
 import com.kira.ui.feature.settings.R
 import com.kira.ui.feature.settings.ui.viewmodel.SettingsViewModel
-import com.kira.ui.uikit.databinding.LayoutPreferenceBinding
+import com.common.kira.ui.databinding.LayoutPreferenceBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class ApplicationFragment : PreferenceFragmentCompat() {

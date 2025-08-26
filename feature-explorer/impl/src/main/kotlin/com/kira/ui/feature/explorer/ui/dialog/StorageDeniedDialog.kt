@@ -13,7 +13,7 @@ import com.kira.ui.core.extensions.showToast
 import com.kira.ui.feature.explorer.R
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class StorageDeniedDialog : DialogFragment() {

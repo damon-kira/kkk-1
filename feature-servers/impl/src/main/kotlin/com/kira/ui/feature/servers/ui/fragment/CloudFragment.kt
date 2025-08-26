@@ -22,11 +22,11 @@ import com.kira.ui.core.navigation.Screen
 import com.kira.ui.feature.servers.R
 import com.kira.ui.feature.servers.ui.navigation.ServersScreen
 import com.kira.ui.feature.servers.ui.viewmodel.ServersViewModel
-import com.kira.ui.uikit.databinding.LayoutPreferenceBinding
+import com.common.kira.ui.databinding.LayoutPreferenceBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class CloudFragment : PreferenceFragmentCompat() {

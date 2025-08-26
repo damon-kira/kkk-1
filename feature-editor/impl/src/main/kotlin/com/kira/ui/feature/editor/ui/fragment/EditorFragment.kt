@@ -51,7 +51,7 @@ import com.kira.ui.feature.shortcuts.domain.model.Shortcut
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class EditorFragment : Fragment(R.layout.fragment_editor),

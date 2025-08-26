@@ -26,7 +26,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @HiltWorker
 class ExtractFileWorker @AssistedInject constructor(

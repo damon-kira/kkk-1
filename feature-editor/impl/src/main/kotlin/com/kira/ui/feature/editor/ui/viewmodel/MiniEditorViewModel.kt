@@ -32,7 +32,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
 import javax.inject.Inject
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @HiltViewModel
 class MiniEditorViewModel @Inject constructor(

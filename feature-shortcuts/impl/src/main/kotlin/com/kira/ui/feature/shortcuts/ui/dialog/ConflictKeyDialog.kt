@@ -11,7 +11,7 @@ import com.kira.ui.feature.shortcuts.R
 import com.kira.ui.feature.shortcuts.ui.mvi.ShortcutIntent
 import com.kira.ui.feature.shortcuts.ui.viewmodel.ShortcutsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class ConflictKeyDialog : DialogFragment() {

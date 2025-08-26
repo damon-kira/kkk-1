@@ -22,9 +22,9 @@ import com.kira.ui.feature.settings.data.utils.applicationName
 import com.kira.ui.feature.settings.data.utils.versionCode
 import com.kira.ui.feature.settings.data.utils.versionName
 import com.kira.ui.feature.settings.ui.navigation.SettingsScreen
-import com.kira.ui.uikit.databinding.LayoutPreferenceBinding
+import com.common.kira.ui.databinding.LayoutPreferenceBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class AboutFragment : PreferenceFragmentCompat() {

@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @HiltWorker
 class DeleteFileWorker @AssistedInject constructor(

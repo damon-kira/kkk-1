@@ -17,10 +17,10 @@ import com.kira.ui.core.extensions.postponeEnterTransition
 import com.kira.ui.core.extensions.setFadeTransition
 import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.ui.feature.settings.R
-import com.kira.ui.uikit.databinding.LayoutPreferenceBinding
+import com.common.kira.ui.databinding.LayoutPreferenceBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.nio.charset.Charset
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class FilesFragment : PreferenceFragmentCompat() {

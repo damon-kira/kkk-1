@@ -8,7 +8,7 @@ import androidx.core.graphics.toColorInt
 import androidx.core.view.doOnPreDraw
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
-import com.kira.ui.uikit.databinding.DialogColorPickerBinding
+import com.common.kira.ui.databinding.DialogColorPickerBinding
 import com.skydoves.colorpickerview.listeners.ColorListener
 
 abstract class ColorPickerDialog : DialogFragment() {

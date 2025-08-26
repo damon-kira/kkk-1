@@ -3,8 +3,8 @@ compileSdk = "36"
 minSdk = "24"
 targetSdk = "34"
 agp = "8.6.0"
-kotlin = "2.1.20"
-ksp = "2.1.20-1.0.31"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.25"
 kover = "0.7.4"
 core = "1.13.0"
 activity = "1.8.0"
@@ -18,7 +18,6 @@ materialdesign = "1.10.0"
 constraintlayout = "2.1.4"
 swiperefreshlayout = "1.2.0-alpha01"
 preferences = "1.2.1"
-colorpicker = "2.3.0"
 recyclerview-selection = "1.1.0"
 vectordrawable = "1.1.0"
 lifecycle = "2.6.2"
@@ -78,6 +77,8 @@ buildkonfig = "0.15.1"
 calf = "0.3.0"
 generativeai = "0.9.0-1.1.0"
 chaquoPython = "15.0.1"
+colorpicker = "2.3.0"
+colorpickerCompose = "1.1.2"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -104,6 +105,7 @@ plugin-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.r
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 #materialdesign = { module = "com.google.android.material:material", version.ref = "materialdesign" }
 colorpicker = { module = "com.github.skydoves:colorpickerview", version.ref = "colorpicker" }
+skydoves-colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "appupdate" }
 superuser = { module = "com.github.topjohnwu.libsu:io", version.ref = "superuser" }

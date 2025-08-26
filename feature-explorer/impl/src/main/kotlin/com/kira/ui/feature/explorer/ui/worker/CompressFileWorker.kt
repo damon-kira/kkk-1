@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @HiltWorker
 class CompressFileWorker @AssistedInject constructor(

@@ -13,7 +13,7 @@ import com.kira.ui.feature.explorer.data.utils.toReadableSize
 import com.kira.ui.feature.explorer.databinding.ItemFileDetailedBinding
 import com.kira.ui.filesystem.base.model.FileModel
 import com.kira.ui.filesystem.base.model.FileType
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 import com.google.android.material.R as MtrlR
 
 class DetailedViewHolder(

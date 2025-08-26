@@ -6,7 +6,7 @@ import android.content.Context
 import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.ui.feature.settings.domain.model.KeyModel
 import com.kira.ui.feature.settings.domain.repository.SettingsRepository
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 class SettingsRepositoryImpl(
     private val settingsManager: SettingsManager,

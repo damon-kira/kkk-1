@@ -14,7 +14,7 @@ import com.kira.ui.feature.explorer.ui.mvi.ExplorerIntent
 import com.kira.ui.feature.explorer.ui.viewmodel.ExplorerViewModel
 import com.kira.ui.filesystem.base.model.AuthMethod
 import dagger.hilt.android.AndroidEntryPoint
-import com.kira.ui.uikit.R as UiR
+import com.common.kira.ui.R as UiR
 
 @AndroidEntryPoint
 class AuthDialog : DialogFragment() {
