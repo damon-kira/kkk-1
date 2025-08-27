@@ -26,8 +26,7 @@ android {
         }
     }
 }
-
 dependencies {
-    implementation(project(":common"))
-//    implementation(project(":codeview"))
+    implementation(project(":common-base"))
 }
+

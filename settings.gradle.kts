@@ -35,7 +35,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "A1"
 include(":app")
-include(":common")
+include(":common-base")
 include(":feature-camera")
 //include(":datepicker")
 //include(":analysis")

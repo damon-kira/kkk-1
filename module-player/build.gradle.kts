@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common-base"))
     // Android 基础库
 //    implementation(rootProject.extra["android.kotlin_stdlib"] as String)
 //    implementation(rootProject.extra["android.core_ktx"] as String)
@@ -43,7 +44,6 @@ dependencies {
 //    implementation(rootProject.extra["lifecycle.runtime"] as String)
 //    implementation(rootProject.extra["lifecycle.livedataKtx"] as String)
 //    implementation(rootProject.extra["lifecycle.viewmodelKtx"] as String)
-    implementation(project(":common"))
 
     // Media3
     implementation(libs.media3.exoplayer)

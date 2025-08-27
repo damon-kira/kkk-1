@@ -37,7 +37,7 @@ android {
         buildConfig = true
     }
 }
-
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":common-base"))
 }
+
