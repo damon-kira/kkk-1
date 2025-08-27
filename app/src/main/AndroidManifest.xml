@@ -222,9 +222,9 @@
         <activity
             android:name=".module.codeeditor.CodePlaygroundActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name=".module.coding.KCodingEditorActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+<!--        <activity-->
+<!--            android:name=".module.coding.KCodingEditorActivity"-->
+<!--            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />-->
         <activity
             android:name=".module.upload.real.QuickUploadActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
@@ -240,6 +240,10 @@
         <activity
             android:name="kira.learning.chat.AiChatActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity
+            android:name=".compose.MainActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize">
+        </activity>
         <activity
             android:name=".module.supereditor.SuperEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"

@@ -168,9 +168,5 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SuperEditorViewModel::class)
     abstract fun bindSuperEditorViewModel(viewModel: SuperEditorViewModel): ViewModel
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(MiniEditorViewModel::class)
-//    abstract fun bindMiniEditorViewModel(viewModel: MiniEditorViewModel): ViewModel
 
 }

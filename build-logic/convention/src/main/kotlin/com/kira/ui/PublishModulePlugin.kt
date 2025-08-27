@@ -22,7 +22,8 @@ class PublishModulePlugin : Plugin<Project> {
                 apply("signing")
             }
 
-            val publishModule = extensions.create("publishModule", PublishModuleExtension::class.java)
+            val publishModule =
+                extensions.create("publishModule", PublishModuleExtension::class.java)
             val publishing = extensions["publishing"] as PublishingExtension
             val properties = Properties().apply {
                 val localFile = rootProject.file("local.properties")
@@ -44,7 +45,8 @@ class PublishModulePlugin : Plugin<Project> {
                     repositories {
                         maven {
                             name = "sonatype"
-                            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                            url =
+                                uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                             credentials {
                                 username = properties.getProperty("ossrhUsername")
                                 password = properties.getProperty("ossrhPassword")

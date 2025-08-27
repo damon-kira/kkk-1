@@ -200,6 +200,12 @@ class NavigationFragment : BaseHomeFragment() {
     }
 
     private fun initViewSetting() {
+        mBinding.inclueDemoLayout0.let {
+            it.tvDemoName.text = "Compose_main"
+            it.tvBtn.setOnClickListener {
+                Launch.skipComposeMainActivity(getSupportContext())
+            }
+        }
         mBinding.inclueDemoLayout1.let {
             it.tvDemoName.text = "Photo scanner"
             it.tvBtn.setOnClickListener {

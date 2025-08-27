@@ -43,5 +43,7 @@ dependencies {
     api(libs.compose.activity)
     api(libs.compose.uitooling.preview)
     api(libs.compose.material.icons.extended)
+    api(libs.hilt.navigation.compose)
+    api(libs.navigation.compose)
     debugApi(libs.compose.uitooling)
 }

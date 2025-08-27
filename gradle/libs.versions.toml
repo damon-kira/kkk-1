@@ -79,6 +79,7 @@ generativeai = "0.9.0-1.1.0"
 chaquoPython = "15.0.1"
 colorpicker = "2.3.0"
 colorpickerCompose = "1.1.2"
+navigationCompose = "2.9.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -147,6 +148,8 @@ hilt-compiler-android = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-navigation = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-android" }
 hilt-workmanager = { module = "androidx.hilt:hilt-work", version.ref = "hilt-android" }
 hilt-android-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-android" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-android" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 test-junit = { module = "junit:junit", version.ref = "junit" }
 test-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }

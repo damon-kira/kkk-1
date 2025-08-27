@@ -1,12 +1,12 @@
-
-
 package com.kira.ui.core.storage.keyvalue
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.kira.ui.core.theme.Theme
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class SettingsManager(private val context: Context) {
+class SettingsManager @Inject constructor(@ApplicationContext private val context: Context) {
 
     companion object {
 
@@ -123,7 +123,8 @@ class SettingsManager(private val context: Context) {
         set(value) = sharedPreferences.edit().putBoolean(KEY_HIGHLIGHT_CURRENT_LINE, value).apply()
     var highlightMatchingDelimiters: Boolean
         get() = sharedPreferences.getBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, value).apply()
+        set(value) = sharedPreferences.edit().putBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, value)
+            .apply()
     var readOnly: Boolean
         get() = sharedPreferences.getBoolean(KEY_READ_ONLY, false)
         set(value) = sharedPreferences.edit().putBoolean(KEY_READ_ONLY, value).apply()
@@ -136,7 +137,8 @@ class SettingsManager(private val context: Context) {
         get() = sharedPreferences.getBoolean(KEY_USE_EXTENDED_KEYBOARD, true)
         set(value) = sharedPreferences.edit().putBoolean(KEY_USE_EXTENDED_KEYBOARD, value).apply()
     var keyboardPreset: String
-        get() = sharedPreferences.getString(KEY_KEYBOARD_PRESET, "{}();,.=|&![]<>+-/*?:_") ?: "{}();,.=|&![]<>+-/*?:_"
+        get() = sharedPreferences.getString(KEY_KEYBOARD_PRESET, "{}();,.=|&![]<>+-/*?:_")
+            ?: "{}();,.=|&![]<>+-/*?:_"
         set(value) = sharedPreferences.edit().putString(KEY_KEYBOARD_PRESET, value).apply()
     var softKeyboard: Boolean
         get() = sharedPreferences.getBoolean(KEY_USE_SOFT_KEYBOARD, false)
