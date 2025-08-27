@@ -39,11 +39,12 @@ dependencies {
     api(libs.compose.runtime)
     api(libs.compose.ui)
     api(libs.compose.foundation)
+    api(libs.compose.material)
     api(libs.compose.material3)
     api(libs.compose.activity)
     api(libs.compose.uitooling.preview)
     api(libs.compose.material.icons.extended)
+    api(libs.compose.navigation)
     api(libs.hilt.navigation.compose)
-    api(libs.navigation.compose)
     debugApi(libs.compose.uitooling)
 }

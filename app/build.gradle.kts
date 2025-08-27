@@ -157,14 +157,12 @@ dependencies {
     implementation(project(":feature-camera"))
     implementation(project(":sdks:bigdata"))
     implementation(project(":sdks:util"))
-    implementation(project(":view-stedit"))
+    implementation(project(":compose-view-stedit"))
     implementation(project(":module-player"))
     implementation(project(":view-window"))
     implementation(project(":view-image"))
     implementation(project(":view-richtext"))
     implementation(project(":feature-upload"))
-    //    implementation(project(":codeview"))
-
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
@@ -186,15 +184,6 @@ dependencies {
 
     // OCR
     implementation(libs.mlkit.text.recognition)
-
-    // Debug工具
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
-
-    // 其他依赖
-    implementation(libs.kodeHighlighter)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
-    implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
 
     // SuperEditor
     implementation(libs.androidx.splashscreen)
@@ -222,6 +211,23 @@ dependencies {
     implementation(project(":common-core"))
     implementation(project(":common-ui"))
     implementation(project(":filesystems:filesystem-base"))
-    implementation(project(":ai-chat"))
+    implementation(project(":compose-view-chat"))
+    // Debug工具
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 
+    // 其他依赖
+    implementation(libs.kodeHighlighter)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
+    implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
+
+    implementation("io.coil-kt:coil-compose:2.7.0")
+//    implementation(platform("androidx.compose:compose-bom:2025.08.00"))
+//    implementation("androidx.compose.ui:ui")
+//    implementation("androidx.compose.foundation:foundation")
+//    implementation("androidx.compose.material3:material3")
+//    implementation("androidx.compose.material:material")
+//    implementation("androidx.compose.ui:ui-tooling-preview")
+//    debugImplementation("androidx.compose.ui:ui-tooling")
+//    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }

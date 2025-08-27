@@ -50,7 +50,7 @@ include(":sdks:util")
 include(":sdks:cache")
 
 //include(":rxpermission")
-include(":view-stedit")
+include(":compose-view-stedit")
 include(":module-player")
 include(":view-window")
 include(":view-image")
@@ -130,4 +130,4 @@ include(
     ":editorkit:language-yaml",
 )
 include(":feature-upload")
-include(":ai-chat")
+include(":compose-view-chat")
