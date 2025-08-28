@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.bigdata.lib.BigDataManager
 import com.bigdata.lib.net.NetConfigDataInterface
 import com.cache.lib.SharedPrefUser
-import com.kira.learning.app.AppEnv
-import com.kira.learning.app.AppInjector
+import com.kira.learning.AppEnv
+import com.kira.learning.di.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.webview.WebViewPool
@@ -87,9 +87,8 @@ object ApplicationDelegate {
             if (e is IllegalStateException) {
                 // that's a bug in RxJava or in a custom operator
                 Thread.currentThread().uncaughtExceptionHandler?.uncaughtException(
-                        Thread.currentThread(),
-                        e
-                    )
+                    Thread.currentThread(), e
+                )
             }
             logger_d("debug_TheApplication", e.toString())
         })

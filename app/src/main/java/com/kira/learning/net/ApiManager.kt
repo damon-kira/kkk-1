@@ -4,8 +4,8 @@ import android.content.Context
 import com.bigdata.lib.LocationHelp
 import com.kira.learning.Constant
 import com.kira.learning.LoanApplication.Companion.getAppContext
-import com.kira.learning.app.AppEnv
-import com.kira.learning.app.AppInjector
+import com.kira.learning.AppEnv
+import com.kira.learning.di.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.expand.setLogout
 import com.kira.learning.expand.showInvalidDialog

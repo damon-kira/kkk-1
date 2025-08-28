@@ -1,6 +1,5 @@
-package com.kira.learning.app
+package com.kira.learning
 
-import com.kira.learning.BuildConfig
 import com.kira.learning.di.getAppContext
 import com.util.lib.AppUtil
 

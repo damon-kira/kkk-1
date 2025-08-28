@@ -11,8 +11,8 @@ import com.cache.lib.CacheInit
 //import com.chaquo.python.PyObject
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.kira.learning.app.AppEnv
-import com.kira.learning.app.AppEnv.Companion.NOTIFICATION_CHANNEL_ID
+import com.kira.learning.AppEnv
+import com.kira.learning.AppEnv.Companion.NOTIFICATION_CHANNEL_ID
 import com.kira.learning.messaging.KiraFirebaseMessagingService
 import com.kira.quickupload.UploadConfiguration
 //import com.kira.learning.module.python.PythonExecutor
@@ -22,7 +22,6 @@ import com.util.lib.log.logger_e
 import dagger.hilt.android.HiltAndroidApp
 import org.conscrypt.Conscrypt
 import java.security.Security
-
 
 @HiltAndroidApp
 class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {

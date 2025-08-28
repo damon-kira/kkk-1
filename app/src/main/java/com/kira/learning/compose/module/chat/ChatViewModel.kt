@@ -2,8 +2,8 @@ package com.kira.learning.compose.module.chat
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kira.learning.app.ChatConversationDao
-import com.kira.learning.app.ChatConversation
+import com.kira.learning.di.ChatConversationDao
+import com.kira.learning.di.ChatConversation
 import com.kira.learning.bean.dao.ChatMessageDao
 import com.kira.learning.bean.dao.ChatMessage
 import com.kira.learning.compose.network.ApiResult

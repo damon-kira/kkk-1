@@ -1,7 +1,7 @@
 package com.kira.learning.expand
 
 import android.accounts.NetworkErrorException
-import com.kira.learning.app.AppInjector
+import com.kira.learning.di.AppInjector
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
 import java.net.ConnectException

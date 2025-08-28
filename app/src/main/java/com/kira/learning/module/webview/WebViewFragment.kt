@@ -16,7 +16,7 @@ import android.widget.LinearLayout
 import com.bigdata.lib.readPrivacyCount
 import com.bigdata.lib.readPrivacyTime
 import com.kira.learning.R
-import com.kira.learning.app.AppEnv
+import com.kira.learning.AppEnv
 import com.kira.learning.databinding.FragmentWebviewBinding
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.module.defer.PayEvent

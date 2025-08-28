@@ -1,12 +1,12 @@
-package com.kira.learning.app
+package com.kira.learning.di
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.bigdata.lib.bgRecoverCount
 import com.cache.lib.SharedPrefUser
-import com.kira.learning.manager.SharedPrefKeyManager
 import com.common.lib.base.BaseActivity
+import com.kira.learning.manager.SharedPrefKeyManager
 import java.lang.ref.WeakReference
 
 object AppInjector {

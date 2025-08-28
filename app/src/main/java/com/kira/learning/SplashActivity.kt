@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashActivity : BaseActivity() {
 
-
     private val mBinding by binding<ActivitySplashBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

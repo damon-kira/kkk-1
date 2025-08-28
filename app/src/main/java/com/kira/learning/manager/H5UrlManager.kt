@@ -1,7 +1,7 @@
 package com.kira.learning.manager
 
 import com.kira.learning.Constant
-import com.kira.learning.app.AppEnv
+import com.kira.learning.AppEnv
 import com.kira.learning.di.getAppContext
 import com.kira.learning.expand.formatCommon
 import com.kira.learning.expand.getUserToken

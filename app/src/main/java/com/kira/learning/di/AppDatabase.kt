@@ -1,4 +1,4 @@
-package com.kira.learning.app
+package com.kira.learning.di
 
 import android.content.Context
 import androidx.room.Database

@@ -17,7 +17,7 @@ import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
 import com.camera.lib.ICamera
 import com.kira.learning.BuildConfig
-import com.kira.learning.app.AppEnv
+import com.kira.learning.AppEnv
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqFaceInfo
 import com.kira.learning.utils.camera.BitmapCrop
