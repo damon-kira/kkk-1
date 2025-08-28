@@ -1,6 +1,7 @@
 package com.kira.learning.app
 
 import com.kira.learning.BuildConfig
+import com.kira.learning.di.getAppContext
 import com.util.lib.AppUtil
 
 class AppEnv {

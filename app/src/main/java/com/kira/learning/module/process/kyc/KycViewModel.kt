@@ -2,14 +2,14 @@ package com.kira.learning.module.process.kyc
 
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqKycInfo
-import com.kira.learning.bean.resp.KycOcrInfo
-import com.kira.learning.bean.resp.RspKycInfo
+import com.kira.learning.bean.res.KycOcrInfo
+import com.kira.learning.bean.res.RspKycInfo
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.module.service.SerManager
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.ImageInfoUtil
-import com.kira.learning.util.image.annotations.PicType
+import com.kira.learning.utils.image.annotations.PicType
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject
 

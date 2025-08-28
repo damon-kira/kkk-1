@@ -1,7 +1,7 @@
 package com.kira.learning.module.service
 
 import android.content.Intent
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.util.lib.log.logger_e
 
 object SerManager {

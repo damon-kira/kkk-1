@@ -1,7 +1,7 @@
 package com.kira.learning.net
 
-import com.kira.learning.bean.resp.RspCheckData
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspCheckData
+import com.kira.learning.bean.res.RspResult
 import com.common.lib.net.bean.BaseResponse
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.RequestBody

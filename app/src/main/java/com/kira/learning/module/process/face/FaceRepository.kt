@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqFaceInfo
-import com.kira.learning.bean.resp.RspFace
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspFace
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.di.UploadApiService
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessRepository

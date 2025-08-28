@@ -2,7 +2,7 @@ package com.kira.learning.module.dashboard.vm
 
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.resp.RspCheckOrder
+import com.kira.learning.bean.res.RspCheckOrder
 import com.kira.learning.module.dashboard.repo.RepayCheckRepository
 import javax.inject.Inject
 

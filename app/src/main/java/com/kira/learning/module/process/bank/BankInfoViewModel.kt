@@ -2,7 +2,7 @@ package com.kira.learning.module.process.bank
 
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.module.process.BaseProcessViewModel
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import javax.inject.Inject
 
 // 上传银行卡信息

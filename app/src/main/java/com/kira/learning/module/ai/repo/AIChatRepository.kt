@@ -3,8 +3,8 @@ package com.kira.learning.module.ai.repo
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.db.AIResponseInfo
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.dao.AIResponseInfo
 import javax.inject.Inject
 
 class AIChatRepository @Inject constructor() : BaseRepository() {

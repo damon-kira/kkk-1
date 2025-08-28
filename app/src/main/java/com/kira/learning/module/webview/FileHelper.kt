@@ -5,11 +5,11 @@ import android.os.SystemClock
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
-import com.kira.learning.util.image.ImageObtainHelper
-import com.kira.learning.util.image.annotations.ImageType
-import com.kira.learning.util.image.annotations.PickRange
-import com.kira.learning.util.image.callback.ResultCallback
-import com.kira.learning.util.image.data.CompressResult
+import com.kira.learning.utils.image.ImageObtainHelper
+import com.kira.learning.utils.image.annotations.ImageType
+import com.kira.learning.utils.image.annotations.PickRange
+import com.kira.learning.utils.image.callback.ResultCallback
+import com.kira.learning.utils.image.data.CompressResult
 import com.common.lib.base.BaseFragment
 import com.util.lib.expand.getCacheFile
 import java.io.File

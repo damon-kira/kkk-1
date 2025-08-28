@@ -1,7 +1,7 @@
 package com.kira.learning.module.defer
 
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspRepayOrders
+import com.kira.learning.bean.res.RspRepayOrders
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.manager.Launch
 import com.util.lib.GsonUtil

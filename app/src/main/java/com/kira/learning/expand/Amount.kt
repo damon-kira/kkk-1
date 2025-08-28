@@ -2,7 +2,7 @@ package com.kira.learning.expand
 
 import android.content.Context
 import com.kira.learning.R
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import kotlin.math.ceil
 
 /**

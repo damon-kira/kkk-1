@@ -6,8 +6,8 @@ import com.common.lib.net.bean.BaseResponse
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.db.AIResponseInfo
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.dao.AIResponseInfo
 import com.kira.learning.bean.QuestionProcessInfo
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@ import com.kira.learning.app.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.expand.setLogout
 import com.kira.learning.expand.showInvalidDialog
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor

@@ -2,6 +2,7 @@ package com.kira.learning.compose.module.answer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.compose.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -20,10 +21,15 @@ class AnswerViewModel @Inject constructor(
 
     private fun load() {
         viewModelScope.launch {
-            _uiState.update { it.copy(loading = true) }
-            val list = repo.fetchQuestions()
-            _uiState.update { it.copy(questions = list, loading = false) }
-            startTimer()
+            _uiState.update { it.copy(loading = true, errorMessage = null) }
+            when(val res = repo.fetchQuestions()) {
+                is ApiResult.Success -> {
+                    _uiState.update { it.copy(questions = res.data, loading = false) }
+                    startTimer()
+                }
+                is ApiResult.Error -> _uiState.update { it.copy(loading = false, errorMessage = res.message) }
+                ApiResult.NetworkUnavailable -> _uiState.update { it.copy(loading = false, errorMessage = "网络不可用") }
+            }
         }
     }
 
@@ -76,6 +82,8 @@ class AnswerViewModel @Inject constructor(
             }
         }
     }
+
+    fun retry() = load()
 }
 
 data class AnswerUiState(
@@ -87,6 +95,7 @@ data class AnswerUiState(
     val currentIndex: Int = 0,
     val elapsedSeconds: Int = 0,
     val showSubmitConfirm: Boolean = false,
+    val errorMessage: String? = null,
 ) {
     val answeredCount: Int get() = answers.size
 }

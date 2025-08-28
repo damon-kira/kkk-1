@@ -2,8 +2,8 @@ package com.kira.learning.expand
 
 import android.content.Context
 import com.cache.lib.SharedPrefUser
-import com.kira.learning.app.getAppContext
-import com.kira.learning.bean.resp.RspLoginInfo
+import com.kira.learning.di.getAppContext
+import com.kira.learning.bean.res.RspLoginInfo
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.util.lib.GsonUtil
 import com.util.lib.ThreadPoolUtil

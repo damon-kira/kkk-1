@@ -1,6 +1,6 @@
 package com.kira.learning.module.upload
 
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqKycInfo
 import com.kira.learning.module.process.BaseProcessViewModel

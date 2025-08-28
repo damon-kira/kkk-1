@@ -8,9 +8,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RepeatProductInfo
-import com.kira.learning.bean.resp.RepeatReview
-import com.kira.learning.bean.resp.RepeatWaitConfirmInfo
+import com.kira.learning.bean.res.RepeatProductInfo
+import com.kira.learning.bean.res.RepeatReview
+import com.kira.learning.bean.res.RepeatWaitConfirmInfo
 import com.kira.learning.databinding.LayoutRepeatItemProductBinding
 import com.kira.learning.expand.formatCommon
 import com.kira.learning.expand.getUnitString

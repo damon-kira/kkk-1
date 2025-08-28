@@ -1,6 +1,6 @@
 package com.kira.learning.module.repeat.confirm
 
-import com.kira.learning.bean.resp.RspRepeatCalcul
+import com.kira.learning.bean.res.RspRepeatCalcul
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject

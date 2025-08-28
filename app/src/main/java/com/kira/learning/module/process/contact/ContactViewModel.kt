@@ -2,7 +2,7 @@ package com.kira.learning.module.process.contact
 
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.module.process.BaseProcessViewModel
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import javax.inject.Inject
 
 // 上传联系人信息

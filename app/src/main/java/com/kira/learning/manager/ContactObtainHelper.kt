@@ -3,12 +3,11 @@ package com.kira.learning.manager
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.provider.ContactsContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kira.learning.R
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.bean.PhoneAndName
 import com.kira.learning.manager.ObtainContactAgent.Companion.REQ_CONTACT_CODE
 import androidx.core.net.toUri

@@ -5,7 +5,7 @@ import android.view.View
 import com.kira.learning.R
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqPersonalInfo
-import com.kira.learning.bean.resp.RspPersonalInfo
+import com.kira.learning.bean.res.RspPersonalInfo
 import com.kira.learning.databinding.ActivityPersonalInfoBinding
 import com.kira.learning.dialog.AddressSelectorDialog
 import com.kira.learning.dialog.FirstLoanHintDialog
@@ -13,7 +13,7 @@ import com.kira.learning.expand.STEP3
 import com.kira.learning.expand.isNewUser
 import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
-import com.kira.learning.util.DictionaryUtil
+import com.kira.learning.utils.DictionaryUtil
 import com.kira.learning.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky

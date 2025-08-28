@@ -3,7 +3,7 @@ package com.kira.learning.module.process.personalinfo
 import com.kira.learning.bean.AddressInfo
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.module.process.BaseProcessViewModel
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.google.gson.reflect.TypeToken
 import com.util.lib.GsonUtil
 import javax.inject.Inject

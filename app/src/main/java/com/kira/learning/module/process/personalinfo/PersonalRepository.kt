@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.kira.learning.LoanApplication
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqPersonalInfo
-import com.kira.learning.bean.resp.RspPersonalInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspPersonalInfo
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessRepository
-import com.kira.learning.util.FileUtils
+import com.kira.learning.utils.FileUtils
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil

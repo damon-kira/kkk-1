@@ -5,10 +5,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.kira.learning.app.getAppContext
-import com.kira.learning.util.SmsContentObserver
-import com.kira.learning.util.registerSmsObserver
-import com.kira.learning.util.unRegisterSmsObserver
+import com.kira.learning.di.getAppContext
+import com.kira.learning.utils.SmsContentObserver
+import com.kira.learning.utils.registerSmsObserver
+import com.kira.learning.utils.unRegisterSmsObserver
 
 // 自动获取验证码
 class SmsCodeHelper : LifecycleEventObserver {

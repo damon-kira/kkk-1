@@ -7,7 +7,7 @@ import com.kira.learning.R
 import com.kira.learning.bean.PhoneAndName
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqContactInfo
-import com.kira.learning.bean.resp.RspContactInfo
+import com.kira.learning.bean.res.RspContactInfo
 import com.kira.learning.databinding.ActivityContactInfoBinding
 import com.kira.learning.expand.*
 import com.kira.learning.manager.ContactObtainHelper
@@ -15,7 +15,7 @@ import com.kira.learning.manager.Launch
 import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.permission.HintDialog
-import com.kira.learning.util.DictionaryUtil
+import com.kira.learning.utils.DictionaryUtil
 import com.kira.learning.view.baseinfo.BaseInfoView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.observerNonSticky

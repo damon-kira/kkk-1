@@ -3,8 +3,8 @@ package com.kira.learning.module.process.contact
 import androidx.lifecycle.LiveData
 import com.kira.learning.bean.req.ReqContactInfo
 import com.kira.learning.bean.req.IReqBaseInfo
-import com.kira.learning.bean.resp.RspContactInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspContactInfo
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessRepository
 import com.common.lib.net.ApiServiceLiveDataProxy

@@ -3,13 +3,11 @@ package com.kira.learning.module.process.kyc
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.Gravity
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqKycInfo
-import com.kira.learning.bean.resp.KycOcrInfo
-import com.kira.learning.bean.resp.RspKycInfo
+import com.kira.learning.bean.res.KycOcrInfo
+import com.kira.learning.bean.res.RspKycInfo
 import com.kira.learning.databinding.ActivityKycInfoBinding
 import com.kira.learning.dialog.KycHintDialog
 import com.kira.learning.expand.STEP6
@@ -18,8 +16,8 @@ import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.permission.CameraPermission
 import com.kira.learning.permission.PermissionHelper
-import com.kira.learning.util.DictionaryUtil
-import com.kira.learning.util.image.annotations.PicType
+import com.kira.learning.utils.DictionaryUtil
+import com.kira.learning.utils.image.annotations.PicType
 import com.kira.learning.view.identity.IdentityPicStatus
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils

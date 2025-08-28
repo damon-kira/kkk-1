@@ -7,7 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspProductInfo
+import com.kira.learning.bean.res.RspProductInfo
 import com.kira.learning.databinding.FragmentHomeBinding
 import com.kira.learning.expand.ShowErrorMsg
 import com.kira.learning.expand.inValidToken

@@ -1,25 +1,19 @@
 package com.kira.learning.module.answer.adapter
 
-import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.cache.lib.getContext
 import com.kira.learning.R
 import com.kira.learning.bean.QuestionProcessInfo
 import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.module.adapter.BaseViewHolder
-import com.kira.learning.popwindow.MsgListPopWindow
 import androidx.core.graphics.drawable.toDrawable
 
 class QuestionAdapter(

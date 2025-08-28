@@ -3,7 +3,7 @@ package com.kira.learning.dialog
 import android.content.Context
 import android.os.Bundle
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RepeatProductInfo
+import com.kira.learning.bean.res.RepeatProductInfo
 import com.kira.learning.databinding.DialogRecommenBinding
 import com.kira.learning.expand.getUnitString
 import com.common.lib.dialog.DefaultDialog

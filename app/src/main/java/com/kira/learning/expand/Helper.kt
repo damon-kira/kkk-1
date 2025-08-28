@@ -10,7 +10,7 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.cache.lib.SharedPrefGlobal
 import com.kira.learning.R
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.bean.DictionaryInfo
 import com.kira.learning.manager.SharedPrefKeyManager
 

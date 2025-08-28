@@ -21,8 +21,8 @@ object AppInjector {
 
             override fun onActivityStarted(activity: Activity) {
                 mCurrActivity = WeakReference(activity)
-                activityCounts ++
-                if (activityCounts == 1){
+                activityCounts++
+                if (activityCounts == 1) {
                     SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, true)
                 }
                 if (appInBackground) {
@@ -36,9 +36,9 @@ object AppInjector {
             override fun onActivityPaused(activity: Activity) {}
 
             override fun onActivityStopped(activity: Activity) {
-                activityCounts --
+                activityCounts--
                 appInBackground = activityCounts == 0
-                if (activityCounts == 0){
+                if (activityCounts == 0) {
                     SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
                 }
             }

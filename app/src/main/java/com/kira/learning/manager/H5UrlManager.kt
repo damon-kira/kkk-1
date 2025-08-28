@@ -2,10 +2,10 @@ package com.kira.learning.manager
 
 import com.kira.learning.Constant
 import com.kira.learning.app.AppEnv
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.expand.formatCommon
 import com.kira.learning.expand.getUserToken
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.SysUtils
 
 object H5UrlManager {

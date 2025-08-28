@@ -1,16 +1,18 @@
 package com.kira.learning.compose.module.answer
 
+import com.kira.learning.compose.network.ApiResult
+import com.kira.learning.compose.network.safeApiCall
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 interface AnswerRepository {
-    suspend fun fetchQuestions(): List<QuestionBase>
+    suspend fun fetchQuestions(): ApiResult<List<QuestionBase>>
 }
 
 class MockAnswerRepository @Inject constructor(): AnswerRepository {
-    override suspend fun fetchQuestions(): List<QuestionBase> {
+    override suspend fun fetchQuestions(): ApiResult<List<QuestionBase>> = safeApiCall {
         delay(500) // 模拟网络
-        return listOf(
+        listOf(
             SingleChoiceQuestion(
                 id = "q1",
                 stem = "下列哪一个是 **Kotlin** 中用于声明不可变变量的关键字?",
@@ -46,4 +48,3 @@ class MockAnswerRepository @Inject constructor(): AnswerRepository {
         )
     }
 }
-

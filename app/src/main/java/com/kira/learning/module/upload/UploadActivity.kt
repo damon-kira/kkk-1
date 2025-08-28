@@ -17,7 +17,7 @@ import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.StatusBarUtil.setStatusBarColor
 import com.util.lib.log.logger_e
 import dagger.hilt.android.AndroidEntryPoint

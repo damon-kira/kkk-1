@@ -4,10 +4,10 @@ import com.bigdata.lib.ContactsHelper
 import com.bigdata.lib.DevicesAppHelper
 import com.bigdata.lib.MCLCManager
 import com.bigdata.lib.SmsHelper
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.app.getAppContext
-import com.kira.learning.bean.resp.RspCheckData
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.di.getAppContext
+import com.kira.learning.bean.res.RspCheckData
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.net.DataApiService
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.common.lib.net.ResponseCode

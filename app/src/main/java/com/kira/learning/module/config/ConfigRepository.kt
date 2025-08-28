@@ -1,6 +1,6 @@
 package com.kira.learning.module.config
 
-import com.kira.learning.app.BaseRepository
+import com.kira.learning.di.BaseRepository
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
 import javax.inject.Inject

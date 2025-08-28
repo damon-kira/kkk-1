@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.ContextThemeWrapper
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspBankNameInfo
+import com.kira.learning.bean.res.RspBankNameInfo
 import com.kira.learning.databinding.DialogBankSelectorBinding
 import com.kira.learning.expand.SimpleOnItemClickListener
 import com.kira.learning.expand.setOnItemClickListener

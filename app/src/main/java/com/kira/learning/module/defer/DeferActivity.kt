@@ -3,7 +3,7 @@ package com.kira.learning.module.defer
 import android.graphics.Color
 import android.os.Bundle
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspRepayDetail
+import com.kira.learning.bean.res.RspRepayDetail
 import com.kira.learning.databinding.ActivityDeferBinding
 import com.kira.learning.dialog.ExtensionConfirmDialog
 import com.kira.learning.expand.ShowErrorMsg

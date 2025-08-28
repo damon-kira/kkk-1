@@ -2,10 +2,10 @@ package com.kira.learning.module.process
 
 import androidx.lifecycle.LiveData
 import com.cache.lib.SharedPrefUser
-import com.kira.learning.app.BaseRepository
+import com.kira.learning.di.BaseRepository
 import com.kira.learning.bean.req.IReqBaseInfo
-import com.kira.learning.bean.resp.IRspBaseInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.IRspBaseInfo
+import com.kira.learning.bean.res.RspResult
 import com.common.lib.net.bean.BaseResponse
 import com.util.lib.GsonUtil
 import com.util.lib.log.logger_d

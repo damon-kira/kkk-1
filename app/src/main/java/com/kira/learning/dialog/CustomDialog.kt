@@ -2,7 +2,7 @@ package com.kira.learning.dialog
 
 import android.content.Context
 import com.kira.learning.R
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.databinding.DialogCutomBinding
 import com.kira.learning.expand.*
 import com.kira.learning.manager.Launch

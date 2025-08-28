@@ -134,7 +134,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".camera.CaptureActivity"
+            android:name=".utils.camera.CaptureActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CaptureActivityTheme" />
         <activity

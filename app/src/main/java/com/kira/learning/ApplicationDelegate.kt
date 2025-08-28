@@ -11,7 +11,7 @@ import com.kira.learning.app.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.webview.WebViewPool
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.google.gson.JsonObject
 import com.util.lib.ImageInfoUtil
 import com.util.lib.UtilInit
@@ -22,7 +22,6 @@ import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.net.SocketException
 
 object ApplicationDelegate {
 

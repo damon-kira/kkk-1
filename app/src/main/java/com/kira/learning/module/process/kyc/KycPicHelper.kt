@@ -2,12 +2,12 @@ package com.kira.learning.module.process.kyc
 
 import com.camera.lib.CameraOneUtils
 import com.kira.learning.dialog.PicImageDialog
-import com.kira.learning.util.image.ImageObtainHelper
-import com.kira.learning.util.image.annotations.ImageType
-import com.kira.learning.util.image.annotations.PicType
-import com.kira.learning.util.image.annotations.PickRange
-import com.kira.learning.util.image.callback.AdapterCallback
-import com.kira.learning.util.image.data.CompressResult
+import com.kira.learning.utils.image.ImageObtainHelper
+import com.kira.learning.utils.image.annotations.ImageType
+import com.kira.learning.utils.image.annotations.PicType
+import com.kira.learning.utils.image.annotations.PickRange
+import com.kira.learning.utils.image.callback.AdapterCallback
+import com.kira.learning.utils.image.data.CompressResult
 import com.common.lib.base.BaseActivity
 import com.util.lib.expand.deleteFiles
 import java.io.File

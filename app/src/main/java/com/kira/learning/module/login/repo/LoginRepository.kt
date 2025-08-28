@@ -3,10 +3,10 @@ package com.kira.learning.module.login.repo
 import android.content.Context
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.resp.RspLoginInfo
-import com.kira.learning.bean.resp.RspSmsCode
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.res.RspLoginInfo
+import com.kira.learning.bean.res.RspSmsCode
+import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.net.WifiInfoUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.RequestBody

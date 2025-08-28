@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.kira.learning.app.AppEnv
-import com.kira.learning.app.getAppContext
+import com.kira.learning.di.getAppContext
 import com.kira.learning.databinding.LayoutToastViewBinding
 import com.common.lib.toast.ToastCompat
 import com.util.lib.log.logger_e

@@ -1,7 +1,7 @@
 package com.kira.learning.dialog
 
 import android.content.Context
-import com.kira.learning.bean.resp.AppUpgradeInfo
+import com.kira.learning.bean.res.AppUpgradeInfo
 import com.kira.learning.databinding.DialogAppUpgradeBinding
 import com.kira.learning.manager.Launch
 import com.common.lib.dialog.DefaultDialog

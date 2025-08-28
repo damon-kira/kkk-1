@@ -1,7 +1,7 @@
 package com.kira.learning.module.firstconfirm.repo
 
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.res.RspResult
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
 import javax.inject.Inject

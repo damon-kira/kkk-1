@@ -2,10 +2,10 @@ package com.kira.learning.module.banklist.repo
 
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.resp.RspBankAccount
-import com.kira.learning.bean.resp.RspBankNameInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.res.RspBankAccount
+import com.kira.learning.bean.res.RspBankNameInfo
+import com.kira.learning.bean.res.RspResult
 import javax.inject.Inject
 
 class BankCardRepository @Inject constructor() : BaseRepository() {

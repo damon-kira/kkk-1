@@ -7,7 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.kira.learning.R
-import com.kira.learning.bean.resp.AppUpgradeInfo
+import com.kira.learning.bean.res.AppUpgradeInfo
 import com.kira.learning.dialog.AppUpgradeDialog
 import com.kira.learning.dialog.CustomDialog
 import com.kira.learning.dialog.NetErrorDialog

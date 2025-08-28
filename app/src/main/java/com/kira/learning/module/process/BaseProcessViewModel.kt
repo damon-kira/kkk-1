@@ -1,8 +1,8 @@
 package com.kira.learning.module.process
 
 import com.kira.learning.bean.req.IReqBaseInfo
-import com.kira.learning.bean.resp.IRspBaseInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.IRspBaseInfo
+import com.kira.learning.bean.res.RspResult
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 

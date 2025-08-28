@@ -3,7 +3,7 @@ package com.kira.learning.module.history
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspHistoryInfo
+import com.kira.learning.bean.res.RspHistoryInfo
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.module.adapter.BaseViewHolder

@@ -20,7 +20,7 @@ import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky

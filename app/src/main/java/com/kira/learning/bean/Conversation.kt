@@ -1,6 +1,6 @@
 package com.kira.learning.bean
 
-import com.kira.learning.bean.db.ChatMessage
+import com.kira.learning.bean.dao.ChatMessage
 
 class Conversation //this.conversationId = conversationId;
     (// 设置一个随机数

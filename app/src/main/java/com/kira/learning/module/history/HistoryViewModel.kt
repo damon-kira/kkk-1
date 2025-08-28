@@ -1,6 +1,6 @@
 package com.kira.learning.module.history
 
-import com.kira.learning.bean.resp.RspHistoryInfo
+import com.kira.learning.bean.res.RspHistoryInfo
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import javax.inject.Inject

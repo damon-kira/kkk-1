@@ -6,7 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RepeatProductInfo
+import com.kira.learning.bean.res.RepeatProductInfo
 import com.kira.learning.databinding.FragmentRepeatBinding
 import com.kira.learning.dialog.RecommendDialog
 import com.kira.learning.expand.*

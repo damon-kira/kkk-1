@@ -46,7 +46,7 @@ import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import androidx.core.net.toUri
-import com.kira.learning.camera.CaptureActivity
+import com.kira.learning.utils.camera.CaptureActivity
 import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity

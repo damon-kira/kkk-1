@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspBankAccount
+import com.kira.learning.bean.res.RspBankAccount
 import com.kira.learning.databinding.ActivityBankCardListBinding
 import com.kira.learning.expand.ShowErrorMsg
 import com.kira.learning.expand.SimpleOnItemClickListener

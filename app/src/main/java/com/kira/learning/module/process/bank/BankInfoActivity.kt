@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.kira.learning.R
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqBankInfo
-import com.kira.learning.bean.resp.RspBankInfo
+import com.kira.learning.bean.res.RspBankInfo
 import com.kira.learning.databinding.ActivityBankInfoBinding
 import com.kira.learning.dialog.BankSearchDialog
 import com.kira.learning.expand.STEP5

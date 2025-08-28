@@ -77,14 +77,10 @@ dependencies {
     api(libs.guava.coroutines)
 
     // Hilt
-//    api(rootProject.extra["hilt.hilt_android"] as String)
-//    kapt(rootProject.extra["hilt.hilt_compiler_android"] as String)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
     // RxJava
-//    api(rootProject.extra["rxjava.rxandroid"] as String)
-//    api(rootProject.extra["rxjava.rxjava"] as String)
     api(libs.rxjava)
     api(libs.rxjava.android)
 
@@ -104,25 +100,12 @@ dependencies {
     // 适配
     api(libs.autosize)
 
-    // Compose
-//    api(platform(libs.compose.bom))
-//    api(libs.compose.runtime)
-//    api(libs.compose.ui)
-//    api(libs.compose.foundation)
-//    api(libs.compose.material3)
-//    api(libs.compose.activity)
-//    api(libs.compose.uitooling.preview)
-//    api(libs.compose.material.icons.extended)
-//    debugApi(libs.compose.uitooling)
-
     // Markwon
     api(libs.markwon.core)
     api(libs.markwon.image)
     api(libs.markwon.image.glide)
 
     // 本地Maven
-//    api(rootProject.extra["other.aes"] as String)
-//    debugApi(rootProject.extra["other.devoptions"] as String)
     api(libs.other.aes)
     debugApi(libs.other.devoptions)
 }

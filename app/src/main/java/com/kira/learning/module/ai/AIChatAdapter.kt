@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
 import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.module.adapter.BaseViewHolder
-import com.kira.learning.bean.db.ChatMessage
+import com.kira.learning.bean.dao.ChatMessage
 import io.noties.markwon.Markwon
 
 class AIChatAdapter(

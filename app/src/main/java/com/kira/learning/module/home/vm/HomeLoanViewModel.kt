@@ -4,11 +4,11 @@ import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.resp.RepeatProductInfo
-import com.kira.learning.bean.resp.RepeatRepayInfo
-import com.kira.learning.bean.resp.RepeatWaitConfirmInfo
-import com.kira.learning.bean.resp.RspCertProcessInfo
-import com.kira.learning.bean.resp.RspProductInfo
+import com.kira.learning.bean.res.RepeatProductInfo
+import com.kira.learning.bean.res.RepeatRepayInfo
+import com.kira.learning.bean.res.RepeatWaitConfirmInfo
+import com.kira.learning.bean.res.RspCertProcessInfo
+import com.kira.learning.bean.res.RspProductInfo
 import com.kira.learning.expand.isGpAccount
 import com.kira.learning.expand.isRepeat
 import com.kira.learning.expand.mUserName

@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bigdata.lib.loanPageStayTime
-import com.kira.learning.bean.resp.RspRepeatCalcul
+import com.kira.learning.bean.res.RspRepeatCalcul
 import com.kira.learning.databinding.ActivityRepeatConfirmBinding
 import com.kira.learning.databinding.LayoutRepeatItemProductBinding
 import com.kira.learning.dialog.CancelAutoHintDialog
@@ -26,7 +26,7 @@ import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
-import com.kira.learning.util.AnimtorUtils
+import com.kira.learning.utils.AnimtorUtils
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.glide.GlideUtils

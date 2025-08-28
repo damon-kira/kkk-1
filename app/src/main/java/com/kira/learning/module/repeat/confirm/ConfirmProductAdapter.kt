@@ -3,7 +3,7 @@ package com.kira.learning.module.repeat.confirm
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspRepeatCalcul
+import com.kira.learning.bean.res.RspRepeatCalcul
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.module.adapter.BaseViewHolder

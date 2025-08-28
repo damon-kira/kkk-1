@@ -20,7 +20,7 @@ import com.kira.learning.BuildConfig
 import com.kira.learning.app.AppEnv
 import com.kira.learning.bean.req.IReqBaseInfo
 import com.kira.learning.bean.req.ReqFaceInfo
-import com.kira.learning.camera.BitmapCrop
+import com.kira.learning.utils.camera.BitmapCrop
 import com.kira.learning.databinding.ActivityFaceBinding
 import com.kira.learning.expand.STEP_OK
 import com.kira.learning.manager.Launch
@@ -30,7 +30,7 @@ import com.kira.learning.module.process.BaseProcessActivity
 import com.kira.learning.module.process.BaseProcessViewModel
 import com.kira.learning.permission.CameraPermission
 import com.kira.learning.permission.PermissionHelper
-import com.kira.learning.util.MediaHelper
+import com.kira.learning.utils.MediaHelper
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.viewbinding.binding

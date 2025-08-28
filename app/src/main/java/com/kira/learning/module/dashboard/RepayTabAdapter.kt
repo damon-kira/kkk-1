@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RspRepayOrders
+import com.kira.learning.bean.res.RspRepayOrders
 import com.kira.learning.expand.getUnitString
 import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.module.adapter.BaseViewHolder

@@ -2,8 +2,8 @@ package com.kira.learning.module.firstconfirm.vm
 
 import com.bigdata.lib.WifiHelper
 import com.bigdata.lib.loanWifi
-import com.kira.learning.app.getAppContext
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.di.getAppContext
+import com.kira.learning.bean.res.RspResult
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.module.firstconfirm.repo.FirstConfirmRepository

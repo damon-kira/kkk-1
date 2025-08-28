@@ -18,7 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
+import com.kira.learning.compose.ui.image.AppImage
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
@@ -41,6 +41,7 @@ fun AnswerRoute(
         onPrev = viewModel::prevQuestion,
         onNext = viewModel::nextQuestion,
         onJump = viewModel::jumpTo,
+        onRetry = viewModel::retry,
         modifier = modifier
     )
 }
@@ -60,6 +61,7 @@ private fun AnswerScreen(
     onPrev: () -> Unit,
     onNext: () -> Unit,
     onJump: (Int) -> Unit,
+    onRetry: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val total = state.questions.size
@@ -91,26 +93,35 @@ private fun AnswerScreen(
             })
         },
         bottomBar = {
-            Surface(shadowElevation = 6.dp) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    AssistChip(onClick = { onPrev() }, label = { Text("上一题") }, enabled = currentIndex > 0 && !state.loading)
-                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text("已答 ${state.answeredCount}/$total", style = MaterialTheme.typography.bodySmall)
+            if (state.errorMessage == null) {
+                Surface(shadowElevation = 6.dp) {
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AssistChip(onClick = { onPrev() }, label = { Text("上一题") }, enabled = currentIndex > 0 && !state.loading)
+                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text("已答 ${state.answeredCount}/$total", style = MaterialTheme.typography.bodySmall)
+                        }
+                        AssistChip(onClick = { onNext() }, label = { Text("下一题") }, enabled = currentIndex < total - 1 && !state.loading)
+                        Button(onClick = onSubmitRequest, enabled = total > 0 && !state.submitted) { Text(if (state.submitted) "已提交" else "提交") }
                     }
-                    AssistChip(onClick = { onNext() }, label = { Text("下一题") }, enabled = currentIndex < total - 1 && !state.loading)
-                    Button(onClick = onSubmitRequest, enabled = total > 0 && !state.submitted) { Text(if (state.submitted) "已提交" else "提交") }
                 }
             }
         }
     ) { padding ->
         when {
             state.loading -> Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+            state.errorMessage != null -> Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(state.errorMessage, color = MaterialTheme.colorScheme.error)
+                    Spacer(Modifier.height(12.dp))
+                    Button(onClick = onRetry) { Text("重试") }
+                }
+            }
             question == null -> Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) { Text("暂无题目") }
             else -> SingleQuestionPage(
                 question = question,
@@ -242,8 +253,8 @@ private fun QuestionCard(
             if (question.imageUrls.isNotEmpty()) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     question.imageUrls.forEach { url ->
-                        AsyncImage(
-                            model = url,
+                        AppImage(
+                            url = url,
                             contentDescription = null,
                             modifier = Modifier.size(72.dp)
                         )

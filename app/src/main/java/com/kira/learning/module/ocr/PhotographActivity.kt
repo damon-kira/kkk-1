@@ -9,7 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.kira.learning.R
-import com.kira.learning.camera.CaptureActivity
+import com.kira.learning.utils.camera.CaptureActivity
 import com.kira.learning.databinding.ActivityPhotographBinding
 import com.common.lib.base.BaseFragmentActivity
 import com.common.lib.viewbinding.binding

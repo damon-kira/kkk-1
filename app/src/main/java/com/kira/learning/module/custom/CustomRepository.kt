@@ -1,7 +1,7 @@
 package com.kira.learning.module.custom
 
-import com.kira.learning.app.BaseRepository
-import com.kira.learning.bean.resp.RspCustom
+import com.kira.learning.di.BaseRepository
+import com.kira.learning.bean.res.RspCustom
 import com.common.lib.net.ApiServiceLiveDataProxy
 import javax.inject.Inject
 

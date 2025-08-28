@@ -6,7 +6,7 @@ import com.kira.learning.bean.req.ReqFaceInfo
 import com.kira.learning.expand.deleteCameraCache
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessViewModel
-import com.kira.learning.util.GPInfoUtils
+import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.ImageInfoUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

@@ -6,9 +6,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.resp.RspBankAccount
-import com.kira.learning.bean.resp.RspBankNameInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspBankAccount
+import com.kira.learning.bean.res.RspBankNameInfo
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.module.banklist.repo.BankCardRepository
 import javax.inject.Inject
 

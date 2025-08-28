@@ -2,7 +2,7 @@ package com.kira.learning.module.dashboard.repo
 
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
-import com.kira.learning.app.BaseRepository
+import com.kira.learning.di.BaseRepository
 import javax.inject.Inject
 
 class RepayCheckRepository @Inject constructor() : BaseRepository() {

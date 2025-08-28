@@ -2,7 +2,7 @@ package com.kira.learning.dialog
 
 import android.content.Context
 import com.kira.learning.R
-import com.kira.learning.bean.resp.RepayDetailInfo
+import com.kira.learning.bean.res.RepayDetailInfo
 import com.kira.learning.databinding.DialogRepayPlanBinding
 import com.kira.learning.expand.formatCommon
 import com.common.lib.dialog.DefaultDialog

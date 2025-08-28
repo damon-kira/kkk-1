@@ -3,7 +3,7 @@ package com.kira.learning.module.firstconfirm.vm
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.expand.getMobile
 import com.kira.learning.module.login.CountDownHelper
 import com.common.lib.base.BaseViewModel

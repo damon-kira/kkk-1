@@ -3,8 +3,8 @@ package com.kira.learning.module.process.bank
 import androidx.lifecycle.LiveData
 import com.kira.learning.bean.req.ReqBankInfo
 import com.kira.learning.bean.req.IReqBaseInfo
-import com.kira.learning.bean.resp.RspBankInfo
-import com.kira.learning.bean.resp.RspResult
+import com.kira.learning.bean.res.RspBankInfo
+import com.kira.learning.bean.res.RspResult
 import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.process.BaseProcessRepository
 import com.common.lib.net.ApiServiceLiveDataProxy

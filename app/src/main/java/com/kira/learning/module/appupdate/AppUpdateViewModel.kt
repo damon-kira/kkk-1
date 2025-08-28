@@ -1,6 +1,6 @@
 package com.kira.learning.module.appupdate
 
-import com.kira.learning.bean.resp.AppUpgradeInfo
+import com.kira.learning.bean.res.AppUpgradeInfo
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import javax.inject.Inject

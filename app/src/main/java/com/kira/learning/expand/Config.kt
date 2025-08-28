@@ -1,7 +1,7 @@
 package com.kira.learning.expand
 
 import com.cache.lib.SharedPrefGlobal
-import com.kira.learning.bean.resp.RspCustom
+import com.kira.learning.bean.res.RspCustom
 import com.util.lib.GsonUtil
 
 
