@@ -10,7 +10,6 @@ import com.util.lib.MainHandler
 import com.util.lib.StatusBarUtil.setStatusBar
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class SplashActivity : BaseActivity() {
 

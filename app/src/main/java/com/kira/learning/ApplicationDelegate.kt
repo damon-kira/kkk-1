@@ -57,13 +57,11 @@ object ApplicationDelegate {
             override fun addBaseParams(jobj: JsonObject) {
                 // ocrPhotoExif
                 jobj.addProperty(
-                    "p4yg",
-                    ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FRONT)
+                    "p4yg", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FRONT)
                 )
                 // faceExif
                 jobj.addProperty(
-                    "Bgp3rnTyWw",
-                    ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
+                    "Bgp3rnTyWw", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
                 )
             }
         })
@@ -88,8 +86,10 @@ object ApplicationDelegate {
             }
             if (e is IllegalStateException) {
                 // that's a bug in RxJava or in a custom operator
-                Thread.currentThread().uncaughtExceptionHandler
-                    ?.uncaughtException(Thread.currentThread(), e)
+                Thread.currentThread().uncaughtExceptionHandler?.uncaughtException(
+                        Thread.currentThread(),
+                        e
+                    )
             }
             logger_d("debug_TheApplication", e.toString())
         })
