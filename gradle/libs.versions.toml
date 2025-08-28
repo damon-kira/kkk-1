@@ -64,7 +64,7 @@ compose-compiler = "1.5.12"
 compose-activity = "1.10.1"
 compose-bom = "2025.08.00"
 compose-plugin = "1.8.2"
-firebase = "31.5.0"
+firebase = "33.10.0"
 markwon = "4.6.2"
 other-aes = "1.0.0"
 other-devoptions = "1.0.4"
@@ -72,11 +72,11 @@ camera = "1.3.0"
 media3 = "1.3.1"
 location = "1.0.1"
 services = "4.4.3"
-crashlytics = "3.0.4"
+crashlytics = "3.0.6"
 buildkonfig = "0.15.1"
 calf = "0.3.0"
 generativeai = "0.9.0-1.1.0"
-chaquoPython = "15.0.1"
+chaquoPython = "16.1.0"
 colorpicker = "2.3.0"
 colorpickerCompose = "1.1.2"
 navigationCompose = "2.9.0"
@@ -130,8 +130,6 @@ view-constraintlayout = { module = "androidx.constraintlayout:constraintlayout",
 view-material = { module = "com.google.android.material:material", version.ref = "materialdesign" }
 view-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 view-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
-view-svg = { module = "com.caverock:androidsvg", version.ref = "androidsvg" }
-view-gif = { module = "pl.droidsonroids.gif:android-gif-drawable", version.ref = "android-gif-drawable" }
 #---------------------------------Firebase---------------------------------
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }

@@ -64,8 +64,6 @@ dependencies {
     api(libs.view.material)
     api(libs.view.recyclerview)
     api(libs.view.swiperefreshlayout)
-    api(libs.view.svg)
-    api(libs.view.gif)
 
     // Lifecycle
     api(libs.androidx.lifecycle.viewmodel)

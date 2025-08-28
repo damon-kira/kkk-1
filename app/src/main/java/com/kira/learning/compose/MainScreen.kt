@@ -122,9 +122,9 @@ internal fun MainScreen(
                     .padding(padding)
             ) {
                 composable(Routes.CHAT) { ChatRoute(Modifier.fillMaxSize(), openDrawer = { scope.launch { drawerState.open() } }) }
-                composable(Routes.SAMPLE) { SampleFeatureRoute(Modifier.fillMaxSize()) }
-                composable(Routes.ANSWER) { AnswerRoute(Modifier.fillMaxSize()) }
-                composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize()) }
+                composable(Routes.SAMPLE) { SampleFeatureRoute(Modifier.fillMaxSize(), openDrawer = { scope.launch { drawerState.open() } }) }
+                composable(Routes.ANSWER) { AnswerRoute(Modifier.fillMaxSize(), openDrawer = { scope.launch { drawerState.open() } }) }
+                composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize(), onBack = null) }
             }
         }
     }
