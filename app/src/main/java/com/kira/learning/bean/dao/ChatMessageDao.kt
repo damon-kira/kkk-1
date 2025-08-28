@@ -11,7 +11,7 @@ interface ChatMessageDao {
 
     // 插入单条消息
     @Insert
-    suspend fun insertMessage(message: ChatMessage)
+    suspend fun insertMessage(message: ChatMessage): Long
 
     // 批量插入消息
     @Insert

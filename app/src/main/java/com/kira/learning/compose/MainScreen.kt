@@ -40,6 +40,7 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavDestination.Companion.hierarchy
+import com.kira.learning.compose.module.chat.ChatRoute
 
 private object Routes {
     // 重新排序更贴近微信: 聊天(微信) -> 发现 -> 学习 -> 我
@@ -91,16 +92,6 @@ internal fun MainScreen(
         }
     ) {
         Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = { Text(bottomItems.firstOrNull { it.route == currentDestination?.route }?.label ?: "") },
-                    navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = null)
-                        }
-                    }
-                )
-            },
             bottomBar = {
                 NavigationBar {
                     bottomItems.forEach { item ->
@@ -109,7 +100,9 @@ internal fun MainScreen(
                             selected = selected,
                             onClick = {
                                 navController.navigate(item.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
                                     launchSingleTop = true
                                     restoreState = true
                                 }
@@ -128,7 +121,7 @@ internal fun MainScreen(
                     .fillMaxSize()
                     .padding(padding)
             ) {
-                composable(Routes.CHAT) { PlaceholderScreen("聊天功能占位") }
+                composable(Routes.CHAT) { ChatRoute(Modifier.fillMaxSize(), openDrawer = { scope.launch { drawerState.open() } }) }
                 composable(Routes.SAMPLE) { SampleFeatureRoute(Modifier.fillMaxSize()) }
                 composable(Routes.ANSWER) { AnswerRoute(Modifier.fillMaxSize()) }
                 composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize()) }
@@ -138,20 +131,40 @@ internal fun MainScreen(
 }
 
 @Composable
-private fun DrawerContent(onNavigateProfile: () -> Unit, profileViewModel: ProfileViewModel = hiltViewModel()) {
+private fun DrawerContent(
+    onNavigateProfile: () -> Unit,
+    profileViewModel: ProfileViewModel = hiltViewModel()
+) {
     val state = profileViewModel.uiState.collectAsStateWithLifecycle()
     ModalDrawerSheet {
         Spacer(Modifier.height(32.dp))
-        when(val s = state.value) {
+        when (val s = state.value) {
             is ProfileUiState.Data -> {
-                Row(Modifier.padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    Modifier.padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     AppAvatar(url = s.profile.avatarUrl, size = 64.dp)
                     Spacer(Modifier.width(12.dp))
-                    Column { Text(s.profile.name, style = MaterialTheme.typography.titleMedium); Text(s.profile.email, style = MaterialTheme.typography.bodySmall) }
+                    Column {
+                        Text(
+                            s.profile.name,
+                            style = MaterialTheme.typography.titleMedium
+                        ); Text(s.profile.email, style = MaterialTheme.typography.bodySmall)
+                    }
                 }
                 Spacer(Modifier.height(12.dp))
             }
-            is ProfileUiState.Loading -> Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) { CircularProgressIndicator(Modifier.size(32.dp)); Spacer(Modifier.width(12.dp)); Text("加载中") }
+
+            is ProfileUiState.Loading -> Row(
+                Modifier.padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator(Modifier.size(32.dp)); Spacer(Modifier.width(12.dp)); Text(
+                "加载中"
+            )
+            }
+
             is ProfileUiState.Error -> Text("用户信息加载失败", modifier = Modifier.padding(16.dp))
         }
         NavigationDrawerItem(
@@ -178,7 +191,7 @@ private fun DrawerContent(onNavigateProfile: () -> Unit, profileViewModel: Profi
 @Composable
 private fun PlaceholderScreen(text: String) {
     Surface(modifier = Modifier.fillMaxSize()) {
-        androidx.compose.material3.Text(text = text, modifier = Modifier)
+        Text(text = text, modifier = Modifier)
     }
 }
 

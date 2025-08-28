@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,7 +25,8 @@ import kotlin.time.Duration.Companion.seconds
 @Composable
 fun AnswerRoute(
     modifier: Modifier = Modifier,
-    viewModel: AnswerViewModel = hiltViewModel()
+    viewModel: AnswerViewModel = hiltViewModel(),
+    openDrawer: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -42,6 +44,7 @@ fun AnswerRoute(
         onNext = viewModel::nextQuestion,
         onJump = viewModel::jumpTo,
         onRetry = viewModel::retry,
+        openDrawer = openDrawer,
         modifier = modifier
     )
 }
@@ -62,6 +65,7 @@ private fun AnswerScreen(
     onNext: () -> Unit,
     onJump: (Int) -> Unit,
     onRetry: () -> Unit,
+    openDrawer: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val total = state.questions.size
@@ -86,12 +90,13 @@ private fun AnswerScreen(
                         modifier = Modifier.weight(1f)
                     )
                 }
-            }, actions = {
+            }, navigationIcon = { IconButton(onClick = openDrawer) { Icon(Icons.Default.Menu, null) } }, actions = {
                 val min = state.elapsedSeconds / 60
                 val sec = state.elapsedSeconds % 60
                 Text(String.format("%02d:%02d", min, sec), style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(end = 12.dp))
             })
         },
+        contentWindowInsets = WindowInsets(0),
         bottomBar = {
             if (state.errorMessage == null) {
                 Surface(shadowElevation = 6.dp) {

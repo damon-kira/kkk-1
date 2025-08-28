@@ -8,8 +8,8 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.composeCompiler)
-    id("com.google.gms.google-services") version "4.4.3"
-    id("com.google.firebase.crashlytics") version "3.0.4"
+    alias(libs.plugins.services)
+    alias(libs.plugins.crashlytics)
 }
 
 android {

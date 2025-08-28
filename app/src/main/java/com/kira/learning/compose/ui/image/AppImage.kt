@@ -1,6 +1,5 @@
 package com.kira.learning.compose.ui.image
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -25,6 +24,27 @@ import coil.compose.SubcomposeAsyncImageContent
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 
+data class ImageTheme(
+    val placeholderColor: Color,
+    val errorColor: Color,
+    val iconTint: Color,
+    val cornerRadius: Dp = 8.dp,
+    val crossfade: Boolean = true,
+)
+
+val LocalImageTheme = staticCompositionLocalOf<ImageTheme> {
+    ImageTheme(
+        placeholderColor = Color.LightGray.copy(alpha = 0.3f),
+        errorColor = Color.Red.copy(alpha = 0.4f),
+        iconTint = Color.DarkGray,
+    )
+}
+
+@Composable
+fun ProvideImageTheme(theme: ImageTheme, content: @Composable () -> Unit) {
+    CompositionLocalProvider(LocalImageTheme provides theme) { content() }
+}
+
 /** 高级图片加载封装
  * 功能:
  * 1. 统一占位/错误UI主题化
@@ -39,14 +59,14 @@ fun AppImage(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
     contentScale: ContentScale = ContentScale.Crop,
-    shape: Shape = RoundedCornerShape(8.dp),
+    shape: Shape = RoundedCornerShape(LocalImageTheme.current.cornerRadius),
     cornerRadius: Dp? = null, // 若传入则覆盖 shape 为圆角
     circle: Boolean = false,
     memoryCache: Boolean = true,
     diskCache: Boolean = true,
-    crossfade: Boolean = true,
-    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-    iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+    crossfade: Boolean = LocalImageTheme.current.crossfade,
+    backgroundColor: Color = LocalImageTheme.current.placeholderColor,
+    iconTint: Color = LocalImageTheme.current.iconTint,
     onSuccess: (() -> Unit)? = null,
     onError: ((Throwable?) -> Unit)? = null,
 ) {
@@ -75,11 +95,11 @@ fun AppImage(
                 state is coil.compose.AsyncImagePainter.State.Loading || state is coil.compose.AsyncImagePainter.State.Empty -> PlaceholderBox(backgroundColor, iconTint, Icons.Default.Image)
                 state is coil.compose.AsyncImagePainter.State.Error -> {
                     onError?.invoke(state.result.throwable)
-                    PlaceholderBox(backgroundColor, iconTint, Icons.Default.BrokenImage, isError = true)
+                    PlaceholderBox(backgroundColor, LocalImageTheme.current.errorColor, Icons.Default.BrokenImage, isError = true)
                 }
                 state is coil.compose.AsyncImagePainter.State.Success -> {
                     onSuccess?.invoke()
-                    Crossfade(targetState = true, label = "image") { _ -> SubcomposeAsyncImageContent() }
+                    SubcomposeAsyncImageContent()
                 }
                 else -> SubcomposeAsyncImageContent()
             }

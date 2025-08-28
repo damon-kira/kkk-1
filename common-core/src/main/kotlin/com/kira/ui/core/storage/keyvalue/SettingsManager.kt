@@ -65,6 +65,9 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
         const val KEY_VIEW_MODE = "VIEW_MODE"
         const val KEY_SORT_MODE = "SORT_MODE"
         const val KEY_FILESYSTEM = "FILESYSTEM"
+
+        // API
+        const val KEY_API_TOKEN = "API_TOKEN"
     }
 
     private val fileName: String
@@ -190,6 +193,10 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
     var filesystem: String
         get() = sharedPreferences.getString(KEY_FILESYSTEM, "local") ?: "local"
         set(value) = sharedPreferences.edit().putString(KEY_FILESYSTEM, value).apply()
+
+    var apiToken: String?
+        get() = sharedPreferences.getString(KEY_API_TOKEN, null)
+        set(value) = sharedPreferences.edit().putString(KEY_API_TOKEN, value).apply()
 
     fun load(key: String, defaultValue: String): String {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue

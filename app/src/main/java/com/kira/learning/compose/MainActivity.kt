@@ -5,6 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.kira.learning.compose.ui.image.ProvideImageTheme
+import com.kira.learning.compose.ui.image.ImageTheme
+import androidx.compose.material3.MaterialTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +18,15 @@ internal class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(savedInstanceState)
+            ProvideImageTheme(
+                ImageTheme(
+                    placeholderColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                    errorColor = MaterialTheme.colorScheme.error.copy(alpha = 0.25f),
+                    iconTint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            ) {
+                MainScreen(savedInstanceState)
+            }
         }
     }
 }

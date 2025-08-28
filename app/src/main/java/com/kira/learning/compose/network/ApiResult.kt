@@ -1,5 +1,6 @@
 package com.kira.learning.compose.network
 
+import com.common.lib.net.bean.BaseResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -48,3 +49,8 @@ suspend inline fun <T> safeApiCall(
         ApiResult.Error(message = e.message ?: "未知错误", throwable = e)
     }
 }
+
+inline fun <T> BaseResponse<T>.toApiResult(): ApiResult<T> = if (isSuccess()) {
+    val d = data
+    if (d == null) ApiResult.Error(code = code, message = "空数据") else ApiResult.Success(d)
+} else ApiResult.Error(code = code, message = ErrorMapper.map(code, msg))

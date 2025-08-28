@@ -1,5 +1,6 @@
 package com.kira.learning.compose.module.sample
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,12 +17,18 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.windowInsetsPadding
+import com.common.kira.ui.SquircleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SampleFeatureRoute(
     modifier: Modifier = Modifier,
     viewModel: SampleViewModel = hiltViewModel(),
+    openDrawer: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -44,7 +51,8 @@ fun SampleFeatureRoute(
             success = state as SampleUiState.Success,
             onRefresh = { viewModel.dispatch(SampleEvent.Refresh) },
             snackbarHostState = snackbarHostState,
-            modifier = modifier
+            modifier = modifier,
+            openDrawer = openDrawer
         )
     }
 }
@@ -76,6 +84,7 @@ private fun SuccessList(
     onRefresh: () -> Unit,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier,
+    openDrawer: () -> Unit,
 ) {
     // material pullRefresh 状态
     val pullRefreshState = rememberPullRefreshState(
@@ -87,6 +96,7 @@ private fun SuccessList(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("Compose 示例") },
+                navigationIcon = { IconButton(onClick = openDrawer) { Icon(Icons.Default.Menu, null) } },
                 actions = {
                     TextButton(onClick = onRefresh, enabled = !success.refreshing) {
                         Text(if (success.refreshing) "刷新中..." else "刷新")
@@ -94,7 +104,8 @@ private fun SuccessList(
                 }
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        contentWindowInsets = WindowInsets(0) // 避免顶部额外留白
     ) { padding ->
         Box(
             modifier = modifier
