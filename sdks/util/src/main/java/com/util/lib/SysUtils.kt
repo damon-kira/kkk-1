@@ -13,7 +13,6 @@ import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
-import com.aes.lib.BuildConfig
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e

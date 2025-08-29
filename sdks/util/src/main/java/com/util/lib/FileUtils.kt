@@ -2,8 +2,6 @@ package com.util.lib
 
 import android.content.Context
 import android.util.Log
-import com.aes.lib.BuildConfig
-import com.aes.lib.MD5Utils
 import java.io.*
 import java.util.*
 
@@ -216,11 +214,11 @@ object FileUtils {
 
 
     fun DES_decrypt(passwordToken: String?, password: String?): String {
-        return MD5Utils.des_decrypt_hex(passwordToken, password.orEmpty())
+        return ""//MD5Utils.des_decrypt_hex(passwordToken, password.orEmpty())
     }
 
     fun DES_encrypt(securityToken: String?, passwd: String?): String {
-        return MD5Utils.des_encrypt_hex(securityToken.orEmpty(), passwd.orEmpty()).orEmpty()
+        return ""//MD5Utils.des_encrypt_hex(securityToken.orEmpty(), passwd.orEmpty()).orEmpty()
     }
 
 }

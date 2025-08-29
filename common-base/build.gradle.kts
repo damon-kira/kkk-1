@@ -104,6 +104,5 @@ dependencies {
     api(libs.markwon.image.glide)
 
     // 本地Maven
-    api(libs.other.aes)
     debugApi(libs.other.devoptions)
 }

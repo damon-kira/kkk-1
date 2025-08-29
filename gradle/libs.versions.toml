@@ -103,115 +103,127 @@ plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
 #---------------------------------Core---------------------------------
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" }
-androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
-androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
-androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
-androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profile-installer" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
-androidx-recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerview-selection" }
-androidx-vectordrawable = { module = "androidx.vectordrawable:vectordrawable", version.ref = "vectordrawable" }
-androidx-preferences = { module = "androidx.preference:preference-ktx", version.ref = "preferences" }
-androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-androidx-navigation = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
-androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-androidx-workmanager = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" }
-androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-view-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
-view-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-view-material = { module = "com.google.android.material:material", version.ref = "materialdesign" }
-view-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-view-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" } # 协程核心库
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" } # Android 特定协程支持
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" } # 协程测试库
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" } # AndroidX 核心库
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" } # Activity 组件扩展
+androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" } # Fragment 组件扩展
+androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" } # 启动屏幕支持
+androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profile-installer" } # 配置文件安装器
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" } # AppCompat 支持库
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" } # 多 Dex 支持
+androidx-recyclerview-selection = { module = "androidx.recyclerview:recyclerview-selection", version.ref = "recyclerview-selection" } # RecyclerView 选择器库
+androidx-vectordrawable = { module = "androidx.vectordrawable:vectordrawable", version.ref = "vectordrawable" } # 向量图形支持
+androidx-preferences = { module = "androidx.preference:preference-ktx", version.ref = "preferences" } # SharedPreferences 扩展
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" } # ViewModel 组件扩展
+androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" } # LiveData 组件扩展
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" } # 生命周期库
+androidx-navigation = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" } # Navigation 组件扩展
+androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" } # Room 数据库 Kotlin 扩展
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" } # Room 数据库运行时
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" } # Room 数据库编译器
+androidx-workmanager = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" } # WorkManager Kotlin 扩展
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" } # 注解库
+view-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" } # ViewPager2 组件
+view-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" } # ConstraintLayout 组件
+view-material = { module = "com.google.android.material:material", version.ref = "materialdesign" } # Material Design 组件
+view-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" } # RecyclerView 组件
+view-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" } # SwipeRefreshLayout 组件
 #---------------------------------Firebase---------------------------------
-firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" } # Firebase 消息推送
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" } # Firebase 分析
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" } # Firebase 崩溃日志
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" } # Firebase BOM
 #---------------------------------Net---------------------------------
-rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
-rxjava-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava-android" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
-retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
-retrofit-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
-retrofit-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" }
-retrofit-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" }
-retrofit-android = { module = "org.conscrypt:conscrypt-android", version.ref = "retrofit-android" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" } # RxJava 核心库
+rxjava-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava-android" } # RxJava Android 扩展
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" } # Retrofit 网络请求库
+retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" } # Retrofit RxJava3 适配器
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" } # Retrofit Gson 转换器
+retrofit-gson = { module = "com.google.code.gson:gson", version.ref = "gson" } # Gson 序列化/反序列化
+retrofit-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" } # OkHttp 日志拦截器
+retrofit-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" } # OkHttp 网络库
+retrofit-android = { module = "org.conscrypt:conscrypt-android", version.ref = "retrofit-android" } # Conscrypt Android 支持
 #---------------------------------ImageLoad---------------------------------
-image-glide = { module = "com.github.bumptech.glide:glide", version.ref = "image-glide" }
-image-egloo = { module = "com.otaliastudios.opengl:egloo", version.ref = "image-egloo" }
+image-glide = { module = "com.github.bumptech.glide:glide", version.ref = "image-glide" } # Glide 图片加载库
+image-egloo = { module = "com.otaliastudios.opengl:egloo", version.ref = "image-egloo" } # Egloo OpenGL 图片加载
 #---------------------------------Hilt---------------------------------
-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-hilt-compiler-android = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-navigation = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-android" }
-hilt-workmanager = { module = "androidx.hilt:hilt-work", version.ref = "hilt-android" }
-hilt-android-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-android" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-android" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" } # Hilt DI 库
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" } # Hilt 编译器
+hilt-compiler-android = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" } # Hilt Android 编译器
+hilt-navigation = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-android" } # Hilt Navigation 组件
+hilt-workmanager = { module = "androidx.hilt:hilt-work", version.ref = "hilt-android" } # Hilt WorkManager 组件
+hilt-android-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-android" } # Hilt Android 编译器
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-android" } # Hilt Navigation Compose 组件
 #---------------------------------Compose---------------------------------
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
-compose-runtime = { module = "androidx.compose.runtime:runtime" }
-compose-ui = { module = "androidx.compose.ui:ui" }
-compose-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-material3 = { module = "androidx.compose.material3:material3" }
-compose-material = { module = "androidx.compose.material:material" }
-compose-uitooling = { module = "androidx.compose.ui:ui-tooling" }
-compose-uitooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
-compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" } # Compose BOM
+compose-runtime = { module = "androidx.compose.runtime:runtime" } # Compose 运行时
+compose-ui = { module = "androidx.compose.ui:ui" } # Compose UI 组件
+compose-foundation = { module = "androidx.compose.foundation:foundation" } # Compose 基础组件
+compose-material3 = { module = "androidx.compose.material3:material3" } # Compose Material3 组件
+compose-material = { module = "androidx.compose.material:material" } # Compose Material 组件
+compose-uitooling = { module = "androidx.compose.ui:ui-tooling" } # Compose UI 工具
+compose-uitooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" } # Compose UI 预览工具
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" } # Compose Material 扩展图标
+compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" } # Compose Material 核心图标
+compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" } # Compose 自适应组件
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" } # Compose Activity 组件
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" } # Compose Navigation 组件
 #---------------------------------Markdwon---------------------------------
-markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }
-markwon-image = { module = "io.noties.markwon:image", version.ref = "markwon" }
-markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" }
+markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" } # Markwon 核心库
+markwon-image = { module = "io.noties.markwon:image", version.ref = "markwon" } # Markwon 图片支持
+markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" } # Markwon Glide 图片支持
 #---------------------------------Camera---------------------------------
-camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera" }
-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "camera" }
+camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" } # Camera 核心库
+camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" } # Camera2 API 支持
+camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" } # Camera 生命周期库
+camera-view = { module = "androidx.camera:camera-view", version.ref = "camera" } # Camera 视图组件
+camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "camera" } # Camera 扩展功能
 #---------------------------------Media3---------------------------------
-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
-media3-exoplayer-hls = { module = "androidx.media3:media3-exoplayer-hls", version.ref = "media3" }
-media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3" }
+media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" } # ExoPlayer 视频播放器
+media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" } # ExoPlayer UI 组件
+media3-exoplayer-hls = { module = "androidx.media3:media3-exoplayer-hls", version.ref = "media3" } # ExoPlayer HLS 支持
+media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3" } # ExoPlayer DASH 支持
 #---------------------------------Other---------------------------------
-test-junit = { module = "junit:junit", version.ref = "junit" }
-test-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-test-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit-ext" }
-test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
-test-macrobenchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "test-benchmark" }
-location = { module = "com.location.lib:location", version.ref = "location" }
-calf-filepicker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "calf" }
-generativeai-google = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
-other-aes = { module = "com.aes.lib:aes", version.ref = "other-aes" }
-other-devoptions = { module = "com.devoptions.lib:devoptions", version.ref = "other-devoptions" }
-autosize = { module = "com.github.JessYanCoding:AndroidAutoSize", version.ref = "autosize" }
-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
-cropper = { module = "com.edmodo:cropper", version.ref = "cropper" }
-mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkit" }
-kodeHighlighter = { module = "com.github.markusressel.KodeHighlighter:core", version.ref = "kodeHighlighter" }
-guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" }
-guava-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "guava-coroutines" }
-appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "appupdate" }
-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-colorpicker = { module = "com.github.skydoves:colorpickerview", version.ref = "colorpicker" }
-skydoves-colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" }
-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-superuser = { module = "com.github.topjohnwu.libsu:io", version.ref = "superuser" }
-bouncycastle = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
-ftpclient = { module = "commons-net:commons-net", version.ref = "ftpclient" }
-jsch = { module = "com.github.mwiede:jsch", version.ref = "jsch" }
-zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }
-icu4j = { module = "com.ibm.icu:icu4j", version.ref = "icu4j" }
+# 单元与测试相关
+test-junit = { module = "junit:junit", version.ref = "junit" } # JUnit4 单元测试框架
+test-mockk = { module = "io.mockk:mockk", version.ref = "mockk" } # Kotlin Mock 框架
+test-junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit-ext" } # AndroidX JUnit 扩展 (Instrumented 测试集成)
+test-runner = { module = "androidx.test:runner", version.ref = "test-runner" } # Android Instrumentation 测试运行器
+test-macrobenchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "test-benchmark" } # 宏观性能基准测试
+# 业务/功能库
+location = { module = "com.location.lib:location", version.ref = "location" } # 自定义/第三方定位功能封装
+calf-filepicker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "calf" } # Compose 文件选择器组件
+generativeai-google = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" } # Google Generative AI 客户端封装
+#other-aes = { module = "com.aes.lib:aes", version.ref = "other-aes" } # 自定义 AES 加解密库
+other-devoptions = { module = "com.devoptions.lib:devoptions", version.ref = "other-devoptions" } # 开发者调试/设置选项集合
+autosize = { module = "com.github.JessYanCoding:AndroidAutoSize", version.ref = "autosize" } # 屏幕适配自动尺寸缩放
+exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" } # 读取/写入图片 EXIF 元数据
+cropper = { module = "com.edmodo:cropper", version.ref = "cropper" } # 基础图片裁剪控件
+mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkit" } # ML Kit 文本识别
+kodeHighlighter = { module = "com.github.markusressel.KodeHighlighter:core", version.ref = "kodeHighlighter" } # 代码语法高亮核心
+# 工具与协程互操作
+guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" } # Guava 工具集 (Android 版)
+guava-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "guava-coroutines" } # 协程与 ListenableFuture 互操作
+# Play / 更新
+appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "appupdate" } # Google Play In-App Update KTX
+# 代码规范
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" } # Kotlin 代码风格检测 CLI
+# 基础语言/标准库
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" } # Kotlin 标准库
+# 颜色选择
+colorpicker = { module = "com.github.skydoves:colorpickerview", version.ref = "colorpicker" } # 传统 View 颜色选择器
+skydoves-colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" } # Compose 颜色选择器
+# 日志
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" } # Timber 日志库
+# Root / 安全
+superuser = { module = "com.github.topjohnwu.libsu:io", version.ref = "superuser" } # libsu Root 权限与 IO 支持
+bouncycastle = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" } # BouncyCastle 加密算法实现
+# 网络协议/传输
+ftpclient = { module = "commons-net:commons-net", version.ref = "ftpclient" } # Apache Commons Net (FTP/网络协议)
+jsch = { module = "com.github.mwiede:jsch", version.ref = "jsch" } # JSch SSH/SFTP 客户端
+# 压缩/存档
+zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" } # Zip4j 压缩/解压 (支持加密)
+# 国际化
+icu4j = { module = "com.ibm.icu:icu4j", version.ref = "icu4j" } # ICU4J 国际化与 Unicode 支持

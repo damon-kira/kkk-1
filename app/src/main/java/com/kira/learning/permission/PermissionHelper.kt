@@ -8,7 +8,6 @@ import android.hardware.Camera
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
-import com.bigdata.lib.LocationHelp
 import com.common.lib.base.BaseActivity
 import com.util.lib.MainHandler
 import com.util.lib.ThreadPoolUtil
@@ -234,11 +233,6 @@ object PermissionHelper {
 //                    uploadAuthInfo(true)
                     //statisticPermission(deniedList, getNotGrantedAllPermissionList())
 
-                    if (deniedList.contains(LocationPermission())) {
-                        if (!LocationPermission().hasThisPermission(activity)) {
-                            LocationHelp.requestLocation()
-                        }
-                    }
 //                    fixCalendarPermission()
                     logger_d(
                         "debug_PermissionHelper",

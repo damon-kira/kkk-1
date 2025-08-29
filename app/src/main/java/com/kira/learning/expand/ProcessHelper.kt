@@ -31,7 +31,7 @@ fun jumpProcess(context: Context, type: Int) {
             Launch.skipFaceActivity(context)
         }
         STEP_OK -> {
-            Launch.skipUploadActivity(context)
+//            Launch.skipUploadActivity(context)
         }
     }
 }

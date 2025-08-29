@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.core.content.PermissionChecker
-import com.project.util.AESUtil
 import com.util.lib.*
 import com.cache.lib.SharedPrefGlobal
 import com.util.lib.log.logger_d
@@ -55,7 +54,7 @@ class UUIDHelper {
     fun getAesUUid(): String {
         val uuid = "${getUUid()}+${System.currentTimeMillis()}"
         logger_d(TAG, "getAesUUid: uuid = $uuid")
-        return AESUtil.mexicoEncrypt(uuid, AesInfo.UUID_KEY, AesInfo.UUID_IV, false).orEmpty()
+        return ""//AESUtil.mexicoEncrypt(uuid, AesInfo.UUID_KEY, AesInfo.UUID_IV, false).orEmpty()
     }
 
     fun getMediaUUid(context: Context): String {

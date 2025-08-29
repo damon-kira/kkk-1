@@ -35,7 +35,6 @@ import com.kira.learning.module.dashboardDetail.RepayDetailHisActivity
 import com.kira.learning.module.repeat.confirm.RepeatConfirmActivity
 import com.kira.learning.module.review.RepeatReviewActivity
 import com.kira.learning.module.setting.SettingActivity
-import com.kira.learning.module.upload.UploadActivity
 import com.kira.learning.module.webview.WebViewActivity
 import com.common.lib.base.BaseActivity
 import com.kira.learning.module.answer.AnswerActivity
@@ -51,7 +50,6 @@ import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.richview.ZoomImageActivity
 import com.kira.learning.module.stepbar.StepBarViewActivity
 import com.kira.learning.module.supereditor.SuperEditorActivity
-import com.kira.learning.module.upload.real.QuickUploadActivity
 import kira.learning.chat.AiChatActivity
 import com.kira.learning.compose.MainActivity as ComposeMainActivity
 
@@ -124,10 +122,6 @@ object Launch {
 
     fun skipFaceFailedActivity(context: Context) {
         launch(context, FaceFailedActivity::class.java)
-    }
-
-    fun skipUploadActivity(context: Context) {
-        launch(context, UploadActivity::class.java)
     }
 
     /**
@@ -245,9 +239,6 @@ object Launch {
 //    }
     fun skipSuperEditorActivity(context: Context){
         launch(context, SuperEditorActivity::class.java)
-    }
-    fun skipQuickUploadActivity(context: Context){
-        launch(context, QuickUploadActivity::class.java)
     }
     fun skipAiChatActivity(context: Context){
         launch(context, AiChatActivity::class.java)

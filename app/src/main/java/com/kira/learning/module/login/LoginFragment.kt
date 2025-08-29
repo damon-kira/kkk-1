@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import com.bigdata.lib.loginTime
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentLoginBinding
 import com.kira.learning.expand.*
@@ -58,7 +57,7 @@ class LoginFragment : BaseLoginFragment() {
     private var mMobileLayout: SysMobileLayout? = null
         get() {
             if (field == null) {
-             field = SysMobileLayout(getSupportContext()).also {
+                field = SysMobileLayout(getSupportContext()).also {
                     it.setItemClick { item ->
                         isAutoGetMobile = false
                         mBinding.loginEditPhone.setText(item)
@@ -75,7 +74,7 @@ class LoginFragment : BaseLoginFragment() {
                 try {
                     mBinding.clInput.removeView(it)
                 } catch (e: Exception) {
-                    logger_e(TAG,"removeSysMobileLayout == $e")
+                    logger_e(TAG, "removeSysMobileLayout == $e")
                 }
             }
             mMobileLayout = null
@@ -148,7 +147,7 @@ class LoginFragment : BaseLoginFragment() {
         hideSoftInput()
     }
 
-    private fun getConfig(){
+    private fun getConfig() {
         mConfigViewModel.getConfig(ConfigViewModel.KEY_VOICE)
     }
 
@@ -156,11 +155,7 @@ class LoginFragment : BaseLoginFragment() {
         mBinding.loginEditPhone.onFocusChangeListener = object : OnFocusChangeListener {
             var startTime = System.currentTimeMillis()
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                if (!hasFocus) {
-                    if (getMobile().isNotEmpty()) {
-                        loginTime = System.currentTimeMillis() - startTime
-                    }
-                } else {
+                if (hasFocus) {
                     startTime = System.currentTimeMillis()
                 }
             }

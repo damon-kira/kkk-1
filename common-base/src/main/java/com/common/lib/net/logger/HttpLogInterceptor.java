@@ -4,8 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.project.util.AESNormalUtil;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -285,8 +283,8 @@ public final class HttpLogInterceptor implements Interceptor {
 //            String dataStr = jsonObject.optString("data");
             String dataStr = content;
             if (!TextUtils.isEmpty(dataStr)) {
-                String d = AESNormalUtil.mexicoDecrypt(dataStr, false);
-                return d;
+//                String d = AESNormalUtil.mexicoDecrypt(dataStr, false);
+                return "";//d;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -346,8 +344,8 @@ public final class HttpLogInterceptor implements Interceptor {
                         requestLogs.add("--> request raw data :" + rawReqData);
                         if (rawReqData.startsWith("data=")) {
                             String value = rawReqData.substring("data=".length());
-                            String decryptData = AESNormalUtil.mexicoDecrypt(value, true);
-                            requestLogs.add("--> request decrypt data :" + decryptData);
+//                            String decryptData = AESNormalUtil.mexicoDecrypt(value, true);
+//                            requestLogs.add("--> request decrypt data :" + decryptData);
                         }
                     }
                     requestLogs.add("--> END request " + request.method() + " " + request.url());
@@ -361,7 +359,7 @@ public final class HttpLogInterceptor implements Interceptor {
     }
 
 
-    private void logResponse(@Nullable Response response, @Nullable Exception e, String rawRequestUrl, String trackNo, long startNs){
+    private void logResponse(@Nullable Response response, @Nullable Exception e, String rawRequestUrl, String trackNo, long startNs) {
         List<String> respLogs = new ArrayList<>();
         respLogs.add("--> START response url -> " + rawRequestUrl);
         boolean logBody = level == HttpLoggingInterceptor.Level.BODY;
@@ -382,7 +380,7 @@ public final class HttpLogInterceptor implements Interceptor {
 
             ResponseBody responseBody = response.body();
             long contentLength = -1;
-            if(responseBody != null){
+            if (responseBody != null) {
                 contentLength = responseBody.contentLength();
             }
             String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
@@ -407,7 +405,7 @@ public final class HttpLogInterceptor implements Interceptor {
 
 
                     if ("gzip".equalsIgnoreCase(headers.get("Content-Encoding"))) {
-                        long  gzippedLength = buffer.size();
+                        long gzippedLength = buffer.size();
                         GzipSource gzippedResponseBody = null;
                         try {
                             gzippedResponseBody = new GzipSource(buffer.clone());
@@ -437,21 +435,22 @@ public final class HttpLogInterceptor implements Interceptor {
                         respLogs.add("decrypt content:");
                         respLogs.add(strOrEmpty(decryptJsonData(content)));
 
-                    }else{
+                    } else {
                         respLogs.add("-->  response  (binary " + buffer.size() + "-byte body omitted)");
                     }
                 }
             }
-        } catch (Throwable e3){
+        } catch (Throwable e3) {
             respLogs.add("--> error " + e3);
-        }finally {
+        } finally {
             respLogs.add("<-- END response " + endSuffix);
             logger.log(trackNo, respLogs.toArray(new String[0]), e != null);
         }
     }
 
     private String strOrEmpty(String str) {
-        if (str == null) return ""; else return str;
+        if (str == null) return "";
+        else return str;
     }
 
 
@@ -486,8 +485,6 @@ public final class HttpLogInterceptor implements Interceptor {
 
     private static boolean bodyHasUnknownEncoding(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");
-        return contentEncoding != null
-                && !contentEncoding.equalsIgnoreCase("identity")
-                && !contentEncoding.equalsIgnoreCase("gzip");
+        return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity") && !contentEncoding.equalsIgnoreCase("gzip");
     }
 }

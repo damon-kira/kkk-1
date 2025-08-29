@@ -47,18 +47,12 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":sdks:cache"))
-//    implementation(rootProject.extra["android.kotlin_stdlib"] as String)
-//    implementation(rootProject.extra["android.core_ktx"] as String)
-//    implementation(rootProject.extra["retrofit.gson"] as String)
-//    implementation(rootProject.extra["exifinterface.exifinterface"] as String)
-//    implementation(rootProject.extra["other.aes"] as String)
+
     api(libs.kotlin.stdlib)
     api(libs.androidx.core)
     api(libs.androidx.appcompat)
     api(libs.retrofit.gson)
     implementation(libs.exifinterface)
-
-    api(libs.other.aes)
 }
 
 apply(from = "../../maven_push.gradle")

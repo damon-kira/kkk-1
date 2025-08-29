@@ -1,7 +1,6 @@
 package com.common.lib.net
 
 import android.util.Log
-import com.project.util.AESNormalUtil
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_i
 import okhttp3.*
@@ -46,10 +45,10 @@ class DecryptInterceptor : Interceptor {
 //                    obj.put("data", decryptStr)
 //                    newResponseBody = ResponseBody.create(contentType, obj.toString())
 //                }
-                val decrypt = AESNormalUtil.mexicoDecrypt(body, false)
-                logger_d(TAG, "解密后 decrypt = $decrypt")
-                newResponseBody = ResponseBody.create(contentType, decrypt ?: "")
-                response = response.newBuilder().body(newResponseBody).build()
+//                val decrypt = AESNormalUtil.mexicoDecrypt(body, false)
+//                logger_d(TAG, "解密后 decrypt = $decrypt")
+//                newResponseBody = ResponseBody.create(contentType, decrypt ?: "")
+//                response = response.newBuilder().body(newResponseBody).build()
 
             } catch (e: Exception) {
                 Log.e(TAG, "buildDecryptResponse error：${e.message} ")

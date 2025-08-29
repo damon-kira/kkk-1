@@ -1,5 +1,7 @@
 package com.kira.learning
 
+//import com.chaquo.python.PyObject
+//import com.kira.learning.module.python.PythonExecutor
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -8,16 +10,11 @@ import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
 import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
-//import com.chaquo.python.PyObject
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.kira.learning.AppEnv
 import com.kira.learning.AppEnv.Companion.NOTIFICATION_CHANNEL_ID
 import com.kira.learning.messaging.KiraFirebaseMessagingService
 import com.kira.quickupload.UploadConfiguration
-//import com.kira.learning.module.python.PythonExecutor
-import com.project.util.AesConstant
-import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
 import dagger.hilt.android.HiltAndroidApp
 import org.conscrypt.Conscrypt
@@ -90,9 +87,9 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 //    }
 
     private fun initAes() {
-        AesConstant.AES_SECRET = Constant.API_SECRET
-        AesConstant.apiKey = Constant.API_KEY
-        AesConstant.apiIv = Constant.API_IV
+//        AesConstant.AES_SECRET = Constant.API_SECRET
+//        AesConstant.apiKey = Constant.API_KEY
+//        AesConstant.apiIv = Constant.API_IV
     }
 
     override fun getCameraXConfig(): CameraXConfig {

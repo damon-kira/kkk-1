@@ -1,9 +1,7 @@
 package com.common.lib.net
 
 import android.util.Log
-import com.aes.lib.SignatureManager
 import com.google.gson.JsonObject
-import com.project.util.AESNormalUtil
 import com.util.lib.GsonUtil
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
@@ -91,8 +89,8 @@ class EncryptDecryptInterceptor : Interceptor {
             //请求参数转换为JsonObject
 //            val needEncryptData = getURLDecoderString( requestData )?.substring("data=".length)
             reqData = if (requestData.isNullOrEmpty()) JsonObject() else GsonUtil.toJsonObject(requestData) ?: JsonObject()
-            val signature = SignatureManager.mexicoSign(reqData)
-            reqData.addProperty("signature", signature)
+//            val signature = SignatureManager.mexicoSign(reqData)
+//            reqData.addProperty("signature", signature)
             requestData = reqData.toString()
             logger_e(TAG, "加密前 requestData=$requestData")
 //            encryptData = "data=${URLEncoder.encode(handle(reqData.toString()))}"
@@ -136,10 +134,10 @@ class EncryptDecryptInterceptor : Interceptor {
 //                    obj.put("data", decryptStr)
 //                    newResponseBody = ResponseBody.create(contentType, obj.toString())
 //                }
-                val decrypt = AESNormalUtil.mexicoDecrypt(body, false).orEmpty()
-                logger_d(TAG, "解密后 body = $decrypt")
-                newResponseBody = ResponseBody.create(contentType, JSONObject(decrypt).toString())
-                response = response.newBuilder().body(newResponseBody).build()
+//                val decrypt = AESNormalUtil.mexicoDecrypt(body, false).orEmpty()
+//                logger_d(TAG, "解密后 body = $decrypt")
+//                newResponseBody = ResponseBody.create(contentType, JSONObject(decrypt).toString())
+//                response = response.newBuilder().body(newResponseBody).build()
 
             } catch (e: Exception) {
                 Log.e(TAG, "buildDecryptResponse error：${e.message} ")
@@ -153,7 +151,7 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handle(data: String): String {
         logger_i(TAG, " 需加密的参数 $data")
-        return AESNormalUtil.mexicoEncrypt(data, false).orEmpty()
+        return ""//AESNormalUtil.mexicoEncrypt(data, false).orEmpty()
     }
 
     private fun getURLDecoderString(str: String?): String? {

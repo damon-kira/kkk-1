@@ -3,7 +3,6 @@ package com.kira.learning.module.firstconfirm
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.bigdata.lib.loanPageStayTime
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentFirstConfirmBinding
 import com.kira.learning.dialog.CancelAutoHintDialog
@@ -17,7 +16,6 @@ import com.kira.learning.manager.Launch.jumpToAppSettingPage
 import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
-import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
 import com.kira.learning.utils.GPInfoUtils
@@ -36,7 +34,6 @@ import com.util.lib.timeToTimeStr
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
-// 首盘确认额度页面
 @AndroidEntryPoint
 class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
 
@@ -45,8 +42,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
     private val mViewModel by lazyViewModel<FirstConfirmViewModel>()
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
-
-    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private val mAutoConfirmModel by lazyViewModel<AutoConfirmViewModel>()
 
@@ -99,7 +94,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
             isFixGroup = true,
             {
                 mProcessDialog.show()
-                mUploadViewModel.checkAndUpload()
             },
             {
                 getSupportContext().jumpToAppSettingPage()
@@ -172,15 +166,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
                 if (!it.value.isNullOrEmpty()) {
                     mLoanBankNo = it.value
                 }
-            }
-        }
-
-        mUploadViewModel.resultLiveData.observerNonSticky(viewLifecycleOwner) {
-            if (it.isSuccess()) {
-                confirmLoan()
-            } else {
-                mProcessDialog.dismiss()
-                it.ShowErrorMsg(::reqPermission)
             }
         }
 
@@ -270,8 +255,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
         super.onFragmentVisibilityChanged(visible)
         if (visible) {
             startTime = System.currentTimeMillis()
-        } else {
-            loanPageStayTime = System.currentTimeMillis() - startTime
         }
     }
 }

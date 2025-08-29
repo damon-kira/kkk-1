@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
-import com.aes.lib.BuildConfig
 import com.cache.lib.SharedPrefGlobal
 import java.io.DataInputStream
 

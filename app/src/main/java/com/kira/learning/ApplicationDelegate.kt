@@ -3,10 +3,7 @@ package com.kira.learning
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.bigdata.lib.BigDataManager
-import com.bigdata.lib.net.NetConfigDataInterface
 import com.cache.lib.SharedPrefUser
-import com.kira.learning.AppEnv
 import com.kira.learning.di.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.manager.SharedPrefKeyManager
@@ -33,39 +30,10 @@ object ApplicationDelegate {
         AppInjector.init(application)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setRxjavaErrorHandler()
-        initBigData()
         WebViewPool.INSTANCE.init(application)
     }
 
     fun getContext() = mWeakContext?.get()
-
-    private fun initBigData() {
-        BigDataManager.get().setNetDataListener(object : NetConfigDataInterface {
-            override fun getContext(): Context = LoanApplication.getAppContext()
-
-            override fun getGaid(): String = GPInfoUtils.getGdid()
-
-            override fun isDebug(): Boolean = AppEnv.DEBUG
-
-            override fun isAppFront(): Boolean =
-                SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_APP_FRONT_BACK_TAG, false)
-
-            override fun getAppToken(): String = getUserToken()
-
-            override fun getBigUrl(): String = Constant.BIG_DATA_URL
-
-            override fun addBaseParams(jobj: JsonObject) {
-                // ocrPhotoExif
-                jobj.addProperty(
-                    "p4yg", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FRONT)
-                )
-                // faceExif
-                jobj.addProperty(
-                    "Bgp3rnTyWw", ImageInfoUtil.getInfo(SharedPrefKeyManager.KEY_IMAGE_FACE)
-                )
-            }
-        })
-    }
 
     private fun setRxjavaErrorHandler() {
         if (AppEnv.DEBUG) return

@@ -26,7 +26,6 @@ import com.kira.learning.module.quiz.vm.QuizViewModel
 import com.kira.learning.module.repeat.confirm.RepeatConfirmViewModel
 import com.kira.learning.module.setting.SettingViewModel
 import com.kira.learning.module.supereditor.viewmodel.SuperEditorViewModel
-import com.kira.learning.module.upload.UploadViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -67,11 +66,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FirstConfirmViewModel::class)
     abstract fun bindFirstConfirmViewModel(viewModel: FirstConfirmViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(UploadViewModel::class)
-    abstract fun bindUploadViewModel(viewModel: UploadViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -155,7 +155,6 @@ dependencies {
     // 本地库依赖
     implementation(project(":common-base"))
     implementation(project(":feature-camera"))
-    implementation(project(":sdks:bigdata"))
     implementation(project(":sdks:util"))
     implementation(project(":compose-view-stedit"))
     implementation(project(":module-player"))

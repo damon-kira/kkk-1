@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bigdata.lib.loanPageStayTime
 import com.kira.learning.bean.res.RspRepeatCalcul
 import com.kira.learning.databinding.ActivityRepeatConfirmBinding
 import com.kira.learning.databinding.LayoutRepeatItemProductBinding
@@ -23,7 +22,6 @@ import com.kira.learning.module.adapter.linearLayoutManager
 import com.kira.learning.module.firstconfirm.vm.AutoConfirmViewModel
 import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
 import com.kira.learning.utils.AnimtorUtils
@@ -60,8 +58,6 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
     private val mConfirmViewModel by lazyViewModel<FirstConfirmViewModel>()
 
     private val mInfoViewModel by lazyViewModel<RepeatConfirmViewModel>()
-
-    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private var mPrdIds = "" // 上一个页面带过来的产品id
     private var mOrderId = "" // 复盘有待确认订单时传过来
@@ -144,15 +140,6 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         }
-        mUploadViewModel.resultLiveData.observerNonSticky(this) {
-            if (it.isSuccess()) {
-                confirm()
-            } else {
-                mProcessDialog.dismiss()
-                it.ShowErrorMsg(::reqPermission)
-            }
-        }
-
         mAutoConfirmModel.downTimerLiveData.observerNonSticky(this) {
             if (it < 0) {
                 // 获取数据，自动确认额度接口
@@ -207,6 +194,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_confirm -> {
                 reqPermission()
             }
+
             R.id.aiv_arrow -> {
                 // 底部list展开或收起
                 mBinding.aivArrow.isEnabled = false
@@ -225,6 +213,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                 AnimtorUtils.startAnima(mBinding.recyclerview, start, end, mRHeight, duration) {
                 }
             }
+
             R.id.iil_bank -> {
                 Launch.skipBankCardListActivity(
                     this,
@@ -233,6 +222,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
                     mBankNo
                 )
             }
+
             R.id.tv_cancel -> {
                 CancelAutoHintDialog(this)
                     .setAmount(mAdapter.getTotalAmount().toString())
@@ -253,7 +243,6 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             isFixGroup = true,
             {
                 mProcessDialog.show()
-                mUploadViewModel.checkAndUpload()
             },
             {
                 jumpToAppSettingPage()
@@ -281,7 +270,7 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
             override fun onItemClick(viewHolder: RecyclerView.ViewHolder, position: Int) {
                 // 计算仪表信息
                 val data = mAdapter.getItemData<RspRepeatCalcul.CalculDetail>(position)
-                if (data?.isCheck == 1 && mAdapter.getSelectorList().size <= 1){
+                if (data?.isCheck == 1 && mAdapter.getSelectorList().size <= 1) {
                     toast(R.string.toast_min_product)
                     return
                 }
@@ -325,10 +314,5 @@ class RepeatConfirmActivity : BaseActivity(), View.OnClickListener {
         }
         mBinding.llItem.requestLayout()
         mBinding.llProductList.requestLayout()
-    }
-
-    override fun onDestroy() {
-        loanPageStayTime = System.currentTimeMillis() - mStartTime
-        super.onDestroy()
     }
 }

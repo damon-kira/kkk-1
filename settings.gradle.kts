@@ -4,12 +4,8 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven {
-            url = uri("${rootProject.projectDir.path}/repo")
-        }
-        maven {
-            url = uri("https://maven.google.com") // Google's Maven repository
-        }
+        maven { url = uri("${rootProject.projectDir.path}/repo") }
+        maven { url = uri("https://maven.google.com") }
         maven { url = uri("https://chaquo.com/maven") }
         maven { url = uri("https://jitpack.io") }
 //        maven { url = uri("https://maven.aliyun.com/repository/public") }
@@ -21,12 +17,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("${rootProject.projectDir.path}/repo")
-        }
-        maven {
-            url = uri("https://maven.google.com")
-        }
+        maven { url = uri("${rootProject.projectDir.path}/repo") }
+        maven { url = uri("https://maven.google.com") }
         maven { url = uri("https://chaquo.com/maven") }
         maven { url = uri("https://jitpack.io") }
 //        maven { url = uri("https://maven.aliyun.com/repository/public") }
@@ -37,28 +29,16 @@ rootProject.name = "A1"
 include(":app")
 include(":common-base")
 include(":feature-camera")
-//include(":datepicker")
-//include(":analysis")
-
-//if (isModule.toBoolean()) {
-//    include(":sdks:bigdata")
-//    include(":sdks:util")
-//    include(":sdks:cache")
-//}
-include(":sdks:bigdata")
 include(":sdks:util")
 include(":sdks:cache")
 
-//include(":rxpermission")
 include(":compose-view-stedit")
 include(":module-player")
 include(":view-window")
 include(":view-image")
-//include(":sdks:devoptions")
-//include(":sdks:aes")
 include(":view-richtext")
+//include(":sdks:devoptions")
 //include(":codeview")
-
 
 include(
     ":common-core",

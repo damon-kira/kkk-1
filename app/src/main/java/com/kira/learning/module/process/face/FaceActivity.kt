@@ -9,9 +9,6 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import com.bigdata.lib.WifiHelper
-import com.bigdata.lib.faceWifi
-import com.bigdata.lib.isSwitchPage
 import com.camera.lib.BaseCameraManager
 import com.camera.lib.CameraFactory
 import com.camera.lib.CameraType
@@ -75,13 +72,10 @@ class FaceActivity : BaseProcessActivity() {
         if (CameraPermission().hasThisPermission(this)) {
             openCamera()
         }
-        registerReceiver(mHomeReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
-
         mBinding.faceAivSwitch.setBlockingOnClickListener {
             mCameraManager?.switchCamera()
         }
 
-        faceWifi = WifiHelper.getSSid(this)
         mBinding.faceAivTake.setBlockingOnClickListener {
             val file = File(getPicCacheFilePath(this, "face.jpg"))
             showLoading(true)
@@ -101,7 +95,8 @@ class FaceActivity : BaseProcessActivity() {
                             mBinding.aivFaceMask.right,
                             mBinding.aivFaceMask.bottom
                         )
-                        val previewRect = Rect(0,0, mBinding.cameraview.width, mBinding.cameraview.height)
+                        val previewRect =
+                            Rect(0, 0, mBinding.cameraview.width, mBinding.cameraview.height)
                         BitmapCrop.cropAndCompress(
                             this,
                             f,
@@ -134,15 +129,21 @@ class FaceActivity : BaseProcessActivity() {
     }
 
     private fun reqPermission() {
-        PermissionHelper.reqPermission(this, arrayListOf(CameraPermission()), true, isFixGroup = false,{ result ->
-            if (result) {
-                openCamera()
-            } else {
-                finish()
-            }
-        }, {
-            jumpToAppSettingPage()
-        })
+        PermissionHelper.reqPermission(
+            this,
+            arrayListOf(CameraPermission()),
+            true,
+            isFixGroup = false,
+            { result ->
+                if (result) {
+                    openCamera()
+                } else {
+                    finish()
+                }
+            },
+            {
+                jumpToAppSettingPage()
+            })
     }
 
     override fun initObserver() {}
@@ -234,7 +235,6 @@ class FaceActivity : BaseProcessActivity() {
 
     override fun onStop() {
         super.onStop()
-        mHomeReceiver?.stop()
         mMediaHelper.stop()
     }
 
@@ -263,10 +263,5 @@ class FaceActivity : BaseProcessActivity() {
             }
         }
 
-        fun stop() {
-            if (isHome) {
-                isSwitchPage++
-            }
-        }
     }
 }

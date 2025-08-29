@@ -1,6 +1,5 @@
 package com.common.lib.net
 
-import com.aes.lib.SignatureManager
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.util.lib.GsonUtil
@@ -145,7 +144,7 @@ class BaseDataAddInterceptor : Interceptor {
 //            NetBaseParamsManager.getCashNormalBaseParams(source)
 //        }
         //2.添加签名json
-        source.addProperty("signature", SignatureManager.mexicoSign(source))
+//        source.addProperty("signature", SignatureManager.mexicoSign(source))
         return source
     }
 

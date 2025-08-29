@@ -16,7 +16,6 @@ import com.kira.learning.module.adapter.SpaceItemDecoration
 import com.kira.learning.module.home.BaseHomeRefreshFragment
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.home.MainEvent
-import com.kira.learning.module.upload.UploadViewModel
 import com.kira.learning.permission.HintDialog
 import com.kira.learning.permission.PermissionHelper
 import com.common.lib.expand.setBlockingOnClickListener
@@ -42,8 +41,6 @@ class RepeatFragment : BaseHomeRefreshFragment() {
     }
 
     private val mHomeViewModel by lazyActivityViewModel<HomeLoanViewModel>()
-
-    private val mUploadViewModel by lazyViewModel<UploadViewModel>()
 
     private var mOrderIds: String? = null // 待确认订单
     private var mProductIds: String? = null // 产品id
@@ -193,7 +190,6 @@ class RepeatFragment : BaseHomeRefreshFragment() {
     }
 
     private fun initObserver() {
-        setViewModelLoading(mUploadViewModel)
         mHomeViewModel.repeatProductLiveData.observe(viewLifecycleOwner) {
             mAdapter.setItems(it)
             val params = it?.firstOrNull()?.g7tzi ?: "0"
@@ -225,23 +221,11 @@ class RepeatFragment : BaseHomeRefreshFragment() {
             }
         }
 
-        mUploadViewModel.resultLiveData.observerNonSticky(viewLifecycleOwner) {
-            if (it.isSuccess()) {
-                Launch.skipRepeatConfirmActivity(
-                    getSupportContext(),
-                    mProductIds.orEmpty(),
-                    mOrderIds.orEmpty()
-                )
-            } else it.ShowErrorMsg{
-                checkAndUpload()
-            }
-        }
     }
 
     private fun checkAndUpload() {
         getBaseActivity()?.let {
             PermissionHelper.reqPermission(it, PermissionHelper.getExcludeCameraPermission(), true, true, {
-                mUploadViewModel.checkAndUpload()
             }, {
                 getSupportContext().jumpToAppSettingPage()
             })

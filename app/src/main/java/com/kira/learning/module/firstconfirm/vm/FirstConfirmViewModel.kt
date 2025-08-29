@@ -1,7 +1,5 @@
 package com.kira.learning.module.firstconfirm.vm
 
-import com.bigdata.lib.WifiHelper
-import com.bigdata.lib.loanWifi
 import com.kira.learning.di.getAppContext
 import com.kira.learning.bean.res.RspResult
 import com.common.lib.base.BaseViewModel
@@ -16,7 +14,6 @@ class FirstConfirmViewModel @Inject constructor(private val repository: FirstCon
 
     fun confirmLoan(bankNo: String, productId: String) {
         showloading()
-        loanWifi = WifiHelper.getSSid(getAppContext())
         confirmLiveData.addSourceLiveData(repository.confirmLoan(bankNo, productId)) {
             hideLoading()
             confirmLiveData.postValue(it)

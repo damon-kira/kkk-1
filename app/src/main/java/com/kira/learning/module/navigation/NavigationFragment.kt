@@ -255,7 +255,7 @@ class NavigationFragment : BaseHomeFragment() {
             it.tvDemoName.text = "Upload"
             it.tvBtn.setOnClickListener {
 //                Launch.skipUploadActivity(getSupportContext())
-                Launch.skipQuickUploadActivity(getSupportContext())
+//                Launch.skipQuickUploadActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout9.let {

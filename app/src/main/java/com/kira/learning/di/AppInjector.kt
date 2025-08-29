@@ -3,7 +3,6 @@ package com.kira.learning.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.bigdata.lib.bgRecoverCount
 import com.cache.lib.SharedPrefUser
 import com.common.lib.base.BaseActivity
 import com.kira.learning.manager.SharedPrefKeyManager
@@ -27,7 +26,6 @@ object AppInjector {
                 }
                 if (appInBackground) {
                     appInBackground = false
-                    bgRecoverCount++
                 }
             }
 

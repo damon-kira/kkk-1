@@ -1,7 +1,6 @@
 package com.kira.learning.net
 
 import android.content.Context
-import com.bigdata.lib.LocationHelp
 import com.kira.learning.Constant
 import com.kira.learning.LoanApplication.Companion.getAppContext
 import com.kira.learning.AppEnv
@@ -108,10 +107,7 @@ class ApiManager @Inject constructor() {
             }
 
             override fun getLocationInfo(): Location {
-                val locationInfo = LocationHelp.getLocationInfo()
                 val location = Location()
-                location.longitude = locationInfo?.first.orEmpty()
-                location.latitude = locationInfo?.second.orEmpty()
                 return location
             }
 

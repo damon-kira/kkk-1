@@ -13,8 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.widget.LinearLayout
-import com.bigdata.lib.readPrivacyCount
-import com.bigdata.lib.readPrivacyTime
 import com.kira.learning.R
 import com.kira.learning.AppEnv
 import com.kira.learning.databinding.FragmentWebviewBinding
@@ -120,7 +118,6 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
         setStatusBarColor(isTitleShow, url)
 
         if (url == H5UrlManager.URL_PRIVACY) {
-            readPrivacyCount++
             mEnterTime = System.currentTimeMillis()
         }
     }
@@ -330,9 +327,6 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if (mUrl == H5UrlManager.URL_PRIVACY) {
-            readPrivacyTime = System.currentTimeMillis() - mEnterTime
-        }
         if (this.mUrl.contains(H5UrlManager.URL_PAY)) {
             LiveDataBus.post(PayEvent(PayEvent.EVENT_EXIT))
         }

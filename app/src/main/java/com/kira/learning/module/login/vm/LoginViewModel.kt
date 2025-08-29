@@ -3,9 +3,6 @@ package com.kira.learning.module.login.vm
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.bigdata.lib.WifiHelper
-import com.bigdata.lib.registIP
-import com.bigdata.lib.registWifi
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.di.getAppContext
@@ -106,9 +103,6 @@ class LoginViewModel @Inject constructor(
         ) {
             hideLoading()
             if (it.isSuccess()) {
-                val ctx = getAppContext()
-                registWifi = WifiHelper.getSSid(ctx)
-                registIP = WifiHelper.getIp()
                 saveMobile(mobile)
                 it.getData()?.let { data ->
                     saveUserInfo(data)
