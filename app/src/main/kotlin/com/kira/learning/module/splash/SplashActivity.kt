@@ -1,8 +1,9 @@
-package com.kira.learning
+package com.kira.learning.module.splash
 
 import android.os.Bundle
 import com.common.lib.base.BaseActivity
 import com.common.lib.viewbinding.binding
+import com.kira.learning.R
 import com.kira.learning.databinding.ActivitySplashBinding
 import com.kira.learning.manager.Launch
 import com.kira.learning.permission.PermissionHelper
@@ -22,14 +23,14 @@ class SplashActivity : BaseActivity() {
 
 //        LanguageUtils.applyLanguage(this, Locale.CHINESE.language)
 //        recreate()
-        MainHandler.postDelay({
+        MainHandler.Companion.postDelay({
             reqPermission()
         }, 0)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MainHandler.removeAll()
+        MainHandler.Companion.removeAll()
     }
 
     private fun reqPermission() {

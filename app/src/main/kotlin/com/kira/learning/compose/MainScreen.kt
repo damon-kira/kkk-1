@@ -49,6 +49,7 @@ private object Routes {
     const val ANSWER = "answer"
     const val PROFILE = "profile"
     const val NAV_DEMO = "nav_demo"
+    const val UI_DEMO = "ui_demo"
 }
 
 data class BottomItem(
@@ -95,6 +96,14 @@ internal fun MainScreen(
                 onNavigateNavDemo = {
                     scope.launch { drawerState.close() }
                     navController.navigate(Routes.NAV_DEMO) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onNavigateUiDemo = {
+                    scope.launch { drawerState.close() }
+                    navController.navigate(Routes.UI_DEMO) {
                         popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
@@ -160,6 +169,12 @@ internal fun MainScreen(
                         openDrawer = { scope.launch { drawerState.open() } }
                     )
                 }
+                composable(Routes.UI_DEMO) {
+                    com.kira.learning.compose.module.uidemo.UiComponentsDemoRoute(
+                        modifier = Modifier.fillMaxSize(),
+                        openDrawer = { scope.launch { drawerState.open() } }
+                    )
+                }
             }
         }
     }
@@ -170,6 +185,7 @@ private fun DrawerContent(
     currentRoute: String?,
     onNavigateProfile: () -> Unit,
     onNavigateNavDemo: () -> Unit,
+    onNavigateUiDemo: () -> Unit,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state = profileViewModel.uiState.collectAsStateWithLifecycle()
@@ -214,6 +230,12 @@ private fun DrawerContent(
             label = { Text("导航示例") },
             selected = currentRoute == Routes.NAV_DEMO,
             onClick = onNavigateNavDemo,
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+        NavigationDrawerItem(
+            label = { Text("UI组件演示") },
+            selected = currentRoute == Routes.UI_DEMO,
+            onClick = onNavigateUiDemo,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
