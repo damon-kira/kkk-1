@@ -41,7 +41,7 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun next() {
-        Launch.skipMainActivity(this)
+        Launch.skipXMLMainActivity(this)
         finish()
     }
 }

@@ -289,7 +289,7 @@ class AIChatActivity : BaseActivity() {
 
 
     open fun checkOrderResult() {
-        Launch.skipMainActivity(this)
+        Launch.skipXMLMainActivity(this)
         finish()
     }
 

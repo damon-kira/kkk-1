@@ -24,7 +24,7 @@ import com.kira.learning.module.applysuccess.ApplySuccessActivity
 import com.kira.learning.module.chat.ChatActivity
 import com.kira.learning.module.codeeditor.CodePlaygroundActivity
 import com.kira.learning.module.history.HistoryActivity
-import com.kira.learning.module.home.MainActivity
+import com.kira.learning.module.home.XMLMainActivity
 import com.kira.learning.module.ocr.PhotographActivity
 import com.kira.learning.module.player.PlayerManageActivity
 import com.kira.learning.module.python.CodingActivity
@@ -46,8 +46,8 @@ object Launch {
 
     private const val TAG = "debug_Launch"
 
-    fun skipMainActivity(context: Context) {
-        launch(context, MainActivity::class.java)
+    fun skipXMLMainActivity(context: Context) {
+        launch(context, XMLMainActivity::class.java)
     }
 
     fun skipHistoryActivity(context: Context) {
@@ -192,10 +192,10 @@ object Launch {
      * 跳转首页然后退出app
      */
     fun skipMainAndExitApp(context: Context) {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, XMLMainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("exit", 0)
-        launch(context, MainActivity::class.java, intent)
+        launch(context, XMLMainActivity::class.java, intent)
     }
 
     @SuppressLint("IntentReset")

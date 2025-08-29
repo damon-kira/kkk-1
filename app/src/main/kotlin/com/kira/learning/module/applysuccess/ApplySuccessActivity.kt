@@ -58,7 +58,7 @@ class ApplySuccessActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        Launch.skipMainActivity(this)
+        Launch.skipXMLMainActivity(this)
         super.onBackPressed()
     }
 }

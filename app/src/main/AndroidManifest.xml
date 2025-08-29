@@ -87,14 +87,14 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".module.home.MainActivity"
+            android:name=".module.home.XMLMainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
@@ -157,7 +157,13 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
             android:name=".compose.MainActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".module.supereditor.SuperEditorActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"

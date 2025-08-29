@@ -19,15 +19,13 @@ import com.hjq.window.draggable.MovingWindowDraggableRule
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.expand.setLogout
-import com.kira.learning.expand.showAppUpgradeDialog
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.home.BaseHomeFragment
 import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.MainActivity
+import com.kira.learning.module.home.XMLMainActivity
 import com.kira.learning.module.home.MainEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 /**
  * 样例代码导航页
@@ -54,27 +52,12 @@ class NavigationFragment : BaseHomeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCustomListener(mBinding.toolbar)
-//        mBinding.includeBlack.let {
-//            it.tvText1.setText(R.string.black_text1)
-//            it.tvText2.setText(R.string.refused_days)
-//            it.tvDays.text = "0"
-//            it.tvDesc.setText(R.string.black_desc)
-//        }
-
-
-//        mBinding.inclueRepay.tvBtn.setBlockingOnClickListener{
-//            LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_REPAY))
-//        }
 
         mHomeViewModel.mRspInfoLiveData.observe(viewLifecycleOwner) {
-//            mBinding.includeBlack.tvAmount.text = getString(R.string.days, it.WTvE5G.toString())
 
             val data = it.gQ1J
             if (data == null || data.isEmpty()) return@observe
 
-//            mBinding.inclueRepay.llContent.show()
-//            mBinding.inclueRepay.tvOrder.text = getString(R.string.orders, data.AMGH9kXswv)
-//            mBinding.inclueRepay.tvAmount.text = getUnitString(data.RPBJ47rhC.orEmpty())
             mOrderIds = data.QLPGXTNU
         }
         initToolbar()
@@ -88,9 +71,6 @@ class NavigationFragment : BaseHomeFragment() {
 
         mRemovableWindow = EasyWindow.with(getBaseActivity()!!)
             .setContentView(R.layout.window_hint)
-//                    .setAnimStyle(R.style.IOSAnimStyle)
-//                    .setImageDrawableByImageView(R.id.icon, R.drawable.ic_dialog_tip_finish)
-//                    .setTextByTextView(R.id.message, "点我消失") // 设置成可拖拽的
             .setWindowDraggableRule(MovingWindowDraggableRule())
             .setOnClickListenerByView(
                 R.id.win_tv_message,
@@ -99,15 +79,10 @@ class NavigationFragment : BaseHomeFragment() {
                         easyWindow: EasyWindow<*>,
                         view: TextView
                     ) {
-
                         FragmentHelper.getCurrFragment(
                             getMainActivity()?.supportFragmentManager ?: parentFragmentManager,
                             R.id.fl_main_container
                         )?.let { fragment ->
-//                                    if (fragment is NavigationFragment) {
-//                                        fragment.onRefresh()
-//                                    }
-                            Log.e(TAG, "onClick: 当前Fragment= ${FragmentHelper.getTag(fragment)}")
                         }
                     }
                 })
@@ -183,7 +158,7 @@ class NavigationFragment : BaseHomeFragment() {
         popup.show()
     }
 
-    private fun getMainActivity() = activity as MainActivity?
+    private fun getMainActivity() = activity as XMLMainActivity?
 
     fun initToolbar() {
         mBinding.toolbar.setRightImage(R.drawable.svg_me_nor)
@@ -254,8 +229,7 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout8.let {
             it.tvDemoName.text = "Upload"
             it.tvBtn.setOnClickListener {
-//                Launch.skipUploadActivity(getSupportContext())
-//                Launch.skipQuickUploadActivity(getSupportContext())
+
             }
         }
         mBinding.inclueDemoLayout9.let {
@@ -303,7 +277,8 @@ class NavigationFragment : BaseHomeFragment() {
         mBinding.inclueDemoLayout14.let {
             it.tvDemoName.text = "WebView"
             it.tvBtn.setOnClickListener {
-                Launch.skipWebViewActivity(getSupportContext(),"https://onecompiler.com/embed?language=python"
+                Launch.skipWebViewActivity(
+                    getSupportContext(), "https://onecompiler.com/embed?language=python"
                 )
             }
         }

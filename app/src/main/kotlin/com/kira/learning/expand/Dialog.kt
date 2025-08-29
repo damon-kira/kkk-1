@@ -58,7 +58,7 @@ fun BaseActivity.showInvalidDialog(): DefaultDialog {
         .setOnClickListener {
             LiveDataBus.post(HomeEvent(HomeEvent.EVENT_LOGOUT))
             LiveDataBus.post(MainEvent(MainEvent.EVENT_SHOW_HOME))
-            Launch.skipMainActivity(this)
+            Launch.skipXMLMainActivity(this)
         }
         .showClose(false)
         .showTitle(HintDialog.type_GONE)

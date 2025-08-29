@@ -19,7 +19,7 @@ import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseFragmentActivity() {
+class XMLMainActivity : BaseFragmentActivity() {
 
     private val mBinding: ActivityMainBinding by binding()
 

@@ -3,12 +3,10 @@ package com.kira.learning.compose
 import android.os.Bundle
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +25,7 @@ import com.kira.learning.compose.module.profile.ProfileUiState
 import com.kira.learning.compose.module.profile.ProfileViewModel
 import com.kira.learning.compose.ui.image.AppAvatar
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -41,6 +40,7 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.kira.learning.compose.module.chat.ChatRoute
+import com.kira.learning.compose.module.navigation.NavigationDemoRoute
 
 private object Routes {
     // 重新排序更贴近微信: 聊天(微信) -> 发现 -> 学习 -> 我
@@ -48,6 +48,7 @@ private object Routes {
     const val SAMPLE = "sample"
     const val ANSWER = "answer"
     const val PROFILE = "profile"
+    const val NAV_DEMO = "nav_demo"
 }
 
 data class BottomItem(
@@ -63,7 +64,7 @@ internal fun MainScreen(
     savedInstanceState: Bundle? = null,
     viewModel: MainViewModel = hiltViewModel(),
 ) {
-    val viewState by viewModel.viewState.collectAsStateWithLifecycle()
+    val viewState by viewModel.viewState.collectAsStateWithLifecycle() // 保留命名，后续可能使用
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -72,7 +73,7 @@ internal fun MainScreen(
     val scope = rememberCoroutineScope()
 
     val bottomItems = listOf(
-        BottomItem(Routes.CHAT, "微信") { Icon(Icons.Default.Chat, null) },
+        BottomItem(Routes.CHAT, "微信") { Icon(Icons.AutoMirrored.Filled.Chat, null) },
         BottomItem(Routes.SAMPLE, "发现") { Icon(Icons.Default.Home, null) },
         BottomItem(Routes.ANSWER, "学习") { Icon(Icons.Default.School, null) },
         BottomItem(Routes.PROFILE, "我") { Icon(Icons.Default.Person, null) },
@@ -81,14 +82,25 @@ internal fun MainScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DrawerContent(onNavigateProfile = {
-                scope.launch { drawerState.close() }
-                navController.navigate(Routes.PROFILE) {
-                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                    launchSingleTop = true
-                    restoreState = true
+            DrawerContent(
+                currentRoute = currentDestination?.route,
+                onNavigateProfile = {
+                    scope.launch { drawerState.close() }
+                    navController.navigate(Routes.PROFILE) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onNavigateNavDemo = {
+                    scope.launch { drawerState.close() }
+                    navController.navigate(Routes.NAV_DEMO) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
-            })
+            )
         }
     ) {
         Scaffold(
@@ -142,6 +154,12 @@ internal fun MainScreen(
                         openDrawer = { scope.launch { drawerState.open() } })
                 }
                 composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize(), onBack = null) }
+                composable(Routes.NAV_DEMO) {
+                    NavigationDemoRoute(
+                        modifier = Modifier.fillMaxSize(),
+                        openDrawer = { scope.launch { drawerState.open() } }
+                    )
+                }
             }
         }
     }
@@ -149,7 +167,9 @@ internal fun MainScreen(
 
 @Composable
 private fun DrawerContent(
+    currentRoute: String?,
     onNavigateProfile: () -> Unit,
+    onNavigateNavDemo: () -> Unit,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state = profileViewModel.uiState.collectAsStateWithLifecycle()
@@ -186,8 +206,14 @@ private fun DrawerContent(
         }
         NavigationDrawerItem(
             label = { Text("个人信息") },
-            selected = false,
+            selected = currentRoute == Routes.PROFILE,
             onClick = onNavigateProfile,
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+        NavigationDrawerItem(
+            label = { Text("导航示例") },
+            selected = currentRoute == Routes.NAV_DEMO,
+            onClick = onNavigateNavDemo,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
