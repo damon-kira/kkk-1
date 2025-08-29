@@ -30,8 +30,7 @@ class NetBaseParamsManager {
             builder.addHeader("NbBH4GIwmz", SysUtils.getDeviceId(supplier.getContext()))
             // 客户端类型
             builder.addHeader("dnpiIILLEI", "android")
-            // google广告id
-            builder.addHeader("pg77Foy4PL", supplier.getAdvertisingId())
+
             builder.addHeader("wCxyJuAwkK", supplier.getToken())
         }
     }

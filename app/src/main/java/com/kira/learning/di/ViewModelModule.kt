@@ -4,26 +4,16 @@ import androidx.lifecycle.ViewModel
 import com.kira.learning.module.ai.vm.AIChatViewModel
 import com.kira.learning.module.answer.vm.AnswerViewModel
 import com.kira.learning.module.appupdate.AppUpdateViewModel
-import com.kira.learning.module.banklist.vm.BankCardViewModel
 import com.kira.learning.module.chat.ui.ChatViewModel
 import com.kira.learning.module.config.ConfigViewModel
 import com.kira.learning.module.custom.CustomViewModel
-import com.kira.learning.module.dashboard.vm.RepayCheckViewModel
-import com.kira.learning.module.dashboard.vm.RepayTabViewModel
-import com.kira.learning.module.dashboardDetail.RepayDetailViewModel
 import com.kira.learning.module.firstconfirm.vm.AutoConfirmViewModel
 import com.kira.learning.module.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.module.history.HistoryViewModel
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.module.login.vm.LoginViewModel
 import com.kira.learning.module.ocr.vm.OcrViewModel
-import com.kira.learning.module.process.bank.BankInfoViewModel
-import com.kira.learning.module.process.contact.ContactViewModel
-import com.kira.learning.module.process.face.FaceViewModel
-import com.kira.learning.module.process.kyc.KycViewModel
-import com.kira.learning.module.process.personalinfo.PersonalViewModel
 import com.kira.learning.module.quiz.vm.QuizViewModel
-import com.kira.learning.module.repeat.confirm.RepeatConfirmViewModel
 import com.kira.learning.module.setting.SettingViewModel
 import com.kira.learning.module.supereditor.viewmodel.SuperEditorViewModel
 import dagger.Binds
@@ -49,16 +39,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RepayTabViewModel::class)
-    abstract fun bindRepayTabViewModel(model: RepayTabViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(BankCardViewModel::class)
-    abstract fun bindBankCardViewModel(model: BankCardViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(SettingViewModel::class)
     abstract fun bindSettingViewModel(viewModel: SettingViewModel): ViewModel
 
@@ -69,31 +49,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(KycViewModel::class)
-    abstract fun bindKycViewModel(viewModel: KycViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(FaceViewModel::class)
-    abstract fun bindFaceViewModel(viewModel: FaceViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(BankInfoViewModel::class)
-    abstract fun bindBankInfoViewModel(viewModel: BankInfoViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ContactViewModel::class)
-    abstract fun bindContactViewModel(viewModel: ContactViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(PersonalViewModel::class)
-    abstract fun bindPersonalViewModel(viewModel: PersonalViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(AppUpdateViewModel::class)
     abstract fun bindAppUpdateViewModel(viewModel: AppUpdateViewModel): ViewModel
 
@@ -101,16 +56,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HistoryViewModel::class)
     abstract fun bindHistoryViewModel(viewModel: HistoryViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RepeatConfirmViewModel::class)
-    abstract fun bindRepeatConfirmViewModel(viewModel: RepeatConfirmViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RepayDetailViewModel::class)
-    abstract fun bindRepayDetailViewModel(viewModel: RepayDetailViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -126,11 +71,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ConfigViewModel::class)
     abstract fun bindConfigViewModel(viewModel: ConfigViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RepayCheckViewModel::class)
-    abstract fun bindRepayCheckViewModel(viewModel: RepayCheckViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -8,7 +8,6 @@ import com.kira.learning.di.AppInjector
 import com.kira.learning.expand.getUserToken
 import com.kira.learning.expand.setLogout
 import com.kira.learning.expand.showInvalidDialog
-import com.kira.learning.utils.GPInfoUtils
 import com.common.lib.net.*
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.logger.HttpLogInterceptor
@@ -78,10 +77,6 @@ class ApiManager @Inject constructor() {
                 return PackageUtil.getVersionCode(getAppContext(), getAppContext().packageName)
             }
 
-            override fun getAdvertisingId(): String {
-                return GPInfoUtils.getGdid()
-            }
-
             override fun getChannelId(): String {
                 return ""
             }
@@ -100,10 +95,6 @@ class ApiManager @Inject constructor() {
 
             override fun getServiceChannel(): Int {
                 return 0
-            }
-
-            override fun getFcmToken(): String {
-                return GPInfoUtils.getFcmToken()
             }
 
             override fun getLocationInfo(): Location {

@@ -8,7 +8,6 @@ import com.kira.learning.databinding.ActivityHistoryBinding
 import com.kira.learning.expand.ShowErrorMsg
 import com.kira.learning.manager.Launch
 import com.kira.learning.module.adapter.linearLayoutManager
-import com.kira.learning.module.defer.PayEvent
 import com.kira.learning.module.home.MainEvent
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
@@ -36,12 +35,6 @@ class HistoryActivity : BaseActivity() {
 
         setStatusBarColor(Color.WHITE, true)
 
-        LiveDataBus.getLiveData(PayEvent::class.java).observerNonSticky(this) {
-            if (it.event == PayEvent.EVENT_REFRESH) {
-                getInfo()
-            }
-        }
-
         initClick()
 
         mViewModel.mInfoLiveData.observerNonSticky(this) {
@@ -67,8 +60,6 @@ class HistoryActivity : BaseActivity() {
         mAdapter.mRepayListener = { isReview, item ->
             if (isReview) {
                 Launch.skipRepeatReviewActivity(this)
-            } else {
-                Launch.skipRepayDetailHisActivity(this, item.KxX0GIRzo.orEmpty())
             }
         }
 

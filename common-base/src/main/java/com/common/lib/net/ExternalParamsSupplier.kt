@@ -13,12 +13,6 @@ interface ExternalParamsSupplier {
     fun getAppVersionCode(): Int
 
     /**
-     * 获取广告id
-     */
-    fun getAdvertisingId(): String
-
-
-    /**
      * 获取渠道id
      */
     fun getChannelId(): String
@@ -27,7 +21,6 @@ interface ExternalParamsSupplier {
      * 获取AppsFlyer的uid
      */
     fun getAppsFlyerUid(): String
-
 
     /**
      * 获取应用api token
@@ -44,14 +37,7 @@ interface ExternalParamsSupplier {
      */
     fun getServiceChannel(): Int
 
-
-    /**
-     * 获取 Firebase Cloud Messaging 的token
-     */
-    fun getFcmToken(): String
-
     fun getLocationInfo(): Location
-
 
     fun getAppInstanceId(): String
 }

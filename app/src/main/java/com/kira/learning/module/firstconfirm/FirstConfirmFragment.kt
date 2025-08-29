@@ -18,7 +18,6 @@ import com.kira.learning.module.home.HomeEvent
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import com.kira.learning.permission.PermissionHelper
 import com.kira.learning.permission.appPermissions
-import com.kira.learning.utils.GPInfoUtils
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
@@ -148,7 +147,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
 
         mViewModel.confirmLiveData.observerNonSticky(viewLifecycleOwner) {
             if (it.isSuccess()) {
-                GPInfoUtils.saveTag(GPInfoUtils.TAG8)
                 mProcessDialog.end()
                 MainHandler.postDelay({
                     mProcessDialog.dismiss()
@@ -212,14 +210,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
             R.id.rl_period3,
             R.id.rl_period4 -> {
                 toast(R.string.toast_level_hint)
-            }
-            R.id.tv_bank_no -> {
-                Launch.skipBankCardListActivity(
-                    getSupportContext(),
-                    mLoanAmount.orEmpty(),
-                    mProductId.orEmpty(),
-                    mLoanBankNo.orEmpty()
-                )
             }
             R.id.confirm_tv_apply -> {
                 reqPermission()

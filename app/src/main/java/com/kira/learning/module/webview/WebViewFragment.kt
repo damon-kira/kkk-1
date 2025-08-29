@@ -11,18 +11,23 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.*
+import android.webkit.SslErrorHandler
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.LinearLayout
-import com.kira.learning.R
-import com.kira.learning.AppEnv
-import com.kira.learning.databinding.FragmentWebviewBinding
-import com.kira.learning.manager.H5UrlManager
-import com.kira.learning.module.defer.PayEvent
-import com.kira.learning.view.BaseWebView
 import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
-import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
+import com.kira.learning.AppEnv
+import com.kira.learning.R
+import com.kira.learning.databinding.FragmentWebviewBinding
+import com.kira.learning.manager.H5UrlManager
+import com.kira.learning.view.BaseWebView
 import com.util.lib.MainHandler
 import com.util.lib.NetWorkUtils
 import com.util.lib.StatusBarUtil.setStatusBar
@@ -327,9 +332,6 @@ class WebViewFragment : BaseFragment(), View.OnKeyListener, IWebHost {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if (this.mUrl.contains(H5UrlManager.URL_PAY)) {
-            LiveDataBus.post(PayEvent(PayEvent.EVENT_EXIT))
-        }
         mWebView?.let {
             WebViewPool.INSTANCE.recycle(it)
             mWebView = null

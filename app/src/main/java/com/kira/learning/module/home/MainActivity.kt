@@ -15,7 +15,6 @@ import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityMainBinding
 import com.kira.learning.module.account.MineFragment
-import com.kira.learning.module.dashboard.RepayTabFragment
 import com.kira.learning.module.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,10 +27,6 @@ class MainActivity : BaseFragmentActivity() {
 
     private val mHomeFragment by lazy(LazyThreadSafetyMode.NONE) {
         BaseFragment.getInstance(this, HomeFragment::class.java)
-    }
-
-    private val mRepayFragment by lazy(LazyThreadSafetyMode.NONE) {
-        BaseFragment.getInstance(this, RepayTabFragment::class.java)
     }
 
     private val mMineFragment by lazy(LazyThreadSafetyMode.NONE) {
@@ -148,15 +143,6 @@ class MainActivity : BaseFragmentActivity() {
             when (checkedId) {
                 R.id.rb_home_loan -> {
                     switchFragment(mHomeFragment)
-                }
-
-                R.id.rb_home_repay -> {
-                    switchFragment(mRepayFragment)
-                    try {
-                        supportFragmentManager.executePendingTransactions()
-                    } catch (e: Exception) {
-
-                    }
                 }
 
                 R.id.rb_account -> {

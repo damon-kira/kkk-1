@@ -5,7 +5,6 @@ import com.kira.learning.AppEnv
 import com.kira.learning.di.getAppContext
 import com.kira.learning.expand.formatCommon
 import com.kira.learning.expand.getUserToken
-import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.SysUtils
 
 object H5UrlManager {
@@ -41,7 +40,6 @@ object H5UrlManager {
             .append("&tk=").append(getUserToken())
             .append("&dnpiIILLEI=android")
             .append("&NbBH4GIwmz=").append(SysUtils.getImei(getAppContext()))
-            .append("&pg77Foy4PL=").append(GPInfoUtils.getGdid())
         return sr.toString()
     }
 }

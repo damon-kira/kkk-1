@@ -1,7 +1,5 @@
 package com.kira.learning
 
-//import com.chaquo.python.PyObject
-//import com.kira.learning.module.python.PythonExecutor
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -26,15 +24,12 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
     companion object {
         private lateinit var mAppContext: Context
         fun getAppContext(): Context = mAppContext
-//        lateinit var module: PyObject
     }
 
     override fun onCreate() {
         super.onCreate()
         mAppContext = this
         CacheInit.get().setContext(this).setDebug(AppEnv.DEBUG)
-        initAes()
-//        initLeakCanary()
         ApplicationDelegate.init(this)
 //        AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id))
 //        PushManagerFactory.init(this)
@@ -68,7 +63,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
             }
 
             val crashlytics = FirebaseCrashlytics.getInstance()
-            crashlytics.setCrashlyticsCollectionEnabled(true)
+            crashlytics.isCrashlyticsCollectionEnabled = true
         } catch (e: Exception) {
             logger_e("Firebase", "Failed to enable Crashlytics ${e.message}")
         }
@@ -77,19 +72,6 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 //        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 //         Notification Channel 初始化
         KiraFirebaseMessagingService.getDeviceToken()
-    }
-
-//    private fun initLeakCanary() {
-//        LeakCanary.config = LeakCanary.config.copy(
-//            dumpHeapWhenDebugging = false,  // 调试时不转储堆
-//            retainedVisibleThreshold = 5    // 内存泄漏对象阈值
-//        )
-//    }
-
-    private fun initAes() {
-//        AesConstant.AES_SECRET = Constant.API_SECRET
-//        AesConstant.apiKey = Constant.API_KEY
-//        AesConstant.apiIv = Constant.API_IV
     }
 
     override fun getCameraXConfig(): CameraXConfig {

@@ -14,11 +14,9 @@ import com.kira.learning.expand.inValidToken
 import com.kira.learning.expand.showAppUpgradeDialog
 import com.kira.learning.module.appupdate.AppUpdateViewModel
 import com.kira.learning.module.firstconfirm.FirstConfirmFragment
-import com.kira.learning.module.homerepay.FirstRepayFragment
 import com.kira.learning.module.login.LoginFragment
 import com.kira.learning.module.navigation.NavigationFragment
 import com.kira.learning.module.navigation.RefusedFragment
-import com.kira.learning.module.repeat.RepeatFragment
 import com.kira.learning.module.review.ReviewFragment
 import com.common.lib.base.BaseFragment
 import com.common.lib.helper.FragmentHelper
@@ -90,7 +88,7 @@ class HomeFragment : BaseHomeFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.e(TAG, "onViewCreated: 调用了", )
+        Log.e(TAG, "onViewCreated: 调用了")
         super.onViewCreated(view, savedInstanceState)
         //首次创建
         replaceChildFragment(getFragment())
@@ -167,31 +165,10 @@ class HomeFragment : BaseHomeFragment() {
                         getInstance(getSupportContext(), FirstConfirmFragment::class.java, null)
                     }
 
-                    OrderStatus.STATUS_REPAY,
-                    OrderStatus.STATUS_OVERDUE -> {
-                        getInstance(getSupportContext(), FirstRepayFragment::class.java, null)
-                    }
-
-                    OrderStatus.STATUS_REPEAT1,
-                    OrderStatus.STATUS_REPEAT2,
-                    OrderStatus.STATUS_REPEAT3,
-                    OrderStatus.STATUS_REPEAT4 -> {
-                        getInstance(getSupportContext(), RepeatFragment::class.java, null)
-                    }
-
                     else -> {
                         getInstance(getSupportContext(), NoProductFragment::class.java, null)
                     }
                 }
-            }
-
-            UserStatus.STATUS_REPEAT -> {
-//                val empty = rspInfo.jBRR?.isEmpty() ?: true
-//                if (empty){
-//                    mNoProductFragment
-//                } else {
-                getInstance(getSupportContext(), RepeatFragment::class.java, null)
-//                }
             }
 
             UserStatus.STATUS_NAVIGATION -> {

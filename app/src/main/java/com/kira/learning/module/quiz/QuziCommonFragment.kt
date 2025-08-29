@@ -145,10 +145,6 @@ class QuziCommonFragment : BaseFragment(), View.OnClickListener {
                 if (!checkLogin()) return
                 Launch.skipHistoryActivity(getSupportContext())
             }
-            R.id.fl_bank -> {
-                if (!checkLogin()) return
-                Launch.skipMeBankCardListActivity(getSupportContext())
-            }
             R.id.etv_btn -> {
                 // 需要区分状态，仪表状态--仪表页面
                 // 没有在盘，跳转首页

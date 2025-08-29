@@ -5,14 +5,12 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.di.getAppContext
 import com.kira.learning.bean.res.RspLoginInfo
 import com.kira.learning.bean.res.RspSmsCode
 import com.kira.learning.expand.saveMobile
 import com.kira.learning.expand.saveUserInfo
 import com.kira.learning.module.login.CountDownHelper
 import com.kira.learning.module.login.repo.LoginRepository
-import com.kira.learning.utils.GPInfoUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -106,9 +104,6 @@ class LoginViewModel @Inject constructor(
                 saveMobile(mobile)
                 it.getData()?.let { data ->
                     saveUserInfo(data)
-                    if (data.rSXY6ttC3w == "1") {
-                        GPInfoUtils.saveTag(GPInfoUtils.TAG1)
-                    }
                 }
             }
             loginLiveData.postValue(it)

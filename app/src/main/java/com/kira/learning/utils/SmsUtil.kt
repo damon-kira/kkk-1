@@ -11,6 +11,7 @@ import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 import java.util.*
 import java.util.regex.Pattern
+import androidx.core.net.toUri
 
 /**
  * 自动获取验证码
@@ -78,7 +79,7 @@ class SmsContentObserver(private var mContext: Context, handler: Handler? = Hand
         if (uri?.toString() == "content://sms/draft") {
             return
         }
-        val inboxUri = Uri.parse(INBOX_URI_PATH)
+        val inboxUri = INBOX_URI_PATH.toUri()
         try {
             // 按时间顺序排序短信数据库
             mContext.contentResolver.query(
@@ -87,7 +88,7 @@ class SmsContentObserver(private var mContext: Context, handler: Handler? = Hand
                 null,
                 null,
                 "date desc"
-            ) ?.use {c ->
+            )?.use { c ->
                 if (c.moveToFirst()) {
                     val dataIndex = c.getColumnIndex("date")
                     if (receiverTime >= c.getLong(dataIndex)) return

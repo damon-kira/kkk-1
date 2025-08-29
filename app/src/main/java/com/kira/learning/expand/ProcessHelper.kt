@@ -16,19 +16,19 @@ fun jumpProcess(context: Context, type: Int) {
     saveShowBackDialog(true)
     when (type) {
         STEP1 -> {
-            Launch.skipPersonalInfoActivity(context)
+//            Launch.skipPersonalInfoActivity(context)
         }
         STEP3 -> {
-            Launch.skipContactInfoActivity(context)
+//            Launch.skipContactInfoActivity(context)
         }
         STEP4 -> {
-            Launch.skipBankInfoActivity(context)
+//            Launch.skipBankInfoActivity(context)
         }
         STEP5 -> {
-            Launch.skipKycInfoActivity(context)
+//            Launch.skipKycInfoActivity(context)
         }
         STEP6 -> {
-            Launch.skipFaceActivity(context)
+//            Launch.skipFaceActivity(context)
         }
         STEP_OK -> {
 //            Launch.skipUploadActivity(context)

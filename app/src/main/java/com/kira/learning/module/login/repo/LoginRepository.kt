@@ -6,7 +6,6 @@ import com.google.gson.JsonObject
 import com.kira.learning.di.BaseRepository
 import com.kira.learning.bean.res.RspLoginInfo
 import com.kira.learning.bean.res.RspSmsCode
-import com.kira.learning.utils.GPInfoUtils
 import com.util.lib.net.WifiInfoUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.RequestBody
@@ -24,7 +23,6 @@ class LoginRepository @Inject constructor(@ApplicationContext private val contex
         jobj.addProperty("gGvE", uuid) // 来自验证码接口返回的uuid 【多个uuid就用,隔开】
         jobj.addProperty("nYc91KC", "") // 邀请码
         jobj.addProperty("bhUyamS",  WifiInfoUtil.getWifiName(context)) // WiFi
-        jobj.addProperty("Sbbh", GPInfoUtils.getGdid()) // gaid
         apiService.loginSms(createRequestBody(jobj.toString()))
     }
 

@@ -3,14 +3,8 @@ package com.kira.learning
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.cache.lib.SharedPrefUser
 import com.kira.learning.di.AppInjector
-import com.kira.learning.expand.getUserToken
-import com.kira.learning.manager.SharedPrefKeyManager
 import com.kira.learning.module.webview.WebViewPool
-import com.kira.learning.utils.GPInfoUtils
-import com.google.gson.JsonObject
-import com.util.lib.ImageInfoUtil
 import com.util.lib.UtilInit
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e
