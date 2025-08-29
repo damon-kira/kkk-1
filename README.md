@@ -1,4 +1,4 @@
-发布线上时需要修改的地方
+备注：
 1.project / build.gradle 放开注释
    //classpath 'com.google.gms:google-services:4.3.0'
    //classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
@@ -10,7 +10,3 @@
    2).放开 firebase 相关注释，在 dependencies 中
    3).放开Facebook 注释,在dependencies中
 4.放开LoanApplication 中firebase相关注释
-5.GPInfoUtils中放开注释
-6.添加google-service.json文件
-7.androidManifest中最后Facebook meta-data信息放开注释
-8.LoanApplication放开Facebook注释

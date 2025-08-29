@@ -27,4 +27,3 @@ plugins {
 }
 
 apply(from = "./build_gradle/app.gradle")
-apply(from = "./build_gradle/common.gradle")

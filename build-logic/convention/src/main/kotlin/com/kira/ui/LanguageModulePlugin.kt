@@ -7,7 +7,9 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotlin.text.set
 
 class LanguageModulePlugin : Plugin<Project> {
 
@@ -26,8 +28,8 @@ class LanguageModulePlugin : Plugin<Project> {
                 withJavadocJar()
             }
             tasks.withType<KotlinCompile>().configureEach {
-                kotlinOptions {
-                    jvmTarget = "21"
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_21)
                 }
             }
 

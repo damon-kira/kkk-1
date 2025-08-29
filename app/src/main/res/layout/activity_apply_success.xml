@@ -15,14 +15,6 @@
         app:tl_textsize="18sp"
         app:tl_title="@string/apply_success_title" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        style="@style/marginLeftAndRight16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/image_apply_success" />
-
     <LinearLayout
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"

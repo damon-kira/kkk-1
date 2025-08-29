@@ -6,8 +6,10 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Properties
+import kotlin.text.set
 
 class ApplicationModulePlugin : Plugin<Project> {
 
@@ -71,8 +73,8 @@ class ApplicationModulePlugin : Plugin<Project> {
                     targetCompatibility = JavaVersion.VERSION_21
                 }
                 tasks.withType<KotlinCompile>().configureEach {
-                    kotlinOptions {
-                        jvmTarget = "21"
+                    compilerOptions {
+                        jvmTarget.set(JvmTarget.JVM_21)
                     }
                 }
                 sourceSets.configureEach {

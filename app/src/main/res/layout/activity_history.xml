@@ -17,14 +17,6 @@
         app:tl_textsize="16sp"
         app:tl_title="@string/history_title" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        style="@style/marginLeftAndRight16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/image_apply_success" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"

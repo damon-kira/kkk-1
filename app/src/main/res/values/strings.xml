@@ -242,7 +242,7 @@
     <string name="apply_success_hint">恭喜！</string>
     <string name="apply_success_hint2">我们已收到您的申请，正在审核资质，请稍候</string>
     <string name="defer_title">延期详情</string>
-    <string name="defer_top_warning">注意：请勿向任何个人钱包转账</string>
+    <string name="defer_top_warning">注意：！！！！！！！！！</string>
     <string name="defer_amount_hint">延期总费用</string>
     <string name="defer_hint_text">延期申请通过后原订单将自动修改，后续需按新订单时间钱包</string>
     <string name="defer_detail_hint">延期明细</string>

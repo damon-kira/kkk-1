@@ -28,7 +28,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
         android:name="android.hardware.telephony"
@@ -100,19 +101,6 @@
             android:launchMode="singleTask"
 
             android:windowSoftInputMode="stateAlwaysVisible" />
-        <activity android:name=".module.process.personalinfo.PersonalInfoActivity" />
-        <activity android:name=".module.process.contact.ContactInfoActivity" />
-        <activity android:name=".module.process.kyc.KycInfoActivity" />
-        <activity android:name=".module.process.bank.BankInfoActivity" />
-        <activity android:name=".module.process.face.FaceActivity" />
-        <activity android:name=".module.process.face.FaceFailedActivity" />
-        <activity android:name=".module.banklist.BankCardListActivity" />
-        <activity android:name=".module.banklist.MeBankAccountListActivity" />
-        <activity android:name=".module.banklist.ConfirmBankCardListActivity" />
-        <activity
-            android:name=".module.banklist.BankInfoAddActivity"
-
-            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".module.history.HistoryActivity"
             android:launchMode="singleTask" />
@@ -120,21 +108,14 @@
             android:name=".utils.camera.CaptureActivity"
             android:screenOrientation="landscape"
             android:theme="@style/CaptureActivityTheme" />
-        <activity android:name=".module.upload.UploadActivity" />
-        <activity android:name=".module.repeat.confirm.RepeatConfirmActivity" />
-        <activity android:name=".module.dashboardDetail.RepayDetailActivity" />
-        <activity android:name=".module.dashboardDetail.RepayDetailHisActivity" />
         <activity android:name=".module.review.RepeatReviewActivity" />
         <activity android:name=".module.applysuccess.ApplySuccessActivity" />
-        <activity android:name=".module.defer.DeferActivity" />
-        <activity android:name=".module.defer.RepayTabDeferActivity" />
-        <activity android:name=".module.defer.DeferHisActivity" />
 
         <activity android:name=".module.webview.WebViewActivity" />
         <activity android:name=".module.setting.SettingActivity" />
         <activity
             android:name=".module.ocr.CutOutPhotoActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
             android:name=".module.ocr.PhotographActivity"
             android:exported="true" />
@@ -175,18 +156,6 @@
         <!--        <activity-->
         <!--            android:name=".module.coding.KCodingEditorActivity"-->
         <!--            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />-->
-        <activity
-            android:name=".module.upload.real.QuickUploadActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name=".module.upload.real.QuickUploadSingleActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name=".module.upload.real.QuickUploadMultipleSingleFileActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name=".module.upload.real.QuickUploadMultipleFilesSimultaneouslyActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
             android:name="kira.learning.chat.AiChatActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
