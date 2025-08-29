@@ -144,5 +144,22 @@ interface ComposeApiService {
     @POST("/v1/kira/activities")
     @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     suspend fun getQuizInfo(@Body body: RequestBody): BaseResponse<Document>
-}
 
+    // ===== Compose Module Unified APIs =====
+    // Sample photos (use full url so we don't need second Retrofit)
+    @GET
+    suspend fun fetchPhotos(@Url url: String = "https://jsonplaceholder.typicode.com/photos?_limit=20"): List<PhotoDTO>
+
+    // Profile
+    @GET("/compose/profile")
+    suspend fun getProfile(): UserProfileDTO
+
+    @PUT("/compose/profile")
+    suspend fun updateProfile(@Body req: UpdateProfileRequest): UserProfileDTO
+
+    @PUT("/compose/profile/avatar")
+    suspend fun updateAvatar(@Body req: UpdateAvatarRequest): UserProfileDTO
+
+    @PUT("/compose/profile/settings")
+    suspend fun updateSettings(@Body settings: AppSettingsDTO): AppSettingsDTO
+}
