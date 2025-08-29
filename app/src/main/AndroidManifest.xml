@@ -28,26 +28,23 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
-    <uses-feature android:name="android.hardware.camera.autofocus"
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
         android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <!-- 通讯录 -->
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
     <!-- 日历权限 -->
     <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_CALENDAR" /> -->
     <!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" -->
-    <!-- tools:ignore="ProtectedPermissions" /> -->
     <!-- 读取短信 -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 闪光灯 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -99,7 +96,6 @@
         <activity
             android:name=".module.home.MainActivity"
             android:launchMode="singleTask"
-
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".module.history.HistoryActivity"
@@ -290,8 +286,6 @@
         <!--        <meta-data-->
         <!--            android:name="com.google.firebase.messaging.default_notification_color"-->
         <!--            android:resource="@color/primary_color" />-->
-
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${pkgName}.provider"
