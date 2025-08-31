@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.kira.learning.di.AppInjector
-import com.kira.learning.module.webview.WebViewPool
+import com.kira.learning.xml.modules.webview.WebViewPool
 import com.util.lib.UtilInit
 import com.util.lib.log.logger_d
 import com.util.lib.log.logger_e

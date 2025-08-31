@@ -12,7 +12,7 @@ import com.kira.learning.bean.SearchInfo
 import com.kira.learning.databinding.DialogAddrSelectorBinding
 import com.kira.learning.expand.SimpleOnItemClickListener
 import com.kira.learning.expand.setOnItemClickListener
-import com.kira.learning.module.adapter.*
+import com.kira.learning.xml.adapter.*
 import com.kira.learning.view.SearchView
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener

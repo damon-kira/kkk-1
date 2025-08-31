@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.kira.learning.manager.Launch
 import com.kira.learning.expand.setLogout
 import com.common.lib.livedata.LiveDataBus
-import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.MainEvent
+import com.kira.learning.xml.modules.home.HomeEvent
+import com.kira.learning.xml.modules.home.MainEvent
 import com.hjq.window.EasyWindow
 import com.hjq.window.OnWindowViewClickListener
 import com.hjq.window.draggable.MovingWindowDraggableRule

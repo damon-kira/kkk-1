@@ -12,10 +12,10 @@ import com.kira.learning.databinding.DialogProcessSelectorBinding
 import com.kira.learning.expand.SimpleOnItemClickListener
 import com.kira.learning.expand.mapToPopData
 import com.kira.learning.expand.setOnItemClickListener
-import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
-import com.kira.learning.module.adapter.BaseViewHolder
-import com.kira.learning.module.adapter.MyDividerItemDecoration
-import com.kira.learning.module.adapter.linearLayoutManager
+import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
+import com.kira.learning.xml.adapter.BaseViewHolder
+import com.kira.learning.xml.adapter.MyDividerItemDecoration
+import com.kira.learning.xml.adapter.linearLayoutManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding

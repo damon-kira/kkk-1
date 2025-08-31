@@ -12,8 +12,8 @@ import com.kira.learning.dialog.AppUpgradeDialog
 import com.kira.learning.dialog.CustomDialog
 import com.kira.learning.dialog.NetErrorDialog
 import com.kira.learning.manager.Launch
-import com.kira.learning.module.home.HomeEvent
-import com.kira.learning.module.home.MainEvent
+import com.kira.learning.xml.modules.home.HomeEvent
+import com.kira.learning.xml.modules.home.MainEvent
 import com.kira.learning.permission.HintDialog
 import com.common.lib.BuildConfig
 import com.common.lib.base.BaseActivity

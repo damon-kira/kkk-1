@@ -20,7 +20,7 @@
         android:visibility="visible">
 
         <!--网格参考线-->
-        <com.kira.learning.module.ocr.ReferenceLine
+        <com.kira.learning.xml.modules.ocr.ReferenceLine
             android:id="@+id/view_lines"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

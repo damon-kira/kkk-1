@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.kira.learning.LoanApplication
 import com.kira.learning.bean.dao.AIResponseDao
 import com.kira.learning.bean.dao.ChatMessageDao
-import com.kira.learning.module.chat.database.ChatDao
+import com.kira.learning.xml.modules.chat.database.ChatDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

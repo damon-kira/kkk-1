@@ -1,0 +1,10 @@
+package com.kira.learning.xml.modules.supereditor.provider
+
+import com.kira.ui.core.provider.coroutine.DispatcherProvider
+import kotlinx.coroutines.Dispatchers
+
+class DispatcherProviderImpl : DispatcherProvider {
+    override fun io() = Dispatchers.IO
+    override fun computation() = Dispatchers.Default
+    override fun mainThread() = Dispatchers.Main
+}

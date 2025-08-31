@@ -6,7 +6,7 @@ import com.kira.learning.di.getAppContext
 import com.kira.learning.databinding.DialogCutomBinding
 import com.kira.learning.expand.*
 import com.kira.learning.manager.Launch
-import com.kira.learning.module.service.SerManager
+import com.kira.learning.xml.service.SerManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding

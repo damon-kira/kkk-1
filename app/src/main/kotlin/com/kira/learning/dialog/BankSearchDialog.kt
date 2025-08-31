@@ -8,10 +8,10 @@ import com.kira.learning.bean.res.RspBankNameInfo
 import com.kira.learning.databinding.DialogBankSelectorBinding
 import com.kira.learning.expand.SimpleOnItemClickListener
 import com.kira.learning.expand.setOnItemClickListener
-import com.kira.learning.module.adapter.BankItemDecoration
-import com.kira.learning.module.adapter.BaseViewHolder
-import com.kira.learning.module.adapter.SearchAdapter
-import com.kira.learning.module.adapter.linearLayoutManager
+import com.kira.learning.xml.adapter.BankItemDecoration
+import com.kira.learning.xml.adapter.BaseViewHolder
+import com.kira.learning.xml.adapter.SearchAdapter
+import com.kira.learning.xml.adapter.linearLayoutManager
 import com.kira.learning.view.SearchView
 import com.common.lib.base.BaseActivity
 import com.common.lib.dialog.DefaultDialog

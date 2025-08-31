@@ -1,8 +1,8 @@
 package com.kira.learning.di
 
 import android.content.Context
-import com.kira.learning.module.supereditor.provider.coroutine.DispatcherProviderImpl
-import com.kira.learning.module.supereditor.provider.resources.StringProviderImpl
+import com.kira.learning.xml.modules.supereditor.provider.DispatcherProviderImpl
+import com.kira.learning.xml.modules.supereditor.provider.StringProviderImpl
 import com.kira.learning.net.ApiManager
 import com.kira.learning.net.ApiService
 import com.kira.learning.net.DataApiService

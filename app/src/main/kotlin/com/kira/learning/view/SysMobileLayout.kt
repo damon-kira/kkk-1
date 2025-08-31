@@ -15,9 +15,9 @@ import com.kira.learning.R
 import com.kira.learning.databinding.LayoutSysMobileBinding
 import com.kira.learning.expand.SimpleOnItemClickListener
 import com.kira.learning.expand.setOnItemClickListener
-import com.kira.learning.module.adapter.BaseRecyclerViewAdapter
-import com.kira.learning.module.adapter.BaseViewHolder
-import com.kira.learning.module.adapter.linearLayoutManager
+import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
+import com.kira.learning.xml.adapter.BaseViewHolder
+import com.kira.learning.xml.adapter.linearLayoutManager
 import com.util.lib.dp
 
 class SysMobileLayout : CardView {

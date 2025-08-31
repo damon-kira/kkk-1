@@ -3,7 +3,7 @@ package com.kira.learning.bean.dao
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.kira.learning.module.ai.ChoiceConverters
+import com.kira.learning.xml.modules.ai.ChoiceConverters
 
 @Entity(tableName = "ai_responses")
 @TypeConverters(ChoiceConverters::class)

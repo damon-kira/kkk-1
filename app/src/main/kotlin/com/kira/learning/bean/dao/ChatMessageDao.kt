@@ -32,4 +32,8 @@ interface ChatMessageDao {
     // 清空会话的所有消息
     @Query("DELETE FROM ai_chat_message WHERE conversationId = :conversationId")
     suspend fun clearConversation(conversationId: Long)
+
+    // 统计会话消息数（用于清理空会话）
+    @Query("SELECT COUNT(*) FROM ai_chat_message WHERE conversationId = :conversationId")
+    suspend fun countMessages(conversationId: Long): Int
 }
