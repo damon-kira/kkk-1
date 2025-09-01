@@ -12,7 +12,6 @@ import com.kira.learning.xml.modules.firstconfirm.vm.FirstConfirmViewModel
 import com.kira.learning.xml.modules.history.HistoryViewModel
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel
 import com.kira.learning.xml.modules.login.vm.LoginViewModel
-import com.kira.learning.xml.modules.ocr.vm.OcrViewModel
 import com.kira.learning.xml.modules.quiz.vm.QuizViewModel
 import com.kira.learning.xml.modules.setting.SettingViewModel
 import com.kira.learning.xml.modules.supereditor.viewmodel.SuperEditorViewModel
@@ -91,11 +90,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(QuizViewModel::class)
     abstract fun bindQuizViewModel(viewModel: QuizViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(OcrViewModel::class)
-    abstract fun bindOcrViewModel(viewModel: OcrViewModel): ViewModel
 
     @Binds
     @IntoMap

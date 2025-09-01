@@ -5,8 +5,6 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.widget.EditText
-import com.kira.learning.LoanApplication.Companion.getAppContext
-import com.kira.learning.permission.SmsPermission
 import com.util.lib.log.logger_e
 import com.util.lib.log.logger_i
 import java.util.*
@@ -20,9 +18,9 @@ fun EditText.registerSmsObserver(
     observer: SmsContentObserver,
     autoFillCallback: (code: String) -> Unit = {}
 ) {
-    if (!SmsPermission().hasThisPermission(getAppContext())) {
-        return
-    }
+//    if (!SmsPermission().hasThisPermission(getAppContext())) {
+//        return
+//    }
     logger_i("EditText", "注册绑定自动获取验证码")
 
     try {

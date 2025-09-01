@@ -31,15 +31,12 @@ object PermissionHelper {
         return appPermissions.toList()
     }
 
-    /** 不包含日历权限
-     * 在产品首页
-     * @param isIncludeCamera 是否包含相机权限
-     * */
+    /** 不包含日历权限 (已移除短信/电话，仅保留定位可选) */
     fun getExcludeCameraPermission(): ArrayList<AbsPermissionEntity> {
         val list = arrayListOf<AbsPermissionEntity>()
         with(list) {
-            add(SmsPermission())
-            add(ReadPhonePermission())
+            // SmsPermission() removed
+            // ReadPhonePermission() removed
             add(LocationPermission())
         }
         return list
@@ -365,7 +362,7 @@ object PermissionHelper {
         result.invoke(deniedList)
     }
 
-    /** @return 如果权限组中的权限没有允许的，则不需要fix组中的权限，如果有一个允许了，再次申请时需要fix组中的权限 */
+    /** @return 如果权限组中的权限沒有允許的，則不需要fix組中的權限，如果有一個允許了，再次申請時需要fix組中的權限 */
     private fun checkGroup(activity: Activity, permissions: Array<String>): List<String>? {
         val deniedList = permissions.filter {
             ContextCompat.checkSelfPermission(

@@ -27,17 +27,8 @@ val TAG = "debug_Permissions"
 
 //需要新权限只需在此数组添加即可
 val appPermissions = arrayOf(
-    SmsPermission(),
-//    ReceivePermission(),
-//    ContactPermission(),
-//    ReadPhonePermission(),
-//    LocationPermission(),
-//    AccountPermission(),
+    // 已移除短信与电话相关权限，仅保留必要权限
     CameraPermission(),
-//    PhotoAlbumPermission(),
-//    CalendarReadPermission(),
-//    CalendarWritePermission()
-//    AppNotificationsPermission(),
 )
 //是否是6.0以及以上系统
 

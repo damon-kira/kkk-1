@@ -272,8 +272,8 @@
 *;
 }
 
-#bean
--keep class com.kira.learning.bean.**{*;}
+#model
+-keep class com.kira.learning.model.**{*;}
 
 # Gson
 -keep class com.google.gson.stream.** { *; }
@@ -313,7 +313,6 @@
 -keep class me.jessyan.autosize.** { *; }
 -keep interface me.jessyan.autosize.** { *; }
 
-#-keep class com.common.lib.net.bean.BaseResponse {*;}
 # Guava
 -keep class com.google.common.** { *; }
 

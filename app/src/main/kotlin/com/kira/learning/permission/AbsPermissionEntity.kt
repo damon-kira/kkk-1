@@ -34,36 +34,6 @@ abstract class AbsPermissionEntity() {
     }
 }
 
-//短信权限
-class SmsPermission : AbsPermissionEntity() {
-    override fun permissionName(): String {
-        return Manifest.permission.READ_SMS
-    }
-
-    override fun hasPermissionUnder6(context: Context): Boolean {
-        return true
-    }
-
-    override fun getHintIfNoPermission(): Pair<Int, Int> {
-        return Pair(R.string.permission_sms, R.string.permission_dlg_text_sms)
-    }
-}
-
-//短信权限
-class ReceivePermission : AbsPermissionEntity() {
-    override fun permissionName(): String {
-        return Manifest.permission.RECEIVE_SMS
-    }
-
-    override fun hasPermissionUnder6(context: Context): Boolean {
-        return true
-    }
-
-    override fun getHintIfNoPermission(): Pair<Int, Int> {
-        return Pair(R.string.permission_sms, R.string.permission_dlg_text_sms)
-    }
-}
-
 //定位权限
 class LocationPermission : AbsPermissionEntity() {
     override fun permissionName(): String {
@@ -207,21 +177,6 @@ class CalendarWritePermission : AbsPermissionEntity() {
     }
 }
 
-/** 读取IMEI */
-class ReadPhonePermission : AbsPermissionEntity() {
-    override fun permissionName(): String {
-        return Manifest.permission.READ_PHONE_STATE
-    }
-
-    override fun hasPermissionUnder6(context: Context): Boolean {
-        return true
-    }
-
-    override fun getHintIfNoPermission(): Pair<Int, Int> {
-        return Pair(R.string.permission_read_phone_state, R.string.permission_dlg_text_readphone)
-    }
-}
-
 //存储卡权限
 class StoragePermission : AbsPermissionEntity() {
     override fun permissionName(): String {
@@ -298,4 +253,3 @@ class AppNotificationsPermission : AbsPermissionEntity() {
         return true
     }
 }
-

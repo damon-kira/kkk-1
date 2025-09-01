@@ -49,10 +49,6 @@ class LoginFragment : BaseLoginFragment() {
 
     private val mConfigViewModel by lazyViewModel<ConfigViewModel>()
 
-    private val mSmsHelper by lazy(LazyThreadSafetyMode.NONE) {
-        SmsCodeHelper()
-    }
-
     private val mLoginHelper by lazy {
         LoginHelper()
     }
@@ -103,7 +99,6 @@ class LoginFragment : BaseLoginFragment() {
         setCustomListener(mBinding.loginToolbar)
         setViewModelLoading(mViewModel)
         lifecycle.addObserver(mViewModel)
-        lifecycle.addObserver(mSmsHelper)
         lifecycle.addObserver(mLoginHelper)
         mobileFocus()
         initProtocol()
@@ -171,7 +166,6 @@ class LoginFragment : BaseLoginFragment() {
                 mBinding.loginTvPhoneError.show()
                 return@setBlockingOnClickListener
             }
-            mSmsHelper.updateReceiverTime()
             mLoginHelper.isFirst(getMobile())
             reqCode()
         }
@@ -210,12 +204,8 @@ class LoginFragment : BaseLoginFragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 super.afterTextChanged(s)
-                if ((s?.length ?: 0) < 4) {
-                    mSmsHelper.isAutoInsert = false
-                }
                 s?.let {
-                    // 非自动触发获取验证码 || 非自动回填验证码 会自动触发登录接口
-                    if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()) || mSmsHelper.isAutoInsert)
+                    if (s.length == 4 && !(mLoginHelper.isFirstAuto(mBinding.loginEditPhone.getRealText()))
                         && !mViewModel.isAutoGetCode && !isAutoGetMobile
                     ) {
                         isAutoGetMobile = false
@@ -227,7 +217,6 @@ class LoginFragment : BaseLoginFragment() {
     }
 
     private fun initObserver() {
-        mSmsHelper.registerObserver(mBinding.loginEditCode)
         mViewModel.downTimerLiveData.observerNonSticky(viewLifecycleOwner) { time ->
             if (time == -1L) {
                 mBinding.loginTvVoice.isEnabled = true
@@ -263,10 +252,6 @@ class LoginFragment : BaseLoginFragment() {
             } else {
                 it.ShowErrorMsg(::login)
             }
-        }
-
-        mSmsHelper.codeLivedata.observerNonSticky(viewLifecycleOwner) {
-            mViewModel.cancelDown30()
         }
     }
 
