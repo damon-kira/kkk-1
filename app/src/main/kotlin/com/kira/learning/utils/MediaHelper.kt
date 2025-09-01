@@ -44,7 +44,7 @@ class MediaHelper(private val context: Context) {
     }
 
     fun stop() {
-        if(mMediaPlayer?.isPlaying == true) {
+        if (mMediaPlayer?.isPlaying == true) {
             mMediaPlayer?.stop()
         }
     }

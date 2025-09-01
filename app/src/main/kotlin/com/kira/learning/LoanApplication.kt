@@ -4,6 +4,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.os.SystemClock
+import android.view.Choreographer
 import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
 import androidx.multidex.MultiDexApplication
@@ -24,26 +26,60 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
     companion object {
         private lateinit var mAppContext: Context
         fun getAppContext(): Context = mAppContext
+        internal var appStartUptime: Long = 0L
     }
 
     override fun onCreate() {
+        appStartUptime = SystemClock.uptimeMillis()
         super.onCreate()
         mAppContext = this
+        // 配置延迟任务（Debug 下立即执行便于调试；开启日志）
+        DeferredStartup.configure(
+            debugImmediate = BuildConfig.DEBUG && false,
+            enableLogging = BuildConfig.DEBUG
+        )
+        // 轻量：本地缓存与 Delegates
         CacheInit.get().setContext(this).setDebug(AppEnv.DEBUG)
         ApplicationDelegate.init(this)
-//        AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id))
-//        PushManagerFactory.init(this)
-//        PushManagerFactory.getGaid(this)
-//        AdjustManager.init(this, AppEnv.DEBUG)
 
-        // Firebase 初始化
-        initFirebase()
+        // 安全相关（需尽早影响后续网络 TLS）
+        try {
+            Security.insertProviderAt(Conscrypt.newProvider(), 1)
+        } catch (_: Throwable) {
+        }
 
-        // 本地Python初始化
-//        PythonExecutor.initialize(this)
-        Security.insertProviderAt(Conscrypt.newProvider(), 1)
+        // 注册延迟任务
+        registerDeferredTasks()
 
-        initUpload()
+        // 首帧后调度所有延迟任务（避免阻塞冷启动关键路径）
+        Choreographer.getInstance().postFrameCallback { DeferredStartup.dispatchAll(this) }
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        DeferredStartup.signalLowMemory()
+    }
+
+    private fun registerDeferredTasks() {
+        // 轻量：Firebase Core / Crashlytics 打开（若需尽早捕获崩溃可放回 onCreate）
+        DeferredStartup.register(
+            DeferredStartup.Task(
+                "FirebaseCore",
+                DeferredStartup.Phase.LIGHT
+            ) { initFirebaseCore() })
+        // 中等：上传模块（创建通知渠道 + SDK 初始化）
+        DeferredStartup.register(
+            DeferredStartup.Task(
+                "UploadInit",
+                DeferredStartup.Phase.MEDIUM
+            ) { initUpload() })
+        // 重：获取 FCM Token（可能触发网络）
+        DeferredStartup.register(
+            DeferredStartup.Task(
+                "FetchFcmToken",
+                DeferredStartup.Phase.HEAVY
+            ) { fetchFcmToken() })
+        // 预留：后续可添加 WebView 预热 / ML 模型下载 等
     }
 
     private fun initUpload() {
@@ -55,23 +91,23 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
         )
     }
 
-    private fun initFirebase() {
+    private fun initFirebaseCore() {
         try {
             if (FirebaseApp.getApps(mAppContext).isEmpty()) {
-                logger_e("Firebase", "FirebaseApp not initialized!")
                 FirebaseApp.initializeApp(mAppContext)
             }
-
-            val crashlytics = FirebaseCrashlytics.getInstance()
-            crashlytics.isCrashlyticsCollectionEnabled = true
+            FirebaseCrashlytics.getInstance().isCrashlyticsCollectionEnabled = true
         } catch (e: Exception) {
-            logger_e("Firebase", "Failed to enable Crashlytics ${e.message}")
+            logger_e("Firebase", "Failed FirebaseCore ${e.message}")
         }
-//        FirebaseApp.initializeApp(this)
-//        logger_d("Firebase", "Initialized: ${FirebaseApp.getInstance().name}")
-//        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
-//         Notification Channel 初始化
-        KiraFirebaseMessagingService.getDeviceToken()
+    }
+
+    private fun fetchFcmToken() {
+        try {
+            KiraFirebaseMessagingService.getDeviceToken()
+        } catch (e: Exception) {
+            logger_e("Firebase", "Fetch token fail ${e.message}")
+        }
     }
 
     override fun getCameraXConfig(): CameraXConfig {
@@ -80,7 +116,7 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
-            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID,
                 getString(R.string.app_name),
