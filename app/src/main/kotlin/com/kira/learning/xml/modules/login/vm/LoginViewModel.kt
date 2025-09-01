@@ -5,10 +5,10 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.res.RspLoginInfo
-import com.kira.learning.bean.res.RspSmsCode
-import com.kira.learning.expand.saveMobile
-import com.kira.learning.expand.saveUserInfo
+import com.kira.learning.model.res.RspLoginInfo
+import com.kira.learning.model.res.RspSmsCode
+import com.kira.learning.xml.expand.saveMobile
+import com.kira.learning.xml.expand.saveUserInfo
 import com.kira.learning.xml.modules.login.CountDownHelper
 import com.kira.learning.xml.modules.login.repo.LoginRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

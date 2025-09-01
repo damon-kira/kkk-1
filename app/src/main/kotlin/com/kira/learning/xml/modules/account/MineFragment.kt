@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentAccountBinding
-import com.kira.learning.expand.*
 import com.kira.learning.manager.H5UrlManager
 import com.kira.learning.manager.Launch
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel
@@ -15,6 +14,14 @@ import com.common.lib.base.BaseFragment
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
+import com.kira.learning.xml.expand.getMobile
+import com.kira.learning.xml.expand.getUnitString
+import com.kira.learning.xml.expand.inValidToken
+import com.kira.learning.xml.expand.isRepeat
+import com.kira.learning.xml.expand.mUserName
+import com.kira.learning.xml.expand.maskString
+import com.kira.learning.xml.expand.orderStatus
+import com.kira.learning.xml.expand.showCustomDialog
 import com.kira.learning.xml.modules.home.MainEvent
 import com.kira.learning.xml.modules.home.OrderStatus
 import com.util.lib.StatusBarUtil.setStatusBarColor

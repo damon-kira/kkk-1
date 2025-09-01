@@ -8,12 +8,12 @@ import com.common.lib.base.BaseActivity
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
-import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.databinding.ActivityAnswerBinding
-import com.kira.learning.expand.showCustomDialog
+import com.kira.learning.xml.expand.showCustomDialog
 import com.kira.learning.xml.modules.answer.adapter.AnswerAdapter
 import com.kira.learning.xml.modules.answer.vm.AnswerViewModel
-import com.kira.learning.view.ToolbarLayout
+import com.kira.learning.xml.view.ToolbarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityHistoryBinding
-import com.kira.learning.expand.ShowErrorMsg
+import com.kira.learning.xml.expand.ShowErrorMsg
 import com.kira.learning.manager.Launch
 import com.kira.learning.xml.adapter.linearLayoutManager
 import com.kira.learning.xml.modules.home.MainEvent

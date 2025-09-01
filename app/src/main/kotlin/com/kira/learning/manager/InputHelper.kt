@@ -3,7 +3,7 @@ package com.kira.learning.manager
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import com.kira.learning.expand.isValidChar
+import com.kira.learning.xml.expand.isValidChar
 
 object InputHelper {
 

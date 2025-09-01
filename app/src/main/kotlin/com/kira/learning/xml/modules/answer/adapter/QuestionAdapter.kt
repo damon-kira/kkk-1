@@ -11,7 +11,7 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.xml.adapter.BaseViewHolder
 import androidx.core.graphics.drawable.toDrawable

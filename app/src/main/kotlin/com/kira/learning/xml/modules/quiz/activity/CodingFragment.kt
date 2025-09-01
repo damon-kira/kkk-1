@@ -7,17 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.LinearLayout
-import android.widget.TextView
-import com.common.lib.glide.GlideUtils
 import com.common.lib.net.bean.MultipleChoiceActivity
 import com.common.lib.viewbinding.binding
-import com.kira.learning.R
-import com.kira.learning.databinding.FragmentChoiceMultipleBinding
 import com.kira.learning.databinding.FragmentCodingBinding
-import com.kira.learning.expand.dpToPx
+import com.kira.learning.xml.expand.dpToPx
 import com.kira.learning.xml.modules.quiz.BaseFunctionFragment
 import com.kira.learning.xml.modules.quiz.vm.QuizViewModel
-import com.util.lib.dp
 import com.util.lib.log.logger_d
 import dagger.hilt.android.AndroidEntryPoint
 

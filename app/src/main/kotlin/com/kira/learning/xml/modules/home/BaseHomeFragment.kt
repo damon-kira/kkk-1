@@ -1,9 +1,9 @@
 package com.kira.learning.xml.modules.home
 
 import androidx.core.content.ContextCompat
-import com.kira.learning.dialog.CustomDialog
-import com.kira.learning.expand.showCustomDialog
-import com.kira.learning.view.ToolbarLayout
+import com.kira.learning.xml.dialog.CustomDialog
+import com.kira.learning.xml.expand.showCustomDialog
+import com.kira.learning.xml.view.ToolbarLayout
 import com.common.lib.base.BaseFragment
 import com.kira.learning.R
 import com.util.lib.StatusBarUtil.setStatusBarColor

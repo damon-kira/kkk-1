@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.kira.learning.R
-import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.xml.adapter.BaseViewHolder
 

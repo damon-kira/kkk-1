@@ -3,9 +3,9 @@ package com.kira.learning.di
 import android.content.Context
 import com.kira.learning.xml.modules.supereditor.provider.DispatcherProviderImpl
 import com.kira.learning.xml.modules.supereditor.provider.StringProviderImpl
-import com.kira.learning.net.ApiManager
-import com.kira.learning.net.ApiService
-import com.kira.learning.net.DataApiService
+import com.kira.learning.xml.net.ApiManager
+import com.kira.learning.xml.net.ApiService
+import com.kira.learning.xml.net.DataApiService
 import com.kira.ui.core.provider.coroutine.DispatcherProvider
 import com.kira.ui.core.provider.resources.StringProvider
 import dagger.Module

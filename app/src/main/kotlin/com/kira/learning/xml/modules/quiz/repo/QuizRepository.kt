@@ -7,10 +7,10 @@ import com.common.lib.net.bean.BaseResponse
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.kira.learning.di.BaseRepository
-import com.kira.learning.bean.dao.AIResponseInfo
+import com.kira.learning.model.dao.AIResponseInfo
 import com.kira.learning.di.ApiActivitiesService
 import com.kira.learning.xml.modules.answer.repo.AnswerRepository
-import com.kira.learning.net.ApiService
+import com.kira.learning.xml.net.ApiService
 import javax.inject.Inject
 
 class QuizRepository @Inject constructor(@ApiActivitiesService private val apiActivitiesService: ApiService) :

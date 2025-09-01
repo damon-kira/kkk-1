@@ -74,7 +74,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.kira.learning.view.textview.EasyTextView
+    <com.kira.learning.xml.view.textview.EasyTextView
         android:id="@+id/etv_repay_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -33,7 +33,7 @@
             android:textColor="@color/color_333333"
             android:textSize="15sp" />
 
-        <com.kira.learning.view.textview.EasyTextView
+        <com.kira.learning.xml.view.textview.EasyTextView
             android:id="@+id/etv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <com.kira.learning.view.textview.EasyTextView
+        <com.kira.learning.xml.view.textview.EasyTextView
             android:id="@+id/tv_repay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

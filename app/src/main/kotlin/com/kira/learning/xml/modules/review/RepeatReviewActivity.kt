@@ -3,7 +3,7 @@ package com.kira.learning.xml.modules.review
 import android.graphics.Color
 import android.os.Bundle
 import com.kira.learning.databinding.ActivityReviewBinding
-import com.kira.learning.expand.showCustomDialog
+import com.kira.learning.xml.expand.showCustomDialog
 import com.common.lib.base.BaseActivity
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding

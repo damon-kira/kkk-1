@@ -1,7 +1,7 @@
 package com.kira.learning.di
 
 import com.common.lib.base.CommonRepository
-import com.kira.learning.net.ApiService
+import com.kira.learning.xml.net.ApiService
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody

@@ -3,11 +3,11 @@ package com.kira.learning.xml.modules.history
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.kira.learning.R
-import com.kira.learning.bean.res.RspHistoryInfo
-import com.kira.learning.expand.getUnitString
+import com.kira.learning.model.res.RspHistoryInfo
+import com.kira.learning.xml.expand.getUnitString
 import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.xml.adapter.BaseViewHolder
-import com.kira.learning.view.textview.EasyTextView
+import com.kira.learning.xml.view.textview.EasyTextView
 import com.common.lib.expand.setBlockingOnClickListener
 import com.util.lib.invisible
 import com.util.lib.show

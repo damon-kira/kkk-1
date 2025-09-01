@@ -9,11 +9,11 @@ import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivitySettingBinding
-import com.kira.learning.dialog.LogoutDialog
-import com.kira.learning.dialog.RetentionDialog
-import com.kira.learning.expand.ShowErrorMsg
-import com.kira.learning.expand.setLogout
-import com.kira.learning.expand.toast
+import com.kira.learning.xml.dialog.LogoutDialog
+import com.kira.learning.xml.dialog.RetentionDialog
+import com.kira.learning.xml.expand.ShowErrorMsg
+import com.kira.learning.xml.expand.setLogout
+import com.kira.learning.xml.expand.toast
 import com.kira.learning.xml.modules.home.HomeEvent
 import com.kira.learning.xml.modules.home.MainEvent
 import com.kira.learning.permission.HintDialog

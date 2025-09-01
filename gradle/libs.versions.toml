@@ -96,7 +96,7 @@ crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyti
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
-chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
+#chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
 
 [libraries]
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }

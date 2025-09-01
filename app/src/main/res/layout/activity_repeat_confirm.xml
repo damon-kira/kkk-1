@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <com.kira.learning.view.ToolbarLayout
+    <com.kira.learning.xml.view.ToolbarLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_loan_title"
                     tools:text="$ 9.000" />
 
-                <com.kira.learning.view.ItemInfoLayout
+                <com.kira.learning.xml.view.ItemInfoLayout
                     android:id="@+id/iil_bank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
                 <!-- 仪表金额 包含利息、费率-->
-                <com.kira.learning.view.ItemInfoLayout
+                <com.kira.learning.xml.view.ItemInfoLayout
                     android:id="@+id/iil_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 提示信息 -->
-            <com.kira.learning.view.TextViewDrawable
+            <com.kira.learning.xml.view.TextViewDrawable
                 android:id="@+id/tvd_auto"
                 style="@style/marginLeftAndRight16"
                 android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                 android:textStyle="bold" />
 
             <!-- 取消按钮 -->
-            <com.kira.learning.view.TextViewLine
+            <com.kira.learning.xml.view.TextViewLine
                 android:id="@+id/tv_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:layout_marginTop="23dp"
                 android:background="@drawable/shape_white_10dp">
 
-                <com.kira.learning.view.textview.EasyTextView
+                <com.kira.learning.xml.view.textview.EasyTextView
                     android:id="@+id/tv_loan_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                     app:etv_solid="@color/color_f1dfff"
                     app:layout_constraintTop_toTopOf="parent" />
                 <!-- 总仪表金额 -->
-                <com.kira.learning.view.ItemInfoLayout
+                <com.kira.learning.xml.view.ItemInfoLayout
                     android:id="@+id/iil_total_amount"
                     style="@style/marginLeftAndRight12"
                     android:layout_width="match_parent"
@@ -186,7 +186,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_loan_list" />
 
                 <!-- 总利息 -->
-                <com.kira.learning.view.ItemInfoLayout
+                <com.kira.learning.xml.view.ItemInfoLayout
                     android:id="@+id/iil_total_interest"
                     style="@style/marginLeftAndRight12"
                     android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                     app:layout_constraintTop_toBottomOf="@id/iil_total_amount" />
 
                 <!-- 仪表日期 -->
-                <com.kira.learning.view.ItemInfoLayout
+                <com.kira.learning.xml.view.ItemInfoLayout
                     android:id="@+id/iil_repay_date"
                     style="@style/marginLeftAndRight12"
                     android:layout_width="match_parent"

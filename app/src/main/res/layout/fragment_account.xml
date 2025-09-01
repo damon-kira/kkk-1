@@ -131,7 +131,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_amount" />
 
-        <com.kira.learning.view.textview.EasyTextView
+        <com.kira.learning.xml.view.textview.EasyTextView
             android:id="@+id/etv_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <!-- 关于 -->
-    <com.kira.learning.view.AccountItemLayout
+    <com.kira.learning.xml.view.AccountItemLayout
         android:id="@+id/ail_about"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
@@ -227,7 +227,7 @@
         app:ail_left_icon="@drawable/ic_me_about"
         app:ail_text="@string/me_about" />
     <!-- 协议 -->
-    <com.kira.learning.view.AccountItemLayout
+    <com.kira.learning.xml.view.AccountItemLayout
         android:id="@+id/ail_protocol"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
@@ -236,7 +236,7 @@
         app:ail_left_icon="@drawable/ic_me_policy"
         app:ail_text="@string/me_protocol" />
     <!-- 反馈 -->
-    <com.kira.learning.view.AccountItemLayout
+    <com.kira.learning.xml.view.AccountItemLayout
         android:id="@+id/ail_feedback"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
@@ -245,7 +245,7 @@
         app:ail_left_icon="@drawable/ic_me_feedback"
         app:ail_text="@string/me_feedback" />
     <!-- 设置 -->
-    <com.kira.learning.view.AccountItemLayout
+    <com.kira.learning.xml.view.AccountItemLayout
         android:id="@+id/ail_setting"
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
@@ -254,7 +254,7 @@
         app:ail_left_icon="@drawable/ic_me_setup"
         app:ail_text="@string/me_setting" />
 
-    <com.kira.learning.view.textview.EasyTextView
+    <com.kira.learning.xml.view.textview.EasyTextView
         android:id="@+id/etv_custom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

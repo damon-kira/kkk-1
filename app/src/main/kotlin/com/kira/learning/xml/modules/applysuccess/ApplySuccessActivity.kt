@@ -4,8 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityApplySuccessBinding
-import com.kira.learning.expand.isGpAccount
-import com.kira.learning.expand.isRepeat
+import com.kira.learning.xml.expand.isGpAccount
+import com.kira.learning.xml.expand.isRepeat
 import com.kira.learning.manager.Launch
 import com.kira.learning.xml.modules.config.ConfigViewModel
 import com.kira.learning.permission.HintDialog

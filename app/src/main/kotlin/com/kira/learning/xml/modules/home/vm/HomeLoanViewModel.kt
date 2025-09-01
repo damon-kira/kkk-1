@@ -4,16 +4,16 @@ import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import com.common.lib.net.ResponseCode
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.res.RepeatProductInfo
-import com.kira.learning.bean.res.RepeatRepayInfo
-import com.kira.learning.bean.res.RepeatWaitConfirmInfo
-import com.kira.learning.bean.res.RspCertProcessInfo
-import com.kira.learning.bean.res.RspProductInfo
-import com.kira.learning.expand.isGpAccount
-import com.kira.learning.expand.isRepeat
-import com.kira.learning.expand.mUserName
-import com.kira.learning.expand.orderStatus
-import com.kira.learning.expand.saveMobile
+import com.kira.learning.model.res.RepeatProductInfo
+import com.kira.learning.model.res.RepeatRepayInfo
+import com.kira.learning.model.res.RepeatWaitConfirmInfo
+import com.kira.learning.model.res.RspCertProcessInfo
+import com.kira.learning.model.res.RspProductInfo
+import com.kira.learning.xml.expand.isGpAccount
+import com.kira.learning.xml.expand.isRepeat
+import com.kira.learning.xml.expand.mUserName
+import com.kira.learning.xml.expand.orderStatus
+import com.kira.learning.xml.expand.saveMobile
 import com.kira.learning.xml.modules.home.repo.HomeLoanRepository
 import javax.inject.Inject
 

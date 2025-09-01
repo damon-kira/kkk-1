@@ -4,7 +4,7 @@ import android.webkit.JavascriptInterface
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.kira.learning.expand.toast
+import com.kira.learning.xml.expand.toast
 
 
 class JsInterface(webHost: IWebHost) : LifecycleEventObserver {

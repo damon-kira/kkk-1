@@ -60,7 +60,7 @@
             tools:ignore="HardcodedText" />
 
         <!-- 加载动画 -->
-        <com.kira.learning.view.LoadingDotsView
+        <com.kira.learning.xml.view.LoadingDotsView
             android:id="@+id/loading_wait"
             android:layout_width="80dp"
             android:layout_height="wrap_content"

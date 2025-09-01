@@ -12,7 +12,7 @@
         android:background="@drawable/image_home_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.kira.learning.view.ToolbarLayout
+    <com.kira.learning.xml.view.ToolbarLayout
         android:id="@+id/process_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/process_toolbar"
         app:srcCompat="@drawable/image_process_bg" />
 
-    <com.kira.learning.view.ProcessView
+    <com.kira.learning.xml.view.ProcessView
         android:id="@+id/process_pv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:textStyle="bold" />
 
             <!--联系人1关系-->
-            <com.kira.learning.view.baseinfo.BaseInfoView
+            <com.kira.learning.xml.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_relationship"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
             <!-- 联系人1 -->
             <!-- 姓名 -->
-            <com.kira.learning.view.baseinfo.BaseInfoView
+            <com.kira.learning.xml.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                 app:right_icon="@drawable/svg_contact_num"
                 app:title="@string/contact_number" />
             <!-- 手机号 -->
-            <com.kira.learning.view.baseinfo.BaseInfoView
+            <com.kira.learning.xml.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact1_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 
             <!-- 联系人2 -->
             <!-- 姓名 -->
-            <com.kira.learning.view.baseinfo.BaseInfoView
+            <com.kira.learning.xml.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                 app:right_icon="@drawable/svg_contact_num"
                 app:title="@string/contact_number" />
             <!-- 手机号 -->
-            <com.kira.learning.view.baseinfo.BaseInfoView
+            <com.kira.learning.xml.view.baseinfo.BaseInfoView
                 android:id="@+id/biv_contact2_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

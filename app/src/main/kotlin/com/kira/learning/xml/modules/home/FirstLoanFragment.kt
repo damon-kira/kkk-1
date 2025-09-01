@@ -7,9 +7,9 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.databinding.FragmentHomeLoanBinding
-import com.kira.learning.expand.ShowErrorMsg
-import com.kira.learning.expand.getUnitString
-import com.kira.learning.expand.jumpProcess
+import com.kira.learning.xml.expand.ShowErrorMsg
+import com.kira.learning.xml.expand.getUnitString
+import com.kira.learning.xml.expand.jumpProcess
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

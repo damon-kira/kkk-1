@@ -7,7 +7,7 @@
     android:background="@drawable/shape_white_10dp"
     android:paddingBottom="32dp">
 
-    <com.kira.learning.view.textview.EasyTextView
+    <com.kira.learning.xml.view.textview.EasyTextView
         android:id="@+id/etv_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <com.kira.learning.view.textview.EasyTextView
+            <com.kira.learning.xml.view.textview.EasyTextView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:gravity="center"

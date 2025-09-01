@@ -2,8 +2,8 @@ package com.kira.learning.xml.modules.home.repo
 
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.kira.learning.di.BaseRepository
-import com.kira.learning.bean.res.RspCertProcessInfo
-import com.kira.learning.bean.res.RspProductInfo
+import com.kira.learning.model.res.RspCertProcessInfo
+import com.kira.learning.model.res.RspProductInfo
 import javax.inject.Inject
 
 class HomeLoanRepository @Inject constructor(): BaseRepository() {

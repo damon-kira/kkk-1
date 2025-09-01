@@ -1,7 +1,7 @@
 package com.kira.learning.xml.modules.appupdate
 
 import com.kira.learning.di.BaseRepository
-import com.kira.learning.bean.res.AppUpgradeInfo
+import com.kira.learning.model.res.AppUpgradeInfo
 import com.common.lib.net.ApiServiceLiveDataProxy
 import javax.inject.Inject
 

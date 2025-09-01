@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 放款金额 -->
-    <com.kira.learning.view.ItemInfoLayout
+    <com.kira.learning.xml.view.ItemInfoLayout
         android:id="@+id/iil_loan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:iil_right_text_bold="true"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
     <!-- 利息 -->
-    <com.kira.learning.view.ItemInfoLayout
+    <com.kira.learning.xml.view.ItemInfoLayout
         android:id="@+id/iil_interest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:iil_right_text_bold="true"
         app:layout_constraintTop_toBottomOf="@id/iil_loan" />
     <!-- 逾期金额 -->
-    <com.kira.learning.view.ItemInfoLayout
+    <com.kira.learning.xml.view.ItemInfoLayout
         android:id="@+id/iil_overdue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         app:iil_right_text_color="@color/color_FE4F4F"
         app:layout_constraintTop_toBottomOf="@id/iil_interest" />
 
-    <com.kira.learning.view.ItemInfoLayout
+    <com.kira.learning.xml.view.ItemInfoLayout
         android:id="@+id/iil_repay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

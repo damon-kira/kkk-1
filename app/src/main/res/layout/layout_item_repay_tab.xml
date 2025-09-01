@@ -35,7 +35,7 @@
             android:textColor="@color/color_333333"
             android:textSize="15sp" />
 
-        <com.kira.learning.view.TextViewDrawable
+        <com.kira.learning.xml.view.TextViewDrawable
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

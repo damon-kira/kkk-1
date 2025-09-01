@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.kira.learning.view.ToolbarLayout
+    <com.kira.learning.xml.view.ToolbarLayout
         android:id="@+id/review_toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -109,7 +109,7 @@
                     tools:text="$35.000" />
 
 
-                <com.kira.learning.view.ReviewProcessView
+                <com.kira.learning.xml.view.ReviewProcessView
                     android:id="@+id/review_rpv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

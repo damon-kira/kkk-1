@@ -5,7 +5,7 @@
     android:background="@drawable/shape_white_10dp"
     android:orientation="vertical">
 
-    <com.kira.learning.view.UploadView
+    <com.kira.learning.xml.view.UploadView
         android:id="@+id/upload_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

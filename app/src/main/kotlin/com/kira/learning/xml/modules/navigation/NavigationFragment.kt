@@ -18,7 +18,7 @@ import com.hjq.window.OnWindowViewClickListener
 import com.hjq.window.draggable.MovingWindowDraggableRule
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentBlackBinding
-import com.kira.learning.expand.setLogout
+import com.kira.learning.xml.expand.setLogout
 import com.kira.learning.manager.Launch
 import com.kira.learning.xml.modules.home.BaseHomeFragment
 import com.kira.learning.xml.modules.home.HomeEvent

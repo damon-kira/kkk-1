@@ -6,7 +6,7 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <com.kira.learning.view.ToolbarLayout
+    <com.kira.learning.xml.view.ToolbarLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
@@ -71,7 +71,7 @@
             android:textColor="@color/color_666666"
             android:textSize="12sp" />
 
-        <com.kira.learning.view.textview.EasyTextView
+        <com.kira.learning.xml.view.textview.EasyTextView
             android:id="@+id/etv_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

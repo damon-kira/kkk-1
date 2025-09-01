@@ -12,11 +12,11 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.kira.learning.LoanApplication.Companion.getAppContext
 import com.kira.learning.R
-import com.kira.learning.expand.getEmail
-import com.kira.learning.expand.getServiceTel
-import com.kira.learning.expand.getWhatsAppTel
-import com.kira.learning.expand.isXiaomi
-import com.kira.learning.expand.toast
+import com.kira.learning.xml.expand.getEmail
+import com.kira.learning.xml.expand.getServiceTel
+import com.kira.learning.xml.expand.getWhatsAppTel
+import com.kira.learning.xml.expand.isXiaomi
+import com.kira.learning.xml.expand.toast
 import com.kira.learning.xml.modules.ai.AIChatActivity
 import com.kira.learning.xml.modules.answer.AnswerActivity
 import com.kira.learning.xml.modules.answer.CourseActivity
@@ -40,7 +40,7 @@ import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
 import kira.learning.chat.AiChatActivity
-import com.kira.learning.compose.MainActivity as ComposeMainActivity
+import com.kira.learning.module.main.MainActivity as ComposeMainActivity
 
 object Launch {
 

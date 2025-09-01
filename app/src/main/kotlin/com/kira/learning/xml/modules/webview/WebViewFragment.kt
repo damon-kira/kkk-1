@@ -27,7 +27,7 @@ import com.kira.learning.AppEnv
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentWebviewBinding
 import com.kira.learning.manager.H5UrlManager
-import com.kira.learning.view.BaseWebView
+import com.kira.learning.xml.view.BaseWebView
 import com.util.lib.MainHandler
 import com.util.lib.NetWorkUtils
 import com.util.lib.StatusBarUtil.setStatusBar

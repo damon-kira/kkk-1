@@ -4,8 +4,8 @@ import android.content.Context
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonObject
 import com.kira.learning.di.BaseRepository
-import com.kira.learning.bean.res.RspLoginInfo
-import com.kira.learning.bean.res.RspSmsCode
+import com.kira.learning.model.res.RspLoginInfo
+import com.kira.learning.model.res.RspSmsCode
 import com.util.lib.net.WifiInfoUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.RequestBody

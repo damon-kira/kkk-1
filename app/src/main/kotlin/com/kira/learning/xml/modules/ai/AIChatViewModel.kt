@@ -8,10 +8,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.dao.AIResponseDao
-import com.kira.learning.bean.dao.AIResponseInfo
-import com.kira.learning.bean.dao.ChatMessage
-import com.kira.learning.bean.dao.ChatMessageDao
+import com.kira.learning.model.dao.AIResponseDao
+import com.kira.learning.model.dao.AIResponseInfo
+import com.kira.learning.model.dao.ChatMessage
+import com.kira.learning.model.dao.ChatMessageDao
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

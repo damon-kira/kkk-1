@@ -7,8 +7,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.kira.learning.di.BaseRepository
-import com.kira.learning.bean.dao.AIResponseInfo
-import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.model.dao.AIResponseInfo
+import com.kira.learning.model.QuestionProcessInfo
 import javax.inject.Inject
 
 class AnswerRepository @Inject constructor() : BaseRepository() {

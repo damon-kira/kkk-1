@@ -3,7 +3,7 @@ package com.kira.learning.xml.modules.ai
 import com.common.lib.net.ApiServiceLiveDataProxy
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.kira.learning.bean.dao.AIResponseInfo
+import com.kira.learning.model.dao.AIResponseInfo
 import com.kira.learning.di.BaseRepository
 import javax.inject.Inject
 

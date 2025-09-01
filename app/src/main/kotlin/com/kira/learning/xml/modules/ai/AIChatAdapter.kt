@@ -4,7 +4,7 @@ import android.text.Spannable
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.dao.ChatMessage
+import com.kira.learning.model.dao.ChatMessage
 import com.kira.learning.xml.adapter.BaseRecyclerViewAdapter
 import com.kira.learning.xml.adapter.BaseViewHolder
 import io.noties.markwon.Markwon

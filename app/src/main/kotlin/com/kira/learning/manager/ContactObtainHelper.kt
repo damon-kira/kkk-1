@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kira.learning.R
 import com.kira.learning.di.getAppContext
-import com.kira.learning.bean.PhoneAndName
+import com.kira.learning.model.PhoneAndName
 import com.kira.learning.manager.ObtainContactAgent.Companion.REQ_CONTACT_CODE
 import androidx.core.net.toUri
 

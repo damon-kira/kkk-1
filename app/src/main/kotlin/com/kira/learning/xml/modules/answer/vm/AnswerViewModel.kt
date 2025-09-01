@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.QuestionProcessInfo
+import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.xml.modules.answer.repo.AnswerRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject

@@ -13,7 +13,7 @@ import com.common.lib.net.bean.MultipleChoiceActivity
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentChoiceMultipleBinding
-import com.kira.learning.expand.dpToPx
+import com.kira.learning.xml.expand.dpToPx
 import com.kira.learning.xml.modules.quiz.BaseFunctionFragment
 import com.kira.learning.xml.modules.quiz.vm.QuizViewModel
 import com.util.lib.dp

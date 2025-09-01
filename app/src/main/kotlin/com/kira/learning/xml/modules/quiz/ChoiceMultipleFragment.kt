@@ -12,7 +12,7 @@
 //import android.widget.TextView
 //import com.common.lib.glide.GlideUtils
 //import com.kira.learning.R
-//import com.kira.learning.bean.QuizInfo
+//import com.kira.learning.model.QuizInfo
 //import com.kira.learning.expand.dpToPx
 //import com.util.lib.dp
 //import kotlin.util.UUID

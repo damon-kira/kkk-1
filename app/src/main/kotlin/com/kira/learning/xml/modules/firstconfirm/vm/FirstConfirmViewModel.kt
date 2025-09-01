@@ -2,7 +2,7 @@ package com.kira.learning.xml.modules.firstconfirm.vm
 
 import com.common.lib.base.BaseViewModel
 import com.common.lib.net.bean.BaseResponse
-import com.kira.learning.bean.res.RspResult
+import com.kira.learning.model.res.RspResult
 import com.kira.learning.xml.modules.firstconfirm.repo.FirstConfirmRepository
 import javax.inject.Inject
 

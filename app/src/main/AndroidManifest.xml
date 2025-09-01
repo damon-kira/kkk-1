@@ -157,7 +157,7 @@
             android:name="kira.learning.chat.AiChatActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
-            android:name=".compose.MainActivity"
+            android:name=".module.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

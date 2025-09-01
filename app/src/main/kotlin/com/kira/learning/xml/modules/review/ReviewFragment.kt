@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentReviewBinding
-import com.kira.learning.expand.getUnitString
-import com.kira.learning.expand.mUserName
+import com.kira.learning.xml.expand.getUnitString
+import com.kira.learning.xml.expand.mUserName
 import com.kira.learning.xml.modules.home.BaseHomeRefreshFragment
 import com.kira.learning.xml.modules.home.HomeEvent
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel

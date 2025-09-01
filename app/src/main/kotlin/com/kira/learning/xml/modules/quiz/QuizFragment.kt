@@ -1,8 +1,6 @@
 package com.kira.learning.xml.modules.quiz
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -11,13 +9,10 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
-import androidx.fragment.app.Fragment
 import com.common.lib.base.BaseFragment
-import com.common.lib.glide.GlideUtils
 import com.kira.learning.R
-import com.kira.learning.bean.QuizInfo
-import com.kira.learning.expand.dpToPx
-import com.util.lib.dp
+import com.kira.learning.model.QuizInfo
+import com.kira.learning.xml.expand.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

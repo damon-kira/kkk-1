@@ -5,7 +5,7 @@ import android.content.ComponentCallbacks
 import android.content.Context
 import android.content.MutableContextWrapper
 import android.content.res.Configuration
-import com.kira.learning.view.BaseWebView
+import com.kira.learning.xml.view.BaseWebView
 import com.util.lib.log.logger_e
 import java.util.*
 import java.util.concurrent.LinkedBlockingQueue

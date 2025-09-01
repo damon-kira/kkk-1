@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentRefusedBinding
-import com.kira.learning.expand.formatCommon
+import com.kira.learning.xml.expand.formatCommon
 import com.kira.learning.xml.modules.home.BaseHomeRefreshFragment
 import com.kira.learning.xml.modules.home.HomeEvent
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel

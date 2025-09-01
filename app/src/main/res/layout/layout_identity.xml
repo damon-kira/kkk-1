@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.kira.learning.view.identity.IdentityView
+    <com.kira.learning.xml.view.identity.IdentityView
         android:id="@+id/iv_left"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         app:iv_image="@drawable/kyc_front_pic"
         app:iv_text="@string/kyc_front_text" />
 
-    <com.kira.learning.view.identity.IdentityView
+    <com.kira.learning.xml.view.identity.IdentityView
         android:id="@+id/iv_right"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

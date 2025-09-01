@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.provider.ContactsContract
-import com.kira.learning.bean.PhoneAndName
+import com.kira.learning.model.PhoneAndName
 import com.kira.learning.permission.PermissionHelper
 import androidx.core.net.toUri
 

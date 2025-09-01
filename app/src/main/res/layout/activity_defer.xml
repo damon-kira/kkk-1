@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <com.kira.learning.view.ToolbarLayout
+    <com.kira.learning.xml.view.ToolbarLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
@@ -21,7 +21,7 @@
         app:tl_text_gravity="center"
         app:tl_title="@string/defer_title" />
 
-    <com.kira.learning.view.textview.EasyTextView
+    <com.kira.learning.xml.view.textview.EasyTextView
         style="@style/marginLeftAndRight16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_amount_text"
             tools:text="$ 4.000" />
 
-        <com.kira.learning.view.textview.EasyTextView
+        <com.kira.learning.xml.view.textview.EasyTextView
             android:id="@+id/etv_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@id/etv_hint" />
 
         <!-- 展期天数 -->
-        <com.kira.learning.view.ItemInfoLayout
+        <com.kira.learning.xml.view.ItemInfoLayout
             android:id="@+id/iil_days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_detail_hint" />
 
         <!-- 展期仪表时间 -->
-        <com.kira.learning.view.ItemInfoLayout
+        <com.kira.learning.xml.view.ItemInfoLayout
             android:id="@+id/iil_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
             app:layout_constraintTop_toBottomOf="@id/iil_days" />
 
         <!-- 展期仪表金额 -->
-        <com.kira.learning.view.ItemInfoLayout
+        <com.kira.learning.xml.view.ItemInfoLayout
             android:id="@+id/iil_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

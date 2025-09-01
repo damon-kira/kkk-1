@@ -1,0 +1,94 @@
+package com.kira.learning.xml.expand
+
+import android.content.Context
+import com.cache.lib.SharedPrefUser
+import com.kira.learning.di.getAppContext
+import com.kira.learning.model.res.RspLoginInfo
+import com.kira.learning.manager.SharedPrefKeyManager
+import com.util.lib.GsonUtil
+import com.util.lib.ThreadPoolUtil
+import com.util.lib.expand.deleteDir
+import com.util.lib.expand.getCameraCache
+
+
+fun saveUserInfo(info: RspLoginInfo) {
+    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_INFO, GsonUtil.toJson(info))
+    setUserId(info.jsa2Dfw3.orEmpty())
+    saveUserToken(info.token.orEmpty())
+    isNewUser = info.rSXY6ttC3w == "1"
+}
+
+fun getUserToken(): String {
+    return SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_TOKEN, null)
+}
+
+fun saveUserToken(token: String) {
+    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_TOKEN, token)
+}
+
+fun getUserId(): String {
+    return SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_ID, null)
+}
+
+fun setUserId(id: String) {
+    if (id.isEmpty()) return
+    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_TOKEN, id)
+}
+
+fun inValidToken(): Boolean {
+//        return false
+    return getUserToken().isEmpty()
+}
+
+var isRepeat: Boolean
+    get() = SharedPrefUser.getBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, false)
+    set(value) = SharedPrefUser.setBoolean(SharedPrefKeyManager.KEY_IS_REPEAT, value)
+
+// 是否是gp审核账号
+fun isGpAccount(): Boolean {
+    val json = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_INFO, null)
+    return (GsonUtil.fromJsonNew<RspLoginInfo>(json)?.IpZFxXYW
+        ?: "0") == "1"
+}
+
+fun setLogout() {
+    orderStatus = null
+    isNewUser = false
+    saveUserToken("")
+    SharedPrefUser.clear()
+    deleteCameraCache(getAppContext())
+}
+
+
+/**
+ * 删除应用内拍照图片
+ */
+fun deleteCameraCache(context: Context) {
+    ThreadPoolUtil.executor("删除证件信息图片缓存") {
+        deleteDir(getCameraCache(context))
+    }
+}
+
+fun getMobile(): String {
+    return SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_MOBILE, null)
+}
+
+fun saveMobile(mobile: String) {
+    var temp = mobile
+    if (mobile.startsWith("57") && mobile.length == 12) {
+        temp = mobile.substring(2)
+    }
+    SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_MOBILE, temp)
+}
+
+var orderStatus: String? = null
+var isNewUser = false
+
+var mUserName: String
+    get() {
+        val cache = SharedPrefUser.getString(SharedPrefKeyManager.KEY_USER_NAME, "")
+        return if (cache.isNullOrEmpty()) {
+            "user"
+        } else cache
+    }
+    set(value) = SharedPrefUser.setString(SharedPrefKeyManager.KEY_USER_NAME, value)

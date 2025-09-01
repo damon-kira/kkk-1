@@ -12,11 +12,11 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.livedata.observerNonSticky
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
-import com.kira.learning.bean.res.RspProductInfo
+import com.kira.learning.model.res.RspProductInfo
 import com.kira.learning.databinding.FragmentHomeBinding
-import com.kira.learning.expand.ShowErrorMsg
-import com.kira.learning.expand.inValidToken
-import com.kira.learning.expand.showAppUpgradeDialog
+import com.kira.learning.xml.expand.ShowErrorMsg
+import com.kira.learning.xml.expand.inValidToken
+import com.kira.learning.xml.expand.showAppUpgradeDialog
 import com.kira.learning.xml.modules.appupdate.AppUpdateViewModel
 import com.kira.learning.xml.modules.firstconfirm.FirstConfirmFragment
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel

@@ -1,38 +1,27 @@
-package com.kira.learning.xml.modules.richview;
+package com.kira.learning.xml.modules.richview
+
+import com.kira.richtext.Attachment
 
 
-import com.kira.richtext.Attachment;
-
-public class ExampleAttachment extends Attachment {
-    private String mText;
-    private String mId;
-    private boolean mIsImage;
-    private String mUrl;
-
-    public ExampleAttachment(String text, String id, boolean isImage, String url) {
-        this.mText = text;
-        this.mId = id;
-        this.mIsImage = isImage;
-        this.mUrl = url;
+class ExampleAttachment(
+    private val mText: String?,
+    private val mId: String?,
+    private val mIsImage: Boolean,
+    private val mUrl: String?
+) : Attachment() {
+    override fun getUrl(): String? {
+        return mUrl
     }
 
-    @Override
-    public String getUrl() {
-        return mUrl;
+    override fun getText(): String? {
+        return mText
     }
 
-    @Override
-    public String getText() {
-        return mText;
+    override fun getAttachmentId(): String? {
+        return mId
     }
 
-    @Override
-    public String getAttachmentId() {
-        return mId;
-    }
-
-    @Override
-    public boolean isImage() {
-        return mIsImage;
+    override fun isImage(): Boolean {
+        return mIsImage
     }
 }

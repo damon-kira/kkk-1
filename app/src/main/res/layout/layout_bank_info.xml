@@ -11,7 +11,7 @@
     android:paddingRight="12dp"
     android:paddingBottom="16dp">
 
-    <com.kira.learning.view.TextViewDrawable
+    <com.kira.learning.xml.view.TextViewDrawable
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -23,7 +23,7 @@
         app:isAlignCenter="false" />
 
     <!--银行类型-->
-    <com.kira.learning.view.baseinfo.BaseInfoView
+    <com.kira.learning.xml.view.baseinfo.BaseInfoView
         android:id="@+id/biv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
     </RadioGroup>
 
     <!-- 银行卡号 -->
-    <com.kira.learning.view.baseinfo.BaseInfoView
+    <com.kira.learning.xml.view.baseinfo.BaseInfoView
         android:id="@+id/biv_bankno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
         app:title="@string/bank_no_title" />
 
     <!-- 再次确认银行卡号 -->
-    <com.kira.learning.view.baseinfo.BaseInfoView
+    <com.kira.learning.xml.view.baseinfo.BaseInfoView
         android:id="@+id/biv_bankno_tow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

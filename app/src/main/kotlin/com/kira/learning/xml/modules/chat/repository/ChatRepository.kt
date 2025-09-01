@@ -2,7 +2,7 @@ package com.kira.learning.xml.modules.chat.repository
 
 import com.kira.learning.xml.modules.chat.bean.ChatEntity
 import com.kira.learning.xml.modules.chat.database.ChatDao
-import com.kira.learning.net.ApiService
+import com.kira.learning.xml.net.ApiService
 //import com.kira.learning.xml.modules.chat.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

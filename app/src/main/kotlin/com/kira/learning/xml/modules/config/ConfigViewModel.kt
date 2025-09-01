@@ -1,6 +1,6 @@
 package com.kira.learning.xml.modules.config
 
-import com.kira.learning.bean.res.RspConfig
+import com.kira.learning.model.res.RspConfig
 import com.common.lib.base.BaseViewModel
 import com.common.lib.livedata.observerNonStickyForever
 import javax.inject.Inject

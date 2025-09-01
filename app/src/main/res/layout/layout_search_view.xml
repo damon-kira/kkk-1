@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/svg_search" />
 
-    <com.kira.learning.view.SafeEditText
+    <com.kira.learning.xml.view.SafeEditText
         android:id="@+id/set_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -7,7 +7,7 @@ import com.common.lib.livedata.LiveDataBus
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.FragmentNoProductBinding
-import com.kira.learning.expand.getUnitString
+import com.kira.learning.xml.expand.getUnitString
 import com.kira.learning.xml.modules.home.vm.HomeLoanViewModel
 import com.util.lib.hide
 import com.util.lib.show

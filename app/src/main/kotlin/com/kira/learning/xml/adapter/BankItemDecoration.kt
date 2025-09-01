@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.kira.learning.R
-import com.kira.learning.bean.SearchInfo
+import com.kira.learning.model.SearchInfo
 import com.util.lib.dp
 
 class BankItemDecoration(
