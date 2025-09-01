@@ -5,7 +5,6 @@ import com.kira.learning.R
 import com.kira.learning.di.getAppContext
 import com.kira.learning.databinding.DialogCutomBinding
 import com.kira.learning.manager.Launch
-import com.kira.learning.xml.service.SerManager
 import com.common.lib.dialog.DefaultDialog
 import com.common.lib.expand.setBlockingOnClickListener
 import com.common.lib.viewbinding.binding
@@ -35,10 +34,6 @@ class CustomDialog constructor(context: Context) : DefaultDialog(context) {
         binding.etvEmail.ifShow(email.isNotEmpty())
 
         binding.etvEmail.text = email
-
-        if (whatsapp.isEmpty() && tel.isEmpty() && email.isEmpty()) {
-            SerManager.getCustom()
-        }
 
         binding.aivClose.setBlockingOnClickListener {
             dismiss()

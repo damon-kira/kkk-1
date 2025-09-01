@@ -153,8 +153,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
             }
 
             R.id.ail_setting -> {
-//                Launch.skipZoomImageActivity(getSupportContext())
-                Launch.skipPhotographActivity(getSupportContext())
 //                throw RuntimeException("无Mapping包的崩溃测试！！！！！！")
                 if (!checkLogin()) return
                 Launch.skipSettingActivity(getSupportContext())

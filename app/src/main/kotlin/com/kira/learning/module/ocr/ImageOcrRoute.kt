@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -218,10 +219,28 @@ private fun AsyncImage(uri: Uri) {
 @Composable
 private fun CropDialog(source: Uri, onCancel: () -> Unit, onCropped: (Bitmap) -> Unit) {
     Dialog(onDismissRequest = onCancel) {
+        val config = LocalConfiguration.current
+        val maxWidth = (config.screenWidthDp * 0.9f).dp
+        val maxHeight = (config.screenHeightDp * 0.75f).dp // 只占屏幕 75% 高度
         Surface(shape = MaterialTheme.shapes.medium) {
-            Column(Modifier.padding(16.dp)) {
+            Column(
+                Modifier
+                    .widthIn(max = maxWidth)
+                    .heightIn(max = maxHeight)
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
                 var cropImageView by remember { mutableStateOf<CropImageView?>(null) }
-                AndroidCropper(source = source, onReady = { cropImageView = it })
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 180.dp, max = maxHeight - 96.dp) // 预留按钮区域
+                ) {
+                    AndroidCropper(
+                        source = source,
+                        onReady = { cropImageView = it }
+                    )
+                }
                 Spacer(Modifier.height(12.dp))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                     TextButton(onClick = onCancel) { Text("取消") }
@@ -235,16 +254,19 @@ private fun CropDialog(source: Uri, onCancel: () -> Unit, onCropped: (Bitmap) ->
 
 @Composable
 private fun AndroidCropper(source: Uri, onReady: (CropImageView) -> Unit) {
-    AndroidView(factory = { ctx ->
-        CropImageView(ctx).apply {
-            setFixedAspectRatio(false)
-            val bitmap = ctx.contentResolver.openInputStream(source)?.use { input ->
-                android.graphics.BitmapFactory.decodeStream(input)
+    AndroidView(
+        modifier = Modifier.fillMaxSize(),
+        factory = { ctx ->
+            CropImageView(ctx).apply {
+                setFixedAspectRatio(false)
+                val bitmap = ctx.contentResolver.openInputStream(source)?.use { input ->
+                    android.graphics.BitmapFactory.decodeStream(input)
+                }
+                setImageBitmap(bitmap)
+                onReady(this)
             }
-            setImageBitmap(bitmap)
-            onReady(this)
         }
-    })
+    )
 }
 
 private suspend fun <T> com.google.android.gms.tasks.Task<T>.await(): T = suspendCancellableCoroutine { cont ->

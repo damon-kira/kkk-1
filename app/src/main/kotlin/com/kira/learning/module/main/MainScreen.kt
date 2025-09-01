@@ -45,7 +45,6 @@ import com.kira.learning.module.ocr.ImageOcrRoute
 import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 
 private object Routes {
-    // 重新排序更贴近微信: 聊天(微信) -> 发现 -> 学习 -> 我
     const val CHAT = "chat"
     const val SAMPLE = "sample"
     const val ANSWER = "answer"

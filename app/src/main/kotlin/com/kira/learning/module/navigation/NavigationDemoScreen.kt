@@ -76,16 +76,14 @@ fun NavigationDemoRoute(
 
     val allItems = remember {
         listOf(
-//            DemoItem("Compose Main", action = { Launch.skipComposeMainActivity(context) }),
-            DemoItem("Photo Scanner", action = { Launch.skipPhotographActivity(context) }),
             DemoItem("Question Bank", action = { Launch.skipAnswerActivity(context) }),
-            DemoItem("Python Run", action = { Launch.skipCodingActivity(context) }),
-            DemoItem("AI Chat(IM)", action = { Launch.skipAIIMActivity(context) }),
-            DemoItem("Chat (Database)", action = { Launch.skipChatActivity(context) }),
+            DemoItem("Python Run(废弃)", action = { Launch.skipCodingActivity(context) }),
+            DemoItem("AI Chat(废弃)", action = { Launch.skipAIIMActivity(context) }),
+            DemoItem("Chat (废弃)", action = { Launch.skipChatActivity(context) }),
             DemoItem("Video Player", action = { Launch.skipPlayerManageActivity(context) }),
             DemoItem("Activities Quiz", action = { Launch.skipQuizActivity(context) }),
-            DemoItem("Upload", enabled = false, action = { }),
-            DemoItem("Logout (Bus)", action = { showLogoutConfirm = true }),
+            DemoItem("Upload(废弃)", enabled = false, action = { }),
+            DemoItem("Logout", action = { showLogoutConfirm = true }),
             DemoItem("Floating Window", action = {
                 if (floatingShowing) {
                     easyWindow?.cancel(); floatingShowing = false
@@ -94,7 +92,7 @@ fun NavigationDemoRoute(
                 }
             }),
             DemoItem("Crash Test", action = { showCrashConfirm = true }),
-            DemoItem("Image Zoom", action = { Launch.skipZoomImageActivity(context) }),
+            DemoItem("Image Zoom(正在迁移)", action = { Launch.skipZoomImageActivity(context) }),
             DemoItem("Step Bar", action = { Launch.skipStepBarViewActivity(context) }),
             DemoItem(
                 "WebView Embed",

@@ -11,8 +11,6 @@
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <!-- 定位相关 -->
-    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- wifi -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -36,10 +34,6 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <!-- 日历权限 -->
-    <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
-    <!-- <uses-permission android:name="android.permission.WRITE_CALENDAR" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" -->
     <!-- 读取短信 -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -81,19 +75,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="true" />
-
-        <activity
-            android:name=".xml.modules.splash.SplashActivity"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
         <activity
             android:name=".xml.modules.home.XMLMainActivity"
             android:launchMode="singleTask"
@@ -103,22 +84,11 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".utils.camera.CaptureActivity"
-            android:screenOrientation="landscape"
             android:theme="@style/CaptureActivityTheme" />
         <activity android:name=".xml.modules.review.RepeatReviewActivity" />
 
         <activity android:name=".xml.modules.webview.WebViewActivity" />
         <activity android:name=".xml.modules.setting.SettingActivity" />
-        <activity
-            android:name=".xml.modules.ocr.CutOutPhotoActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name=".xml.modules.ocr.PhotographActivity"
-            android:exported="true" />
-        <activity
-            android:name=".xml.modules.ocr.ShowCropperedActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".xml.modules.ocr.TakePhotoActivity" />
         <activity
             android:name=".xml.modules.answer.CourseActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
@@ -262,9 +232,7 @@
         </activity>
 
 
-        <service
-            android:name=".xml.service.XjbgdfdfService"
-            android:exported="false" /> <!-- 适配 -->
+        <!--       适配        -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="400" />
@@ -285,13 +253,6 @@
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
-        <!--        推送图标&颜色信息-->
-        <!--        <meta-data-->
-        <!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
-        <!--            android:resource="@drawable/ic_logo" />-->
-        <!--        <meta-data-->
-        <!--            android:name="com.google.firebase.messaging.default_notification_color"-->
-        <!--            android:resource="@color/primary_color" />-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${pkgName}.provider"
@@ -302,6 +263,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--        推送图标&颜色信息-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+        <!--            android:resource="@drawable/ic_logo" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.firebase.messaging.default_notification_color"-->
+        <!--            android:resource="@color/primary_color" />-->
     </application>
 
 </manifest>

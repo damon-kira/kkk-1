@@ -24,7 +24,6 @@ import com.kira.learning.xml.modules.chat.ChatActivity
 import com.kira.learning.xml.modules.codeeditor.CodePlaygroundActivity
 import com.kira.learning.xml.modules.history.HistoryActivity
 import com.kira.learning.xml.modules.home.XMLMainActivity
-import com.kira.learning.xml.modules.ocr.PhotographActivity
 import com.kira.learning.xml.modules.player.PlayerManageActivity
 import com.kira.learning.xml.modules.python.CodingActivity
 import com.kira.learning.xml.modules.quiz.QuizActivity
@@ -82,10 +81,6 @@ object Launch {
     // 复盘审核中页面
     fun skipRepeatReviewActivity(context: Context) {
         launch(context, RepeatReviewActivity::class.java)
-    }
-
-    fun skipPhotographActivity(context: Context) {
-        launch(context, PhotographActivity::class.java)
     }
 
     fun skipAIChatActivity(context: Context) {
@@ -272,8 +267,7 @@ object Launch {
         try {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.data = Uri.fromParts(
-                "package",
-                packageName, null
+                "package", packageName, null
             )
             startActivity(intent)
         } catch (e: Exception) {

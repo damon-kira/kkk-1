@@ -37,8 +37,6 @@ include(":module-player")
 include(":view-window")
 include(":view-image")
 include(":view-richtext")
-//include(":sdks:devoptions")
-//include(":codeview")
 
 include(
     ":common-core",
@@ -64,7 +62,6 @@ include(
 include(
     ":filesystems:filesystem-base",
     ":filesystems:filesystem-local",
-//    ":filesystems:filesystem-root",
     ":filesystems:filesystem-ftp",
     ":filesystems:filesystem-ftps",
     ":filesystems:filesystem-ftpes",

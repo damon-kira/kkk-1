@@ -182,9 +182,8 @@ class NavigationFragment : BaseHomeFragment() {
             }
         }
         mBinding.inclueDemoLayout1.let {
-            it.tvDemoName.text = "Photo scanner"
+            it.tvDemoName.text = "Photo scanner(废弃)"
             it.tvBtn.setOnClickListener {
-                Launch.skipPhotographActivity(getSupportContext())
             }
         }
         mBinding.inclueDemoLayout2.let {
