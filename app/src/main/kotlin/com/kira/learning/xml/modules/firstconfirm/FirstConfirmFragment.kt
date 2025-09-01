@@ -151,7 +151,6 @@ class FirstConfirmFragment : BaseHomeRefreshFragment(), View.OnClickListener {
                 MainHandler.postDelay({
                     mProcessDialog.dismiss()
                     mHomeViewModel.getHomeInfo()
-                    Launch.skipApplySuccessActivity(getSupportContext())
                 }, 260)
             } else {
                 mProcessDialog.dismiss()

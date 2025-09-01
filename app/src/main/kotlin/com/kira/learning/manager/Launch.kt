@@ -20,7 +20,6 @@ import com.kira.learning.xml.expand.toast
 import com.kira.learning.xml.modules.ai.AIChatActivity
 import com.kira.learning.xml.modules.answer.AnswerActivity
 import com.kira.learning.xml.modules.answer.CourseActivity
-import com.kira.learning.xml.modules.applysuccess.ApplySuccessActivity
 import com.kira.learning.xml.modules.chat.ChatActivity
 import com.kira.learning.xml.modules.codeeditor.CodePlaygroundActivity
 import com.kira.learning.xml.modules.history.HistoryActivity
@@ -52,10 +51,6 @@ object Launch {
 
     fun skipHistoryActivity(context: Context) {
         launch(context, HistoryActivity::class.java)
-    }
-
-    fun skipApplySuccessActivity(context: Context) {
-        launch(context, ApplySuccessActivity::class.java)
     }
 
     fun skipWifiPage(context: Context) {

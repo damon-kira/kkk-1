@@ -132,9 +132,9 @@
     <string name="bank_card_type">卡类型</string>
     <string name="bank_card_ahorros">储蓄卡</string>
     <string name="bank_card_corriente">卡</string>
-    <string name="bank_no_desc">*请使用与身份证绑定的本人卡，勿使用他人卡避免放款失败</string>
+    <string name="bank_no_desc">*请使用与身份证绑定的本人卡</string>
     <string name="error_bank_no">卡信息错误，请重试</string>
-    <string name="bank_hint">注意！收款时，请确保钱包有足够余额，否则将导致收款失败</string>
+    <string name="bank_hint">注意！</string>
 
     <!-- 身份证信息 -->
     <string name="kyc_title">身份验证</string>
@@ -165,7 +165,7 @@
     <string name="amount_text">金额</string>
     <string name="order_text">订单编号</string>
     <string name="total_amount_text">总额</string>
-    <string name="first_hint_text">您已符合优质客户条件，填写信息可获得现金奖励。建议填写真实资料以获得更高额度</string>
+    <string name="first_hint_text">您已符合条件</string>
     <string name="first_btn">继续填写</string>
     <string name="first_title">恭喜您！</string>
     <string name="first_top_hint">获得额度</string>
@@ -184,12 +184,12 @@
     <string name="permission_setting">去设置</string>
 
     <!-- 钱包列表 -->
-    <string name="bank_card_hint">选择收款钱包</string>
+    <string name="bank_card_hint">选择钱包</string>
     <string name="bank_card_btn_text">确认金币%s</string>
     <string name="bank_add_btn">添加卡</string>
     <string name="dialog_bank_title">名称</string>
     <string name="bank_name_search_hint">输入名称搜索</string>
-    <string name="bank_card_up_hint">最多可添加5张卡，如需更换已添加但无法使用的卡，请联系客服</string>
+    <string name="bank_card_up_hint">最多可添加5张卡</string>
 
     <!-- 活体 -->
     <string name="face_failed_title">人脸识别</string>
@@ -336,7 +336,7 @@
     <string name="apply_status">申请状态</string>
     <string name="amount_88888">¥ 88,888</string>
 
-    <string name="cancel_auto_hint">请慎重考虑，取消自动确认申请后，新申请可能被拒绝，谨慎操作。确定不需要金币吗？</string>
+    <string name="cancel_auto_hint">请慎重考虑</string>
     <string name="consider">我需要金币</string>
     <string name="dialog_confirm_cancel">确认取消</string>
     <string name="wait_confirm">确认收款</string>
