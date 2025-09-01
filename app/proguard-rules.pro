@@ -393,3 +393,9 @@
 #}
 #-keep @com.squareup.moshi.JsonClass class *
 
+# ===== WheelView 包保留，防止 R8 误删导致 Missing class =====
+-keep class com.kira.learning.xml.view.wheel.** { *; }
+-dontwarn com.kira.learning.xml.view.wheel.**
+
+# 忽略 JDK 管理包在 Android 上不存在的警告（Ktor Debug Detector）
+-dontwarn java.lang.management.**

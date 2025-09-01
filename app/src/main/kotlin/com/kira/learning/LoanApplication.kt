@@ -8,6 +8,7 @@ import android.os.SystemClock
 import android.view.Choreographer
 import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
+import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDexApplication
 import com.cache.lib.CacheInit
 import com.google.firebase.FirebaseApp

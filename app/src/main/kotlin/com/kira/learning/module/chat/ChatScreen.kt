@@ -31,6 +31,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kira.learning.di.ChatConversation
+import com.kira.learning.extensions.gone
+import com.kira.learning.extensions.invisible
 import kotlinx.coroutines.launch
 
 @Composable
@@ -282,12 +284,15 @@ private fun ChatScreen(
                 )
             }
             IconButton(
+                modifier = Modifier.gone(true),
                 onClick = { copyAll() }, enabled = state.messages.isNotEmpty()
             ) { Icon(Icons.Default.ContentCopy, null) }
             IconButton(
+                modifier = Modifier.gone(true),
                 onClick = { shareAll() }, enabled = state.messages.isNotEmpty()
             ) { Icon(Icons.Default.Share, null) }
             IconButton(
+                modifier = Modifier.gone(true),
                 onClick = { clearAll() },
                 enabled = state.messages.isNotEmpty() && !state.sending
             ) { Icon(Icons.Default.Delete, null) }

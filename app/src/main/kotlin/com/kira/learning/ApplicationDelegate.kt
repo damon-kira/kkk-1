@@ -3,7 +3,6 @@ package com.kira.learning
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.kira.learning.DeferredStartup
 import com.kira.learning.DeferredStartup.Task
 import com.kira.learning.DeferredStartup.Phase
 import com.kira.learning.di.AppInjector
