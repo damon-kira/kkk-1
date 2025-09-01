@@ -41,6 +41,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.kira.learning.compose.module.chat.ChatRoute
 import com.kira.learning.compose.module.navigation.NavigationDemoRoute
+import com.kira.learning.compose.module.ocr.ImageOcrRoute
 
 private object Routes {
     // 重新排序更贴近微信: 聊天(微信) -> 发现 -> 学习 -> 我
@@ -50,6 +51,7 @@ private object Routes {
     const val PROFILE = "profile"
     const val NAV_DEMO = "nav_demo"
     const val UI_DEMO = "ui_demo"
+    const val OCR = "ocr" // 图片识别
 }
 
 data class BottomItem(
@@ -104,6 +106,14 @@ internal fun MainScreen(
                 onNavigateUiDemo = {
                     scope.launch { drawerState.close() }
                     navController.navigate(Routes.UI_DEMO) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onNavigateOcr = {
+                    scope.launch { drawerState.close() }
+                    navController.navigate(Routes.OCR) {
                         popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
@@ -175,6 +185,12 @@ internal fun MainScreen(
                         openDrawer = { scope.launch { drawerState.open() } }
                     )
                 }
+                composable(Routes.OCR) {
+                    ImageOcrRoute(
+                        modifier = Modifier.fillMaxSize(),
+                        openDrawer = { scope.launch { drawerState.open() } }
+                    )
+                }
             }
         }
     }
@@ -186,6 +202,7 @@ private fun DrawerContent(
     onNavigateProfile: () -> Unit,
     onNavigateNavDemo: () -> Unit,
     onNavigateUiDemo: () -> Unit,
+    onNavigateOcr: () -> Unit,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state = profileViewModel.uiState.collectAsStateWithLifecycle()
@@ -239,13 +256,13 @@ private fun DrawerContent(
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
-            label = { Text("设置(占位)") },
-            selected = false,
-            onClick = {},
+            label = { Text("图片识别") },
+            selected = currentRoute == Routes.OCR,
+            onClick = onNavigateOcr,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
-            label = { Text("关于(占位)") },
+            label = { Text("设置(占位)") },
             selected = false,
             onClick = {},
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
