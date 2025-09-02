@@ -3,10 +3,10 @@ package com.kira.learning.module.profile
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
 import com.kira.learning.network.apiCall
-import com.kira.learning.network.toDomain
-import com.kira.learning.network.UpdateProfileRequest
-import com.kira.learning.network.UpdateAvatarRequest
-import com.kira.learning.network.toDto
+import com.kira.learning.model.dao.toDomain
+import com.kira.learning.model.dao.UpdateProfileRequest
+import com.kira.learning.model.dao.UpdateAvatarRequest
+import com.kira.learning.model.dao.toDto
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -34,7 +34,6 @@ include(":sdks:cache")
 
 include(":compose-view-stedit")
 include(":module-player")
-include(":view-window")
 include(":view-image")
 include(":view-richtext")
 

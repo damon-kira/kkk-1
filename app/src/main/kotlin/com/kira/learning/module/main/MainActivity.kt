@@ -5,10 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.kira.learning.utils.image.ProvideImageTheme
-import com.kira.learning.utils.image.ImageTheme
+import com.kira.learning.utils.ProvideImageTheme
+import com.kira.learning.utils.ImageTheme
 import androidx.compose.material3.MaterialTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.kira.learning.module.auth.AppRoot
 
 @AndroidEntryPoint
 internal class MainActivity : ComponentActivity() {
@@ -25,7 +26,7 @@ internal class MainActivity : ComponentActivity() {
                     iconTint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             ) {
-                MainScreen(savedInstanceState)
+                AppRoot(savedInstanceState)
             }
         }
     }

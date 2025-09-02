@@ -15,9 +15,6 @@ import com.common.lib.view.stepbar.StageStepBar
 import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityStepBarBinding
-import com.kira.learning.xml.modules.stepbar.ExampleViewViewModel.Companion.DEFAULT_FILLED_TRACK_SIZE_DP
-import com.kira.learning.xml.modules.stepbar.ExampleViewViewModel.Companion.DEFAULT_THUMB_SIZE_DP
-import com.kira.learning.xml.modules.stepbar.ExampleViewViewModel.Companion.DEFAULT_UNFILLED_TRACK_SIZE_DP
 import kotlin.getValue
 
 internal class StepBarViewActivity : BaseActivity() {
@@ -81,11 +78,11 @@ internal class StepBarViewActivity : BaseActivity() {
         mBinding.unfilledThumbDropDown.setAdapter(unfilledThumbAdapter)
 
         mBinding.thumbSizeSeekBar.progress = 50
-        mBinding.thumbSizeValue.text = "${DEFAULT_THUMB_SIZE_DP}dp"
+        mBinding.thumbSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_THUMB_SIZE_DP}dp"
         mBinding.filledTrackSizeSeekBar.progress = 50
-        mBinding.filledTrackSizeValue.text = "${DEFAULT_FILLED_TRACK_SIZE_DP}dp"
+        mBinding.filledTrackSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_FILLED_TRACK_SIZE_DP}dp"
         mBinding.unfilledTrackSizeSeekBar.progress = 50
-        mBinding.unfilledTrackSizeValue.text = "${DEFAULT_UNFILLED_TRACK_SIZE_DP}dp"
+        mBinding.unfilledTrackSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_UNFILLED_TRACK_SIZE_DP}dp"
 
         mBinding.activeThumbDefaultColorView.setBackgroundColor(viewModel.firstActiveThumbColor)
         mBinding.filledThumbDefaultColorView.setBackgroundColor(viewModel.firstFilledThumbColor)

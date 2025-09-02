@@ -10,8 +10,6 @@ import com.kira.learning.model.dao.AIResponseInfo
 import com.kira.learning.model.dao.ChatMessage
 import com.kira.learning.model.dao.AIResponseDao
 import com.kira.learning.model.dao.ChatMessageDao
-import com.kira.learning.xml.modules.chat.bean.ChatEntity
-import com.kira.learning.xml.modules.chat.database.ChatDao
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Dao
@@ -40,20 +38,34 @@ interface ChatConversationDao {
 }
 
 @Database(
-    entities = [AIResponseInfo::class, ChatMessage::class, ChatEntity::class, ChatConversation::class],
-    version = 2,
+    entities = [AIResponseInfo::class, ChatMessage::class, ChatConversation::class],
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(ChoiceConverters::class) // 全局注册类型转换器
 abstract class AppDatabase : RoomDatabase() {
     abstract fun aiResponseDao(): AIResponseDao
     abstract fun chatMessageDao(): ChatMessageDao
-    abstract fun chatDao(): ChatDao
     abstract fun chatConversationDao(): ChatConversationDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
+
+        private val MIGRATION_2_3 = object : androidx.room.migration.Migration(2, 3) {
+            override fun migrate(database: androidx.sqlite.db.SupportSQLiteDatabase) {
+                // 新增 chat_conversation 表（若之前 schema 未包含）
+                database.execSQL(
+                    """CREATE TABLE IF NOT EXISTS `chat_conversation` (
+                        `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `title` TEXT NOT NULL,
+                        `createdAt` INTEGER NOT NULL,
+                        `updatedAt` INTEGER NOT NULL,
+                        `lastPreview` TEXT NOT NULL
+                    )""".trimIndent()
+                )
+            }
+        }
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
@@ -61,7 +73,10 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "ai_response_db"
-                ).fallbackToDestructiveMigration().build()
+                )
+                    .addMigrations(MIGRATION_2_3)
+                    // .fallbackToDestructiveMigration() // 如需保留老数据请保持迁移路径，不再使用破坏式升级
+                    .build()
                 INSTANCE = instance
                 instance
             }

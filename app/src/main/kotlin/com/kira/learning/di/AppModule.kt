@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.kira.learning.LoanApplication
 import com.kira.learning.model.dao.AIResponseDao
 import com.kira.learning.model.dao.ChatMessageDao
-import com.kira.learning.xml.modules.chat.database.ChatDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,12 +42,8 @@ class AppModule {
     }
 
     @Provides
-    fun provideChatDao(database: AppDatabase): ChatDao {
-        return database.chatDao()
-    }
-
-    @Provides
-    fun provideChatConversationDao(database: AppDatabase): ChatConversationDao = database.chatConversationDao()
+    fun provideChatConversationDao(database: AppDatabase): ChatConversationDao =
+        database.chatConversationDao()
 }
 
 internal fun getAppContext() = LoanApplication.getAppContext()

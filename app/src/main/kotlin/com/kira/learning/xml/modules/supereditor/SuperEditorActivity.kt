@@ -11,6 +11,7 @@ import com.kira.ui.core.extensions.applySystemWindowInsets
 import com.kira.ui.core.extensions.decorFitsSystemWindows
 import com.kira.ui.core.extensions.fullscreenMode
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.getValue
 
 @AndroidEntryPoint
 class SuperEditorActivity : BaseActivity() {

@@ -20,26 +20,44 @@ import com.kira.ui.core.storage.keyvalue.SettingsManager
 import javax.inject.Inject
 
 /** 多 BaseUrl Qualifier 定义 */
-@Qualifier @Retention(AnnotationRetention.BINARY) annotation class MainBaseUrl
-@Qualifier @Retention(AnnotationRetention.BINARY) annotation class MainRetrofit
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MainBaseUrl
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MainRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     // 仅保留主 BaseUrl
-    @Provides @MainBaseUrl fun provideMainBaseUrl(): String = Constant.BASE_URL
+    @Provides
+    @MainBaseUrl
+    fun provideMainBaseUrl(): String = Constant.BASE_URL
 
-    @Provides @Singleton fun provideGson(): Gson = GsonBuilder().create()
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder().create()
 
-    @Provides @Singleton fun provideOkHttpClient(authProvider: InMemoryAuthTokenProvider): OkHttpClient = OkHttpClient.Builder()
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        authProvider: InMemoryAuthTokenProvider,
+        settingsManager: com.kira.ui.core.storage.keyvalue.SettingsManager
+    ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HeaderInterceptor())
         .addInterceptor(AuthInterceptor(authProvider))
+        .addInterceptor(Logout401Interceptor(settingsManager, authProvider))
         .addInterceptor(RetryInterceptor())
-        .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        })
         .build()
 
-    @Provides @Singleton @MainRetrofit
+    @Provides
+    @Singleton
+    @MainRetrofit
     fun provideMainRetrofit(
         @MainBaseUrl baseUrl: String,
         gson: Gson,
@@ -50,10 +68,14 @@ object NetworkModule {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    @Provides @Singleton
-    fun provideComposeApi(@MainRetrofit retrofit: Retrofit): ComposeApiService = retrofit.create(ComposeApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideComposeApi(@MainRetrofit retrofit: Retrofit): ComposeApiService =
+        retrofit.create(ComposeApiService::class.java)
 
-    @Provides @Singleton fun provideImageLoader(
+    @Provides
+    @Singleton
+    fun provideImageLoader(
         @ApplicationContext context: Context,
         client: OkHttpClient,
     ): ImageLoader = ImageLoader.Builder(context)
@@ -61,13 +83,19 @@ object NetworkModule {
         .crossfade(true)
         .build()
 
-    @Provides @Singleton fun provideAuthTokenProvider(settingsManager: SettingsManager): InMemoryAuthTokenProvider {
+    @Provides
+    @Singleton
+    fun provideAuthTokenProvider(settingsManager: SettingsManager): InMemoryAuthTokenProvider {
         val p = InMemoryAuthTokenProvider(); p.updateToken(settingsManager.apiToken); return p
     }
 }
 
-class InMemoryAuthTokenProvider @Inject constructor(): AuthTokenProvider {
-    @Volatile private var token: String? = null
-    fun updateToken(t: String?) { token = t }
+class InMemoryAuthTokenProvider @Inject constructor() : AuthTokenProvider {
+    @Volatile
+    private var token: String? = null
+    fun updateToken(t: String?) {
+        token = t
+    }
+
     override fun currentToken(): String? = token
 }

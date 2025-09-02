@@ -3,7 +3,7 @@ package com.kira.learning.module.sample
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.apiCall
 import com.kira.learning.network.ComposeApiService
-import com.kira.learning.network.toDomain
+import com.kira.learning.model.dao.toDomain
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -2,7 +2,6 @@ package com.common.lib.net.logger
 
 import android.annotation.SuppressLint
 import android.util.Log
-import com.common.lib.net.ServiceClient
 
 @SuppressLint("CheckLogUsageConditional")
 object HttpLogHelper {
@@ -88,17 +87,6 @@ object HttpLogHelper {
                 aChar = theString[x++]
                 if (aChar == 'u') {
                     var value = 0
-                    for (i in 0..3) {
-                        aChar = theString[x++]
-                        value = when (aChar) {
-                            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> (value shl 4) + aChar.toInt() - '0'.toInt()
-                            'a', 'b', 'c', 'd', 'e', 'f' -> (value shl 4) + 10 + aChar.toInt() - 'a'.toInt()
-                            'A', 'B', 'C', 'D', 'E', 'F' -> (value shl 4) + 10 + aChar.toInt() - 'A'.toInt()
-                            else -> {
-                                Log.e(ServiceClient.TAG, "Malformed   \\uxxxx   encoding.")
-                            }
-                        }
-                    }
                     outBuffer.append(value.toChar())
                 } else {
                     when (aChar) {

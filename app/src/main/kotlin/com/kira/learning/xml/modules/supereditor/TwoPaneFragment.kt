@@ -20,7 +20,6 @@ import com.kira.learning.xml.modules.supereditor.viewmodel.SuperEditorViewModel
 import com.kira.ui.core.delegate.viewBinding
 import com.kira.ui.core.extensions.fragment
 import com.kira.ui.core.extensions.getColorAttr
-import com.kira.ui.core.extensions.navigate
 import com.kira.ui.core.extensions.postponeEnterTransition
 import com.kira.ui.core.extensions.setFadeTransition
 import com.kira.ui.core.extensions.showToast

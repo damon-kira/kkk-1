@@ -3,9 +3,6 @@ package com.kira.learning.di
 import android.content.Context
 import com.kira.learning.xml.modules.supereditor.provider.DispatcherProviderImpl
 import com.kira.learning.xml.modules.supereditor.provider.StringProviderImpl
-import com.kira.learning.xml.net.ApiManager
-import com.kira.learning.xml.net.ApiService
-import com.kira.learning.xml.net.DataApiService
 import com.kira.ui.core.provider.coroutine.DispatcherProvider
 import com.kira.ui.core.provider.resources.StringProvider
 import dagger.Module
@@ -19,33 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetWorkModule {
 
-    @Singleton
-    @Provides
-    fun provideApiService(): ApiService {
-        return ApiManager.Companion.getInstance().createApiService()
-    }
-
-    @Singleton
-    @Provides
-    fun provideDataApiService(): DataApiService {
-        return ApiManager.Companion.getInstance().getDataApiService()
-    }
-
-    @UploadApiService
-    @Singleton
-    @Provides
-    fun provideApiUploadService(): ApiService {
-        return ApiManager.Companion.getInstance().createUploadService()
-    }
-
-    @ApiActivitiesService
-    @Singleton
-    @Provides
-    fun provideApiActivitiesService(): ApiService {
-        return ApiManager.Companion.getInstance().createApiActivitiesService()
-    }
-
-
     @Provides
     @Singleton
     fun provideDispatcherProvider(): DispatcherProvider {
@@ -58,17 +28,4 @@ class NetWorkModule {
         return StringProviderImpl(context)
     }
 
-//    @CheckApiService
-//    @Singleton
-//    @Provides
-//    fun provideCheckApiService(): ApiService {
-//        return ApiManager.getInstance().createCheckApiService()
-//    }
-
-//    @DownloadApiService
-//    @Singleton
-//    @Provides
-//    fun provideDownloadpiService(): ApiService {
-//        return ApiManager.getInstance().createDownloadApiService()
-//    }
 }

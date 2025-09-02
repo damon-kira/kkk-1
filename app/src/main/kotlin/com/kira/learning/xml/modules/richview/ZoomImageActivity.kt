@@ -31,7 +31,7 @@ class ZoomImageActivity : BaseActivity() {
             zoomImage.setImageDrawable(
                 ContextCompat.getDrawable(
                     this@ZoomImageActivity,
-                    R.drawable.image_splash_bg
+                    R.drawable.ic_logo
                 )
             )
             rtButton.setOnClickListener {
@@ -56,62 +56,6 @@ class ZoomImageActivity : BaseActivity() {
 
         }
 
-        //        setContentView(R.layout.activity_main);
-
-//        final boolean supportsSurfaceView = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
-//        if (supportsSurfaceView) setUpVideoPlayer();
-
-//        final Button buttonZoomLayout = findViewById(R.id.show_zl);
-//        final Button buttonZoomImage = findViewById(R.id.show_ziv);
-//        final Button buttonZoomSurface = findViewById(R.id.show_zsv);
-//        final ZoomLayout zoomLayout = findViewById(R.id.zoom_layout);
-//        final ZoomImageView zoomImage = findViewById(R.id.zoom_image);
-//        final View zoomSurface = findViewById(R.id.zoom_surface);
-//        zoomImage.setImageDrawable(new ColorGridDrawable());
-//
-//        buttonZoomLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (supportsSurfaceView) player.setPlayWhenReady(false);
-//                zoomSurface.setVisibility(View.GONE);
-//                zoomImage.setVisibility(View.GONE);
-//                zoomLayout.setVisibility(View.VISIBLE);
-//                buttonZoomImage.setAlpha(0.65f);
-//                buttonZoomSurface.setAlpha(0.65f);
-//                buttonZoomLayout.setAlpha(1f);
-//            }
-//        });
-
-//        buttonZoomImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (supportsSurfaceView) player.setPlayWhenReady(false);
-//                zoomSurface.setVisibility(View.GONE);
-//                zoomLayout.setVisibility(View.GONE);
-//                zoomImage.setVisibility(View.VISIBLE);
-//                buttonZoomLayout.setAlpha(0.65f);
-//                buttonZoomSurface.setAlpha(0.65f);
-//                buttonZoomImage.setAlpha(1f);
-//            }
-//        });
-//        buttonZoomSurface.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (supportsSurfaceView) {
-//                    player.setPlayWhenReady(true);
-//                    zoomImage.setVisibility(View.GONE);
-//                    zoomLayout.setVisibility(View.GONE);
-//                    zoomSurface.setVisibility(View.VISIBLE);
-//                    buttonZoomLayout.setAlpha(0.65f);
-//                    buttonZoomImage.setAlpha(0.65f);
-//                    buttonZoomSurface.setAlpha(1f);
-//                } else {
-//                    Toast.makeText(MainActivity.this,
-//                            "ZoomSurfaceView requires API 18", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        buttonZoomLayout.performClick();
     }
 
     private fun initRichText() {

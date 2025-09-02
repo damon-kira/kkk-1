@@ -78,31 +78,6 @@ object GlideUtils {
             .into(imageView)
     }
 
-    fun getGlideCacheUrl(context: Context, url: String, result: (resultPath: String?) -> Unit) {
-        if (!url.startsWith("https")) {
-            result.invoke("")
-            return
-        }
-//        val disposable = Flowable.fromPublisher<String> {
-//            try {
-//                val path = Glide.with(context)
-//                    .load(getUrl(url))
-//                    .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-//                    .get().absolutePath
-//                it.onNext(path)
-//                it.onComplete()
-//            } catch (e: Exception) {
-//                it.onError(e)
-//            }
-//        }.subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                result.invoke(it)
-//            }, {
-//                result.invoke(null)
-//            })
-    }
-
     private fun createRequestOptions(
         width: Int,
         height: Int,

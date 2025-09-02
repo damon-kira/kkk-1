@@ -2,7 +2,7 @@ rootProject.ext {
 
     debug = [
             h5Host       : "\"http://192.168.5.222:7755\"",
-            apiHost      : "\"http://192.168.5.222:8083/\"",
+            apiHost      : "\"https://core.staging.kira-learning.com/\"",
             bigDataHost  : "\"http://192.168.5.222:8083/XRmN4gV/N9Ed7VEoU\"",
             apiSecret    : "\"83D763DA4B8B0734\"",
     ]

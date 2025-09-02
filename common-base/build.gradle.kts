@@ -78,14 +78,9 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
-    // RxJava
-    api(libs.rxjava)
-    api(libs.rxjava.android)
-
     // Retrofit
     api(libs.retrofit)
     api(libs.retrofit.converter.gson)
-    api(libs.retrofit.rxjava)
     api(libs.retrofit.gson)
     api(libs.retrofit.logging.interceptor)
     api(libs.retrofit.okhttp)

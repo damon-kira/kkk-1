@@ -2,9 +2,15 @@ package com.kira.learning.network
 
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.bean.Document
+import com.kira.learning.module.auth.LoginRequest
+import com.kira.learning.module.auth.LoginResponse
 import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.model.dao.AIResponseInfo
-import com.kira.learning.model.res.RspResult
+import com.kira.learning.model.dao.AppSettingsDTO
+import com.kira.learning.model.dao.PhotoDTO
+import com.kira.learning.model.dao.UpdateAvatarRequest
+import com.kira.learning.model.dao.UpdateProfileRequest
+import com.kira.learning.model.dao.UserProfileDTO
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,10 +20,6 @@ import retrofit2.http.PUT
 import retrofit2.http.Url
 
 interface ComposeApiService {
-
-    @POST("tZyFyDwU/wD9X")
-    @Headers("kio8YGhwe6:UzB5rkIgVd")
-    suspend fun logout(@Body body: RequestBody): BaseResponse<RspResult>
 
     @POST("/v1/chat/completions123456")
     @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
@@ -48,4 +50,7 @@ interface ComposeApiService {
 
     @PUT("/compose/profile/settings")
     suspend fun updateSettings(@Body settings: AppSettingsDTO): AppSettingsDTO
+
+    @POST("login/login")
+    suspend fun login(@Body body: LoginRequest): LoginResponse
 }

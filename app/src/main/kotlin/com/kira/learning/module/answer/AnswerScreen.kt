@@ -18,7 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kira.learning.utils.image.AppImage
+import com.kira.learning.utils.AppImage
 
 @Composable
 fun AnswerRoute(
