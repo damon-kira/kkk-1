@@ -1,8 +1,7 @@
 package com.kira.learning.module.main
 
 import android.os.Bundle
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -10,9 +9,13 @@ import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,7 +27,6 @@ import com.kira.learning.module.profile.ProfileRoute
 import com.kira.learning.module.profile.ProfileUiState
 import com.kira.learning.module.profile.ProfileViewModel
 import com.kira.learning.utils.image.AppAvatar
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,11 +40,19 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
+import kotlin.math.roundToInt
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.mutableFloatStateOf
 import com.kira.learning.module.chat.ChatRoute
+import com.kira.learning.module.chat.ChatDialog
 import com.kira.learning.module.navigation.NavigationDemoRoute
-import com.kira.learning.module.ocr.ImageOcrRoute
 import com.kira.learning.module.uidemo.UiComponentsDemoRoute
+import com.kira.learning.module.ocr.ImageOcrRoute
 
 private object Routes {
     const val CHAT = "chat"
@@ -74,6 +84,9 @@ internal fun MainScreen(
 
     val drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
+    // 全局聊天 Dialog 显示状态
+    var showGlobalChat by remember { mutableStateOf(false) }
 
     val bottomItems = listOf(
         BottomItem(Routes.CHAT, "微信") { Icon(Icons.AutoMirrored.Filled.Chat, null) },
@@ -145,9 +158,7 @@ internal fun MainScreen(
                 }
             }
         ) { padding ->
-            NavHost(
-                navController = navController,
-                startDestination = Routes.CHAT,
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
@@ -157,41 +168,91 @@ internal fun MainScreen(
                         bottom = padding.calculateBottomPadding()
                     )
             ) {
-                composable(Routes.CHAT) {
-                    ChatRoute(
-                        Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } })
+                // 主内容 NavHost
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.CHAT,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    composable(Routes.CHAT) {
+                        ChatRoute(
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
+                    }
+                    composable(Routes.SAMPLE) {
+                        SampleFeatureRoute(
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
+                    }
+                    composable(Routes.ANSWER) {
+                        AnswerRoute(
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
+                    }
+                    composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize(), onBack = null) }
+                    composable(Routes.NAV_DEMO) {
+                        NavigationDemoRoute(
+                            modifier = Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } }
+                        )
+                    }
+                    composable(Routes.UI_DEMO) {
+                        UiComponentsDemoRoute(
+                            modifier = Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } }
+                        )
+                    }
+                    composable(Routes.OCR) {
+                        ImageOcrRoute(
+                            modifier = Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } }
+                        )
+                    }
                 }
-                composable(Routes.SAMPLE) {
-                    SampleFeatureRoute(
-                        Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } })
+
+                // 可拖动悬浮按钮
+                val density = LocalDensity.current
+                val margin = 16.dp
+                val buttonSize = 56.dp
+                val marginPx = with(density) { margin.toPx() }
+                val buttonSizePx = with(density) { buttonSize.toPx() }
+                val bottomBarHeightPx = with(density) { 80.dp.toPx() } // 近似底部导航高度
+
+                var offsetX by remember { mutableFloatStateOf(0f) }
+                var offsetY by remember { mutableFloatStateOf(0f) }
+                var inited by remember { mutableStateOf(false) }
+
+                val maxW = constraints.maxWidth.toFloat()
+                val maxH = constraints.maxHeight.toFloat()
+                LaunchedEffect(maxW, maxH) {
+                    if (!inited && maxW > 0 && maxH > 0) {
+                        offsetX = maxW - buttonSizePx - marginPx
+                        offsetY = maxH - buttonSizePx - bottomBarHeightPx - marginPx
+                        inited = true
+                    }
                 }
-                composable(Routes.ANSWER) {
-                    AnswerRoute(
-                        Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } })
-                }
-                composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize(), onBack = null) }
-                composable(Routes.NAV_DEMO) {
-                    NavigationDemoRoute(
-                        modifier = Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } }
-                    )
-                }
-                composable(Routes.UI_DEMO) {
-                    UiComponentsDemoRoute(
-                        modifier = Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } }
-                    )
-                }
-                composable(Routes.OCR) {
-                    ImageOcrRoute(
-                        modifier = Modifier.fillMaxSize(),
-                        openDrawer = { scope.launch { drawerState.open() } }
-                    )
+
+                FloatingActionButton(
+                    onClick = { showGlobalChat = true },
+                    modifier = Modifier
+                        .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+                        .pointerInput(maxW, maxH) {
+                            detectDragGestures { change, dragAmount ->
+                                change.consume()
+                                val newX = (offsetX + dragAmount.x).coerceIn(0f, maxW - buttonSizePx)
+                                val newY = (offsetY + dragAmount.y).coerceIn(0f, maxH - buttonSizePx)
+                                offsetX = newX
+                                offsetY = newY
+                            }
+                        }
+                ) {
+                    Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "聊天")
                 }
             }
+        }
+        // 放在 Scaffold 之后以确保覆盖层级
+        if (showGlobalChat) {
+            ChatDialog(onDismiss = { showGlobalChat = false })
         }
     }
 }

@@ -47,20 +47,6 @@ android {
         // }
     }
 
-//    packagingOptions {
-//        resources.excludes.addAll(
-//            listOf(
-//                "*/kotlin/**",
-//                "META-INF/DEPENDENCIES",
-//                "META-INF/NOTICE",
-//                "META-INF/LICENSE",
-//                "META-INF/LICENSE.txt",
-//                "META-INF/NOTICE.txt",
-//                "META-INF/*.version"
-//            )
-//        )
-//    }
-
 //    aaptOptions {
 //        additionalParameters("--no-compress", "png")
 //        additionalParameters("--no-compress")// 禁用压缩所有资源
@@ -107,9 +93,7 @@ android {
             buildConfigField("String", "BASE_URL", "\"http://192.168.5.222:8083/\"")
             buildConfigField("String", "H5_URL", "\"http://192.168.5.222:7755\"")
             buildConfigField(
-                "String",
-                "DATA_URL",
-                "\"http://192.168.5.222:8083/XRmN4gV/N9Ed7VEoU\""
+                "String", "DATA_URL", "\"http://192.168.5.222:8083/XRmN4gV/N9Ed7VEoU\""
             )
             buildConfigField("String", "APP_SECRET", "\"83D763DA4B8B0734\"")
             buildConfigField("boolean", "APP_DEBUG", "true")

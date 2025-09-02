@@ -2,7 +2,16 @@ package com.kira.learning.module.chat
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -11,17 +20,39 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -29,105 +60,148 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kira.learning.di.ChatConversation
-import com.kira.learning.extensions.gone
-import com.kira.learning.extensions.invisible
 import kotlinx.coroutines.launch
 
+@Composable
+fun rememberChatController(viewModel: ChatViewModel = hiltViewModel()): ChatController {
+    val state by viewModel.uiState.collectAsState()
+    val adv by viewModel.advanced.collectAsState()
+    val token by viewModel.token.collectAsState()
+    val conversations by viewModel.conversations.collectAsState()
+    return remember(state, adv, token, conversations) {
+        ChatController(
+            state = state,
+            adv = adv,
+            token = token,
+            conversations = conversations,
+            currentConversationId = viewModel.currentConversationId(),
+            onInput = viewModel::updateInput,
+            onSend = viewModel::send,
+            onClear = viewModel::reset,
+            onToggleMock = viewModel::toggleMock,
+            onToggleStreaming = viewModel::toggleStreaming,
+            onUpdateToken = viewModel::updateToken,
+            onNewConversation = viewModel::startNewConversation,
+            onSwitchConversation = viewModel::switchConversation,
+            onRenameConversation = viewModel::renameConversation,
+            onDeleteConversation = viewModel::deleteConversation,
+        )
+    }
+}
+
+data class ChatController(
+    val state: ChatUiState,
+    val adv: ChatAdvancedState,
+    val token: String,
+    val conversations: List<ChatConversation>,
+    val currentConversationId: Long?,
+    val onInput: (String) -> Unit,
+    val onSend: () -> Unit,
+    val onClear: () -> Unit,
+    val onToggleMock: () -> Unit,
+    val onToggleStreaming: () -> Unit,
+    val onUpdateToken: (String) -> Unit,
+    val onNewConversation: () -> Unit,
+    val onSwitchConversation: (Long) -> Unit,
+    val onRenameConversation: (Long, String) -> Unit,
+    val onDeleteConversation: (Long) -> Unit,
+)
+
+// 原 ChatRoute 简化使用 ChatScaffold
 @Composable
 fun ChatRoute(
     modifier: Modifier = Modifier,
     viewModel: ChatViewModel = hiltViewModel(),
     openDrawer: () -> Unit = {}
 ) {
-    // 收集来自 ViewModel 的 StateFlow（注意：collectAsState() 会在 composition 中订阅并触发重组）
-    val state by viewModel.uiState.collectAsState()              // 主 UI 状态（消息 / 输入 / 发送中 / 错误）
-    val adv by viewModel.advanced.collectAsState()               // 高级开关（Mock / Streaming）
-    val token by viewModel.token.collectAsState()                // 动态 token 展示
-    val conversations by viewModel.conversations.collectAsState()// 会话列表（流实时刷新）
-    val snackbar =
-        remember { SnackbarHostState() }              // SnackbarHostState 只需 remember 一份即可复用
-
-    // 当出现 error 字段时以副作用弹出 snackbar：LaunchedEffect(key) 只在 key 变化时启动协程
-    state.error?.let { err -> LaunchedEffect(err) { snackbar.showSnackbar(err) } }
-
-    // 将所有状态与事件回调下传给纯 UI ChatScreen，实现“State hoisting”
-    ChatScreen(
-        state = state,
-        adv = adv,
-        token = token,
-        conversations = conversations,
-        currentConversationId = viewModel.currentConversationId(),
-        onInput = viewModel::updateInput,
-        onSend = viewModel::send,
-        onClear = viewModel::reset,
-        onToggleMock = viewModel::toggleMock,
-        onToggleStreaming = viewModel::toggleStreaming,
-        onUpdateToken = viewModel::updateToken,
-        onNewConversation = viewModel::startNewConversation,
-        onSwitchConversation = viewModel::switchConversation,
-        onRenameConversation = viewModel::renameConversation,
-        onDeleteConversation = viewModel::deleteConversation,
+    val controller = rememberChatController(viewModel)
+    val snackbar = remember { SnackbarHostState() }
+    controller.state.error?.let { err -> LaunchedEffect(err) { snackbar.showSnackbar(err) } }
+    ChatScaffold(
+        controller = controller,
         snackbarHostState = snackbar,
         modifier = modifier,
         openDrawer = openDrawer
     )
 }
 
+/** 可嵌入任意容器的最小聊天面板：只含消息列表与输入框，不含顶栏/底状态/对话管理 */
+@Composable
+fun ChatPanel(
+    controller: ChatController,
+    modifier: Modifier = Modifier,
+    onCopyMessage: (String) -> Unit = {},
+    onShareMessage: (String) -> Unit = {},
+    onCopyAll: (() -> Unit)? = null,
+    onShareAll: (() -> Unit)? = null,
+    showDividerAboveInput: Boolean = true,
+) {
+    Column(modifier.fillMaxSize()) {
+        MessagesList(
+            list = controller.state.messages,
+            onCopy = onCopyMessage,
+            onShare = onShareMessage,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        )
+        if (showDividerAboveInput) HorizontalDivider()
+        InputBar(
+            value = controller.state.input,
+            onValueChange = controller.onInput,
+            onSend = controller.onSend,
+            sending = controller.state.sending,
+            canSend = controller.state.canSend,
+        )
+    }
+}
+
+/** 全功能 Scaffold（含会话列表、设置、顶栏、底部状态）。 */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ChatScreen(
-    state: ChatUiState,
-    adv: ChatAdvancedState,
-    token: String,
-    conversations: List<ChatConversation>,
-    currentConversationId: Long?,
-    onInput: (String) -> Unit,
-    onSend: () -> Unit,
-    onClear: () -> Unit,
-    onToggleMock: () -> Unit,
-    onToggleStreaming: () -> Unit,
-    onUpdateToken: (String) -> Unit,
-    onNewConversation: () -> Unit,
-    onSwitchConversation: (Long) -> Unit,
-    onRenameConversation: (Long, String) -> Unit,
-    onDeleteConversation: (Long) -> Unit,
-    snackbarHostState: SnackbarHostState,
+fun ChatScaffold(
+    controller: ChatController,
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     modifier: Modifier = Modifier,
     openDrawer: () -> Unit = {},
+    isDialog: Boolean = false,
 ) {
-    // —— 本地 UI 临时状态（与 ViewModel 分层）：弹窗开关、重命名输入、token 草稿 ——
     val clipboard = LocalClipboardManager.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    var showSettings by remember { mutableStateOf(false) }          // 设置弹窗
-    var showConversations by remember { mutableStateOf(false) }      // 会话列表底部 Sheet
-    var showRename by remember { mutableStateOf<Long?>(null) }       // 当前正在重命名的会话 id
-    var renameText by remember { mutableStateOf("") }               // 重命名输入框内容
-    var tokenDraft by remember(token) { mutableStateOf(token) }      // token 草稿（token 改变时重置）
+    var showSettings by remember { mutableStateOf(false) }
+    var showConversations by remember { mutableStateOf(false) }
+    var showRename by remember { mutableStateOf<Long?>(null) }
+    var renameText by remember { mutableStateOf("") }
+    var tokenDraft by remember(controller.token) { mutableStateOf(controller.token) }
 
-    // 纯 UI 逻辑：当前标题（防止当会话删除后 NPE）
     val currentTitle =
-        conversations.firstOrNull { it.id == currentConversationId }?.title ?: "AI 聊天"
+        controller.conversations.firstOrNull { it.id == controller.currentConversationId }?.title
+            ?: "AI 聊天"
 
-    // —— 小工具函数：复制 / 分享 / 清空 ——
     fun copyAll() {
-        if (state.messages.isEmpty()) return
-        clipboard.setText(AnnotatedString(state.messages.joinToString("\n") { (if (it.isUser) "我:" else "AI:") + it.content }))
+        if (controller.state.messages.isEmpty()) return
+        clipboard.setText(AnnotatedString(controller.state.messages.joinToString("\n") { (if (it.isUser) "我:" else "AI:") + it.content }))
         scope.launch { snackbarHostState.showSnackbar("已复制全部内容") }
     }
 
     fun shareAll() {
-        if (state.messages.isEmpty()) return
-        val all =
-            state.messages.joinToString("\n\n") { (if (it.isUser) "我:" else "AI:") + it.content }
-        context.startActivity(Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"; putExtra(
-            Intent.EXTRA_TEXT, all
-        )
-        }.let { Intent.createChooser(it, "分享会话") })
+        if (controller.state.messages.isEmpty()) return
+        val all = controller.state.messages.joinToString("\n\n") { (if (it.isUser) "我:" else "AI:") + it.content }
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, all)
+        }
+        context.startActivity(Intent.createChooser(sendIntent, "分享会话"))
+    }
+
+    fun clearAll() {
+        controller.onClear(); scope.launch { snackbarHostState.showSnackbar("已清空") }
     }
 
     fun copySingle(text: String) {
@@ -135,191 +209,114 @@ private fun ChatScreen(
     }
 
     fun shareSingle(text: String) {
-        context.startActivity(Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"; putExtra(
-            Intent.EXTRA_TEXT, text
-        )
-        }.let { Intent.createChooser(it, "分享消息") })
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, text)
+        }
+        context.startActivity(Intent.createChooser(sendIntent, "分享消息"))
     }
 
-    fun clearAll() {
-        onClear(); scope.launch { snackbarHostState.showSnackbar("已清空") }
-    }
-
-    // ModalBottomSheetState：skipPartiallyExpanded=true 直接全展开，减少中间态复杂度
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    // —— 会话列表 BottomSheet ——
     if (showConversations) {
         ModalBottomSheet(
-            onDismissRequest = { showConversations = false }, sheetState = sheetState
+            onDismissRequest = { showConversations = false },
+            sheetState = sheetState
         ) {
-            Column(
+            ConversationSheet(
+                conversations = controller.conversations,
+                currentConversationId = controller.currentConversationId,
+                onNewConversation = controller.onNewConversation,
+                onSwitchConversation = {
+                    controller.onSwitchConversation(it); showConversations = false
+                },
+                onRename = { id, title -> renameText = title; showRename = id },
+                onDelete = controller.onDeleteConversation,
+            )
+        }
+    }
+
+    if (showSettings) {
+        SettingsDialog(
+            show = showSettings,
+            onDismiss = { showSettings = false },
+            adv = controller.adv,
+            tokenDraft = tokenDraft,
+            onTokenDraftChange = { tokenDraft = it },
+            onSave = { controller.onUpdateToken(tokenDraft); showSettings = false },
+            onToggleMock = controller.onToggleMock,
+            onToggleStreaming = controller.onToggleStreaming,
+        )
+    }
+
+    showRename?.let { rid ->
+        RenameDialog(
+            id = rid,
+            name = renameText,
+            onNameChange = { renameText = it },
+            onConfirm = {
+                controller.onRenameConversation(
+                    rid,
+                    renameText.ifBlank { "未命名" }); showRename = null
+            },
+            onDismiss = { showRename = null }
+        )
+    }
+
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(
+                title = { Text(currentTitle) },
+                navigationIcon = {
+                    IconButton(onClick = openDrawer) {
+                        Icon(
+                            if (isDialog) Icons.Default.Close else Icons.Default.Menu,
+                            null
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { showConversations = true }) {
+                        Icon(
+                            Icons.Default.List,
+                            null
+                        )
+                    }
+                    IconButton(onClick = { showSettings = true }) {
+                        Icon(
+                            Icons.Default.MoreVert,
+                            null
+                        )
+                    }
+                }
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        bottomBar = {
+            Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                    .padding(horizontal = 12.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        "会话列表",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.weight(1f)
-                    )
-                    IconButton(onClick = { onNewConversation() }) { Icon(Icons.Default.Add, null) }
-                }
-                if (conversations.isEmpty()) {
-                    Text("暂无会话，点击右上 + 创建")
-                } else {
-                    conversations.forEach { conv ->
-                        val selected = conv.id == currentConversationId
-                        Surface(
-                            tonalElevation = if (selected) 4.dp else 0.dp,
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                Modifier
-                                    .padding(12.dp)
-                                    .clickable {
-                                        onSwitchConversation(conv.id); showConversations = false
-                                    }, verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column(Modifier.weight(1f)) {
-                                    Text(
-                                        conv.title,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        maxLines = 1
-                                    )
-                                    if (conv.lastPreview.isNotBlank()) Text(
-                                        conv.lastPreview,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        maxLines = 1
-                                    )
-                                }
-                                IconButton(onClick = {
-                                    renameText = conv.title; showRename = conv.id
-                                }) { Icon(Icons.Default.Edit, null) }
-                                IconButton(onClick = { onDeleteConversation(conv.id) }) {
-                                    Icon(
-                                        Icons.Default.Close, null
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                Spacer(Modifier.height(8.dp))
+                AssistChip(
+                    onClick = {},
+                    label = { Text(if (controller.adv.useMock) "Mock" else "Real") })
+                AssistChip(
+                    onClick = {},
+                    label = { Text(if (controller.adv.streaming) "Stream" else "Once") })
+                if (controller.token.isBlank()) AssistChip(
+                    onClick = { showSettings = true },
+                    label = { Text("Token未设") })
             }
         }
-    }
-
-    // —— 设置弹窗：Mock / Streaming 开关与 Token ——
-    if (showSettings) {
-        AlertDialog(
-            onDismissRequest = { showSettings = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    onUpdateToken(tokenDraft); showSettings = false
-                }) { Text("保存") }
-            },
-            dismissButton = { TextButton(onClick = { showSettings = false }) { Text("关闭") } },
-            title = { Text("设置") },
-            text = {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("Mock模式", Modifier.weight(1f))
-                        Switch(checked = adv.useMock, onCheckedChange = { onToggleMock() })
-                    }
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("流式输出", Modifier.weight(1f))
-                        Switch(checked = adv.streaming, onCheckedChange = { onToggleStreaming() })
-                    }
-                    OutlinedTextField(
-                        value = tokenDraft,
-                        onValueChange = { tokenDraft = it },
-                        label = { Text("API Token") },
-                        singleLine = true,
-                        supportingText = { if (tokenDraft.isBlank()) Text("留空将使用注解中的默认密钥") })
-                }
-            })
-    }
-
-    // —— 重命名会话对话框 ——
-    showRename?.let { rid ->
-        AlertDialog(
-            onDismissRequest = { showRename = null },
-            confirmButton = {
-                TextButton(onClick = {
-                    onRenameConversation(rid, renameText.ifBlank { "未命名" }); showRename = null
-                }) { Text("确定") }
-            },
-            dismissButton = { TextButton(onClick = { showRename = null }) { Text("取消") } },
-            title = { Text("重命名会话") },
-            text = {
-                OutlinedTextField(
-                    value = renameText, onValueChange = { renameText = it }, singleLine = true
-                )
-            })
-    }
-
-    // Scaffold：TopBar + Bottom 状态条 + 消息列表 + 输入栏
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(currentTitle) }, navigationIcon = {
-            IconButton(onClick = openDrawer) {
-                Icon(
-                    Icons.Default.Menu, contentDescription = "menu"
-                )
-            }
-        }, actions = {
-            // Action 区：会话 / 设置 / 全局操作（复制全部 / 分享全部 / 清空）
-            IconButton(onClick = { showConversations = true }) {
-                Icon(
-                    Icons.Default.List, null
-                )
-            }
-            IconButton(onClick = { showSettings = true }) {
-                Icon(
-                    Icons.Default.MoreVert, null
-                )
-            }
-            IconButton(
-                modifier = Modifier.gone(true),
-                onClick = { copyAll() }, enabled = state.messages.isNotEmpty()
-            ) { Icon(Icons.Default.ContentCopy, null) }
-            IconButton(
-                modifier = Modifier.gone(true),
-                onClick = { shareAll() }, enabled = state.messages.isNotEmpty()
-            ) { Icon(Icons.Default.Share, null) }
-            IconButton(
-                modifier = Modifier.gone(true),
-                onClick = { clearAll() },
-                enabled = state.messages.isNotEmpty() && !state.sending
-            ) { Icon(Icons.Default.Delete, null) }
-        })
-    }, snackbarHost = { SnackbarHost(snackbarHostState) }, bottomBar = {
-        // 底部状态条：展示当前模式（Mock / Stream），缺失 Token 时提醒
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            AssistChip(onClick = { }, label = { Text(if (adv.useMock) "Mock" else "Real") })
-            AssistChip(onClick = { }, label = { Text(if (adv.streaming) "Stream" else "Once") })
-            if (token.isBlank()) AssistChip(
-                onClick = { showSettings = true },
-                label = { Text("Token未设") })
-        }
-    }) { padding ->
-        // Column 主体：消息列表(权重=1) + 分隔线 + 输入栏
-        Column(
-            modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
+    ) { padding ->
+        Column(Modifier
+            .fillMaxSize()
+            .padding(padding)) {
             MessagesList(
-                list = state.messages,
+                list = controller.state.messages,
                 onCopy = ::copySingle,
                 onShare = ::shareSingle,
                 modifier = Modifier
@@ -328,16 +325,174 @@ private fun ChatScreen(
             )
             HorizontalDivider()
             InputBar(
-                value = state.input,
-                onValueChange = onInput,
-                onSend = onSend,
-                sending = state.sending,
-                canSend = state.canSend,
+                value = controller.state.input,
+                onValueChange = controller.onInput,
+                onSend = controller.onSend,
+                sending = controller.state.sending,
+                canSend = controller.state.canSend,
             )
         }
     }
 }
 
+/** 可在任意地方以全屏 Dialog 的形式打开聊天 */
+@Composable
+fun ChatDialog(
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+    controller: ChatController = rememberChatController(),
+    usePlatformDefaultWidth: Boolean = false,
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
+) {
+    controller.state.error?.let { err -> LaunchedEffect(err) { snackbarHostState.showSnackbar(err) } }
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = usePlatformDefaultWidth)
+    ) {
+        Surface(
+            shape = RoundedCornerShape(12.dp),
+            tonalElevation = 4.dp,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            ChatScaffold(
+                controller = controller,
+                snackbarHostState = snackbarHostState,
+                modifier = modifier,
+                openDrawer = { onDismiss() },
+                isDialog = true,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ConversationSheet(
+    conversations: List<ChatConversation>,
+    currentConversationId: Long?,
+    onNewConversation: () -> Unit,
+    onSwitchConversation: (Long) -> Unit,
+    onRename: (Long, String) -> Unit,
+    onDelete: (Long) -> Unit,
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                "会话列表",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.weight(1f)
+            )
+            IconButton(onClick = onNewConversation) { Icon(Icons.Default.Add, null) }
+        }
+        if (conversations.isEmpty()) {
+            Text("暂无会话，点击右上 + 创建")
+        } else {
+            conversations.forEach { conv ->
+                val selected = conv.id == currentConversationId
+                Surface(
+                    tonalElevation = if (selected) 4.dp else 0.dp,
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        Modifier
+                            .padding(12.dp)
+                            .clickable { onSwitchConversation(conv.id) },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                conv.title,
+                                style = MaterialTheme.typography.bodyMedium,
+                                maxLines = 1
+                            )
+                            if (conv.lastPreview.isNotBlank()) Text(
+                                conv.lastPreview,
+                                style = MaterialTheme.typography.bodySmall,
+                                maxLines = 1
+                            )
+                        }
+                        IconButton(onClick = {
+                            onRename(
+                                conv.id,
+                                conv.title
+                            )
+                        }) { Icon(Icons.Default.Edit, null) }
+                        IconButton(onClick = { onDelete(conv.id) }) {
+                            Icon(
+                                Icons.Default.Close,
+                                null
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Spacer(Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun SettingsDialog(
+    show: Boolean,
+    onDismiss: () -> Unit,
+    adv: ChatAdvancedState,
+    tokenDraft: String,
+    onTokenDraftChange: (String) -> Unit,
+    onSave: () -> Unit,
+    onToggleMock: () -> Unit,
+    onToggleStreaming: () -> Unit,
+) {
+    if (!show) return
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = { TextButton(onClick = onSave) { Text("保存") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("关闭") } },
+        title = { Text("设置") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("Mock模式", Modifier.weight(1f)); Switch(
+                    checked = adv.useMock,
+                    onCheckedChange = { onToggleMock() })
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("流式输出", Modifier.weight(1f)); Switch(
+                    checked = adv.streaming,
+                    onCheckedChange = { onToggleStreaming() })
+                }
+                OutlinedTextField(
+                    value = tokenDraft,
+                    onValueChange = onTokenDraftChange,
+                    label = { Text("API Token") },
+                    singleLine = true,
+                    supportingText = { if (tokenDraft.isBlank()) Text("留空将使用注解中的默认密钥") })
+            }
+        }
+    )
+}
+
+@Composable
+private fun RenameDialog(
+    id: Long,
+    name: String,
+    onNameChange: (String) -> Unit,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = { TextButton(onClick = onConfirm) { Text("确定") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } },
+        title = { Text("重命名会话") },
+        text = { OutlinedTextField(value = name, onValueChange = onNameChange, singleLine = true) }
+    )
+}
+
+// 原 MessageList / MessageBubble / InputBar 保留在文件底部
 @Composable
 private fun MessagesList(
     list: List<ChatMessageUi>,
