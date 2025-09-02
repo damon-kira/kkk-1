@@ -1,10 +1,12 @@
 package com.kira.learning.network
 
+import com.kira.ui.core.storage.keyvalue.SettingsManager
+import java.io.IOException
+import java.net.SocketTimeoutException
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import java.io.IOException
-import java.net.SocketTimeoutException
 
 /** 添加通用 Header */
 class HeaderInterceptor: Interceptor {
@@ -49,6 +51,21 @@ class AuthInterceptor(private val provider: AuthTokenProvider): Interceptor {
             original.newBuilder().addHeader("Authorization", "Bearer $token").build()
         } else original
         return chain.proceed(newReq)
+    }
+}
+
+class Logout401Interceptor(
+    private val settings: SettingsManager,
+    private val provider: InMemoryAuthTokenProvider,
+): Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val resp = chain.proceed(chain.request())
+        if (resp.code == 401) {
+            settings.apiToken = null
+            settings.apiTokenExpireAt = 0
+            provider.updateToken(null)
+        }
+        return resp
     }
 }
 

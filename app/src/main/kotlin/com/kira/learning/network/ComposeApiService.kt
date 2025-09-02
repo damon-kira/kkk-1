@@ -2,6 +2,8 @@ package com.kira.learning.network
 
 import com.common.lib.net.bean.BaseResponse
 import com.common.lib.net.bean.Document
+import com.kira.learning.module.auth.LoginRequest
+import com.kira.learning.module.auth.LoginResponse
 import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.model.dao.AIResponseInfo
 import com.kira.learning.model.res.RspResult
@@ -48,4 +50,7 @@ interface ComposeApiService {
 
     @PUT("/compose/profile/settings")
     suspend fun updateSettings(@Body settings: AppSettingsDTO): AppSettingsDTO
+
+    @POST("login/login")
+    suspend fun login(@Body body: LoginRequest): LoginResponse
 }

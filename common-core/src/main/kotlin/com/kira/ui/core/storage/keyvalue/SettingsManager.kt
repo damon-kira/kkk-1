@@ -68,6 +68,7 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
 
         // API
         const val KEY_API_TOKEN = "API_TOKEN"
+        const val KEY_API_TOKEN_EXPIRE = "API_TOKEN_EXPIRE" // 毫秒时间戳
     }
 
     private val fileName: String
@@ -197,6 +198,10 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
     var apiToken: String?
         get() = sharedPreferences.getString(KEY_API_TOKEN, null)
         set(value) = sharedPreferences.edit().putString(KEY_API_TOKEN, value).apply()
+
+    var apiTokenExpireAt: Long
+        get() = sharedPreferences.getLong(KEY_API_TOKEN_EXPIRE, 0L)
+        set(value) = sharedPreferences.edit().putLong(KEY_API_TOKEN_EXPIRE, value).apply()
 
     fun load(key: String, defaultValue: String): String {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue

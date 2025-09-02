@@ -90,7 +90,7 @@ android {
 
         }
         getByName("debug") {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.5.222:8083/\"")
+            buildConfigField("String", "BASE_URL", "\"https://core.staging.kira-learning.com/\"")
             buildConfigField("String", "H5_URL", "\"http://192.168.5.222:7755\"")
             buildConfigField(
                 "String", "DATA_URL", "\"http://192.168.5.222:8083/XRmN4gV/N9Ed7VEoU\""

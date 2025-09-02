@@ -9,6 +9,7 @@ import com.kira.learning.utils.image.ProvideImageTheme
 import com.kira.learning.utils.image.ImageTheme
 import androidx.compose.material3.MaterialTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.kira.learning.module.auth.AppRoot
 
 @AndroidEntryPoint
 internal class MainActivity : ComponentActivity() {
@@ -25,7 +26,7 @@ internal class MainActivity : ComponentActivity() {
                     iconTint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             ) {
-                MainScreen(savedInstanceState)
+                AppRoot(savedInstanceState)
             }
         }
     }
