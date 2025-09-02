@@ -13,7 +13,7 @@ class AuthRepository @Inject constructor(
     private val inMemory: InMemoryAuthTokenProvider
 ) {
     companion object {
-        private const val TOKEN_TTL_MS = 60_000L
+        private const val TOKEN_TTL_MS = 1_800_000L
     }
 
     suspend fun login(email: String, pwd: String): Result<Unit> = withContext(Dispatchers.IO) {

@@ -52,7 +52,7 @@ class ChatViewModel @Inject constructor(
     val advanced: StateFlow<ChatAdvancedState> = _adv.asStateFlow()
 
     // Token 状态（设置里修改 -> 更新 OkHttp）
-    private val _token = MutableStateFlow(settings.apiToken ?: "")
+    private val _token = MutableStateFlow(settings.aiToken ?: "")
     val token: StateFlow<String> = _token.asStateFlow()
 
     init {
@@ -189,7 +189,14 @@ class ChatViewModel @Inject constructor(
                     is ApiResult.Success -> _uiState.update { s ->
                         s.copy(messages = s.messages.map { m -> if (m.pending) m.copy(content = res.data) else m })
                     }
-                    is ApiResult.Error -> finalizePendingWith(ErrorMapper.map(res.code, res.message))
+
+                    is ApiResult.Error -> finalizePendingWith(
+                        ErrorMapper.map(
+                            res.code,
+                            res.message
+                        )
+                    )
+
                     ApiResult.NetworkUnavailable -> finalizePendingWith("网络不可用")
                 }
             }
@@ -247,6 +254,7 @@ class ChatViewModel @Inject constructor(
                     )
                     touchConversationPreview(r.data)
                 }
+
                 is ApiResult.Error -> {
                     val mapped = ErrorMapper.map(r.code, r.message)
                     chatMessageDao.insertMessage(
@@ -258,6 +266,7 @@ class ChatViewModel @Inject constructor(
                     )
                     _uiState.update { s -> s.copy(error = mapped) }
                 }
+
                 ApiResult.NetworkUnavailable -> {
                     chatMessageDao.insertMessage(
                         ChatMessage(
@@ -288,7 +297,7 @@ class ChatViewModel @Inject constructor(
     }
 
     fun updateToken(token: String) {
-        settings.apiToken = token; authProvider.updateToken(token); _token.value = token
+        settings.aiToken = token; authProvider.updateToken(token); _token.value = token
     }
 
     fun setToken(token: String) = updateToken(token)

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.kira.ui.core.theme.Theme
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import androidx.core.content.edit
 
 class SettingsManager @Inject constructor(@ApplicationContext private val context: Context) {
 
@@ -67,6 +68,7 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
         const val KEY_FILESYSTEM = "FILESYSTEM"
 
         // API
+        const val KEY_AI_TOKEN = "AI_TOKEN"
         const val KEY_API_TOKEN = "API_TOKEN"
         const val KEY_API_TOKEN_EXPIRE = "API_TOKEN_EXPIRE" // 毫秒时间戳
     }
@@ -81,137 +83,142 @@ class SettingsManager @Inject constructor(@ApplicationContext private val contex
 
     var theme: String
         get() = sharedPreferences.getString(KEY_THEME, Theme.DARK.value) ?: Theme.DARK.value
-        set(value) = sharedPreferences.edit().putString(KEY_THEME, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_THEME, value) }
     var colorScheme: String
         get() = sharedPreferences.getString(KEY_COLOR_SCHEME, "DARCULA") ?: "DARCULA"
-        set(value) = sharedPreferences.edit().putString(KEY_COLOR_SCHEME, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_COLOR_SCHEME, value) }
     var fullScreenMode: Boolean
         get() = sharedPreferences.getBoolean(KEY_FULLSCREEN_MODE, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_FULLSCREEN_MODE, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_FULLSCREEN_MODE, value) }
 
     var confirmExit: Boolean
         get() = sharedPreferences.getBoolean(KEY_CONFIRM_EXIT, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_CONFIRM_EXIT, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_CONFIRM_EXIT, value) }
 
     var fontSize: Int
         get() = sharedPreferences.getInt(KEY_FONT_SIZE, 14)
-        set(value) = sharedPreferences.edit().putInt(KEY_FONT_SIZE, value).apply()
+        set(value) = sharedPreferences.edit { putInt(KEY_FONT_SIZE, value) }
     var fontType: String
         get() = sharedPreferences.getString(
             KEY_FONT_TYPE, "file:///android_asset/fonts/jetbrains_mono.ttf"
         ) ?: "file:///android_asset/fonts/jetbrains_mono.ttf"
-        set(value) = sharedPreferences.edit().putString(KEY_FONT_TYPE, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_FONT_TYPE, value) }
 
     var selectedUuid: String
         get() = sharedPreferences.getString(KEY_SELECTED_DOCUMENT_ID, "whatever") ?: "whatever"
-        set(value) = sharedPreferences.edit().putString(KEY_SELECTED_DOCUMENT_ID, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_SELECTED_DOCUMENT_ID, value) }
 
     var wordWrap: Boolean
         get() = sharedPreferences.getBoolean(KEY_WORD_WRAP, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_WORD_WRAP, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_WORD_WRAP, value) }
     var codeCompletion: Boolean
         get() = sharedPreferences.getBoolean(KEY_CODE_COMPLETION, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_CODE_COMPLETION, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_CODE_COMPLETION, value) }
 
     /*var errorHighlighting: Boolean
         get() = sharedPreferences.getBoolean(KEY_ERROR_HIGHLIGHTING, true)
         set(value) = sharedPreferences.edit().putBoolean(KEY_ERROR_HIGHLIGHTING, value).apply()*/
     var pinchZoom: Boolean
         get() = sharedPreferences.getBoolean(KEY_PINCH_ZOOM, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_PINCH_ZOOM, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_PINCH_ZOOM, value) }
     var lineNumbers: Boolean
         get() = sharedPreferences.getBoolean(KEY_LINE_NUMBERS, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_LINE_NUMBERS, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_LINE_NUMBERS, value) }
     var highlightCurrentLine: Boolean
         get() = sharedPreferences.getBoolean(KEY_HIGHLIGHT_CURRENT_LINE, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_HIGHLIGHT_CURRENT_LINE, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_HIGHLIGHT_CURRENT_LINE, value) }
     var highlightMatchingDelimiters: Boolean
         get() = sharedPreferences.getBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, value)
-            .apply()
+        set(value) = sharedPreferences.edit {
+            putBoolean(KEY_HIGHLIGHT_MATCHING_DELIMITERS, value)
+        }
     var readOnly: Boolean
         get() = sharedPreferences.getBoolean(KEY_READ_ONLY, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_READ_ONLY, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_READ_ONLY, value) }
 
     var autoSaveFiles: Boolean
         get() = sharedPreferences.getBoolean(KEY_AUTO_SAVE_FILES, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_AUTO_SAVE_FILES, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_AUTO_SAVE_FILES, value) }
 
     var extendedKeyboard: Boolean
         get() = sharedPreferences.getBoolean(KEY_USE_EXTENDED_KEYBOARD, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_USE_EXTENDED_KEYBOARD, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_USE_EXTENDED_KEYBOARD, value) }
     var keyboardPreset: String
         get() = sharedPreferences.getString(KEY_KEYBOARD_PRESET, "{}();,.=|&![]<>+-/*?:_")
             ?: "{}();,.=|&![]<>+-/*?:_"
-        set(value) = sharedPreferences.edit().putString(KEY_KEYBOARD_PRESET, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_KEYBOARD_PRESET, value) }
     var softKeyboard: Boolean
         get() = sharedPreferences.getBoolean(KEY_USE_SOFT_KEYBOARD, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_USE_SOFT_KEYBOARD, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_USE_SOFT_KEYBOARD, value) }
 
     var autoIndentation: Boolean
         get() = sharedPreferences.getBoolean(KEY_AUTO_INDENTATION, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_AUTO_INDENTATION, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_AUTO_INDENTATION, value) }
     var autoCloseBrackets: Boolean
         get() = sharedPreferences.getBoolean(KEY_AUTO_CLOSE_BRACKETS, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_AUTO_CLOSE_BRACKETS, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_AUTO_CLOSE_BRACKETS, value) }
     var autoCloseQuotes: Boolean
         get() = sharedPreferences.getBoolean(KEY_AUTO_CLOSE_QUOTES, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_AUTO_CLOSE_QUOTES, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_AUTO_CLOSE_QUOTES, value) }
 
     var useSpacesInsteadOfTabs: Boolean
         get() = sharedPreferences.getBoolean(KEY_USE_SPACES_NOT_TABS, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_USE_SPACES_NOT_TABS, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_USE_SPACES_NOT_TABS, value) }
     var tabWidth: Int
         get() = sharedPreferences.getInt(KEY_TAB_WIDTH, 4)
-        set(value) = sharedPreferences.edit().putInt(KEY_TAB_WIDTH, value).apply()
+        set(value) = sharedPreferences.edit { putInt(KEY_TAB_WIDTH, value) }
 
     var encodingAutoDetect: Boolean
         get() = sharedPreferences.getBoolean(KEY_ENCODING_AUTO_DETECT, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_ENCODING_AUTO_DETECT, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_ENCODING_AUTO_DETECT, value) }
     var encodingForOpening: String
         get() = sharedPreferences.getString(KEY_ENCODING_FOR_OPENING, "UTF-8") ?: "UTF-8"
-        set(value) = sharedPreferences.edit().putString(KEY_ENCODING_FOR_OPENING, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_ENCODING_FOR_OPENING, value) }
     var encodingForSaving: String
         get() = sharedPreferences.getString(KEY_ENCODING_FOR_SAVING, "UTF-8") ?: "UTF-8"
-        set(value) = sharedPreferences.edit().putString(KEY_ENCODING_FOR_SAVING, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_ENCODING_FOR_SAVING, value) }
 
     var lineBreakForSaving: String
         get() = sharedPreferences.getString(KEY_LINEBREAK_FOR_SAVING, "2") ?: "2"
-        set(value) = sharedPreferences.edit().putString(KEY_LINEBREAK_FOR_SAVING, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_LINEBREAK_FOR_SAVING, value) }
 
     var showHidden: Boolean
         get() = sharedPreferences.getBoolean(KEY_SHOW_HIDDEN_FILES, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_SHOW_HIDDEN_FILES, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_SHOW_HIDDEN_FILES, value) }
     var foldersOnTop: Boolean
         get() = sharedPreferences.getBoolean(KEY_FOLDERS_ON_TOP, true)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_FOLDERS_ON_TOP, value).apply()
+        set(value) = sharedPreferences.edit { putBoolean(KEY_FOLDERS_ON_TOP, value) }
     var viewMode: String
         get() = sharedPreferences.getString(KEY_VIEW_MODE, "0") ?: "0"
-        set(value) = sharedPreferences.edit().putString(KEY_VIEW_MODE, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_VIEW_MODE, value) }
     var sortMode: String
         get() = sharedPreferences.getString(KEY_SORT_MODE, "0") ?: "0"
-        set(value) = sharedPreferences.edit().putString(KEY_SORT_MODE, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_SORT_MODE, value) }
     var filesystem: String
         get() = sharedPreferences.getString(KEY_FILESYSTEM, "local") ?: "local"
-        set(value) = sharedPreferences.edit().putString(KEY_FILESYSTEM, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_FILESYSTEM, value) }
+
+    var aiToken: String?
+        get() = sharedPreferences.getString(KEY_AI_TOKEN, null)
+        set(value) = sharedPreferences.edit { putString(KEY_AI_TOKEN, value) }
 
     var apiToken: String?
         get() = sharedPreferences.getString(KEY_API_TOKEN, null)
-        set(value) = sharedPreferences.edit().putString(KEY_API_TOKEN, value).apply()
+        set(value) = sharedPreferences.edit { putString(KEY_API_TOKEN, value) }
 
     var apiTokenExpireAt: Long
         get() = sharedPreferences.getLong(KEY_API_TOKEN_EXPIRE, 0L)
-        set(value) = sharedPreferences.edit().putLong(KEY_API_TOKEN_EXPIRE, value).apply()
+        set(value) = sharedPreferences.edit { putLong(KEY_API_TOKEN_EXPIRE, value) }
 
     fun load(key: String, defaultValue: String): String {
         return sharedPreferences.getString(key, defaultValue) ?: defaultValue
     }
 
     fun update(key: String, value: String) {
-        sharedPreferences.edit().putString(key, value).apply()
+        sharedPreferences.edit { putString(key, value) }
     }
 
     fun remove(key: String) {
-        sharedPreferences.edit().remove(key).apply()
+        sharedPreferences.edit { remove(key) }
     }
 }

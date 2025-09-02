@@ -69,7 +69,7 @@ generativeai = "0.9.0-1.1.0"
 colorpicker = "2.3.0"
 colorpickerCompose = "1.1.2"
 navigationCompose = "2.9.0"
-chaquoPython = "16.1.0"
+#chaquoPython = "16.1.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -82,7 +82,7 @@ services = { id = "com.google.gms.google-services", version.ref = "services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
+#chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
 
 [libraries]
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }

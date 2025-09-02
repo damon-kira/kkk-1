@@ -21,7 +21,6 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
 
-        //  vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
 
         // resConfigs("en") // 资源配置限制
@@ -49,7 +48,7 @@ android {
 
 //    aaptOptions {
 //        additionalParameters("--no-compress", "png")
-//        additionalParameters("--no-compress")// 禁用压缩所有资源
+//        additionalParameters("--no-compress")// 禁止压缩所有资源
 //    }
 
     buildFeatures {
@@ -136,15 +135,6 @@ fun time(): String {
 }
 
 dependencies {
-    // 本地库依赖
-    implementation(project(":common-base"))
-    implementation(project(":feature-camera"))
-    implementation(project(":sdks:util"))
-    implementation(project(":compose-view-stedit"))
-    implementation(project(":module-player"))
-    implementation(project(":view-image"))
-    implementation(project(":view-richtext"))
-    implementation(project(":feature-upload"))
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
@@ -174,6 +164,17 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.hilt.workmanager)
     ksp(libs.hilt.android.compiler)
+
+    implementation(project(":feature-camera"))
+    implementation(project(":sdks:util"))
+    implementation(project(":compose-view-stedit"))
+    implementation(project(":module-player"))
+    implementation(project(":view-image"))
+    implementation(project(":view-richtext"))
+    implementation(project(":feature-upload"))
+    implementation(project(":common-base"))
+    implementation(project(":common-core"))
+    implementation(project(":common-ui"))
     implementation(project(":feature-changelog:api"))
     implementation(project(":feature-changelog:impl"))
     implementation(project(":feature-editor:api"))
@@ -190,8 +191,6 @@ dependencies {
     implementation(project(":feature-shortcuts:impl"))
     implementation(project(":feature-themes:api"))
     implementation(project(":feature-themes:impl"))
-    implementation(project(":common-core"))
-    implementation(project(":common-ui"))
     implementation(project(":filesystems:filesystem-base"))
     implementation(project(":compose-view-chat"))
     // Debug工具
