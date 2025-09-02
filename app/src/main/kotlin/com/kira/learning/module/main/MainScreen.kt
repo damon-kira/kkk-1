@@ -1,6 +1,7 @@
 package com.kira.learning.module.main
 
 import android.os.Bundle
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Home
@@ -40,14 +41,13 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import kotlin.math.roundToInt
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.mutableFloatStateOf
+import com.kira.learning.module.assistant.AiAssistantRoute
 import com.kira.learning.module.chat.ChatRoute
 import com.kira.learning.module.chat.ChatDialog
 import com.kira.learning.module.navigation.NavigationDemoRoute
@@ -62,6 +62,7 @@ private object Routes {
     const val NAV_DEMO = "nav_demo"
     const val UI_DEMO = "ui_demo"
     const val OCR = "ocr" // 图片识别
+    const val ASSISTANT = "assistant" // AI 助手
 }
 
 data class BottomItem(
@@ -77,7 +78,6 @@ internal fun MainScreen(
     savedInstanceState: Bundle? = null,
     viewModel: MainViewModel = hiltViewModel(),
 ) {
-    val viewState by viewModel.viewState.collectAsStateWithLifecycle() // 保留命名，后续可能使用
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -96,68 +96,61 @@ internal fun MainScreen(
     )
 
     ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerContent(
-                currentRoute = currentDestination?.route,
-                onNavigateProfile = {
-                    scope.launch { drawerState.close() }
-                    navController.navigate(Routes.PROFILE) {
-                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                onNavigateNavDemo = {
-                    scope.launch { drawerState.close() }
-                    navController.navigate(Routes.NAV_DEMO) {
-                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                onNavigateUiDemo = {
-                    scope.launch { drawerState.close() }
-                    navController.navigate(Routes.UI_DEMO) {
-                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                onNavigateOcr = {
-                    scope.launch { drawerState.close() }
-                    navController.navigate(Routes.OCR) {
-                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+        drawerState = drawerState, drawerContent = {
+            DrawerContent(currentRoute = currentDestination?.route, onNavigateProfile = {
+                scope.launch { drawerState.close() }
+                navController.navigate(Routes.PROFILE) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
                 }
-            )
-        }
-    ) {
+            }, onNavigateAssistant = {
+                scope.launch { drawerState.close() }
+                navController.navigate(Routes.ASSISTANT) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }, onNavigateNavDemo = {
+                scope.launch { drawerState.close() }
+                navController.navigate(Routes.NAV_DEMO) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }, onNavigateUiDemo = {
+                scope.launch { drawerState.close() }
+                navController.navigate(Routes.UI_DEMO) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }, onNavigateOcr = {
+                scope.launch { drawerState.close() }
+                navController.navigate(Routes.OCR) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            })
+        }) {
         Scaffold(
             bottomBar = {
                 NavigationBar {
                     bottomItems.forEach { item ->
                         val selected = currentDestination.isRouteInHierarchy(item.route)
-                        NavigationBarItem(
-                            selected = selected,
-                            onClick = {
-                                navController.navigate(item.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
+                        NavigationBarItem(selected = selected, onClick = {
+                            navController.navigate(item.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
                                 }
-                            },
-                            icon = item.icon,
-                            label = { Text(item.label) }
-                        )
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }, icon = item.icon, label = { Text(item.label) })
                     }
                 }
-            }
-        ) { padding ->
+            }) { padding ->
             BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxSize()
@@ -189,24 +182,35 @@ internal fun MainScreen(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.PROFILE) { ProfileRoute(Modifier.fillMaxSize(), onBack = null) }
+                    composable(Routes.PROFILE) {
+                        ProfileRoute(
+                            Modifier.fillMaxSize(), onBack = null
+                        )
+                    }
                     composable(Routes.NAV_DEMO) {
                         NavigationDemoRoute(
-                            modifier = Modifier.fillMaxSize(),
-                            openDrawer = { scope.launch { drawerState.open() } }
-                        )
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
                     }
                     composable(Routes.UI_DEMO) {
                         UiComponentsDemoRoute(
-                            modifier = Modifier.fillMaxSize(),
-                            openDrawer = { scope.launch { drawerState.open() } }
-                        )
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
                     }
                     composable(Routes.OCR) {
                         ImageOcrRoute(
-                            modifier = Modifier.fillMaxSize(),
-                            openDrawer = { scope.launch { drawerState.open() } }
-                        )
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
+                    }
+                    composable(Routes.ASSISTANT) {
+                        AiAssistantRoute(Modifier.fillMaxSize(), navigate = { route ->
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true; restoreState = true
+                            }
+                        })
                     }
                 }
 
@@ -235,17 +239,22 @@ internal fun MainScreen(
                 FloatingActionButton(
                     onClick = { showGlobalChat = true },
                     modifier = Modifier
-                        .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+                        .offset {
+                            IntOffset(
+                                offsetX.roundToInt(), offsetY.roundToInt()
+                            )
+                        }
                         .pointerInput(maxW, maxH) {
                             detectDragGestures { change, dragAmount ->
                                 change.consume()
-                                val newX = (offsetX + dragAmount.x).coerceIn(0f, maxW - buttonSizePx)
-                                val newY = (offsetY + dragAmount.y).coerceIn(0f, maxH - buttonSizePx)
+                                val newX =
+                                    (offsetX + dragAmount.x).coerceIn(0f, maxW - buttonSizePx)
+                                val newY =
+                                    (offsetY + dragAmount.y).coerceIn(0f, maxH - buttonSizePx)
                                 offsetX = newX
                                 offsetY = newY
                             }
-                        }
-                ) {
+                        }) {
                     Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = "聊天")
                 }
             }
@@ -257,10 +266,12 @@ internal fun MainScreen(
     }
 }
 
+// 修改抽屉，添加 AI助手 项
 @Composable
 private fun DrawerContent(
     currentRoute: String?,
     onNavigateProfile: () -> Unit,
+    onNavigateAssistant: () -> Unit,
     onNavigateNavDemo: () -> Unit,
     onNavigateUiDemo: () -> Unit,
     onNavigateOcr: () -> Unit,
@@ -279,8 +290,7 @@ private fun DrawerContent(
                     Spacer(Modifier.width(12.dp))
                     Column {
                         Text(
-                            s.profile.name,
-                            style = MaterialTheme.typography.titleMedium
+                            s.profile.name, style = MaterialTheme.typography.titleMedium
                         ); Text(s.profile.email, style = MaterialTheme.typography.bodySmall)
                     }
                 }
@@ -288,8 +298,7 @@ private fun DrawerContent(
             }
 
             is ProfileUiState.Loading -> Row(
-                Modifier.padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically
             ) {
                 CircularProgressIndicator(Modifier.size(32.dp)); Spacer(Modifier.width(12.dp)); Text(
                 "加载中"
@@ -302,6 +311,12 @@ private fun DrawerContent(
             label = { Text("个人信息") },
             selected = currentRoute == Routes.PROFILE,
             onClick = onNavigateProfile,
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+        NavigationDrawerItem(
+            label = { Text("AI助手") },
+            selected = currentRoute == Routes.ASSISTANT,
+            onClick = onNavigateAssistant,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
