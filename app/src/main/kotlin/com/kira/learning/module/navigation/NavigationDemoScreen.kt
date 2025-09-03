@@ -51,7 +51,6 @@ fun NavigationDemoRoute(
             DemoItem("Upload(废弃)", enabled = false, action = { }),
             DemoItem("Logout", action = { showLogoutConfirm = true }),
             DemoItem("Crash Test", action = { showCrashConfirm = true }),
-            DemoItem("Image Zoom(正在迁移)", action = { Launch.skipZoomImageActivity(context) }),
             DemoItem("Step Bar", action = { Launch.skipStepBarViewActivity(context) }),
             DemoItem("Code Playground", action = { Launch.skipCodePlaygroundActivity(context) }),
             DemoItem("Super Editor", action = { Launch.skipSuperEditorActivity(context) }),

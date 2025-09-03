@@ -8,7 +8,6 @@ import com.kira.learning.LoanApplication.Companion.getAppContext
 import com.kira.learning.xml.modules.codeeditor.CodePlaygroundActivity
 import com.kira.learning.xml.modules.player.PlayerManageActivity
 import com.kira.learning.xml.modules.python.CodingActivity
-import com.kira.learning.xml.modules.richview.ZoomImageActivity
 import com.kira.learning.xml.modules.stepbar.StepBarViewActivity
 import com.kira.learning.xml.modules.supereditor.SuperEditorActivity
 import com.util.lib.expand.isNotEmpty
@@ -26,10 +25,6 @@ object Launch {
 
     fun skipPlayerManageActivity(context: Context) {
         launch(context, PlayerManageActivity::class.java)
-    }
-
-    fun skipZoomImageActivity(context: Context) {
-        launch(context, ZoomImageActivity::class.java)
     }
 
     fun skipStepBarViewActivity(context: Context) {

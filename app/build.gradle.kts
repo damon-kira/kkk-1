@@ -171,7 +171,6 @@ dependencies {
     implementation(project(":feature-camera"))
     implementation(project(":feature-upload"))
     implementation(project(":view-image"))
-    implementation(project(":view-richtext"))
     implementation(project(":compose-view-stedit"))
     implementation(project(":compose-view-chat"))
 
@@ -200,7 +199,6 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
     implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
-    implementation("io.coil-kt:coil-compose:2.7.0")
 
 //    implementation(platform("androidx.compose:compose-bom:2025.08.00"))
 //    implementation("androidx.compose.ui:ui")

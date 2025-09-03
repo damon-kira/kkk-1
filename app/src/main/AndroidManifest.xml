@@ -82,9 +82,6 @@
             android:name=".xml.modules.player.PlayerManageActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity
-            android:name=".xml.modules.richview.ZoomImageActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
             android:name=".xml.modules.stepbar.StepBarViewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity

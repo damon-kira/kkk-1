@@ -91,7 +91,7 @@ dependencies {
     api(libs.retrofit.android)
 
     // Image
-    api(libs.image.glide)
+    api(libs.image.coil)
     api(libs.image.egloo)
 
     // 适配
@@ -100,7 +100,7 @@ dependencies {
     // Markwon
     api(libs.markwon.core)
     api(libs.markwon.image)
-    api(libs.markwon.image.glide)
+//    api(libs.markwon.image.glide)
 
     // 本地Maven
     debugApi(libs.other.devoptions)

@@ -51,7 +51,7 @@ guava-coroutines = "1.7.3"
 retrofit = "2.11.0"
 okhttp3 = "4.12.0"
 retrofit-android = "2.5.3"
-image-glide = "4.16.0"
+image-coil = "2.7.0"
 image-egloo = "0.6.1"
 autosize = "v1.2.1"
 compose-activity = "1.10.1"
@@ -130,7 +130,7 @@ retrofit-logging-interceptor = { module = "com.squareup.okhttp3:logging-intercep
 retrofit-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" } # OkHttp 网络库
 retrofit-android = { module = "org.conscrypt:conscrypt-android", version.ref = "retrofit-android" } # Conscrypt Android 支持
 #---------------------------------ImageLoad---------------------------------
-image-glide = { module = "com.github.bumptech.glide:glide", version.ref = "image-glide" } # Glide 图片加载库
+image-coil = { module = "io.coil-kt:coil-compose", version.ref = "image-coil" } # Coil 图片加载库
 image-egloo = { module = "com.otaliastudios.opengl:egloo", version.ref = "image-egloo" } # Egloo OpenGL 图片加载
 #---------------------------------Hilt---------------------------------
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" } # Hilt DI 库
@@ -157,7 +157,6 @@ compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" } #
 #---------------------------------Markdwon---------------------------------
 markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" } # Markwon 核心库
 markwon-image = { module = "io.noties.markwon:image", version.ref = "markwon" } # Markwon 图片支持
-markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" } # Markwon Glide 图片支持
 #---------------------------------Camera---------------------------------
 camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" } # Camera 核心库
 camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" } # Camera2 API 支持

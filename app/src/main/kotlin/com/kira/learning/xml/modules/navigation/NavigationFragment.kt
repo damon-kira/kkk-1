@@ -55,12 +55,6 @@ class NavigationFragment : BaseFragment() {
 //                getBaseActivity()?.showAppUpgradeDialog(it)
             }
         }
-        mBinding.inclueDemoLayout12.let {
-            it.tvDemoName.text = "MathView"
-            it.tvBtn.setOnClickListener {
-                Launch.skipZoomImageActivity(getSupportContext())
-            }
-        }
 
         mBinding.inclueDemoLayout13.let {
             it.tvDemoName.text = "StepBar"
