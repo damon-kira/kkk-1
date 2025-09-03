@@ -1,13 +1,15 @@
 package com.common.base.dialog
 
 import android.app.Activity
+import android.app.Application
 import android.app.Dialog
+import android.app.Service
 import android.content.Context
+import android.content.ContextWrapper
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.annotation.StringRes
 import com.common.base.R
-import com.common.base.base.getActivityFromContext
 import com.util.lib.log.logger_e
 
 open class DefaultDialog : Dialog, IDialog {
@@ -36,9 +38,7 @@ open class DefaultDialog : Dialog, IDialog {
 
 
     protected fun setDisplaySize(
-        widthPercent: Float,
-        heightPercent: Float,
-        isBottom: Boolean = false
+        widthPercent: Float, heightPercent: Float, isBottom: Boolean = false
     ) {
         val window = window
         val layoutParams = window!!.attributes
@@ -48,9 +48,11 @@ open class DefaultDialog : Dialog, IDialog {
             WRAP -> {
                 layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
+
             MATCH -> {
                 layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
             }
+
             else -> {
                 layoutParams.width = (d.width * widthPercent).toInt()
             }
@@ -59,9 +61,11 @@ open class DefaultDialog : Dialog, IDialog {
             WRAP -> {
                 layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
             }
+
             MATCH -> {
                 layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
             }
+
             else -> {
                 layoutParams.height = (d.height * heightPercent).toInt()
             }
@@ -114,4 +118,26 @@ open class DefaultDialog : Dialog, IDialog {
     interface OnDialogDismissListener {
         fun onDialogDismiss()
     }
+}
+
+fun getActivityFromContext(context: Context?): Activity? {
+    if (context == null) {
+        return null
+    }
+    if (context is Activity) {
+        return context
+    }
+    if (context is Application || context is Service) {
+        return null
+    }
+    var c: Context = context
+    if (c is ContextWrapper) {
+        c = c.baseContext
+        if (c is Activity) {
+            return c
+        }
+    } else {
+        return null
+    }
+    return null
 }

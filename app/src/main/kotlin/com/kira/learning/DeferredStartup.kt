@@ -38,7 +38,7 @@ object DeferredStartup {
     private var dispatched = false
     private val executed = ConcurrentHashMap<String, Long>() // taskName -> durationMs
     private val phaseCancelled = EnumMap<Phase, AtomicBoolean>(Phase::class.java).apply {
-        Phase.values().forEach { put(it, AtomicBoolean(false)) }
+        Phase.entries.forEach { put(it, AtomicBoolean(false)) }
     }
     @Volatile
     private var debugImmediate = false
@@ -70,7 +70,7 @@ object DeferredStartup {
         dispatched = true
         if (debugImmediate) {
             // 立即顺序执行所有阶段
-            Phase.values().forEach { runPhase(it) }
+            Phase.entries.forEach { runPhase(it) }
             return
         }
         // LIGHT 立即(首帧后由 LoanApplication 触发)
