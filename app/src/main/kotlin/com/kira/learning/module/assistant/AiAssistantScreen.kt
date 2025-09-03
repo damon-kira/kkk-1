@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.kira.learning.navigation.AppRoutes
 
 internal data class AiFeature(
     val title: String,
@@ -41,9 +42,9 @@ internal fun AiAssistantRoute(
     navigate: (String) -> Unit,
 ) {
     val features = listOf(
-        AiFeature("聊天", { Icon(Icons.AutoMirrored.Filled.Chat, null) }) { navigate("chat") },
-        AiFeature("图片识别", { Icon(Icons.Default.Image, null) }) { navigate("ocr") },
-        AiFeature("导航示例", { Icon(Icons.Default.List, null) }) { navigate("nav_demo") },
+        AiFeature("聊天", { Icon(Icons.AutoMirrored.Filled.Chat, null) }) { navigate(AppRoutes.CHAT) },
+        AiFeature("图片识别", { Icon(Icons.Default.Image, null) }) { navigate(AppRoutes.OCR) },
+        AiFeature("导航示例", { Icon(Icons.Default.List, null) }) { navigate(AppRoutes.NAV_DEMO) },
         AiFeature("设置(占位)", { Icon(Icons.Default.Settings, null) }) { },
     )
     Scaffold(

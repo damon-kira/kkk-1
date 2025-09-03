@@ -53,17 +53,9 @@ import com.kira.learning.module.chat.ChatDialog
 import com.kira.learning.module.demo.NavigationDemoRoute
 import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 import com.kira.learning.module.ocr.ImageOcrRoute
+import com.kira.learning.navigation.AppRoutes
 
-private object Routes {
-    const val CHAT = "chat"
-    const val SAMPLE = "sample"
-    const val ANSWER = "answer"
-    const val PROFILE = "profile"
-    const val NAV_DEMO = "nav_demo"
-    const val UI_DEMO = "ui_demo"
-    const val OCR = "ocr" // 图片识别
-    const val ASSISTANT = "assistant" // AI 助手
-}
+// 统一路由常量使用 AppRoutes，保留底部导航数据模型
 
 data class BottomItem(
     val route: String,
@@ -89,45 +81,45 @@ internal fun MainScreen(
     var showGlobalChat by remember { mutableStateOf(false) }
 
     val bottomItems = listOf(
-        BottomItem(Routes.CHAT, "微信") { Icon(Icons.AutoMirrored.Filled.Chat, null) },
-        BottomItem(Routes.SAMPLE, "发现") { Icon(Icons.Default.Home, null) },
-        BottomItem(Routes.ANSWER, "学习") { Icon(Icons.Default.School, null) },
-        BottomItem(Routes.PROFILE, "我") { Icon(Icons.Default.Person, null) },
+        BottomItem(AppRoutes.CHAT, "微信") { Icon(Icons.AutoMirrored.Filled.Chat, null) },
+        BottomItem(AppRoutes.SAMPLE, "发现") { Icon(Icons.Default.Home, null) },
+        BottomItem(AppRoutes.ANSWER, "学习") { Icon(Icons.Default.School, null) },
+        BottomItem(AppRoutes.PROFILE, "我") { Icon(Icons.Default.Person, null) },
     )
 
     ModalNavigationDrawer(
         drawerState = drawerState, drawerContent = {
             DrawerContent(currentRoute = currentDestination?.route, onNavigateProfile = {
                 scope.launch { drawerState.close() }
-                navController.navigate(Routes.PROFILE) {
+                navController.navigate(AppRoutes.PROFILE) {
                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }
             }, onNavigateAssistant = {
                 scope.launch { drawerState.close() }
-                navController.navigate(Routes.ASSISTANT) {
+                navController.navigate(AppRoutes.ASSISTANT) {
                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }
             }, onNavigateNavDemo = {
                 scope.launch { drawerState.close() }
-                navController.navigate(Routes.NAV_DEMO) {
+                navController.navigate(AppRoutes.NAV_DEMO) {
                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }
             }, onNavigateUiDemo = {
                 scope.launch { drawerState.close() }
-                navController.navigate(Routes.UI_DEMO) {
+                navController.navigate(AppRoutes.UI_DEMO) {
                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }
             }, onNavigateOcr = {
                 scope.launch { drawerState.close() }
-                navController.navigate(Routes.OCR) {
+                navController.navigate(AppRoutes.OCR) {
                     popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
@@ -164,45 +156,45 @@ internal fun MainScreen(
                 // 主内容 NavHost
                 NavHost(
                     navController = navController,
-                    startDestination = Routes.CHAT,
+                    startDestination = AppRoutes.CHAT,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    composable(Routes.CHAT) {
+                    composable(AppRoutes.CHAT) {
                         ChatRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.SAMPLE) {
+                    composable(AppRoutes.SAMPLE) {
                         SampleFeatureRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.ANSWER) {
+                    composable(AppRoutes.ANSWER) {
                         AnswerRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.PROFILE) {
+                    composable(AppRoutes.PROFILE) {
                         ProfileRoute(
                             Modifier.fillMaxSize(), onBack = null
                         )
                     }
-                    composable(Routes.NAV_DEMO) {
+                    composable(AppRoutes.NAV_DEMO) {
                         NavigationDemoRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.UI_DEMO) {
+                    composable(AppRoutes.UI_DEMO) {
                         UiComponentsDemoRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.OCR) {
+                    composable(AppRoutes.OCR) {
                         ImageOcrRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }
-                    composable(Routes.ASSISTANT) {
+                    composable(AppRoutes.ASSISTANT) {
                         AiAssistantRoute(Modifier.fillMaxSize(), navigate = { route ->
                             navController.navigate(route) {
                                 popUpTo(navController.graph.findStartDestination().id) {
@@ -309,31 +301,31 @@ private fun DrawerContent(
         }
         NavigationDrawerItem(
             label = { Text("个人信息") },
-            selected = currentRoute == Routes.PROFILE,
+            selected = currentRoute == AppRoutes.PROFILE,
             onClick = onNavigateProfile,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
             label = { Text("AI助手") },
-            selected = currentRoute == Routes.ASSISTANT,
+            selected = currentRoute == AppRoutes.ASSISTANT,
             onClick = onNavigateAssistant,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
             label = { Text("导航示例") },
-            selected = currentRoute == Routes.NAV_DEMO,
+            selected = currentRoute == AppRoutes.NAV_DEMO,
             onClick = onNavigateNavDemo,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
             label = { Text("UI组件演示") },
-            selected = currentRoute == Routes.UI_DEMO,
+            selected = currentRoute == AppRoutes.UI_DEMO,
             onClick = onNavigateUiDemo,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
         NavigationDrawerItem(
             label = { Text("图片识别") },
-            selected = currentRoute == Routes.OCR,
+            selected = currentRoute == AppRoutes.OCR,
             onClick = onNavigateOcr,
             modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
         )
