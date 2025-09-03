@@ -3,10 +3,10 @@ package com.kira.learning.xml.modules.richview
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.common.lib.base.BaseActivity
-import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityZoomImageBinding
+import com.common.base.base.BaseActivity
+import com.common.base.viewbinding.binding
 import com.kira.richtext.Attachment
 import com.kira.richtext.Tokenizer
 import com.otaliastudios.zoom.ZoomLogger

@@ -7,11 +7,11 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import com.common.lib.view.stepbar.StageStepBar
 import com.kira.learning.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import androidx.core.graphics.toColorInt
+import com.common.base.view.StageStepBar
 
 internal class ExampleViewViewModel(application: Application) : AndroidViewModel(application) {
     private val _events: MutableStateFlow<Event?> = MutableStateFlow(null)

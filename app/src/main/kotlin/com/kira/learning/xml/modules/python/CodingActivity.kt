@@ -24,7 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.common.lib.base.BaseActivity
+import com.common.base.base.BaseActivity
 import com.steve28.stedit.SteditField
 import com.steve28.stedit.highlighter.PythonHighlighter
 

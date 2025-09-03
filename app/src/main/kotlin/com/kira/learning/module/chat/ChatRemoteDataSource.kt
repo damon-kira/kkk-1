@@ -1,10 +1,10 @@
 package com.kira.learning.module.chat
 
 import com.kira.learning.model.dao.AIResponseInfo
-import com.common.lib.net.bean.BaseResponse
 import com.kira.learning.network.ComposeApiService
 import com.kira.learning.network.toApiResult
 import com.kira.learning.network.ApiResult
+import com.kira.learning.network.BaseResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

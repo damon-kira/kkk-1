@@ -10,11 +10,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.common.lib.base.BaseActivity
-import com.common.lib.view.stepbar.StageStepBar
-import com.common.lib.viewbinding.binding
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityStepBarBinding
+import com.common.base.base.BaseActivity
+import com.common.base.view.StageStepBar
+import com.common.base.viewbinding.binding
 import kotlin.getValue
 
 internal class StepBarViewActivity : BaseActivity() {

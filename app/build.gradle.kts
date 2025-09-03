@@ -139,20 +139,18 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.messaging)
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-
     // Room
-    implementation(libs.androidx.room)
-    implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
     // 图片处理
     implementation(libs.exifinterface)
     implementation(libs.cropper)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 
     // OCR
     implementation(libs.mlkit.text.recognition)
@@ -165,16 +163,19 @@ dependencies {
     implementation(libs.hilt.workmanager)
     ksp(libs.hilt.android.compiler)
 
-    implementation(project(":feature-camera"))
-    implementation(project(":sdks:util"))
-    implementation(project(":compose-view-stedit"))
-    implementation(project(":module-player"))
-    implementation(project(":view-image"))
-    implementation(project(":view-richtext"))
-    implementation(project(":feature-upload"))
     implementation(project(":common-base"))
     implementation(project(":common-core"))
     implementation(project(":common-ui"))
+    implementation(project(":sdks:util"))
+    implementation(project(":module-player"))
+    implementation(project(":feature-camera"))
+    implementation(project(":feature-upload"))
+    implementation(project(":view-image"))
+    implementation(project(":view-richtext"))
+    implementation(project(":compose-view-stedit"))
+    implementation(project(":compose-view-chat"))
+
+    implementation(project(":filesystems:filesystem-base"))
     implementation(project(":feature-changelog:api"))
     implementation(project(":feature-changelog:impl"))
     implementation(project(":feature-editor:api"))
@@ -191,8 +192,6 @@ dependencies {
     implementation(project(":feature-shortcuts:impl"))
     implementation(project(":feature-themes:api"))
     implementation(project(":feature-themes:impl"))
-    implementation(project(":filesystems:filesystem-base"))
-    implementation(project(":compose-view-chat"))
     // Debug工具
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
 
@@ -201,8 +200,8 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
     implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
-
     implementation("io.coil-kt:coil-compose:2.7.0")
+
 //    implementation(platform("androidx.compose:compose-bom:2025.08.00"))
 //    implementation("androidx.compose.ui:ui")
 //    implementation("androidx.compose.foundation:foundation")
@@ -211,4 +210,5 @@ dependencies {
 //    implementation("androidx.compose.ui:ui-tooling-preview")
 //    debugImplementation("androidx.compose.ui:ui-tooling")
 //    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
 }

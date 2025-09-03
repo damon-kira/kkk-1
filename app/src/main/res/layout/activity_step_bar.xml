@@ -46,7 +46,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.common.lib.view.stepbar.StageStepBar
+    <com.common.base.view.StageStepBar
         android:id="@+id/stageStepBar"
         android:layout_width="300dp"
         android:layout_height="100dp"

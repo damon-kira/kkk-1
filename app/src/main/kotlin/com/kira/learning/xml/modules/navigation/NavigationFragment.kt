@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.common.lib.base.BaseFragment
-import com.common.lib.viewbinding.binding
+import com.common.base.base.BaseFragment
+import com.common.base.viewbinding.binding
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.xml.Launch
 import dagger.hilt.android.AndroidEntryPoint

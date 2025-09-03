@@ -1,7 +1,5 @@
 package com.kira.learning.network
 
-import com.common.lib.net.ResponseCode
-import com.common.lib.net.bean.BaseResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

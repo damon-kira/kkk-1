@@ -69,7 +69,6 @@ dependencies {
 
     // Modules
     implementation(project(":filesystems:filesystem-base"))
-
     implementation(project(":editorkit:language-base"))
     implementation(project(":editorkit:language-cpp"))
     implementation(project(":editorkit:language-java"))

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.updatePadding
-import com.common.lib.base.BaseActivity
 import com.kira.learning.databinding.ActivitySuperEditorBinding
+import com.common.base.base.BaseActivity
 import com.kira.learning.xml.modules.supereditor.viewmodel.SuperEditorViewModel
 import com.kira.ui.core.extensions.applySystemWindowInsets
 import com.kira.ui.core.extensions.decorFitsSystemWindows

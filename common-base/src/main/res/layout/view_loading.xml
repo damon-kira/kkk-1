@@ -7,7 +7,7 @@
     android:background="@drawable/shape_loading_bg"
     tools:ignore="ResourceName">
 
-    <com.common.lib.view.LoadingView
+    <com.common.base.view.LoadingView
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center" />

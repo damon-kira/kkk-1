@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.common.lib"
+    namespace = "com.common.base"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -70,12 +70,16 @@ dependencies {
     api(libs.androidx.lifecycle.livedata)
     api(libs.androidx.lifecycle.runtime)
 
+    // Room
+    api(libs.androidx.room)
+    api(libs.androidx.room.runtime)
+
     // Guava
     api(libs.guava.android)
     api(libs.guava.coroutines)
 
     // Hilt
-    implementation(libs.hilt)
+    api(libs.hilt)
     ksp(libs.hilt.compiler)
 
     // Retrofit

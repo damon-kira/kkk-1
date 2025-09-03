@@ -7,9 +7,9 @@ import androidx.core.widget.doOnTextChanged
 import com.arezoonazer.player.argument.PlayerParams
 import com.arezoonazer.player.argument.VideoSubtitle
 import com.arezoonazer.player.extension.startPlayer
-import com.common.lib.base.BaseActivity
-import com.common.lib.viewbinding.binding
 import com.kira.learning.databinding.ActivityPlayerManageBinding
+import com.common.base.base.BaseActivity
+import com.common.base.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

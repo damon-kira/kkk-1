@@ -1,7 +1,5 @@
 package com.kira.learning.network
 
-import com.common.lib.net.bean.BaseResponse
-import com.common.lib.net.bean.Document
 import com.kira.learning.module.auth.LoginRequest
 import com.kira.learning.module.auth.LoginResponse
 import com.kira.learning.model.QuestionProcessInfo
