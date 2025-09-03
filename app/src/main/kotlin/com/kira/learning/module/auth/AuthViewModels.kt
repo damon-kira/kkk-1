@@ -2,6 +2,7 @@ package com.kira.learning.module.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -45,9 +46,11 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepository) : View
         }
         viewModelScope.launch {
             _uiState.value = LoginUiState.Loading
-            val r = repo.login(e, p)
-            _uiState.value =
-                r.fold({ LoginUiState.Success }, { LoginUiState.Error(it.message ?: "登录失败") })
+            when (val r = repo.login(e, p)) {
+                is ApiResult.Success -> _uiState.value = LoginUiState.Success
+                is ApiResult.Error -> _uiState.value = LoginUiState.Error(r.message.ifBlank { "登录失败" })
+                is ApiResult.NetworkUnavailable -> _uiState.value = LoginUiState.Error("网络不可用")
+            }
         }
     }
 }

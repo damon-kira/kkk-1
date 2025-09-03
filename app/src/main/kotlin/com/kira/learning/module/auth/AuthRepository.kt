@@ -3,6 +3,8 @@ package com.kira.learning.module.auth
 import com.kira.learning.network.ComposeApiService
 import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.learning.network.InMemoryAuthTokenProvider
+import com.kira.learning.network.ApiResult
+import com.kira.learning.network.toApiResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,22 +18,29 @@ class AuthRepository @Inject constructor(
         private const val TOKEN_TTL_MS = 1_800_000L
     }
 
-    suspend fun login(email: String, pwd: String): Result<Unit> = withContext(Dispatchers.IO) {
-        return@withContext try {
-            val resp = api.login(LoginRequest(username = email, password = pwd))
-            if (resp.success == true && resp.data?.token != null) {
-                val token = resp.data.token
-                val expire = System.currentTimeMillis() + TOKEN_TTL_MS
-                settings.apiToken = token
-                settings.apiTokenExpireAt = expire
-                inMemory.updateToken(token)
-                AuthEventBus.emit(AuthEventBus.AuthEvent.LoggedIn)
-                Result.success(Unit)
-            } else {
-                Result.failure(RuntimeException(resp.msg ?: "登录失败"))
+    // 返回 ApiResult<Unit>，封装成功与错误。避免外部直接依赖 BaseResponse。
+    suspend fun login(email: String, pwd: String): ApiResult<Unit> = withContext(Dispatchers.IO) {
+        try {
+            val base = api.login(LoginRequest(username = email, password = pwd))
+            when (val r = base.toApiResult()) {
+                is ApiResult.Success -> {
+                    val token = r.data.token
+                    if (token.isNullOrBlank()) {
+                        ApiResult.Error(code = base.code, message = "token为空")
+                    } else {
+                        val expire = System.currentTimeMillis() + TOKEN_TTL_MS
+                        settings.apiToken = token
+                        settings.apiTokenExpireAt = expire
+                        inMemory.updateToken(token)
+                        AuthEventBus.emit(AuthEventBus.AuthEvent.LoggedIn)
+                        ApiResult.Success(Unit)
+                    }
+                }
+                is ApiResult.Error -> r
+                is ApiResult.NetworkUnavailable -> r
             }
         } catch (e: Exception) {
-            Result.failure(e)
+            ApiResult.Error(message = e.message ?: "未知错误", throwable = e)
         }
     }
 

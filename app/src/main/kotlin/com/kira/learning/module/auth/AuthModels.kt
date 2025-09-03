@@ -8,13 +8,6 @@ data class LoginRequest(
     @SerializedName("preferredLocale") val preferredLocale: String = "en-US"
 )
 
-data class LoginResponse(
-    val code: Int?,
-    val msg: String?,
-    val success: Boolean?,
-    val data: LoginData?
-)
-
 data class LoginData(
     val loginDate: String?,
     val token: String?,

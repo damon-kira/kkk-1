@@ -1,7 +1,6 @@
 package com.kira.learning.network
 
 import com.kira.learning.module.auth.LoginRequest
-import com.kira.learning.module.auth.LoginResponse
 import com.kira.learning.model.QuestionProcessInfo
 import com.kira.learning.model.dao.AIResponseInfo
 import com.kira.learning.model.dao.AppSettingsDTO
@@ -9,6 +8,7 @@ import com.kira.learning.model.dao.PhotoDTO
 import com.kira.learning.model.dao.UpdateAvatarRequest
 import com.kira.learning.model.dao.UpdateProfileRequest
 import com.kira.learning.model.dao.UserProfileDTO
+import com.kira.learning.module.auth.LoginData
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -50,5 +50,5 @@ interface ComposeApiService {
     suspend fun updateSettings(@Body settings: AppSettingsDTO): AppSettingsDTO
 
     @POST("login/login")
-    suspend fun login(@Body body: LoginRequest): LoginResponse
+    suspend fun login(@Body body: LoginRequest): BaseResponse<LoginData>
 }

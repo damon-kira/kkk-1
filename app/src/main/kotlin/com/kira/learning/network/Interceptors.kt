@@ -3,7 +3,6 @@ package com.kira.learning.network
 import com.kira.ui.core.storage.keyvalue.SettingsManager
 import java.io.IOException
 import java.net.SocketTimeoutException
-import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
