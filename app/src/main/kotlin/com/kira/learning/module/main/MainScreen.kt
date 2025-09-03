@@ -50,7 +50,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import com.kira.learning.module.assistant.AiAssistantRoute
 import com.kira.learning.module.chat.ChatRoute
 import com.kira.learning.module.chat.ChatDialog
-import com.kira.learning.module.navigation.NavigationDemoRoute
+import com.kira.learning.module.demo.NavigationDemoRoute
 import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 import com.kira.learning.module.ocr.ImageOcrRoute
 

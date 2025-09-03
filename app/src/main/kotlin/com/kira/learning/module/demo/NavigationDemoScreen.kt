@@ -1,4 +1,4 @@
-package com.kira.learning.module.navigation
+package com.kira.learning.module.demo
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
