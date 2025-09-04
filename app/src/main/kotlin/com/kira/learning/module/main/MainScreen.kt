@@ -53,6 +53,7 @@ import com.kira.learning.module.chat.ChatDialog
 import com.kira.learning.module.demo.NavigationDemoRoute
 import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 import com.kira.learning.module.ocr.ImageOcrRoute
+import com.kira.learning.module.imageplayer.ImagePlayerRoute
 import com.kira.learning.navigation.AppRoutes
 
 // 统一路由常量使用 AppRoutes，保留底部导航数据模型
@@ -191,6 +192,11 @@ internal fun MainScreen(
                     }
                     composable(AppRoutes.OCR) {
                         ImageOcrRoute(
+                            Modifier.fillMaxSize(),
+                            openDrawer = { scope.launch { drawerState.open() } })
+                    }
+                    composable(AppRoutes.IMAGE_PLAYER) {
+                        ImagePlayerRoute(
                             Modifier.fillMaxSize(),
                             openDrawer = { scope.launch { drawerState.open() } })
                     }

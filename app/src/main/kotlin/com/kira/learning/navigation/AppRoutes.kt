@@ -18,5 +18,6 @@ object AppRoutes {
     // AI & 识别
     const val OCR = "ocr"          // 图片识别
     const val ASSISTANT = "assistant" // AI 助手
+    // 图片播放器
+    const val IMAGE_PLAYER = "image_player"
 }
-
