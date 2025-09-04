@@ -15,9 +15,7 @@ class AuthRepository @Inject constructor(
     private val settings: SettingsManager,
     private val inMemory: InMemoryAuthTokenProvider
 ) {
-    companion object {
-        private const val TOKEN_TTL_MS = 1_800_000L
-    }
+    // 去除 TOKEN_TTL_MS 与本地过期时间控制，仅由服务端 401 决定失效
 
     // 返回 ApiResult<Unit>，封装成功与错误。避免外部直接依赖 BaseResponse。
     suspend fun login(email: String, pwd: String): ApiResult<Unit> = withContext(Dispatchers.IO) {
@@ -29,9 +27,9 @@ class AuthRepository @Inject constructor(
                     if (token.isNullOrBlank()) {
                         ApiResult.Error(code = base.code, message = "token为空")
                     } else {
-                        val expire = System.currentTimeMillis() + TOKEN_TTL_MS
                         settings.apiToken = token
-                        settings.apiTokenExpireAt = expire
+                        // 设成一个极大值避免残留逻辑读取到 0 误判；后续不再依赖该字段
+                        settings.apiTokenExpireAt = Long.MAX_VALUE
                         inMemory.updateToken(token)
                         AuthEventBus.emit(AuthEventBus.AuthEvent.LoggedIn)
                         ApiResult.Success(Unit)
@@ -55,9 +53,8 @@ class AuthRepository @Inject constructor(
 
     fun tokenValid(): Boolean {
         val token = settings.apiToken
-        val exp = settings.apiTokenExpireAt
-        return !token.isNullOrBlank() && exp > System.currentTimeMillis()
+        return !token.isNullOrBlank()
     }
 
-    fun tokenExpiry(): Long = settings.apiTokenExpireAt
+    // tokenExpiry 不再需要，如外部仍引用可保留返回极大值；当前已无调用点，删除。
 }

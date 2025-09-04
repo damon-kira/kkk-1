@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kira.learning.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -60,44 +58,17 @@ class SessionViewModel @Inject constructor(private val repo: AuthRepository) : V
     private val _loggedIn = MutableStateFlow(repo.tokenValid())
     val loggedIn: StateFlow<Boolean> = _loggedIn.asStateFlow()
 
-    private var expiryJob: Job? = null
-
     init {
-        if (_loggedIn.value) scheduleExpiryCheck()
         viewModelScope.launch {
             AuthEventBus.events.collect { ev ->
                 when (ev) {
-                    is AuthEventBus.AuthEvent.LoggedIn -> {
-                        _loggedIn.value = true
-                        scheduleExpiryCheck()
-                    }
-
-                    is AuthEventBus.AuthEvent.LoggedOut -> {
-                        _loggedIn.value = false
-                        expiryJob?.cancel()
-                    }
+                    is AuthEventBus.AuthEvent.LoggedIn -> _loggedIn.value = true
+                    is AuthEventBus.AuthEvent.LoggedOut -> _loggedIn.value = false
                 }
             }
         }
     }
 
-    private fun scheduleExpiryCheck() {
-        expiryJob?.cancel()
-        val remain = repo.tokenExpiry() - System.currentTimeMillis()
-        if (remain <= 0) {
-            repo.clear(); return
-        }
-        expiryJob = viewModelScope.launch {
-            delay(remain)
-            if (!repo.tokenValid()) repo.clear()
-        }
-    }
-
-    fun notifyLoginSuccess() { /* 已由事件触发，这里兼容旧调用 */ _loggedIn.value =
-        true; scheduleExpiryCheck()
-    }
-
-    fun forceLogout() {
-        repo.clear()
-    }
+    fun notifyLoginSuccess() { _loggedIn.value = true }
+    fun forceLogout() { repo.clear() }
 }
