@@ -1,5 +1,7 @@
 package com.kira.learning.module.chat
 
+import com.kira.learning.model.ChatUiState
+import com.kira.learning.model.ChatMessageUi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kira.learning.di.ChatConversationDao

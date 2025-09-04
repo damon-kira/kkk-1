@@ -1,5 +1,7 @@
 package com.kira.learning.module.profile
 
+import com.kira.learning.model.ProfileUiState
+import com.kira.learning.model.AppSettings
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll

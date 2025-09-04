@@ -1,11 +1,9 @@
-package com.kira.learning.module.answer
+package com.kira.learning.model
 
 import androidx.compose.runtime.Immutable
 
-/** 题目类型 */
 enum class QuestionType { SINGLE_CHOICE, MULTI_CHOICE, SHORT_ANSWER, FILL_BLANK, OPEN_EXT }
 
-/** 公共题目字段 */
 @Immutable
 sealed interface QuestionBase { val id: String; val stem: String; val imageUrls: List<String>; val type: QuestionType }
 
@@ -35,11 +33,10 @@ data class ShortAnswerQuestion(
     override val imageUrls: List<String> = emptyList(),
 ) : QuestionBase { override val type = QuestionType.SHORT_ANSWER }
 
-/** 填空题以 __ 作为一个空，内部保持正确答案列表顺序 */
 @Immutable
 data class FillBlankQuestion(
     override val id: String,
-    override val stem: String, // 含占位 __
+    override val stem: String,
     val answers: List<String>,
     override val imageUrls: List<String> = emptyList(),
 ) : QuestionBase { override val type = QuestionType.FILL_BLANK }
@@ -52,7 +49,6 @@ data class OpenExtQuestion(
     override val imageUrls: List<String> = emptyList(),
 ) : QuestionBase { override val type = QuestionType.OPEN_EXT }
 
-/** 用户作答结构 */
 sealed interface UserAnswer { val questionId: String }
 
 data class SingleChoiceUserAnswer(override val questionId: String, val selected: Int?) : UserAnswer
@@ -65,7 +61,6 @@ data class FillBlankUserAnswer(override val questionId: String, val blanks: List
 
 data class OpenExtUserAnswer(override val questionId: String, val content: String) : UserAnswer
 
-/** 批改结果 */
 sealed interface MarkResult { val questionId: String; val correct: Boolean? }
 
 data class ObjectiveMarkResult(
@@ -80,7 +75,6 @@ data class SubjectiveMarkResult(
     val reference: String?,
 ) : MarkResult { override val correct: Boolean? = null }
 
-/** 简单评分: 单选/多选/填空正确得满分 */
 object AnswerEvaluator {
     fun evaluate(question: QuestionBase, ua: UserAnswer?): MarkResult = when (question) {
         is SingleChoiceQuestion -> {
@@ -108,3 +102,4 @@ object AnswerEvaluator {
         is OpenExtQuestion -> SubjectiveMarkResult(question.id, question.guide)
     }
 }
+

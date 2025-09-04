@@ -2,6 +2,16 @@ package com.kira.learning.module.answer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.model.AnswerEvaluator
+import com.kira.learning.model.FillBlankQuestion
+import com.kira.learning.model.FillBlankUserAnswer
+import com.kira.learning.model.MarkResult
+import com.kira.learning.model.MultiChoiceUserAnswer
+import com.kira.learning.model.OpenExtUserAnswer
+import com.kira.learning.model.QuestionBase
+import com.kira.learning.model.ShortAnswerUserAnswer
+import com.kira.learning.model.SingleChoiceUserAnswer
+import com.kira.learning.model.UserAnswer
 import com.kira.learning.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -52,7 +62,7 @@ class AnswerViewModel @Inject constructor(
         s.copy(answers = s.answers + (questionId to ShortAnswerUserAnswer(questionId, content)))
     }
     fun updateFillBlank(questionId: String, index: Int, content: String) = _uiState.update { s ->
-        val q = s.questions.find { it.id == questionId } as? FillBlankQuestion ?: return
+        val q = s.questions.find { it.id == questionId } as? FillBlankQuestion ?: return@update s
         val current = (s.answers[questionId] as? FillBlankUserAnswer)?.blanks?.toMutableList() ?: MutableList(q.answers.size){""}
         if (index in current.indices) current[index] = content
         s.copy(answers = s.answers + (questionId to FillBlankUserAnswer(questionId, current)))

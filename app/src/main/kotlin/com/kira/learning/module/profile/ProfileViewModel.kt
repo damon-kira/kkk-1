@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
+import com.kira.learning.model.ProfileUiState
+import com.kira.learning.model.AppSettings
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(

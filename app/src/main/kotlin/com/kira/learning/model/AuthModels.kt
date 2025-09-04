@@ -1,4 +1,4 @@
-package com.kira.learning.module.auth
+package com.kira.learning.model
 
 import com.google.gson.annotations.SerializedName
 

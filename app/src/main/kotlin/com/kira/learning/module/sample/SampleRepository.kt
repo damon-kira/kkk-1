@@ -1,5 +1,6 @@
 package com.kira.learning.module.sample
 
+import com.kira.learning.model.SampleImage
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.apiCall
 import com.kira.learning.network.ComposeApiService

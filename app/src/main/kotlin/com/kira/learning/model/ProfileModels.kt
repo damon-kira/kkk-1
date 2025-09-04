@@ -1,4 +1,4 @@
-package com.kira.learning.module.profile
+package com.kira.learning.model
 
 import androidx.compose.runtime.Immutable
 

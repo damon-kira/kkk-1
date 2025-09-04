@@ -1,5 +1,11 @@
 package com.kira.learning.module.answer
 
+import com.kira.learning.model.FillBlankQuestion
+import com.kira.learning.model.MultiChoiceQuestion
+import com.kira.learning.model.OpenExtQuestion
+import com.kira.learning.model.QuestionBase
+import com.kira.learning.model.ShortAnswerQuestion
+import com.kira.learning.model.SingleChoiceQuestion
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.safeApiCall
 import kotlinx.coroutines.delay
@@ -24,7 +30,7 @@ class MockAnswerRepository @Inject constructor(): AnswerRepository {
                 id = "q2",
                 stem = "选择所有属于协程构建器的函数 (支持部分分):",
                 options = listOf("launch", "async", "map", "withContext"),
-                answerIndexes = setOf(0,1,3),
+                answerIndexes = setOf(0, 1, 3),
                 imageUrls = emptyList()
             ),
             ShortAnswerQuestion(

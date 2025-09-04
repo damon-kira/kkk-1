@@ -1,8 +1,8 @@
 package com.kira.learning.model.dao
 
-import com.kira.learning.module.profile.AppSettings
-import com.kira.learning.module.profile.UserProfile
-import com.kira.learning.module.sample.SampleImage
+import com.kira.learning.model.AppSettings
+import com.kira.learning.model.UserProfile
+import com.kira.learning.model.SampleImage
 
 // Sample photos
 @DataTransferObject

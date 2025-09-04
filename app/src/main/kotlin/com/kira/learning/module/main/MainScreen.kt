@@ -25,7 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kira.learning.module.sample.SampleFeatureRoute
 import com.kira.learning.module.answer.AnswerRoute
 import com.kira.learning.module.profile.ProfileRoute
-import com.kira.learning.module.profile.ProfileUiState
+import com.kira.learning.model.ProfileUiState
 import com.kira.learning.module.profile.ProfileViewModel
 import com.kira.learning.utils.AppAvatar
 import androidx.compose.material.icons.Icons

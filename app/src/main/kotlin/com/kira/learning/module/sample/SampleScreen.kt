@@ -1,5 +1,8 @@
 package com.kira.learning.module.sample
 
+import com.kira.learning.model.SampleUiState
+import com.kira.learning.model.SampleEvent
+import com.kira.learning.model.SampleImage
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items

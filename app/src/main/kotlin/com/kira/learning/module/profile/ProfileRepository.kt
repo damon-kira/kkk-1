@@ -1,5 +1,7 @@
 package com.kira.learning.module.profile
 
+import com.kira.learning.model.UserProfile
+import com.kira.learning.model.AppSettings
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
 import com.kira.learning.network.apiCall

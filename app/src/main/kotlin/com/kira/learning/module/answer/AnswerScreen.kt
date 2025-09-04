@@ -18,6 +18,22 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kira.learning.model.FillBlankQuestion
+import com.kira.learning.model.FillBlankUserAnswer
+import com.kira.learning.model.MarkResult
+import com.kira.learning.model.MultiChoiceQuestion
+import com.kira.learning.model.MultiChoiceUserAnswer
+import com.kira.learning.model.ObjectiveMarkResult
+import com.kira.learning.model.OpenExtQuestion
+import com.kira.learning.model.OpenExtUserAnswer
+import com.kira.learning.model.QuestionBase
+import com.kira.learning.model.QuestionType
+import com.kira.learning.model.ShortAnswerQuestion
+import com.kira.learning.model.ShortAnswerUserAnswer
+import com.kira.learning.model.SingleChoiceQuestion
+import com.kira.learning.model.SingleChoiceUserAnswer
+import com.kira.learning.model.SubjectiveMarkResult
+import com.kira.learning.model.UserAnswer
 import com.kira.learning.utils.AppImage
 
 @Composable

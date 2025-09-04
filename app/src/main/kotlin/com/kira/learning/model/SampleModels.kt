@@ -1,4 +1,4 @@
-package com.kira.learning.module.sample
+package com.kira.learning.model
 
 import androidx.compose.runtime.Immutable
 
@@ -9,7 +9,6 @@ data class SampleImage(
     val thumbnailUrl: String,
 )
 
-// UI 层状态
 sealed interface SampleUiState {
     object Idle: SampleUiState
     object Loading: SampleUiState
@@ -17,9 +16,9 @@ sealed interface SampleUiState {
     data class Error(val message: String): SampleUiState
 }
 
-// 用户意图 / 事件
 sealed interface SampleEvent {
     object Load: SampleEvent
     object Refresh: SampleEvent
     data class Retry(val reason: String = ""): SampleEvent
 }
+

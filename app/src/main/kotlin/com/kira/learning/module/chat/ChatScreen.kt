@@ -64,6 +64,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kira.learning.di.ChatConversation
+import com.kira.learning.model.ChatMessageUi
+import com.kira.learning.model.ChatUiState
 import kotlinx.coroutines.launch
 
 @Composable
