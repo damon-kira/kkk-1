@@ -170,7 +170,6 @@ dependencies {
     implementation(project(":module-player"))
     implementation(project(":feature-camera"))
     implementation(project(":feature-upload"))
-    implementation(project(":view-image"))
     implementation(project(":compose-view-stedit"))
     implementation(project(":compose-view-chat"))
 

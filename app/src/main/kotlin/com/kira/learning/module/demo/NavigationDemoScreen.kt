@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.kira.learning.xml.Launch
 
-// 顶级定义，供 DemoRow 与页面共享
 private data class DemoItem(
     val title: String,
     val enabled: Boolean = true,
@@ -40,16 +39,12 @@ fun NavigationDemoRoute(
 
     // Crash 确认弹窗
     var showCrashConfirm by remember { mutableStateOf(false) }
-    // Bus 注销确认弹窗
-    var showLogoutConfirm by remember { mutableStateOf(false) }
 
 
     val allItems = remember {
         listOf(
             DemoItem("Python Run(废弃)", action = { Launch.skipCodingActivity(context) }),
             DemoItem("Video Player", action = { Launch.skipPlayerManageActivity(context) }),
-            DemoItem("Upload(废弃)", enabled = false, action = { }),
-            DemoItem("Logout", action = { showLogoutConfirm = true }),
             DemoItem("Crash Test", action = { showCrashConfirm = true }),
             DemoItem("Step Bar", action = { Launch.skipStepBarViewActivity(context) }),
             DemoItem("Code Playground", action = { Launch.skipCodePlaygroundActivity(context) }),
@@ -131,23 +126,6 @@ fun NavigationDemoRoute(
         )
     }
 
-    if (showLogoutConfirm) {
-        AlertDialog(
-            onDismissRequest = { showLogoutConfirm = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    showLogoutConfirm = false
-                }) { Text("退出") }
-            },
-            dismissButton = {
-                TextButton(onClick = {
-                    showLogoutConfirm = false
-                }) { Text("取消") }
-            },
-            title = { Text("确认退出") },
-            text = { Text("将注销并发送相关事件，确认继续？") }
-        )
-    }
 }
 
 @Composable
