@@ -1,138 +1,268 @@
 package com.kira.learning.module.profile
 
-import com.kira.learning.model.ProfileUiState
-import com.kira.learning.model.AppSettings
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kira.learning.model.UserProfile
 import com.kira.learning.utils.AppAvatar
+import com.kira.learning.base.components.*
+import com.kira.learning.base.mvi.UiEvent
 
 @Composable
-fun ProfileRoute(modifier: Modifier = Modifier, viewModel: ProfileViewModel = hiltViewModel(), onBack: (() -> Unit)? = null) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    ProfileScreen(
-        state = state,
-        onStartEdit = viewModel::startEdit,
-        onCancelEdit = viewModel::cancelEdit,
-        onSave = viewModel::saveEdit,
-        onName = viewModel::setName,
-        onEmail = viewModel::setEmail,
-        onBio = viewModel::setBio,
-        onRandomAvatar = viewModel::randomUpdateAvatar,
-        onToggleDark = viewModel::toggleDark,
-        onToggleNotify = viewModel::toggleNotify,
-        onToggleAutoPlay = viewModel::toggleAutoPlay,
-        onToggleAnalytics = viewModel::toggleAnalytics,
-        onToggleCrash = viewModel::toggleCrash,
-        onRetry = viewModel::load,
-        modifier = modifier,
-        onBack = onBack
-    )
+fun ProfileRoute(
+    modifier: Modifier = Modifier,
+    viewModel: ProfileViewModel = hiltViewModel(),
+    onBack: (() -> Unit)? = null
+) {
+    val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    // 收集事件
+    LaunchedEffect(viewModel) {
+        viewModel.viewEvent.collect { event ->
+            when (event) {
+                is UiEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+
+                else -> {}
+            }
+        }
+    }
+
+    Scaffold(
+        topBar = {
+            ProfileTopBar(
+                isEditing = state.isEditing,
+                onBack = onBack,
+                onStartEdit = { viewModel.handleAction(ProfileEvent.StartEdit) },
+                onRandomAvatar = { viewModel.handleAction(ProfileEvent.RandomAvatar) }
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
+        StateHandler(
+            state = state.profileData,
+            onRetry = { viewModel.handleAction(ProfileEvent.LoadProfile) }
+        ) { profile, stateModifier ->
+            ProfileContent(
+                profile = profile,
+                state = state,
+                onAction = viewModel::handleAction,
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .then(stateModifier)
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProfileScreen(
-    state: ProfileUiState,
+private fun ProfileTopBar(
+    isEditing: Boolean,
+    onBack: (() -> Unit)?,
     onStartEdit: () -> Unit,
-    onCancelEdit: () -> Unit,
+    onRandomAvatar: () -> Unit
+) {
+    TopAppBar(
+        title = { Text("个人信息") },
+        navigationIcon = {
+            if (onBack != null) {
+                IconButton(onClick = onBack) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
+                }
+            }
+        },
+        actions = {
+            if (!isEditing) {
+                IconButton(onClick = onStartEdit) {
+                    Icon(Icons.Default.Edit, null)
+                }
+                IconButton(onClick = onRandomAvatar) {
+                    Icon(Icons.Default.Refresh, null)
+                }
+            }
+        }
+    )
+}
+
+@Composable
+private fun ProfileContent(
+    profile: UserProfile,
+    state: ProfileViewState,
+    onAction: (ProfileEvent) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+        // 头像和基本信息
+        ProfileHeader(
+            profile = profile,
+            isEditing = state.isEditing
+        )
+
+        // 编辑表单
+        if (state.isEditing) {
+            ProfileEditForm(
+                formState = state.formState,
+                isSaving = state.isSaving,
+                onUpdateName = { onAction(ProfileEvent.UpdateName(it)) },
+                onUpdateEmail = { onAction(ProfileEvent.UpdateEmail(it)) },
+                onUpdateBio = { onAction(ProfileEvent.UpdateBio(it)) },
+                onSave = { onAction(ProfileEvent.SaveProfile) },
+                onCancel = { onAction(ProfileEvent.CancelEdit) }
+            )
+        }
+
+        // 设置选项
+        ProfileSettings(
+            settings = state.settings,
+            onToggleSetting = { onAction(ProfileEvent.ToggleSetting(it)) }
+        )
+
+        // 消息提示
+//        state.message?.let { message ->
+//            Card(
+//                colors = CardDefaults.cardColors(
+//                    containerColor = MaterialTheme.colorScheme.primaryContainer
+//                )
+//            ) {
+//                Text(
+//                    text = message,
+//                    modifier = Modifier.padding(16.dp),
+//                    style = MaterialTheme.typography.bodyMedium
+//                )
+//            }
+//        }
+    }
+}
+
+@Composable
+private fun ProfileHeader(
+    profile: UserProfile,
+    isEditing: Boolean
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AppAvatar(
+            url = profile.avatarUrl,
+            size = 80.dp
+        )
+
+        Column {
+            Text(
+                text = profile.name,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                text = profile.email,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            if (!isEditing && profile.bio.isNotEmpty()) {
+                Text(
+                    text = profile.bio,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfileEditForm(
+    formState: com.kira.learning.base.validation.FormState,
+    isSaving: Boolean,
+    onUpdateName: (String) -> Unit,
+    onUpdateEmail: (String) -> Unit,
+    onUpdateBio: (String) -> Unit,
     onSave: () -> Unit,
-    onName: (String) -> Unit,
-    onEmail: (String) -> Unit,
-    onBio: (String) -> Unit,
-    onRandomAvatar: () -> Unit,
-    onToggleDark: () -> Unit,
-    onToggleNotify: () -> Unit,
-    onToggleAutoPlay: () -> Unit,
-    onToggleAnalytics: () -> Unit,
-    onToggleCrash: () -> Unit,
-    onRetry: () -> Unit,
-    modifier: Modifier = Modifier,
-    onBack: (() -> Unit)? = null,
+    onCancel: () -> Unit
 ) {
-    when (state) {
-        ProfileUiState.Loading -> Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
-        is ProfileUiState.Error -> Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(state.message)
-                Spacer(Modifier.height(12.dp))
-                Button(onClick = onRetry) { Text("重试") }
-            }
-        }
-        is ProfileUiState.Data -> {
-            val d = state
-            Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = { Text("个人信息") },
-                        navigationIcon = {
-                            if (onBack != null) {
-                                IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, null) }
-                            }
-                        },
-                        actions = {
-                            if (!d.editing) {
-                                IconButton(onClick = onStartEdit) { Icon(Icons.Default.Edit, null) }
-                                IconButton(onClick = onRandomAvatar) { Icon(Icons.Default.Refresh, null) }
-                            }
-                        }
-                    )
-                }
-            ) { padding ->
-                Column(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(padding)
-                        .verticalScroll(rememberScrollState())
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
+    Card {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = "编辑信息",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            val nameField = formState.fields["name"]
+            InputField(
+                value = nameField?.value ?: "",
+                onValueChange = onUpdateName,
+                label = "姓名",
+                errorMessage = nameField?.error,
+                enabled = !isSaving,
+                imeAction = ImeAction.Next
+            )
+
+            val emailField = formState.fields["email"]
+            InputField(
+                value = emailField?.value ?: "",
+                onValueChange = onUpdateEmail,
+                label = "邮箱",
+                errorMessage = emailField?.error,
+                enabled = !isSaving,
+                imeAction = ImeAction.Next
+            )
+
+            val bioField = formState.fields["bio"]
+            MultilineInputField(
+                value = bioField?.value ?: "",
+                onValueChange = onUpdateBio,
+                label = "个人简介",
+                errorMessage = bioField?.error,
+                enabled = !isSaving
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+            ) {
+                TextButton(
+                    onClick = onCancel,
+                    enabled = !isSaving
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        AppAvatar(
-                            url = d.profile.avatarUrl,
-                            size = 96.dp,
-                            modifier = Modifier
+                    Text("取消")
+                }
+
+                Button(
+                    onClick = onSave,
+                    enabled = !isSaving && formState.isValid
+                ) {
+                    if (isSaving) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(16.dp),
+                            strokeWidth = 2.dp
                         )
-                        Spacer(Modifier.width(16.dp))
-                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(d.profile.name, style = MaterialTheme.typography.titleMedium)
-                            Text(d.profile.email, style = MaterialTheme.typography.bodySmall)
-                            Text(d.profile.bio, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        }
+                    } else {
+                        Text("保存")
                     }
-
-                    if (d.editing) {
-                        OutlinedTextField(value = d.editName, onValueChange = onName, label = { Text("姓名") }, modifier = Modifier.fillMaxWidth())
-                        OutlinedTextField(value = d.editEmail, onValueChange = onEmail, label = { Text("邮箱") }, modifier = Modifier.fillMaxWidth())
-                        OutlinedTextField(value = d.editBio, onValueChange = onBio, label = { Text("简介") }, modifier = Modifier.fillMaxWidth(), maxLines = 3)
-                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            Button(onClick = onSave, enabled = !d.saving) { Text(if (d.saving) "保存中" else "保存") }
-                            OutlinedButton(onClick = onCancelEdit, enabled = !d.saving) { Text("取消") }
-                        }
-                    }
-
-                    SettingsSection(
-                        settings = d.settings,
-                        onToggleDark = onToggleDark,
-                        onToggleNotify = onToggleNotify,
-                        onToggleAutoPlay = onToggleAutoPlay,
-                        onToggleAnalytics = onToggleAnalytics,
-                        onToggleCrash = onToggleCrash,
-                    )
-
-                    if (d.message != null) Text(d.message, color = MaterialTheme.colorScheme.primary)
                 }
             }
         }
@@ -140,28 +270,172 @@ private fun ProfileScreen(
 }
 
 @Composable
-private fun SettingsSection(
-    settings: AppSettings,
-    onToggleDark: () -> Unit,
-    onToggleNotify: () -> Unit,
-    onToggleAutoPlay: () -> Unit,
-    onToggleAnalytics: () -> Unit,
-    onToggleCrash: () -> Unit,
+private fun ProfileSettings(
+    settings: com.kira.learning.model.AppSettings,
+    onToggleSetting: (SettingType) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("应用设置", style = MaterialTheme.typography.titleSmall)
-        SettingRow("深色模式", settings.darkMode, onToggleDark)
-        SettingRow("消息通知", settings.notificationsEnabled, onToggleNotify)
-        SettingRow("视频自动播放", settings.autoPlayVideo, onToggleAutoPlay)
-        SettingRow("分析上报", settings.analyticsEnabled, onToggleAnalytics)
-        SettingRow("崩溃报告", settings.crashReportEnabled, onToggleCrash)
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(0.dp)
+        ) {
+            // 标题区域，使用紫色渐变背景
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
+                            colors = listOf(
+                                androidx.compose.ui.graphics.Color(0xFF8B5CF6), // 紫色
+                                androidx.compose.ui.graphics.Color(0xFFA855F7)  // 偏粉的紫色
+                            )
+                        )
+                    )
+                    .padding(horizontal = 20.dp, vertical = 16.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = null,
+                        tint = androidx.compose.ui.graphics.Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "个人设置",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold
+                        ),
+                        color = androidx.compose.ui.graphics.Color.White
+                    )
+                }
+            }
+
+            // 设置项列表
+            Column(
+                modifier = Modifier.padding(vertical = 8.dp)
+            ) {
+                SettingItemWithIcon(
+                    title = "深色模式",
+                    description = "切换应用主题色调",
+                    icon = Icons.Default.DarkMode,
+                    checked = settings.darkMode,
+                    onCheckedChange = { onToggleSetting(SettingType.DARK_MODE) }
+                )
+
+                SettingItemWithIcon(
+                    title = "推送通知",
+                    description = "接收重要消息提醒",
+                    icon = Icons.Default.Notifications,
+                    checked = settings.notificationsEnabled,
+                    onCheckedChange = { onToggleSetting(SettingType.NOTIFICATIONS) }
+                )
+
+                SettingItemWithIcon(
+                    title = "自动播放视频",
+                    description = "视频内容自动播放",
+                    icon = Icons.Default.PlayArrow,
+                    checked = settings.autoPlayVideo,
+                    onCheckedChange = { onToggleSetting(SettingType.AUTO_PLAY) }
+                )
+
+                SettingItemWithIcon(
+                    title = "数据分析",
+                    description = "帮助改善应用体验",
+                    icon = Icons.Default.Analytics,
+                    checked = settings.analyticsEnabled,
+                    onCheckedChange = { onToggleSetting(SettingType.ANALYTICS) }
+                )
+
+                SettingItemWithIcon(
+                    title = "崩溃报告",
+                    description = "自动发送错误报告",
+                    icon = Icons.Default.BugReport,
+                    checked = settings.crashReportEnabled,
+                    onCheckedChange = { onToggleSetting(SettingType.CRASH_REPORTS) }
+                )
+            }
+        }
     }
 }
 
 @Composable
-private fun SettingRow(label: String, checked: Boolean, onToggle: () -> Unit) {
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Text(label, modifier = Modifier.weight(1f))
-        Switch(checked = checked, onCheckedChange = { onToggle() })
+private fun SettingItemWithIcon(
+    title: String,
+    description: String,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = { onCheckedChange(!checked) },
+        color = androidx.compose.ui.graphics.Color.Transparent
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // 图标背景
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .background(
+                        color = androidx.compose.ui.graphics.Color(0xFF8B5CF6).copy(alpha = 0.1f),
+                        shape = androidx.compose.foundation.shape.CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = androidx.compose.ui.graphics.Color(0xFF8B5CF6),
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // 文本内容
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Medium
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // 紫色主题的开关
+            Switch(
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = androidx.compose.ui.graphics.Color.White,
+                    checkedTrackColor = androidx.compose.ui.graphics.Color(0xFF8B5CF6),
+                    uncheckedThumbColor = androidx.compose.ui.graphics.Color.White,
+                    uncheckedTrackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                )
+            )
+        }
     }
 }

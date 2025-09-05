@@ -1,82 +1,264 @@
 package com.kira.learning.module.profile
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.model.UserProfile
+import com.kira.learning.model.AppSettings
 import com.kira.learning.network.ApiResult
+import com.kira.learning.base.mvi.BaseUiState
+import com.kira.learning.base.mvi.BaseViewModel
+import com.kira.learning.base.mvi.UiEvent
+import com.kira.learning.base.mvi.ViewState
+import com.kira.learning.base.validation.FormState
+import com.kira.learning.base.validation.FormField
+import com.kira.learning.base.validation.Validators
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
-import com.kira.learning.model.ProfileUiState
-import com.kira.learning.model.AppSettings
+
+// 重构后的ProfileViewState，使用通用BaseUiState
+data class ProfileViewState(
+    val profileData: BaseUiState<UserProfile> = BaseUiState.Idle,
+    val settings: AppSettings = AppSettings(),
+    val formState: FormState = FormState(),
+    val isEditing: Boolean = false,
+    val isSaving: Boolean = false,
+    val message: String? = null
+) : ViewState()
+
+// 重构后的事件系统
+sealed interface ProfileEvent {
+    object LoadProfile : ProfileEvent
+    object StartEdit : ProfileEvent
+    object CancelEdit : ProfileEvent
+    object SaveProfile : ProfileEvent
+    object RandomAvatar : ProfileEvent
+    data class UpdateName(val name: String) : ProfileEvent
+    data class UpdateEmail(val email: String) : ProfileEvent
+    data class UpdateBio(val bio: String) : ProfileEvent
+    data class ToggleSetting(val setting: SettingType) : ProfileEvent
+}
+
+enum class SettingType {
+    DARK_MODE, NOTIFICATIONS, AUTO_PLAY, ANALYTICS, CRASH_REPORTS
+}
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repo: ProfileRepository
-): ViewModel() {
+) : BaseViewModel<ProfileViewState, UiEvent>(
+    initialState = ProfileViewState()
+) {
 
-    private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
-    val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
+    init {
+        setupFormValidation()
+        handleAction(ProfileEvent.LoadProfile)
+    }
 
-    init { load() }
+    override fun handleAction(action: Any) {
+        when (action) {
+            is ProfileEvent.LoadProfile -> loadProfile()
+            is ProfileEvent.StartEdit -> startEditInternal()
+            is ProfileEvent.CancelEdit -> cancelEditInternal()
+            is ProfileEvent.SaveProfile -> saveProfile()
+            is ProfileEvent.RandomAvatar -> updateAvatar()
+            is ProfileEvent.UpdateName -> updateFormField("name", action.name)
+            is ProfileEvent.UpdateEmail -> updateFormField("email", action.email)
+            is ProfileEvent.UpdateBio -> updateFormField("bio", action.bio)
+            is ProfileEvent.ToggleSetting -> toggleSetting(action.setting)
+        }
+    }
 
-    fun load() {
+    private fun setupFormValidation() {
+        val initialFormState = FormState(
+            fields = mapOf(
+                "name" to FormField(
+                    validators = listOf(
+                        Validators.required("姓名不能为空"),
+                        Validators.maxLength(50, "姓名不能超过50个字符")
+                    )
+                ),
+                "email" to FormField(
+                    validators = listOf(
+                        Validators.required("邮箱不能为空"),
+                        Validators.email("请输入有效的邮箱地址")
+                    )
+                ),
+                "bio" to FormField(
+                    validators = listOf(
+                        Validators.maxLength(200, "个人简介不能超过200个字符")
+                    )
+                )
+            )
+        )
+        updateState { copy(formState = initialFormState) }
+    }
+
+    private fun loadProfile() {
         viewModelScope.launch {
-            _uiState.value = ProfileUiState.Loading
-            when(val res = repo.load()) {
-                is ApiResult.Success -> _uiState.value = ProfileUiState.Data(profile = res.data)
-                is ApiResult.Error -> _uiState.value = ProfileUiState.Error(res.message)
-                ApiResult.NetworkUnavailable -> _uiState.value = ProfileUiState.Error("网络不可用")
+            updateState { copy(profileData = BaseUiState.Loading) }
+
+            when (val result = repo.load()) {
+                is ApiResult.Success -> {
+                    val settings = repo.getSettings()
+                    updateState {
+                        copy(
+                            profileData = BaseUiState.Success(result.data),
+                            settings = settings,
+                            formState = formState.copy(
+                                fields = formState.fields.mapValues { (key, field) ->
+                                    when (key) {
+                                        "name" -> field.copy(value = result.data.name)
+                                        "email" -> field.copy(value = result.data.email)
+                                        "bio" -> field.copy(value = result.data.bio)
+                                        else -> field
+                                    }
+                                }
+                            )
+                        )
+                    }
+                }
+                is ApiResult.Error -> {
+                    updateState { copy(profileData = BaseUiState.Error(result.message)) }
+                    sendEvent(UiEvent.ShowSnackbar(result.message))
+                }
+                ApiResult.NetworkUnavailable -> {
+                    val message = "网络不可用"
+                    updateState { copy(profileData = BaseUiState.Error(message)) }
+                    sendEvent(UiEvent.ShowSnackbar(message))
+                }
             }
         }
     }
 
-    fun startEdit() = mutateData { it.copy(editing = true, message = null) }
-    fun cancelEdit() = mutateData { it.copy(editing = false, editName = it.profile.name, editEmail = it.profile.email, editBio = it.profile.bio, message = null) }
+    private fun startEditInternal() {
+        updateState { copy(isEditing = true, message = null) }
+    }
 
-    fun setName(v: String) = mutateData { it.copy(editName = v) }
-    fun setEmail(v: String) = mutateData { it.copy(editEmail = v) }
-    fun setBio(v: String) = mutateData { it.copy(editBio = v) }
-
-    fun saveEdit() = viewModelScope.launch {
-        val data = _uiState.value as? ProfileUiState.Data ?: return@launch
-        _uiState.update { (it as ProfileUiState.Data).copy(saving = true, message = null) }
-        when(val r = repo.update(data.editName, data.editEmail, data.editBio)) {
-            is ApiResult.Success -> _uiState.update { (it as ProfileUiState.Data).copy(profile = r.data, editing = false, saving = false, message = "已保存") }
-            is ApiResult.Error -> _uiState.update { (it as ProfileUiState.Data).copy(saving = false, message = r.message) }
-            ApiResult.NetworkUnavailable -> _uiState.update { (it as ProfileUiState.Data).copy(saving = false, message = "网络不可用") }
+    private fun cancelEditInternal() {
+        val profile = (currentState.profileData as? BaseUiState.Success)?.data
+        if (profile != null) {
+            updateState {
+                copy(
+                    isEditing = false,
+                    formState = formState.copy(
+                        fields = formState.fields.mapValues { (key, field) ->
+                            when (key) {
+                                "name" -> field.copy(value = profile.name)
+                                "email" -> field.copy(value = profile.email)
+                                "bio" -> field.copy(value = profile.bio)
+                                else -> field
+                            }
+                        }
+                    ),
+                    message = null
+                )
+            }
         }
     }
 
-    fun randomUpdateAvatar() = viewModelScope.launch {
-        val data = _uiState.value as? ProfileUiState.Data ?: return@launch
-        val size = Random.nextInt(180, 260)
-        when(val r = repo.updateAvatar("https://placekitten.com/${size}/${size}")) {
-            is ApiResult.Success -> _uiState.update { data.copy(profile = r.data, message = "头像已更新") }
-            is ApiResult.Error -> _uiState.update { data.copy(message = r.message) }
-            ApiResult.NetworkUnavailable -> _uiState.update { data.copy(message = "网络不可用") }
+    private fun updateFormField(fieldName: String, value: String) {
+        updateState {
+            copy(formState = formState.updateField(fieldName, value))
         }
     }
 
-    fun toggleDark() = toggleSetting { it.copy(darkMode = !it.darkMode) }
-    fun toggleNotify() = toggleSetting { it.copy(notificationsEnabled = !it.notificationsEnabled) }
-    fun toggleAutoPlay() = toggleSetting { it.copy(autoPlayVideo = !it.autoPlayVideo) }
-    fun toggleAnalytics() = toggleSetting { it.copy(analyticsEnabled = !it.analyticsEnabled) }
-    fun toggleCrash() = toggleSetting { it.copy(crashReportEnabled = !it.crashReportEnabled) }
+    private fun saveProfile() {
+        val validatedForm = currentState.formState.validateAll()
+        updateState { copy(formState = validatedForm) }
 
-    private fun toggleSetting(block: (AppSettings) -> AppSettings) {
-        val data = _uiState.value as? ProfileUiState.Data ?: return
-        val settings = block(data.settings)
-        _uiState.update { data.copy(settings = settings, message = null) }
-        viewModelScope.launch { repo.updateSettings(settings) }
+        if (!validatedForm.isValid) {
+            sendEvent(UiEvent.ShowSnackbar("请检查输入信息"))
+            return
+        }
+
+        viewModelScope.launch {
+            updateState { copy(isSaving = true, message = null) }
+
+            val name = validatedForm.fields["name"]?.value ?: ""
+            val email = validatedForm.fields["email"]?.value ?: ""
+            val bio = validatedForm.fields["bio"]?.value ?: ""
+
+            when (val result = repo.update(name, email, bio)) {
+                is ApiResult.Success -> {
+                    updateState {
+                        copy(
+                            profileData = BaseUiState.Success(result.data),
+                            isEditing = false,
+                            isSaving = false,
+                            message = "保存成功"
+                        )
+                    }
+                    sendEvent(UiEvent.ShowSnackbar("保存成功"))
+                }
+                is ApiResult.Error -> {
+                    updateState { copy(isSaving = false, message = result.message) }
+                    sendEvent(UiEvent.ShowSnackbar(result.message))
+                }
+                ApiResult.NetworkUnavailable -> {
+                    val message = "网络不可用"
+                    updateState { copy(isSaving = false, message = message) }
+                    sendEvent(UiEvent.ShowSnackbar(message))
+                }
+            }
+        }
     }
 
-    private inline fun mutateData(transform: (ProfileUiState.Data) -> ProfileUiState.Data) {
-        val cur = _uiState.value as? ProfileUiState.Data ?: return
-        _uiState.value = transform(cur)
+    private fun updateAvatar() {
+        viewModelScope.launch {
+            val size = Random.nextInt(180, 260)
+
+            when (val result = repo.updateAvatar("https://placekitten.com/${size}/${size}")) {
+                is ApiResult.Success -> {
+                    updateState {
+                        copy(
+                            profileData = BaseUiState.Success(result.data),
+                            message = "头像已更新"
+                        )
+                    }
+                    sendEvent(UiEvent.ShowSnackbar("头像已更新"))
+                }
+                is ApiResult.Error -> {
+                    updateState { copy(message = result.message) }
+                    sendEvent(UiEvent.ShowSnackbar(result.message))
+                }
+                ApiResult.NetworkUnavailable -> {
+                    val message = "网络不可用"
+                    updateState { copy(message = message) }
+                    sendEvent(UiEvent.ShowSnackbar(message))
+                }
+            }
+        }
     }
+
+    private fun toggleSetting(settingType: SettingType) {
+        val newSettings = when (settingType) {
+            SettingType.DARK_MODE -> currentState.settings.copy(darkMode = !currentState.settings.darkMode)
+            SettingType.NOTIFICATIONS -> currentState.settings.copy(notificationsEnabled = !currentState.settings.notificationsEnabled)
+            SettingType.AUTO_PLAY -> currentState.settings.copy(autoPlayVideo = !currentState.settings.autoPlayVideo)
+            SettingType.ANALYTICS -> currentState.settings.copy(analyticsEnabled = !currentState.settings.analyticsEnabled)
+            SettingType.CRASH_REPORTS -> currentState.settings.copy(crashReportEnabled = !currentState.settings.crashReportEnabled)
+        }
+
+        updateState { copy(settings = newSettings, message = null) }
+
+        viewModelScope.launch {
+            repo.updateSettings(newSettings)
+        }
+    }
+
+    // 提供向后兼容的方法，供旧的ProfileScreen使用
+    fun load() = handleAction(ProfileEvent.LoadProfile)
+    fun startEdit() = handleAction(ProfileEvent.StartEdit)
+    fun cancelEdit() = handleAction(ProfileEvent.CancelEdit)
+    fun saveEdit() = handleAction(ProfileEvent.SaveProfile)
+    fun setName(v: String) = handleAction(ProfileEvent.UpdateName(v))
+    fun setEmail(v: String) = handleAction(ProfileEvent.UpdateEmail(v))
+    fun setBio(v: String) = handleAction(ProfileEvent.UpdateBio(v))
+    fun randomUpdateAvatar() = handleAction(ProfileEvent.RandomAvatar)
+    fun toggleDark() = handleAction(ProfileEvent.ToggleSetting(SettingType.DARK_MODE))
+    fun toggleNotify() = handleAction(ProfileEvent.ToggleSetting(SettingType.NOTIFICATIONS))
+    fun toggleAutoPlay() = handleAction(ProfileEvent.ToggleSetting(SettingType.AUTO_PLAY))
+    fun toggleAnalytics() = handleAction(ProfileEvent.ToggleSetting(SettingType.ANALYTICS))
+    fun toggleCrash() = handleAction(ProfileEvent.ToggleSetting(SettingType.CRASH_REPORTS))
 }

@@ -4,18 +4,18 @@ import com.kira.learning.model.UserProfile
 import com.kira.learning.model.AppSettings
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
-import com.kira.learning.network.apiCall
 import com.kira.learning.model.dao.toDomain
 import com.kira.learning.model.dao.UpdateProfileRequest
 import com.kira.learning.model.dao.UpdateAvatarRequest
 import com.kira.learning.model.dao.toDto
+import com.kira.learning.base.repository.BaseRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class ProfileRepository @Inject constructor(
     private val api: ComposeApiService
-) {
+) : BaseRepository() {
     // 是否启用本地模拟（后端未就绪时开启）
     private val useMock = true
 
@@ -39,7 +39,7 @@ class ProfileRepository @Inject constructor(
     suspend fun load(): ApiResult<UserProfile> = if (useMock) {
         ApiResult.Success(mockProfile.copy())
     } else {
-        apiCall { api.getProfile().toDomain() }
+        safeApiCall { api.getProfile().toDomain() }
     }
 
     suspend fun update(name: String, email: String, bio: String): ApiResult<UserProfile> = if (useMock) {
@@ -51,20 +51,31 @@ class ProfileRepository @Inject constructor(
         )
         ApiResult.Success(mockProfile.copy())
     } else {
-        apiCall { api.updateProfile(UpdateProfileRequest(name, email, bio)).toDomain() }
+        safeApiCall {
+            api.updateProfile(UpdateProfileRequest(name, email, bio)).toDomain()
+        }
     }
 
-    suspend fun updateAvatar(url: String): ApiResult<UserProfile> = if (useMock) {
-        mockProfile = mockProfile.copy(avatarUrl = url, updatedAt = System.currentTimeMillis())
+    suspend fun updateAvatar(avatarUrl: String): ApiResult<UserProfile> = if (useMock) {
+        mockProfile = mockProfile.copy(
+            avatarUrl = avatarUrl,
+            updatedAt = System.currentTimeMillis()
+        )
         ApiResult.Success(mockProfile.copy())
     } else {
-        apiCall { api.updateAvatar(UpdateAvatarRequest(url)).toDomain() }
+        safeApiCall {
+            api.updateAvatar(UpdateAvatarRequest(avatarUrl)).toDomain()
+        }
     }
 
-    suspend fun updateSettings(settings: AppSettings): ApiResult<AppSettings> = if (useMock) {
+    suspend fun updateSettings(settings: AppSettings): ApiResult<Unit> = if (useMock) {
         mockSettings = settings
-        ApiResult.Success(mockSettings.copy())
+        ApiResult.Success(Unit)
     } else {
-        apiCall { api.updateSettings(settings.toDto()).toDomain() }
+        safeApiCall {
+            api.updateSettings(settings.toDto())
+        }
     }
+
+    fun getSettings(): AppSettings = mockSettings.copy()
 }

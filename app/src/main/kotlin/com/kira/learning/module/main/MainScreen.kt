@@ -25,9 +25,9 @@ import androidx.navigation.compose.rememberNavController
 import com.kira.learning.module.sample.SampleFeatureRoute
 import com.kira.learning.module.answer.AnswerRoute
 import com.kira.learning.module.profile.ProfileRoute
-import com.kira.learning.model.ProfileUiState
 import com.kira.learning.module.profile.ProfileViewModel
 import com.kira.learning.utils.AppAvatar
+import com.kira.learning.base.mvi.BaseUiState
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,8 +55,6 @@ import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 import com.kira.learning.module.ocr.ImageOcrRoute
 import com.kira.learning.module.imageplayer.ImagePlayerRoute
 import com.kira.learning.navigation.AppRoutes
-
-// 统一路由常量使用 AppRoutes，保留底部导航数据模型
 
 data class BottomItem(
     val route: String,
@@ -212,13 +210,13 @@ internal fun MainScreen(
                     }
                 }
 
-                // 可拖动悬浮按钮
+                // 可���动悬浮按钮
                 val density = LocalDensity.current
                 val margin = 16.dp
                 val buttonSize = 56.dp
                 val marginPx = with(density) { margin.toPx() }
                 val buttonSizePx = with(density) { buttonSize.toPx() }
-                val bottomBarHeightPx = with(density) { 80.dp.toPx() } // 近似底部导航高度
+                val bottomBarHeightPx = with(density) { 80.dp.toPx() } // 近似底部导��高度
 
                 var offsetX by remember { mutableFloatStateOf(0f) }
                 var offsetY by remember { mutableFloatStateOf(0f) }
@@ -275,35 +273,38 @@ private fun DrawerContent(
     onNavigateOcr: () -> Unit,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
-    val state = profileViewModel.uiState.collectAsStateWithLifecycle()
+    val state by profileViewModel.viewState.collectAsStateWithLifecycle()
     ModalDrawerSheet {
         Spacer(Modifier.height(32.dp))
-        when (val s = state.value) {
-            is ProfileUiState.Data -> {
+        when (val profileData = state.profileData) {
+            is BaseUiState.Success -> {
+                val profile = profileData.data
                 Row(
                     Modifier.padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    AppAvatar(url = s.profile.avatarUrl, size = 64.dp)
+                    AppAvatar(url = profile.avatarUrl, size = 64.dp)
                     Spacer(Modifier.width(12.dp))
                     Column {
                         Text(
-                            s.profile.name, style = MaterialTheme.typography.titleMedium
-                        ); Text(s.profile.email, style = MaterialTheme.typography.bodySmall)
+                            profile.name, style = MaterialTheme.typography.titleMedium
+                        ); Text(profile.email, style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 Spacer(Modifier.height(12.dp))
             }
 
-            is ProfileUiState.Loading -> Row(
+            is BaseUiState.Loading -> Row(
                 Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically
             ) {
                 CircularProgressIndicator(Modifier.size(32.dp)); Spacer(Modifier.width(12.dp)); Text(
-                "加载中"
+                "加载中..."
             )
             }
 
-            is ProfileUiState.Error -> Text("用户信息加载失败", modifier = Modifier.padding(16.dp))
+            is BaseUiState.Error -> Text("用户信息加载失败", modifier = Modifier.padding(16.dp))
+
+            is BaseUiState.Idle -> Text("初始化中...", modifier = Modifier.padding(16.dp))
         }
         NavigationDrawerItem(
             label = { Text("个人信息") },
