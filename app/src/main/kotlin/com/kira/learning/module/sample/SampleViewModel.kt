@@ -1,54 +1,78 @@
 package com.kira.learning.module.sample
 
-import com.kira.learning.model.SampleUiState
-import com.kira.learning.model.SampleEvent
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.base.mvi.BaseUiState
+import com.kira.learning.base.mvi.BaseViewModel
+import com.kira.learning.base.mvi.UiEvent
+import com.kira.learning.base.mvi.ViewState
+import com.kira.learning.model.SampleImage
 import com.kira.learning.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+// 使用通用的BaseUiState替代原有的SampleUiState
+data class SampleViewState(
+    val data: BaseUiState<List<SampleImage>> = BaseUiState.Idle
+) : ViewState()
+
+// 使用通用的事件系统
+sealed interface SampleEvent {
+    object LoadSamples : SampleEvent
+    object RefreshSamples : SampleEvent
+    object RetrySamples : SampleEvent
+}
 
 @HiltViewModel
 class SampleViewModel @Inject constructor(
     private val repo: SampleRepository,
     private val savedStateHandle: SavedStateHandle,
-) : ViewModel() {
-
-    private val _uiState = MutableStateFlow<SampleUiState>(SampleUiState.Idle)
-    val uiState: StateFlow<SampleUiState> = _uiState.asStateFlow()
-
-    private var loadJob: Job? = null
+) : BaseViewModel<SampleViewState, UiEvent>(
+    initialState = SampleViewState()
+) {
 
     init {
-        dispatch(SampleEvent.Load)
+        handleAction(SampleEvent.LoadSamples)
     }
 
-    fun dispatch(event: SampleEvent) {
-        when (event) {
-            SampleEvent.Load -> load(force = false, refresh = false)
-            SampleEvent.Refresh -> load(force = true, refresh = true)
-            is SampleEvent.Retry -> load(force = true, refresh = false)
+    override fun handleAction(action: Any) {
+        when (action) {
+            is SampleEvent.LoadSamples -> loadSamples(refresh = false)
+            is SampleEvent.RefreshSamples -> loadSamples(refresh = true)
+            is SampleEvent.RetrySamples -> loadSamples(refresh = false)
         }
     }
 
-    private fun load(force: Boolean, refresh: Boolean) {
-        if (loadJob?.isActive == true) return
-        loadJob = viewModelScope.launch {
-            val current = _uiState.value
-            _uiState.value = when {
-                refresh && current is SampleUiState.Success -> current.copy(refreshing = true)
-                else -> SampleUiState.Loading
+    private fun loadSamples(refresh: Boolean) {
+        viewModelScope.launch {
+            val currentData = currentState.data
+            updateState {
+                copy(
+                    data = when {
+                        refresh && currentData is BaseUiState.Success ->
+                            currentData.copy(refreshing = true)
+
+                        else -> BaseUiState.Loading
+                    }
+                )
             }
-            when (val result = repo.load(force)) {
-                is ApiResult.Success -> _uiState.value = SampleUiState.Success(result.data, refreshing = false)
-                is ApiResult.Error -> _uiState.value = SampleUiState.Error(result.message)
-                ApiResult.NetworkUnavailable -> _uiState.value = SampleUiState.Error("网络不可用")
+
+            when (val result = repo.load(force = refresh)) {
+                is ApiResult.Success -> updateState {
+                    copy(data = BaseUiState.Success(result.data, refreshing = false))
+                }
+
+                is ApiResult.Error -> {
+                    updateState { copy(data = BaseUiState.Error(result.message)) }
+                    sendEvent(UiEvent.ShowSnackbar(result.message))
+                }
+
+                ApiResult.NetworkUnavailable -> {
+                    val message = "网络不可用"
+                    updateState { copy(data = BaseUiState.Error(message)) }
+                    sendEvent(UiEvent.ShowSnackbar(message))
+                }
             }
         }
     }

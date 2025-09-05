@@ -7,7 +7,7 @@ import com.kira.learning.model.QuestionBase
 import com.kira.learning.model.ShortAnswerQuestion
 import com.kira.learning.model.SingleChoiceQuestion
 import com.kira.learning.network.ApiResult
-import com.kira.learning.network.safeApiCall
+import com.kira.learning.base.repository.BaseRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ interface AnswerRepository {
     suspend fun fetchQuestions(): ApiResult<List<QuestionBase>>
 }
 
-class MockAnswerRepository @Inject constructor(): AnswerRepository {
+class MockAnswerRepository @Inject constructor() : BaseRepository(), AnswerRepository {
     override suspend fun fetchQuestions(): ApiResult<List<QuestionBase>> = safeApiCall {
         delay(500) // 模拟网络
         listOf(
