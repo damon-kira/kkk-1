@@ -27,7 +27,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "A1"
 include(":app")
-include(":common-base")
+include(":xml-base")
 include(":feature-camera")
 include(":sdks:util")
 include(":sdks:cache")

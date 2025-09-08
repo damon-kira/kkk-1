@@ -162,8 +162,8 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.hilt.workmanager)
     ksp(libs.hilt.android.compiler)
+    implementation(project(":xml-base"))
 
-    implementation(project(":common-base"))
     implementation(project(":common-core"))
     implementation(project(":common-ui"))
     implementation(project(":sdks:util"))

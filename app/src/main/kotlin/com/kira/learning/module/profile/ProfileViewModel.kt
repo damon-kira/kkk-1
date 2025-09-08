@@ -118,10 +118,12 @@ class ProfileViewModel @Inject constructor(
                         )
                     }
                 }
+
                 is ApiResult.Error -> {
                     updateState { copy(profileData = BaseUiState.Error(result.message)) }
                     sendEvent(UiEvent.ShowSnackbar(result.message))
                 }
+
                 ApiResult.NetworkUnavailable -> {
                     val message = "网络不可用"
                     updateState { copy(profileData = BaseUiState.Error(message)) }
@@ -191,10 +193,12 @@ class ProfileViewModel @Inject constructor(
                     }
                     sendEvent(UiEvent.ShowSnackbar("保存成功"))
                 }
+
                 is ApiResult.Error -> {
                     updateState { copy(isSaving = false, message = result.message) }
                     sendEvent(UiEvent.ShowSnackbar(result.message))
                 }
+
                 ApiResult.NetworkUnavailable -> {
                     val message = "网络不可用"
                     updateState { copy(isSaving = false, message = message) }
@@ -218,10 +222,12 @@ class ProfileViewModel @Inject constructor(
                     }
                     sendEvent(UiEvent.ShowSnackbar("头像已更新"))
                 }
+
                 is ApiResult.Error -> {
                     updateState { copy(message = result.message) }
                     sendEvent(UiEvent.ShowSnackbar(result.message))
                 }
+
                 ApiResult.NetworkUnavailable -> {
                     val message = "网络不可用"
                     updateState { copy(message = message) }
@@ -247,18 +253,4 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    // 提供向后兼容的方法，供旧的ProfileScreen使用
-    fun load() = handleAction(ProfileEvent.LoadProfile)
-    fun startEdit() = handleAction(ProfileEvent.StartEdit)
-    fun cancelEdit() = handleAction(ProfileEvent.CancelEdit)
-    fun saveEdit() = handleAction(ProfileEvent.SaveProfile)
-    fun setName(v: String) = handleAction(ProfileEvent.UpdateName(v))
-    fun setEmail(v: String) = handleAction(ProfileEvent.UpdateEmail(v))
-    fun setBio(v: String) = handleAction(ProfileEvent.UpdateBio(v))
-    fun randomUpdateAvatar() = handleAction(ProfileEvent.RandomAvatar)
-    fun toggleDark() = handleAction(ProfileEvent.ToggleSetting(SettingType.DARK_MODE))
-    fun toggleNotify() = handleAction(ProfileEvent.ToggleSetting(SettingType.NOTIFICATIONS))
-    fun toggleAutoPlay() = handleAction(ProfileEvent.ToggleSetting(SettingType.AUTO_PLAY))
-    fun toggleAnalytics() = handleAction(ProfileEvent.ToggleSetting(SettingType.ANALYTICS))
-    fun toggleCrash() = handleAction(ProfileEvent.ToggleSetting(SettingType.CRASH_REPORTS))
 }
