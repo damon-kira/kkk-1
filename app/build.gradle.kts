@@ -118,7 +118,7 @@ android {
 
     sourceSets {
         getByName("main") {
-            jniLibs.srcDirs("libs")  // 修正为函数调用形式
+            jniLibs.srcDirs("libs")
         }
     }
 

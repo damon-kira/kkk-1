@@ -18,7 +18,6 @@ plugins {
     alias(libs.plugins.crashlytics) apply false
     alias(libs.plugins.kotlin.ksp) apply false
     alias(libs.plugins.services) apply false
-//    alias(libs.plugins.chaquoPython) apply false
 
 }
 

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.composeCompiler)
-    id("com.kira.stub")
+//    id("com.kira.stub")
 }
 
 android {
