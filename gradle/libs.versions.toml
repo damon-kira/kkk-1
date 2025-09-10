@@ -55,7 +55,7 @@ firebase = "33.10.0"
 markwon = "4.6.2"
 other-devoptions = "1.0.4"
 camera = "1.4.2"
-media3 = "1.3.1"
+media3 = "1.8.0"
 services = "4.4.3"
 crashlytics = "3.0.6"
 calf = "0.3.0"
@@ -63,6 +63,7 @@ generativeai = "0.9.0-1.1.0"
 colorpicker = "2.3.0"
 colorpickerCompose = "1.1.2"
 navigationCompose = "2.9.0"
+leakcanary = "2.14"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -178,5 +179,6 @@ guava-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", 
 colorpicker = { module = "com.github.skydoves:colorpickerview", version.ref = "colorpicker" } # 传统 View 颜色选择器
 skydoves-colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" } # Compose 颜色选择器
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" } # Timber 日志库
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" } # 内存泄漏检测
 appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "appupdate" } # Google Play In-App Update KTX
 

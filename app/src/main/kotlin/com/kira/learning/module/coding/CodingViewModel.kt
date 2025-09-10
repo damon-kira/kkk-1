@@ -151,7 +151,7 @@ def calculator():
 calculator()"""
 
         ProgrammingLanguage.JAVA -> """// Java Hello World Example
-import java.util.Scanner;
+import kotlin.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

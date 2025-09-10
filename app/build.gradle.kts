@@ -174,6 +174,6 @@ dependencies {
     implementation(project(":compose-view-chat"))
 
     // Debug工具
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
+    debugImplementation(libs.leakcanary)
 
 }

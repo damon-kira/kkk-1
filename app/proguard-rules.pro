@@ -1,139 +1,196 @@
+# ===============================================================================
+# Kira Learning App - ProGuard 配置文件
+# ===============================================================================
+
+# ==== 基础优化配置 ====
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -dontpreverify
 -verbose
 -allowaccessmodification
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--renamesourcefileattribute Paramount
+
+# 优化配置 - 移除过于激进的优化选项
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!method/inlining/*
+
+# 调试信息保留
+-renamesourcefileattribute SourceFile
 -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,EnclosingMethod,*Annotation*,JavascriptInterface
 
--dontwarn android.support.v4.**
--dontwarn android.support.v7.**
--dontwarn de.greenrobot.event.**
+# ==== Android 核心组件保护 ====
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+-keep public class * extends androidx.fragment.app.Fragment
+-keep public class * extends androidx.appcompat.app.AppCompatActivity
 
--keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
--keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
-
--keepclassmembers class android.view.View { *; }
--keepclassmembers class android.widget.TextView { *; }
--keepclassmembers public class * extends android.view.View {*;}
--keepclassmembers public class * extends android.view.ViewGroup {*;}
--keep class androidx.appcompat.widget.** { *; }
-
--keepclasseswithmembernames class * {
-    native <methods>;
-}
-
--keepclasseswithmembers class * {
+# View 相关保护
+-keepclassmembers class * extends android.view.View {
+    public <init>(android.content.Context);
     public <init>(android.content.Context, android.util.AttributeSet);
-}
-
--keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(***);
+    *** get*();
 }
 
 -keepclassmembers class * extends android.app.Activity {
    public void *(android.view.View);
 }
 
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
+# ==== Kotlin & Coroutines 支持 ====
+-keep class kotlin.** { *; }
+-keep class kotlin.Metadata { *; }
+-keepclassmembers class **$WhenMappings {
+    <fields>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
 }
 
--keepclassmembers class * extends android.database.sqlite.SQLiteOpenHelper {
-    public void onDowngrade(...);
+# Coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
 }
 
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
+# ==== Compose 支持 ====
+-keep class androidx.compose.** { *; }
+-keep class androidx.compose.runtime.** { *; }
+-keep class androidx.compose.ui.** { *; }
+-keep interface androidx.compose.runtime.Composer
+-keepclassmembers class androidx.compose.** {
+    *;
 }
 
--keep public class * implements android.os.Parcelable {
-    public *;
-}
--keep public class * implements java.io.Serializable {
-    public *;
-}
+# Compose Compiler 生成的类
+-keep class *ComposerKt { *; }
+-keep class *$Companion { *; }
 
-#------------------  下方是android平台自带的排除项，这里不要动         ----------------
-
--keep public class * extends androidx.appcompat.app.AppCompatActivity {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends androidx.fragment.app.Fragment {
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Application{
-	public <fields>;
-	public <methods>;
-}
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends android.app.backup.BackupAgentHelper
--keep public class * extends android.preference.Preference
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
-# 方法名中含有“JNI”字符的，认定是Java Native Interface方法，自动排除
-# 方法名中含有“JRI”字符的，认定是Java Reflection Interface方法，自动排除
-
+# ==== Hilt/Dagger 依赖注入 ====
+-keep class dagger.** { *; }
+-keep class javax.inject.** { *; }
+-keep class dagger.hilt.** { *; }
 -keepclasseswithmembers class * {
-    ... *JNI*(...);
+    @dagger.** <methods>;
+    @javax.inject.** <methods>;
 }
 
--keepclasseswithmembernames class * {
-	... *JRI*(...);
+# Hilt 生成的类
+-keep class **_HiltModules { *; }
+-keep class **_HiltComponents { *; }
+-keep class **_Impl { *; }
+-keep class **_MembersInjector { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+
+# ==== 项目特定包保护 ====
+# 主应用包
+-keep class com.kira.learning.** { *; }
+
+# 模型类保护
+-keep class com.kira.learning.model.** { *; }
+-keep class com.kira.learning.module.coding.** { *; }
+
+# 网络模型和API
+-keep class com.kira.learning.network.** { *; }
+-keepclassmembers class com.kira.learning.network.** {
+    <fields>;
 }
 
--keep class **JNI* {*;}
-#-keep public class com.project.Constant
-
-# log配置  不能有关闭优化的配置-dontoptimize,否则失效
--assumenosideeffects class android.util.Log{
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
+# ViewBinding
+-keep class com.kira.learning.databinding.** { *; }
+-keepclassmembers class * implements androidx.viewbinding.ViewBinding {
+  public static ** inflate(android.view.LayoutInflater);
+  public static ** bind(android.view.View);
 }
-# ======== 解决 AppCompatTextView 冲突 ========
 
-# 保留 AppCompatTextView 类及其所有成员
--keep class androidx.appcompat.widget.AppCompatTextView { *; }
-# 防止相关的继承链优化问题
--dontoptimize
--dontshrink
--keepattributes JavascriptInterface
--keepattributes EnclosingMethod
-#-dontobfuscate
-#-dontoptimize
-#------------------  上方是共性的排除项目         ----------------
+# ==== 第三方库配置 ====
 
+# Retrofit & OkHttp
+-keep class retrofit2.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.logging.**
+-dontwarn retrofit2.**
 
-# for appsflyerlib
-#-dontwarn com.google.android.gms.ads.**.
-#-dontwarn android.content.pm.**
-#-dontwarn com.android.installreferrer
-#-keep class com.appsflyer.** { *; }
-#-keep public class com.google.firebase.iid.FirebaseInstanceId {
-#    public *;
-#}
-# for appsflyer sdk end
+# Gson 序列化
+-keep class com.google.gson.** { *; }
+-keep class * implements com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+-keepattributes Signature
+-keepattributes *Annotation*
 
-# 保留序列化相关的类
+# Firebase
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+
+# Crashlytics
+-keep class com.google.firebase.crashlytics.** { *; }
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+
+# WorkManager
+-keep class androidx.work.** { *; }
+-keep class * extends androidx.work.Worker
+-keep class * extends androidx.work.ListenableWorker
+-keepclassmembers class * extends androidx.work.Worker {
+    public <init>(android.content.Context,androidx.work.WorkerParameters);
+}
+
+# Navigation Component
+-keep class androidx.navigation.** { *; }
+-keep class * extends androidx.navigation.Navigator
+
+# Lifecycle Components
+-keep class androidx.lifecycle.** { *; }
+-keep class * extends androidx.lifecycle.ViewModel {
+    <init>();
+}
+-keep class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(android.app.Application);
+}
+
+# Room Database
+-keep class androidx.room.** { *; }
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-keep @androidx.room.Dao class *
+
+# Coil 图片加载
+-keep class coil.** { *; }
+-keep interface coil.** { *; }
+
+# Material Design
+-keep class com.google.android.material.** { *; }
+-dontwarn com.google.android.material.**
+
+# ==== 通用保护规则 ====
+
+# 枚举类保护
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# Parcelable 实现
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+# Serializable 实现
 -keepclassmembers class * implements java.io.Serializable {
     static final long serialVersionUID;
     private static final java.io.ObjectStreamField[] serialPersistentFields;
@@ -143,258 +200,72 @@
     java.lang.Object readResolve();
 }
 
-# 保留注解
+# JNI 方法保护
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# 反射相关
+-keep class **.R$* { *; }
 -keep @interface *
 
-# 保留通过反射调用的类
--keep class **.R$* { *; }
--keep class **.R$*$* { *; }
-
--dontwarn com.google.android.gms.**
-
-#viewbinding
--keepclassmembers class * implements androidx.viewbinding.ViewBinding {
-  public static ** inflate(...);
-  public static ** bind(***);
+# ==== 日志优化 ====
+# 移除 Log 调用以减小包大小（Release 版本）
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
 }
 
-#Androidx
--dontwarn com.google.android.material.**
--dontnote com.google.android.material.**
--dontwarn androidx.**
--keep class androidx.core.app.CoreComponentFactory { *; }
-
-
-# Google Play Services library
--keep class * extends java.util.ListResourceBundle {
-  protected Object[][] getContents();
+# 移除 println 调用
+-assumenosideeffects class java.io.PrintStream {
+    public void println(...);
+    public void print(...);
 }
 
--keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-  public static final *** NULL;
+# ==== WebView 支持 ====
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
 }
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclasseswithmembernames class * {
-  @com.google.android.gms.common.annotation.KeepName *;
-}
+-keep class android.webkit.** { *; }
 
--keepnames class * implements android.os.Parcelable {
-  public static final ** CREATOR;
-}
-#flurry adv end
-
-# google
--dontwarn com.google.**
--keep class com.google.**{*;}
-# end google
-
-# firebase
--dontwarn com.google.firebase.**
--keep class com.google.firebase.**{*;}
-#-keep class com.google.firebase.provider.FirebaseInitProvider {*;}
-# end firebase
-
--dontwarn javax.annotation.**
--dontwarn javax.inject.**
-
-# Retrofit
--dontnote retrofit2.Platform
--dontnote retrofit2.Platform$IOS$MainThreadExecutor
--dontwarn retrofit2.Platform$Java8
--keepattributes Exceptions
--keep class retrofit2.** { *; }
--keepclasseswithmembers class * {
-    @retrofit2.http.* <methods>;
-}
-
-# OkHttp3
--dontwarn okhttp3.logging.**
--dontwarn okio.**
--keep class okhttp3.** { *; }
--keep class okhttp3.internal.**{*;}
--keep interface okhttp3.** { *; }
--keep class okhttp3.internal.platform.* { *; }
--keepclassmembers class okhttp3.internal.platform.* { *; }
--keepclassmembers class okhttp3.internal.platform.* {
-    *;
-}
-# ======= Conscrypt 保留规则 =======
+# ==== 加密和安全 ====
+# Conscrypt TLS 提供者
 -keep class org.conscrypt.** { *; }
--keep class com.android.org.conscrypt.** { *; }
 -keep interface org.conscrypt.** { *; }
 -dontwarn org.conscrypt.**
 
-# ======= BouncyCastle 保留规则 =======
+# BouncyCastle 加密
 -keep class org.bouncycastle.** { *; }
--keep interface org.bouncycastle.** { *; }
 -dontwarn org.bouncycastle.**
 
-# ======= OpenJSSE 保留规则 =======
--keep class org.openjsse.** { *; }
--dontwarn org.openjsse.**
+# ==== 警告抑制 ====
+-dontwarn android.support.**
+-dontwarn androidx.**
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+-dontwarn java.lang.management.**
 
-# ======= 系统级 SSL 实现 =======
--keep class org.apache.harmony.xnet.provider.jsse.** { *; }
--dontwarn org.apache.harmony.xnet.provider.jsse.**
+# JNA 相关警告（可能用于某些第三方库）
+-dontwarn com.sun.jna.**
+-dontwarn org.apache.logging.log4j.**
+-dontwarn org.ietf.jgss.**
+-dontwarn org.newsclub.net.unix.**
+-dontwarn org.slf4j.**
 
-# Gson
--keep class com.google.gson.** { *; }
--keep class com.google.gson.stream.** { *; }
-
-# RxJava RxAndroid
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-    long producerIndex;
-    long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+# ==== 特殊处理 ====
+# 防止过度优化导致的问题
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
 }
 
-# SVG 支持
--keep class com.caverock.androidsvg.** { *; }
--dontwarn com.caverock.androidsvg.**
-
-# GIF 支持
--keep class pl.droidsonroids.gif.** { *; }
--dontwarn pl.droidsonroids.gif.**
-
-# Markwon 核心保留
--keep class io.noties.markwon.** { *; }
--keepclasseswithmembers class * {
-    @io.noties.markwon.core.SpanFactory <methods>;
-}
-# RxPermission
--keep class com.tbruyelle.rxpermissions2.* {
-*;
-}
-
-#model
--keep class com.kira.learning.model.**{*;}
-
-# Gson
--keep class com.google.gson.stream.** { *; }
--keep class com.google.gson.**{*;}
--keepattributes Signature
--keepattributes *Annotation*
--dontobfuscate
-
-#glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
-
-#LiveData
--keep class androidx.lifecycle.LiveData.**{
-   private int mVersion;
-}
-
-#banner
-#-dontwarn androidx.viewpager2.**
-#-keep class androidx.viewpager2.** {*;}
-#-dontwarn androidx.recyclerview.widget.RecyclerView
-#-keep class androidx.recyclerview.widget.RecyclerView{*;}
-#-dontwarn com.finance.learning.banner.**
-#-keep class com.finance.learning.banner.** {*;}
-
--optimizations !method/inlining/*
-
--keepclasseswithmembers class * {
-  public void onPayment*(...);
-}
-
-# 屏幕适配
--keep class me.jessyan.autosize.** { *; }
--keep interface me.jessyan.autosize.** { *; }
-
-# Guava
--keep class com.google.common.** { *; }
-
--keep class com.steve28.stedit.** { *; }
--keep class com.steve28.stedit.highlighter.** { *; }
-
--keep class com.google.firebase.crashlytics.** { *; }
-
-# 私有库image
--keep class com.otaliastudios.zoom.** { *; }
-
--keep class com.otaliastudios.opengl.** { *; }
--keep class io.github.kbiakov.codeview.** { *; }
--keep class com.kira.richtext.** { *; }
--keep class org.scilab.forge.jlatexmath.** { *; }
-# Crashlytics
--keepattributes *Annotation*
--keepattributes SourceFile,LineNumberTable
--keep public class * extends java.lang.Exception
--keep class com.google.firebase.crashlytics.** { *; }
--dontwarn com.google.firebase.crashlytics.**
-
--keep class com.jcraft.jsch.** { *; }
-
-# Unresolved classes
--dontwarn com.sun.jna.Library
--dontwarn com.sun.jna.Memory
--dontwarn com.sun.jna.Native
--dontwarn com.sun.jna.Platform
--dontwarn com.sun.jna.Pointer
--dontwarn com.sun.jna.Structure
--dontwarn com.sun.jna.platform.win32.BaseTSD$ULONG_PTR
--dontwarn com.sun.jna.platform.win32.WinDef$LPARAM
--dontwarn com.sun.jna.platform.win32.WinDef$LRESULT
--dontwarn com.sun.jna.platform.win32.WinUser$COPYDATASTRUCT
--dontwarn com.sun.jna.platform.win32.Kernel32
--dontwarn com.sun.jna.platform.win32.User32
--dontwarn com.sun.jna.platform.win32.WinBase$SECURITY_ATTRIBUTES
--dontwarn com.sun.jna.platform.win32.WinBase
--dontwarn com.sun.jna.platform.win32.WinDef$HWND
--dontwarn com.sun.jna.platform.win32.WinDef$WPARAM
--dontwarn com.sun.jna.platform.win32.WinNT$HANDLE
--dontwarn com.sun.jna.win32.W32APIOptions
--dontwarn org.apache.logging.log4j.Level
--dontwarn org.apache.logging.log4j.LogManager
--dontwarn org.apache.logging.log4j.Logger
--dontwarn org.ietf.jgss.GSSContext
--dontwarn org.ietf.jgss.GSSCredential
--dontwarn org.ietf.jgss.GSSException
--dontwarn org.ietf.jgss.GSSManager
--dontwarn org.ietf.jgss.GSSName
--dontwarn org.ietf.jgss.MessageProp
--dontwarn org.ietf.jgss.Oid
--dontwarn org.newsclub.net.unix.AFUNIXServerSocketChannel
--dontwarn org.newsclub.net.unix.AFUNIXSocketAddress
--dontwarn org.newsclub.net.unix.AFUNIXSocketChannel
--dontwarn org.slf4j.Logger
--dontwarn org.slf4j.LoggerFactory
-
-# Retain generic signatures of TypeToken and its subclasses with R8 version 3.0 and higher.
--keep class com.google.gson.reflect.TypeToken
+# 保留泛型信息
 -keep class * extends com.google.gson.reflect.TypeToken
 -keep public class * implements java.lang.reflect.Type
-# 保留 Kotlin 元数据和反射相关资源
-#-keep class kotlin.** { *; }
-#-keep class kotlin.Metadata { *; }
-#-dontwarn kotlin.**
-#-keepclassmembers class **.kotlin.** { *; }
 
-# 特别保留内置资源
-#-keepnames class kotlin.kotlin_builtins
-#-keep class kotlin.kotlin_builtins { *; }
-
-# 保留 Moshi 相关类
-#-keepclassmembers class * {
-#    @com.squareup.moshi.* <methods>;
-#}
-#-keep @com.squareup.moshi.JsonClass class *
-
-# ===== WheelView 包保留，防止 R8 误删导致 Missing class =====
--keep class com.kira.learning.xml.view.wheel.** { *; }
--dontwarn com.kira.learning.xml.view.wheel.**
-
-# 忽略 JDK 管理包在 Android 上不存在的警告（Ktor Debug Detector）
--dontwarn java.lang.management.**
+# 内部类保护
+-keepattributes InnerClasses
+-keep class *$* { *; }

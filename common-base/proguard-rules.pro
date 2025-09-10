@@ -1,1 +1,0 @@
--keep class com.common.base.net.bean.BaseResponse {*;}
