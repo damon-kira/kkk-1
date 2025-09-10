@@ -49,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":xml-base"))
+    implementation(project(":common-base"))
     implementation(project(":common-ui"))
 
     implementation(libs.calf.filepicker)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
@@ -12,12 +13,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.kira.learning.R
 import com.kira.learning.databinding.ActivityStepBarBinding
-import com.common.base.base.BaseActivity
 import com.common.base.view.StageStepBar
 import com.common.base.viewbinding.binding
 import kotlin.getValue
 
-internal class StepBarViewActivity : BaseActivity() {
+internal class StepBarViewActivity : ComponentActivity() {
     private val mBinding by binding<ActivityStepBarBinding>()
     private val viewModel: ExampleViewViewModel by viewModels()
 
@@ -80,9 +80,11 @@ internal class StepBarViewActivity : BaseActivity() {
         mBinding.thumbSizeSeekBar.progress = 50
         mBinding.thumbSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_THUMB_SIZE_DP}dp"
         mBinding.filledTrackSizeSeekBar.progress = 50
-        mBinding.filledTrackSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_FILLED_TRACK_SIZE_DP}dp"
+        mBinding.filledTrackSizeValue.text =
+            "${ExampleViewViewModel.Companion.DEFAULT_FILLED_TRACK_SIZE_DP}dp"
         mBinding.unfilledTrackSizeSeekBar.progress = 50
-        mBinding.unfilledTrackSizeValue.text = "${ExampleViewViewModel.Companion.DEFAULT_UNFILLED_TRACK_SIZE_DP}dp"
+        mBinding.unfilledTrackSizeValue.text =
+            "${ExampleViewViewModel.Companion.DEFAULT_UNFILLED_TRACK_SIZE_DP}dp"
 
         mBinding.activeThumbDefaultColorView.setBackgroundColor(viewModel.firstActiveThumbColor)
         mBinding.filledThumbDefaultColorView.setBackgroundColor(viewModel.firstFilledThumbColor)

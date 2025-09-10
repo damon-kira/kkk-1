@@ -3,17 +3,17 @@ package com.kira.learning.xml.modules.player
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.activity.ComponentActivity
 import androidx.core.widget.doOnTextChanged
 import com.arezoonazer.player.argument.PlayerParams
 import com.arezoonazer.player.argument.VideoSubtitle
 import com.arezoonazer.player.extension.startPlayer
 import com.kira.learning.databinding.ActivityPlayerManageBinding
-import com.common.base.base.BaseActivity
 import com.common.base.viewbinding.binding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlayerManageActivity : BaseActivity() {
+class PlayerManageActivity : ComponentActivity() {
 
     private val mBinding by binding<ActivityPlayerManageBinding>()
 

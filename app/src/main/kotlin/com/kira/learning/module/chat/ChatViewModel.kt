@@ -4,6 +4,7 @@ import com.kira.learning.model.ChatUiState
 import com.kira.learning.model.ChatMessageUi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kira.learning.base.keyvalue.SettingsManager
 import com.kira.learning.di.ChatConversationDao
 import com.kira.learning.di.ChatConversation
 import com.kira.learning.model.dao.ChatMessageDao
@@ -25,7 +26,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.learning.network.InMemoryAuthTokenProvider
 import kotlinx.coroutines.flow.update
 

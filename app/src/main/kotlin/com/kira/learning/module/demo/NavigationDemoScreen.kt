@@ -43,12 +43,9 @@ fun NavigationDemoRoute(
 
     val allItems = remember {
         listOf(
-            DemoItem("Python Run(废弃)", action = { Launch.skipCodingActivity(context) }),
             DemoItem("Video Player", action = { Launch.skipPlayerManageActivity(context) }),
             DemoItem("Crash Test", action = { showCrashConfirm = true }),
             DemoItem("Step Bar", action = { Launch.skipStepBarViewActivity(context) }),
-            DemoItem("Code Playground", action = { Launch.skipCodePlaygroundActivity(context) }),
-            DemoItem("Super Editor", action = { Launch.skipSuperEditorActivity(context) }),
             DemoItem("AI Chat", action = { Launch.skipAiChatActivity(context) }),
         )
     }

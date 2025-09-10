@@ -26,14 +26,9 @@ navigation = "2.7.5"
 room = "2.7.2"
 workmanager = "2.8.1"
 gson = "2.10.1"
-ftpclient = "3.9.0"
-jsch = "0.2.9"
 coroutines = "1.8.0"
 hilt = "2.56.2"
 hilt-android = "1.2.0"
-zip4j = "2.11.5"
-icu4j = "73.2"
-bouncycastle = "1.74"
 junit = "4.13.2"
 junit-ext = "1.1.5"
 test-runner = "1.5.2"
@@ -41,7 +36,6 @@ mockk = "1.13.5"
 exifinterface = "1.3.6"
 cropper = "2.0.0"
 mlkit = "16.0.1"
-kodeHighlighter = "v3.0.0"
 multidex = "2.0.1"
 annotation = "1.1.0"
 viewpager2 = "1.1.0"
@@ -69,7 +63,6 @@ generativeai = "0.9.0-1.1.0"
 colorpicker = "2.3.0"
 colorpickerCompose = "1.1.2"
 navigationCompose = "2.9.0"
-#chaquoPython = "16.1.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -82,7 +75,6 @@ services = { id = "com.google.gms.google-services", version.ref = "services" }
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-#chaquoPython = { id = "com.chaquo.python", version.ref = "chaquoPython" }
 
 [libraries]
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -135,10 +127,10 @@ image-egloo = { module = "com.otaliastudios.opengl:egloo", version.ref = "image-
 #---------------------------------Hilt---------------------------------
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" } # Hilt DI 库
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" } # Hilt 编译器
-hilt-navigation = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-android" } # Hilt Navigation 组件
 hilt-workmanager = { module = "androidx.hilt:hilt-work", version.ref = "hilt-android" } # Hilt WorkManager 组件
 hilt-android-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-android" } # Hilt Android 编译器
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-android" } # Hilt Navigation Compose 组件
+hilt-navigation = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-android" } # Hilt Navigation 组件
 hilt-compiler-android = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" } # Hilt Android 编译器
 #---------------------------------Compose---------------------------------
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" } # Compose BOM
@@ -181,18 +173,10 @@ autosize = { module = "com.github.JessYanCoding:AndroidAutoSize", version.ref = 
 exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" } # 读取/写入图片 EXIF 元数据
 cropper = { module = "com.edmodo:cropper", version.ref = "cropper" } # 基础图片裁剪控件
 mlkit-text-recognition = { module = "com.google.mlkit:text-recognition", version.ref = "mlkit" } # ML Kit 文本识别
-kodeHighlighter = { module = "com.github.markusressel.KodeHighlighter:core", version.ref = "kodeHighlighter" } # 代码语法高亮核心
 guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" } # Guava 工具集 (Android 版)
 guava-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "guava-coroutines" } # 协程与 ListenableFuture 互操作
 colorpicker = { module = "com.github.skydoves:colorpickerview", version.ref = "colorpicker" } # 传统 View 颜色选择器
 skydoves-colorpicker-compose = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpickerCompose" } # Compose 颜色选择器
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" } # Timber 日志库
-# Play / 更新
 appupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "appupdate" } # Google Play In-App Update KTX
-#---------------------------------SuperEditor---------------------------------
-bouncycastle = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" } # BouncyCastle 加密算法实现
-ftpclient = { module = "commons-net:commons-net", version.ref = "ftpclient" } # Apache Commons Net (FTP/网络协议)
-jsch = { module = "com.github.mwiede:jsch", version.ref = "jsch" } # JSch SSH/SFTP 客户端
-zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" } # Zip4j 压缩/解压 (支持加密)
-icu4j = { module = "com.ibm.icu:icu4j", version.ref = "icu4j" } # ICU4J 国际化与 Unicode 支持
 

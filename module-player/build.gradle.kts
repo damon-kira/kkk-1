@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":xml-base"))
+    implementation(project(":common-base"))
 
     // Media3
     implementation(libs.media3.exoplayer)

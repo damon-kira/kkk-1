@@ -162,50 +162,18 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.hilt.workmanager)
     ksp(libs.hilt.android.compiler)
-    implementation(project(":xml-base"))
 
-    implementation(project(":common-core"))
+    implementation(libs.androidx.workmanager)
+
+    implementation(project(":common-base"))
     implementation(project(":common-ui"))
     implementation(project(":sdks:util"))
     implementation(project(":module-player"))
     implementation(project(":feature-camera"))
     implementation(project(":feature-upload"))
-    implementation(project(":compose-view-stedit"))
     implementation(project(":compose-view-chat"))
 
-    implementation(project(":filesystems:filesystem-base"))
-    implementation(project(":feature-changelog:api"))
-    implementation(project(":feature-changelog:impl"))
-    implementation(project(":feature-editor:api"))
-    implementation(project(":feature-editor:impl"))
-    implementation(project(":feature-explorer:api"))
-    implementation(project(":feature-explorer:impl"))
-    implementation(project(":feature-fonts:api"))
-    implementation(project(":feature-fonts:impl"))
-    implementation(project(":feature-servers:api"))
-    implementation(project(":feature-servers:impl"))
-    implementation(project(":feature-settings:api"))
-    implementation(project(":feature-settings:impl"))
-    implementation(project(":feature-shortcuts:api"))
-    implementation(project(":feature-shortcuts:impl"))
-    implementation(project(":feature-themes:api"))
-    implementation(project(":feature-themes:impl"))
     // Debug工具
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
-
-    // 其他依赖
-    implementation(libs.kodeHighlighter)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation("com.github.markusressel.KodeHighlighter:python:v3.0.0")
-    implementation("com.github.markusressel.KodeHighlighter:markdown:v3.0.0")
-
-//    implementation(platform("androidx.compose:compose-bom:2025.08.00"))
-//    implementation("androidx.compose.ui:ui")
-//    implementation("androidx.compose.foundation:foundation")
-//    implementation("androidx.compose.material3:material3")
-//    implementation("androidx.compose.material:material")
-//    implementation("androidx.compose.ui:ui-tooling-preview")
-//    debugImplementation("androidx.compose.ui:ui-tooling")
-//    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
 }

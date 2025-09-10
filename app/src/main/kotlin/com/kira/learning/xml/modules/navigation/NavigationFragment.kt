@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.common.base.base.BaseFragment
+import androidx.fragment.app.Fragment
 import com.common.base.viewbinding.binding
 import com.kira.learning.databinding.FragmentBlackBinding
 import com.kira.learning.xml.Launch
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 样例代码导航页
  */
 @AndroidEntryPoint
-class NavigationFragment : BaseFragment() {
+class NavigationFragment : Fragment() {
 
     private val mBinding by binding(FragmentBlackBinding::inflate)
 
@@ -33,19 +33,19 @@ class NavigationFragment : BaseFragment() {
     }
 
     private fun initViewSetting() {
-        mBinding.inclueDemoLayout6.let {
+        mBinding.inclueDemoLayout0.let {
             it.tvDemoName.text = "Vedio-player"
             it.tvBtn.setOnClickListener {
-                Launch.skipPlayerManageActivity(getSupportContext())
+                Launch.skipPlayerManageActivity(requireActivity())
             }
         }
-        mBinding.inclueDemoLayout8.let {
+        mBinding.inclueDemoLayout1.let {
             it.tvDemoName.text = "Upload"
             it.tvBtn.setOnClickListener {
 
             }
         }
-        mBinding.inclueDemoLayout11.let {
+        mBinding.inclueDemoLayout2.let {
             it.tvDemoName.text = "Crash"
             it.tvBtn.setOnClickListener {
 //                throw RuntimeException("Test Crash") // Force a crash
@@ -56,29 +56,16 @@ class NavigationFragment : BaseFragment() {
             }
         }
 
-        mBinding.inclueDemoLayout13.let {
+        mBinding.inclueDemoLayout3.let {
             it.tvDemoName.text = "StepBar"
             it.tvBtn.setOnClickListener {
-                Launch.skipStepBarViewActivity(getSupportContext())
+                Launch.skipStepBarViewActivity(requireActivity())
             }
         }
-        mBinding.inclueDemoLayout15.let {
-            it.tvDemoName.text = "Coding"
-            it.tvBtn.setOnClickListener {
-                Launch.skipCodePlaygroundActivity(getSupportContext())
-//                Launch.skipKCodingEditorActivity(getSupportContext())
-            }
-        }
-        mBinding.inclueDemoLayout16.let {
-            it.tvDemoName.text = "SuperEditor"
-            it.tvBtn.setOnClickListener {
-                Launch.skipSuperEditorActivity(getSupportContext())
-            }
-        }
-        mBinding.inclueDemoLayout17.let {
+        mBinding.inclueDemoLayout4.let {
             it.tvDemoName.text = "Ai-Chat"
             it.tvBtn.setOnClickListener {
-                Launch.skipAiChatActivity(getSupportContext())
+                Launch.skipAiChatActivity(requireActivity())
             }
         }
     }

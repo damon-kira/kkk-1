@@ -38,6 +38,6 @@ android {
     }
 }
 dependencies {
-    implementation(project(":xml-base"))
+    implementation(project(":common-base"))
 }
 

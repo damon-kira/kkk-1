@@ -1,6 +1,6 @@
 package com.kira.learning.network
 
-import com.kira.ui.core.storage.keyvalue.SettingsManager
+import com.kira.learning.base.keyvalue.SettingsManager
 import java.io.IOException
 import java.net.SocketTimeoutException
 import okhttp3.Interceptor

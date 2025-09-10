@@ -15,8 +15,8 @@ import javax.inject.Singleton
 import com.kira.learning.Constant
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.kira.learning.base.keyvalue.SettingsManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import com.kira.ui.core.storage.keyvalue.SettingsManager
 import javax.inject.Inject
 
 /** 多 BaseUrl Qualifier 定义 */
@@ -44,7 +44,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         authProvider: InMemoryAuthTokenProvider,
-        settingsManager: com.kira.ui.core.storage.keyvalue.SettingsManager
+        settingsManager: SettingsManager
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HeaderInterceptor())
         .addInterceptor(AuthInterceptor(authProvider))

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<resources>
-    <string name="label_changelog">Lista zmian</string>
-    <string name="label_latest_release">Najnowsze wydanie</string>
-</resources>

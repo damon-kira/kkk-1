@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<resources>
-    <string name="label_changelog">更新日誌</string>
-    <string name="label_latest_release">最新版本</string>
-</resources>

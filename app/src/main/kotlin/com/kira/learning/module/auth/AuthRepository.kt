@@ -1,8 +1,8 @@
 package com.kira.learning.module.auth
 
+import com.kira.learning.base.keyvalue.SettingsManager
 import com.kira.learning.model.LoginRequest
 import com.kira.learning.network.ComposeApiService
-import com.kira.ui.core.storage.keyvalue.SettingsManager
 import com.kira.learning.network.InMemoryAuthTokenProvider
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.toApiResult

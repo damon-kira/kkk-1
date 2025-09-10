@@ -5,11 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.net.toUri
 import com.kira.learning.LoanApplication.Companion.getAppContext
-import com.kira.learning.xml.modules.codeeditor.CodePlaygroundActivity
 import com.kira.learning.xml.modules.player.PlayerManageActivity
-import com.kira.learning.xml.modules.python.CodingActivity
 import com.kira.learning.xml.modules.stepbar.StepBarViewActivity
-import com.kira.learning.xml.modules.supereditor.SuperEditorActivity
 import com.util.lib.expand.isNotEmpty
 import com.util.lib.log.isDebug
 import com.util.lib.log.logger_e
@@ -19,24 +16,12 @@ object Launch {
 
     private const val TAG = "debug_Launch"
 
-    fun skipCodingActivity(context: Context) {
-        launch(context, CodingActivity::class.java)
-    }
-
     fun skipPlayerManageActivity(context: Context) {
         launch(context, PlayerManageActivity::class.java)
     }
 
     fun skipStepBarViewActivity(context: Context) {
         launch(context, StepBarViewActivity::class.java)
-    }
-
-    fun skipCodePlaygroundActivity(context: Context) {
-        launch(context, CodePlaygroundActivity::class.java)
-    }
-
-    fun skipSuperEditorActivity(context: Context) {
-        launch(context, SuperEditorActivity::class.java)
     }
 
     fun skipAiChatActivity(context: Context) {
