@@ -15,9 +15,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -219,13 +222,16 @@ private fun CodeEditor(
         lineHeight = 20.sp // 与代码区域相同的行高
     )
 
+    // 生成语法高亮的代码
+    val highlightedCode = SyntaxHighlighter.highlightCode(code, language)
+
     Row(modifier = modifier) {
         // 行号显示
         if (showLineNumbers) {
             Column(
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.surfaceVariant)
-                    .padding(start = 8.dp, end = 8.dp, top = 24.dp, bottom = 16.dp) // 与代码区域相同的顶部边距
+                    .padding(start = 8.dp, end = 8.dp, top = 24.dp, bottom = 16.dp)
                     .verticalScroll(verticalScrollState)
             ) {
                 val lineCount = code.count { it == '\n' } + 1
@@ -234,7 +240,7 @@ private fun CodeEditor(
                         text = "${index + 1}",
                         style = lineNumberStyle,
                         modifier = Modifier
-                            .height(20.dp) // 固定高度确保对齐
+                            .height(20.dp)
                             .padding(vertical = 0.dp)
                     )
                 }
@@ -247,16 +253,30 @@ private fun CodeEditor(
             )
         }
 
-        // 代码编辑区域
+        // 代码编辑区域 - 使用双层显示（编辑层 + 高亮层）
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
+            // 背景层 - 显示语法高亮
+            if (code.isNotEmpty()) {
+                Text(
+                    text = highlightedCode,
+                    style = textStyle,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .horizontalScroll(horizontalScrollState)
+                        .verticalScroll(verticalScrollState)
+                        .padding(8.dp)
+                )
+            }
+
+            // 前景层 - 透明的编辑器
             BasicTextField(
                 value = code,
                 onValueChange = onCodeChange,
-                textStyle = textStyle,
+                textStyle = textStyle.copy(color = Color.Transparent),
                 modifier = Modifier
                     .fillMaxSize()
                     .horizontalScroll(horizontalScrollState)
@@ -266,7 +286,8 @@ private fun CodeEditor(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(
-                                MaterialTheme.colorScheme.surface,
+                                if (code.isEmpty()) MaterialTheme.colorScheme.surface
+                                else Color.Transparent,
                                 MaterialTheme.shapes.small
                             )
                             .padding(8.dp)
