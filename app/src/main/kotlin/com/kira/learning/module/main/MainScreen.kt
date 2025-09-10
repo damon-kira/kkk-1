@@ -55,6 +55,7 @@ import com.kira.learning.module.uidemo.UiComponentsDemoRoute
 import com.kira.learning.module.ocr.ImageOcrRoute
 import com.kira.learning.module.imageplayer.ImagePlayerRoute
 import com.kira.learning.navigation.AppRoutes
+import com.kira.learning.module.coding.CodingEditorRoute
 
 data class BottomItem(
     val route: String,
@@ -207,6 +208,12 @@ internal fun MainScreen(
                                 launchSingleTop = true; restoreState = true
                             }
                         })
+                    }
+                    composable(AppRoutes.CODE_EDITOR) {
+                        CodingEditorRoute(
+                            modifier = Modifier.fillMaxSize(),
+                            onNavigateBack = { navController.popBackStack() }
+                        )
                     }
                 }
 

@@ -20,4 +20,6 @@ object AppRoutes {
     const val ASSISTANT = "assistant" // AI 助手
     // 图片播放器
     const val IMAGE_PLAYER = "image_player"
+    // 代码编辑器
+    const val CODE_EDITOR = "code_editor"
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
+import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.PhotoLibrary
@@ -46,6 +47,7 @@ internal fun AiAssistantRoute(
         AiFeature("聊天", { Icon(Icons.AutoMirrored.Filled.Chat, null) }) { navigate(AppRoutes.CHAT) },
         AiFeature("图片识别", { Icon(Icons.Default.Image, null) }) { navigate(AppRoutes.OCR) },
         AiFeature("图片播放器", { Icon(Icons.Default.PhotoLibrary, null) }) { navigate(AppRoutes.IMAGE_PLAYER) },
+        AiFeature("代码编辑器", { Icon(Icons.Default.Code, null) }) { navigate(AppRoutes.CODE_EDITOR) },
         AiFeature("导航示例", { Icon(Icons.Default.List, null) }) { navigate(AppRoutes.NAV_DEMO) },
         AiFeature("设置(占位)", { Icon(Icons.Default.Settings, null) }) { },
     )
