@@ -23,6 +23,7 @@ import javax.inject.Inject
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class MainBaseUrl
+
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class MainRetrofit
@@ -46,13 +47,20 @@ object NetworkModule {
         authProvider: InMemoryAuthTokenProvider,
         settingsManager: SettingsManager
     ): OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(NetworkConfig.CONNECT_TIMEOUT, java.util.concurrent.TimeUnit.SECONDS)
+        .readTimeout(NetworkConfig.READ_TIMEOUT, java.util.concurrent.TimeUnit.SECONDS)
+        .writeTimeout(NetworkConfig.WRITE_TIMEOUT, java.util.concurrent.TimeUnit.SECONDS)
         .addInterceptor(HeaderInterceptor())
         .addInterceptor(AuthInterceptor(authProvider))
         .addInterceptor(Logout401Interceptor(settingsManager, authProvider))
-        .addInterceptor(RetryInterceptor())
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-        })
+        .addInterceptor(RetryInterceptor(NetworkConfig.MAX_RETRY_COUNT))
+        .apply {
+            if (NetworkConfig.ENABLE_LOGGING) {
+                addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
+            }
+        }
         .build()
 
     @Provides

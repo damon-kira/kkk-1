@@ -72,9 +72,9 @@ android {
 
     buildTypes {
         getByName("release") {  // 使用 getByName 而不是 create
-            buildConfigField("String", "BASE_URL", "\"https://kira.learning.com\"")
-            buildConfigField("String", "H5_URL", "\"https://kirah5.learning.com\"")
-            buildConfigField("String", "DATA_URL", "\"httpsdata://kira.learning.com\"")
+            buildConfigField("String", "BASE_URL", "\"https://kira.learning.com/data\"")
+            buildConfigField("String", "H5_URL", "\"https://kira.learning.com/data\"")
+            buildConfigField("String", "DATA_URL", "\"https://kira.learning.com/data\"")
             buildConfigField("String", "APP_SECRET", "\"265F5D19C0EC03B1\"")
             buildConfigField("boolean", "APP_DEBUG", "false")
             isMinifyEnabled = true

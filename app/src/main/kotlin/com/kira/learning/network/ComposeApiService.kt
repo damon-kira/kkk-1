@@ -12,23 +12,19 @@ import com.kira.learning.model.dao.UserProfileDTO
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.POST
 import retrofit2.http.Url
 
 interface ComposeApiService {
 
     @POST("/v1/chat/completions123456")
-    @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     suspend fun aiSendRequest(@Body body: RequestBody): BaseResponse<AIResponseInfo>
 
     @POST("/v1/chat/searchQuestion")
-    @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     suspend fun searchQuestion(@Body body: RequestBody): BaseResponse<QuestionProcessInfo>
 
     @POST("/v1/kira/activities")
-    @Headers("Authorization:Bearer sk-FehZFlRbSd6NlCgUt8o6RxW7fQgiwWm8sh9uguhqMFQjZ1uU")
     suspend fun getQuizInfo(@Body body: RequestBody): BaseResponse<Document>
 
     // ===== Compose Module Unified APIs =====
