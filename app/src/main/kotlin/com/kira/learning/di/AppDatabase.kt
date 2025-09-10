@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.kira.learning.xml.modules.ai.ChoiceConverters
-import com.kira.learning.model.dao.AIResponseInfo
-import com.kira.learning.model.dao.ChatMessage
-import com.kira.learning.model.dao.AIResponseDao
-import com.kira.learning.model.dao.ChatMessageDao
+import com.kira.learning.models.dao.AIResponseInfo
+import com.kira.learning.models.dao.ChatMessage
+import com.kira.learning.models.dao.AIResponseDao
+import com.kira.learning.models.dao.ChatMessageDao
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Dao

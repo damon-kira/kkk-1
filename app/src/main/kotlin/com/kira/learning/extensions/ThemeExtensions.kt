@@ -2,8 +2,8 @@ package com.kira.learning.extensions
 
 import androidx.compose.ui.graphics.Color
 import com.common.kira.ui.Colors
-import com.kira.learning.model.ColorScheme
-import com.kira.learning.model.ThemeType
+import com.kira.learning.models.ColorScheme
+import com.kira.learning.models.ThemeType
 
 internal fun toComposeColors(colorScheme: ColorScheme?): Colors {
     val defaultTheme = when (colorScheme?.type) {

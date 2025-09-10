@@ -1,15 +1,11 @@
 package com.kira.learning.di
 
-import androidx.lifecycle.ViewModel
-import com.kira.learning.module.answer.AnswerRepository
-import com.kira.learning.module.answer.MockAnswerRepository
+import com.kira.learning.modules.answer.AnswerRepository
+import com.kira.learning.modules.answer.MockAnswerRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 //@Module

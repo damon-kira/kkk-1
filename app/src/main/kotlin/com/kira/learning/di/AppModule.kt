@@ -3,8 +3,8 @@ package com.kira.learning.di
 import android.content.Context
 import androidx.room.Room
 import com.kira.learning.LoanApplication
-import com.kira.learning.model.dao.AIResponseDao
-import com.kira.learning.model.dao.ChatMessageDao
+import com.kira.learning.models.dao.AIResponseDao
+import com.kira.learning.models.dao.ChatMessageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -94,8 +94,8 @@
 -keep class com.kira.learning.** { *; }
 
 # 模型类保护
--keep class com.kira.learning.model.** { *; }
--keep class com.kira.learning.module.coding.** { *; }
+-keep class com.kira.learning.models.** { *; }
+-keep class com.kira.learning.modules.coding.** { *; }
 
 # 网络模型和API
 -keep class com.kira.learning.network.** { *; }

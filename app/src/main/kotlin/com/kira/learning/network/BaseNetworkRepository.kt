@@ -43,11 +43,11 @@ class ExampleRepository @Inject constructor(
     private val apiService: ComposeApiService
 ) : BaseNetworkRepository() {
 
-    fun login(request: com.kira.learning.model.LoginRequest): Flow<ApiResult<com.kira.learning.model.LoginData>> {
+    fun login(request: com.kira.learning.models.LoginRequest): Flow<ApiResult<com.kira.learning.models.LoginData>> {
         return baseResponseCall { apiService.login(request) }
     }
 
-    fun getProfile(): Flow<ApiResult<com.kira.learning.model.dao.UserProfileDTO>> {
+    fun getProfile(): Flow<ApiResult<com.kira.learning.models.dao.UserProfileDTO>> {
         return networkCall { apiService.getProfile() }
     }
 }

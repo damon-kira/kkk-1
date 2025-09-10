@@ -1,14 +1,14 @@
 package com.kira.learning.network
 
-import com.kira.learning.model.LoginRequest
-import com.kira.learning.model.LoginData
-import com.kira.learning.model.QuestionProcessInfo
-import com.kira.learning.model.dao.AIResponseInfo
-import com.kira.learning.model.dao.AppSettingsDTO
-import com.kira.learning.model.dao.PhotoDTO
-import com.kira.learning.model.dao.UpdateAvatarRequest
-import com.kira.learning.model.dao.UpdateProfileRequest
-import com.kira.learning.model.dao.UserProfileDTO
+import com.kira.learning.models.LoginRequest
+import com.kira.learning.models.LoginData
+import com.kira.learning.models.QuestionProcessInfo
+import com.kira.learning.models.dao.AIResponseInfo
+import com.kira.learning.models.dao.AppSettingsDTO
+import com.kira.learning.models.dao.PhotoDTO
+import com.kira.learning.models.dao.UpdateAvatarRequest
+import com.kira.learning.models.dao.UpdateProfileRequest
+import com.kira.learning.models.dao.UserProfileDTO
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET

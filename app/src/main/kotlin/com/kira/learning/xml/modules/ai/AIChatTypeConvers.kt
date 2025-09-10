@@ -2,8 +2,8 @@ package com.kira.learning.xml.modules.ai
 
 import android.location.Address
 import androidx.room.TypeConverter
-import com.kira.learning.model.dao.Choice
-import com.kira.learning.model.dao.ChatMessage
+import com.kira.learning.models.dao.Choice
+import com.kira.learning.models.dao.ChatMessage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
