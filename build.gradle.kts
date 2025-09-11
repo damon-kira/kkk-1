@@ -20,5 +20,3 @@ plugins {
     alias(libs.plugins.services) apply false
 
 }
-
-apply(from = "./app.gradle")

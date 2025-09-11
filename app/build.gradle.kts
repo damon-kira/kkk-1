@@ -72,11 +72,10 @@ android {
 
     buildTypes {
         getByName("release") {  // 使用 getByName 而不是 create
-            buildConfigField("String", "BASE_URL", "\"https://kira.learning.com/data\"")
-            buildConfigField("String", "H5_URL", "\"https://kira.learning.com/data\"")
-            buildConfigField("String", "DATA_URL", "\"https://kira.learning.com/data\"")
-            buildConfigField("String", "APP_SECRET", "\"265F5D19C0EC03B1\"")
-            buildConfigField("boolean", "APP_DEBUG", "false")
+            buildConfigField("String", "BASE_URL", "\"https://core.staging.kira-learning.com\"")
+            buildConfigField("String", "H5_URL", "\"https://core.staging.kira-learning.com\"")
+            buildConfigField("String", "DATA_URL", "\"https://core.staging.kira-learning.com\"")
+            buildConfigField("String", "APP_SECRET", "\"0000\"")
             isMinifyEnabled = true
             isShrinkResources = true
             configure<CrashlyticsExtension> {
@@ -89,13 +88,6 @@ android {
 
         }
         getByName("debug") {
-            buildConfigField("String", "BASE_URL", "\"https://core.staging.kira-learning.com/\"")
-            buildConfigField("String", "H5_URL", "\"http://192.168.5.222:7755\"")
-            buildConfigField(
-                "String", "DATA_URL", "\"http://192.168.5.222:8083/XRmN4gV/N9Ed7VEoU\""
-            )
-            buildConfigField("String", "APP_SECRET", "\"83D763DA4B8B0734\"")
-            buildConfigField("boolean", "APP_DEBUG", "true")
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
