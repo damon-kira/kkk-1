@@ -16,8 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(
-    private val apiService: ComposeApiService,
-    private val settingsManager: SettingsManager
+    private val apiService: ComposeApiService, private val settingsManager: SettingsManager
 ) : BaseRepository() {
 
     private val _currentSession = MutableStateFlow<UserSession?>(null)
@@ -35,11 +34,10 @@ class AuthRepository @Inject constructor(
      * 用户登录
      */
     fun login(
-        username: String,
-        password: String,
-        rememberMe: Boolean = false
+        username: String, password: String, rememberMe: Boolean = false
     ): Flow<ApiResult<LoginData>> {
         val request = LoginRequest(username = username, password = password)
+
         return baseResponseCall {
             apiService.login(request).also { response ->
                 // 登录成功后保存会话信息
@@ -76,10 +74,7 @@ class AuthRepository @Inject constructor(
      * 用户注册
      */
     suspend fun register(
-        username: String,
-        password: String,
-        email: String,
-        preferredLocale: String = "en-US"
+        username: String, password: String, email: String, preferredLocale: String = "en-US"
     ): ApiResult<LoginData> {
         return safeApiCallWithMapping {
             val request = RegisterRequest(username, password, email, preferredLocale)

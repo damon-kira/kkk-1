@@ -265,22 +265,22 @@ class ProfileViewModel @Inject constructor(
 
             when (val result = authRepo.logout()) {
                 is ApiResult.Success -> {
-                    logger_e("Logout success1: ${result.S}")
-                    logger_e("Logout success2: ${result}")
+//                    logger_e("Logout success1: ${result.data.isSuccess()}")
+//                    logger_e("Logout success2: ${result}")
                     updateState { copy(isLoggingOut = false) }
                     sendEvent(UiEvent.ShowSnackbar("已退出登录"))
                     sendEvent(UiEvent.Navigate("login"))
                 }
 
                 is ApiResult.Error -> {
-                    logger_e("Logout error1: ${result.message}")
-                    logger_e("Logout error2: ${result}")
+//                    logger_e("Logout error1: ${result.message}")
+//                    logger_e("Logout error2: ${result}")
                     updateState { copy(isLoggingOut = false) }
                     sendEvent(UiEvent.ShowSnackbar("退出登录失败: ${result.message}"))
                 }
 
                 ApiResult.NetworkUnavailable -> {
-                    logger_e("Logout network unavailable  ${result}" )
+//                    logger_e("Logout network unavailable  ${result}" )
                     updateState { copy(isLoggingOut = false) }
                     sendEvent(UiEvent.ShowSnackbar("网络不可用"))
                 }
