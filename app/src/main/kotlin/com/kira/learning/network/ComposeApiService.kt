@@ -9,11 +9,17 @@ import com.kira.learning.models.dao.PhotoDTO
 import com.kira.learning.models.dao.UpdateAvatarRequest
 import com.kira.learning.models.dao.UpdateProfileRequest
 import com.kira.learning.models.dao.UserProfileDTO
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.PUT
 import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface ComposeApiService {
@@ -32,7 +38,7 @@ interface ComposeApiService {
     @GET
     suspend fun fetchPhotos(@Url url: String = "https://jsonplaceholder.typicode.com/photos?_limit=20"): List<PhotoDTO>
 
-    // Profile
+    // Profile APIs
     @GET("/compose/profile")
     suspend fun getProfile(): UserProfileDTO
 
@@ -45,6 +51,77 @@ interface ComposeApiService {
     @PUT("/compose/profile/settings")
     suspend fun updateSettings(@Body settings: AppSettingsDTO): AppSettingsDTO
 
+    // Auth APIs
     @POST("login/login")
     suspend fun login(@Body body: LoginRequest): BaseResponse<LoginData>
+
+    @POST("/auth/register")
+    suspend fun register(@Body body: RequestBody): BaseResponse<LoginData>
+
+    @POST("/auth/refresh")
+    suspend fun refreshToken(@Body body: RequestBody): BaseResponse<LoginData>
+
+    @POST("/auth/logout")
+    suspend fun logout(): BaseResponse<Unit>
+
+    @POST("/auth/validate")
+    suspend fun validateToken(@Body body: RequestBody): BaseResponse<Boolean>
+
+    @POST("/auth/reset-password")
+    suspend fun resetPassword(@Body body: RequestBody): BaseResponse<Unit>
+
+    // Code Execution APIs
+    @POST("/code/execute")
+    suspend fun executeCode(@Body body: RequestBody): BaseResponse<com.kira.learning.modules.coding.CodeExecutionResponse>
+
+    // Main/Home APIs
+    @GET("/home/recommended")
+    suspend fun getRecommendedContent(): BaseResponse<List<com.kira.learning.modules.main.RecommendedItem>>
+
+    @GET("/user/stats")
+    suspend fun getUserLearningStats(): BaseResponse<com.kira.learning.modules.main.LearningStats>
+
+    // Image Player APIs
+    @GET("/images/{id}")
+    suspend fun getImageDetail(@Path("id") imageId: String): BaseResponse<com.kira.learning.modules.imageplayer.ImageDetail>
+
+    @POST("/images/{id}/favorite")
+    suspend fun favoriteImage(@Path("id") imageId: String): BaseResponse<Unit>
+
+    @DELETE("/images/{id}/favorite")
+    suspend fun unfavoriteImage(@Path("id") imageId: String): BaseResponse<Unit>
+
+    @GET("/images/favorites")
+    suspend fun getFavoriteImages(): BaseResponse<List<PhotoDTO>>
+
+    // OCR APIs
+    @Multipart
+    @POST("/ocr/recognize")
+    suspend fun recognizeText(@Part image: MultipartBody.Part): BaseResponse<com.kira.learning.modules.ocr.OcrResult>
+
+    @Multipart
+    @POST("/ocr/recognize/batch")
+    suspend fun recognizeMultipleTexts(@Part images: List<MultipartBody.Part>): BaseResponse<List<com.kira.learning.modules.ocr.OcrResult>>
+
+    @GET("/ocr/history")
+    suspend fun getOcrHistory(): BaseResponse<List<com.kira.learning.modules.ocr.OcrHistoryItem>>
+
+    @DELETE("/ocr/history/{id}")
+    suspend fun deleteOcrHistory(@Path("id") historyId: String): BaseResponse<Unit>
+
+    @POST("/ocr/save")
+    suspend fun saveOcrResult(@Body body: RequestBody): BaseResponse<String>
+
+    // UI Demo APIs
+    @GET("/ui/demo-data")
+    suspend fun getUiDemoData(): BaseResponse<com.kira.learning.modules.uidemo.UiDemoData>
+
+    @POST("/ui/feedback")
+    suspend fun submitUiFeedback(@Body body: RequestBody): BaseResponse<Unit>
+
+    @GET("/ui/theme")
+    suspend fun getThemeConfig(): BaseResponse<com.kira.learning.modules.uidemo.ThemeConfig>
+
+    @PUT("/ui/theme")
+    suspend fun saveThemeConfig(@Body body: RequestBody): BaseResponse<Unit>
 }

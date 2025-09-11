@@ -8,6 +8,7 @@ import com.kira.learning.models.ShortAnswerQuestion
 import com.kira.learning.models.SingleChoiceQuestion
 import com.kira.learning.network.ApiResult
 import com.kira.learning.base.repository.BaseRepository
+import com.kira.learning.network.safeApiCall
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 

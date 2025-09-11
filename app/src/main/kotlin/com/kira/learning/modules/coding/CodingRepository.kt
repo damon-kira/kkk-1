@@ -1,33 +1,42 @@
 package com.kira.learning.modules.coding
 
 import com.kira.learning.network.ApiResult
+import com.kira.learning.network.ComposeApiService
+import com.kira.learning.network.safeApiCall
+import com.kira.learning.base.repository.BaseRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CodingRepository @Inject constructor() {
+class CodingRepository @Inject constructor(
+    private val apiService: ComposeApiService
+) : BaseRepository() {
 
     suspend fun executeCode(request: CodeExecutionRequest): ApiResult<CodeExecutionResponse> {
-        return try {
-            // 模拟网络延迟
-            delay(1000)
+        return safeApiCall {
+            // TODO: 实现真实的API调用
+            // val response = apiService.executeCode(request)
+            // return response.toCodeExecutionResponse()
 
-            // 这里应该是真实的API调用，现在用模拟数据
-            val result = when (request.language.lowercase()) {
-                "python" -> simulatePythonExecution(request.code, request.input)
-                "java" -> simulateJavaExecution(request.code, request.input)
-                "kotlin" -> simulateKotlinExecution(request.code, request.input)
-                "javascript" -> simulateJavaScriptExecution(request.code, request.input)
-                else -> CodeExecutionResponse(
-                    output = "Language ${request.language} is not supported yet",
-                    error = "Unsupported language"
-                )
-            }
+            // 目前使用模拟数据
+            simulateCodeExecution(request)
+        }
+    }
 
-            ApiResult.Success(result)
-        } catch (e: Exception) {
-            ApiResult.Error(message = e.message ?: "Unknown error occurred")
+    private suspend fun simulateCodeExecution(request: CodeExecutionRequest): CodeExecutionResponse {
+        // 模拟网络延迟
+        delay(1000)
+
+        return when (request.language.lowercase()) {
+            "python" -> simulatePythonExecution(request.code, request.input)
+            "java" -> simulateJavaExecution(request.code, request.input)
+            "kotlin" -> simulateKotlinExecution(request.code, request.input)
+            "javascript" -> simulateJavaScriptExecution(request.code, request.input)
+            else -> CodeExecutionResponse(
+                output = "Language ${request.language} is not supported yet",
+                error = "Unsupported language"
+            )
         }
     }
 

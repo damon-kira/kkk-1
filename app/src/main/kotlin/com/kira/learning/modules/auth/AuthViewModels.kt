@@ -9,6 +9,7 @@ import com.kira.learning.base.mvi.ViewState
 import com.kira.learning.base.validation.FormState
 import com.kira.learning.base.validation.FormField
 import com.kira.learning.base.validation.Validators
+import com.kira.learning.models.LoginData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -116,39 +117,41 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             updateState { copy(isLoading = true, errorMessage = null) }
 
-            when (val result = repo.login(email, password)) {
-                is ApiResult.Success -> {
-                    updateState {
-                        copy(
-                            isLoading = false,
-                            isSuccess = true,
-                            errorMessage = null
-                        )
+            repo.login(email, password).collect { result ->
+                when (result) {
+                    is ApiResult.Success<LoginData> -> {
+                        updateState {
+                            copy(
+                                isLoading = false,
+                                isSuccess = true,
+                                errorMessage = null
+                            )
+                        }
+                        sendEvent(UiEvent.ShowSnackbar("登录成功"))
+                        sendEvent(UiEvent.Navigate("main"))
                     }
-                    sendEvent(UiEvent.ShowSnackbar("登录成功"))
-                    sendEvent(UiEvent.Navigate("main"))
-                }
 
-                is ApiResult.Error -> {
-                    val message = result.message.ifBlank { "登录失败" }
-                    updateState {
-                        copy(
-                            isLoading = false,
-                            errorMessage = message
-                        )
+                    is ApiResult.Error -> {
+                        val message = result.message.ifBlank { "登录失败" }
+                        updateState {
+                            copy(
+                                isLoading = false,
+                                errorMessage = message
+                            )
+                        }
+                        sendEvent(UiEvent.ShowSnackbar(message))
                     }
-                    sendEvent(UiEvent.ShowSnackbar(message))
-                }
 
-                ApiResult.NetworkUnavailable -> {
-                    val message = "网络不可用"
-                    updateState {
-                        copy(
-                            isLoading = false,
-                            errorMessage = message
-                        )
+                    ApiResult.NetworkUnavailable -> {
+                        val message = "网络不可用"
+                        updateState {
+                            copy(
+                                isLoading = false,
+                                errorMessage = message
+                            )
+                        }
+                        sendEvent(UiEvent.ShowSnackbar(message))
                     }
-                    sendEvent(UiEvent.ShowSnackbar(message))
                 }
             }
         }
@@ -157,7 +160,7 @@ class AuthViewModel @Inject constructor(
 
 @HiltViewModel
 class SessionViewModel @Inject constructor(private val repo: AuthRepository) : ViewModel() {
-    private val _loggedIn = MutableStateFlow(repo.tokenValid())
+    private val _loggedIn = MutableStateFlow<Boolean>(repo.tokenValid())
     val loggedIn: StateFlow<Boolean> = _loggedIn.asStateFlow()
 
     init {
@@ -177,5 +180,6 @@ class SessionViewModel @Inject constructor(private val repo: AuthRepository) : V
 
     fun forceLogout() {
         repo.clear()
+        _loggedIn.value = false
     }
 }

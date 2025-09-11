@@ -2,6 +2,7 @@ package com.kira.learning.modules.chat
 
 import com.kira.learning.network.ApiResult
 import com.kira.learning.base.repository.BaseRepository
+import com.kira.learning.network.safeApiCall
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton

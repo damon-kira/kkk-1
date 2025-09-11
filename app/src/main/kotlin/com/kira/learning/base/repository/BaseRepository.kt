@@ -1,41 +1,16 @@
 package com.kira.learning.base.repository
 
 import com.kira.learning.network.ApiResult
+import com.kira.learning.network.BaseNetworkRepository
+import com.kira.learning.network.safeApiCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 /**
  * 通用Repository基类
- * 提供数据加载、缓存和错误处理的基础功能
+ * 继承BaseNetworkRepository，提供数据加载、缓存和错误处理的基础功能
  */
-abstract class BaseRepository {
-
-    /**
-     * 执行API调用并处理结果
-     */
-    protected suspend fun <T> safeApiCall(
-        apiCall: suspend () -> T
-    ): ApiResult<T> {
-        return try {
-            val result = apiCall()
-            ApiResult.Success(result)
-        } catch (e: Exception) {
-            handleException(e)
-        }
-    }
-
-    /**
-     * 处理异常并转换为ApiResult
-     */
-    private fun <T> handleException(e: Exception): ApiResult<T> {
-        return when (e) {
-            is UnknownHostException,
-            is ConnectException -> ApiResult.NetworkUnavailable
-            else -> ApiResult.Error(message = e.message ?: "未知错误", throwable = e)
-        }
-    }
+abstract class BaseRepository : BaseNetworkRepository() {
 
     /**
      * 执行带缓存的数据加载
@@ -55,11 +30,12 @@ abstract class BaseRepository {
         }
 
         // 从网络加载
-        emit(safeApiCall {
+        val networkResult = safeApiCall {
             val networkData = loadFromNetwork()
             saveToCache(networkData)
             networkData
-        })
+        }
+        emit(networkResult)
     }
 }
 

@@ -5,6 +5,7 @@ import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
 import com.kira.learning.models.dao.toDomain
 import com.kira.learning.base.repository.BaseRepository
+import com.kira.learning.network.safeApiCall
 import javax.inject.Inject
 import javax.inject.Singleton
 

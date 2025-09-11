@@ -9,6 +9,7 @@ import com.kira.learning.models.dao.UpdateProfileRequest
 import com.kira.learning.models.dao.UpdateAvatarRequest
 import com.kira.learning.models.dao.toDto
 import com.kira.learning.base.repository.BaseRepository
+import com.kira.learning.network.safeApiCall
 import javax.inject.Inject
 import javax.inject.Singleton
 

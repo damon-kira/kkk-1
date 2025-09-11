@@ -32,4 +32,3 @@ suspend fun <T> safeApiCall(
         ApiResult.Error(message = e.message ?: "Unknown Error", throwable = e)
     }
 }
-
