@@ -6,6 +6,7 @@ import com.kira.learning.network.safeApiCallWithMapping
 import com.kira.learning.base.repository.BaseRepository
 import com.kira.learning.base.keyvalue.SettingsManager
 import com.kira.learning.models.*
+import com.kira.learning.network.BaseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,12 +34,16 @@ class AuthRepository @Inject constructor(
     /**
      * 用户登录
      */
-    fun login(username: String, password: String, rememberMe: Boolean = false): Flow<ApiResult<LoginData>> {
+    fun login(
+        username: String,
+        password: String,
+        rememberMe: Boolean = false
+    ): Flow<ApiResult<LoginData>> {
         val request = LoginRequest(username = username, password = password)
         return baseResponseCall {
             apiService.login(request).also { response ->
                 // 登录成功后保存会话信息
-                if (response.code == 200 && response.data != null) {
+                if (response.isSuccess() && response.data != null) {
                     saveSession(UserSession(response.data, isRememberMe = rememberMe))
                 }
             }
@@ -46,7 +51,7 @@ class AuthRepository @Inject constructor(
     }
 
     /**
-     * 刷��Token
+     * 刷新Token
      */
     suspend fun refreshToken(): ApiResult<LoginData> {
         val currentRefreshToken = _currentSession.value?.loginData?.refreshToken
@@ -86,22 +91,19 @@ class AuthRepository @Inject constructor(
     /**
      * 用户登出
      */
-    suspend fun logout(): ApiResult<Unit> {
+    suspend fun logout(): ApiResult<BaseResponse<String>> {
         return try {
             // 调用服务端登出API
             val result = safeApiCallWithMapping {
                 apiService.logout()
-                Unit
             }
 
-            // 清除本地会话
             clearSession()
-
             result
-        } catch (_: Exception) {
-            // 即使服务端登出失败，也要清除本地会话
+        } catch (e: Exception) {
+            // 只有在发生意外异常时才强制清除会话并返回成功
             clearSession()
-            ApiResult.Success(Unit)
+            ApiResult.Error(message = "登出时发生异常: ${e.message ?: "未知错误"}")
         }
     }
 

@@ -34,6 +34,10 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
         appStartUptime = SystemClock.uptimeMillis()
         super.onCreate()
         mAppContext = this
+
+        // 初始化系统错误处理器（放在最前面）
+//        SystemErrorHandler.setupGlobalExceptionHandler()
+
         // 配置延迟任务（Debug 下立即执行便于调试；开启日志）
         DeferredStartup.configure(
             debugImmediate = BuildConfig.DEBUG && false,
@@ -98,6 +102,10 @@ class LoanApplication : MultiDexApplication(), CameraXConfig.Provider {
                 FirebaseApp.initializeApp(mAppContext)
             }
             FirebaseCrashlytics.getInstance().isCrashlyticsCollectionEnabled = true
+
+            // 初始化崩溃报告过滤器
+//            CrashReportFilter.setupCrashlyticsFilter()
+
         } catch (e: Exception) {
             logger_e("Firebase", "Failed FirebaseCore ${e.message}")
         }

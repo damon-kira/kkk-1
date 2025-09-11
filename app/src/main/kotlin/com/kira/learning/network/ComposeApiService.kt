@@ -64,7 +64,7 @@ interface ComposeApiService {
     suspend fun refreshToken(@Body body: com.kira.learning.models.RefreshTokenRequest): BaseResponse<LoginData>
 
     @POST("/auth/logout")
-    suspend fun logout(): BaseResponse<Unit>
+    suspend fun logout(): BaseResponse<String>
 
     @GET("/auth/validate")
     suspend fun validateToken(@Query("token") token: String): ValidationResponse

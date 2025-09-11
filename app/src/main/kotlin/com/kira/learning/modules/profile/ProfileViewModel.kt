@@ -11,6 +11,8 @@ import com.kira.learning.base.mvi.ViewState
 import com.kira.learning.base.validation.FormState
 import com.kira.learning.base.validation.FormField
 import com.kira.learning.base.validation.Validators
+import com.kira.learning.modules.auth.AuthRepository
+import com.util.lib.log.logger_e
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +25,7 @@ data class ProfileViewState(
     val formState: FormState = FormState(),
     val isEditing: Boolean = false,
     val isSaving: Boolean = false,
+    val isLoggingOut: Boolean = false,
     val message: String? = null
 ) : ViewState()
 
@@ -33,6 +36,7 @@ sealed interface ProfileEvent {
     object CancelEdit : ProfileEvent
     object SaveProfile : ProfileEvent
     object RandomAvatar : ProfileEvent
+    object Logout : ProfileEvent
     data class UpdateName(val name: String) : ProfileEvent
     data class UpdateEmail(val email: String) : ProfileEvent
     data class UpdateBio(val bio: String) : ProfileEvent
@@ -45,7 +49,8 @@ enum class SettingType {
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repo: ProfileRepository
+    private val repo: ProfileRepository,
+    private val authRepo: AuthRepository
 ) : BaseViewModel<ProfileViewState, UiEvent>(
     initialState = ProfileViewState()
 ) {
@@ -62,6 +67,7 @@ class ProfileViewModel @Inject constructor(
             is ProfileEvent.CancelEdit -> cancelEditInternal()
             is ProfileEvent.SaveProfile -> saveProfile()
             is ProfileEvent.RandomAvatar -> updateAvatar()
+            is ProfileEvent.Logout -> logout()
             is ProfileEvent.UpdateName -> updateFormField("name", action.name)
             is ProfileEvent.UpdateEmail -> updateFormField("email", action.email)
             is ProfileEvent.UpdateBio -> updateFormField("bio", action.bio)
@@ -80,7 +86,7 @@ class ProfileViewModel @Inject constructor(
                 ),
                 "email" to FormField(
                     validators = listOf(
-                        Validators.required("邮箱不能为空"),
+                        Validators.required("邮箱不���为空"),
                         Validators.email("请输入有效的邮箱地址")
                     )
                 ),
@@ -250,6 +256,35 @@ class ProfileViewModel @Inject constructor(
 
         viewModelScope.launch {
             repo.updateSettings(newSettings)
+        }
+    }
+
+    private fun logout() {
+        viewModelScope.launch {
+            updateState { copy(isLoggingOut = true) }
+
+            when (val result = authRepo.logout()) {
+                is ApiResult.Success -> {
+                    logger_e("Logout success1: ${result.S}")
+                    logger_e("Logout success2: ${result}")
+                    updateState { copy(isLoggingOut = false) }
+                    sendEvent(UiEvent.ShowSnackbar("已退出登录"))
+                    sendEvent(UiEvent.Navigate("login"))
+                }
+
+                is ApiResult.Error -> {
+                    logger_e("Logout error1: ${result.message}")
+                    logger_e("Logout error2: ${result}")
+                    updateState { copy(isLoggingOut = false) }
+                    sendEvent(UiEvent.ShowSnackbar("退出登录失败: ${result.message}"))
+                }
+
+                ApiResult.NetworkUnavailable -> {
+                    logger_e("Logout network unavailable  ${result}" )
+                    updateState { copy(isLoggingOut = false) }
+                    sendEvent(UiEvent.ShowSnackbar("网络不可用"))
+                }
+            }
         }
     }
 

@@ -24,7 +24,8 @@ import com.kira.learning.base.mvi.UiEvent
 fun ProfileRoute(
     modifier: Modifier = Modifier,
     viewModel: ProfileViewModel = hiltViewModel(),
-    onBack: (() -> Unit)? = null
+    onBack: (() -> Unit)? = null,
+    onNavigateToLogin: (() -> Unit)? = null
 ) {
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -36,7 +37,11 @@ fun ProfileRoute(
                 is UiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(event.message)
                 }
-
+                is UiEvent.Navigate -> {
+                    if (event.route == "login") {
+                        onNavigateToLogin?.invoke()
+                    }
+                }
                 else -> {}
             }
         }
@@ -135,7 +140,8 @@ private fun ProfileContent(
         // 设置选项
         ProfileSettings(
             settings = state.settings,
-            onToggleSetting = { onAction(ProfileEvent.ToggleSetting(it)) }
+            onToggleSetting = { onAction(ProfileEvent.ToggleSetting(it)) },
+            onLogout = { onAction(ProfileEvent.Logout) } // 添加登出事件处理
         )
 
         // 消息提示
@@ -272,7 +278,8 @@ private fun ProfileEditForm(
 @Composable
 private fun ProfileSettings(
     settings: com.kira.learning.models.AppSettings,
-    onToggleSetting: (SettingType) -> Unit
+    onToggleSetting: (SettingType) -> Unit,
+    onLogout: () -> Unit // 添加登出事件的回调
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -360,6 +367,32 @@ private fun ProfileSettings(
                     icon = Icons.Default.BugReport,
                     checked = settings.crashReportEnabled,
                     onCheckedChange = { onToggleSetting(SettingType.CRASH_REPORTS) }
+                )
+            }
+
+            // 登出按钮
+            Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+            TextButton(
+                onClick = onLogout,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Logout,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.error
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "登出",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = MaterialTheme.colorScheme.error
+                    )
                 )
             }
         }
