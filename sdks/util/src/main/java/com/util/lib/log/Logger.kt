@@ -40,3 +40,9 @@ inline fun logger_e(tag: String, message: String) {
         Log.e(tag, message)
     }
 }
+
+inline fun logger_e(message: String) {
+    if (isDebug()) {
+        logger_e("KiraLog", message)
+    }
+}

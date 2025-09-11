@@ -2,25 +2,69 @@ package com.kira.learning.modules.auth
 
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
-import com.kira.learning.network.safeApiCall
+import com.kira.learning.network.safeApiCallWithMapping
 import com.kira.learning.base.repository.BaseRepository
-import com.kira.learning.models.LoginRequest
-import com.kira.learning.models.LoginData
+import com.kira.learning.base.keyvalue.SettingsManager
+import com.kira.learning.models.*
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(
-    private val apiService: ComposeApiService
+    private val apiService: ComposeApiService,
+    private val settingsManager: SettingsManager
 ) : BaseRepository() {
+
+    private val _currentSession = MutableStateFlow<UserSession?>(null)
+    val currentSession: StateFlow<UserSession?> = _currentSession.asStateFlow()
+
+    private val _isLoggedIn = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> = _isLoggedIn.asStateFlow()
+
+    init {
+        // 应用启动时检查本地存储的会话
+        restoreSession()
+    }
 
     /**
      * 用户登录
      */
-    fun login(username: String, password: String): Flow<ApiResult<LoginData>> {
+    fun login(username: String, password: String, rememberMe: Boolean = false): Flow<ApiResult<LoginData>> {
         val request = LoginRequest(username = username, password = password)
-        return baseResponseCall { apiService.login(request) }
+        return baseResponseCall {
+            apiService.login(request).also { response ->
+                // 登录成功后保存会话信息
+                if (response.code == 200 && response.data != null) {
+                    saveSession(UserSession(response.data, isRememberMe = rememberMe))
+                }
+            }
+        }
+    }
+
+    /**
+     * 刷��Token
+     */
+    suspend fun refreshToken(): ApiResult<LoginData> {
+        val currentRefreshToken = _currentSession.value?.loginData?.refreshToken
+        if (currentRefreshToken.isNullOrEmpty()) {
+            return ApiResult.Error(message = "No refresh token available")
+        }
+
+        return safeApiCallWithMapping {
+            val request = RefreshTokenRequest(currentRefreshToken)
+            val response = apiService.refreshToken(request)
+            response.data?.let { newLoginData ->
+                // 更新会话信息
+                _currentSession.value?.let { currentSession ->
+                    saveSession(currentSession.copy(loginData = newLoginData))
+                }
+            }
+            response.data ?: throw IllegalStateException("Refresh token failed")
+        }
     }
 
     /**
@@ -29,46 +73,13 @@ class AuthRepository @Inject constructor(
     suspend fun register(
         username: String,
         password: String,
-        email: String
+        email: String,
+        preferredLocale: String = "en-US"
     ): ApiResult<LoginData> {
-        return safeApiCall {
-            // TODO: 实现注册API调用
-            // val request = RegisterRequest(username, password, email)
-            // val response = apiService.register(request)
-            // response.data
-
-            // 模拟注册成功
-            LoginData(
-                token = "mock_token_${System.currentTimeMillis()}",
-                loginDate = System.currentTimeMillis().toString(),
-                currentVersion = "1.0.0",
-                refreshToken = "refresh_${System.currentTimeMillis()}",
-                currentRole = "user",
-                prove = "registered",
-                preferredLocale = "zh-CN"
-            )
-        }
-    }
-
-    /**
-     * 刷新token
-     */
-    suspend fun refreshToken(refreshToken: String): ApiResult<LoginData> {
-        return safeApiCall {
-            // TODO: 实现刷新token API调用
-            // val response = apiService.refreshToken(RefreshTokenRequest(refreshToken))
-            // response.data
-
-            // 模拟刷新成功
-            LoginData(
-                token = "refreshed_token_${System.currentTimeMillis()}",
-                loginDate = System.currentTimeMillis().toString(),
-                currentVersion = "1.0.0",
-                refreshToken = "new_refresh_${System.currentTimeMillis()}",
-                currentRole = "user",
-                prove = "refreshed",
-                preferredLocale = "zh-CN"
-            )
+        return safeApiCallWithMapping {
+            val request = RegisterRequest(username, password, email, preferredLocale)
+            val response = apiService.register(request)
+            response.data ?: throw IllegalStateException("Registration failed")
         }
     }
 
@@ -76,54 +87,169 @@ class AuthRepository @Inject constructor(
      * 用户登出
      */
     suspend fun logout(): ApiResult<Unit> {
-        return safeApiCall {
-            // TODO: 实现登出API调用
-            // apiService.logout()
+        return try {
+            // 调用服务端登出API
+            val result = safeApiCallWithMapping {
+                apiService.logout()
+                Unit
+            }
 
-            // 模拟登出成功
+            // 清除本地会话
+            clearSession()
+
+            result
+        } catch (_: Exception) {
+            // 即使服务端登出失败，也要清除本地会话
+            clearSession()
+            ApiResult.Success(Unit)
         }
     }
 
     /**
-     * 验证token是否有效
+     * 验证当前Token是否有效
      */
-    suspend fun validateToken(token: String): ApiResult<Boolean> {
-        return safeApiCall {
-            // TODO: 实现token验证API调用
-            // val response = apiService.validateToken(token)
-            // response.isValid
+    suspend fun validateCurrentToken(): ApiResult<Boolean> {
+        val token = getCurrentToken()
+        if (token.isNullOrEmpty()) {
+            return ApiResult.Success(false)
+        }
 
-            // 模拟验证结果
-            token.isNotEmpty() && !token.contains("expired")
+        return safeApiCallWithMapping {
+            val result = apiService.validateToken(token)
+            result.isValid
         }
     }
 
     /**
-     * 重置密码
+     * 切换用户角色（如果用户有多个角色）
      */
-    suspend fun resetPassword(email: String): ApiResult<Unit> {
-        return safeApiCall {
-            // TODO: 实现重置密码API调用
-            // apiService.resetPassword(ResetPasswordRequest(email))
+    suspend fun switchRole(newRole: UserRole): ApiResult<LoginData> {
+        val currentSession = _currentSession.value
+        if (currentSession == null || !currentSession.loginData.hasRole(newRole)) {
+            return ApiResult.Error(message = "Invalid role or not logged in")
+        }
 
-            // 模拟重置成功
+        return safeApiCallWithMapping {
+            val request = RoleSwitchRequest(newRole.code)
+            val response = apiService.switchRole(request)
+            response.data?.let { newLoginData ->
+                saveSession(currentSession.copy(loginData = newLoginData))
+            }
+            response.data ?: throw IllegalStateException("Role switch failed")
         }
     }
 
     /**
-     * 检查token是否有效
+     * 获取当前用户信息
+     */
+    fun getCurrentUser(): LoginData? = _currentSession.value?.loginData
+
+    /**
+     * 获取当前Token
+     */
+    fun getCurrentToken(): String? = _currentSession.value?.loginData?.token
+
+    /**
+     * 检查Token是否有效
      */
     fun tokenValid(): Boolean {
-        // TODO: 实现真实的token验证逻辑
-        // 可以从SharedPreferences或DataStore中获取token并验证
-        return false // 暂时返回false，表示未登录状态
+        val session = _currentSession.value ?: return false
+        return !session.isExpired && session.loginData.isTokenValid
     }
 
     /**
-     * 清除本地认证数据
+     * 检查用户是否有特定角色
      */
-    fun clear() {
-        // TODO: 实现清除本地token和用户数据的逻辑
-        // 例如：清除SharedPreferences、DataStore等存储的认证信息
+    fun hasRole(role: UserRole): Boolean {
+        return _currentSession.value?.loginData?.hasRole(role) ?: false
     }
+
+    /**
+     * 保存会话信息
+     */
+    private fun saveSession(session: UserSession) {
+        _currentSession.value = session
+        _isLoggedIn.value = true
+
+        // 保存到本地存储
+        if (session.isRememberMe) {
+            settingsManager.apiToken = session.loginData.token
+            // TODO: 扩展 SettingsManager 支持这些属性
+            // settingsManager.refreshToken = session.loginData.refreshToken
+            // settingsManager.userRole = session.loginData.currentRole
+            // settingsManager.loginTimestamp = session.loginTimestamp
+        }
+
+        // 发送登录事件
+        AuthEventBus.sendEvent(AuthEventBus.AuthEvent.LoggedIn(session.loginData))
+    }
+
+    /**
+     * 恢复会话信息
+     */
+    private fun restoreSession() {
+        val token = settingsManager.apiToken
+        // TODO: 从 SettingsManager 恢复更多会话数据
+
+        if (!token.isNullOrEmpty()) {
+            val loginData = LoginData(
+                token = token,
+                refreshToken = "", // 临时值，需要从设置中恢复
+                currentRole = "0", // 临时值，需要从设置中恢复
+                prove = "restored",
+                loginDate = System.currentTimeMillis().toString(),
+                currentVersion = "1.0",
+                preferredLocale = "en-US"
+            )
+
+            val session = UserSession(
+                loginData = loginData,
+                loginTimestamp = System.currentTimeMillis(),
+                isRememberMe = true
+            )
+
+            if (!session.isExpired) {
+                _currentSession.value = session
+                _isLoggedIn.value = true
+            } else {
+                // 会话过期，清除本地数据
+                clearSession()
+            }
+        }
+    }
+
+    /**
+     * 清除会话信息
+     */
+    fun clearSession() {
+        val currentUser = _currentSession.value?.loginData
+        _currentSession.value = null
+        _isLoggedIn.value = false
+
+        // 清除本地存储
+        settingsManager.apiToken = null
+        // TODO: 清除扩展的设置字段
+
+        // 发送登出事件
+        currentUser?.let {
+            AuthEventBus.sendEvent(AuthEventBus.AuthEvent.LoggedOut(it))
+        }
+    }
+
+    /**
+     * 移除特定会话
+     */
+    fun removeSession(session: UserSession) {
+        // 如果移除的是当前会话，清除所有状态
+        if (_currentSession.value?.loginTimestamp == session.loginTimestamp) {
+            clearSession()
+        }
+        // 这里可以扩展为从本地存储中移除特定会话记录
+        // 目前简化处理为清除当前会话
+    }
+
+    /**
+     * 清除所有数据（用于测试或重置）
+     */
+    fun clear() = clearSession()
 }

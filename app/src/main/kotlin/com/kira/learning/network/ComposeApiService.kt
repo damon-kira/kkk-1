@@ -3,6 +3,8 @@ package com.kira.learning.network
 import com.kira.learning.models.LoginRequest
 import com.kira.learning.models.LoginData
 import com.kira.learning.models.QuestionProcessInfo
+import com.kira.learning.models.RoleSwitchRequest
+import com.kira.learning.models.ValidationResponse
 import com.kira.learning.models.dao.AIResponseInfo
 import com.kira.learning.models.dao.AppSettingsDTO
 import com.kira.learning.models.dao.PhotoDTO
@@ -56,16 +58,19 @@ interface ComposeApiService {
     suspend fun login(@Body body: LoginRequest): BaseResponse<LoginData>
 
     @POST("/auth/register")
-    suspend fun register(@Body body: RequestBody): BaseResponse<LoginData>
+    suspend fun register(@Body body: com.kira.learning.models.RegisterRequest): BaseResponse<LoginData>
 
     @POST("/auth/refresh")
-    suspend fun refreshToken(@Body body: RequestBody): BaseResponse<LoginData>
+    suspend fun refreshToken(@Body body: com.kira.learning.models.RefreshTokenRequest): BaseResponse<LoginData>
 
     @POST("/auth/logout")
     suspend fun logout(): BaseResponse<Unit>
 
-    @POST("/auth/validate")
-    suspend fun validateToken(@Body body: RequestBody): BaseResponse<Boolean>
+    @GET("/auth/validate")
+    suspend fun validateToken(@Query("token") token: String): ValidationResponse
+
+    @POST("/auth/switch-role")
+    suspend fun switchRole(@Body body: RoleSwitchRequest): BaseResponse<LoginData>
 
     @POST("/auth/reset-password")
     suspend fun resetPassword(@Body body: RequestBody): BaseResponse<Unit>
