@@ -19,7 +19,7 @@ class ImagePlayerRepository @Inject constructor(
      * 获取图片列表
      */
     fun getImages(url: String? = null): Flow<ApiResult<List<SampleImage>>> {
-        return networkCall {
+        return executeApiFlow {
             apiService.fetchPhotos(url ?: "https://jsonplaceholder.typicode.com/photos?_limit=50")
                 .map { it.toDomain() }
         }

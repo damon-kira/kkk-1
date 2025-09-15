@@ -21,21 +21,21 @@ class MainRepository @Inject constructor(
      * AI聊天请求
      */
     fun sendAIRequest(requestBody: RequestBody): Flow<ApiResult<AIResponseInfo>> {
-        return baseResponseCall { apiService.aiSendRequest(requestBody) }
+        return executeBaseResponseFlow { apiService.aiSendRequest(requestBody) }
     }
 
     /**
      * 搜索问题
      */
     fun searchQuestion(requestBody: RequestBody): Flow<ApiResult<QuestionProcessInfo>> {
-        return baseResponseCall { apiService.searchQuestion(requestBody) }
+        return executeBaseResponseFlow { apiService.searchQuestion(requestBody) }
     }
 
     /**
      * 获取测验信息
      */
     fun getQuizInfo(requestBody: RequestBody): Flow<ApiResult<Document>> {
-        return baseResponseCall { apiService.getQuizInfo(requestBody) }
+        return executeBaseResponseFlow { apiService.getQuizInfo(requestBody) }
     }
 
     /**

@@ -217,13 +217,13 @@ internal fun MainScreen(
                     }
                 }
 
-                // 可���动悬浮按钮
+                // 可滑动悬浮按钮
                 val density = LocalDensity.current
                 val margin = 16.dp
                 val buttonSize = 56.dp
                 val marginPx = with(density) { margin.toPx() }
                 val buttonSizePx = with(density) { buttonSize.toPx() }
-                val bottomBarHeightPx = with(density) { 80.dp.toPx() } // 近似底部导��高度
+                val bottomBarHeightPx = with(density) { 80.dp.toPx() } // 近似底部高度
 
                 var offsetX by remember { mutableFloatStateOf(0f) }
                 var offsetY by remember { mutableFloatStateOf(0f) }

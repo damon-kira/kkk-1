@@ -1,14 +1,11 @@
 package com.kira.learning.modules.coding
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
+import com.kira.learning.base.mvi.BaseApiViewModel
 import com.kira.learning.base.mvi.BaseUiState
-import com.kira.learning.base.mvi.BaseViewModel
-import com.kira.learning.base.mvi.UiEvent
+import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.base.mvi.ViewState
-import com.kira.learning.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class CodingViewState(
@@ -20,7 +17,7 @@ data class CodingViewState(
     val isExecuting: Boolean = false
 ) : ViewState()
 
-sealed interface CodingEvent {
+sealed interface CodingEvent : ViewEvent {
     data class UpdateCode(val code: String) : CodingEvent
     data class ChangeLanguage(val language: ProgrammingLanguage) : CodingEvent
     data class UpdateUserInput(val input: String) : CodingEvent
@@ -33,11 +30,11 @@ sealed interface CodingEvent {
 class CodingViewModel @Inject constructor(
     private val repository: CodingRepository,
     @Suppress("UNUSED_PARAMETER") private val savedStateHandle: SavedStateHandle
-) : BaseViewModel<CodingViewState, UiEvent>(
+) : BaseApiViewModel<CodingViewState, CodingEvent>(
     initialState = CodingViewState()
 ) {
 
-    override fun handleAction(action: Any) {
+    override fun handleAction(action: CodingEvent) {
         when (action) {
             is CodingEvent.UpdateCode -> updateCode(action.code)
             is CodingEvent.ChangeLanguage -> changeLanguage(action.language)
@@ -45,6 +42,15 @@ class CodingViewModel @Inject constructor(
             is CodingEvent.ExecuteCode -> executeCode()
             is CodingEvent.ToggleLineNumbers -> toggleLineNumbers()
             is CodingEvent.ClearResult -> clearResult()
+        }
+    }
+
+    override fun updateLoadingState(isLoading: Boolean, message: String) {
+        updateState {
+            copy(
+                isExecuting = isLoading,
+                executionResult = if (isLoading) BaseUiState.Loading else executionResult
+            )
         }
     }
 
@@ -69,48 +75,25 @@ class CodingViewModel @Inject constructor(
     private fun executeCode() {
         if (currentState.isExecuting) return
 
-        viewModelScope.launch {
-            updateState {
-                copy(
-                    isExecuting = true,
-                    executionResult = BaseUiState.Loading
-                )
-            }
+        val request = CodeExecutionRequest(
+            code = currentState.code,
+            language = currentState.selectedLanguage.displayName,
+            input = currentState.userInput
+        )
 
-            val request = CodeExecutionRequest(
-                code = currentState.code,
-                language = currentState.selectedLanguage.displayName,
-                input = currentState.userInput
-            )
-
-            when (val result = repository.executeCode(request)) {
-                is ApiResult.Success -> {
-                    updateState {
-                        copy(
-                            isExecuting = false,
-                            executionResult = BaseUiState.Success(result.data)
-                        )
-                    }
+        executeApiCall(
+            apiCall = { repository.executeCode(request) },
+            onSuccess = { response ->
+                updateState {
+                    copy(executionResult = BaseUiState.Success(response))
                 }
-                is ApiResult.Error -> {
-                    updateState {
-                        copy(
-                            isExecuting = false,
-                            executionResult = BaseUiState.Error(result.message)
-                        )
-                    }
-                    sendEvent(UiEvent.ShowSnackbar(result.message))
-                }
-                else -> {
-                    updateState {
-                        copy(
-                            isExecuting = false,
-                            executionResult = BaseUiState.Error("Unknown error occurred")
-                        )
-                    }
+            },
+            onError = { error ->
+                updateState {
+                    copy(executionResult = BaseUiState.Error(error.message))
                 }
             }
-        }
+        )
     }
 
     private fun toggleLineNumbers() {
@@ -151,7 +134,7 @@ def calculator():
 calculator()"""
 
         ProgrammingLanguage.JAVA -> """// Java Hello World Example
-import kotlin.util.Scanner;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

@@ -24,6 +24,10 @@ abstract class BaseViewModel<State : ViewState, Event : ViewEvent>(
     private val _viewEvent = Channel<Event>(Channel.BUFFERED)
     val viewEvent: Flow<Event> = _viewEvent.receiveAsFlow()
 
+    // 添加UI事件支持
+    private val _uiEvent = Channel<UiEvent>(Channel.BUFFERED)
+    val uiEvent: Flow<UiEvent> = _uiEvent.receiveAsFlow()
+
     protected val currentState: State
         get() = _viewState.value
 
@@ -41,10 +45,17 @@ abstract class BaseViewModel<State : ViewState, Event : ViewEvent>(
         }
     }
 
+    // 添加UI事件发送方法
+    protected fun sendUiEvent(event: UiEvent) {
+        viewModelScope.launch {
+            _uiEvent.send(event)
+        }
+    }
+
     /**
      * 处理用户操作
      */
-    abstract fun handleAction(action: Any)
+    abstract fun handleAction(action: Event)
 }
 
 /**

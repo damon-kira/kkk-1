@@ -71,11 +71,12 @@ android {
     }
 
     buildTypes {
-        getByName("release") {  // 使用 getByName 而不是 create
-            buildConfigField("String", "BASE_URL", "\"https://core.staging.kira-learning.com\"")
-            buildConfigField("String", "H5_URL", "\"https://core.staging.kira-learning.com\"")
-            buildConfigField("String", "DATA_URL", "\"https://core.staging.kira-learning.com\"")
-            buildConfigField("String", "APP_SECRET", "\"0000\"")
+        getByName("release") {
+            // 使用环境变量或gradle.properties中的配置
+            buildConfigField("String", "BASE_URL", "\"${findProperty("RELEASE_BASE_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "H5_URL", "\"${findProperty("RELEASE_H5_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "DATA_URL", "\"${findProperty("RELEASE_DATA_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "APP_SECRET", "\"${findProperty("RELEASE_APP_SECRET") ?: "0000"}\"")
             isMinifyEnabled = true
             isShrinkResources = true
             configure<CrashlyticsExtension> {
@@ -85,9 +86,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
-
         }
         getByName("debug") {
+            // Debug环境
+            buildConfigField("String", "BASE_URL", "\"${findProperty("DEBUG_BASE_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "H5_URL", "\"${findProperty("DEBUG_H5_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "DATA_URL", "\"${findProperty("DEBUG_DATA_URL") ?: "https://core.staging.kira-learning.com"}\"")
+            buildConfigField("String", "APP_SECRET", "\"${findProperty("DEBUG_APP_SECRET") ?: "debug_secret"}\"")
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true

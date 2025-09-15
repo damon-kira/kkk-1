@@ -28,7 +28,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.kira.learning.network.InMemoryAuthTokenProvider
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val repo: ChatRepository,
@@ -193,13 +195,14 @@ class ChatViewModel @Inject constructor(
                     }
 
                     is ApiResult.Error -> finalizePendingWith(
-                        ErrorMapper.map(
-                            res.code,
-                            res.message
-                        )
+                        "网络错误: ${res.message}"
                     )
 
-                    ApiResult.NetworkUnavailable -> finalizePendingWith("网络不可用")
+                    is ApiResult.NetworkUnavailable -> finalizePendingWith("网络不可用")
+
+                    is ApiResult.Loading -> {
+                        // Loading状态处理
+                    }
                 }
             }
             val finalText = _uiState.value.messages.lastOrNull { it.pending }?.content ?: ""
@@ -258,7 +261,7 @@ class ChatViewModel @Inject constructor(
                 }
 
                 is ApiResult.Error -> {
-                    val mapped = ErrorMapper.map(r.code, r.message)
+                    val mapped = ErrorMapper.mapException(r.throwable ?: Exception(r.message))
                     chatMessageDao.insertMessage(
                         ChatMessage(
                             content = "出错: $mapped",
@@ -269,7 +272,7 @@ class ChatViewModel @Inject constructor(
                     _uiState.update { s -> s.copy(error = mapped) }
                 }
 
-                ApiResult.NetworkUnavailable -> {
+                is ApiResult.NetworkUnavailable -> {
                     chatMessageDao.insertMessage(
                         ChatMessage(
                             content = "网络不可用",
@@ -277,6 +280,10 @@ class ChatViewModel @Inject constructor(
                             conversationId = cid
                         )
                     )
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading状态处理
                 }
             }
             _uiState.update { s -> s.copy(sending = false) }

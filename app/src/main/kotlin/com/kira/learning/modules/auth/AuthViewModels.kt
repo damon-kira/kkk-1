@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.kira.learning.network.ApiResult
 import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.UiEvent
+import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.base.mvi.ViewState
 import com.kira.learning.base.validation.FormState
 import com.kira.learning.base.validation.FormField
@@ -30,7 +31,7 @@ data class AuthViewState(
 ) : ViewState()
 
 // 认证事件
-sealed interface AuthEvent {
+sealed interface AuthEvent : ViewEvent {
     object Login : AuthEvent
     object Logout : AuthEvent
     object RefreshToken : AuthEvent
@@ -47,7 +48,7 @@ sealed interface AuthEvent {
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val repo: AuthRepository
-) : BaseViewModel<AuthViewState, UiEvent>(
+) : BaseViewModel<AuthViewState, AuthEvent>(
     initialState = AuthViewState()
 ) {
 
@@ -63,7 +64,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    override fun handleAction(action: Any) {
+    override fun handleAction(action: AuthEvent) {
         when (action) {
             is AuthEvent.Login -> login()
             is AuthEvent.Logout -> logout()
@@ -144,7 +145,7 @@ class AuthViewModel @Inject constructor(
         updateState { copy(formState = validatedForm) }
 
         if (!validatedForm.isValid) {
-            sendEvent(UiEvent.ShowSnackbar("请检查输入信息"))
+            sendUiEvent(UiEvent.ShowSnackbar("请检查输入信息"))
             return
         }
 
@@ -167,8 +168,8 @@ class AuthViewModel @Inject constructor(
                                 availableRoles = result.data.userRoles
                             )
                         }
-                        sendEvent(UiEvent.ShowSnackbar("登录成功"))
-                        sendEvent(UiEvent.Navigate("main"))
+                        sendUiEvent(UiEvent.ShowSnackbar("登录成功"))
+                        sendUiEvent(UiEvent.Navigate("main"))
                     }
 
                     is ApiResult.Error -> {
@@ -179,10 +180,10 @@ class AuthViewModel @Inject constructor(
                                 errorMessage = message
                             )
                         }
-                        sendEvent(UiEvent.ShowSnackbar(message))
+                        sendUiEvent(UiEvent.ShowSnackbar(message))
                     }
 
-                    ApiResult.NetworkUnavailable -> {
+                    is ApiResult.NetworkUnavailable -> {
                         val message = "网络不可用，请检查网络连接"
                         updateState {
                             copy(
@@ -190,7 +191,11 @@ class AuthViewModel @Inject constructor(
                                 errorMessage = message
                             )
                         }
-                        sendEvent(UiEvent.ShowSnackbar(message))
+                        sendUiEvent(UiEvent.ShowSnackbar(message))
+                    }
+
+                    is ApiResult.Loading -> {
+                        // Loading状态已在开始时设置
                     }
                 }
             }
@@ -212,18 +217,22 @@ class AuthViewModel @Inject constructor(
                             errorMessage = null
                         )
                     }
-                    sendEvent(UiEvent.ShowSnackbar("已退出登录"))
-                    sendEvent(UiEvent.Navigate("login"))
+                    sendUiEvent(UiEvent.ShowSnackbar("已退出登录"))
+                    sendUiEvent(UiEvent.Navigate("login"))
                 }
 
                 is ApiResult.Error -> {
                     updateState { copy(isLoading = false) }
-                    sendEvent(UiEvent.ShowSnackbar("退出登录失败: ${result.message}"))
+                    sendUiEvent(UiEvent.ShowSnackbar("退出登录失败: ${result.message}"))
                 }
 
-                ApiResult.NetworkUnavailable -> {
+                is ApiResult.NetworkUnavailable -> {
                     updateState { copy(isLoading = false) }
-                    sendEvent(UiEvent.ShowSnackbar("网络不可用"))
+                    sendUiEvent(UiEvent.ShowSnackbar("网络不可用"))
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading状态已在开始时设置
                 }
             }
         }
@@ -239,19 +248,23 @@ class AuthViewModel @Inject constructor(
                             errorMessage = null
                         )
                     }
-                    sendEvent(UiEvent.ShowSnackbar("Token已刷新"))
+                    sendUiEvent(UiEvent.ShowSnackbar("Token已刷新"))
                 }
 
                 is ApiResult.Error -> {
                     updateState { copy(errorMessage = result.message) }
-                    sendEvent(UiEvent.ShowSnackbar("Token刷新失败: ${result.message}"))
+                    sendUiEvent(UiEvent.ShowSnackbar("Token刷新失败: ${result.message}"))
                     // Token刷新失败，可能需要重新登录
                     repo.clearSession()
-                    sendEvent(UiEvent.Navigate("login"))
+                    sendUiEvent(UiEvent.Navigate("login"))
                 }
 
-                ApiResult.NetworkUnavailable -> {
-                    sendEvent(UiEvent.ShowSnackbar("网络不可用"))
+                is ApiResult.NetworkUnavailable -> {
+                    sendUiEvent(UiEvent.ShowSnackbar("网络不可用"))
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading处理
                 }
             }
         }
@@ -272,7 +285,7 @@ class AuthViewModel @Inject constructor(
                             errorMessage = null
                         )
                     }
-                    sendEvent(UiEvent.ShowSnackbar("已切换到${newRole.displayName}模式"))
+                    sendUiEvent(UiEvent.ShowSnackbar("已切换到${newRole.displayName}模式"))
                 }
 
                 is ApiResult.Error -> {
@@ -282,12 +295,16 @@ class AuthViewModel @Inject constructor(
                             errorMessage = result.message
                         )
                     }
-                    sendEvent(UiEvent.ShowSnackbar("角色切换失败: ${result.message}"))
+                    sendUiEvent(UiEvent.ShowSnackbar("角色切换失败: ${result.message}"))
                 }
 
-                ApiResult.NetworkUnavailable -> {
+                is ApiResult.NetworkUnavailable -> {
                     updateState { copy(isRoleSwitching = false) }
-                    sendEvent(UiEvent.ShowSnackbar("网络不可用"))
+                    sendUiEvent(UiEvent.ShowSnackbar("网络不可用"))
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading状态已在开始时设置
                 }
             }
         }
@@ -300,17 +317,21 @@ class AuthViewModel @Inject constructor(
                     if (!result.data) {
                         // Token无效，清除会话并导航到登录页
                         repo.clearSession()
-                        sendEvent(UiEvent.ShowSnackbar("会话已过期，请重新登录"))
-                        sendEvent(UiEvent.Navigate("login"))
+                        sendUiEvent(UiEvent.ShowSnackbar("会话已过期，请重新登录"))
+                        sendUiEvent(UiEvent.Navigate("login"))
                     }
                 }
 
                 is ApiResult.Error -> {
-                    sendEvent(UiEvent.ShowSnackbar("会话验证失败: ${result.message}"))
+                    sendUiEvent(UiEvent.ShowSnackbar("会话验证失败: ${result.message}"))
                 }
 
-                ApiResult.NetworkUnavailable -> {
-                    sendEvent(UiEvent.ShowSnackbar("网络不可用，无法验证会话"))
+                is ApiResult.NetworkUnavailable -> {
+                    sendUiEvent(UiEvent.ShowSnackbar("网络不可用，无法验证会话"))
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading处理
                 }
             }
         }
@@ -326,8 +347,8 @@ class AuthViewModel @Inject constructor(
                     errorMessage = null
                 )
             }
-            sendEvent(UiEvent.ShowSnackbar("快速登录成功"))
-            sendEvent(UiEvent.Navigate("main"))
+            sendUiEvent(UiEvent.ShowSnackbar("快速登录成功"))
+            sendUiEvent(UiEvent.Navigate("main"))
         }
     }
 
@@ -342,7 +363,7 @@ class AuthViewModel @Inject constructor(
                     errorMessage = null
                 )
             }
-            sendEvent(UiEvent.ShowSnackbar("会话已移除"))
+            sendUiEvent(UiEvent.ShowSnackbar("会话已移除"))
         }
     }
 }
@@ -362,6 +383,7 @@ class SessionViewModel @Inject constructor(
                     is AuthEventBus.AuthEvent.LoggedIn -> {
                         // 可以在这里处理登录后的额外逻辑
                     }
+
                     is AuthEventBus.AuthEvent.LoggedOut -> {
                         // 可以在这里处理登出后的清理逻辑
                     }

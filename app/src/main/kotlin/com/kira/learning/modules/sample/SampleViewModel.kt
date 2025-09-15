@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.kira.learning.base.mvi.BaseUiState
 import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.UiEvent
+import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.base.mvi.ViewState
 import com.kira.learning.models.SampleImage
 import com.kira.learning.network.ApiResult
@@ -18,7 +19,7 @@ data class SampleViewState(
 ) : ViewState()
 
 // 使用通用的事件系统
-sealed interface SampleEvent {
+sealed interface SampleEvent : ViewEvent {
     object LoadSamples : SampleEvent
     object RefreshSamples : SampleEvent
     object RetrySamples : SampleEvent
@@ -28,7 +29,7 @@ sealed interface SampleEvent {
 class SampleViewModel @Inject constructor(
     private val repo: SampleRepository,
     private val savedStateHandle: SavedStateHandle,
-) : BaseViewModel<SampleViewState, UiEvent>(
+) : BaseViewModel<SampleViewState, SampleEvent>(
     initialState = SampleViewState()
 ) {
 
@@ -36,7 +37,7 @@ class SampleViewModel @Inject constructor(
         handleAction(SampleEvent.LoadSamples)
     }
 
-    override fun handleAction(action: Any) {
+    override fun handleAction(action: SampleEvent) {
         when (action) {
             is SampleEvent.LoadSamples -> loadSamples(refresh = false)
             is SampleEvent.RefreshSamples -> loadSamples(refresh = true)
@@ -64,14 +65,22 @@ class SampleViewModel @Inject constructor(
                 }
 
                 is ApiResult.Error -> {
-                    updateState { copy(data = BaseUiState.Error(result.message)) }
-                    sendEvent(UiEvent.ShowSnackbar(result.message))
+                    updateState {
+                        copy(data = BaseUiState.Error(result.message))
+                    }
+                    sendUiEvent(UiEvent.ShowSnackbar(result.message))
                 }
 
-                ApiResult.NetworkUnavailable -> {
+                is ApiResult.NetworkUnavailable -> {
                     val message = "网络不可用"
-                    updateState { copy(data = BaseUiState.Error(message)) }
-                    sendEvent(UiEvent.ShowSnackbar(message))
+                    updateState {
+                        copy(data = BaseUiState.Error(message))
+                    }
+                    sendUiEvent(UiEvent.ShowSnackbar(message))
+                }
+
+                is ApiResult.Loading -> {
+                    // Loading状态已在开始时设置
                 }
             }
         }

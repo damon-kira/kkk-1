@@ -17,7 +17,7 @@ abstract class BaseNetworkRepository {
     protected fun <T> networkCall(
         call: suspend () -> T
     ): Flow<ApiResult<T>> = flow {
-        emit(safeApiCallWithMapping { call() })
+        emit(apiCall { call() })
     }
 
     /**
@@ -26,11 +26,16 @@ abstract class BaseNetworkRepository {
     protected fun <T> baseResponseCall(
         call: suspend () -> BaseResponse<T>
     ): Flow<ApiResult<T>> = flow {
-        val result = safeApiCallWithMapping { call() }
+        val result = apiCall { call() }
         when (result) {
-            is ApiResult.Success -> emit(result.data.toApiResult())
+            is ApiResult.Success -> {
+                val response = result.data
+                emit(response.toApiResult())
+            }
+
             is ApiResult.Error -> emit(result)
             is ApiResult.NetworkUnavailable -> emit(result)
+            is ApiResult.Loading -> emit(result)
         }
     }
 }

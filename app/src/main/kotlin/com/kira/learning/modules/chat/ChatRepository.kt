@@ -12,7 +12,7 @@ class ChatRepository @Inject constructor(
     private val real: RealChatRemoteDataSource,
     private val mock: MockChatRemoteDataSource
 ) : BaseRepository() {
-    // 标记当前是否使用本地模拟数据源（可由 VM 切换）
+    // 标记当前是否使用本地模拟数据源（可由 VM 替换）
     @Volatile
     private var useMock = false
     fun setUseMock(v: Boolean) {
@@ -23,11 +23,12 @@ class ChatRepository @Inject constructor(
     private fun ds(): ChatRemoteDataSource = if (useMock) mock else real
 
     // 一次性请求 - 使用 BaseRepository 的 safeApiCall
-    suspend fun sendUserMessage(content: String): ApiResult<String> = safeApiCall {
+    suspend fun sendUserMessage(content: String): ApiResult<String> = executeApiCall {
         when (val result = ds().sendOnce(content)) {
             is ApiResult.Success -> result.data
             is ApiResult.Error -> throw Exception(result.message)
-            ApiResult.NetworkUnavailable -> throw Exception("网络不可用")
+            is ApiResult.NetworkUnavailable -> throw Exception("网络不可用")
+            is ApiResult.Loading -> throw Exception("加载中")
         }
     }
 

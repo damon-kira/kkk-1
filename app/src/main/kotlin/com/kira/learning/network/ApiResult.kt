@@ -3,24 +3,70 @@ package com.kira.learning.network
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.retryWhen
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
+/**
+ * 统一的API返回结果封装
+ * 所有网络请求都应该返回这个类型，确保一致性
+ */
 sealed class ApiResult<out T> {
     data class Success<T>(val data: T) : ApiResult<T>()
-    data class Error(val code: Int? = null, val message: String, val throwable: Throwable? = null) :
-        ApiResult<Nothing>()
+    data class Error(
+        val code: Int? = null,
+        val message: String,
+        val errorType: ErrorType = ErrorType.UNKNOWN,
+        val throwable: Throwable? = null
+    ) : ApiResult<Nothing>()
 
+    data class Loading(val message: String = "加载中...") : ApiResult<Nothing>()
     object NetworkUnavailable : ApiResult<Nothing>()
 }
+
+/**
+ * 错误类型枚举，用于更精确的错误处理
+ */
+enum class ErrorType {
+    NETWORK,        // 网络错误
+    SERVER,         // 服务器错误
+    AUTHENTICATION, // 认证错误
+    AUTHORIZATION,  // 授权错误
+    VALIDATION,     // 验证错误
+    TIMEOUT,        // 超时错误
+    UNKNOWN         // 未知错误
+}
+
+/**
+ * 扩展函数：判断是否为成功状态
+ */
+val <T> ApiResult<T>.isSuccess: Boolean
+    get() = this is ApiResult.Success
+
+/**
+ * 扩展函数：判断是否为错误状态
+ */
+val <T> ApiResult<T>.isError: Boolean
+    get() = this is ApiResult.Error
+
+/**
+ * 扩展函数：判断是否为加载状态
+ */
+val <T> ApiResult<T>.isLoading: Boolean
+    get() = this is ApiResult.Loading
 
 /** 基础映射；仅对 Success 进行数据转换 */
 inline fun <T, R> ApiResult<T>.map(transform: (T) -> R): ApiResult<R> = when (this) {
     is ApiResult.Success -> ApiResult.Success(transform(data))
     is ApiResult.Error -> this
+    is ApiResult.Loading -> this
     is ApiResult.NetworkUnavailable -> ApiResult.NetworkUnavailable
 }
 
@@ -28,6 +74,7 @@ inline fun <T, R> ApiResult<T>.map(transform: (T) -> R): ApiResult<R> = when (th
 inline fun <T, R> ApiResult<T>.flatMap(transform: (T) -> ApiResult<R>): ApiResult<R> = when (this) {
     is ApiResult.Success -> transform(data)
     is ApiResult.Error -> this
+    is ApiResult.Loading -> this
     is ApiResult.NetworkUnavailable -> ApiResult.NetworkUnavailable
 }
 
@@ -35,6 +82,7 @@ inline fun <T, R> ApiResult<T>.flatMap(transform: (T) -> ApiResult<R>): ApiResul
 inline fun <T> ApiResult<T>.recover(block: (ApiResult.Error) -> T): ApiResult<T> = when (this) {
     is ApiResult.Success -> this
     is ApiResult.Error -> ApiResult.Success(block(this))
+    is ApiResult.Loading -> this
     is ApiResult.NetworkUnavailable -> ApiResult.NetworkUnavailable
 }
 
@@ -48,6 +96,7 @@ inline fun <T, R> ApiResult<T>.mapNotNull(transform: (T) -> R?): ApiResult<R> = 
     }
 
     is ApiResult.Error -> this
+    is ApiResult.Loading -> this
     is ApiResult.NetworkUnavailable -> ApiResult.NetworkUnavailable
 }
 
@@ -55,109 +104,147 @@ inline fun <T, R> ApiResult<T>.mapNotNull(transform: (T) -> R?): ApiResult<R> = 
 inline fun <T, R> ApiResult<T>.fold(
     onSuccess: (T) -> R,
     onError: (ApiResult.Error) -> R,
+    onLoading: (String) -> R,
     onNetworkUnavailable: () -> R
 ): R = when (this) {
     is ApiResult.Success -> onSuccess(data)
     is ApiResult.Error -> onError(this)
+    is ApiResult.Loading -> onLoading(message)
     is ApiResult.NetworkUnavailable -> onNetworkUnavailable()
 }
 
 inline fun <T> ApiResult<T>.getOrNull(): T? = (this as? ApiResult.Success)?.data
-inline fun <T> ApiResult<T>.getOrElse(default: () -> T): T = when (this) {
+inline fun <T> ApiResult<T>.getOrElse(default: T): T = when (this) {
     is ApiResult.Success -> data
-    else -> default()
+    else -> default
 }
 
 inline fun <T> ApiResult<T>.onSuccess(block: (T) -> Unit): ApiResult<T> {
-    if (this is ApiResult.Success) block(data); return this
+    if (this is ApiResult.Success) block(data)
+    return this
 }
 
 inline fun <T> ApiResult<T>.onError(block: (ApiResult.Error) -> Unit): ApiResult<T> {
-    if (this is ApiResult.Error) block(this); return this
+    if (this is ApiResult.Error) block(this)
+    return this
+}
+
+inline fun <T> ApiResult<T>.onLoading(block: (String) -> Unit): ApiResult<T> {
+    if (this is ApiResult.Loading) block(message)
+    return this
 }
 
 inline fun <T> ApiResult<T>.onNetworkUnavailable(block: () -> Unit): ApiResult<T> {
-    if (this is ApiResult.NetworkUnavailable) block(); return this
+    if (this is ApiResult.NetworkUnavailable) block()
+    return this
 }
 
-/** 挂起网络调用封装 */
+/** 统一的挂起网络调用封装 - 所有API调用都应使用这个方法 */
 suspend fun <T> apiCall(
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
     block: suspend () -> T
 ): ApiResult<T> = withContext(dispatcher) {
     try {
         ApiResult.Success(block())
-    } catch (e: IOException) {
-        ApiResult.Error(message = e.message ?: "IO Error", throwable = e)
-    } catch (e: HttpException) {
-        ApiResult.Error(code = e.code(), message = e.message(), throwable = e)
-    } catch (e: Throwable) {
-        ApiResult.Error(message = e.message ?: "Unknown Error", throwable = e)
-    }
-}
-
-/** BaseResponse 转换：默认 successCode == ResponseCode.SUCCESS_CODE */
-fun <T> BaseResponse<T>.toApiResult(successCode: Int = ResponseCode.SUCCESS_CODE): ApiResult<T> =
-    if (code == successCode) {
-        val d = data
-        if (d == null) ApiResult.Error(
-            code = code,
-            message = msg ?: "Empty body"
-        ) else ApiResult.Success(d)
-    } else ApiResult.Error(code = code, message = ErrorMapper.mapWithFallback(code, msg))
-
-/** 改进的挂起网络调用封装，使用增强的错误映射 */
-suspend fun <T> safeApiCallWithMapping(
-    dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    block: suspend () -> T
-): ApiResult<T> = withContext(dispatcher) {
-    try {
-        ApiResult.Success(block())
-    } catch (e: IOException) {
-        if (e is java.net.UnknownHostException) {
-            ApiResult.NetworkUnavailable
-        } else {
-            ApiResult.Error(message = ErrorMapper.mapException(e), throwable = e)
-        }
-    } catch (e: HttpException) {
+    } catch (e: UnknownHostException) {
+        ApiResult.NetworkUnavailable
+    } catch (e: ConnectException) {
+        ApiResult.NetworkUnavailable
+    } catch (e: SocketTimeoutException) {
         ApiResult.Error(
-            code = e.code(),
-            message = ErrorMapper.mapWithFallback(e.code(), e.message()),
+            message = "请求超时，请检查网络连接",
+            errorType = ErrorType.TIMEOUT,
             throwable = e
         )
-    } catch (e: Throwable) {
-        ApiResult.Error(message = ErrorMapper.mapException(e), throwable = e)
+    } catch (e: HttpException) {
+        val errorType = when (e.code()) {
+            401 -> ErrorType.AUTHENTICATION
+            403 -> ErrorType.AUTHORIZATION
+            in 400..499 -> ErrorType.VALIDATION
+            in 500..599 -> ErrorType.SERVER
+            else -> ErrorType.UNKNOWN
+        }
+        ApiResult.Error(
+            code = e.code(),
+            message = ErrorMapper.mapHttpError(e.code(), e.message()),
+            errorType = errorType,
+            throwable = e
+        )
+    } catch (e: IOException) {
+        ApiResult.Error(
+            message = "网络连接异常",
+            errorType = ErrorType.NETWORK,
+            throwable = e
+        )
+    } catch (e: Exception) {
+        ApiResult.Error(
+            message = e.message ?: "未知错误",
+            errorType = ErrorType.UNKNOWN,
+            throwable = e
+        )
     }
 }
 
-/** Flow 扩展：仅对 Success.data 做转换 */
-inline fun <T, R> Flow<ApiResult<T>>.mapData(crossinline transform: (T) -> R): Flow<ApiResult<R>> =
-    flow {
-        collect { result ->
-            when (result) {
-                is ApiResult.Success -> emit(ApiResult.Success(transform(result.data)))
-                is ApiResult.Error -> emit(result)
-                is ApiResult.NetworkUnavailable -> emit(ApiResult.NetworkUnavailable)
-            }
+/**
+ * Flow版本的API调用封装 - 支持响应式编程
+ * 统一返回Flow<ApiResult<T>>格式
+ */
+fun <T> apiCallFlow(
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    block: suspend () -> T
+): Flow<ApiResult<T>> = flow {
+    emit(ApiResult.Loading())
+    emit(apiCall(dispatcher, block))
+}.flowOn(dispatcher)
+
+/**
+ * 带重试机制的API调用
+ */
+fun <T> apiCallWithRetry(
+    maxRetries: Int = 3,
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    block: suspend () -> T
+): Flow<ApiResult<T>> = flow {
+    emit(ApiResult.Loading())
+    emit(apiCall(dispatcher, block))
+}.retryWhen { cause, attempt ->
+    attempt < maxRetries && (cause is IOException || cause is SocketTimeoutException)
+}.catch { e ->
+    emit(
+        ApiResult.Error(
+            message = e.message ?: "重试失败",
+            errorType = ErrorType.NETWORK,
+            throwable = e
+        )
+    )
+}.flowOn(dispatcher)
+
+/** BaseResponse 转：统一转换服务端响应格式 */
+fun <T> BaseResponse<T>.toApiResult(): ApiResult<T> = when {
+    isSuccess() -> {
+        if (data != null) {
+            ApiResult.Success(data)
+        } else {
+            ApiResult.Error(
+                code = code,
+                message = msg ?: "数据为空",
+                errorType = ErrorType.SERVER
+            )
         }
     }
 
-/** Flow 扩展：合并多个 ApiResult */
-fun <T1, T2, R> Flow<ApiResult<T1>>.combineApiResult(
-    other: Flow<ApiResult<T2>>,
-    transform: (T1, T2) -> R
-): Flow<ApiResult<R>> = combine(this, other) { result1, result2 ->
-    when {
-        result1 is ApiResult.Success && result2 is ApiResult.Success -> {
-            ApiResult.Success(transform(result1.data, result2.data))
+    else -> {
+        val errorType = when (code) {
+            401 -> ErrorType.AUTHENTICATION
+            403 -> ErrorType.AUTHORIZATION
+            in 400..499 -> ErrorType.VALIDATION
+            in 500..599 -> ErrorType.SERVER
+            else -> ErrorType.UNKNOWN
         }
-
-        result1 is ApiResult.Error -> result1
-        result2 is ApiResult.Error -> result2
-        result1 is ApiResult.NetworkUnavailable || result2 is ApiResult.NetworkUnavailable -> {
-            ApiResult.NetworkUnavailable
-        }
-
-        else -> ApiResult.Error(message = "Unknown error in combineApiResult")
+        ApiResult.Error(
+            code = code,
+            message = ErrorMapper.mapBusinessError(code, msg),
+            errorType = errorType
+        )
     }
 }

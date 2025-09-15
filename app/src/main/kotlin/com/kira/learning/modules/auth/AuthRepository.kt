@@ -2,11 +2,9 @@ package com.kira.learning.modules.auth
 
 import com.kira.learning.network.ApiResult
 import com.kira.learning.network.ComposeApiService
-import com.kira.learning.network.safeApiCallWithMapping
 import com.kira.learning.base.repository.BaseRepository
 import com.kira.learning.base.keyvalue.SettingsManager
 import com.kira.learning.models.*
-import com.kira.learning.network.BaseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,14 +29,13 @@ class AuthRepository @Inject constructor(
     }
 
     /**
-     * 用户登录
+     * 用户登录 - 统一返回Flow<ApiResult<LoginData>>
      */
     fun login(
         username: String, password: String, rememberMe: Boolean = false
     ): Flow<ApiResult<LoginData>> {
         val request = LoginRequest(username = username, password = password)
-
-        return baseResponseCall {
+        return executeBaseResponseFlow {
             apiService.login(request).also { response ->
                 // 登录成功后保存会话信息
                 if (response.isSuccess() && response.data != null) {
@@ -49,7 +46,7 @@ class AuthRepository @Inject constructor(
     }
 
     /**
-     * 刷新Token
+     * 刷新Token - 统一使用executeApiCall
      */
     suspend fun refreshToken(): ApiResult<LoginData> {
         val currentRefreshToken = _currentSession.value?.loginData?.refreshToken
@@ -57,7 +54,7 @@ class AuthRepository @Inject constructor(
             return ApiResult.Error(message = "No refresh token available")
         }
 
-        return safeApiCallWithMapping {
+        return executeBaseResponseCall {
             val request = RefreshTokenRequest(currentRefreshToken)
             val response = apiService.refreshToken(request)
             response.data?.let { newLoginData ->
@@ -66,39 +63,42 @@ class AuthRepository @Inject constructor(
                     saveSession(currentSession.copy(loginData = newLoginData))
                 }
             }
-            response.data ?: throw IllegalStateException("Refresh token failed")
+            response
         }
     }
 
     /**
-     * 用户注册
+     * 用户注册 - 统一使用executeApiCall
      */
     suspend fun register(
         username: String, password: String, email: String, preferredLocale: String = "en-US"
     ): ApiResult<LoginData> {
-        return safeApiCallWithMapping {
+        return executeBaseResponseCall {
             val request = RegisterRequest(username, password, email, preferredLocale)
-            val response = apiService.register(request)
-            response.data ?: throw IllegalStateException("Registration failed")
+            apiService.register(request)
         }
     }
 
     /**
-     * 用户登出
+     * 用户登出 - 统一错误处理
      */
-    suspend fun logout(): ApiResult<BaseResponse<String>> {
-        return try {
-            // 调用服务端登出API
-            val result = safeApiCallWithMapping {
-                apiService.logout()
+    suspend fun logout(): ApiResult<Unit> {
+        val result = executeApiCall {
+            apiService.logout()
+        }
+
+        // 无论API调用是否成功，都清除本地会话
+        clearSession()
+
+        return when (result) {
+            is ApiResult.Success -> ApiResult.Success(Unit)
+            is ApiResult.Error -> result
+            is ApiResult.NetworkUnavailable -> {
+                // 网络不可用时也认为登出成功（本地已清除）
+                ApiResult.Success(Unit)
             }
 
-            clearSession()
-            result
-        } catch (e: Exception) {
-            // 只有在发生意外异常时才强制清除会话并返回成功
-            clearSession()
-            ApiResult.Error(message = "登出时发生异常: ${e.message ?: "未知错误"}")
+            else -> ApiResult.Success(Unit)
         }
     }
 
@@ -111,14 +111,14 @@ class AuthRepository @Inject constructor(
             return ApiResult.Success(false)
         }
 
-        return safeApiCallWithMapping {
+        return executeApiCall {
             val result = apiService.validateToken(token)
             result.isValid
         }
     }
 
     /**
-     * 切换用户角色（如果用户有多个角色）
+     * 切换用户角色
      */
     suspend fun switchRole(newRole: UserRole): ApiResult<LoginData> {
         val currentSession = _currentSession.value
@@ -126,13 +126,13 @@ class AuthRepository @Inject constructor(
             return ApiResult.Error(message = "Invalid role or not logged in")
         }
 
-        return safeApiCallWithMapping {
+        return executeBaseResponseCall {
             val request = RoleSwitchRequest(newRole.code)
             val response = apiService.switchRole(request)
             response.data?.let { newLoginData ->
                 saveSession(currentSession.copy(loginData = newLoginData))
             }
-            response.data ?: throw IllegalStateException("Role switch failed")
+            response
         }
     }
 
@@ -157,9 +157,7 @@ class AuthRepository @Inject constructor(
     /**
      * 检查用户是否有特定角色
      */
-    fun hasRole(role: UserRole): Boolean {
-        return _currentSession.value?.loginData?.hasRole(role) ?: false
-    }
+    fun hasRole(role: UserRole): Boolean = _currentSession.value?.loginData?.hasRole(role) ?: false
 
     /**
      * 保存会话信息

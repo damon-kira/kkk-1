@@ -93,32 +93,3 @@ class Logout401Interceptor(
         return resp
     }
 }
-
-object ErrorMapper {
-    fun map(code: Int?, raw: String?): String = when (code) {
-        401 -> "未授权, 请重新登录"
-        403 -> "无权限"
-        404 -> "未找到资源"
-        408 -> "请求超时"
-        500 -> "服务器错误"
-        else -> raw ?: "未知错误"
-    }
-
-    /**
-     * 增强的错误映射，结合 ResponseCode 的描述
-     */
-    fun mapWithFallback(code: Int?, raw: String?): String {
-        return code?.let { ResponseCode.getDescription(it) } ?: raw ?: "未知错误"
-    }
-
-    /**
-     * 根据异常类型提供更友好的错误信息
-     */
-    fun mapException(throwable: Throwable): String = when (throwable) {
-        is java.net.UnknownHostException -> "网络连接失败，请检查网络设置"
-        is java.net.SocketTimeoutException -> "网络超时，请稍后重试"
-        is javax.net.ssl.SSLException -> "安全连接失败"
-        is retrofit2.HttpException -> "服务器错误 (${throwable.code()})"
-        else -> throwable.message ?: "未知错误"
-    }
-}

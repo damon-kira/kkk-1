@@ -241,7 +241,7 @@ private fun LoginForm(
             enabled = !state.isLoading
         )
 
-        // 记住密码��项
+        // 记住密码选项
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
