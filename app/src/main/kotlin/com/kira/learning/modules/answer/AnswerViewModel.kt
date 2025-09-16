@@ -11,8 +11,7 @@ import com.kira.learning.models.QuestionBase
 import com.kira.learning.models.ShortAnswerUserAnswer
 import com.kira.learning.models.SingleChoiceUserAnswer
 import com.kira.learning.models.UserAnswer
-import com.kira.learning.network.ApiResult
-import com.kira.learning.base.mvi.BaseApiViewModel
+import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.ViewState
 import com.kira.learning.base.mvi.ViewEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,7 +58,7 @@ sealed interface AnswerEvent : ViewEvent {
 @HiltViewModel
 class AnswerViewModel @Inject constructor(
     private val repo: AnswerRepository
-) : BaseApiViewModel<AnswerUiState, AnswerEvent>(
+) : BaseViewModel<AnswerUiState, AnswerEvent>(
     initialState = AnswerUiState()
 ) {
 

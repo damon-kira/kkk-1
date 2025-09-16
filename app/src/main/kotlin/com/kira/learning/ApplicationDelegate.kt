@@ -3,12 +3,9 @@ package com.kira.learning
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import com.kira.learning.DeferredStartup.Task
 import com.kira.learning.DeferredStartup.Phase
+import com.kira.learning.DeferredStartup.Task
 import com.util.lib.UtilInit
-import com.util.lib.log.logger_d
-import com.util.lib.log.logger_e
-import java.io.IOException
 import java.lang.ref.WeakReference
 
 object ApplicationDelegate {

@@ -1,7 +1,7 @@
 package com.kira.learning.modules.main
 
 import com.kira.learning.base.keyvalue.SettingsManager
-import com.kira.learning.base.mvi.BaseApiViewModel
+import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.models.ColorScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ sealed interface MainEvent : ViewEvent {
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
-) : BaseApiViewModel<MainViewState, MainEvent>(
+) : BaseViewModel<MainViewState, MainEvent>(
     initialState = MainViewState(
         fullscreenMode = settingsManager.fullScreenMode
     )

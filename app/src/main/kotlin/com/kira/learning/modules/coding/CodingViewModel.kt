@@ -1,8 +1,8 @@
 package com.kira.learning.modules.coding
 
 import androidx.lifecycle.SavedStateHandle
-import com.kira.learning.base.mvi.BaseApiViewModel
 import com.kira.learning.base.mvi.BaseUiState
+import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.base.mvi.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +30,7 @@ sealed interface CodingEvent : ViewEvent {
 class CodingViewModel @Inject constructor(
     private val repository: CodingRepository,
     @Suppress("UNUSED_PARAMETER") private val savedStateHandle: SavedStateHandle
-) : BaseApiViewModel<CodingViewState, CodingEvent>(
+) : BaseViewModel<CodingViewState, CodingEvent>(
     initialState = CodingViewState()
 ) {
 

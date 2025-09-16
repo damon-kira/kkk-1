@@ -5,7 +5,7 @@ import com.kira.learning.models.UserProfile
 import com.kira.learning.models.AppSettings
 import com.kira.learning.network.ApiResult
 import com.kira.learning.base.mvi.BaseUiState
-import com.kira.learning.base.mvi.BaseApiViewModel
+import com.kira.learning.base.mvi.BaseViewModel
 import com.kira.learning.base.mvi.UiEvent
 import com.kira.learning.base.mvi.ViewEvent
 import com.kira.learning.base.mvi.ViewState
@@ -53,7 +53,7 @@ enum class SettingType {
 class ProfileViewModel @Inject constructor(
     private val repo: ProfileRepository,
     private val authRepo: AuthRepository
-) : BaseApiViewModel<ProfileViewState, ProfileEvent>(
+) : BaseViewModel<ProfileViewState, ProfileEvent>(
     initialState = ProfileViewState()
 ) {
 
