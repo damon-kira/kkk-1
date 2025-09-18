@@ -29,10 +29,10 @@ dependencies {
     implementation(project(":common-base"))
 
     // Media3
-    implementation(libs.media3.exoplayer)
-    implementation(libs.media3.ui)
-    implementation(libs.media3.exoplayer.hls)
-    implementation(libs.media3.exoplayer.dash)
+    api(libs.media3.exoplayer)
+    api(libs.media3.ui)
+    api(libs.media3.exoplayer.hls)
+    api(libs.media3.exoplayer.dash)
 
     // Hilt
     implementation(libs.hilt)

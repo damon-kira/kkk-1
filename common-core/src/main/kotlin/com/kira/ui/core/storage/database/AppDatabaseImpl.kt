@@ -1,9 +1,11 @@
-
-
 package com.kira.ui.core.storage.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.kira.learning.modules.videoplayer.data.dao.VideoNoteDao
+import com.kira.learning.modules.videoplayer.data.dao.VideoProgressDao
+import com.kira.learning.modules.videoplayer.models.VideoNoteEntity
+import com.kira.learning.modules.videoplayer.models.VideoProgressEntity
 import com.kira.ui.core.storage.database.dao.document.DocumentDao
 import com.kira.ui.core.storage.database.dao.font.FontDao
 import com.kira.ui.core.storage.database.dao.server.ServerDao
@@ -19,8 +21,10 @@ import com.kira.ui.core.storage.database.entity.theme.ThemeEntity
         ServerEntity::class,
         FontEntity::class,
         ThemeEntity::class,
+        VideoNoteEntity::class,
+        VideoProgressEntity::class,
     ],
-    version = 5,
+    version = 6,
 )
 abstract class AppDatabaseImpl : RoomDatabase(), AppDatabase {
 
@@ -32,6 +36,8 @@ abstract class AppDatabaseImpl : RoomDatabase(), AppDatabase {
     abstract override fun serverDao(): ServerDao
     abstract override fun fontDao(): FontDao
     abstract override fun themeDao(): ThemeDao
+    abstract fun videoNoteDao(): VideoNoteDao
+    abstract fun videoProgressDao(): VideoProgressDao
 
     override fun shutdown() {
         clearAllTables()

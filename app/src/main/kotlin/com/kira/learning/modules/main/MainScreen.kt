@@ -56,6 +56,7 @@ import com.kira.learning.modules.ocr.ImageOcrRoute
 import com.kira.learning.modules.imageplayer.ImagePlayerRoute
 import com.kira.learning.navigation.AppRoutes
 import com.kira.learning.modules.coding.CodingEditorRoute
+import com.kira.learning.modules.videoplayer.VideoPlayerRoute
 
 data class BottomItem(
     val route: String,
@@ -153,7 +154,7 @@ internal fun MainScreen(
                         bottom = padding.calculateBottomPadding()
                     )
             ) {
-                // 主内容 NavHost
+                // 主要内容 NavHost
                 NavHost(
                     navController = navController,
                     startDestination = AppRoutes.CHAT,
@@ -211,6 +212,12 @@ internal fun MainScreen(
                     }
                     composable(AppRoutes.CODE_EDITOR) {
                         CodingEditorRoute(
+                            modifier = Modifier.fillMaxSize(),
+                            onNavigateBack = { navController.popBackStack() }
+                        )
+                    }
+                    composable(AppRoutes.VIDEO_PLAYER) {
+                        VideoPlayerRoute(
                             modifier = Modifier.fillMaxSize(),
                             onNavigateBack = { navController.popBackStack() }
                         )

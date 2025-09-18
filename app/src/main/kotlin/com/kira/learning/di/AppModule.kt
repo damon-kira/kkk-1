@@ -5,6 +5,9 @@ import androidx.room.Room
 import com.kira.learning.LoanApplication
 import com.kira.learning.models.dao.AIResponseDao
 import com.kira.learning.models.dao.ChatMessageDao
+import com.kira.learning.models.dao.VideoNoteDao
+import com.kira.learning.modules.videoplayer.repository.VideoPlayerRepository
+import com.kira.learning.modules.videoplayer.repository.VideoPlayerRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +47,20 @@ class AppModule {
     @Provides
     fun provideChatConversationDao(database: AppDatabase): ChatConversationDao =
         database.chatConversationDao()
+
+    // 添加VideoNoteDao的提供方法，使用app模块的AppDatabase
+    @Provides
+    fun provideVideoNoteDao(database: AppDatabase): VideoNoteDao {
+        return database.videoNoteDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideVideoPlayerRepository(
+        videoNoteDao: VideoNoteDao
+    ): VideoPlayerRepository {
+        return VideoPlayerRepositoryImpl(videoNoteDao)
+    }
 }
 
 internal fun getAppContext() = LoanApplication.getAppContext()
